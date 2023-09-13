@@ -1,7 +1,8 @@
-package com.spyker.framework.xxxjob.config.properties;
+package com.spyker.framework.xxxjob.properties;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties(prefix = "xxl.job")
+@ConditionalOnProperty(prefix = "xxl.job", name = "enabled", havingValue = "true")
 public class XxlJobProperties {
 
     private Boolean enabled;

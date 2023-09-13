@@ -8,12 +8,13 @@ import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.spyker.framework.xxxjob.config.properties.XxlServerProperties;
 import com.spyker.framework.xxxjob.model.XxlJobGroup;
 import com.spyker.framework.xxxjob.model.XxlJobInfo;
+import com.spyker.framework.xxxjob.properties.XxlServerProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import java.net.HttpCookie;
 import java.util.HashMap;
@@ -22,7 +23,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+@ConditionalOnClass(XxlServerProperties.class)
+@AutoConfiguration
 @Slf4j
 public class XxlJobUtils {
 

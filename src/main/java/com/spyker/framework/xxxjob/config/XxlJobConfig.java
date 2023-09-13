@@ -2,17 +2,16 @@ package com.spyker.framework.xxxjob.config;
 
 import cn.hutool.core.collection.CollUtil;
 import com.spyker.framework.util.StreamUtils;
-import com.spyker.framework.xxxjob.config.properties.XxlJobProperties;
+import com.spyker.framework.xxxjob.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
@@ -22,10 +21,9 @@ import java.util.List;
  * @author Lion Li
  */
 @Slf4j
-@Configuration
-@EnableConfigurationProperties(XxlJobProperties.class)
+@AutoConfiguration
+@ConditionalOnClass(XxlJobProperties.class)
 @AllArgsConstructor
-@ConditionalOnProperty(prefix = "xxl.job", name = "enabled", havingValue = "true")
 public class XxlJobConfig {
 
     private final XxlJobProperties xxlJobProperties;

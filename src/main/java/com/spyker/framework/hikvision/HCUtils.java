@@ -13,8 +13,9 @@ import com.sun.jna.Pointer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -22,7 +23,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Component
+@ConditionalOnClass(HCProperties.class)
+@AutoConfiguration
 @Slf4j
 public class HCUtils {
 
@@ -35,7 +37,6 @@ public class HCUtils {
      * 抓图
      *
      * @param loginDeviceInfo 设备登录信息
-     *
      * @return 图片地址
      */
     public String NET_DVR_CaptureJPEGPicture(HCLoginInfo loginDeviceInfo) {
@@ -46,8 +47,8 @@ public class HCUtils {
 
         String now = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
 
-        String realPath = hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_"
-            + loginDeviceInfo.getLDChannel() + "_" + now + ".jpg";
+        String realPath =
+                hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_" + loginDeviceInfo.getLDChannel() + "_" + now + ".jpg";
 
         hcControl.NET_DVR_CaptureJPEGPicture(realPath);
 
@@ -61,7 +62,6 @@ public class HCUtils {
      * 设备登录V40 与V30功能一致
      *
      * @param loginDeviceInfo
-     *
      * @return
      */
     private HCOpInfo login_V40(HCLoginInfo loginDeviceInfo) {
@@ -164,11 +164,8 @@ public class HCUtils {
      * @param end         结束下载时间
      */
     @Async
-    public void downloadVideoRecordByTime(HCLoginInfo hCLoginInfo,
-        int lDChannel,
-        String fileName,
-        Date start,
-        Date end) {
+    public void downloadVideoRecordByTime(HCLoginInfo hCLoginInfo, int lDChannel, String fileName, Date start,
+            Date end) {
 
         HCOpInfo hCOpInfo = login_V40(hCLoginInfo);
 
@@ -190,7 +187,6 @@ public class HCUtils {
      *
      * @param loginDeviceInfo
      * @param iChannelNo
-     *
      * @return
      */
     public boolean findExistVideoFile(HCLoginInfo loginDeviceInfo, int iChannelNo, Date start, Date end) {
@@ -241,8 +237,8 @@ public class HCUtils {
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
         String newName = sf.format(new Date());
 
-        String realPath = hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_"
-            + loginDeviceInfo.getLDChannel() + "_" + newName + ".jpg";
+        String realPath =
+                hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_" + loginDeviceInfo.getLDChannel() + "_" + newName + ".jpg";
         // 实时取流
         realPath = hcVideo.getPicByPlayCtrl(realPath);
 
@@ -297,8 +293,8 @@ public class HCUtils {
 
         String now = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
 
-        String realPath = hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_C"
-            + loginDeviceInfo.getLDChannel() + "_P" + dwPresetIndex + "_" + now + ".jpg";
+        String realPath =
+                hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_C" + loginDeviceInfo.getLDChannel() + "_P" + dwPresetIndex + "_" + now + ".jpg";
 
         boolean opCapturePic = hcControl.NET_DVR_CaptureJPEGPicture(realPath);
 

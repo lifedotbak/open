@@ -8,9 +8,13 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
-@Component
+@AutoConfiguration
+@ConditionalOnClass(HCProperties.class)
+@Configurable
 @Slf4j
 public class HCInitUtils {
 

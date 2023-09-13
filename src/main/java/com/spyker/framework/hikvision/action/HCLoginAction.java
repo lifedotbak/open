@@ -6,10 +6,12 @@ import com.spyker.framework.hikvision.jna.HCNetSDK;
 import com.spyker.framework.hikvision.utils.HCInitUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
-@Component
+@AutoConfiguration
 @Slf4j
+@ConditionalOnClass(HCInitUtils.class)
 public class HCLoginAction {
 
     @Autowired

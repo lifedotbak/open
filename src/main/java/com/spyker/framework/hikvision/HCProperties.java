@@ -3,13 +3,15 @@ package com.spyker.framework.hikvision;
 import com.spyker.framework.hikvision.utils.OsSelect;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 @Setter
 @Slf4j
-@Component
+@AutoConfiguration
 @ConfigurationProperties(prefix = "hik", ignoreUnknownFields = true)
+@ConditionalOnProperty(prefix = "hik", name = "enabled", havingValue = "true")
 public class HCProperties {
 
     private String winLib;

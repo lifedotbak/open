@@ -1,12 +1,13 @@
 package com.spyker.framework.zlmediakit.action;
 
 import com.google.gson.Gson;
-import com.spyker.framework.zlmediakit.OpResult;
 import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.model.OpResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -17,7 +18,8 @@ import java.util.Map;
  *
  * @author spyker
  */
-@Component
+@ConditionalOnClass(ZLMediaKitProperties.class)
+@AutoConfiguration
 @Slf4j
 public class AddFFmpegSourceAction {
 

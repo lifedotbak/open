@@ -1,6 +1,7 @@
-package com.spyker.framework.xxxjob.config.properties;
+package com.spyker.framework.xxxjob.properties;
 
 import lombok.Data;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +11,9 @@ import org.springframework.stereotype.Component;
  * @author Lion Li
  */
 @Data
-@ConfigurationProperties(prefix = "xxl-server")
 @Component
+@ConfigurationProperties(prefix = "xxl-server")
+@ConditionalOnProperty(prefix = "xxl-server", name = "enabled", havingValue = "true")
 public class XxlServerProperties {
 
     private String url;
