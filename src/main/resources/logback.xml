@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="40 seconds">
+    
+    <!-- 日志存放路径 -->
+    <property name="log.base" value="logs/open" />
+    
+    <!-- 打印sleuth对应日志信息 -->
+    <property name="TRACE_LOG_PATTERN" value="%d [%thread] %-5level %logger{35} [%L] [TraceId=%X{X-B3-TraceId:-},SpanId=%X{X-B3-SpanId:-},ParentSpanId=%X{X-B3-ParentSpanId:-}] - %msg%n" />
+    
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+    
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
+                - %msg%n</pattern> -->
+            <pattern>${TRACE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    
+    <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}-error.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
+                - %msg%n</pattern> -->
+            <pattern>${TRACE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    
+    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}-info.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
+                - %msg%n</pattern> -->
+            <pattern>${TRACE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    
+    <appender name="FILE-WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}-warn.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
+                - %msg%n</pattern> -->
+            <pattern>${TRACE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    
+    <appender name="FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}-debug.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>1</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
+                - %msg%n</pattern> -->
+            <pattern>${TRACE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    
+    <root level="INFO">
+        <appender-ref ref="FILE-DEBUG" />
+        <appender-ref ref="FILE-ERROR" />
+        <appender-ref ref="FILE-INFO" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>

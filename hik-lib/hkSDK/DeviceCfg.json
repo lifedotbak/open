@@ -1,0 +1,53 @@
+{
+	"Devices":	[{
+			"ID":	0,
+			"SerialNumber":	"DS-2SE4C142IMW-DE20221216AACHS6L07935672",
+			"ChannelNumber":	2,
+			"StartChannel":	1,
+			"AlarmInNum":	1,
+			"AlarmOutNum":	1,
+			"IPChanNum":	0,
+			"MirrorChanNum":	0,
+			"StartMirrorChanNo":	0,
+			"LocalNodeName":	"88",
+			"DeviceType":	41,
+			"DiskNum":	0,
+			"LoginUserName":	"admin",
+			"LoginUserPwd":	"grid123456",
+			"DeviceIP":	"192.168.15.88",
+			"DeviceMultiIP":	"0.0.0.0",
+			"DevicePort":	8000,
+			"DeviceName":	"",
+			"LoginMode":	0,
+			"Https":	0,
+			"Channels":	[{
+					"ChanID":	0,
+					"DeviceIndex":	0,
+					"ChanIndex":	0,
+					"ChanName":	"Camera1",
+					"Protocol":	0,
+					"PicResolution":	0,
+					"PicQuality":	0,
+					"Enable":	1,
+					"PreviewMode":	0,
+					"PreviewProtocolType":	0,
+					"VideoCodingType":	0,
+					"StreamType":	0,
+					"LinkMode":	0
+				}, {
+					"ChanID":	1,
+					"DeviceIndex":	0,
+					"ChanIndex":	1,
+					"ChanName":	"Camera2",
+					"Protocol":	0,
+					"PicResolution":	0,
+					"PicQuality":	0,
+					"Enable":	1,
+					"PreviewMode":	0,
+					"PreviewProtocolType":	0,
+					"VideoCodingType":	0,
+					"StreamType":	0,
+					"LinkMode":	0
+				}]
+		}]
+}

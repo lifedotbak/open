@@ -1,0 +1,117 @@
+# 项目相关配置###############################
+server :
+  http :
+    port : 8080
+  servlet :
+    context-path : /open
+
+###############################文件上传配置,配置默认文件保存位置###############################
+upload :
+  localtion : /open
+
+# Spring配置
+spring :
+  jackson :
+    time-zone : Asia/Shanghai
+  #    date-format: yyyy-MM-dd HH:mm:ss
+  #  profiles:
+  #    active: druid
+  # 文件上传
+  servlet :
+    multipart :
+      # 单个文件大小
+      max-file-size : 100MB
+      # 设置总上传的文件大小
+      max-request-size : 1000MB
+  application :
+    name : matchor
+  redis :
+    host : 127.0.0.1
+    password :
+    port : 6379
+    timeout : 6000
+    lettuce :
+      pool :
+        max-active : 8
+        max-wait : 10000
+        max-idle : 8
+        min-idle : 1
+      shutdown-timeout : 100
+
+  mvc :
+    view :
+      prefix : /
+      suffix : .html
+
+  #数据源
+  datasource :
+    druid :
+      username : root
+      password : 123456
+      url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      driver-class-name : com.mysql.cj.jdbc.Driver
+      minIdle : 3
+      maxWait : 10000
+      validationQuery : SELECT 'x'
+      timeBetweenEvictionRunsMillis : 60000
+      minEvictableIdleTimeMillis : 300000
+  resources :
+    static-locations : classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
+
+
+#=======================mybatis-plus日志输出==========================
+mybatis-plus :
+  configuration :
+    log-impl : org.apache.ibatis.logging.stdout.StdOutImpl
+
+#======================阿里云配置================================
+aliyun :
+  push :
+    accessKeyId :
+    accessKeySecret :
+    signName :
+    androidKey :
+    iosKey :
+  sms :
+    accessKeyId :
+    accessKeySecret :
+    signName :
+  oss :
+    accessKeyId :
+    accessKeySecret :
+    bucketName :
+    endPoint :
+    out :
+      imgUrl :
+  ram :
+    accessKeyId :
+    accessKeySecret :
+    roleArn :
+    roleSessionName :
+    durationSeconds : 3600
+
+#======================微信配置================================
+weixin :
+  miniprogram :
+    appId :
+    appSecret :
+  pay :
+    appId :
+    mchId :
+    certificateSerialNo :
+    apiclientKeyPath :
+    notifyUrl :
+    apiV3key :
+    refundNotifyUrl :
+
+#========================网易云信================================
+netease :
+  im :
+    appKey :
+    appSecret :
+
+#========================系统配置================================
+sys :
+  user :
+    token : 'user:'
+    tokenExpireTime : 1800

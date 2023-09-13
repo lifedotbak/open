@@ -1,0 +1,110 @@
+package com.spyker.framework.tencent.pay.v3.sign;
+
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.util.Base64;
+
+import com.spyker.framework.tencent.pay.PayConfig;
+import com.spyker.framework.tencent.pay.v3.entity.CallBackAuth;
+import com.spyker.framework.tencent.pay.v3.utils.PrivateKeyUtil;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * 生成回调的sign
+ *
+ * @author zhangzhaofeng
+ *
+ */
+@Slf4j
+public class SignCallBackUtil {
+
+	private PayConfig payConfig;
+
+	public SignCallBackUtil(PayConfig payConfig) {
+		this.payConfig = payConfig;
+	}
+
+	@SneakyThrows
+	public String app(CallBackAuth callBackAuth) {
+
+		String message = buildAppMessage(callBackAuth);
+
+		log.info("signApp message============>{}", message);
+
+		String signature = sign(message.getBytes("utf-8"));
+
+		log.info("signApp signature============>{}", signature);
+
+		return signature;
+
+	}
+
+	@SneakyThrows
+	public String jsapi(CallBackAuth callBackAuth) {
+
+		String message = buildJsapiMessage(callBackAuth);
+
+		log.info("signJsapi message============>{}", message);
+
+		String signature = sign(message.getBytes("utf-8"));
+
+		log.info("signJsapi signature============>{}", signature);
+
+		return signature;
+
+	}
+
+	/**
+	 * 构造的请求签名串
+	 *
+	 * @param method
+	 * @param url
+	 * @param timestamp
+	 * @param nonceStr
+	 * @param body
+	 * @return
+	 */
+	private String buildJsapiMessage(CallBackAuth callBackAuth) {
+
+		return callBackAuth.getAppId() + "\n" + callBackAuth.getTimeStamp() + "\n" + callBackAuth.getNonceStr() + "\n"
+				+ callBackAuth.getPackageValue() + "\n";
+	}
+
+	/**
+	 * 构造的请求签名串
+	 *
+	 * @param method
+	 * @param url
+	 * @param timestamp
+	 * @param nonceStr
+	 * @param body
+	 * @return
+	 */
+	private String buildAppMessage(CallBackAuth callBackAuth) {
+
+		return callBackAuth.getAppId() + "\n" + callBackAuth.getTimeStamp() + "\n" + callBackAuth.getNonceStr() + "\n"
+				+ callBackAuth.getPrepayid() + "\n";
+	}
+
+	/**
+	 * 计算签名值
+	 *
+	 * @param message
+	 * @return
+	 * @throws Exception
+	 */
+	@SneakyThrows
+	private String sign(byte[] message) {
+
+		PrivateKey privateKey = PrivateKeyUtil.getPrivateKey(payConfig.getApiclientKeyPath());
+
+		Signature sign = Signature.getInstance("SHA256withRSA");
+		sign.initSign(privateKey);
+		sign.update(message);
+
+		return Base64.getEncoder().encodeToString(sign.sign());
+	}
+
+}
