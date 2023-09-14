@@ -383,24 +383,38 @@
             <artifactId>minio</artifactId>
             <version>8.5.4</version>
         </dependency>
+        
+        <!--支持注释直接转swagger-ui -->
+        <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc-scribe -->
+        <dependency>
+            <groupId>com.github.therapi</groupId>
+            <artifactId>therapi-runtime-javadoc-scribe</artifactId>
+            <version>0.15.0</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc -->
+        <dependency>
+            <groupId>com.github.therapi</groupId>
+            <artifactId>therapi-runtime-javadoc</artifactId>
+            <version>0.15.0</version>
+        </dependency>
     
     </dependencies>
     
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <!--    <dependencyManagement>-->
+    <!--        <dependencies>-->
+    <!--            <dependency>-->
+    <!--                <groupId>org.springframework.cloud</groupId>-->
+    <!--                <artifactId>spring-cloud-dependencies</artifactId>-->
+    <!--                <version>${spring-cloud.version}</version>-->
+    <!--                <type>pom</type>-->
+    <!--                <scope>import</scope>-->
+    <!--            </dependency>-->
+    <!--        </dependencies>-->
+    <!--    </dependencyManagement>-->
     
     <build>
         <finalName>open</finalName>
-        <!--2020/08/25 -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -416,7 +430,6 @@
                     <source>17</source> <!-- 源代码使用的JDK版本 -->
                     <target>17</target> <!-- 需要生成的目标class文件的编译版本 -->
                     <encoding>UTF-8</encoding><!-- 字符集编码 -->
-                    <annotationProcessorPaths></annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>

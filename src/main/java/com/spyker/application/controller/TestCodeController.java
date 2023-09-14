@@ -35,7 +35,7 @@ public class TestCodeController {
     /**
      * 列表查询
      *
-     * @param search
+     * @param search 查询条件
      * @return
      */
     @GetMapping("list")
@@ -46,7 +46,12 @@ public class TestCodeController {
         return RestResponse.success(result);
     }
 
-    @Operation(summary = "列表（分页）", description = "列表（分页）")
+    /**
+     * 分页查询
+     *
+     * @param search 查询条件
+     * @return
+     */
     @GetMapping("list_page")
     public RestResponse<IPage<TestCode>> list_page(TestCodeSearch search) {
         int current = 1;
