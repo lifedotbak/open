@@ -5,6 +5,7 @@ import ${superServiceClassPackage};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.util.List;
+import com.spyker.framework.response.RestResponse;
 
 import ${package.Parent}.search.${entity}Search;
 
@@ -19,16 +20,15 @@ import ${package.Parent}.search.${entity}Search;
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
     List<${entity}> query(${entity}Search search);
-    
+
     IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search);
-    
-    ${entity} get(Long id);
-    
+
+    ${entity} get(String id);
+
     RestResponse<?> insert(${entity} ${entity});
-    
+
     RestResponse<?> update(${entity} ${entity});
-    
-    RestResponse<?> delete(Long id);
+
+    RestResponse<?> delete(String id);
 
 }
-

@@ -1,33 +1,30 @@
 package com.spyker.framework.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-
 @Configuration
 public class OpenApiConfig {
 
+    @Value("${spring.application.name}")
+    private String application;
 
-	@Value("${spring.application.name}")
-	private String application;
+    @Bean
+    public OpenAPI springOpenAPI() {
 
-	@Bean
-	public OpenAPI springOpenAPI() {
+        OpenAPI openApi = new OpenAPI();
 
-		OpenAPI openApi = new OpenAPI();
+        openApi.info(apiInfo());
 
-		openApi.info(apiInfo());
+        return openApi;
+    }
 
-		return openApi;
-	}
+    private Info apiInfo() {
 
-	private Info apiInfo() {
-
-		return new Info().title(application).description(application).version("V-0.0.1");
-	}
+        return new Info().title(application).description(application).version("V-0.0.1");
+    }
 
 }

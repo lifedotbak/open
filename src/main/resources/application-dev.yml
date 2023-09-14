@@ -24,7 +24,7 @@ spring :
       # 设置总上传的文件大小
       max-request-size : 1000MB
   application :
-    name : matchor
+    name : open
   redis :
     enabled : false
     host : 127.0.0.1
@@ -48,7 +48,7 @@ spring :
   datasource :
     druid :
       username : root
-      password : 123456
+      password : '123456'
       url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       driver-class-name : com.mysql.cj.jdbc.Driver
       minIdle : 3

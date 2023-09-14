@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import ${package.Parent}.search.${entity}Search;
 import lombok.RequiredArgsConstructor;
 
+import com.spyker.framework.response.RestResponse;
+
 
 /**
  * <p>
@@ -26,51 +28,51 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Transactional
 @Slf4j
+@RequiredArgsConstructor
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
     private final ${table.mapperName} ${table.mapperName?uncap_first};
-    
+
     @Override
     public List<${entity}> query(${entity}Search search){
         List<${entity}> ${entity}List =  ${table.mapperName?uncap_first}.query(search);
-        
+
         return ${entity}List;
-    }	
-    
+    }
+
     @Override
     public IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search){
         page =  ${table.mapperName?uncap_first}.queryPage(page, search);
-        
+
         return page;
     }
-    
+
     @Override
-    public ${entity} get(Long id){
+    public ${entity} get(String id){
          ${entity} ${entity} = getById(id);
-         
+
          return ${entity};
-    }  
-    
+    }
+
     @Override
     public RestResponse<?> insert(${entity} ${entity}){
         save(${entity});
-        
+
         return RestResponse.success(${entity});
     }
-      
-    @Override 
+
+    @Override
     public RestResponse<?> update(${entity} ${entity}){
         updateById(${entity});
-        
-        return RestResponse.success();
-    }
-    
-    @Override
-    public RestResponse<?> delete(Long id){
-        removeById(id);
-        
-        return RestResponse.success();
-    }
-  
-}
 
+        return RestResponse.success();
+    }
+
+    @Override
+    public RestResponse<?> delete(String id){
+        removeById(id);
+
+        return RestResponse.success();
+    }
+
+}

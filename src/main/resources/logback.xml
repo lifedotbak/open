@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true" scan="true" scanPeriod="40 seconds">
     
+    <!-- 引用 Spring Boot 的 logback 基础配置 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    
+    <!-- application中spring.application.name值 -->
+    <springProperty scope="context" name="log.path" source="spring.application.name" />
+    
     <!-- 日志存放路径 -->
-    <property name="log.base" value="logs/open" />
+    <property name="log.base" value="logs/${log.path}" />
     
     <!-- 打印sleuth对应日志信息 -->
     <property name="TRACE_LOG_PATTERN" value="%d [%thread] %-5level %logger{35} [%L] [TraceId=%X{X-B3-TraceId:-},SpanId=%X{X-B3-SpanId:-},ParentSpanId=%X{X-B3-ParentSpanId:-}] - %msg%n" />
@@ -96,7 +102,7 @@
     </appender>
     
     <root level="INFO">
-        <appender-ref ref="FILE-DEBUG" />
+        <!--        <appender-ref ref="FILE-DEBUG" />-->
         <appender-ref ref="FILE-ERROR" />
         <appender-ref ref="FILE-INFO" />
         <appender-ref ref="CONSOLE" />

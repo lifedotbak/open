@@ -358,6 +358,31 @@
             <artifactId>spring-cloud-commons</artifactId>
             <version>4.0.4</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.github.sftwnd.crayfish.common/crayfish-common-crc -->
+        <dependency>
+            <groupId>com.github.sftwnd.crayfish.common</groupId>
+            <artifactId>crayfish-common-crc</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        
+        <!--mqtt相关依赖 start -->
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-stream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-mqtt</artifactId>
+        </dependency>
+        <!--mqtt相关依赖 end -->
+        
+        <!-- https://mvnrepository.com/artifact/io.minio/minio -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.5.4</version>
+        </dependency>
     
     </dependencies>
     
@@ -391,9 +416,7 @@
                     <source>17</source> <!-- 源代码使用的JDK版本 -->
                     <target>17</target> <!-- 需要生成的目标class文件的编译版本 -->
                     <encoding>UTF-8</encoding><!-- 字符集编码 -->
-                    <annotationProcessorPaths>
-                    
-                    </annotationProcessorPaths>
+                    <annotationProcessorPaths></annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>

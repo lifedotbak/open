@@ -1,4 +1,4 @@
-package com.spyker.framework.config;
+package com.spyker.framework.mybatisplus;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -9,11 +9,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Configuration
 public class MybatisPlusConfig {
-	@Bean
-	public MybatisPlusInterceptor paginationInterceptor() {
 
-		MybatisPlusInterceptor mp = new MybatisPlusInterceptor();
-		mp.addInnerInterceptor(new PaginationInnerInterceptor());
-		return mp;
-	}
+    @Bean
+    public MybatisPlusInterceptor paginationInterceptor() {
+
+        MybatisPlusInterceptor mp = new MybatisPlusInterceptor();
+        mp.addInnerInterceptor(new PaginationInnerInterceptor());
+        return mp;
+    }
 }

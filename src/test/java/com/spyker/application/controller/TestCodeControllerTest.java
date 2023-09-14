@@ -1,4 +1,4 @@
-package ${package.Controller};
+package com.spyker.application.controller;
 
 
 import org.junit.jupiter.api.Test;
@@ -19,12 +19,12 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import com.google.gson.Gson;
 
-import ${package.Entity}.${entity};
+import com.spyker.application.entity.TestCode;
 
 @Slf4j
-public class ${table.controllerName}Test extends BaseTest {
+public class TestCodeControllerTest extends BaseTest {
 
-    private static String URL ="<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>";
+    private static String URL ="/application/test-code";
 
     @Autowired
     private MockMvc mockMvc;
@@ -95,7 +95,7 @@ public class ${table.controllerName}Test extends BaseTest {
     @Test
     @SneakyThrows
     public void add() {
-        ${entity} add = new ${entity}();
+        TestCode add = new TestCode();
 
         Gson gson = new Gson();
 
@@ -114,7 +114,7 @@ public class ${table.controllerName}Test extends BaseTest {
     @Test
     @SneakyThrows
     public void update() {
-        ${entity} update = new ${entity}();
+        TestCode update = new TestCode();
 
         update.setId("1");
 
