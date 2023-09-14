@@ -13,8 +13,8 @@
   - minio
   - mqtt
   - mybatis-plus模板方式生成dao到controller包括测试代码
+  - 引入therapi-runtime-javadoc,javadoc生成swagger
 
-## 2.支持平台
+## 2. 支持平台
   - unix
   - windows
-  
