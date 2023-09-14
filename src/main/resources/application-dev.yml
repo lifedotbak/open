@@ -1,16 +1,19 @@
 # 项目相关配置###############################
 server :
+  name : open
   http :
     port : 8080
   servlet :
-    context-path : /open
+    context-path : /${server.name}
 
 ###############################文件上传配置,配置默认文件保存位置###############################
 upload :
-  localtion : /open
+  localtion : /${server.name}
 
 # Spring配置
 spring :
+  application :
+    name : #{server.name}
   jackson :
     time-zone : Asia/Shanghai
   #    date-format: yyyy-MM-dd HH:mm:ss
@@ -23,8 +26,6 @@ spring :
       max-file-size : 100MB
       # 设置总上传的文件大小
       max-request-size : 1000MB
-  application :
-    name : open
   redis :
     enabled : false
     host : 127.0.0.1
@@ -49,7 +50,7 @@ spring :
     druid :
       username : root
       password : '123456'
-      url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url : jdbc:mysql://127.0.0.1:3306/${server.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       driver-class-name : com.mysql.cj.jdbc.Driver
       minIdle : 3
       maxWait : 10000

@@ -1,16 +1,19 @@
 # 项目相关配置###############################
 server :
+  name : open
   http :
     port : 8080
   servlet :
-    context-path : /open
+    context-path : /${server.name}
 
 ###############################文件上传配置,配置默认文件保存位置###############################
 upload :
-  localtion : /open
+  localtion : /${server.name}
 
 # Spring配置
 spring :
+  application :
+    name : #{server.name}
   jackson :
     time-zone : Asia/Shanghai
   #    date-format: yyyy-MM-dd HH:mm:ss
@@ -23,9 +26,8 @@ spring :
       max-file-size : 100MB
       # 设置总上传的文件大小
       max-request-size : 1000MB
-  application :
-    name : matchor
   redis :
+    enabled : false
     host : 127.0.0.1
     password :
     port : 6379
@@ -47,8 +49,8 @@ spring :
   datasource :
     druid :
       username : root
-      password : 123456
-      url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      password : '123456'
+      url : jdbc:mysql://127.0.0.1:3306/${server.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       driver-class-name : com.mysql.cj.jdbc.Driver
       minIdle : 3
       maxWait : 10000
@@ -66,6 +68,7 @@ mybatis-plus :
 
 #======================阿里云配置================================
 aliyun :
+  enabled : false
   push :
     accessKeyId :
     accessKeySecret :
@@ -92,6 +95,7 @@ aliyun :
 
 #======================微信配置================================
 weixin :
+  enabled : false
   miniprogram :
     appId :
     appSecret :
@@ -106,11 +110,87 @@ weixin :
 
 #========================网易云信================================
 netease :
+  enabled : false
   im :
     appKey :
     appSecret :
 
-#========================系统配置================================
+# ======================Mqtt配置===lighting-x7etg8 =============================
+# =======  input--->采集器接收命令的队列，服务器从input获取命令操作结果
+# =======  out--->采集器返回命令结果的队列，服务器象out队列发送命令
+mqtt :
+  enabled : false
+  services : tcp://192.168.200.66:1883
+  user :
+  password :
+  topic :
+    input : mqttpub
+    out : mqttsub
+
+#========================xxl-server config================================
+xxl :
+  job :
+    # 执行器开关
+    enabled : false
+    # 调度中心地址：如调度中心集群部署存在多个地址则用逗号分隔。
+    # admin-addresses: http://localhost:9900
+    # 调度中心应用名 通过服务名连接调度中心(启用admin-appname会导致admin-addresses不生效)
+    admin-appname : xxl-job-admin
+    # 执行器通讯TOKEN：非空时启用
+    access-token : xxl-job
+    # 执行器配置
+    executor :
+      # 执行器AppName：执行器心跳注册分组依据；为空则关闭自动注册
+      appname : ${spring.application.name}-executor
+      # 执行器端口号 执行器从19901开始往后写
+      port : 9902
+      # 执行器注册：默认IP:PORT
+      address :
+      # 执行器IP：默认自动获取IP
+      ip :
+      # 执行器运行日志文件存储磁盘路径
+      logpath : ./logs/${spring.application.name}/xxl-job
+      # 执行器日志文件保存天数：大于3生效
+      logretentiondays : 30
+xxl-server :
+  enabled : false
+  url : http://192.168.200.65:9900
+  user-name :
+  password :
+  job-group : 3
+  author :
+  job-desc :
+  glue-type : BEAN
+  executor-route-strategy : FIRST
+  misfire-strategy : DO_NOTHING
+  executor-block-strategy : SERIAL_EXECUTION
+
+#========================海康威视硬盘录像机config================================
+hik :
+  enabled : false
+  win-lib :
+  win-pic :
+  win-video :
+  linux-lib :
+  linux-pic :
+  linux-video :
+
+#========================zlmediakit配置config================================
+zlmediakit :
+  enabled : false
+  ip :
+  port :
+  secret :
+
+#========================minio配置config================================
+minio :
+  enabled : false
+  endpoint :
+  bucket :
+  accesskey :
+  secretkey :
+
+#========================系统配置config================================
 sys :
   user :
     token : 'user:'
