@@ -18,7 +18,7 @@
     <properties>
         <java.version>1.8</java.version>
         <druid.version>1.2.16</druid.version>
-        <spring-cloud.version>2022.0.1</spring-cloud.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
     </properties>
     
     <profiles>
@@ -401,17 +401,17 @@
     
     </dependencies>
     
-    <!--    <dependencyManagement>-->
-    <!--        <dependencies>-->
-    <!--            <dependency>-->
-    <!--                <groupId>org.springframework.cloud</groupId>-->
-    <!--                <artifactId>spring-cloud-dependencies</artifactId>-->
-    <!--                <version>${spring-cloud.version}</version>-->
-    <!--                <type>pom</type>-->
-    <!--                <scope>import</scope>-->
-    <!--            </dependency>-->
-    <!--        </dependencies>-->
-    <!--    </dependencyManagement>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     
     <build>
         <finalName>open</finalName>
