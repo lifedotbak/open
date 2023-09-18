@@ -15,6 +15,7 @@
   - mqtt
   - mybatis-plus模板方式生成dao到controller包括测试代码
   - 引入therapi-runtime-javadoc,javadoc生成swagger
+  - 引入alibaba easyexcel完成excel生成
 
 ## 2. 支持平台
   - unix
