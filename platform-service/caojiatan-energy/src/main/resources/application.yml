@@ -129,3 +129,14 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+# ======================Mqtt配置===lighting-x7etg8 =============================
+# =======  input--->采集器接收命令的队列，服务器从input获取命令操作结果
+# =======  out--->采集器返回命令结果的队列，服务器象out队列发送命令
+mqtt :
+  services : tcp://39.103.152.146:1883
+  user : admin
+  password : 123456
+  topic :
+    input : cloud/push/WTC200230125/real/gzip
+    out : mqttsub
