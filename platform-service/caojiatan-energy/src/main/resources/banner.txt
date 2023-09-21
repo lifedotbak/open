@@ -1,2 +1,2 @@
-Application Version: ${ruoyi.version}
+Application Version: ${platform.version}
 Spring Boot Version: ${spring-boot.version}
