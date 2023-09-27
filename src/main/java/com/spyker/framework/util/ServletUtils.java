@@ -1,13 +1,13 @@
 package com.spyker.framework.util;
 
 import com.spyker.framework.constant.Constants;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -68,7 +68,6 @@ public class ServletUtils {
      * 获得所有请求参数
      *
      * @param request 请求对象{@link ServletRequest}
-     *
      * @return Map
      */
     public static Map<String, String[]> getParams(ServletRequest request) {
@@ -80,7 +79,6 @@ public class ServletUtils {
      * 获得所有请求参数
      *
      * @param request 请求对象{@link ServletRequest}
-     *
      * @return Map
      */
     public static Map<String, String> getParamMap(ServletRequest request) {
@@ -162,7 +160,6 @@ public class ServletUtils {
      * 内容编码
      *
      * @param str 内容
-     *
      * @return 编码后的内容
      */
     public static String urlEncode(String str) {
@@ -177,7 +174,6 @@ public class ServletUtils {
      * 内容解码
      *
      * @param str 内容
-     *
      * @return 解码后的内容
      */
     public static String urlDecode(String str) {

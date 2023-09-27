@@ -85,7 +85,7 @@ public interface HCNetSDK extends Library {
 
     // NET_DVR_SetDVRMessage的扩展
     boolean NET_DVR_SetExceptionCallBack_V30(int nMessage, int hWnd, FExceptionCallBack fExceptionCallBack,
-        Pointer pUser);
+            Pointer pUser);
 
     boolean NET_DVR_Init();
 
@@ -104,17 +104,17 @@ public interface HCNetSDK extends Library {
     int NET_DVR_GetLastError();
 
     boolean NET_DVR_GetDVRConfig(int lUserID, int dwCommand, int lChannel, Pointer lpOutBuffer, int dwOutBufferSize,
-        IntByReference lpBytesReturned);
+            IntByReference lpBytesReturned);
 
     int NET_DVR_RealPlay_V40(int lUserID, NET_DVR_PREVIEWINFO lpPreviewInfo,
-        FRealDataCallBack_V30 fRealDataCallBack_V30, Pointer pUser);
+            FRealDataCallBack_V30 fRealDataCallBack_V30, Pointer pUser);
 
     boolean NET_DVR_FindClose_V30(int lFindHandle);
 
     int NET_DVR_PlayBackByName(int lUserID, String sPlayBackFileName, HWND hWnd);
 
     boolean NET_DVR_PlayBackControl_V40(int lPlayHandle, int dwControlCode, Pointer lpInBuffer, int dwInLen,
-        Pointer lpOutBuffer, IntByReference lpOutLen);
+            Pointer lpOutBuffer, IntByReference lpOutLen);
 
     int NET_DVR_GetDownloadPos(int lFileHandle);
 
@@ -470,7 +470,8 @@ public interface HCNetSDK extends Library {
         @Override
         public String toString() {
             return "NET_DVR_TIME.dwYear: " + dwYear + "\n" + "NET_DVR_TIME.dwMonth: \n" + dwMonth + "\n" +
-                "NET_DVR_TIME.dwDay: \n" + dwDay + "\n" + "NET_DVR_TIME.dwHour: \n" + dwHour + "\n" + "NET_DVR_TIME" + ".dwMinute: \n" + dwMinute + "\n" + "NET_DVR_TIME.dwSecond: \n" + dwSecond;
+                    "NET_DVR_TIME.dwDay: \n" + dwDay + "\n" + "NET_DVR_TIME.dwHour: \n" + dwHour + "\n" +
+                    "NET_DVR_TIME" + ".dwMinute: \n" + dwMinute + "\n" + "NET_DVR_TIME.dwSecond: \n" + dwSecond;
         }
 
         // 用于列表中显示

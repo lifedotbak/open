@@ -1,7 +1,7 @@
 package com.spyker.framework.aop.aspectj;
 
 import com.spyker.framework.aop.annotation.Log;
-import com.spyker.framework.login.LoginUser;
+import com.spyker.framework.domain.LoginUser;
 import com.spyker.framework.util.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -30,10 +30,14 @@ import java.util.Map;
 public class LogAspect {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
-    /** 排除敏感属性字段 */
+    /**
+     * 排除敏感属性字段
+     */
     public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
 
-    /** 计算操作消耗时间 */
+    /**
+     * 计算操作消耗时间
+     */
     private static final ThreadLocal<Long> TIME_THREADLOCAL = new NamedThreadLocal<Long>("Cost Time");
 
     /**
@@ -100,7 +104,6 @@ public class LogAspect {
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("异常信息:{}", exp.getMessage());
-            exp.printStackTrace();
         } finally {
             TIME_THREADLOCAL.remove();
         }
@@ -190,7 +193,6 @@ public class LogAspect {
      * 判断是否需要过滤的对象。
      *
      * @param o 对象信息。
-     *
      * @return 如果是需要过滤的对象，则返回true；否则返回false。
      */
     @SuppressWarnings("rawtypes")
@@ -214,7 +216,6 @@ public class LogAspect {
                 }
             }
         }
-        return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse
-                || o instanceof BindingResult;
+        return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse || o instanceof BindingResult;
     }
 }

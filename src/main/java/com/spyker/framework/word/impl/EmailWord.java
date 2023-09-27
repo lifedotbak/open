@@ -7,35 +7,35 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class EmailWord {
 
-	private static final String emailSplit = "@";
-	private static final String replaceChart = "*";
+    private static final String emailSplit = "@";
+    private static final String replaceChart = "*";
 
-	public static String getValue(String word) {
-		boolean checked = SensitiveWordUtils.isEmail(word);
-		if (!checked) {
-			return word;
-		}
-		int length = word.length();
-		String second = "";
-		int splitLength = word.indexOf(emailSplit);
-		if (splitLength <= 2) {
-			return word;
-		} else if (splitLength <= 5) {
-			String first = word.substring(2, length);
-			for (int i = 0; i < 2; i++) {
-				second = second.concat(replaceChart);
-			}
-			return second.concat(first);
-		} else if (splitLength > 5) {
-			String first = word.substring(0, 3);
-			String third = word.substring(splitLength, length);
-			for (int i = 0; i < splitLength - 3; i++) {
-				second = second.concat(replaceChart);
-			}
-			return first.concat(second).concat(third);
-		} else {
-			return word;
-		}
+    public static String getValue(String word) {
+        boolean checked = SensitiveWordUtils.isEmail(word);
+        if (!checked) {
+            return word;
+        }
+        int length = word.length();
+        String second = "";
+        int splitLength = word.indexOf(emailSplit);
+        if (splitLength <= 2) {
+            return word;
+        } else if (splitLength <= 5) {
+            String first = word.substring(2, length);
+            for (int i = 0; i < 2; i++) {
+                second = second.concat(replaceChart);
+            }
+            return second.concat(first);
+        } else if (splitLength > 5) {
+            String first = word.substring(0, 3);
+            String third = word.substring(splitLength, length);
+            for (int i = 0; i < splitLength - 3; i++) {
+                second = second.concat(replaceChart);
+            }
+            return first.concat(second).concat(third);
+        } else {
+            return word;
+        }
 
-	}
+    }
 }

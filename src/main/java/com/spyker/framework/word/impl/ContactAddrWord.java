@@ -6,31 +6,31 @@ package com.spyker.framework.word.impl;
  */
 public class ContactAddrWord {
 
-	public static String getValue(String word) {
-		int length = word.length();
-		String second = "";
-		if (length > 0 && length <= 5) {
-			String first = word.substring(0, 1);
-			String third = word.substring(length - 2);
-			for (int i = 2; i < length - 1; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		} else if (length >= 6 && length <= 9) {
-			String third = word.substring(length - 5);
-			for (int i = 0; i < length - 5; i++) {
-				second = second.concat("*");
-			}
-			return second.concat(third);
-		} else if (length >= 10) {
-			String first = word.substring(0, length - 9);
-			String third = word.substring(length - 5);
-			for (int i = 0; i < 4; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		} else {
-			return word;
-		}
-	}
+    public static String getValue(String word) {
+        int length = word.length();
+        String second = "";
+        if (length > 0 && length <= 5) {
+            String first = word.substring(0, 1);
+            String third = word.substring(length - 2);
+            for (int i = 2; i < length - 1; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else if (length >= 6 && length <= 9) {
+            String third = word.substring(length - 5);
+            for (int i = 0; i < length - 5; i++) {
+                second = second.concat("*");
+            }
+            return second.concat(third);
+        } else if (length >= 10) {
+            String first = word.substring(0, length - 9);
+            String third = word.substring(length - 5);
+            for (int i = 0; i < 4; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else {
+            return word;
+        }
+    }
 }

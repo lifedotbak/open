@@ -8,23 +8,23 @@ import lombok.Data;
 @Data
 public class PayNotifyResource {
 
-	/**
-	 * 加密算法类型
-	 */
-	private String algorithm;
+    /**
+     * 加密算法类型
+     */
+    private String algorithm;
 
-	/**
-	 * 数据密文
-	 */
-	private String ciphertext;
+    /**
+     * 数据密文
+     */
+    private String ciphertext;
 
-	/**
-	 * 附加数据
-	 */
-	private String associated_data;
+    /**
+     * 附加数据
+     */
+    private String associated_data;
 
-	/**
-	 * 随机串
-	 */
-	private String nonce;
+    /**
+     * 随机串
+     */
+    private String nonce;
 }

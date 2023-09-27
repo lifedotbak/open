@@ -96,7 +96,7 @@ public class XxlJobUtils {
     public String login() {
 
         Map<String, String> loginCookie = new HashMap<>();
-        String url = xxlServerProperties.getUrl() + "/login";
+        String url = xxlServerProperties.getUrl() + "/domain";
 
         HttpResponse response = HttpRequest.post(url).form("userName", xxlServerProperties.getUserName()).form(
                 "password", xxlServerProperties.getPassword()).execute();

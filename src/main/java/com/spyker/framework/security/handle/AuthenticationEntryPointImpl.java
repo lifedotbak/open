@@ -20,8 +20,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, S
     private static final long serialVersionUID = -8970718410437077606L;
 
     @Override
-    public void commence(HttpServletRequest request,
-            HttpServletResponse response,
+    public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
 
         //TODO

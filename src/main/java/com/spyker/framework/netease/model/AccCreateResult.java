@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AccCreateResult {
 
-	private int code;
-	private Acc info;
+    private int code;
+    private Acc info;
 
 }

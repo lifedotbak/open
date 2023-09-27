@@ -11,11 +11,11 @@ import lombok.Data;
 @Data
 public class RequestAuth {
 
-	private String nonce_str;
-	private String url;
-	private String timestamp;
-	private String mchid;
-	private String certificateSerialNo;
-	private String method;
-	private String body;
+    private String nonce_str;
+    private String url;
+    private String timestamp;
+    private String mchid;
+    private String certificateSerialNo;
+    private String method;
+    private String body;
 }

@@ -18,7 +18,6 @@ public class PermissionContextHolder {
     }
 
     public static String getContext() {
-        return Convert.toStr(RequestContextHolder.currentRequestAttributes()
-                .getAttribute(PERMISSION_CONTEXT_ATTRIBUTES, RequestAttributes.SCOPE_REQUEST));
+        return Convert.toStr(RequestContextHolder.currentRequestAttributes().getAttribute(PERMISSION_CONTEXT_ATTRIBUTES, RequestAttributes.SCOPE_REQUEST));
     }
 }

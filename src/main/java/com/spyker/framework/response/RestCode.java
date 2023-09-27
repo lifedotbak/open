@@ -2,7 +2,7 @@ package com.spyker.framework.response;
 
 public interface RestCode {
 
-	int getCode();
+    int getCode();
 
-	String getMsg();
+    String getMsg();
 }

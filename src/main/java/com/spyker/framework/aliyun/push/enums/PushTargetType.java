@@ -2,31 +2,25 @@ package com.spyker.framework.aliyun.push.enums;
 
 public enum PushTargetType {
 
-	DEVICE("DEVICE", "按设备")
+    DEVICE("DEVICE", "按设备"),
+    ALIAS("ALIAS", "别名"),
+    ACCOUNT("ACCOUNT", "帐号"),
+    TAG("TAG", "按标签推送"),
+    ALL("TAG", "广播推送");
 
-	, ALIAS("ALIAS", "别名")
+    private final String type;
+    private final String desc;
 
-	, ACCOUNT("ACCOUNT", "帐号")
+    PushTargetType(String type, String desc) {
+        this.type = type;
+        this.desc = desc;
+    }
 
-	, TAG("TAG", "按标签推送")
+    public String getType() {
+        return type;
+    }
 
-	, ALL("TAG", "广播推送")
-
-	;
-
-	private String type;
-	private String desc;
-
-	PushTargetType(String type, String desc) {
-		this.type = type;
-		this.desc = desc;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
+    public String getDesc() {
+        return desc;
+    }
 }

@@ -7,20 +7,20 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class VatAccountWord {
 
-	public static String getValue(String word) {
-		int x = word.length();
-		int y = x - 4;
-		String z = "";
-		for (int i = 0; i < y; i++) {
-			z = z + "*";
-		}
-		if (word.length() > 7 && word.length() < 29) {
-			if (SensitiveWordUtils.vatAccountId(word)) {
-				return word.replaceAll("(\\d{4,24})(\\d{4})", z + "$2");
-			} else {
-				return word;
-			}
-		}
-		return word;
-	}
+    public static String getValue(String word) {
+        int x = word.length();
+        int y = x - 4;
+        String z = "";
+        for (int i = 0; i < y; i++) {
+            z = z + "*";
+        }
+        if (word.length() > 7 && word.length() < 29) {
+            if (SensitiveWordUtils.vatAccountId(word)) {
+                return word.replaceAll("(\\d{4,24})(\\d{4})", z + "$2");
+            } else {
+                return word;
+            }
+        }
+        return word;
+    }
 }

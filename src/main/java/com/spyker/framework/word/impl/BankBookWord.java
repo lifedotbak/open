@@ -7,20 +7,20 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class BankBookWord {
 
-	public static String getValue(String word) {
-		int x = word.length();
-		int y = x - 8;
-		String z = "";
-		for (int i = 0; i < y; i++) {
-			z = z + "*";
-		}
-		if (word.length() > 13 && word.length() < 20) {
-			if (SensitiveWordUtils.bankBookId(word)) {
-				return word.replaceAll("(\\d{4})(\\d{6,11})(\\d{4})", "$1" + z + "$3");
-			} else {
-				return word;
-			}
-		}
-		return word;
-	}
+    public static String getValue(String word) {
+        int x = word.length();
+        int y = x - 8;
+        String z = "";
+        for (int i = 0; i < y; i++) {
+            z = z + "*";
+        }
+        if (word.length() > 13 && word.length() < 20) {
+            if (SensitiveWordUtils.bankBookId(word)) {
+                return word.replaceAll("(\\d{4})(\\d{6,11})(\\d{4})", "$1" + z + "$3");
+            } else {
+                return word;
+            }
+        }
+        return word;
+    }
 }

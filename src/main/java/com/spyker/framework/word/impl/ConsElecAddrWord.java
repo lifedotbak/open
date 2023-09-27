@@ -6,20 +6,18 @@ package com.spyker.framework.word.impl;
  */
 public class ConsElecAddrWord {
 
-	public static String getValue(String word) {
-		int q_length = word.length();
-		String second = "";
-		if (q_length >= 14) {
-			String first = word.substring(0, 9);
-			String third = word.substring(q_length - 5);
-			for (int i = 0; i < 6; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		}
-
-		else {
-			return word;
-		}
-	}
+    public static String getValue(String word) {
+        int q_length = word.length();
+        String second = "";
+        if (q_length >= 14) {
+            String first = word.substring(0, 9);
+            String third = word.substring(q_length - 5);
+            for (int i = 0; i < 6; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else {
+            return word;
+        }
+    }
 }

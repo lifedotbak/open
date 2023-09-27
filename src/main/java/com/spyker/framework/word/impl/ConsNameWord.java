@@ -8,36 +8,35 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class ConsNameWord {
 
-	private static final int consNameMinLength = 3;
-	private static final int consNameCenterLenght = 4;
-	private static final int consNameMaxLength = 6;
-	private static final String consNameSplit = "•";
-	private static final String repalceStr = "*";
+    private static final int consNameMinLength = 3;
+    private static final int consNameCenterLenght = 4;
+    private static final int consNameMaxLength = 6;
+    private static final String consNameSplit = "•";
+    private static final String repalceStr = "*";
 
-	public static String getValue(String word) {
-		boolean checked = SensitiveWordUtils.isChineseName(word);
-		if (!checked) {
-			return word;
-		}
-		// 判断是否有以"•"分隔
-		word = word.replace("·", "•");
-		String[] words = word.split(consNameSplit);
-//        System.out.println(words.length);
-		StringBuilder returnWord = new StringBuilder();
-		for (String word2 : words) {
-//            System.out.println(words[i]);
-			int length = word2.length();
-			if (length <= consNameMinLength && length > 0) {
-				returnWord.append(repalceStr).append(word2.substring(1, length));
-			} else if (length >= consNameCenterLenght && length <= consNameMaxLength) {
-				returnWord.append(repalceStr).append(repalceStr).append(word2.substring(2, length));
-			} else if (length > consNameMaxLength) {
-				returnWord.append(word2.substring(0, 2)).append(repalceStr).append(repalceStr).append(repalceStr)
-						.append(repalceStr).append(word2.substring(5, length));
-			}
-			returnWord.append(consNameSplit);
+    public static String getValue(String word) {
+        boolean checked = SensitiveWordUtils.isChineseName(word);
+        if (!checked) {
+            return word;
+        }
+        // 判断是否有以"•"分隔
+        word = word.replace("·", "•");
+        String[] words = word.split(consNameSplit);
+        //        System.out.println(words.length);
+        StringBuilder returnWord = new StringBuilder();
+        for (String word2 : words) {
+            //            System.out.println(words[i]);
+            int length = word2.length();
+            if (length <= consNameMinLength && length > 0) {
+                returnWord.append(repalceStr).append(word2, 1, length);
+            } else if (length >= consNameCenterLenght && length <= consNameMaxLength) {
+                returnWord.append(repalceStr).append(repalceStr).append(word2, 2, length);
+            } else if (length > consNameMaxLength) {
+                returnWord.append(word2, 0, 2).append(repalceStr).append(repalceStr).append(repalceStr).append(repalceStr).append(word2, 5, length);
+            }
+            returnWord.append(consNameSplit);
 
-		}
-		return returnWord.substring(0, returnWord.length() - 1);
-	}
+        }
+        return returnWord.substring(0, returnWord.length() - 1);
+    }
 }

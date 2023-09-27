@@ -1,43 +1,42 @@
 package com.spyker.framework.aliyun.sms;
 
-import java.util.Map;
-
 import com.alibaba.fastjson.JSONObject;
-
 import lombok.Data;
+
+import java.util.Map;
 
 @Data
 public class Sms {
 
-	private String phonenumber;
+    private String phonenumber;
 
-	private String templeteCode;
+    private String templeteCode;
 
-	/**
-	 * json 格式 "{\"code\":\"888888\"}"
-	 */
-	// private String templateParam;
-	private String outId;
+    /**
+     * json 格式 "{\"code\":\"888888\"}"
+     */
+    // private String templateParam;
+    private String outId;
 
-	private String accessKeyId;
+    private String accessKeyId;
 
-	private String accessSecret;
+    private String accessSecret;
 
-	private String signName;
+    private String signName;
 
-	private Map<String, Object> paramMap;
+    private Map<String, Object> paramMap;
 
-	public String getTemplateParam() {
+    public String getTemplateParam() {
 
-		String result = "";
+        String result = "";
 
-		if (null != paramMap) {
-			JSONObject jsonObject = new JSONObject(paramMap);
+        if (null != paramMap) {
+            JSONObject jsonObject = new JSONObject(paramMap);
 
-			result = jsonObject.toString();
-		}
+            result = jsonObject.toString();
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 }

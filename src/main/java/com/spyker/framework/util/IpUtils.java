@@ -14,8 +14,7 @@ public class IpUtils {
     // 匹配 ip
     public final static String REGX_IP = "((" + REGX_0_255 + "\\.){3}" + REGX_0_255 + ")";
     public final static String REGX_IP_WILDCARD =
-            "(((\\*\\.){3}\\*)|(" + REGX_0_255 + "(\\.\\*){3})|(" + REGX_0_255 + "\\." + REGX_0_255 + ")(\\.\\*){2}"
-                    + "|((" + REGX_0_255 + "\\.){3}\\*))";
+            "(((\\*\\.){3}\\*)|(" + REGX_0_255 + "(\\.\\*){3})|(" + REGX_0_255 + "\\." + REGX_0_255 + ")(\\.\\*){2}" + "|((" + REGX_0_255 + "\\.){3}\\*))";
     // 匹配网段
     public final static String REGX_IP_SEG = "(" + REGX_IP + "\\-" + REGX_IP + ")";
 
@@ -32,7 +31,6 @@ public class IpUtils {
      * 获取客户端IP
      *
      * @param request 请求对象
-     *
      * @return IP地址
      */
     public static String getIpAddr(HttpServletRequest request) {
@@ -64,7 +62,6 @@ public class IpUtils {
      * 检查是否为内部IP地址
      *
      * @param ip IP地址
-     *
      * @return 结果
      */
     public static boolean internalIp(String ip) {
@@ -76,7 +73,6 @@ public class IpUtils {
      * 检查是否为内部IP地址
      *
      * @param addr byte地址
-     *
      * @return 结果
      */
     private static boolean internalIp(byte[] addr) {
@@ -115,7 +111,6 @@ public class IpUtils {
      * 将IPv4地址转换成字节
      *
      * @param text IPv4地址
-     *
      * @return byte 字节
      */
     public static byte[] textToNumericFormatV4(String text) {
@@ -216,7 +211,6 @@ public class IpUtils {
      * 从多级反向代理中获得第一个非unknown IP地址
      *
      * @param ip 获得的IP地址
-     *
      * @return 第一个非unknown IP地址
      */
     public static String getMultistageReverseProxyIp(String ip) {
@@ -237,7 +231,6 @@ public class IpUtils {
      * 检测给定字符串是否为未知，多用于检测HTTP请求相关
      *
      * @param checkString 被检测的字符串
-     *
      * @return 是否未知
      */
     public static boolean isUnknown(String checkString) {
@@ -308,7 +301,6 @@ public class IpUtils {
      *
      * @param filter 过滤IP列表,支持后缀'*'通配,支持网段如:`10.10.10.1-10.10.10.99`
      * @param ip     校验IP地址
-     *
      * @return boolean 结果
      */
     public static boolean isMatchedIp(String filter, String ip) {

@@ -366,7 +366,7 @@ public class HCVideo {
         IntByReference intP1 = new IntByReference(0);
         IntByReference intInlen = new IntByReference(0);
         boolean b_PlayBackStart = hCNetSDK.NET_DVR_PlayBackControl_V40(lPlayByFileHandle, HCNetSDK.NET_DVR_PLAYSTART,
-            intP1.getPointer(), 4, Pointer.NULL, intInlen);
+                intP1.getPointer(), 4, Pointer.NULL, intInlen);
         if (!b_PlayBackStart) {
             System.out.println("开始播放失败，错误码为" + hCNetSDK.NET_DVR_GetLastError());
             return;
@@ -574,7 +574,7 @@ public class HCVideo {
         // lpIpParaConfig 接收数据的缓冲指针
         Pointer lpIpParaConfig = m_strIpparaCfg.getPointer();
         boolean bRet = hCNetSDK.NET_DVR_GetDVRConfig(userID, HCNetSDK.NET_DVR_GET_IPPARACFG_V40, 0, lpIpParaConfig,
-            m_strIpparaCfg.size(), ibrBytesReturned);
+                m_strIpparaCfg.size(), ibrBytesReturned);
         m_strIpparaCfg.read();
 
         log.info("起始数字通道号--->{}", m_strIpparaCfg.dwStartDChan);

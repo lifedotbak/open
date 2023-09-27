@@ -1,4 +1,3 @@
-
 package com.spyker.framework.word.impl;
 
 import com.spyker.framework.word.SensitiveWordUtils;
@@ -9,43 +8,43 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class CompanyNameWord {
 
-	public static String getValue(String word) {
-		boolean checked = SensitiveWordUtils.isChinese(word);
-		if (!checked) {
-			return word;
-		}
-		int length = word.length();
-		String second = "";
-		if (length <= 4) {
-			String first = word.substring(0, 1);
-			String third = word.substring(length - 1);
-			for (int i = 1; i < length - 1; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		} else if (length == 5 || length == 6) {
-			String first = word.substring(0, 2);
-			String third = word.substring(length - 2);
-			for (int i = 3; i < length - 1; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		} else if (length >= 7 && (length % 2 == 1)) {
-			String first = word.substring(0, (length - 3) / 2);
-			String third = word.substring(length - (length - 3) / 2);
-			for (int i = 0; i < 3; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		} else if (length >= 8 && (length % 2 == 0)) {
-			String first = word.substring(0, (length - 4) / 2);
-			String third = word.substring(length - (length - 4) / 2);
-			for (int i = 0; i < 4; i++) {
-				second = second.concat("*");
-			}
-			return first.concat(second).concat(third);
-		} else {
-			return word;
-		}
-	}
+    public static String getValue(String word) {
+        boolean checked = SensitiveWordUtils.isChinese(word);
+        if (!checked) {
+            return word;
+        }
+        int length = word.length();
+        String second = "";
+        if (length <= 4) {
+            String first = word.substring(0, 1);
+            String third = word.substring(length - 1);
+            for (int i = 1; i < length - 1; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else if (length == 5 || length == 6) {
+            String first = word.substring(0, 2);
+            String third = word.substring(length - 2);
+            for (int i = 3; i < length - 1; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else if (length >= 7 && (length % 2 == 1)) {
+            String first = word.substring(0, (length - 3) / 2);
+            String third = word.substring(length - (length - 3) / 2);
+            for (int i = 0; i < 3; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else if (length >= 8 && (length % 2 == 0)) {
+            String first = word.substring(0, (length - 4) / 2);
+            String third = word.substring(length - (length - 4) / 2);
+            for (int i = 0; i < 4; i++) {
+                second = second.concat("*");
+            }
+            return first.concat(second).concat(third);
+        } else {
+            return word;
+        }
+    }
 }

@@ -1,4 +1,3 @@
-
 package com.spyker.framework.word.impl;
 
 import com.spyker.framework.word.SensitiveWordUtils;
@@ -8,20 +7,20 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class BankCardWord {
 
-	public static String getValue(String word) {
-		int x = word.length();
-		int y = x - 8;
-		String z = "";
-		for (int i = 0; i < y; i++) {
-			z = z + "*";
-		}
-		if (word.length() > 12 && word.length() < 20) {
-			if (SensitiveWordUtils.bankCardId(word)) {
-				return word.replaceAll("(\\d{4})(\\d{5,11})(\\d{4})", "$1" + z + "$3");
-			} else {
-				return word;
-			}
-		}
-		return word;
-	}
+    public static String getValue(String word) {
+        int x = word.length();
+        int y = x - 8;
+        String z = "";
+        for (int i = 0; i < y; i++) {
+            z = z + "*";
+        }
+        if (word.length() > 12 && word.length() < 20) {
+            if (SensitiveWordUtils.bankCardId(word)) {
+                return word.replaceAll("(\\d{4})(\\d{5,11})(\\d{4})", "$1" + z + "$3");
+            } else {
+                return word;
+            }
+        }
+        return word;
+    }
 }

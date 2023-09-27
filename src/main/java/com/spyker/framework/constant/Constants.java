@@ -141,8 +141,6 @@ public class Constants {
     /**
      * 定时任务违规的字符
      */
-    public static final String[] JOB_ERROR_STR = {
-            "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml", "org.springframework", "org.apache",
-            "com.platform.common.utils.file", "com.platform.common.config"
-    };
+    public static final String[] JOB_ERROR_STR = {"java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml"
+            , "org.springframework", "org.apache", "com.platform.common.utils.file", "com.platform.common.config"};
 }

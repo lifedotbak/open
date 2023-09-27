@@ -1,6 +1,6 @@
 package com.spyker.framework.util;
 
-import com.spyker.framework.login.LoginUser;
+import com.spyker.framework.domain.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -66,7 +66,6 @@ public class SecurityUtils {
      * 生成BCryptPasswordEncoder密码
      *
      * @param password 密码
-     *
      * @return 加密字符串
      */
     public static String encryptPassword(String password) {
@@ -79,7 +78,6 @@ public class SecurityUtils {
      *
      * @param rawPassword     真实密码
      * @param encodedPassword 加密后字符
-     *
      * @return 结果
      */
     public static boolean matchesPassword(String rawPassword, String encodedPassword) {
@@ -91,7 +89,6 @@ public class SecurityUtils {
      * 是否为管理员
      *
      * @param userId 用户ID
-     *
      * @return 结果
      */
     public static boolean isAdmin(Long userId) {

@@ -1,4 +1,3 @@
-
 package com.spyker.framework.word.impl;
 
 import com.spyker.framework.word.SensitiveWordUtils;
@@ -8,16 +7,16 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class CarNoWord {
 
-	private static final String carNoRegx = "(^[\\u4e00-\\u9fa5]{1})(\\w{1})(\\w{3,4})(\\w{2})";
-	private static final String carNoReplaceRule = "$1$2***$4";
+    private static final String carNoRegx = "(^[\\u4e00-\\u9fa5]{1})(\\w{1})(\\w{3,4})(\\w{2})";
+    private static final String carNoReplaceRule = "$1$2***$4";
 
-	public static String getValue(String word) {
+    public static String getValue(String word) {
 
-		word = word.toUpperCase();
-		boolean checked = SensitiveWordUtils.carId(word);
-		if (!checked) {
-			return word;
-		}
-		return word.replaceAll(carNoRegx, carNoReplaceRule);
-	}
+        word = word.toUpperCase();
+        boolean checked = SensitiveWordUtils.carId(word);
+        if (!checked) {
+            return word;
+        }
+        return word.replaceAll(carNoRegx, carNoReplaceRule);
+    }
 }

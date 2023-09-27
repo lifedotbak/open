@@ -7,14 +7,14 @@ import com.spyker.framework.word.SensitiveWordUtils;
  */
 public class CarVinWord {
 
-	private static final String carVinRegx = "(\\w{11})(\\d{6})";
-	private static final String carVinReplaceRule = "***********$2";
+    private static final String carVinRegx = "(\\w{11})(\\d{6})";
+    private static final String carVinReplaceRule = "***********$2";
 
-	public static String getValue(String word) {
-		boolean checked = SensitiveWordUtils.carVin(word);
-		if (!checked) {
-			return word;
-		}
-		return word.replaceAll(carVinRegx, carVinReplaceRule);
-	}
+    public static String getValue(String word) {
+        boolean checked = SensitiveWordUtils.carVin(word);
+        if (!checked) {
+            return word;
+        }
+        return word.replaceAll(carVinRegx, carVinReplaceRule);
+    }
 }

@@ -1,509 +1,476 @@
 package com.spyker.framework.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import lombok.extern.slf4j.Slf4j;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.util.Calendar;
+import java.util.Date;
 
 @Slf4j
 public final class DateUtils {
 
-	public enum Format {
+    public enum Format {
+
+        YYYYMMDD("yyyyMMdd"),
+        YYYYMMDDE("yyyyMMdd E"),
+        HHMM("HH:mm"),
+        HHMMSS("HH:mm:ss"),
+        YYYY_P_MM_P_DD("yyyy.MM.dd"),
+        YYYY_P_MM_P_DD_HHMM("yyyy.MM.dd HH:mm"),
+        YYYYMMDDHHMMSS("yyyyMMddHHmmss"),
+        YYYYMMDDHHMM("yyyyMMddHHmm"),
+        YYYY_MM_DD("yyyy-MM-dd"),
+        YYYY_Y_MM_M_DD_D("yyyy年MM月dd日"),
+        YYYYMM("yyyyMM"),
+        YYYY_MM("yyyy-MM"),
+        YYYY_MM_("yyyy/MM"),
+        YYYY_MM_CN("yyyy年MM月"),
+        MM_DD_CN("MM月dd日"),
+        MM_DD_HH_MM_CN("MM月dd日 HH:mm"),
+        YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),
+        YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),
+        YYYY_MM_DD_CN("yyyy年MM月dd日"),
+        YYYY_MM_DD_HH_MM_CN("yyyy年MM月dd日 HH:mm"),
+        YYYY_MM_DD_HH_MM_SS_CN("yyyy年MM月dd日 HH:mm:ss");
 
-		YYYYMMDD("yyyyMMdd")
+        private final String format;
 
-		, YYYYMMDDE("yyyyMMdd E")
+        Format(String format) {
+            this.format = format;
+        }
 
-		, HHMM("HH:mm")
+        public String getFormat() {
+            return format;
+        }
 
-		, HHMMSS("HH:mm:ss")
+    }
 
-		, YYYY_P_MM_P_DD("yyyy.MM.dd")
+    /**
+     * 2022-07-25T09:41:49+08:00
+     *
+     * @param dateValue
+     * @return
+     */
+    public static Date formatISO8601(String dateValue) {
 
-		, YYYY_P_MM_P_DD_HHMM("yyyy.MM.dd HH:mm")
+        String parseValue = StringUtils.substring(dateValue, 0, 19);
 
-		, YYYYMMDDHHMMSS("yyyyMMddHHmmss")
+        parseValue = parseValue.replace("T", " ");
 
-		, YYYYMMDDHHMM("yyyyMMddHHmm")
+        SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-		, YYYY_MM_DD("yyyy-MM-dd")
+        try {
+            return dd.parse(parseValue);
+        } catch (ParseException e) {
+            return null;
+        }
 
-		, YYYY_Y_MM_M_DD_D("yyyy年MM月dd日")
+    }
 
-		, YYYYMM("yyyyMM")
+    public static String date2String(long date, Format format) {
+        return date2String(new Date(date), format);
+    }
 
-		, YYYY_MM("yyyy-MM")
+    public static String date2String(Date date, Format format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format.getFormat());
+        return sdf.format(date);
+    }
 
-		, YYYY_MM_("yyyy/MM")
+    public static Date format2Date(String dateValue, Format format) {
 
-		, YYYY_MM_CN("yyyy年MM月")
+        if (null == dateValue || dateValue.trim().length() < 1) {
+            return null;
+        }
 
-		, MM_DD_CN("MM月dd日")
+        try {
+            SimpleDateFormat dd = new SimpleDateFormat(format.getFormat());
+            return dd.parse(dateValue);
+        } catch (Exception e) {
 
-		, MM_DD_HH_MM_CN("MM月dd日 HH:mm")
+            log.error("format2Date error", e.getMessage());
 
-		, YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm")
+            return null;
+        }
 
-		, YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss")
+    }
 
-		, YYYY_MM_DD_CN("yyyy年MM月dd日")
+    public static Date addDays(Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addDays(date, amount);
+    }
 
-		, YYYY_MM_DD_HH_MM_CN("yyyy年MM月dd日 HH:mm")
+    public static Date addMonths(Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addMonths(date, amount);
+    }
 
-		, YYYY_MM_DD_HH_MM_SS_CN("yyyy年MM月dd日 HH:mm:ss");
+    public static Date addYears(Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addYears(date, amount);
+    }
 
-		private String format;
+    public static Date addHours(Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addHours(date, amount);
+    }
 
-		Format(String format) {
-			this.format = format;
-		}
+    public static Date addMinutes(Date date, int amount) {
 
-		public String getFormat() {
-			return format;
-		}
+        return org.apache.commons.lang3.time.DateUtils.addMinutes(date, amount);
+    }
 
-	}
+    public static Date addSeconds(Date date, int amount) {
 
-	/**
-	 * 2022-07-25T09:41:49+08:00
-	 *
-	 * @param dateValue
-	 * @return
-	 */
-	public static Date formatISO8601(String dateValue) {
+        return org.apache.commons.lang3.time.DateUtils.addSeconds(date, amount);
+    }
 
-		String parseValue = StringUtils.substring(dateValue, 0, 19);
+    public static String getCurrentMonth() {
+        return DateUtils.date2String(getCurrentDate(), DateUtils.Format.YYYY_MM);
+    }
 
-		parseValue = parseValue.replace("T", " ");
+    public static Date getCurrentDate() {
 
-		SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return new Date();
+    }
 
-		try {
-			return dd.parse(parseValue);
-		} catch (ParseException e) {
-			return null;
-		}
+    public static String getYear(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
 
-	}
+        int year = cal.get(Calendar.YEAR);
 
-	public static String date2String(long date, Format format) {
-		return date2String(new Date(date), format);
-	}
+        return year + "";
+    }
 
-	public static String date2String(Date date, Format format) {
-		SimpleDateFormat sdf = new SimpleDateFormat(format.getFormat());
-		return sdf.format(date);
-	}
+    public static String getNextYear(Date date) {
+        Date nextYear = org.apache.commons.lang3.time.DateUtils.addYears(date, 1);
 
-	public static Date format2Date(String dateValue, Format format) {
+        return getYear(nextYear);
+    }
 
-		if (null == dateValue || dateValue.trim().length() < 1) {
-			return null;
-		}
+    public static Date getPreviousMonth(Date date) {
+        return addMonths(date, -1);
+    }
 
-		try {
-			SimpleDateFormat dd = new SimpleDateFormat(format.getFormat());
-			return dd.parse(dateValue);
-		} catch (Exception e) {
+    public static Date getNextMonth(Date date) {
+        return addMonths(date, 1);
+    }
 
-			log.error("format2Date error", e.getMessage());
+    public static int dayOfYear(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.setTime(date);
 
-			return null;
-		}
+        return calendar.get(Calendar.DAY_OF_YEAR);
+    }
 
-	}
+    public static int weekOfYear(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.setTime(date);
 
-	public static Date addDays(Date date, int amount) {
-		return org.apache.commons.lang3.time.DateUtils.addDays(date, amount);
-	}
+        return calendar.get(Calendar.WEEK_OF_YEAR);
+    }
 
-	public static Date addMonths(Date date, int amount) {
-		return org.apache.commons.lang3.time.DateUtils.addMonths(date, amount);
-	}
+    public static int hourOfDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-	public static Date addYears(Date date, int amount) {
-		return org.apache.commons.lang3.time.DateUtils.addYears(date, amount);
-	}
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
 
-	public static Date addHours(Date date, int amount) {
-		return org.apache.commons.lang3.time.DateUtils.addHours(date, amount);
-	}
+    public static int minutesOfDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-	public static Date addMinutes(Date date, int amount) {
+        return calendar.get(Calendar.MINUTE);
+    }
 
-		return org.apache.commons.lang3.time.DateUtils.addMinutes(date, amount);
-	}
+    public static int weekOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.setTime(date);
 
-	public static Date addSeconds(Date date, int amount) {
+        return calendar.get(Calendar.WEEK_OF_MONTH);
+    }
 
-		return org.apache.commons.lang3.time.DateUtils.addSeconds(date, amount);
-	}
+    public static int monthOfYear(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-	public static String getCurrentMonth() {
-		return DateUtils.date2String(getCurrentDate(), DateUtils.Format.YYYY_MM);
-	}
+        return calendar.get(Calendar.MONTH) + 1;
+    }
 
-	public static Date getCurrentDate() {
+    public static int secOfMinute(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-		return new Date();
-	}
+        return calendar.get(Calendar.SECOND);
+    }
 
-	public static String getYear(Date date) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
+    public static Date clearMs(Date date) {
 
-		int year = cal.get(Calendar.YEAR);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-		return year + "";
-	}
+        return cal.getTime();
+    }
 
-	public static String getNextYear(Date date) {
-		Date nextYear = org.apache.commons.lang3.time.DateUtils.addYears(date, 1);
+    public static Date clearHms(Date date) {
 
-		return getYear(nextYear);
-	}
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-	public static Date getPreviousMonth(Date date) {
-		return addMonths(date, -1);
-	}
+        return cal.getTime();
+    }
 
-	public static Date getNextMonth(Date date) {
-		return addMonths(date, 1);
-	}
+    public static Date clearSec(Date date) {
 
-	public static int dayOfYear(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.setTime(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-		return calendar.get(Calendar.DAY_OF_YEAR);
-	}
+        return cal.getTime();
+    }
 
-	public static int weekOfYear(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.setTime(date);
+    public static int dayOfWeek(Date date) {
 
-		return calendar.get(Calendar.WEEK_OF_YEAR);
-	}
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
 
-	public static int hourOfDay(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        return cal.get(Calendar.DAY_OF_WEEK) - 1;
+    }
 
-		return calendar.get(Calendar.HOUR_OF_DAY);
-	}
+    public static Date startOfWeek(Date date) {
+        int dayOfWeek = dayOfWeek(date);
 
-	public static int minutesOfDay(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        if (0 == dayOfWeek) {
+            return addDays(date, -7 + 1);
+        }
 
-		return calendar.get(Calendar.MINUTE);
-	}
+        return addDays(date, dayOfWeek * -1 + 1);
+    }
 
-	public static int weekOfMonth(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.setTime(date);
+    public static Date endOfWeek(Date date) {
+        int dayOfWeek = dayOfWeek(date);
 
-		return calendar.get(Calendar.WEEK_OF_MONTH);
-	}
+        if (0 == dayOfWeek) {
+            return date;
+        }
 
-	public static int monthOfYear(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        return addDays(date, 7 - dayOfWeek);
+    }
 
-		return calendar.get(Calendar.MONTH) + 1;
-	}
+    public static float minutesBetween(Date start, Date end) {
 
-	public static int secOfMinute(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        return (end.getTime() - start.getTime()) / (1000 * 60);
+    }
 
-		return calendar.get(Calendar.SECOND);
-	}
+    public static float hourBetween(Date start, Date end) {
 
-	public static Date clearMs(Date date) {
+        start = clearMs(start);
+        end = clearMs(end);
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+        return (end.getTime() - start.getTime()) / (1000 * 3600);
+    }
 
-		return cal.getTime();
-	}
+    public static int daysBetween(Date start, Date end) {
 
-	public static Date clearHms(Date date) {
+        start = clearHms(start);
+        end = clearHms(end);
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+        Long days = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
 
-		return cal.getTime();
-	}
+        return days.intValue();
+    }
 
-	public static Date clearSec(Date date) {
+    public static int dayNumberOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+        return calendar.getActualMaximum(Calendar.DATE);
+    }
 
-		return cal.getTime();
-	}
+    public static int dayOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-	public static int dayOfWeek(Date date) {
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
+    public static Date endOfDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-		return cal.get(Calendar.DAY_OF_WEEK) - 1;
-	}
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
 
-	public static Date startOfWeek(Date date) {
-		int dayOfWeek = dayOfWeek(date);
+        return calendar.getTime();
+    }
 
-		if (0 == dayOfWeek) {
-			return addDays(date, -7 + 1);
-		}
+    public static boolean isDayStart(Date date) {
 
-		return addDays(date, dayOfWeek * -1 + 1);
-	}
+        String dateValue = date2String(date, Format.HHMMSS);
 
-	public static Date endOfWeek(Date date) {
-		int dayOfWeek = dayOfWeek(date);
+        return "00:00:00".equals(dateValue);
+    }
 
-		if (0 == dayOfWeek) {
-			return date;
-		}
+    public static boolean isDayEnd(Date date) {
 
-		return addDays(date, 7 - dayOfWeek);
-	}
+        String dateValue = date2String(date, Format.HHMMSS);
 
-	public static float minutesBetween(Date start, Date end) {
+        return "23:59:59".equals(dateValue);
+    }
 
-		return (end.getTime() - start.getTime()) / (1000 * 60);
-	}
+    public static Date startOfDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-	public static float hourBetween(Date start, Date end) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
 
-		start = clearMs(start);
-		end = clearMs(end);
+        return calendar.getTime();
+    }
 
-		return (end.getTime() - start.getTime()) / (1000 * 3600);
-	}
+    public static Date startOfMonth(Date date) {
 
-	public static int daysBetween(Date start, Date end) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-		start = clearHms(start);
-		end = clearHms(end);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
 
-		Long days = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
+        return calendar.getTime();
+    }
 
-		return days.intValue();
-	}
+    public static Date endOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(addMonths(date, 1));
 
-	public static int dayNumberOfMonth(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
 
-		return calendar.getActualMaximum(Calendar.DATE);
-	}
+        return addDays(calendar.getTime(), -1);
+    }
 
-	public static int dayOfMonth(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+    public static Date nowMonthEnd() {
 
-		return calendar.get(Calendar.DAY_OF_MONTH);
-	}
+        return endOfMonth(getCurrentDate());
+    }
 
-	public static Date endOfDay(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+    public static Date nowMonthStart() {
 
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
+        return startOfMonth(getCurrentDate());
 
-		return calendar.getTime();
-	}
+    }
 
-	public static boolean isDayStart(Date date) {
+    public static Date nowYearStart() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, 1);
+        cal.set(Calendar.DATE, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-		String dateValue = date2String(date, Format.HHMMSS);
+        return cal.getTime();
+    }
 
-		if ("00:00:00".equals(dateValue)) {
-			return true;
-		}
+    public static long getCurrentDateValue() {
+        return new Date().getTime();
+    }
 
-		return false;
-	}
+    public static Date calcQingMingJie(Date date) {
 
-	public static boolean isDayEnd(Date date) {
+        // 清明节日期的计算 [Y*D+C]-L Y=年数后2位，D=0.2422，L=闰年数，21世纪C=4.81，20世纪=5.59。
 
-		String dateValue = date2String(date, Format.HHMMSS);
+        Calendar calendar = Calendar.getInstance();
 
-		if ("23:59:59".equals(dateValue)) {
-			return true;
-		}
+        calendar.setTime(date);
+        String year = calendar.get(Calendar.YEAR) + "";
 
-		return false;
-	}
+        // 21世纪C=4.81，20世纪=5.59
+        double c = 4.81;
+        if (year.startsWith("1")) {
+            c = 5.59;
+        }
+        double d = 0.242;
 
-	public static Date startOfDay(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        int y = Integer.parseInt(year.substring(2, 4));
 
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
+        Double result = (y * d + c) - (y / 4);
 
-		return calendar.getTime();
-	}
+        int days = result.intValue();
 
-	public static Date startOfMonth(Date date) {
+        calendar.set(Calendar.MONTH, 4 - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, days);
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+        return calendar.getTime();
 
-		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
-		calendar.set(Calendar.DATE, 1);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
+    }
 
-		return calendar.getTime();
-	}
+    /**
+     * 计算两个日期相差的月份数
+     *
+     * @param date1  日期1
+     * @param date2  日期2
+     * @param format 日期1和日期2的日期格式
+     * @return 相差的月份数
+     */
+    public static int monthsBetween(Date start, Date end) {
 
-	public static Date endOfMonth(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(addMonths(date, 1));
+        Period between = Period.between(date2LocalDate(start), date2LocalDate(end));
 
-		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
-		calendar.set(Calendar.DATE, 1);
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		calendar.set(Calendar.SECOND, 59);
+        return ((Long) between.toTotalMonths()).intValue();
+    }
 
-		return addDays(calendar.getTime(), -1);
-	}
+    public static LocalDate date2LocalDate(Date date) {
+        Instant instant = date.toInstant();
+        ZoneId zone = ZoneId.systemDefault();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
+        return localDateTime.toLocalDate();
+    }
 
-	public static Date nowMonthEnd() {
+    /**
+     * 是否跨天
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static boolean isDaySpan(Date start, Date end) {
+        Date startYmd = clearHms(start);
+        String startHm = date2String(start, Format.HHMM);
+        String endHm = date2String(end, Format.HHMM);
 
-		return endOfMonth(getCurrentDate());
-	}
+        Date startYMDHM =
+                DateUtils.format2Date(DateUtils.date2String(startYmd, DateUtils.Format.YYYY_MM_DD) + " " + startHm,
+                        DateUtils.Format.YYYY_MM_DD_HH_MM);
+        Date endYMDHM =
+                DateUtils.format2Date(DateUtils.date2String(startYmd, DateUtils.Format.YYYY_MM_DD) + " " + endHm,
+                        DateUtils.Format.YYYY_MM_DD_HH_MM);
 
-	public static Date nowMonthStart() {
+        return startYMDHM.after(endYMDHM);
 
-		return startOfMonth(getCurrentDate());
+    }
 
-	}
-
-	public static Date nowYearStart() {
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.MONTH, 1);
-		cal.set(Calendar.DATE, 1);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
-
-		return cal.getTime();
-	}
-
-	public static long getCurrentDateValue() {
-		return new Date().getTime();
-	}
-
-	public static Date calcQingMingJie(Date date) {
-
-		// 清明节日期的计算 [Y*D+C]-L Y=年数后2位，D=0.2422，L=闰年数，21世纪C=4.81，20世纪=5.59。
-
-		Calendar calendar = Calendar.getInstance();
-
-		calendar.setTime(date);
-		String year = calendar.get(Calendar.YEAR) + "";
-
-		// 21世纪C=4.81，20世纪=5.59
-		double c = 4.81;
-		if (year.startsWith("1")) {
-			c = 5.59;
-		}
-		double d = 0.242;
-
-		int y = Integer.parseInt(year.substring(2, 4));
-
-		Double result = (y * d + c) - (y / 4);
-
-		int days = result.intValue();
-
-		calendar.set(Calendar.MONTH, 4 - 1);
-		calendar.set(Calendar.DAY_OF_MONTH, days);
-
-		return calendar.getTime();
-
-	}
-
-	/**
-	 * 计算两个日期相差的月份数
-	 *
-	 * @param date1  日期1
-	 * @param date2  日期2
-	 * @param format 日期1和日期2的日期格式
-	 * @return 相差的月份数
-	 */
-	public static int monthsBetween(Date start, Date end) {
-
-		Period between = Period.between(date2LocalDate(start), date2LocalDate(end));
-
-		return ((Long) between.toTotalMonths()).intValue();
-	}
-
-	public static LocalDate date2LocalDate(Date date) {
-		Instant instant = date.toInstant();
-		ZoneId zone = ZoneId.systemDefault();
-		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);
-		return localDateTime.toLocalDate();
-	}
-
-	/**
-	 * 是否跨天
-	 *
-	 * @param start
-	 * @param end
-	 * @return
-	 */
-	public static boolean isDaySpan(Date start, Date end) {
-		Date startYmd = clearHms(start);
-		String startHm = date2String(start, Format.HHMM);
-		String endHm = date2String(end, Format.HHMM);
-
-		Date startYMDHM = DateUtils.format2Date(
-				DateUtils.date2String(startYmd, DateUtils.Format.YYYY_MM_DD) + " " + startHm,
-				DateUtils.Format.YYYY_MM_DD_HH_MM);
-		Date endYMDHM = DateUtils.format2Date(
-				DateUtils.date2String(startYmd, DateUtils.Format.YYYY_MM_DD) + " " + endHm,
-				DateUtils.Format.YYYY_MM_DD_HH_MM);
-
-		return startYMDHM.after(endYMDHM);
-
-	}
-
-	public static void main(String[] args) {
-		System.out.println(formatISO8601("2022-07-25T09:41:49+08:00"));
-	}
+    public static void main(String[] args) {
+        System.out.println(formatISO8601("2022-07-25T09:41:49+08:00"));
+    }
 
 }
