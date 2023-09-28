@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.application.mapper.SysUserMapper">
+    
+    <select id="query" resultType="com.spyker.application.entity.SysUser" parameterType="com.spyker.application.search.SysUserSearch">
+        SELECT a.* FROM sys_user a
+        <where>
+            <if test="null != deptId ">
+                and a.dept_id = #{deptId}
+            </if>
+            <if test="null != userName ">
+                and a.user_name = #{userName}
+            </if>
+            <if test="null != nickName ">
+                and a.nick_name = #{nickName}
+            </if>
+            <if test="null != userType ">
+                and a.user_type = #{userType}
+            </if>
+            <if test="null != email ">
+                and a.email = #{email}
+            </if>
+            <if test="null != phonenumber ">
+                and a.phonenumber = #{phonenumber}
+            </if>
+            <if test="null != sex ">
+                and a.sex = #{sex}
+            </if>
+            <if test="null != avatar ">
+                and a.avatar = #{avatar}
+            </if>
+            <if test="null != password ">
+                and a.password = #{password}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != delFlag ">
+                and a.del_flag = #{delFlag}
+            </if>
+            <if test="null != loginIp ">
+                and a.login_ip = #{loginIp}
+            </if>
+            <if test="null != loginDate ">
+                and a.login_date = #{loginDate}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryPage" resultType="com.spyker.application.entity.SysUser" parameterType="com.spyker.application.search.SysUserSearch">
+        SELECT a.* FROM sys_user a
+        <where>
+            <if test="null != deptId ">
+                and a.dept_id = #{deptId}
+            </if>
+            <if test="null != userName ">
+                and a.user_name = #{userName}
+            </if>
+            <if test="null != nickName ">
+                and a.nick_name = #{nickName}
+            </if>
+            <if test="null != userType ">
+                and a.user_type = #{userType}
+            </if>
+            <if test="null != email ">
+                and a.email = #{email}
+            </if>
+            <if test="null != phonenumber ">
+                and a.phonenumber = #{phonenumber}
+            </if>
+            <if test="null != sex ">
+                and a.sex = #{sex}
+            </if>
+            <if test="null != avatar ">
+                and a.avatar = #{avatar}
+            </if>
+            <if test="null != password ">
+                and a.password = #{password}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != delFlag ">
+                and a.del_flag = #{delFlag}
+            </if>
+            <if test="null != loginIp ">
+                and a.login_ip = #{loginIp}
+            </if>
+            <if test="null != loginDate ">
+                and a.login_date = #{loginDate}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+</mapper>

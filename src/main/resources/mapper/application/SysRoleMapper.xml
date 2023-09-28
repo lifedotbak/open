@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.application.mapper.SysRoleMapper">
+    
+    <select id="query" resultType="com.spyker.application.entity.SysRole" parameterType="com.spyker.application.search.SysRoleSearch">
+        SELECT a.* FROM sys_role a
+        <where>
+            <if test="null != roleName ">
+                and a.role_name = #{roleName}
+            </if>
+            <if test="null != roleKey ">
+                and a.role_key = #{roleKey}
+            </if>
+            <if test="null != roleSort ">
+                and a.role_sort = #{roleSort}
+            </if>
+            <if test="null != dataScope ">
+                and a.data_scope = #{dataScope}
+            </if>
+            <if test="null != menuCheckStrictly ">
+                and a.menu_check_strictly = #{menuCheckStrictly}
+            </if>
+            <if test="null != deptCheckStrictly ">
+                and a.dept_check_strictly = #{deptCheckStrictly}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != delFlag ">
+                and a.del_flag = #{delFlag}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryPage" resultType="com.spyker.application.entity.SysRole" parameterType="com.spyker.application.search.SysRoleSearch">
+        SELECT a.* FROM sys_role a
+        <where>
+            <if test="null != roleName ">
+                and a.role_name = #{roleName}
+            </if>
+            <if test="null != roleKey ">
+                and a.role_key = #{roleKey}
+            </if>
+            <if test="null != roleSort ">
+                and a.role_sort = #{roleSort}
+            </if>
+            <if test="null != dataScope ">
+                and a.data_scope = #{dataScope}
+            </if>
+            <if test="null != menuCheckStrictly ">
+                and a.menu_check_strictly = #{menuCheckStrictly}
+            </if>
+            <if test="null != deptCheckStrictly ">
+                and a.dept_check_strictly = #{deptCheckStrictly}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != delFlag ">
+                and a.del_flag = #{delFlag}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+</mapper>

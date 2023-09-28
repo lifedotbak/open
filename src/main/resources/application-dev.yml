@@ -50,7 +50,7 @@ spring :
     druid :
       username : root
       password : '123456'
-      url : jdbc:mysql://127.0.0.1:3306/${server.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       driver-class-name : com.mysql.cj.jdbc.Driver
       minIdle : 3
       maxWait : 10000

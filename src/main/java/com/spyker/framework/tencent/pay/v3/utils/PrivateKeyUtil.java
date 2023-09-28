@@ -25,8 +25,8 @@ public final class PrivateKeyUtil {
 
         String content = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
         try {
-            String privateKey = content.replace("-----BEGIN PRIVATE KEY-----", "").replace("-----END PRIVATE " +
-                    "KEY-----", "").replaceAll("\\s+", "");
+            String privateKey = content.replace("-----BEGIN PRIVATE KEY-----", "").replace("-----END PRIVATE " + "KEY" +
+                    "-----", "").replaceAll("\\s+", "");
 
             KeyFactory kf = KeyFactory.getInstance("RSA");
             return kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey)));

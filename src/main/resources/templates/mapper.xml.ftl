@@ -9,7 +9,7 @@
       ${table.name} a
     <where>
       <#list table.fields as field>
-      <#if field.propertyName != "id" && field.propertyName != "modifyTime" && field.propertyName != "createTime">
+      <#if !field.keyFlag && !field.capitalName?contains("Time")>
           <if test="null != ${field.propertyName} " >
             and a.${field.name} = <#noparse>#{</#noparse>${field.propertyName}<#noparse>}</#noparse>
           </if>
@@ -25,7 +25,7 @@
       ${table.name} a
     <where>
       <#list table.fields as field>
-      <#if field.propertyName != "id" && field.propertyName != "modifyTime" && field.propertyName != "createTime">
+      <#if !field.keyFlag && !field.capitalName?contains("Time")>
         <if test="null != ${field.propertyName} " >
           and a.${field.name} = <#noparse>#{</#noparse>${field.propertyName}<#noparse>}</#noparse>
         </if>

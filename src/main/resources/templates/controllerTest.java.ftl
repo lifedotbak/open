@@ -64,7 +64,11 @@ public class ${table.controllerName}Test extends BaseTest {
     public void detail() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("id","1");
+        <#list table.fields as field>
+            <#if field.keyFlag>
+        params.add("${field.propertyName}","1");
+            </#if>
+        </#list>
 
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.get(URL+"/detail")
@@ -80,7 +84,11 @@ public class ${table.controllerName}Test extends BaseTest {
     public void delete() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("id","1");
+        <#list table.fields as field>
+            <#if field.keyFlag>
+        params.add("${field.propertyName}","1");
+            </#if>
+        </#list>
 
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.delete(URL+"/delete")
@@ -96,6 +104,20 @@ public class ${table.controllerName}Test extends BaseTest {
     @SneakyThrows
     public void add() {
         ${entity} add = new ${entity}();
+
+        <#list table.fields as field>
+            <#if !field.keyFlag && !field.capitalName?contains("Time")>
+
+        <#if field.propertyType == 'Integer'>
+            add.set${field.capitalName}(1);
+        </#if>
+
+        <#if field.propertyType=='String'>
+            add.set${field.capitalName}("${field.propertyName}");
+        </#if>
+
+            </#if>
+        </#list>
 
         Gson gson = new Gson();
 
@@ -116,7 +138,19 @@ public class ${table.controllerName}Test extends BaseTest {
     public void update() {
         ${entity} update = new ${entity}();
 
-        update.setId("1");
+        <#list table.fields as field>
+            <#if !field.capitalName?contains("Time")>
+
+        <#if field.propertyType == 'Integer'>
+                                    update.set${field.capitalName}(1);
+                                </#if>
+
+                                <#if field.propertyType=='String'>
+                                    update.set${field.capitalName}("${field.propertyName}");
+                                </#if>
+
+            </#if>
+        </#list>
 
         Gson gson = new Gson();
 

@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
  */
 public class IdCardWord {
 
-    private static final String IdCardReg18 = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}" +
-            "([\\d|x|X]{1})$";
+    private static final String IdCardReg18 =
+            "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}" + "([\\d|x|X]{1})$";
     private static final String IdCardReg = "(\\d{6})\\d{8}(\\w{4})";
     private static final String IdCardReplaceRule = "$1********$2";
 

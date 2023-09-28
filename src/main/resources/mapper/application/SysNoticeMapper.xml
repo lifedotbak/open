@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.application.mapper.SysNoticeMapper">
+    
+    <select id="query" resultType="com.spyker.application.entity.SysNotice" parameterType="com.spyker.application.search.SysNoticeSearch">
+        SELECT a.* FROM sys_notice a
+        <where>
+            <if test="null != noticeTitle ">
+                and a.notice_title = #{noticeTitle}
+            </if>
+            <if test="null != noticeType ">
+                and a.notice_type = #{noticeType}
+            </if>
+            <if test="null != noticeContent ">
+                and a.notice_content = #{noticeContent}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryPage" resultType="com.spyker.application.entity.SysNotice" parameterType="com.spyker.application.search.SysNoticeSearch">
+        SELECT a.* FROM sys_notice a
+        <where>
+            <if test="null != noticeTitle ">
+                and a.notice_title = #{noticeTitle}
+            </if>
+            <if test="null != noticeType ">
+                and a.notice_type = #{noticeType}
+            </if>
+            <if test="null != noticeContent ">
+                and a.notice_content = #{noticeContent}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+</mapper>

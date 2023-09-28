@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.application.mapper.SysJobLogMapper">
+    
+    <select id="query" resultType="com.spyker.application.entity.SysJobLog" parameterType="com.spyker.application.search.SysJobLogSearch">
+        SELECT a.* FROM sys_job_log a
+        <where>
+            <if test="null != jobName ">
+                and a.job_name = #{jobName}
+            </if>
+            <if test="null != jobGroup ">
+                and a.job_group = #{jobGroup}
+            </if>
+            <if test="null != invokeTarget ">
+                and a.invoke_target = #{invokeTarget}
+            </if>
+            <if test="null != jobMessage ">
+                and a.job_message = #{jobMessage}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != exceptionInfo ">
+                and a.exception_info = #{exceptionInfo}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryPage" resultType="com.spyker.application.entity.SysJobLog" parameterType="com.spyker.application.search.SysJobLogSearch">
+        SELECT a.* FROM sys_job_log a
+        <where>
+            <if test="null != jobName ">
+                and a.job_name = #{jobName}
+            </if>
+            <if test="null != jobGroup ">
+                and a.job_group = #{jobGroup}
+            </if>
+            <if test="null != invokeTarget ">
+                and a.invoke_target = #{invokeTarget}
+            </if>
+            <if test="null != jobMessage ">
+                and a.job_message = #{jobMessage}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != exceptionInfo ">
+                and a.exception_info = #{exceptionInfo}
+            </if>
+        </where>
+    </select>
+
+</mapper>

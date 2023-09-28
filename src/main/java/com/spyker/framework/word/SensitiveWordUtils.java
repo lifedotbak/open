@@ -25,8 +25,8 @@ public class SensitiveWordUtils {
 
     // 判断是不是电子邮箱
     public static boolean isEmail(String str) {
-        Pattern pattern = Pattern.compile("^[A-Z0-9a-zd]+([-_.][A-Za-zd]+)*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)" +
-                "+[a-zA-Z]{1,5}$");
+        Pattern pattern = Pattern.compile("^[A-Z0-9a-zd]+([-_.][A-Za-zd]+)*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)" + "+[a" +
+                "-zA-Z]{1,5}$");
         Matcher isNum = pattern.matcher(str);
         return isNum.matches();
     }

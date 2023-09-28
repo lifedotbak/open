@@ -13,6 +13,9 @@ public class MybatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor paginationInterceptor() {
 
+        /**
+         * 分页
+         */
         MybatisPlusInterceptor mp = new MybatisPlusInterceptor();
         mp.addInnerInterceptor(new PaginationInnerInterceptor());
         return mp;
