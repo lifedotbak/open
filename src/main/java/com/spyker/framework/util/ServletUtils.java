@@ -22,6 +22,7 @@ import java.util.Map;
  * @author platform
  */
 public class ServletUtils {
+
     /**
      * 获取String参数
      */
@@ -92,9 +93,9 @@ public class ServletUtils {
     /**
      * 获取request
      */
-    //    public static HttpServletRequest getRequest() {
-    //        return getRequestAttributes().getRequest();
-    //    }
+    public static HttpServletRequest getRequest() {
+        return getRequestAttributes().getRequest();
+    }
 
     /**
      * 获取response

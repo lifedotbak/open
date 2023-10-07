@@ -31,6 +31,11 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
     private final SysConfigMapper sysConfigMapper;
 
     @Override
+    public boolean selectCaptchaEnabled() {
+        return false;
+    }
+
+    @Override
     public List<SysConfig> query(SysConfigSearch search) {
         List<SysConfig> SysConfigList = sysConfigMapper.query(search);
 

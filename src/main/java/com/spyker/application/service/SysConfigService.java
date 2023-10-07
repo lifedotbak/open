@@ -18,6 +18,13 @@ import java.util.List;
  */
 public interface SysConfigService extends IService<SysConfig> {
 
+    /**
+     * 获取验证码开关
+     *
+     * @return true开启，false关闭
+     */
+    boolean selectCaptchaEnabled();
+
     List<SysConfig> query(SysConfigSearch search);
 
     IPage<SysConfig> queryPage(IPage<SysConfig> page, SysConfigSearch search);

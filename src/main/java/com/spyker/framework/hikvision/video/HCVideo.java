@@ -4,7 +4,7 @@ import com.spyker.framework.hikvision.data.HCOpInfo;
 import com.spyker.framework.hikvision.jna.HCNetSDK;
 import com.spyker.framework.hikvision.jna.PlayCtrl;
 import com.spyker.framework.hikvision.utils.CommonUtil;
-import com.spyker.framework.util.DateUtils;
+import com.spyker.framework.util.date.DateUtils;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.ByteByReference;
 import com.sun.jna.ptr.IntByReference;
