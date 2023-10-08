@@ -1,6 +1,6 @@
 package com.spyker.framework.util;
 
-import com.spyker.framework.domain.LoginUser;
+import com.spyker.framework.domain.model.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +14,7 @@ public class SecurityUtils {
     /**
      * 用户ID
      **/
-    public static Long getUserId() {
+    public static String getUserId() {
         try {
             return getLoginUser().getUserId();
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class SecurityUtils {
     /**
      * 获取部门ID
      **/
-    public static Long getDeptId() {
+    public static String getDeptId() {
         try {
             return getLoginUser().getDeptId();
         } catch (Exception e) {

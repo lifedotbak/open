@@ -1,8 +1,9 @@
 package com.spyker.framework.util.ip;
 
 import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.http.ServletUtils;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -25,9 +26,9 @@ public class IpUtils {
      *
      * @return IP地址
      */
-    //    public static String getIpAddr() {
-    //        return getIpAddr(ServletUtils.getRequest());
-    //    }
+    public static String getIpAddr() {
+        return getIpAddr(ServletUtils.getRequest());
+    }
 
     /**
      * 获取客户端IP

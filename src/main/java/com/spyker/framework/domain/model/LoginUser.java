@@ -1,6 +1,7 @@
-package com.spyker.framework.domain;
+package com.spyker.framework.domain.model;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.spyker.framework.domain.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,12 +19,12 @@ public class LoginUser implements UserDetails {
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 部门ID
      */
-    private Long deptId;
+    private String deptId;
 
     /**
      * 用户唯一标识
@@ -78,26 +79,26 @@ public class LoginUser implements UserDetails {
         this.permissions = permissions;
     }
 
-    public LoginUser(Long userId, Long deptId, SysUser user, Set<String> permissions) {
+    public LoginUser(String userId, String deptId, SysUser user, Set<String> permissions) {
         this.userId = userId;
         this.deptId = deptId;
         this.user = user;
         this.permissions = permissions;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Long getDeptId() {
+    public String getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Long deptId) {
+    public void setDeptId(String deptId) {
         this.deptId = deptId;
     }
 

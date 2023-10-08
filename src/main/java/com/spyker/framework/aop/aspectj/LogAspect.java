@@ -1,15 +1,14 @@
 package com.spyker.framework.aop.aspectj;
 
 import com.spyker.framework.aop.annotation.Log;
-import com.spyker.framework.domain.LoginUser;
+import com.spyker.framework.domain.model.LoginUser;
 import com.spyker.framework.util.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
@@ -27,8 +26,8 @@ import java.util.Map;
  */
 @Aspect
 @Component
+@Slf4j
 public class LogAspect {
-    private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
     /**
      * 排除敏感属性字段

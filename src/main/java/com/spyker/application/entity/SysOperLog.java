@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * <p>
@@ -71,7 +71,7 @@ public class SysOperLog implements Serializable {
     private String errorMsg;
 
     @Schema(description = "操作时间")
-    private Timestamp operTime;
+    private Date operTime;
 
     @Schema(description = "消耗时间")
     private Long costTime;

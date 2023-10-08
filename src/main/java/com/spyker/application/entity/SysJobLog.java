@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * <p>
@@ -46,5 +46,5 @@ public class SysJobLog implements Serializable {
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private Timestamp createTime;
+    private Date createTime;
 }

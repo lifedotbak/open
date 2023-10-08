@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * <p>
@@ -43,13 +43,13 @@ public class SysPost implements Serializable {
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    private Timestamp createTime;
+    private Date createTime;
 
     @Schema(description = "更新者")
     private String updateBy;
 
     @Schema(description = "更新时间")
-    private Timestamp updateTime;
+    private Date updateTime;
 
     @Schema(description = "备注")
     private String remark;

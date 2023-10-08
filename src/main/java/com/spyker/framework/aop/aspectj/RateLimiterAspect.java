@@ -4,12 +4,12 @@ import com.aliyun.oss.ServiceException;
 import com.spyker.framework.aop.annotation.RateLimiter;
 import com.spyker.framework.enums.LimitType;
 import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ip.IpUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
@@ -26,8 +26,8 @@ import java.util.List;
  */
 @Aspect
 @Component
+@Slf4j
 public class RateLimiterAspect {
-    private static final Logger log = LoggerFactory.getLogger(RateLimiterAspect.class);
 
     private RedisTemplate<Object, Object> redisTemplate;
 
@@ -66,7 +66,7 @@ public class RateLimiterAspect {
     public String getCombineKey(RateLimiter rateLimiter, JoinPoint point) {
         StringBuffer stringBuffer = new StringBuffer(rateLimiter.key());
         if (rateLimiter.limitType() == LimitType.IP) {
-            //            stringBuffer.append(IpUtils.getIpAddr()).append("-");
+            stringBuffer.append(IpUtils.getIpAddr()).append("-");
         }
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
