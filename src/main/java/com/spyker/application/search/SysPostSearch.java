@@ -15,13 +15,13 @@ import java.sql.Timestamp;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysPostSearch对象", description = "岗位信息表Search对象")
 public class SysPostSearch implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer page = 1;
+
     private Integer size = 10;
 
     @Schema(description = "岗位ID")

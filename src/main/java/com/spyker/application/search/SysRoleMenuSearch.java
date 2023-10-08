@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysRoleMenuSearch对象", description = "角色和菜单关联表Search对象")
 public class SysRoleMenuSearch implements Serializable {
 

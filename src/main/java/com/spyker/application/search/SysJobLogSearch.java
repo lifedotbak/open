@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysJobLogSearch对象", description = "定时任务调度日志表Search对象")
 public class SysJobLogSearch implements Serializable {
 

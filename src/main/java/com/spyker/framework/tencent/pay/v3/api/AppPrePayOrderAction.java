@@ -9,7 +9,7 @@ import com.spyker.framework.tencent.pay.v3.entity.pay.PrePayId;
 import com.spyker.framework.tencent.pay.v3.entity.pay.PrePayOrder;
 import com.spyker.framework.tencent.pay.v3.sign.SignCallBackUtil;
 import com.spyker.framework.tencent.pay.v3.sign.SignRequestAuthUtil;
-import com.spyker.framework.util.AppRandomStringUtil;
+import com.spyker.framework.util.AppRandomStringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -127,7 +127,7 @@ public class AppPrePayOrderAction {
         Gson gson = new Gson();
         String uos = gson.toJson(prePayOrder);
 
-        String nonceStr = AppRandomStringUtil.random32();
+        String nonceStr = AppRandomStringUtils.random32();
         String timestamp = System.currentTimeMillis() / 1000 + "";
 
         RequestAuth prePayAuthorizationInfo = new RequestAuth();

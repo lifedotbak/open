@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.spring;
 
 import cn.hutool.core.bean.BeanUtil;
 import org.springframework.aop.framework.AdvisedSupport;

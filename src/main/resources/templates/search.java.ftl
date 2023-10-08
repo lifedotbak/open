@@ -33,7 +33,6 @@ import lombok.experimental.Accessors;
     </#if>
 </#if>
 <#if table.convert>
-
 </#if>
 <#if springdoc>
 @Schema(name = "${entity}Search对象", description = "${table.comment!}Search对象")

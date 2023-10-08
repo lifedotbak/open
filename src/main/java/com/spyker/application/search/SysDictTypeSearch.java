@@ -15,7 +15,6 @@ import java.sql.Timestamp;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysDictTypeSearch对象", description = "字典类型表Search对象")
 public class SysDictTypeSearch implements Serializable {
 

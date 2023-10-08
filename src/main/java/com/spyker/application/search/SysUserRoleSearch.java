@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysUserRoleSearch对象", description = "用户和角色关联表Search对象")
 public class SysUserRoleSearch implements Serializable {
 

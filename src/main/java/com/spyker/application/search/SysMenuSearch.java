@@ -15,7 +15,6 @@ import java.sql.Timestamp;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysMenuSearch对象", description = "菜单权限表Search对象")
 public class SysMenuSearch implements Serializable {
 

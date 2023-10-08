@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.reflect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

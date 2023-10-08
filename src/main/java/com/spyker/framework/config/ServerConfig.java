@@ -1,6 +1,6 @@
 package com.spyker.framework.config;
 
-import com.spyker.framework.util.ServletUtils;
+import com.spyker.framework.util.http.ServletUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 

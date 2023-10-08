@@ -1,6 +1,6 @@
 package com.spyker.framework.util.reflect;
 
-import com.spyker.framework.util.Convert;
+import cn.hutool.core.convert.Convert;
 import com.spyker.framework.util.date.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;

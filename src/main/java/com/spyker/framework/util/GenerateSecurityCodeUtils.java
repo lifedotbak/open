@@ -2,7 +2,7 @@ package com.spyker.framework.util;
 
 import java.util.Random;
 
-public final class GenerateSecurityCode {
+public final class GenerateSecurityCodeUtils {
 
     private static final int DEFAULT_LENGTH = 6;
 

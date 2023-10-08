@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.number;
 
 import cn.hutool.core.util.StrUtil;
 

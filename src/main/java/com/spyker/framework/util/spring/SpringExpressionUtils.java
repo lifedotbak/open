@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.spring;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;

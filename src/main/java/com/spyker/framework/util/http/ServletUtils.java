@@ -1,8 +1,11 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.http;
 
+import cn.hutool.core.convert.Convert;
 import com.spyker.framework.constant.Constants;
+import com.spyker.framework.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -26,44 +29,44 @@ public class ServletUtils {
     /**
      * 获取String参数
      */
-    //    public static String getParameter(String name) {
-    //        return getRequest().getParameter(name);
-    //    }
-    //
-    //    /**
-    //     * 获取String参数
-    //     */
-    //    public static String getParameter(String name, String defaultValue) {
-    //        return Convert.toStr(getRequest().getParameter(name), defaultValue);
-    //    }
-    //
-    //    /**
-    //     * 获取Integer参数
-    //     */
-    //    public static Integer getParameterToInt(String name) {
-    //        return Convert.toInt(getRequest().getParameter(name));
-    //    }
-    //
-    //    /**
-    //     * 获取Integer参数
-    //     */
-    //    public static Integer getParameterToInt(String name, Integer defaultValue) {
-    //        return Convert.toInt(getRequest().getParameter(name), defaultValue);
-    //    }
-    //
-    //    /**
-    //     * 获取Boolean参数
-    //     */
-    //    public static Boolean getParameterToBool(String name) {
-    //        return Convert.toBool(getRequest().getParameter(name));
-    //    }
-    //
-    //    /**
-    //     * 获取Boolean参数
-    //     */
-    //    public static Boolean getParameterToBool(String name, Boolean defaultValue) {
-    //        return Convert.toBool(getRequest().getParameter(name), defaultValue);
-    //    }
+    public static String getParameter(String name) {
+        return getRequest().getParameter(name);
+    }
+
+    /**
+     * 获取String参数
+     */
+    public static String getParameter(String name, String defaultValue) {
+        return Convert.toStr(getRequest().getParameter(name), defaultValue);
+    }
+
+    /**
+     * 获取Integer参数
+     */
+    public static Integer getParameterToInt(String name) {
+        return Convert.toInt(getRequest().getParameter(name));
+    }
+
+    /**
+     * 获取Integer参数
+     */
+    public static Integer getParameterToInt(String name, Integer defaultValue) {
+        return Convert.toInt(getRequest().getParameter(name), defaultValue);
+    }
+
+    /**
+     * 获取Boolean参数
+     */
+    public static Boolean getParameterToBool(String name) {
+        return Convert.toBool(getRequest().getParameter(name));
+    }
+
+    /**
+     * 获取Boolean参数
+     */
+    public static Boolean getParameterToBool(String name, Boolean defaultValue) {
+        return Convert.toBool(getRequest().getParameter(name), defaultValue);
+    }
 
     /**
      * 获得所有请求参数
@@ -100,16 +103,17 @@ public class ServletUtils {
     /**
      * 获取response
      */
-    //    public static HttpServletResponse getResponse() {
-    //        return getRequestAttributes().getResponse();
-    //    }
+    public static HttpServletResponse getResponse() {
+        return getRequestAttributes().getResponse();
+    }
 
     /**
      * 获取session
      */
-    //    public static HttpSession getSession() {
-    //        return getRequest().getSession();
-    //    }
+    public static HttpSession getSession() {
+        return getRequest().getSession();
+    }
+
     public static ServletRequestAttributes getRequestAttributes() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         return (ServletRequestAttributes) attributes;

@@ -1,4 +1,4 @@
-package com.spyker.framework.spring;
+package com.spyker.framework.util.spring;
 
 import com.spyker.framework.util.StringUtils;
 import org.springframework.aop.framework.AopContext;

@@ -15,7 +15,6 @@ import java.sql.Timestamp;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysConfigSearch对象", description = "参数配置表Search对象")
 public class SysConfigSearch implements Serializable {
 

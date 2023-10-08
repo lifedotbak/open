@@ -1,6 +1,6 @@
 package com.spyker.framework.security.context;
 
-import com.spyker.framework.util.Convert;
+import cn.hutool.core.convert.Convert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 

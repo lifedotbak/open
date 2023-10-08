@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author open-open
  */
-public class ShareCodeUtil {
+public class ShareCodeUtils {
     /**
      * 自定义进制(0,1没有加入,容易与o,l混淆)
      */

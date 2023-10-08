@@ -15,7 +15,6 @@ import java.sql.Timestamp;
  * @since 2023-09-28
  */
 @Data
-
 @Schema(name = "SysUserSearch对象", description = "用户信息表Search对象")
 public class SysUserSearch implements Serializable {
 
