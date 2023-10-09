@@ -3,9 +3,8 @@ package com.spyker.framework.util.file;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.util.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.util.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -19,8 +18,8 @@ import java.util.Arrays;
  *
  * @author platform
  */
+@Slf4j
 public class ImageUtils {
-    private static final Logger log = LoggerFactory.getLogger(ImageUtils.class);
 
     public static byte[] getImage(String imagePath) {
         InputStream is = getFile(imagePath);

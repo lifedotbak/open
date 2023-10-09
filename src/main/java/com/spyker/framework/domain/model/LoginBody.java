@@ -9,6 +9,7 @@ import lombok.Data;
  */
 @Data
 public class LoginBody {
+
     /**
      * 用户名
      */

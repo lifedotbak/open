@@ -6,6 +6,20 @@ server :
   servlet :
     context-path : /${server.name}
 
+platform :
+  # 名称
+  name : ${server.name}
+  # 版本
+  version : 3.8.6
+  # 版权年份
+  copyrightYear : 2023
+  # 文件路径 示例（ Windows配置D:/platform/uploadPath，Linux配置 /home/platform/uploadPath）
+  profile : D:/platform/uploadPath
+  # 获取ip地址开关
+  addressEnabled : false
+  # 验证码类型 math 数字计算 char 字符验证
+  captchaType : math
+
 ###############################文件上传配置,配置默认文件保存位置###############################
 upload :
   localtion : /${server.name}
@@ -195,3 +209,12 @@ sys :
   user :
     token : 'user:'
     tokenExpireTime : 1800
+
+# token配置
+token :
+  # 令牌自定义标识
+  header : Authorization
+  # 令牌密钥
+  secret : abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime : 30

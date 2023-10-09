@@ -20,8 +20,6 @@ import java.util.Date;
 @Schema(name = "SysUser", description = "$!{table.comment}")
 public class SysUser implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Schema(description = "用户ID")
     @TableId(value = "user_id", type = IdType.ASSIGN_ID)
     private String userId;

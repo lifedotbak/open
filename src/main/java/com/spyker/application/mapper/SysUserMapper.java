@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spyker.application.entity.SysUser;
 import com.spyker.application.search.SysUserSearch;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -20,5 +21,8 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     List<SysUser> query(SysUserSearch search);
 
     IPage<SysUser> queryPage(IPage<SysUser> page, SysUserSearch search);
+
+    @Select("select * from sys_user where user_name = #{name}")
+    SysUser getUserByName(String name);
 
 }

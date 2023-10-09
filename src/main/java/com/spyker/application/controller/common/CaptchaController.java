@@ -6,7 +6,7 @@ import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.CacheConstants;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.domain.AjaxResult;
-import com.spyker.framework.redis.RedisCache;
+import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.util.sign.Base64Utils;
 import com.spyker.framework.util.uuid.IdUtils;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequiredArgsConstructor
 public class CaptchaController {
+
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
 
@@ -37,7 +38,7 @@ public class CaptchaController {
     private Producer captchaProducerMath;
 
     @Autowired
-    private RedisCache redisCache;
+    private RedisService redisService;
 
     private final SysConfigService sysConfigService;
 
@@ -72,7 +73,7 @@ public class CaptchaController {
             image = captchaProducer.createImage(capStr);
         }
 
-        redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
+        redisService.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try {

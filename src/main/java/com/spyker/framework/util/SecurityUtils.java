@@ -23,17 +23,6 @@ public class SecurityUtils {
     }
 
     /**
-     * 获取部门ID
-     **/
-    public static String getDeptId() {
-        try {
-            return getLoginUser().getDeptId();
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    /**
      * 获取用户账户
      **/
     public static String getUsername() {
