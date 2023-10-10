@@ -27,11 +27,9 @@ public class SysJob implements Serializable {
     private String jobId;
 
     @Schema(description = "任务名称")
-    @TableId(value = "job_name", type = IdType.ASSIGN_ID)
     private String jobName;
 
     @Schema(description = "任务组名")
-    @TableId(value = "job_group", type = IdType.ASSIGN_ID)
     private String jobGroup;
 
     @Schema(description = "调用目标字符串")

@@ -69,8 +69,6 @@ public class LoginUser implements UserDetails {
     private String password;
     private String userName;
 
-    private boolean loginSuccess;
-
     @JSONField(serialize = false)
     @Override
     public String getPassword() {
