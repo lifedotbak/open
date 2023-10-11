@@ -1,5 +1,6 @@
 package com.spyker.application.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.application.entity.SysConfig;
@@ -22,12 +23,12 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "参数配置表", description = "参数配置表")
 @RequestMapping("/application/sys-config")
 @Slf4j
+@SaCheckLogin
 public class SysConfigController {
 
     private final SysConfigService sysConfigService;
