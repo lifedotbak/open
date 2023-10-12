@@ -2,6 +2,7 @@ package com.spyker.application.mapper;
 
 import com.spyker.application.BaseTest;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -17,5 +18,10 @@ public class SysUserMapperTest extends BaseTest {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Test
+    public void queryRolesById() {
+        sysUserMapper.queryRolesById("1");
+    }
 
 }
