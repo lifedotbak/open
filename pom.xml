@@ -14,6 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>open</name>
     <description>open</description>
+	
     
     <properties>
         <java.version>17</java.version>
