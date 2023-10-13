@@ -220,3 +220,5 @@ sa-token :
   token-style : random-128
   # 是否输出操作日志
   is-log : true
+  # sa-token-temp-jwt 模块的秘钥 （定义的密钥）
+  jwt-secret-key : app-spyker-sa-token-temp-jwt

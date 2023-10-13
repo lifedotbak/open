@@ -42,8 +42,8 @@
     <dependencies>
         
         <!-- =======================================spring boot 基础依赖 ======================================= -->
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+	    <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
@@ -62,42 +62,42 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	    <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+	    <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+	    <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        
-        <!-- =======================================spring doc依赖 ======================================= -->
-        <dependency>
+	    
+	    <!-- =======================================spring doc依赖 ======================================= -->
+	    <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.0.2</version>
         </dependency>
-        
-        <!-- ======================================= mybatis-plus 相关依赖 ======================================= -->
-        <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
-        <dependency>
+	    
+	    <!-- ======================================= mybatis-plus 相关依赖 ======================================= -->
+	    <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+	    <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.2</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+	    <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.3.1</version>
@@ -108,9 +108,9 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.3</version>
         </dependency>
-        
-        <!-- 模板引擎 -->
-        <dependency>
+	    
+	    <!-- 模板引擎 -->
+	    <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>2.3</version>
@@ -120,10 +120,10 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-        
-        <!-- ======================================= 其他相关依赖 ======================================= -->
-        <!--lombok用来简化实体类：需要安装lombok插件 -->
-        <dependency>
+	    
+	    <!-- ======================================= 其他相关依赖 ======================================= -->
+	    <!--lombok用来简化实体类：需要安装lombok插件 -->
+	    <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -139,9 +139,9 @@
             <artifactId>json</artifactId>
             <version>20230227</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+	    <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.1.0</version>
@@ -152,15 +152,15 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
+	    <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
             <version>3.9.1</version>
         </dependency>
-        
-        <!-- redis依赖commons-pool 这个依赖一定要添加 -->
-        <dependency>
+	    
+	    <!-- redis依赖commons-pool 这个依赖一定要添加 -->
+	    <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
@@ -174,23 +174,23 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-        
-        <!-- 提供更加强大的json操作 -->
-        <dependency>
+	    
+	    <!-- 提供更加强大的json操作 -->
+	    <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.83</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+	    <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>3.10.3</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+	    <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
             <version>2.5.1</version>
@@ -201,90 +201,90 @@
             <artifactId>wechatpay-apache-httpclient</artifactId>
             <version>0.2.1</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+	    <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
             <version>4.5.17</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-sts -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-sts -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-sts</artifactId>
             <version>3.0.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+	    <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dysmsapi -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dysmsapi -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
             <version>2.1.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-vod -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-vod -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-vod</artifactId>
             <version>2.15.12</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-push -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-push -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-push</artifactId>
             <version>3.10.1</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+	    <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>3.11.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dysmsapi -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dysmsapi -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
             <version>2.1.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-vod -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-vod -->
+	    <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-vod</artifactId>
             <version>2.15.12</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+	    <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.4.20</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/xmlpull/xmlpull -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/xmlpull/xmlpull -->
+	    <dependency>
             <groupId>xmlpull</groupId>
             <artifactId>xmlpull</artifactId>
             <version>1.1.3.4a</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.ogce/xpp3 -->
-        <dependency>
+	    <!-- https://mvnrepository.com/artifact/org.ogce/xpp3 -->
+	    <dependency>
             <groupId>org.ogce</groupId>
             <artifactId>xpp3</artifactId>
             <version>1.1.6</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+	    <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
@@ -314,58 +314,58 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/hik-lib/examples.jar</systemPath>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+	    <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
             <version>5.13.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+	    <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.digitalpetri.modbus/modbus-master-tcp -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.digitalpetri.modbus/modbus-master-tcp -->
+	    <dependency>
             <groupId>com.digitalpetri.modbus</groupId>
             <artifactId>modbus-master-tcp</artifactId>
             <version>1.2.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
+	    <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
             <version>2.4.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+	    <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.8.22</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-commons -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-commons -->
+	    <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-commons</artifactId>
             <version>4.0.4</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.github.sftwnd.crayfish.common/crayfish-common-crc -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.github.sftwnd.crayfish.common/crayfish-common-crc -->
+	    <dependency>
             <groupId>com.github.sftwnd.crayfish.common</groupId>
             <artifactId>crayfish-common-crc</artifactId>
             <version>1.0.1</version>
         </dependency>
-        
-        <!--mqtt相关依赖 start -->
-        <dependency>
+	    
+	    <!--mqtt相关依赖 start -->
+	    <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-stream</artifactId>
         </dependency>
@@ -373,25 +373,25 @@
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-mqtt</artifactId>
         </dependency>
-        <!--mqtt相关依赖 end -->
-        
-        <!-- https://mvnrepository.com/artifact/io.minio/minio -->
-        <dependency>
+	    <!--mqtt相关依赖 end -->
+	    
+	    <!-- https://mvnrepository.com/artifact/io.minio/minio -->
+	    <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
             <version>8.5.4</version>
         </dependency>
-        
-        <!--支持注释直接转swagger-ui -->
-        <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc-scribe -->
-        <dependency>
+	    
+	    <!--支持注释直接转swagger-ui -->
+	    <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc-scribe -->
+	    <dependency>
             <groupId>com.github.therapi</groupId>
             <artifactId>therapi-runtime-javadoc-scribe</artifactId>
             <version>0.15.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc -->
+	    <dependency>
             <groupId>com.github.therapi</groupId>
             <artifactId>therapi-runtime-javadoc</artifactId>
             <version>0.15.0</version>
@@ -401,49 +401,66 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
         </dependency>
-        
-        <!-- 工具类相关 -->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
-        <dependency>
+	    
+	    <!-- 工具类相关 -->
+	    <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
+	    <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
             <version>3.3.2</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+	    <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2</artifactId>
             <version>2.0.40</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+	    <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
         </dependency>
-        
-        <!-- 验证码 -->
-        <!-- https://mvnrepository.com/artifact/pro.fessional/kaptcha -->
-        <dependency>
+	    
+	    <!-- 验证码 -->
+	    <!-- https://mvnrepository.com/artifact/pro.fessional/kaptcha -->
+	    <dependency>
             <groupId>pro.fessional</groupId>
             <artifactId>kaptcha</artifactId>
             <version>2.3.3</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot3-starter -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot3-starter -->
+	    <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot3-starter</artifactId>
             <version>1.36.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/cn.dev33/sa-token-dao-redis-jackson -->
-        <!-- Sa-Token 整合 Redis （使用 jdk 默认序列化方式） -->
-        <dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/cn.dev33/sa-token-dao-redis-jackson -->
+	    <!-- Sa-Token 整合 Redis （使用 jdk 默认序列化方式） -->
+	    <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-redis</artifactId>
+            <version>1.36.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-temp-jwt</artifactId>
+            <version>1.36.0</version>
+        </dependency>
+	    
+	    <!--
+	        Sa-Token 整合 jwt
+	        注意: sa-token-jwt 显式依赖 hutool-jwt 5.7.14 版本，保险起见：你的项目中要么不引入 hutool，要么引入版本 >= 5.7.14 的 hutool 版本。
+            hutool 5.8.13 和 5.8.14 版本下会出现类型转换问题
+	    -->
+	    <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-jwt</artifactId>
             <version>1.36.0</version>
         </dependency>
     
@@ -476,8 +493,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>17</source> <!-- 源代码使用的JDK版本 -->
-                    <target>17</target> <!-- 需要生成的目标class文件的编译版本 -->
-                    <encoding>UTF-8</encoding><!-- 字符集编码 -->
+	                <target>17</target> <!-- 需要生成的目标class文件的编译版本 -->
+	                <encoding>UTF-8</encoding><!-- 字符集编码 -->
                 </configuration>
             </plugin>
         </plugins>

@@ -37,6 +37,8 @@ public class SysLoginController {
 
         StpUtil.login("11111");
 
+        log.info(StpUtil.getTokenValue());
+
         return ajax;
     }
 
