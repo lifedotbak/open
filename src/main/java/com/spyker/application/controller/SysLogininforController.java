@@ -1,5 +1,6 @@
 package com.spyker.application.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.application.entity.SysLogininfor;
@@ -10,9 +11,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -22,24 +24,15 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "系统访问记录", description = "系统访问记录")
 @RequestMapping("/application/sys-logininfor")
 @Slf4j
+@SaCheckLogin
 public class SysLogininforController {
 
     private final SysLogininforService sysLogininforService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysLogininfor>> list(SysLogininforSearch search) {
-
-        List<SysLogininfor> result = sysLogininforService.query(search);
-
-        return RestResponse.success(result);
-    }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
@@ -65,27 +58,6 @@ public class SysLogininforController {
         SysLogininfor result = sysLogininforService.get(id);
 
         return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysLogininfor add) {
-
-        return sysLogininforService.insert(add);
-    }
-
-    @Operation(summary = "修改", description = "修改")
-    @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysLogininfor update) {
-
-        return sysLogininforService.update(update);
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
-
-        return sysLogininforService.delete(id);
     }
 
 }

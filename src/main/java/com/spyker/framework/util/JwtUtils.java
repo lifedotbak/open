@@ -7,14 +7,16 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.spyker.framework.util.date.DateUtils;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JwtUtils {
+@NoArgsConstructor
+public final class JwtUtils {
 
-    private static final String SECRET = "session_secret";
+    private static final String SECRET = "app-spyker-jwt";
 
     private static final String ISSUER = "spyker";
 

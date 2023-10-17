@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * <p>
  * 参数配置表 前端控制器
@@ -32,15 +30,6 @@ import java.util.List;
 public class SysConfigController {
 
     private final SysConfigService sysConfigService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysConfig>> list(SysConfigSearch search) {
-
-        List<SysConfig> result = sysConfigService.query(search);
-
-        return RestResponse.success(result);
-    }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")

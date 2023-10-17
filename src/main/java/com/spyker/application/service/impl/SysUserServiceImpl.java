@@ -1,5 +1,6 @@
 package com.spyker.application.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spyker.application.entity.SysUser;
@@ -7,6 +8,7 @@ import com.spyker.application.mapper.SysUserMapper;
 import com.spyker.application.search.SysUserSearch;
 import com.spyker.application.service.SysUserService;
 import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.util.BCryptUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -70,6 +72,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         removeById(id);
 
         return RestResponse.success();
+    }
+
+    @Override
+    public boolean login(String userName, String password) {
+
+        SysUser sysUser = sysUserMapper.getUserByName(userName);
+
+        if (null != sysUser) {
+
+            if (BCryptUtils.checkpw(password, sysUser.getPassword())) {
+
+                StpUtil.login(sysUser.getUserId());
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.spyker.application.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.application.entity.SysMenu;
@@ -22,12 +24,13 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "菜单权限表", description = "菜单权限表")
 @RequestMapping("/application/sys-menu")
 @Slf4j
+@SaCheckLogin
+@SaCheckRole("admin")
 public class SysMenuController {
 
     private final SysMenuService sysMenuService;

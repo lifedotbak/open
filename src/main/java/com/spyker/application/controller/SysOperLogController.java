@@ -1,5 +1,6 @@
 package com.spyker.application.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.application.entity.SysOperLog;
@@ -12,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * <p>
  * 操作日志记录 前端控制器
@@ -22,24 +21,15 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "操作日志记录", description = "操作日志记录")
 @RequestMapping("/application/sys-oper-log")
 @Slf4j
+@SaCheckLogin
 public class SysOperLogController {
 
     private final SysOperLogService sysOperLogService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysOperLog>> list(SysOperLogSearch search) {
-
-        List<SysOperLog> result = sysOperLogService.query(search);
-
-        return RestResponse.success(result);
-    }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")

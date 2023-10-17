@@ -35,6 +35,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.spyker.framework.response.RestResponse;
+import cn.dev33.satoken.annotation.SaCheckLogin;
 
 
 /**
@@ -45,7 +46,7 @@ import com.spyker.framework.response.RestResponse;
 * @author ${author}
 * @since ${date}
 */
-
+@SaCheckLogin
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "${table.comment!}", description = "${table.comment!}")

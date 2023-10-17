@@ -1,5 +1,6 @@
 package com.spyker.application.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.application.entity.SysDictData;
@@ -12,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * <p>
  * 字典数据表 前端控制器
@@ -22,24 +21,15 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "字典数据表", description = "字典数据表")
 @RequestMapping("/application/sys-dict-data")
 @Slf4j
+@SaCheckLogin
 public class SysDictDataController {
 
     private final SysDictDataService sysDictDataService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysDictData>> list(SysDictDataSearch search) {
-
-        List<SysDictData> result = sysDictDataService.query(search);
-
-        return RestResponse.success(result);
-    }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")

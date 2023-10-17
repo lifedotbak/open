@@ -3,8 +3,10 @@ package com.spyker.application.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
-import com.spyker.framework.domain.AjaxResult;
+import com.spyker.application.service.SysUserService;
+import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/application/login")
 @Slf4j
 @SaCheckLogin
+@RequiredArgsConstructor
 public class SysLoginController {
+
+    private final SysUserService sysuserService;
 
     /**
      * 登录方法
@@ -32,21 +37,21 @@ public class SysLoginController {
      */
     @PostMapping("/login")
     @SaIgnore
-    public AjaxResult login() {
-        AjaxResult ajax = AjaxResult.success();
+    public RestResponse<?> login(String userName, String password) {
 
-        StpUtil.login("11111");
+        if (sysuserService.login(userName, password)) {
+            return RestResponse.success();
+        }
 
-        log.info(StpUtil.getTokenValue());
-
-        return ajax;
+        return RestResponse.error(-1, "login error");
     }
 
-    @PostMapping("/islogin")
-    public AjaxResult islogin() {
-        AjaxResult ajax = AjaxResult.success();
+    @PostMapping("/logout")
+    public RestResponse<?> logout() {
 
-        return ajax.put("isLogin", StpUtil.isLogin());
+        StpUtil.logout();
+
+        return RestResponse.success();
     }
 
 }

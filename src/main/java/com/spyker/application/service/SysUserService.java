@@ -30,4 +30,6 @@ public interface SysUserService extends IService<SysUser> {
 
     RestResponse<?> delete(String id);
 
+    boolean login(String userName, String password);
+
 }
