@@ -5,7 +5,6 @@ import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.util.StringUtils;
 import com.spyker.framework.util.date.DateUtils;
 import com.spyker.framework.util.uuid.IdUtils;
@@ -192,9 +191,9 @@ public class FileUtils {
      * @return 目标文件
      * @throws IOException IO异常
      */
-    public static String writeImportBytes(byte[] data) throws IOException {
-        return writeBytes(data, PlatformConfig.getImportPath());
-    }
+    //    public static String writeImportBytes(byte[] data) throws IOException {
+    //        return writeBytes(data, PlatformConfig.getImportPath());
+    //    }
 
     /**
      * 写数据到文件中
@@ -275,17 +274,17 @@ public class FileUtils {
         String filename = fileName;
         if (agent.contains("MSIE")) {
             // IE浏览器
-            filename = URLEncoder.encode(filename, "utf-8");
+            filename = URLEncoder.encode(filename, StandardCharsets.UTF_8);
             filename = filename.replace("+", " ");
         } else if (agent.contains("Firefox")) {
             // 火狐浏览器
             filename = new String(fileName.getBytes(), "ISO8859-1");
         } else if (agent.contains("Chrome")) {
             // google浏览器
-            filename = URLEncoder.encode(filename, "utf-8");
+            filename = URLEncoder.encode(filename, StandardCharsets.UTF_8);
         } else {
             // 其它浏览器
-            filename = URLEncoder.encode(filename, "utf-8");
+            filename = URLEncoder.encode(filename, StandardCharsets.UTF_8);
         }
         return filename;
     }
@@ -314,7 +313,7 @@ public class FileUtils {
      * @return 百分号编码后的字符串
      */
     public static String percentEncode(String s) throws UnsupportedEncodingException {
-        String encode = URLEncoder.encode(s, StandardCharsets.UTF_8.toString());
+        String encode = URLEncoder.encode(s, StandardCharsets.UTF_8);
         return encode.replaceAll("\\+", "%20");
     }
 

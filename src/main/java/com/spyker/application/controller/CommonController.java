@@ -1,14 +1,14 @@
-package com.spyker.application.controller.common;
+package com.spyker.application.controller;
 
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.config.ServerConfig;
 import com.spyker.framework.constant.Constants;
-import com.spyker.framework.domain.AjaxResult;
+import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.StringUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
 import com.spyker.framework.util.file.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +29,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/common")
+@RequiredArgsConstructor
+@Slf4j
 public class CommonController {
-    private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
     @Autowired
     private ServerConfig serverConfig;
@@ -68,21 +69,21 @@ public class CommonController {
      * 通用上传请求（单个）
      */
     @PostMapping("/upload")
-    public AjaxResult uploadFile(MultipartFile file) throws Exception {
+    public RestMapResponse uploadFile(MultipartFile file) throws Exception {
         try {
             // 上传文件路径
             String filePath = PlatformConfig.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + fileName;
-            AjaxResult ajax = AjaxResult.success();
+            RestMapResponse ajax = RestMapResponse.success();
             ajax.put("url", url);
             ajax.put("fileName", fileName);
             ajax.put("newFileName", FileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
             return ajax;
         } catch (Exception e) {
-            return AjaxResult.error(e.getMessage());
+            return RestMapResponse.error(e.getMessage());
         }
     }
 
@@ -90,7 +91,7 @@ public class CommonController {
      * 通用上传请求（多个）
      */
     @PostMapping("/uploads")
-    public AjaxResult uploadFiles(List<MultipartFile> files) throws Exception {
+    public RestMapResponse uploadFiles(List<MultipartFile> files) throws Exception {
         try {
             // 上传文件路径
             String filePath = PlatformConfig.getUploadPath();
@@ -107,14 +108,14 @@ public class CommonController {
                 newFileNames.add(FileUtils.getName(fileName));
                 originalFilenames.add(file.getOriginalFilename());
             }
-            AjaxResult ajax = AjaxResult.success();
+            RestMapResponse ajax = RestMapResponse.success();
             ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
             ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));
             ajax.put("newFileNames", StringUtils.join(newFileNames, FILE_DELIMETER));
             ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMETER));
             return ajax;
         } catch (Exception e) {
-            return AjaxResult.error(e.getMessage());
+            return RestMapResponse.error(e.getMessage());
         }
     }
 

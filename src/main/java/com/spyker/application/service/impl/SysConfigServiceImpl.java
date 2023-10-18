@@ -32,6 +32,13 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 
     @Override
     public boolean selectCaptchaEnabled() {
+
+        SysConfig sysConfig = sysConfigMapper.getByConfigKey("sys.account.captchaEnabled");
+
+        if (null != sysConfig) {
+            return "true".equalsIgnoreCase(sysConfig.getConfigValue()) || "yes".equalsIgnoreCase(sysConfig.getConfigValue()) || "1".equalsIgnoreCase(sysConfig.getConfigValue());
+        }
+
         return false;
     }
 

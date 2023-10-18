@@ -2,7 +2,7 @@ package com.spyker.framework.interceptor;
 
 import com.alibaba.fastjson2.JSON;
 import com.spyker.framework.aop.annotation.RepeatSubmit;
-import com.spyker.framework.domain.AjaxResult;
+import com.spyker.framework.response.RestMapResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -21,13 +21,12 @@ public abstract class RepeatSubmitInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (handler instanceof HandlerMethod) {
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
+        if (handler instanceof HandlerMethod handlerMethod) {
             Method method = handlerMethod.getMethod();
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
             if (annotation != null) {
                 if (this.isRepeatSubmit(request, annotation)) {
-                    AjaxResult ajaxResult = AjaxResult.error(annotation.message());
+                    RestMapResponse ajaxResult = RestMapResponse.error(annotation.message());
 
                     response.setStatus(200);
                     response.setContentType("application/json");

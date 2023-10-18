@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spyker.application.entity.SysConfig;
 import com.spyker.application.search.SysConfigSearch;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface SysConfigMapper extends BaseMapper<SysConfig> {
 
     IPage<SysConfig> queryPage(IPage<SysConfig> page, SysConfigSearch search);
 
+    @Select("select * from sys_config where config_key = #{confiKey} limit 1")
+    SysConfig getByConfigKey(String confiKey);
 }

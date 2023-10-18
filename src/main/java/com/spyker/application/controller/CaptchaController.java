@@ -1,23 +1,23 @@
-package com.spyker.application.controller.common;
+package com.spyker.application.controller;
 
 import com.google.code.kaptcha.Producer;
 import com.spyker.application.service.SysConfigService;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.CacheConstants;
 import com.spyker.framework.constant.Constants;
-import com.spyker.framework.domain.AjaxResult;
 import com.spyker.framework.redis.RedisService;
+import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
 import com.spyker.framework.util.uuid.IdUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @author platform
  */
 @RestController
+@RequestMapping("/captcha")
 @RequiredArgsConstructor
 public class CaptchaController {
 
@@ -42,12 +43,14 @@ public class CaptchaController {
 
     private final SysConfigService sysConfigService;
 
+    //    private final PlatformConfig platformConfig;
+
     /**
      * 生成验证码
      */
-    @GetMapping("/captchaImage")
-    public AjaxResult getCode(HttpServletResponse response) throws IOException {
-        AjaxResult ajax = AjaxResult.success();
+    @PostMapping("/captchaImage")
+    public RestMapResponse getCode() throws IOException {
+        RestMapResponse ajax = RestMapResponse.success();
         boolean captchaEnabled = sysConfigService.selectCaptchaEnabled();
         ajax.put("captchaEnabled", captchaEnabled);
         if (!captchaEnabled) {
@@ -68,7 +71,7 @@ public class CaptchaController {
             capStr = capText.substring(0, capText.lastIndexOf("@"));
             code = capText.substring(capText.lastIndexOf("@") + 1);
             image = captchaProducerMath.createImage(capStr);
-        } else if ("char".equals(captchaType)) {
+        } else {
             capStr = code = captchaProducer.createText();
             image = captchaProducer.createImage(capStr);
         }
@@ -79,7 +82,7 @@ public class CaptchaController {
         try {
             ImageIO.write(image, "jpg", os);
         } catch (IOException e) {
-            return AjaxResult.error(e.getMessage());
+            return RestMapResponse.error(e.getMessage());
         }
 
         ajax.put("uuid", uuid);

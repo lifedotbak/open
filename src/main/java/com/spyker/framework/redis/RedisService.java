@@ -1,10 +1,12 @@
 package com.spyker.framework.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,9 +19,9 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ruoyi
  **/
-//@AutoConfiguration
-//@ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
-@Service
+@Configuration
+@ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
+@Slf4j
 public class RedisService {
 
     @Autowired
