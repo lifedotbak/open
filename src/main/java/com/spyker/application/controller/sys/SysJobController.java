@@ -1,11 +1,11 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.application.entity.SysDictType;
-import com.spyker.application.search.SysDictTypeSearch;
-import com.spyker.application.service.SysDictTypeService;
+import com.spyker.application.entity.SysJob;
+import com.spyker.application.search.SysJobSearch;
+import com.spyker.application.service.SysJobService;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- * 字典类型表 前端控制器
+ * 定时任务调度表 前端控制器
  * </p>
  *
  * @author CodeGenerator
@@ -25,26 +25,26 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "字典类型表", description = "字典类型表")
-@RequestMapping("/application/sys-dict-type")
+@Tag(name = "定时任务调度表", description = "定时任务调度表")
+@RequestMapping("/sys/sys-job")
 @Slf4j
 @SaCheckLogin
-public class SysDictTypeController {
+public class SysJobController {
 
-    private final SysDictTypeService sysDictTypeService;
+    private final SysJobService sysJobService;
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("list")
-    public RestResponse<List<SysDictType>> list(SysDictTypeSearch search) {
+    public RestResponse<List<SysJob>> list(SysJobSearch search) {
 
-        List<SysDictType> result = sysDictTypeService.query(search);
+        List<SysJob> result = sysJobService.query(search);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysDictType>> list_page(SysDictTypeSearch search) {
+    public RestResponse<IPage<SysJob>> list_page(SysJobSearch search) {
         int current = 1;
         int size = 10;
 
@@ -53,40 +53,40 @@ public class SysDictTypeController {
             size = search.getSize();
         }
 
-        IPage<SysDictType> page = new Page<>(current, size);
+        IPage<SysJob> page = new Page<>(current, size);
 
-        page = sysDictTypeService.queryPage(page, search);
+        page = sysJobService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
-    public RestResponse<SysDictType> detail(@RequestParam String id) {
-        SysDictType result = sysDictTypeService.get(id);
+    public RestResponse<SysJob> detail(@RequestParam String id) {
+        SysJob result = sysJobService.get(id);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysDictType add) {
+    public RestResponse<?> add(@RequestBody SysJob add) {
 
-        return sysDictTypeService.insert(add);
+        return sysJobService.insert(add);
     }
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysDictType update) {
+    public RestResponse<?> update(@RequestBody SysJob update) {
 
-        return sysDictTypeService.update(update);
+        return sysJobService.update(update);
     }
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysDictTypeService.delete(id);
+        return sysJobService.delete(id);
     }
 
 }

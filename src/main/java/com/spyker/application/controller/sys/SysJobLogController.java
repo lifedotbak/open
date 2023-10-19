@@ -1,4 +1,4 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -11,9 +11,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -26,21 +27,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "定时任务调度日志表", description = "定时任务调度日志表")
-@RequestMapping("/application/sys-job-log")
+@RequestMapping("/sys/sys-job-log")
 @Slf4j
 @SaCheckLogin
 public class SysJobLogController {
 
     private final SysJobLogService sysJobLogService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysJobLog>> list(SysJobLogSearch search) {
-
-        List<SysJobLog> result = sysJobLogService.query(search);
-
-        return RestResponse.success(result);
-    }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
@@ -66,27 +58,6 @@ public class SysJobLogController {
         SysJobLog result = sysJobLogService.get(id);
 
         return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysJobLog add) {
-
-        return sysJobLogService.insert(add);
-    }
-
-    @Operation(summary = "修改", description = "修改")
-    @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysJobLog update) {
-
-        return sysJobLogService.update(update);
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
-
-        return sysJobLogService.delete(id);
     }
 
 }

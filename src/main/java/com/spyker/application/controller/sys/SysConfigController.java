@@ -1,11 +1,11 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.application.entity.SysUser;
-import com.spyker.application.search.SysUserSearch;
-import com.spyker.application.service.SysUserService;
+import com.spyker.application.entity.SysConfig;
+import com.spyker.application.search.SysConfigSearch;
+import com.spyker.application.service.SysConfigService;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,11 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * <p>
- * 用户信息表 前端控制器
+ * 参数配置表 前端控制器
  * </p>
  *
  * @author CodeGenerator
@@ -25,26 +23,17 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "用户信息表", description = "用户信息表")
-@RequestMapping("/application/sys-user")
+@Tag(name = "参数配置表", description = "参数配置表")
+@RequestMapping("/sys/sys-config")
 @Slf4j
 @SaCheckLogin
-public class SysUserController {
+public class SysConfigController {
 
-    private final SysUserService sysUserService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysUser>> list(SysUserSearch search) {
-
-        List<SysUser> result = sysUserService.query(search);
-
-        return RestResponse.success(result);
-    }
+    private final SysConfigService sysConfigService;
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysUser>> list_page(SysUserSearch search) {
+    public RestResponse<IPage<SysConfig>> list_page(SysConfigSearch search) {
         int current = 1;
         int size = 10;
 
@@ -53,40 +42,40 @@ public class SysUserController {
             size = search.getSize();
         }
 
-        IPage<SysUser> page = new Page<>(current, size);
+        IPage<SysConfig> page = new Page<>(current, size);
 
-        page = sysUserService.queryPage(page, search);
+        page = sysConfigService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
-    public RestResponse<SysUser> detail(@RequestParam String id) {
-        SysUser result = sysUserService.get(id);
+    public RestResponse<SysConfig> detail(@RequestParam String id) {
+        SysConfig result = sysConfigService.get(id);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysUser add) {
+    public RestResponse<?> add(@RequestBody SysConfig add) {
 
-        return sysUserService.insert(add);
+        return sysConfigService.insert(add);
     }
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysUser update) {
+    public RestResponse<?> update(@RequestBody SysConfig update) {
 
-        return sysUserService.update(update);
+        return sysConfigService.update(update);
     }
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysUserService.delete(id);
+        return sysConfigService.delete(id);
     }
 
 }

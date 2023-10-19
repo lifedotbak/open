@@ -1,7 +1,6 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.common;
 
 import com.google.code.kaptcha.Producer;
-import com.spyker.application.service.SysConfigService;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.CacheConstants;
 import com.spyker.framework.constant.Constants;
@@ -9,6 +8,7 @@ import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
 import com.spyker.framework.util.uuid.IdUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
@@ -27,8 +27,9 @@ import java.util.concurrent.TimeUnit;
  *
  * @author platform
  */
+@Tag(name = "验证码生成", description = "验证码生成")
 @RestController
-@RequestMapping("/captcha")
+@RequestMapping("/common/captcha")
 @RequiredArgsConstructor
 public class CaptchaController {
 
@@ -41,19 +42,15 @@ public class CaptchaController {
     @Autowired
     private RedisService redisService;
 
-    private final SysConfigService sysConfigService;
-
-    //    private final PlatformConfig platformConfig;
-
     /**
      * 生成验证码
      */
     @PostMapping("/captchaImage")
-    public RestMapResponse getCode() throws IOException {
+    public RestMapResponse createCode() throws IOException {
+
         RestMapResponse ajax = RestMapResponse.success();
-        boolean captchaEnabled = sysConfigService.selectCaptchaEnabled();
-        ajax.put("captchaEnabled", captchaEnabled);
-        if (!captchaEnabled) {
+        ajax.put("captchaEnabled", PlatformConfig.getCaptchaEnabled());
+        if (!"open".equalsIgnoreCase(PlatformConfig.getCaptchaEnabled())) {
             return ajax;
         }
 

@@ -1,12 +1,11 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.application.entity.SysMenu;
-import com.spyker.application.search.SysMenuSearch;
-import com.spyker.application.service.SysMenuService;
+import com.spyker.application.entity.SysDictData;
+import com.spyker.application.search.SysDictDataSearch;
+import com.spyker.application.service.SysDictDataService;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,11 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * <p>
- * 菜单权限表 前端控制器
+ * 字典数据表 前端控制器
  * </p>
  *
  * @author CodeGenerator
@@ -26,27 +23,17 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "菜单权限表", description = "菜单权限表")
-@RequestMapping("/application/sys-menu")
+@Tag(name = "字典数据表", description = "字典数据表")
+@RequestMapping("/sys/sys-dict-data")
 @Slf4j
 @SaCheckLogin
-@SaCheckRole("admin")
-public class SysMenuController {
+public class SysDictDataController {
 
-    private final SysMenuService sysMenuService;
-
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysMenu>> list(SysMenuSearch search) {
-
-        List<SysMenu> result = sysMenuService.query(search);
-
-        return RestResponse.success(result);
-    }
+    private final SysDictDataService sysDictDataService;
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysMenu>> list_page(SysMenuSearch search) {
+    public RestResponse<IPage<SysDictData>> list_page(SysDictDataSearch search) {
         int current = 1;
         int size = 10;
 
@@ -55,40 +42,40 @@ public class SysMenuController {
             size = search.getSize();
         }
 
-        IPage<SysMenu> page = new Page<>(current, size);
+        IPage<SysDictData> page = new Page<>(current, size);
 
-        page = sysMenuService.queryPage(page, search);
+        page = sysDictDataService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
-    public RestResponse<SysMenu> detail(@RequestParam String id) {
-        SysMenu result = sysMenuService.get(id);
+    public RestResponse<SysDictData> detail(@RequestParam String id) {
+        SysDictData result = sysDictDataService.get(id);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysMenu add) {
+    public RestResponse<?> add(@RequestBody SysDictData add) {
 
-        return sysMenuService.insert(add);
+        return sysDictDataService.insert(add);
     }
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysMenu update) {
+    public RestResponse<?> update(@RequestBody SysDictData update) {
 
-        return sysMenuService.update(update);
+        return sysDictDataService.update(update);
     }
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysMenuService.delete(id);
+        return sysDictDataService.delete(id);
     }
 
 }

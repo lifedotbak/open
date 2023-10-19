@@ -1,4 +1,4 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaIgnore;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Tag(name = "系统登录", description = "系统登录")
-@RequestMapping("/application/login")
+@RequestMapping("/sys/login")
 @Slf4j
 @SaCheckLogin
 @RequiredArgsConstructor

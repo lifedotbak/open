@@ -1,11 +1,11 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.application.entity.SysNotice;
-import com.spyker.application.search.SysNoticeSearch;
-import com.spyker.application.service.SysNoticeService;
+import com.spyker.application.entity.SysDept;
+import com.spyker.application.search.SysDeptSearch;
+import com.spyker.application.service.SysDeptService;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,9 +13,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
- * 通知公告表 前端控制器
+ * 部门表 前端控制器
  * </p>
  *
  * @author CodeGenerator
@@ -23,17 +25,26 @@ import org.springframework.web.bind.annotation.*;
  */
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "通知公告表", description = "通知公告表")
-@RequestMapping("/application/sys-notice")
+@Tag(name = "部门表", description = "部门表")
+@RequestMapping("/sys/sys-dept")
 @Slf4j
 @SaCheckLogin
-public class SysNoticeController {
+public class SysDeptController {
 
-    private final SysNoticeService sysNoticeService;
+    private final SysDeptService sysDeptService;
+
+    @Operation(summary = "列表", description = "列表")
+    @GetMapping("list")
+    public RestResponse<List<SysDept>> list(SysDeptSearch search) {
+
+        List<SysDept> result = sysDeptService.query(search);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysNotice>> list_page(SysNoticeSearch search) {
+    public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
         int current = 1;
         int size = 10;
 
@@ -42,40 +53,40 @@ public class SysNoticeController {
             size = search.getSize();
         }
 
-        IPage<SysNotice> page = new Page<>(current, size);
+        IPage<SysDept> page = new Page<>(current, size);
 
-        page = sysNoticeService.queryPage(page, search);
+        page = sysDeptService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
-    public RestResponse<SysNotice> detail(@RequestParam String id) {
-        SysNotice result = sysNoticeService.get(id);
+    public RestResponse<SysDept> detail(@RequestParam String id) {
+        SysDept result = sysDeptService.get(id);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysNotice add) {
+    public RestResponse<?> add(@RequestBody SysDept add) {
 
-        return sysNoticeService.insert(add);
+        return sysDeptService.insert(add);
     }
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysNotice update) {
+    public RestResponse<?> update(@RequestBody SysDept update) {
 
-        return sysNoticeService.update(update);
+        return sysDeptService.update(update);
     }
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysNoticeService.delete(id);
+        return sysDeptService.delete(id);
     }
 
 }

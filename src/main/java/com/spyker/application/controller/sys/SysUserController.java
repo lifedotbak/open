@@ -1,11 +1,11 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.application.entity.SysRole;
-import com.spyker.application.search.SysRoleSearch;
-import com.spyker.application.service.SysRoleService;
+import com.spyker.application.entity.SysUser;
+import com.spyker.application.search.SysUserSearch;
+import com.spyker.application.service.SysUserService;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- * 角色信息表 前端控制器
+ * 用户信息表 前端控制器
  * </p>
  *
  * @author CodeGenerator
@@ -25,26 +25,26 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "角色信息表", description = "角色信息表")
-@RequestMapping("/application/sys-role")
+@Tag(name = "用户信息表", description = "用户信息表")
+@RequestMapping("/sys/sys-user")
 @Slf4j
 @SaCheckLogin
-public class SysRoleController {
+public class SysUserController {
 
-    private final SysRoleService sysRoleService;
+    private final SysUserService sysUserService;
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("list")
-    public RestResponse<List<SysRole>> list(SysRoleSearch search) {
+    public RestResponse<List<SysUser>> list(SysUserSearch search) {
 
-        List<SysRole> result = sysRoleService.query(search);
+        List<SysUser> result = sysUserService.query(search);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysRole>> list_page(SysRoleSearch search) {
+    public RestResponse<IPage<SysUser>> list_page(SysUserSearch search) {
         int current = 1;
         int size = 10;
 
@@ -53,40 +53,40 @@ public class SysRoleController {
             size = search.getSize();
         }
 
-        IPage<SysRole> page = new Page<>(current, size);
+        IPage<SysUser> page = new Page<>(current, size);
 
-        page = sysRoleService.queryPage(page, search);
+        page = sysUserService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
-    public RestResponse<SysRole> detail(@RequestParam String id) {
-        SysRole result = sysRoleService.get(id);
+    public RestResponse<SysUser> detail(@RequestParam String id) {
+        SysUser result = sysUserService.get(id);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysRole add) {
+    public RestResponse<?> add(@RequestBody SysUser add) {
 
-        return sysRoleService.insert(add);
+        return sysUserService.insert(add);
     }
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysRole update) {
+    public RestResponse<?> update(@RequestBody SysUser update) {
 
-        return sysRoleService.update(update);
+        return sysUserService.update(update);
     }
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysRoleService.delete(id);
+        return sysUserService.delete(id);
     }
 
 }

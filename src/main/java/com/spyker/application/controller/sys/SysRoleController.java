@@ -1,11 +1,11 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.application.entity.SysJob;
-import com.spyker.application.search.SysJobSearch;
-import com.spyker.application.service.SysJobService;
+import com.spyker.application.entity.SysRole;
+import com.spyker.application.search.SysRoleSearch;
+import com.spyker.application.service.SysRoleService;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- * 定时任务调度表 前端控制器
+ * 角色信息表 前端控制器
  * </p>
  *
  * @author CodeGenerator
@@ -25,26 +25,26 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "定时任务调度表", description = "定时任务调度表")
-@RequestMapping("/application/sys-job")
+@Tag(name = "角色信息表", description = "角色信息表")
+@RequestMapping("/sys/sys-role")
 @Slf4j
 @SaCheckLogin
-public class SysJobController {
+public class SysRoleController {
 
-    private final SysJobService sysJobService;
+    private final SysRoleService sysRoleService;
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("list")
-    public RestResponse<List<SysJob>> list(SysJobSearch search) {
+    public RestResponse<List<SysRole>> list(SysRoleSearch search) {
 
-        List<SysJob> result = sysJobService.query(search);
+        List<SysRole> result = sysRoleService.query(search);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysJob>> list_page(SysJobSearch search) {
+    public RestResponse<IPage<SysRole>> list_page(SysRoleSearch search) {
         int current = 1;
         int size = 10;
 
@@ -53,40 +53,40 @@ public class SysJobController {
             size = search.getSize();
         }
 
-        IPage<SysJob> page = new Page<>(current, size);
+        IPage<SysRole> page = new Page<>(current, size);
 
-        page = sysJobService.queryPage(page, search);
+        page = sysRoleService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
-    public RestResponse<SysJob> detail(@RequestParam String id) {
-        SysJob result = sysJobService.get(id);
+    public RestResponse<SysRole> detail(@RequestParam String id) {
+        SysRole result = sysRoleService.get(id);
 
         return RestResponse.success(result);
     }
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysJob add) {
+    public RestResponse<?> add(@RequestBody SysRole add) {
 
-        return sysJobService.insert(add);
+        return sysRoleService.insert(add);
     }
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysJob update) {
+    public RestResponse<?> update(@RequestBody SysRole update) {
 
-        return sysJobService.update(update);
+        return sysRoleService.update(update);
     }
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysJobService.delete(id);
+        return sysRoleService.delete(id);
     }
 
 }

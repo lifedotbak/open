@@ -1,4 +1,4 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "系统访问记录", description = "系统访问记录")
-@RequestMapping("/application/sys-logininfor")
+@RequestMapping("/sys/sys-logininfor")
 @Slf4j
 @SaCheckLogin
 public class SysLogininforController {

@@ -1,4 +1,4 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -11,7 +11,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "操作日志记录", description = "操作日志记录")
-@RequestMapping("/application/sys-oper-log")
+@RequestMapping("/sys/sys-oper-log")
 @Slf4j
 @SaCheckLogin
 public class SysOperLogController {
@@ -55,27 +58,6 @@ public class SysOperLogController {
         SysOperLog result = sysOperLogService.get(id);
 
         return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysOperLog add) {
-
-        return sysOperLogService.insert(add);
-    }
-
-    @Operation(summary = "修改", description = "修改")
-    @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysOperLog update) {
-
-        return sysOperLogService.update(update);
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
-
-        return sysOperLogService.delete(id);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.spyker.application.controller;
+package com.spyker.application.controller.common;
 
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.config.ServerConfig;
@@ -7,6 +7,7 @@ import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.StringUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
 import com.spyker.framework.util.file.FileUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,12 @@ import java.util.List;
  *
  * @author platform
  */
+@Tag(name = "文件上传下载处理", description = "文件上传下载处理")
 @RestController
-@RequestMapping("/common")
+@RequestMapping("/common/file")
 @RequiredArgsConstructor
 @Slf4j
-public class CommonController {
+public class FileController {
 
     @Autowired
     private ServerConfig serverConfig;
