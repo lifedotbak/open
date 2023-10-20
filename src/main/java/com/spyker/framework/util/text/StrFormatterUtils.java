@@ -5,7 +5,7 @@ import com.spyker.framework.util.StringUtils;
 /**
  * 字符串格式化
  *
- * @author platform
+ * @author spyker
  */
 public class StrFormatterUtils {
     public static final String EMPTY_JSON = "{}";

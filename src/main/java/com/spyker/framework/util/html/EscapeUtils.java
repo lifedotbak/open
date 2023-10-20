@@ -5,7 +5,7 @@ import com.spyker.framework.util.StringUtils;
 /**
  * 转义和反转义工具类
  *
- * @author platform
+ * @author spyker
  */
 public class EscapeUtils {
     public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";

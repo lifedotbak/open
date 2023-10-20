@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * 服务相关配置
  *
- * @author platform
+ * @author spyker
  */
 @Component
 public class ServerConfig {

@@ -6,7 +6,7 @@ import com.spyker.framework.util.StringUtils;
 /**
  * 基础异常
  *
- * @author platform
+ * @author spyker
  */
 public class BaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;

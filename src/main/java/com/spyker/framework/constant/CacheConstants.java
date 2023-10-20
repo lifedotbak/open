@@ -3,7 +3,7 @@ package com.spyker.framework.constant;
 /**
  * 缓存的key 常量
  *
- * @author platform
+ * @author spyker
  */
 public class CacheConstants {
     /**

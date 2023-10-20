@@ -3,7 +3,7 @@ package com.spyker.framework.exception.job;
 /**
  * 计划策略异常
  *
- * @author platform
+ * @author spyker
  */
 public class TaskException extends Exception {
     private static final long serialVersionUID = 1L;

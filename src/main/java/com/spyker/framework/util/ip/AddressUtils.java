@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 获取地址类
  *
- * @author platform
+ * @author spyker
  */
 public class AddressUtils {
     private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);

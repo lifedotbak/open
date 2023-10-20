@@ -3,7 +3,7 @@ package com.spyker.framework.constant;
 /**
  * 返回状态码
  *
- * @author platform
+ * @author spyker
  */
 public class HttpStatus {
     /**

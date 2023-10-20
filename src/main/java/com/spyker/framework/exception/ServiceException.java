@@ -3,7 +3,7 @@ package com.spyker.framework.exception;
 /**
  * 业务异常
  *
- * @author platform
+ * @author spyker
  */
 public final class ServiceException extends RuntimeException {
     private static final long serialVersionUID = 1L;
@@ -21,7 +21,6 @@ public final class ServiceException extends RuntimeException {
     /**
      * 错误明细，内部调试错误
      * <p>
-     * 和 {@link CommonResult#getDetailMessage()} 一致的设计
      */
     private String detailMessage;
 

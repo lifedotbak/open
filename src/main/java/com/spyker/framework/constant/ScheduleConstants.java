@@ -3,7 +3,7 @@ package com.spyker.framework.constant;
 /**
  * 任务调度通用常量
  *
- * @author platform
+ * @author spyker
  */
 public class ScheduleConstants {
     public static final String TASK_CLASS_NAME = "TASK_CLASS_NAME";

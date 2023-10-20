@@ -3,7 +3,7 @@ package com.spyker.framework.enums;
 /**
  * 操作人类别
  *
- * @author platform
+ * @author spyker
  */
 public enum OperatorType {
     /**

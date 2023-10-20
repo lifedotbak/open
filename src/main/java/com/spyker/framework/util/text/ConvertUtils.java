@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * 类型转换器
  *
- * @author platform
+ * @author spyker
  */
 public class ConvertUtils {
     /**

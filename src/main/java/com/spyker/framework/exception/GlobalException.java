@@ -3,7 +3,7 @@ package com.spyker.framework.exception;
 /**
  * 全局异常
  *
- * @author platform
+ * @author spyker
  */
 public class GlobalException extends RuntimeException {
     private static final long serialVersionUID = 1L;
@@ -15,8 +15,6 @@ public class GlobalException extends RuntimeException {
 
     /**
      * 错误明细，内部调试错误
-     * <p>
-     * 和 {@link CommonResult#getDetailMessage()} 一致的设计
      */
     private String detailMessage;
 

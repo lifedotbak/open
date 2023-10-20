@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 /**
  * 防止重复提交拦截器
  *
- * @author platform
+ * @author spyker
  */
 @Component
 public abstract class RepeatSubmitInterceptor implements HandlerInterceptor {

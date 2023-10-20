@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * 操作消息提醒
  *
- * @author platform
+ * @author spyker
  */
 public class RestMapResponse extends HashMap<String, Object> {
 

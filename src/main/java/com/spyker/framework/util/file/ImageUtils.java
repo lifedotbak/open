@@ -16,7 +16,7 @@ import java.util.Arrays;
 /**
  * 图片处理工具类
  *
- * @author platform
+ * @author spyker
  */
 @Slf4j
 public class ImageUtils {

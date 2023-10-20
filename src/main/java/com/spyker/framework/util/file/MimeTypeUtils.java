@@ -3,7 +3,7 @@ package com.spyker.framework.util.file;
 /**
  * 媒体类型工具类
  *
- * @author platform
+ * @author spyker
  */
 public class MimeTypeUtils {
     public static final String IMAGE_PNG = "image/png";

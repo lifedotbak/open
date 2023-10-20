@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 /**
  * 金额工具类
  *
- * @author 芋道源码
+ * @author spyker
  */
 public class MoneyUtils {
 

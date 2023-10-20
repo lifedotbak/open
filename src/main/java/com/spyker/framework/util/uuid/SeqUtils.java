@@ -6,7 +6,7 @@ import com.spyker.framework.util.date.DateUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author platform 序列生成类
+ * @author spyker 序列生成类
  */
 public class SeqUtils {
     // 通用序列类型

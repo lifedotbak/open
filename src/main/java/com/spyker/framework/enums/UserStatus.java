@@ -3,7 +3,7 @@ package com.spyker.framework.enums;
 /**
  * 用户状态
  *
- * @author platform
+ * @author spyker
  */
 public enum UserStatus {
     OK("0", "正常"),

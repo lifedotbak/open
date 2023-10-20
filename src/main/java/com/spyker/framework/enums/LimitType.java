@@ -3,9 +3,8 @@ package com.spyker.framework.enums;
 /**
  * 限流类型
  *
- * @author platform
+ * @author spyker
  */
-
 public enum LimitType {
     /**
      * 默认策略全局限流

@@ -3,7 +3,7 @@ package com.spyker.framework.util.uuid;
 /**
  * ID生成器工具类
  *
- * @author platform
+ * @author spyker
  */
 public class IdUtils {
     /**

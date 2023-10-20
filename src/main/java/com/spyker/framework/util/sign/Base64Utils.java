@@ -3,7 +3,7 @@ package com.spyker.framework.util.sign;
 /**
  * Base64工具类
  *
- * @author platform
+ * @author spyker
  */
 public final class Base64Utils {
     static private final int BASELENGTH = 128;
