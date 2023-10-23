@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${package.Mapper}.${table.mapperName}">
 
-  <select id="query" resultType="${package.Entity}.${entity}" parameterType="com.spyker.application.search.${entity}Search">
+  <select id="query" resultType="${package.Entity}.${entity}" parameterType="com.spyker.base.search.${entity}Search">
     SELECT
       a.*
     FROM
@@ -18,7 +18,7 @@
     </where>
   </select>
 
-  <select id="queryPage" resultType="${package.Entity}.${entity}" parameterType="com.spyker.application.search.${entity}Search">
+  <select id="queryPage" resultType="${package.Entity}.${entity}" parameterType="com.spyker.base.search.${entity}Search">
     SELECT
       a.*
     FROM

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spyker.application.mapper.SysNoticeMapper">
+<mapper namespace="com.spyker.base.mapper.SysNoticeMapper">
     
-    <select id="query" resultType="com.spyker.application.entity.SysNotice" parameterType="com.spyker.application.search.SysNoticeSearch">
+    <select id="query" resultType="com.spyker.base.entity.SysNotice" parameterType="com.spyker.base.search.SysNoticeSearch">
         SELECT a.* FROM sys_notice a
         <where>
             <if test="null != noticeTitle ">
@@ -28,7 +28,7 @@
         </where>
     </select>
     
-    <select id="queryPage" resultType="com.spyker.application.entity.SysNotice" parameterType="com.spyker.application.search.SysNoticeSearch">
+    <select id="queryPage" resultType="com.spyker.base.entity.SysNotice" parameterType="com.spyker.base.search.SysNoticeSearch">
         SELECT a.* FROM sys_notice a
         <where>
             <if test="null != noticeTitle ">

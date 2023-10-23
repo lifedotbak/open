@@ -4,7 +4,7 @@ import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 import ${package.Mapper}.${table.mapperName};
 import org.springframework.beans.factory.annotation.Autowired;
-import com.spyker.application.BaseTest;
+import com.spyker.base.BaseTest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

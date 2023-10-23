@@ -13,7 +13,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import lombok.RequiredArgsConstructor;
 
-import com.spyker.application.BaseTest;
+import com.spyker.base.BaseTest;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

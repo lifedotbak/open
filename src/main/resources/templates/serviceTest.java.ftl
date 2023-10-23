@@ -1,6 +1,6 @@
 package ${package.Service};
 
-import com.spyker.application.BaseTest;
+import com.spyker.base.BaseTest;
 import ${package.Service}.${table.serviceName};
 import org.springframework.beans.factory.annotation.Autowired;
 

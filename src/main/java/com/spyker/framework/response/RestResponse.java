@@ -2,7 +2,6 @@ package com.spyker.framework.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.spyker.application.enums.SuccessCode;
 import lombok.Data;
 
 @Data
@@ -15,17 +14,17 @@ public class RestResponse<T> {
 
     public static <T> RestResponse<T> success(T result) {
 
-        RestResponse<T> response = new RestResponse<>(SuccessCode.OK.code, SuccessCode.OK.msg, result);
+        RestResponse<T> response = new RestResponse<>(200, "success", result);
 
         return response;
     }
 
     public static <T> RestResponse<T> success() {
-        return new RestResponse<>(SuccessCode.OK.code, SuccessCode.OK.msg);
+        return new RestResponse<>(200, "success");
     }
 
-    public static <T> RestResponse<T> error(RestCode code) {
-        return new RestResponse<>(code.getCode(), code.getMsg());
+    public static <T> RestResponse<T> error(ResponseErrorCode responseErrorCode) {
+        return new RestResponse<>(responseErrorCode.getCode(), responseErrorCode.getMsg());
     }
 
     public static <T> RestResponse<T> error(Integer code, String msg) {

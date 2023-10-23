@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spyker.application.mapper.SysDeptMapper">
+<mapper namespace="com.spyker.base.mapper.SysDeptMapper">
     
-    <select id="query" resultType="com.spyker.application.entity.SysDept" parameterType="com.spyker.application.search.SysDeptSearch">
+    <select id="query" resultType="com.spyker.base.entity.SysDept" parameterType="com.spyker.base.search.SysDeptSearch">
         SELECT a.* FROM sys_dept a
         <where>
             <if test="null != parentId ">
@@ -40,7 +40,7 @@
         </where>
     </select>
     
-    <select id="queryPage" resultType="com.spyker.application.entity.SysDept" parameterType="com.spyker.application.search.SysDeptSearch">
+    <select id="queryPage" resultType="com.spyker.base.entity.SysDept" parameterType="com.spyker.base.search.SysDeptSearch">
         SELECT a.* FROM sys_dept a
         <where>
             <if test="null != parentId ">

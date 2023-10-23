@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spyker.application.mapper.SysPostMapper">
+<mapper namespace="com.spyker.base.mapper.SysPostMapper">
     
-    <select id="query" resultType="com.spyker.application.entity.SysPost" parameterType="com.spyker.application.search.SysPostSearch">
+    <select id="query" resultType="com.spyker.base.entity.SysPost" parameterType="com.spyker.base.search.SysPostSearch">
         SELECT a.* FROM sys_post a
         <where>
             <if test="null != postCode ">
@@ -28,7 +28,7 @@
         </where>
     </select>
     
-    <select id="queryPage" resultType="com.spyker.application.entity.SysPost" parameterType="com.spyker.application.search.SysPostSearch">
+    <select id="queryPage" resultType="com.spyker.base.entity.SysPost" parameterType="com.spyker.base.search.SysPostSearch">
         SELECT a.* FROM sys_post a
         <where>
             <if test="null != postCode ">

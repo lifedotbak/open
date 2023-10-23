@@ -1,4 +1,4 @@
-package com.spyker.application.view;
+package ${package.Parent}.view;
 
 <#list table.importPackages as pkg>
 import ${pkg};
@@ -144,4 +144,3 @@ public class ${entity}View implements Serializable {
     }
 </#if>
 }
-

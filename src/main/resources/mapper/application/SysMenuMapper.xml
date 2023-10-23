@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spyker.application.mapper.SysMenuMapper">
+<mapper namespace="com.spyker.base.mapper.SysMenuMapper">
     
-    <select id="query" resultType="com.spyker.application.entity.SysMenu" parameterType="com.spyker.application.search.SysMenuSearch">
+    <select id="query" resultType="com.spyker.base.entity.SysMenu" parameterType="com.spyker.base.search.SysMenuSearch">
         SELECT a.* FROM sys_menu a
         <where>
             <if test="null != menuName ">
@@ -55,7 +55,7 @@
         </where>
     </select>
     
-    <select id="queryPage" resultType="com.spyker.application.entity.SysMenu" parameterType="com.spyker.application.search.SysMenuSearch">
+    <select id="queryPage" resultType="com.spyker.base.entity.SysMenu" parameterType="com.spyker.base.search.SysMenuSearch">
         SELECT a.* FROM sys_menu a
         <where>
             <if test="null != menuName ">
