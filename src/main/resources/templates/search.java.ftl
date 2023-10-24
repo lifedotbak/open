@@ -61,7 +61,7 @@ private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
     <#list table.fields as field>
 
-        <#if field.propertyName != "id" && field.propertyName != "modifyTime" && field.propertyName != "createTime">
+        <#if field.propertyName != "id" && field.propertyName != "modifyTime" && field.propertyName != "createTime" && field.propertyName != "updateTime">
         @Schema(description = "${field.comment}")
             private ${field.propertyType} ${field.propertyName};
         </#if>

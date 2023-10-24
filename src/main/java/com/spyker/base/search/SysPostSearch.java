@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 /**
  * <p>
@@ -44,9 +43,6 @@ public class SysPostSearch implements Serializable {
 
     @Schema(description = "更新者")
     private String updateBy;
-
-    @Schema(description = "更新时间")
-    private Timestamp updateTime;
 
     @Schema(description = "备注")
     private String remark;

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * <p>
@@ -21,6 +22,7 @@ public class SysDeptSearch implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer page = 1;
+
     private Integer size = 10;
 
     @Schema(description = "部门id")
@@ -58,8 +60,5 @@ public class SysDeptSearch implements Serializable {
 
     @Schema(description = "更新者")
     private String updateBy;
-
-    @Schema(description = "更新时间")
-    private Timestamp updateTime;
 
 }

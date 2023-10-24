@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * <p>
@@ -48,6 +49,6 @@ public class SysLogininforSearch implements Serializable {
     private String msg;
 
     @Schema(description = "访问时间")
-    private Timestamp loginTime;
+    private Date loginTime;
 
 }

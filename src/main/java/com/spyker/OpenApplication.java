@@ -1,5 +1,6 @@
 package com.spyker;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan({"com.spyker.*.mapper"})
 @EnableScheduling
 @EnableAsync
+@EnableAdminServer
 public class OpenApplication {
 
     public static void main(String[] args) {

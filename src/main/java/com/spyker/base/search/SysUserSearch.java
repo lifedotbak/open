@@ -71,9 +71,6 @@ public class SysUserSearch implements Serializable {
     @Schema(description = "更新者")
     private String updateBy;
 
-    @Schema(description = "更新时间")
-    private Timestamp updateTime;
-
     @Schema(description = "备注")
     private String remark;
 
