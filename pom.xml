@@ -500,17 +500,7 @@
     
     <build>
         <finalName>open</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.ftl</exclude>
-	                <!-- <include>**/*.pem</include> -->
-                </excludes>
-            </resource>
-        </resources>
-
-        <plugins>
+		<plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
