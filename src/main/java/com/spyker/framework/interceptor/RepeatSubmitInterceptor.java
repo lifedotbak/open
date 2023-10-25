@@ -1,7 +1,7 @@
 package com.spyker.framework.interceptor;
 
 import com.alibaba.fastjson2.JSON;
-import com.spyker.framework.aop.annotation.RepeatSubmit;
+import com.spyker.framework.idempotent.RepeatSubmit;
 import com.spyker.framework.response.RestMapResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -46,7 +46,7 @@ public class SysConfigServiceTest extends BaseTest {
 
         add.setConfigValue("configValue");
 
-        add.setConfigType("configType");
+        add.setConfigType("1");
 
         add.setCreateBy("createBy");
 

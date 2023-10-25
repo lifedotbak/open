@@ -1,6 +1,5 @@
-package com.spyker.framework.aop.aspectj;
+package com.spyker.framework.log;
 
-import com.spyker.framework.aop.annotation.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

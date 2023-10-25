@@ -11,7 +11,7 @@
     
     <groupId>com.spyker</groupId>
     <artifactId>open</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>open</name>
     <description>open</description>
     
@@ -245,18 +245,25 @@
 	    
 	    <!-- ======================================= 项目监控中心 ======================================= -->
 	    <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
-	    <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>3.1.7</version>
-        </dependency>
+	    <!-- 	    <dependency> -->
+	    <!--             <groupId>de.codecentric</groupId> -->
+	    <!--             <artifactId>spring-boot-admin-starter-client</artifactId> -->
+	    <!--             <version>3.1.7</version> -->
+	    <!--         </dependency> -->
 	    
 	    <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-server -->
-	    <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>3.1.7</version>
-        </dependency>
+	    <!-- 	    <dependency> -->
+	    <!--             <groupId>de.codecentric</groupId> -->
+	    <!--             <artifactId>spring-boot-admin-starter-server</artifactId> -->
+	    <!--             <version>3.1.7</version> -->
+	    <!--         </dependency> -->
+	    
+	    <!-- https://mvnrepository.com/artifact/org.jolokia/jolokia-core -->
+	    <!-- 	    <dependency> -->
+	    <!--             <groupId>org.jolokia</groupId> -->
+	    <!--             <artifactId>jolokia-core</artifactId> -->
+	    <!--             <version>1.7.2</version> -->
+	    <!--         </dependency> -->
 	    
 	    <!-- ======================================= 其他相关依赖 ======================================= -->
 	    <!--lombok用来简化实体类：需要安装lombok插件 -->
@@ -493,6 +500,16 @@
     
     <build>
         <finalName>open</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.ftl</exclude>
+	                <!-- <include>**/*.pem</include> -->
+                </excludes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

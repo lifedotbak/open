@@ -1,4 +1,4 @@
-package com.spyker.framework.aop.annotation;
+package com.spyker.framework.log;
 
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.enums.OperatorType;

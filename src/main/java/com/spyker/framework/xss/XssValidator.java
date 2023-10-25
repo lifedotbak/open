@@ -1,6 +1,5 @@
-package com.spyker.framework.aop.aspectj;
+package com.spyker.framework.xss;
 
-import com.spyker.framework.aop.annotation.Xss;
 import com.spyker.framework.util.StringUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
