@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.commons.mapper.SysDictDataMapper">
+    
+    <select id="query" resultType="com.spyker.commons.entity.SysDictData" parameterType="com.spyker.commons.search.SysDictDataSearch">
+        SELECT a.* FROM sys_dict_data a
+        <where>
+            <if test="null != dictSort ">
+                and a.dict_sort = #{dictSort}
+            </if>
+            <if test="null != dictLabel ">
+                and a.dict_label = #{dictLabel}
+            </if>
+            <if test="null != dictValue ">
+                and a.dict_value = #{dictValue}
+            </if>
+            <if test="null != dictType ">
+                and a.dict_type = #{dictType}
+            </if>
+            <if test="null != cssClass ">
+                and a.css_class = #{cssClass}
+            </if>
+            <if test="null != listClass ">
+                and a.list_class = #{listClass}
+            </if>
+            <if test="null != isDefault ">
+                and a.is_default = #{isDefault}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+    
+    <select id="queryPage" resultType="com.spyker.commons.entity.SysDictData" parameterType="com.spyker.commons.search.SysDictDataSearch">
+        SELECT a.* FROM sys_dict_data a
+        <where>
+            <if test="null != dictSort ">
+                and a.dict_sort = #{dictSort}
+            </if>
+            <if test="null != dictLabel ">
+                and a.dict_label = #{dictLabel}
+            </if>
+            <if test="null != dictValue ">
+                and a.dict_value = #{dictValue}
+            </if>
+            <if test="null != dictType ">
+                and a.dict_type = #{dictType}
+            </if>
+            <if test="null != cssClass ">
+                and a.css_class = #{cssClass}
+            </if>
+            <if test="null != listClass ">
+                and a.list_class = #{listClass}
+            </if>
+            <if test="null != isDefault ">
+                and a.is_default = #{isDefault}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != createBy ">
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy ">
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark ">
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+</mapper>
