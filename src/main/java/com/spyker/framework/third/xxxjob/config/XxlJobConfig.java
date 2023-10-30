@@ -1,8 +1,8 @@
 package com.spyker.framework.third.xxxjob.config;
 
 import cn.hutool.core.collection.CollUtil;
-import com.spyker.framework.util.StreamUtils;
 import com.spyker.framework.third.xxxjob.properties.XxlJobProperties;
+import com.spyker.framework.util.StreamUtils;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
