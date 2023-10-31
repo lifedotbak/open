@@ -7,6 +7,7 @@ import com.spyker.commons.entity.SysUser;
 import com.spyker.commons.mapper.SysUserMapper;
 import com.spyker.commons.search.SysUserSearch;
 import com.spyker.commons.service.SysUserService;
+import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestResponse;
 import com.spyker.framework.util.BCryptUtils;
 import lombok.RequiredArgsConstructor;
@@ -84,6 +85,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             if (BCryptUtils.checkpw(password, sysUser.getPassword())) {
 
                 StpUtil.login(sysUser.getUserId());
+
+                StpUtil.getSession().set(Constants.LOGIN_USER_KEY,sysUser.getUserId());
+
                 return true;
             }
 

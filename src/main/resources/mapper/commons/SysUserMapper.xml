@@ -6,6 +6,22 @@
 		SELECT a.* FROM sys_user a where a.user_name = #{userName} limit 1
 	</select>
 	
+	<select id="queryPermsById" resultType="String">
+		SELECT DISTINCT
+			d.perms
+		FROM
+			sys_user a,
+			sys_user_role b,
+			sys_role_menu c,
+			sys_menu d
+		WHERE
+			a.user_id = b.user_id
+			AND b.role_id = c.role_id
+			AND c.menu_id = d.menu_id
+			AND d.perms != ''
+			AND a.user_id = #{userId}
+	</select>
+	
 	<select id="queryRolesById" resultType="String">
 		SELECT
 			DISTINCT

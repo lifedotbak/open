@@ -11,7 +11,7 @@
  Target Server Version : 80100
  File Encoding         : 65001
 
- Date: 18/10/2023 10:15:26
+ Date: 30/10/2023 10:05:43
 */
 
 SET NAMES utf8mb4;
@@ -70,16 +70,16 @@ CREATE TABLE `sys_dept`  (
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES ('100', '0', '0', '若依科技', 0, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('101', '100', '0,100', '深圳总公司', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('102', '100', '0,100', '长沙分公司', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('103', '101', '0,100,101', '研发部门', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('104', '101', '0,100,101', '市场部门', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('105', '101', '0,100,101', '测试部门', 3, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('106', '101', '0,100,101', '财务部门', 4, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('107', '101', '0,100,101', '运维部门', 5, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('108', '102', '0,100,102', '市场部门', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
-INSERT INTO `sys_dept` VALUES ('109', '102', '0,100,102', '财务部门', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('100', '0', '0', '大傻科技', 0, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('101', '100', '0,100', '深圳总公司', 1, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('102', '100', '0,100', '长沙分公司', 2, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('103', '101', '0,100,101', '研发部门', 1, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('104', '101', '0,100,101', '市场部门', 2, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('105', '101', '0,100,101', '测试部门', 3, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('106', '101', '0,100,101', '财务部门', 4, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('107', '101', '0,100,101', '运维部门', 5, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('108', '102', '0,100,102', '市场部门', 1, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
+INSERT INTO `sys_dept` VALUES ('109', '102', '0,100,102', '财务部门', 2, 'X', '18092000000', 'dashakeji@qq.com', '0', '0', 'admin', '2023-09-28 10:34:11', '', NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_data
@@ -188,13 +188,6 @@ CREATE TABLE `sys_job`  (
   `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '定时任务调度表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of sys_job
--- ----------------------------
-INSERT INTO `sys_job` VALUES ('1', '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams', '0/10 * * * * ?', '3', '1', '1', 'admin', '2023-09-28 10:34:11', '', NULL, '');
-INSERT INTO `sys_job` VALUES ('2', '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(\'ry\')', '0/15 * * * * ?', '3', '1', '1', 'admin', '2023-09-28 10:34:11', '', NULL, '');
-INSERT INTO `sys_job` VALUES ('3', '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)', '0/20 * * * * ?', '3', '1', '1', 'admin', '2023-09-28 10:34:11', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_job_log
@@ -368,8 +361,8 @@ CREATE TABLE `sys_notice`  (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES ('1', '温馨提醒：2018-07-01 若依新版本发布啦', '2', 0xE696B0E78988E69CACE58685E5AEB9, '0', 'admin', '2023-09-28 10:34:11', '', NULL, '管理员');
-INSERT INTO `sys_notice` VALUES ('2', '维护通知：2018-07-01 若依系统凌晨维护', '1', 0xE7BBB4E68AA4E58685E5AEB9, '0', 'admin', '2023-09-28 10:34:11', '', NULL, '管理员');
+INSERT INTO `sys_notice` VALUES ('1', '温馨提醒：~~~~~~~~~~~~~', '2', 0xE696B0E78988E69CACE58685E5AEB9, '0', 'admin', '2023-09-28 10:34:11', '', NULL, '管理员');
+INSERT INTO `sys_notice` VALUES ('2', '维护通知：~~~~~~~~~~~~~~~~~~', '1', 0xE7BBB4E68AA4E58685E5AEB9, '0', 'admin', '2023-09-28 10:34:11', '', NULL, '管理员');
 
 -- ----------------------------
 -- Table structure for sys_oper_log
@@ -598,8 +591,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$An4XF1kI7SV4Ao.67K6Nke6/9i8z.OlzqLxLe6eSQYSrWfOCzrGjq', '0', '0', '127.0.0.1', '2023-09-28 10:34:11', 'admin', '2023-09-28 10:34:11', '', NULL, '管理员');
-INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$An4XF1kI7SV4Ao.67K6Nke6/9i8z.OlzqLxLe6eSQYSrWfOCzrGjq', '0', '0', '127.0.0.1', '2023-09-28 10:34:11', 'admin', '2023-09-28 10:34:11', '', NULL, '测试员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '管理员', '00', 'dashakeji@qq.com', '18092000000', '1', '', '$2a$10$An4XF1kI7SV4Ao.67K6Nke6/9i8z.OlzqLxLe6eSQYSrWfOCzrGjq', '0', '0', '127.0.0.1', '2023-09-28 10:34:11', 'admin', '2023-09-28 10:34:11', '', NULL, '管理员');
+INSERT INTO `sys_user` VALUES ('2', '105', 'zhangsan', '张三', '00', 'dashakeji@qq.com', '18092000000', '1', '', '$2a$10$An4XF1kI7SV4Ao.67K6Nke6/9i8z.OlzqLxLe6eSQYSrWfOCzrGjq', '0', '0', '127.0.0.1', '2023-09-28 10:34:11', 'admin', '2023-09-28 10:34:11', '', NULL, '测试员');
 
 -- ----------------------------
 -- Table structure for sys_user_post

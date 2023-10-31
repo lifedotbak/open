@@ -18,15 +18,15 @@ public class StpInterfaceImpl implements StpInterface {
 
     @Override
     public List<String> getPermissionList(Object loginId, String s) {
-        //TODO
-        return null;
+
+        String loginUserId = String.valueOf(loginId);
+        return sysUserMapper.queryPermsById(loginUserId);
     }
 
     @Override
     public List<String> getRoleList(Object loginId, String s) {
 
-        String userId = String.valueOf(loginId);
-
-        return sysUserMapper.queryRolesById(userId);
+        String loginUserId = String.valueOf(loginId);
+        return sysUserMapper.queryRolesById(loginUserId);
     }
 }

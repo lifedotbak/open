@@ -25,4 +25,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     List<String> queryRolesById(String userId);
 
+    List<String> queryPermsById(String userId);
+
 }
