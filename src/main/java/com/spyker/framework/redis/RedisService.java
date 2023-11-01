@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
  * @author ruoyi
  **/
 @Configuration
-@ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
 @Slf4j
 public class RedisService {
 
