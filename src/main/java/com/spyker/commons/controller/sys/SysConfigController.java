@@ -1,6 +1,8 @@
 package com.spyker.commons.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysConfig;
@@ -31,6 +33,7 @@ public class SysConfigController {
 
     private final SysConfigService sysConfigService;
 
+//    @SaCheckPermission(value = "user:get",orRole = "admin")
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
     public RestResponse<IPage<SysConfig>> list_page(SysConfigSearch search) {
@@ -49,6 +52,7 @@ public class SysConfigController {
         return RestResponse.success(page);
     }
 
+//    @SaCheckPermission(value = "user:get",orRole = "admin")
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
     public RestResponse<SysConfig> detail(@RequestParam String id) {
@@ -57,6 +61,8 @@ public class SysConfigController {
         return RestResponse.success(result);
     }
 
+    @SaCheckRole("admin")
+    @SaCheckPermission("admin:add")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody SysConfig add) {
@@ -64,6 +70,8 @@ public class SysConfigController {
         return sysConfigService.insert(add);
     }
 
+    @SaCheckRole("admin")
+    @SaCheckPermission("admin:update")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody SysConfig update) {
@@ -71,6 +79,8 @@ public class SysConfigController {
         return sysConfigService.update(update);
     }
 
+    @SaCheckRole("admin")
+    @SaCheckPermission("admin:delete")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {

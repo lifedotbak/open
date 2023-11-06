@@ -42,18 +42,6 @@ public class SysConfigServiceTest extends BaseTest {
 
         add.setConfigName("configName");
 
-        add.setConfigKey("configKey");
-
-        add.setConfigValue("configValue");
-
-        add.setConfigType("1");
-
-        add.setCreateBy("createBy");
-
-        add.setUpdateBy("updateBy");
-
-        add.setRemark("remark");
-
         service.insert(add);
     }
 
@@ -86,11 +74,7 @@ public class SysConfigServiceTest extends BaseTest {
 
         search.setConfigName("configName");
         search.setConfigKey("configKey");
-        search.setConfigValue("configValue");
         search.setConfigType("configType");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
-        search.setRemark("remark");
 
         service.query(search);
     }
@@ -105,15 +89,7 @@ public class SysConfigServiceTest extends BaseTest {
 
         search.setConfigKey("configKey");
 
-        search.setConfigValue("configValue");
-
         search.setConfigType("configType");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
-        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

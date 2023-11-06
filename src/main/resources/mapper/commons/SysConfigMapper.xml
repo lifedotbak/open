@@ -10,20 +10,8 @@
             <if test="null != configKey ">
                 and a.config_key = #{configKey}
             </if>
-            <if test="null != configValue ">
-                and a.config_value = #{configValue}
-            </if>
             <if test="null != configType ">
                 and a.config_type = #{configType}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
             </if>
         </where>
     </select>
@@ -31,26 +19,14 @@
     <select id="queryPage" resultType="com.spyker.commons.entity.SysConfig" parameterType="com.spyker.commons.search.SysConfigSearch">
         SELECT a.* FROM sys_config a
         <where>
-            <if test="null != configName ">
-                and a.config_name = #{configName}
+            <if test="null != search.configName ">
+                and a.config_name = #{search.configName}
             </if>
-            <if test="null != configKey ">
-                and a.config_key = #{configKey}
+            <if test="null != search.configKey ">
+                and a.config_key = #{search.configKey}
             </if>
-            <if test="null != configValue ">
-                and a.config_value = #{configValue}
-            </if>
-            <if test="null != configType ">
-                and a.config_type = #{configType}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
+            <if test="null != search.configType ">
+                and a.config_type = #{search.configType}
             </if>
         </where>
     </select>

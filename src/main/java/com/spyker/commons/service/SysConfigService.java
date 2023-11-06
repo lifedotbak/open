@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.spyker.commons.entity.SysConfig;
 import com.spyker.commons.search.SysConfigSearch;
 import com.spyker.framework.response.RestResponse;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface SysConfigService extends IService<SysConfig> {
 
     List<SysConfig> query(SysConfigSearch search);
 
-    IPage<SysConfig> queryPage(IPage<SysConfig> page, SysConfigSearch search);
+    IPage<SysConfig> queryPage(IPage<SysConfig> page,@Param("search") SysConfigSearch search);
 
     SysConfig get(String id);
 
