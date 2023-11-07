@@ -9,11 +9,11 @@
       ${table.name} a
     <where>
       <#list table.fields as field>
-      <#if !field.keyFlag && !field.capitalName?contains("Time")>
-          <if test="null != ${field.propertyName} " >
-            and a.${field.name} = <#noparse>#{</#noparse>${field.propertyName}<#noparse>}</#noparse>
-          </if>
-      </#if>
+          <#if !field.keyFlag && !field.capitalName?contains("Time")>
+              <if test="null != ${field.propertyName} " >
+                and a.${field.name} = <#noparse>#{</#noparse>${field.propertyName}<#noparse>}</#noparse>
+              </if>
+          </#if>
       </#list>
     </where>
   </select>
@@ -25,11 +25,11 @@
       ${table.name} a
     <where>
       <#list table.fields as field>
-      <#if !field.keyFlag && !field.capitalName?contains("Time")>
-        <if test="null != ${field.propertyName} " >
-          and a.${field.name} = <#noparse>#{</#noparse>${field.propertyName}<#noparse>}</#noparse>
-        </if>
-      </#if>
+          <#if !field.keyFlag && !field.capitalName?contains("Time")>
+            <if test="null != search.${field.propertyName} " >
+              and a.${field.name} = <#noparse>#{</#noparse>search.${field.propertyName}<#noparse>}</#noparse>
+            </if>
+          </#if>
       </#list>
     </where>
   </select>

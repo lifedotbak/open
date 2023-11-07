@@ -33,7 +33,7 @@ public class SysConfigController {
 
     private final SysConfigService sysConfigService;
 
-//    @SaCheckPermission(value = "user:get",orRole = "admin")
+    //    @SaCheckPermission(value = "user:get",orRole = "admin")
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
     public RestResponse<IPage<SysConfig>> list_page(SysConfigSearch search) {
@@ -52,7 +52,7 @@ public class SysConfigController {
         return RestResponse.success(page);
     }
 
-//    @SaCheckPermission(value = "user:get",orRole = "admin")
+    //    @SaCheckPermission(value = "user:get",orRole = "admin")
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
     public RestResponse<SysConfig> detail(@RequestParam String id) {
@@ -67,7 +67,9 @@ public class SysConfigController {
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody SysConfig add) {
 
-        return sysConfigService.insert(add);
+        sysConfigService.insert(add);
+
+        return RestResponse.success();
     }
 
     @SaCheckRole("admin")
@@ -76,7 +78,9 @@ public class SysConfigController {
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody SysConfig update) {
 
-        return sysConfigService.update(update);
+        sysConfigService.update(update);
+
+        return RestResponse.success();
     }
 
     @SaCheckRole("admin")
@@ -85,7 +89,9 @@ public class SysConfigController {
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return sysConfigService.delete(id);
+        sysConfigService.delete(id);
+
+        return RestResponse.success();
     }
 
 }

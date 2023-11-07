@@ -6,7 +6,6 @@ import com.spyker.commons.entity.SysConfig;
 import com.spyker.commons.mapper.SysConfigMapper;
 import com.spyker.commons.search.SysConfigSearch;
 import com.spyker.commons.service.SysConfigService;
-import com.spyker.framework.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -58,30 +57,23 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 
     @Override
     public SysConfig get(String id) {
-        SysConfig SysConfig = getById(id);
-
-        return SysConfig;
+        SysConfig sysConfig = getById(id);
+        return sysConfig;
     }
 
     @Override
-    public RestResponse<?> insert(SysConfig SysConfig) {
-        save(SysConfig);
-
-        return RestResponse.success(SysConfig);
+    public boolean insert(SysConfig SysConfig) {
+        return save(SysConfig);
     }
 
     @Override
-    public RestResponse<?> update(SysConfig SysConfig) {
-        updateById(SysConfig);
-
-        return RestResponse.success();
+    public boolean update(SysConfig SysConfig) {
+        return updateById(SysConfig);
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
-
-        return RestResponse.success();
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
 }

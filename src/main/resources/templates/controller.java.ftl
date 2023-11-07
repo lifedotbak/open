@@ -102,7 +102,9 @@ public class ${table.controllerName} {
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody ${entity} add) {
 
-        return ${table.serviceName?uncap_first}.insert(add);
+         ${table.serviceName?uncap_first}.insert(add);
+
+         return RestResponse.success();
     }
 
 
@@ -110,7 +112,9 @@ public class ${table.controllerName} {
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody ${entity} update) {
 
-        return ${table.serviceName?uncap_first}.update(update);
+         ${table.serviceName?uncap_first}.update(update);
+
+         return RestResponse.success();
     }
 
 
@@ -118,7 +122,9 @@ public class ${table.controllerName} {
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
 
-        return ${table.serviceName?uncap_first}.delete(id);
+         ${table.serviceName?uncap_first}.delete(id);
+
+         return RestResponse.success();
     }
 
 }

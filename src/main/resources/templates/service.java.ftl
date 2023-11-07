@@ -25,10 +25,10 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
     ${entity} get(String id);
 
-    RestResponse<?> insert(${entity} ${entity});
+    boolean insert(${entity} ${entity});
 
-    RestResponse<?> update(${entity} ${entity});
+    boolean update(${entity} ${entity});
 
-    RestResponse<?> delete(String id);
+    boolean delete(String id);
 
 }

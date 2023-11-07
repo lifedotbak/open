@@ -32,9 +32,9 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
     @Override
     public List<SysDept> query(SysDeptSearch search) {
-        List<SysDept> SysDeptList = sysDeptMapper.query(search);
+        List<SysDept> result = sysDeptMapper.query(search);
 
-        return SysDeptList;
+        return result;
     }
 
     @Override
@@ -46,9 +46,9 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 
     @Override
     public SysDept get(String id) {
-        SysDept SysDept = getById(id);
+        SysDept result = getById(id);
 
-        return SysDept;
+        return result;
     }
 
     @Override

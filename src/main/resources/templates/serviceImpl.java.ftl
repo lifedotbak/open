@@ -35,9 +35,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Override
     public List<${entity}> query(${entity}Search search){
-        List<${entity}> ${entity}List =  ${table.mapperName?uncap_first}.query(search);
+        List<${entity}> result =  ${table.mapperName?uncap_first}.query(search);
 
-        return ${entity}List;
+        return result;
     }
 
     @Override
@@ -49,30 +49,23 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Override
     public ${entity} get(String id){
-         ${entity} ${entity} = getById(id);
-
-         return ${entity};
+         ${entity} result = getById(id);
+         return result;
     }
 
     @Override
-    public RestResponse<?> insert(${entity} ${entity}){
-        save(${entity});
-
-        return RestResponse.success(${entity});
+    public boolean insert(${entity} ${entity}){
+        return  save(${entity});
     }
 
     @Override
-    public RestResponse<?> update(${entity} ${entity}){
-        updateById(${entity});
-
-        return RestResponse.success();
+    public boolean update(${entity} ${entity}){
+       return  updateById(${entity});
     }
 
     @Override
-    public RestResponse<?> delete(String id){
-        removeById(id);
-
-        return RestResponse.success();
+    public boolean delete(String id){
+        return    removeById(id);
     }
 
 }
