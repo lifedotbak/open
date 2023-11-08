@@ -11,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2023-11-07
  */
 @Data
 @Schema(name = "SysDeptSearch对象", description = "部门表Search对象")
@@ -20,7 +20,6 @@ public class SysDeptSearch implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer page = 1;
-
     private Integer size = 10;
 
     @Schema(description = "部门id")

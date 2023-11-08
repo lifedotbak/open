@@ -108,13 +108,13 @@ public class ${table.controllerName}Test extends BaseTest {
         <#list table.fields as field>
             <#if !field.keyFlag && !field.capitalName?contains("Time")>
 
-        <#if field.propertyType == 'Integer'>
-            add.set${field.capitalName}(1);
-        </#if>
+                <#if field.propertyType == 'Integer'>
+                    add.set${field.capitalName}(1);
+                </#if>
 
-        <#if field.propertyType=='String'>
-            add.set${field.capitalName}("${field.propertyName}");
-        </#if>
+                <#if field.propertyType=='String'>
+                    add.set${field.capitalName}("${field.propertyName}");
+                </#if>
 
             </#if>
         </#list>
@@ -141,13 +141,13 @@ public class ${table.controllerName}Test extends BaseTest {
         <#list table.fields as field>
             <#if !field.capitalName?contains("Time")>
 
-        <#if field.propertyType == 'Integer'>
-                                    update.set${field.capitalName}(1);
-                                </#if>
+                <#if field.propertyType == 'Integer'>
+                    update.set${field.capitalName}(1);
+                </#if>
 
-                                <#if field.propertyType=='String'>
-                                    update.set${field.capitalName}("${field.propertyName}");
-                                </#if>
+                <#if field.propertyType=='String'>
+                    update.set${field.capitalName}("${field.propertyName}");
+                </#if>
 
             </#if>
         </#list>

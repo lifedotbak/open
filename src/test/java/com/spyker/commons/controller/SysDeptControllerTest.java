@@ -19,7 +19,7 @@ import org.springframework.util.MultiValueMap;
 @Slf4j
 public class SysDeptControllerTest extends BaseTest {
 
-    private static String URL = "/application/sys-dept";
+    private static String URL = "/commons/sys-dept";
 
     @Autowired
     private MockMvc mockMvc;

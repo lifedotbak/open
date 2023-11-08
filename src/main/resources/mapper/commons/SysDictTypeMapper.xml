@@ -28,23 +28,8 @@
     <select id="queryPage" resultType="com.spyker.commons.entity.SysDictType" parameterType="com.spyker.commons.search.SysDictTypeSearch">
         SELECT a.* FROM sys_dict_type a
         <where>
-            <if test="null != dictName ">
-                and a.dict_name = #{dictName}
-            </if>
-            <if test="null != dictType ">
-                and a.dict_type = #{dictType}
-            </if>
-            <if test="null != status ">
-                and a.status = #{status}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
+            <if test="null != search.dictName ">
+                and a.dict_name = #{search.dictName}
             </if>
         </where>
     </select>

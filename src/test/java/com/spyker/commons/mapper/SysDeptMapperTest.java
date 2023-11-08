@@ -1,8 +1,12 @@
 package com.spyker.commons.mapper;
 
-import com.spyker.BaseTest;
-import lombok.extern.slf4j.Slf4j;
+import com.spyker.commons.entity.SysDept;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.spyker.commons.mapper.SysDeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.spyker.BaseTest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
@@ -10,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * </p>
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2023-11-07
  */
 @Slf4j
 public class SysDeptMapperTest extends BaseTest {

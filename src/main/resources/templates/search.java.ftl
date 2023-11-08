@@ -58,7 +58,6 @@ private static final long serialVersionUID = 1L;
 	private Integer size = 10;
 
 <#-- ----------  BEGIN 字段循环遍历  ---------->
-<#-- ----------  BEGIN 字段循环遍历  ---------->
     <#list table.fields as field>
 
         <#if field.propertyName != "id" && field.propertyName != "modifyTime" && field.propertyName != "createTime" && field.propertyName != "updateTime">
@@ -67,5 +66,6 @@ private static final long serialVersionUID = 1L;
         </#if>
 
     </#list>
+<#-- ----------  END 字段循环遍历  ---------->
 
 }

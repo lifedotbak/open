@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * </p>
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2023-11-07
  */
 
 @Slf4j
@@ -83,8 +83,6 @@ public class SysDeptServiceTest extends BaseTest {
         update.setPhone("phone");
 
         update.setEmail("email");
-
-        update.setStatus("status");
 
         update.setDelFlag("delFlag");
 

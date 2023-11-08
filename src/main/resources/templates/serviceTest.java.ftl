@@ -48,17 +48,17 @@ public class ${table.serviceName}Test extends BaseTest {
         ${entity} add = new ${entity}();
 
         <#list table.fields as field>
-         <#if !field.keyFlag && !field.capitalName?contains("Time")>
+            <#if !field.keyFlag && !field.capitalName?contains("Time")>
 
-           <#if field.propertyType == 'Integer'>
-            add.set${field.capitalName}(1);
-           </#if>
+                <#if field.propertyType == 'Integer'>
+                    add.set${field.capitalName}(1);
+                </#if>
 
-           <#if field.propertyType == 'String'>
-            add.set${field.capitalName}("${field.propertyName}");
-           </#if>
+                <#if field.propertyType == 'String'>
+                    add.set${field.capitalName}("${field.propertyName}");
+                </#if>
 
-         </#if>
+            </#if>
         </#list>
 
         service.insert(add);
@@ -70,13 +70,13 @@ public class ${table.serviceName}Test extends BaseTest {
 
         <#list table.fields as field>
             <#if !field.capitalName?contains("Time")>
-              <#if field.propertyType == 'Integer'>
-                update.set${field.capitalName}(1);
-              </#if>
+                <#if field.propertyType == 'Integer'>
+                    update.set${field.capitalName}(1);
+                </#if>
 
-              <#if field.propertyType=='String'>
-                update.set${field.capitalName}("${field.propertyName}");
-              </#if>
+                <#if field.propertyType=='String'>
+                    update.set${field.capitalName}("${field.propertyName}");
+                </#if>
             </#if>
         </#list>
 
@@ -88,9 +88,15 @@ public class ${table.serviceName}Test extends BaseTest {
         ${entity}Search search = new ${entity}Search();
 
         <#list table.fields as field>
-         <#if !field.keyFlag && !field.capitalName?contains("Time")>
-          search.set${field.capitalName}("${field.propertyName}");
-         </#if>
+            <#if !field.keyFlag && !field.capitalName?contains("Time")>
+                <#if field.propertyType == 'Integer'>
+                    search.set${field.capitalName}(1);
+                </#if>
+
+                <#if field.propertyType=='String'>
+                    search.set${field.capitalName}("${field.propertyName}");
+                </#if>
+            </#if>
         </#list>
 
         service.query(search);

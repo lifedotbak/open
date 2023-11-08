@@ -36,9 +36,9 @@ import lombok.experimental.Accessors;
 @TableName("${schemaName}${table.name}")
 </#if>
 <#if springdoc>
-@Schema(name = "${entity}", description = "$!{table.comment}")
+@Schema(name = "${entity}", description = "${table.comment!}对象")
 <#elseif swagger>
-@ApiModel(value = "${entity}对象", description = "${table.comment!}")
+@ApiModel(value = "${entity}对象", description = "${table.comment!}对象")
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
@@ -97,6 +97,13 @@ public class ${entity} {
     <#-- 逻辑删除注解 -->
     <#if field.logicDeleteField>
     @TableLogic
+    </#if>
+    <#-- 更新插入填充 -->
+    <#if field.propertyName == "createBy" || field.propertyName == "createTime" >
+    @TableField(fill = FieldFill.INSERT)
+    </#if>
+    <#if field.propertyName == "updateBy" || field.propertyName == "updateTime" || field.propertyName == "modifyTime">
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>

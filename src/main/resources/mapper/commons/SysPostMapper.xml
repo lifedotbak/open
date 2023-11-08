@@ -31,26 +31,8 @@
     <select id="queryPage" resultType="com.spyker.commons.entity.SysPost" parameterType="com.spyker.commons.search.SysPostSearch">
         SELECT a.* FROM sys_post a
         <where>
-            <if test="null != postCode ">
-                and a.post_code = #{postCode}
-            </if>
-            <if test="null != postName ">
-                and a.post_name = #{postName}
-            </if>
-            <if test="null != postSort ">
-                and a.post_sort = #{postSort}
-            </if>
-            <if test="null != status ">
-                and a.status = #{status}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
+            <if test="null != search.postCode ">
+                and a.post_code = #{search.postCode}
             </if>
         </where>
     </select>

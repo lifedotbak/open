@@ -31,26 +31,8 @@
     <select id="queryPage" resultType="com.spyker.commons.entity.SysLogininfor" parameterType="com.spyker.commons.search.SysLogininforSearch">
         SELECT a.* FROM sys_logininfor a
         <where>
-            <if test="null != userName ">
-                and a.user_name = #{userName}
-            </if>
-            <if test="null != ipaddr ">
-                and a.ipaddr = #{ipaddr}
-            </if>
-            <if test="null != loginLocation ">
-                and a.login_location = #{loginLocation}
-            </if>
-            <if test="null != browser ">
-                and a.browser = #{browser}
-            </if>
-            <if test="null != os ">
-                and a.os = #{os}
-            </if>
-            <if test="null != status ">
-                and a.status = #{status}
-            </if>
-            <if test="null != msg ">
-                and a.msg = #{msg}
+            <if test="null != search.userName ">
+                and a.user_name = #{search.userName}
             </if>
         </where>
     </select>

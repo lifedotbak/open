@@ -25,13 +25,25 @@ public class CodeGenerator {
 
     private static final String basePackage = "com.spyker";
 
-    private static final String applicationName = "application";
+    //    private static final String applicationName = "application";
 
     private static final String mainSoure = "/src/main/java";
 
     private static final String testSoure = "/src/test/java";
 
     private static final String ymlSoure = "/src/main/resources/application-dev.yml";
+
+    public static void main(String[] args) {
+
+        String projectPath = System.getProperty("user.dir");
+
+        String applicationName = scanner("applicationName(应用名称)!");
+
+        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
+
+        generatorCode(tableNames, projectPath, applicationName);
+
+    }
 
     /**
      * <p>
@@ -51,17 +63,12 @@ public class CodeGenerator {
         throw new MybatisPlusException("请输入正确的" + tip + "!");
     }
 
-    public static void main(String[] args) {
-
-        String projectPath = System.getProperty("user.dir");
-
-        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
-
-        generatorCode(tableNames, projectPath);
-
+    // 处理 all 情况
+    private static List<String> getTables(String tables) {
+        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
     }
 
-    private static void generatorCode(List<String> tableNames, String projectPath) {
+    private static void generatorCode(List<String> tableNames, String projectPath, String applicationName) {
 
         String xmlPath = projectPath + "/src/main/resources/mapper/" + applicationName;
 
@@ -155,11 +162,6 @@ public class CodeGenerator {
 
         return result;
 
-    }
-
-    // 处理 all 情况
-    private static List<String> getTables(String tables) {
-        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
     }
 
     @SneakyThrows
