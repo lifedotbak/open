@@ -51,6 +51,7 @@ public class SysRole implements Serializable {
     private String delFlag;
 
     @Schema(description = "创建者")
+    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
@@ -58,9 +59,11 @@ public class SysRole implements Serializable {
     private Date createTime;
 
     @Schema(description = "更新者")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")
