@@ -45,21 +45,6 @@ public class FileUtils {
     }
 
     /**
-     * 创建临时文件
-     * 该文件会在 JVM 退出时，进行删除
-     *
-     * @param data 文件内容
-     * @return 文件
-     */
-    @SneakyThrows
-    public static File createTempFile(byte[] data) {
-        File file = createTempFile();
-        // 写入内容
-        cn.hutool.core.io.FileUtil.writeBytes(data, file);
-        return file;
-    }
-
-    /**
      * 创建临时文件，无内容
      * 该文件会在 JVM 退出时，进行删除
      *
@@ -71,6 +56,21 @@ public class FileUtils {
         File file = File.createTempFile(IdUtil.simpleUUID(), null);
         // 标记 JVM 退出时，自动删除
         file.deleteOnExit();
+        return file;
+    }
+
+    /**
+     * 创建临时文件
+     * 该文件会在 JVM 退出时，进行删除
+     *
+     * @param data 文件内容
+     * @return 文件
+     */
+    @SneakyThrows
+    public static File createTempFile(byte[] data) {
+        File file = createTempFile();
+        // 写入内容
+        cn.hutool.core.io.FileUtil.writeBytes(data, file);
         return file;
     }
 
@@ -219,6 +219,26 @@ public class FileUtils {
     }
 
     /**
+     * 获取图像后缀
+     *
+     * @param photoByte 图像数据
+     * @return 后缀名
+     */
+    public static String getFileExtendName(byte[] photoByte) {
+        String strFileExtendName = "jpg";
+        if ((photoByte[0] == 71) && (photoByte[1] == 73) && (photoByte[2] == 70) && (photoByte[3] == 56) && ((photoByte[4] == 55) || (photoByte[4] == 57)) && (photoByte[5] == 97)) {
+            strFileExtendName = "gif";
+        } else if ((photoByte[6] == 74) && (photoByte[7] == 70) && (photoByte[8] == 73) && (photoByte[9] == 70)) {
+            strFileExtendName = "jpg";
+        } else if ((photoByte[0] == 66) && (photoByte[1] == 77)) {
+            strFileExtendName = "bmp";
+        } else if ((photoByte[1] == 80) && (photoByte[2] == 78) && (photoByte[3] == 71)) {
+            strFileExtendName = "png";
+        }
+        return strFileExtendName;
+    }
+
+    /**
      * 删除文件
      *
      * @param filePath 文件
@@ -315,26 +335,6 @@ public class FileUtils {
     public static String percentEncode(String s) throws UnsupportedEncodingException {
         String encode = URLEncoder.encode(s, StandardCharsets.UTF_8);
         return encode.replaceAll("\\+", "%20");
-    }
-
-    /**
-     * 获取图像后缀
-     *
-     * @param photoByte 图像数据
-     * @return 后缀名
-     */
-    public static String getFileExtendName(byte[] photoByte) {
-        String strFileExtendName = "jpg";
-        if ((photoByte[0] == 71) && (photoByte[1] == 73) && (photoByte[2] == 70) && (photoByte[3] == 56) && ((photoByte[4] == 55) || (photoByte[4] == 57)) && (photoByte[5] == 97)) {
-            strFileExtendName = "gif";
-        } else if ((photoByte[6] == 74) && (photoByte[7] == 70) && (photoByte[8] == 73) && (photoByte[9] == 70)) {
-            strFileExtendName = "jpg";
-        } else if ((photoByte[0] == 66) && (photoByte[1] == 77)) {
-            strFileExtendName = "bmp";
-        } else if ((photoByte[1] == 80) && (photoByte[2] == 78) && (photoByte[3] == 71)) {
-            strFileExtendName = "png";
-        }
-        return strFileExtendName;
     }
 
     /**

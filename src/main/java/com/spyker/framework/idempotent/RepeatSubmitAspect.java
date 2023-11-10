@@ -35,10 +35,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RepeatSubmitAspect {
 
-    private static String REPEAT_SUBMIT_KEY = "repeat_submit:";
-
     private static final ThreadLocal<String> KEY_CACHE = new ThreadLocal<>();
-
+    private static String REPEAT_SUBMIT_KEY = "repeat_submit:";
     @Autowired
     private RedisService redisService;
 
@@ -74,39 +72,6 @@ public class RepeatSubmitAspect {
             }
             throw new ServiceException(message);
         }
-    }
-
-    /**
-     * 处理完请求后执行
-     *
-     * @param joinPoint 切点
-     */
-    @AfterReturning(pointcut = "@annotation(repeatSubmit)", returning = "jsonResult")
-    public void doAfterReturning(JoinPoint joinPoint, RepeatSubmit repeatSubmit, Object jsonResult) {
-        if (jsonResult instanceof RestResponse) {
-            try {
-                RestResponse<?> r = (RestResponse<?>) jsonResult;
-                // 成功则不删除redis数据 保证在有效时间内无法重复提交
-                if (r.getCode() == 200) {
-                    return;
-                }
-                redisService.deleteObject(KEY_CACHE.get());
-            } finally {
-                KEY_CACHE.remove();
-            }
-        }
-    }
-
-    /**
-     * 拦截异常操作
-     *
-     * @param joinPoint 切点
-     * @param e         异常
-     */
-    @AfterThrowing(value = "@annotation(repeatSubmit)", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, RepeatSubmit repeatSubmit, Exception e) {
-        redisService.deleteObject(KEY_CACHE.get());
-        KEY_CACHE.remove();
     }
 
     /**
@@ -152,6 +117,39 @@ public class RepeatSubmitAspect {
             }
         }
         return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse || o instanceof BindingResult;
+    }
+
+    /**
+     * 处理完请求后执行
+     *
+     * @param joinPoint 切点
+     */
+    @AfterReturning(pointcut = "@annotation(repeatSubmit)", returning = "jsonResult")
+    public void doAfterReturning(JoinPoint joinPoint, RepeatSubmit repeatSubmit, Object jsonResult) {
+        if (jsonResult instanceof RestResponse) {
+            try {
+                RestResponse<?> r = (RestResponse<?>) jsonResult;
+                // 成功则不删除redis数据 保证在有效时间内无法重复提交
+                if (r.getCode() == 200) {
+                    return;
+                }
+                redisService.deleteObject(KEY_CACHE.get());
+            } finally {
+                KEY_CACHE.remove();
+            }
+        }
+    }
+
+    /**
+     * 拦截异常操作
+     *
+     * @param joinPoint 切点
+     * @param e         异常
+     */
+    @AfterThrowing(value = "@annotation(repeatSubmit)", throwing = "e")
+    public void doAfterThrowing(JoinPoint joinPoint, RepeatSubmit repeatSubmit, Exception e) {
+        redisService.deleteObject(KEY_CACHE.get());
+        KEY_CACHE.remove();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.spyker.commons.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysJob;
@@ -68,6 +69,7 @@ public class SysJobController {
         return RestResponse.success(result);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody SysJob add) {
@@ -75,6 +77,7 @@ public class SysJobController {
         return sysJobService.insert(add);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody SysJob update) {
@@ -82,6 +85,7 @@ public class SysJobController {
         return sysJobService.update(update);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {

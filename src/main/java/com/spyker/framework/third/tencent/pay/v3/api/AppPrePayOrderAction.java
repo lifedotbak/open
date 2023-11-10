@@ -101,23 +101,6 @@ public class AppPrePayOrderAction {
         return null;
     }
 
-    private AppPrePayOrderResult signCallback(AppPrePayOrderResult appPrePayOrderResult) {
-
-        CallBackAuth appCallBackAuth = new CallBackAuth();
-
-        appCallBackAuth.setAppId(appPrePayOrderResult.getAppId());
-        appCallBackAuth.setNonceStr(appPrePayOrderResult.getNonceStr());
-
-        appCallBackAuth.setPrepayid(appPrePayOrderResult.getPrepayId());
-        appCallBackAuth.setTimeStamp(appPrePayOrderResult.getTimestamp());
-
-        SignCallBackUtil signCallBackUtils = new SignCallBackUtil(payConfig);
-        appPrePayOrderResult.setPaySign(signCallBackUtils.app(appCallBackAuth));
-
-        return appPrePayOrderResult;
-
-    }
-
     private RequestAuth create(PrePayOrder prePayOrder) {
 
         prePayOrder.setAppid(payConfig.getAppId());
@@ -141,6 +124,23 @@ public class AppPrePayOrderAction {
         prePayAuthorizationInfo.setTimestamp(timestamp);
 
         return prePayAuthorizationInfo;
+
+    }
+
+    private AppPrePayOrderResult signCallback(AppPrePayOrderResult appPrePayOrderResult) {
+
+        CallBackAuth appCallBackAuth = new CallBackAuth();
+
+        appCallBackAuth.setAppId(appPrePayOrderResult.getAppId());
+        appCallBackAuth.setNonceStr(appPrePayOrderResult.getNonceStr());
+
+        appCallBackAuth.setPrepayid(appPrePayOrderResult.getPrepayId());
+        appCallBackAuth.setTimeStamp(appPrePayOrderResult.getTimestamp());
+
+        SignCallBackUtil signCallBackUtils = new SignCallBackUtil(payConfig);
+        appPrePayOrderResult.setPaySign(signCallBackUtils.app(appCallBackAuth));
+
+        return appPrePayOrderResult;
 
     }
 }

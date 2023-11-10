@@ -158,27 +158,6 @@ public final class HTMLFilter {
         alwaysMakeTags = conf.containsKey("alwaysMakeTags") ? (Boolean) conf.get("alwaysMakeTags") : true;
     }
 
-    private void reset() {
-        vTagCounts.clear();
-    }
-
-    // ---------------------------------------------------------------
-    // my versions of some PHP library functions
-    public static String chr(final int decimal) {
-        return String.valueOf((char) decimal);
-    }
-
-    public static String htmlSpecialChars(final String s) {
-        String result = s;
-        result = regexReplace(P_AMP, "&amp;", result);
-        result = regexReplace(P_QUOTE, "&quot;", result);
-        result = regexReplace(P_LEFT_ARROW, "&lt;", result);
-        result = regexReplace(P_RIGHT_ARROW, "&gt;", result);
-        return result;
-    }
-
-    // ---------------------------------------------------------------
-
     /**
      * given a user submitted input String, filter out any invalid or restricted html.
      *
@@ -202,12 +181,8 @@ public final class HTMLFilter {
         return s;
     }
 
-    public boolean isAlwaysMakeTags() {
-        return alwaysMakeTags;
-    }
-
-    public boolean isStripComments() {
-        return stripComment;
+    private void reset() {
+        vTagCounts.clear();
     }
 
     private String escapeComments(final String s) {
@@ -221,6 +196,8 @@ public final class HTMLFilter {
 
         return buf.toString();
     }
+
+    // ---------------------------------------------------------------
 
     private String balanceHTML(String s) {
         if (alwaysMakeTags) {
@@ -287,6 +264,15 @@ public final class HTMLFilter {
             result = regexReplace(P_REMOVE_SELF_BLANKS.get(tag), "", result);
         }
 
+        return result;
+    }
+
+    public static String htmlSpecialChars(final String s) {
+        String result = s;
+        result = regexReplace(P_AMP, "&amp;", result);
+        result = regexReplace(P_QUOTE, "&quot;", result);
+        result = regexReplace(P_LEFT_ARROW, "&lt;", result);
+        result = regexReplace(P_RIGHT_ARROW, "&gt;", result);
         return result;
     }
 
@@ -383,6 +369,23 @@ public final class HTMLFilter {
         return "";
     }
 
+    private boolean allowed(final String name) {
+        return (vAllowed.isEmpty() || vAllowed.containsKey(name)) && !inArray(name, vDisallowed);
+    }
+
+    private static boolean inArray(final String s, final String[] array) {
+        for (String item : array) {
+            if (item != null && item.equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean allowedAttribute(final String name, final String paramName) {
+        return allowed(name) && (vAllowed.isEmpty() || vAllowed.get(name).contains(paramName));
+    }
+
     private String processParamProtocol(String s) {
         s = decodeEntities(s);
         final Matcher m = P_PROTOCOL.matcher(s);
@@ -436,6 +439,12 @@ public final class HTMLFilter {
         return s;
     }
 
+    // ---------------------------------------------------------------
+    // my versions of some PHP library functions
+    public static String chr(final int decimal) {
+        return String.valueOf((char) decimal);
+    }
+
     private String validateEntities(final String s) {
         StringBuffer buf = new StringBuffer();
 
@@ -449,6 +458,11 @@ public final class HTMLFilter {
         m.appendTail(buf);
 
         return encodeQuotes(buf.toString());
+    }
+
+    private String checkEntity(final String preamble, final String term) {
+
+        return ";".equals(term) && isValidEntity(preamble) ? '&' + preamble : "&amp;" + preamble;
     }
 
     private String encodeQuotes(final String s) {
@@ -469,29 +483,15 @@ public final class HTMLFilter {
         }
     }
 
-    private String checkEntity(final String preamble, final String term) {
-
-        return ";".equals(term) && isValidEntity(preamble) ? '&' + preamble : "&amp;" + preamble;
-    }
-
     private boolean isValidEntity(final String entity) {
         return inArray(entity, vAllowedEntities);
     }
 
-    private static boolean inArray(final String s, final String[] array) {
-        for (String item : array) {
-            if (item != null && item.equals(s)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean isAlwaysMakeTags() {
+        return alwaysMakeTags;
     }
 
-    private boolean allowed(final String name) {
-        return (vAllowed.isEmpty() || vAllowed.containsKey(name)) && !inArray(name, vDisallowed);
-    }
-
-    private boolean allowedAttribute(final String name, final String paramName) {
-        return allowed(name) && (vAllowed.isEmpty() || vAllowed.get(name).contains(paramName));
+    public boolean isStripComments() {
+        return stripComment;
     }
 }

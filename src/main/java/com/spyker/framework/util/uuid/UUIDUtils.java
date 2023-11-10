@@ -15,19 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUtils> {
     private static final long serialVersionUID = -1185015143654744140L;
-
-    /**
-     * SecureRandom 的单例
-     */
-    private static class Holder {
-        static final SecureRandom numberGenerator = getSecureRandom();
-    }
-
     /**
      * 此UUID的最高64有效位
      */
     private final long mostSigBits;
-
     /**
      * 此UUID的最低64有效位
      */
@@ -75,15 +66,6 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
     /**
      * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
      *
-     * @return 随机生成的 {@code UUID}
-     */
-    public static UUIDUtils randomUUID() {
-        return randomUUID(true);
-    }
-
-    /**
-     * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
-     *
      * @param isSecure 是否使用{@link SecureRandom}如果是可以获得更安全的随机码，否则可以得到更好的性能
      * @return 随机生成的 {@code UUID}
      */
@@ -97,6 +79,25 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
         randomBytes[8] &= 0x3f; /* clear variant */
         randomBytes[8] |= 0x80; /* set to IETF variant */
         return new UUIDUtils(randomBytes);
+    }
+
+    /**
+     * 获取随机数生成器对象<br>
+     * ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
+     *
+     * @return {@link ThreadLocalRandom}
+     */
+    public static ThreadLocalRandom getRandom() {
+        return ThreadLocalRandom.current();
+    }
+
+    /**
+     * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
+     *
+     * @return 随机生成的 {@code UUID}
+     */
+    public static UUIDUtils randomUUID() {
+        return randomUUID(true);
     }
 
     /**
@@ -150,6 +151,19 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
     }
 
     /**
+     * 获取{@link SecureRandom}，类提供加密的强随机数生成器 (RNG)
+     *
+     * @return {@link SecureRandom}
+     */
+    public static SecureRandom getSecureRandom() {
+        try {
+            return SecureRandom.getInstance("SHA1PRNG");
+        } catch (NoSuchAlgorithmException e) {
+            throw new UtilException(e);
+        }
+    }
+
+    /**
      * 返回此 UUID 的 128 位值中的最低有效 64 位。
      *
      * @return 此 UUID 的 128 位值中的最低有效 64 位。
@@ -165,24 +179,6 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
      */
     public long getMostSignificantBits() {
         return mostSigBits;
-    }
-
-    /**
-     * 与此 {@code UUID} 相关联的版本号. 版本号描述此 {@code UUID} 是如何生成的。
-     * <p>
-     * 版本号具有以下含意:
-     * <ul>
-     * <li>1 基于时间的 UUID
-     * <li>2 DCE 安全 UUID
-     * <li>3 基于名称的 UUID
-     * <li>4 随机生成的 UUID
-     * </ul>
-     *
-     * @return 此 {@code UUID} 的版本号
-     */
-    public int version() {
-        // Version is bits masked by 0x000000000000F000 in MS long
-        return (int) ((mostSigBits >> 12) & 0x0f);
     }
 
     /**
@@ -228,6 +224,33 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
     }
 
     /**
+     * 检查是否为time-based版本UUID
+     */
+    private void checkTimeBase() {
+        if (version() != 1) {
+            throw new UnsupportedOperationException("Not a time-based UUID");
+        }
+    }
+
+    /**
+     * 与此 {@code UUID} 相关联的版本号. 版本号描述此 {@code UUID} 是如何生成的。
+     * <p>
+     * 版本号具有以下含意:
+     * <ul>
+     * <li>1 基于时间的 UUID
+     * <li>2 DCE 安全 UUID
+     * <li>3 基于名称的 UUID
+     * <li>4 随机生成的 UUID
+     * </ul>
+     *
+     * @return 此 {@code UUID} 的版本号
+     */
+    public int version() {
+        // Version is bits masked by 0x000000000000F000 in MS long
+        return (int) ((mostSigBits >> 12) & 0x0f);
+    }
+
+    /**
      * 与此 UUID 相关联的时钟序列值。
      *
      * <p>
@@ -262,6 +285,36 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
     }
 
     /**
+     * 返回此 UUID 的哈希码。
+     *
+     * @return UUID 的哈希码值。
+     */
+    @Override
+    public int hashCode() {
+        long hilo = mostSigBits ^ leastSigBits;
+        return ((int) (hilo >> 32)) ^ (int) hilo;
+    }
+
+    /**
+     * 将此对象与指定对象比较。
+     * <p>
+     * 当且仅当参数不为 {@code null}、而是一个 UUID 对象、具有与此 UUID 相同的 varriant、包含相同的值（每一位均相同）时，结果才为 {@code true}。
+     *
+     * @param obj 要与之比较的对象
+     * @return 如果对象相同，则返回 {@code true}；否则返回 {@code false}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if ((null == obj) || (obj.getClass() != UUIDUtils.class)) {
+            return false;
+        }
+        UUIDUtils id = (UUIDUtils) obj;
+        return (mostSigBits == id.mostSigBits && leastSigBits == id.leastSigBits);
+    }
+
+    // Comparison Operations
+
+    /**
      * 返回此{@code UUID} 的字符串表现形式。
      *
      * <p>
@@ -289,6 +342,9 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
     public String toString() {
         return toString(false);
     }
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Private method start
 
     /**
      * 返回此{@code UUID} 的字符串表现形式。
@@ -343,34 +399,16 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
     }
 
     /**
-     * 返回此 UUID 的哈希码。
+     * 返回指定数字对应的hex值
      *
-     * @return UUID 的哈希码值。
+     * @param val    值
+     * @param digits 位
+     * @return 值
      */
-    @Override
-    public int hashCode() {
-        long hilo = mostSigBits ^ leastSigBits;
-        return ((int) (hilo >> 32)) ^ (int) hilo;
+    private static String digits(long val, int digits) {
+        long hi = 1L << (digits * 4);
+        return Long.toHexString(hi | (val & (hi - 1))).substring(1);
     }
-
-    /**
-     * 将此对象与指定对象比较。
-     * <p>
-     * 当且仅当参数不为 {@code null}、而是一个 UUID 对象、具有与此 UUID 相同的 varriant、包含相同的值（每一位均相同）时，结果才为 {@code true}。
-     *
-     * @param obj 要与之比较的对象
-     * @return 如果对象相同，则返回 {@code true}；否则返回 {@code false}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if ((null == obj) || (obj.getClass() != UUIDUtils.class)) {
-            return false;
-        }
-        UUIDUtils id = (UUIDUtils) obj;
-        return (mostSigBits == id.mostSigBits && leastSigBits == id.leastSigBits);
-    }
-
-    // Comparison Operations
 
     /**
      * 将此 UUID 与指定的 UUID 比较。
@@ -392,50 +430,10 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
                                         0))));
     }
 
-    // -------------------------------------------------------------------------------------------------------------------
-    // Private method start
-
     /**
-     * 返回指定数字对应的hex值
-     *
-     * @param val    值
-     * @param digits 位
-     * @return 值
+     * SecureRandom 的单例
      */
-    private static String digits(long val, int digits) {
-        long hi = 1L << (digits * 4);
-        return Long.toHexString(hi | (val & (hi - 1))).substring(1);
-    }
-
-    /**
-     * 检查是否为time-based版本UUID
-     */
-    private void checkTimeBase() {
-        if (version() != 1) {
-            throw new UnsupportedOperationException("Not a time-based UUID");
-        }
-    }
-
-    /**
-     * 获取{@link SecureRandom}，类提供加密的强随机数生成器 (RNG)
-     *
-     * @return {@link SecureRandom}
-     */
-    public static SecureRandom getSecureRandom() {
-        try {
-            return SecureRandom.getInstance("SHA1PRNG");
-        } catch (NoSuchAlgorithmException e) {
-            throw new UtilException(e);
-        }
-    }
-
-    /**
-     * 获取随机数生成器对象<br>
-     * ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
-     *
-     * @return {@link ThreadLocalRandom}
-     */
-    public static ThreadLocalRandom getRandom() {
-        return ThreadLocalRandom.current();
+    private static class Holder {
+        static final SecureRandom numberGenerator = getSecureRandom();
     }
 }

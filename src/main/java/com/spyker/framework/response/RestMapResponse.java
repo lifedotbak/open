@@ -70,15 +70,6 @@ public class RestMapResponse extends HashMap<String, Object> {
     }
 
     /**
-     * 返回成功数据
-     *
-     * @return 成功消息
-     */
-    public static RestMapResponse success(Object data) {
-        return RestMapResponse.success("SUCCESS", data);
-    }
-
-    /**
      * 返回成功消息
      *
      * @param msg 返回内容
@@ -97,6 +88,15 @@ public class RestMapResponse extends HashMap<String, Object> {
      */
     public static RestMapResponse success(String msg, Object data) {
         return new RestMapResponse(HttpStatus.SUCCESS, msg, data);
+    }
+
+    /**
+     * 返回成功数据
+     *
+     * @return 成功消息
+     */
+    public static RestMapResponse success(Object data) {
+        return RestMapResponse.success("SUCCESS", data);
     }
 
     /**

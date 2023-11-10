@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_logininfor")
-@Schema(name = "SysLogininfor", description = "$!{table.comment}")
+@Schema(name = "SysLogininfor", description = "系统访问记录")
 public class SysLogininfor implements Serializable {
 
     private static final long serialVersionUID = 1L;

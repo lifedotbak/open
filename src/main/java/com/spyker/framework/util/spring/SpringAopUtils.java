@@ -31,15 +31,15 @@ public class SpringAopUtils {
         return getCglibProxyTargetObject(proxy);
     }
 
-    private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
-        Object dynamicAdvisedInterceptor = BeanUtil.getFieldValue(proxy, "CGLIB$CALLBACK_0");
-        AdvisedSupport advisedSupport = (AdvisedSupport) BeanUtil.getFieldValue(dynamicAdvisedInterceptor, "advised");
-        return advisedSupport.getTargetSource().getTarget();
-    }
-
     private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
         AopProxy aopProxy = (AopProxy) BeanUtil.getFieldValue(proxy, "h");
         AdvisedSupport advisedSupport = (AdvisedSupport) BeanUtil.getFieldValue(aopProxy, "advised");
+        return advisedSupport.getTargetSource().getTarget();
+    }
+
+    private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
+        Object dynamicAdvisedInterceptor = BeanUtil.getFieldValue(proxy, "CGLIB$CALLBACK_0");
+        AdvisedSupport advisedSupport = (AdvisedSupport) BeanUtil.getFieldValue(dynamicAdvisedInterceptor, "advised");
         return advisedSupport.getTargetSource().getTarget();
     }
 

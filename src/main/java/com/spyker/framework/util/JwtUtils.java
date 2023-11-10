@@ -20,6 +20,22 @@ public final class JwtUtils {
 
     private static final String ISSUER = "spyker";
 
+    public static void main(String[] args) {
+        Map<String, String> par = new HashMap<>();
+        par.put("name", "xxxx");
+        par.put("value", "xxxx");
+
+        String token = genToken(par);
+
+        System.out.println(token);
+
+        Map<String, String> re = new HashMap<>();
+
+        re = verifyToken(token);
+
+        System.out.println(re);
+    }
+
     public static String genToken(Map<String, String> claims) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
@@ -45,21 +61,5 @@ public final class JwtUtils {
         Map<String, String> resultMap = new HashMap<String, String>();
         map.forEach((k, v) -> resultMap.put(k, v.asString()));
         return resultMap;
-    }
-
-    public static void main(String[] args) {
-        Map<String, String> par = new HashMap<>();
-        par.put("name", "xxxx");
-        par.put("value", "xxxx");
-
-        String token = genToken(par);
-
-        System.out.println(token);
-
-        Map<String, String> re = new HashMap<>();
-
-        re = verifyToken(token);
-
-        System.out.println(re);
     }
 }

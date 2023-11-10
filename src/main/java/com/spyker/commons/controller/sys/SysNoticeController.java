@@ -1,6 +1,7 @@
 package com.spyker.commons.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysNotice;
@@ -57,6 +58,7 @@ public class SysNoticeController {
         return RestResponse.success(result);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody SysNotice add) {
@@ -64,6 +66,7 @@ public class SysNoticeController {
         return sysNoticeService.insert(add);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody SysNotice update) {
@@ -71,6 +74,7 @@ public class SysNoticeController {
         return sysNoticeService.update(update);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {

@@ -73,25 +73,6 @@ public class SignRequestAuthUtil {
     }
 
     /**
-     * 计算签名值
-     *
-     * @param message
-     * @return
-     * @throws Exception
-     */
-    @SneakyThrows
-    private String sign(byte[] message) {
-
-        PrivateKey privateKey = PrivateKeyUtil.getPrivateKey(payConfig.getApiclientKeyPath());
-
-        Signature sign = Signature.getInstance("SHA256withRSA");
-        sign.initSign(privateKey);
-        sign.update(message);
-
-        return Base64.getEncoder().encodeToString(sign.sign());
-    }
-
-    /**
      * 构造的请求签名串
      *
      * @param method
@@ -112,6 +93,25 @@ public class SignRequestAuthUtil {
 
         return prePayAuth.getMethod() + "\n" + canonicalUrl.append("\n").append(prePayAuth.getTimestamp()).append("\n"
         ).append(prePayAuth.getNonce_str()).append("\n").append(prePayAuth.getBody()).append("\n");
+    }
+
+    /**
+     * 计算签名值
+     *
+     * @param message
+     * @return
+     * @throws Exception
+     */
+    @SneakyThrows
+    private String sign(byte[] message) {
+
+        PrivateKey privateKey = PrivateKeyUtil.getPrivateKey(payConfig.getApiclientKeyPath());
+
+        Signature sign = Signature.getInstance("SHA256withRSA");
+        sign.initSign(privateKey);
+        sign.update(message);
+
+        return Base64.getEncoder().encodeToString(sign.sign());
     }
 
 }

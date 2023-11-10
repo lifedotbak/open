@@ -50,18 +50,6 @@ public final class Base64Utils {
         lookUpBase64Alphabet[63] = '/';
     }
 
-    private static boolean isWhiteSpace(char octect) {
-        return (octect == 0x20 || octect == 0xd || octect == 0xa || octect == 0x9);
-    }
-
-    private static boolean isPad(char octect) {
-        return (octect == PAD);
-    }
-
-    private static boolean isData(char octect) {
-        return (octect < BASELENGTH && base64Alphabet[octect] != -1);
-    }
-
     /**
      * Encodes hex octects into Base64
      *
@@ -249,6 +237,18 @@ public final class Base64Utils {
             }
         }
         return newSize;
+    }
+
+    private static boolean isData(char octect) {
+        return (octect < BASELENGTH && base64Alphabet[octect] != -1);
+    }
+
+    private static boolean isPad(char octect) {
+        return (octect == PAD);
+    }
+
+    private static boolean isWhiteSpace(char octect) {
+        return (octect == 0x20 || octect == 0xd || octect == 0xa || octect == 0x9);
     }
 
     /**

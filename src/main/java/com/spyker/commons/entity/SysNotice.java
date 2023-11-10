@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_notice")
-@Schema(name = "SysNotice", description = "$!{table.comment}")
+@Schema(name = "SysNotice", description = "通知公告表")
 public class SysNotice implements Serializable {
 
     private static final long serialVersionUID = 1L;

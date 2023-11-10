@@ -1,5 +1,6 @@
 package com.spyker.commons.controller.common;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import com.google.code.kaptcha.Producer;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.CacheConstants;
@@ -45,6 +46,7 @@ public class CaptchaController {
     /**
      * 生成验证码
      */
+    @SaIgnore
     @PostMapping("/captchaImage")
     public RestMapResponse createCode() throws IOException {
 

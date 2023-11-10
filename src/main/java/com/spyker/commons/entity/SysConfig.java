@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_config")
-@Schema(name = "SysConfig", description = "$!{table.comment}")
+@Schema(name = "SysConfig", description = "参数配置表")
 public class SysConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;

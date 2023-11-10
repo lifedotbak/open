@@ -86,7 +86,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
                 StpUtil.login(sysUser.getUserId());
 
-                StpUtil.getSession().set(Constants.LOGIN_USER_KEY,sysUser.getUserId());
+                StpUtil.getSession().set(Constants.LOGIN_USER_KEY, sysUser.getUserId());
 
                 return true;
             }

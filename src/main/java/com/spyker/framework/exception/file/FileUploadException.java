@@ -18,13 +18,18 @@ public class FileUploadException extends Exception {
         this(null, null);
     }
 
+    public FileUploadException(String msg, Throwable cause) {
+        super(msg);
+        this.cause = cause;
+    }
+
     public FileUploadException(final String msg) {
         this(msg, null);
     }
 
-    public FileUploadException(String msg, Throwable cause) {
-        super(msg);
-        this.cause = cause;
+    @Override
+    public Throwable getCause() {
+        return cause;
     }
 
     @Override
@@ -43,10 +48,5 @@ public class FileUploadException extends Exception {
             writer.println("Caused by:");
             cause.printStackTrace(writer);
         }
-    }
-
-    @Override
-    public Throwable getCause() {
-        return cause;
     }
 }

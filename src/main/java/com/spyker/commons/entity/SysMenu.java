@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_menu")
-@Schema(name = "SysMenu", description = "$!{table.comment}")
+@Schema(name = "SysMenu", description = "菜单权限表")
 public class SysMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;

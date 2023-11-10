@@ -25,6 +25,17 @@ public class ParsePayNotifyAction {
     @Autowired
     private PayConfig payConfig;
 
+    public static void main(String[] args) {
+        String ss = "{\"mchid\":\"1627332486\",\"appid\":\"wx47bf42b9fe61c9bc\"," + "\"out_trade_no" +
+                "\":\"mMZfXCvvMvaom4NBW9QjbjqprNnbqVpR\"," + "\"transaction_id\":\"4200001455202207250295404576\"," + "\"trade_type\":\"JSAPI\"," + "\"trade_state\":\"SUCCESS\",\"trade_state_desc\":\"支付成功\"," + "\"bank_type\":\"CMB_CREDIT\"," + "\"attach\":\"\",\"success_time\":\"2022-07-25T09:41:49+08:00\"," + "\"payer\":{\"openid\":\"odsEZ5TbgEfZqfNMRWkWKuEMgkI0\"},\"amount\":{\"total\":1,\"payer_total\":1," + "\"currency\":\"CNY\",\"payer_currency\":\"CNY\"}}";
+
+        Gson gson = new Gson();
+        PayNotifyCiphertextParse result = gson.fromJson(ss, PayNotifyCiphertextParse.class);
+
+        System.out.println(result);
+
+    }
+
     @SneakyThrows
     public PayNotifyCiphertextParse parseResource(HttpServletRequest request) {
 
@@ -59,17 +70,6 @@ public class ParsePayNotifyAction {
         }
 
         return null;
-
-    }
-
-    public static void main(String[] args) {
-        String ss = "{\"mchid\":\"1627332486\",\"appid\":\"wx47bf42b9fe61c9bc\"," + "\"out_trade_no" +
-                "\":\"mMZfXCvvMvaom4NBW9QjbjqprNnbqVpR\"," + "\"transaction_id\":\"4200001455202207250295404576\"," + "\"trade_type\":\"JSAPI\"," + "\"trade_state\":\"SUCCESS\",\"trade_state_desc\":\"支付成功\"," + "\"bank_type\":\"CMB_CREDIT\"," + "\"attach\":\"\",\"success_time\":\"2022-07-25T09:41:49+08:00\"," + "\"payer\":{\"openid\":\"odsEZ5TbgEfZqfNMRWkWKuEMgkI0\"},\"amount\":{\"total\":1,\"payer_total\":1," + "\"currency\":\"CNY\",\"payer_currency\":\"CNY\"}}";
-
-        Gson gson = new Gson();
-        PayNotifyCiphertextParse result = gson.fromJson(ss, PayNotifyCiphertextParse.class);
-
-        System.out.println(result);
 
     }
 

@@ -24,16 +24,6 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
 
     private static ApplicationContext applicationContext;
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        SpringUtils.beanFactory = beanFactory;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringUtils.applicationContext = applicationContext;
-    }
-
     /**
      * 获取对象
      *
@@ -111,15 +101,6 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     }
 
     /**
-     * 获取当前的环境配置，无配置返回null
-     *
-     * @return 当前的环境配置
-     */
-    public static String[] getActiveProfiles() {
-        return applicationContext.getEnvironment().getActiveProfiles();
-    }
-
-    /**
      * 获取当前的环境配置，当有多个环境配置时，只获取第一个
      *
      * @return 当前的环境配置
@@ -130,6 +111,15 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
     }
 
     /**
+     * 获取当前的环境配置，无配置返回null
+     *
+     * @return 当前的环境配置
+     */
+    public static String[] getActiveProfiles() {
+        return applicationContext.getEnvironment().getActiveProfiles();
+    }
+
+    /**
      * 获取配置文件中的值
      *
      * @param key 配置文件的key
@@ -137,5 +127,15 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      */
     public static String getRequiredProperty(String key) {
         return applicationContext.getEnvironment().getRequiredProperty(key);
+    }
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        SpringUtils.beanFactory = beanFactory;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringUtils.applicationContext = applicationContext;
     }
 }

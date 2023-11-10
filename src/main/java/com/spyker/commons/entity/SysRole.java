@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_role")
-@Schema(name = "SysRole", description = "$!{table.comment}")
+@Schema(name = "SysRole", description = "角色信息表")
 public class SysRole implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -14,7 +14,7 @@ platform :
   # 获取ip地址开关
   addressEnabled : true
   # 验证码开关
-  captchaEnabled : true
+  captchaEnabled : open
   # 验证码类型 math 数字计算 char 字符验证
   captchaType : math
 
@@ -25,7 +25,12 @@ upload :
 # Spring配置
 spring :
   application :
-    name : #{server.name}
+    name : ${server.name}
+  #  boot :
+  #    admin :
+  #      client :
+  #        name : ${server.name}
+  #        url : http://127.0.0.1:8080/open
   jackson :
     time-zone : Asia/Shanghai
   #    date-format: yyyy-MM-dd HH:mm:ss
@@ -72,6 +77,15 @@ spring :
   resources :
     static-locations : classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
 
+
+############################### springboot admin config ###############################
+management :
+  endpoints :
+    shutdown :
+      enabled : true
+  jmx :
+    exposure :
+      include : health,info
 
 #=======================mybatis-plus日志输出==========================
 mybatis-plus :

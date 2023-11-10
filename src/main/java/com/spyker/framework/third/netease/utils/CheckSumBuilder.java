@@ -3,14 +3,12 @@ package com.spyker.framework.third.netease.utils;
 import java.security.MessageDigest;
 
 public class CheckSumBuilder {
+    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+            'e', 'f'};
+
     // 计算并获取CheckSum
     public static String getCheckSum(String appSecret, String nonce, String curTime) {
         return encode("sha1", appSecret + nonce + curTime);
-    }
-
-    // 计算并获取md5值
-    public static String getMD5(String requestBody) {
-        return encode("md5", requestBody);
     }
 
     private static String encode(String algorithm, String value) {
@@ -36,6 +34,8 @@ public class CheckSumBuilder {
         return buf.toString();
     }
 
-    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-            'e', 'f'};
+    // 计算并获取md5值
+    public static String getMD5(String requestBody) {
+        return encode("md5", requestBody);
+    }
 }

@@ -38,22 +38,6 @@ public class ShareCodeUtils {
 
     private static final int idLen = 6;
 
-    public static long getId() {
-        Random rand = new Random();
-        for (int i = 10; i > 1; i--) {
-            int index = rand.nextInt(i);
-            int tmp = array[index];
-            array[index] = array[i - 1];
-            array[i - 1] = tmp;
-        }
-        long result = 0;
-        for (int i = 0; i < idLen; i++) {
-            result = result * 10 + array[i];
-        }
-
-        return result;
-    }
-
     /**
      * 根据ID生成六位随机码
      *
@@ -84,6 +68,22 @@ public class ShareCodeUtils {
             str += sb.toString();
         }
         return str;
+    }
+
+    public static long getId() {
+        Random rand = new Random();
+        for (int i = 10; i > 1; i--) {
+            int index = rand.nextInt(i);
+            int tmp = array[index];
+            array[index] = array[i - 1];
+            array[i - 1] = tmp;
+        }
+        long result = 0;
+        for (int i = 0; i < idLen; i++) {
+            result = result * 10 + array[i];
+        }
+
+        return result;
     }
 
     public static long codeToId(String code) {

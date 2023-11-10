@@ -9,6 +9,11 @@ public final class GenerateSecurityCodeUtils {
     private static final String MIX_BASE_STRING = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String BASE_STRING = "0123456789";
 
+    public static String create() {
+
+        return create(DEFAULT_LENGTH);
+    }
+
     public static String create(int length) {
 
         Random random = new Random();
@@ -20,9 +25,10 @@ public final class GenerateSecurityCodeUtils {
         return sb.toString();
     }
 
-    public static String create() {
+    public static String createMix() {
 
-        return create(DEFAULT_LENGTH);
+        return createMix(DEFAULT_LENGTH);
+
     }
 
     public static String createMix(int length) {
@@ -34,12 +40,6 @@ public final class GenerateSecurityCodeUtils {
             sb.append(MIX_BASE_STRING.charAt(number));
         }
         return sb.toString();
-    }
-
-    public static String createMix() {
-
-        return createMix(DEFAULT_LENGTH);
-
     }
 
 }

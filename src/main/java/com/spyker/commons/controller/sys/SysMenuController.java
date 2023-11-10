@@ -70,6 +70,7 @@ public class SysMenuController {
         return RestResponse.success(result);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody SysMenu add) {
@@ -77,6 +78,7 @@ public class SysMenuController {
         return sysMenuService.insert(add);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody SysMenu update) {
@@ -84,6 +86,7 @@ public class SysMenuController {
         return sysMenuService.update(update);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {

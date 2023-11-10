@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_oper_log")
-@Schema(name = "SysOperLog", description = "$!{table.comment}")
+@Schema(name = "SysOperLog", description = "操作日志记录")
 public class SysOperLog implements Serializable {
 
     private static final long serialVersionUID = 1L;

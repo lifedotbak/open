@@ -14,42 +14,9 @@ import java.util.Date;
 @Slf4j
 public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
-    public enum Format {
-
-        YYYYMMDD("yyyyMMdd"),
-        YYYYMMDDE("yyyyMMdd E"),
-        HHMM("HH:mm"),
-        HHMMSS("HH:mm:ss"),
-        YYYY_P_MM_P_DD("yyyy.MM.dd"),
-        YYYY_P_MM_P_DD_HHMM("yyyy.MM.dd HH:mm"),
-        YYYYMMDDHHMMSS("yyyyMMddHHmmss"),
-        YYYYMMDDHHMM("yyyyMMddHHmm"),
-        YYYY_MM_DD("yyyy-MM-dd"),
-        YYYY_Y_MM_M_DD_D("yyyy年MM月dd日"),
-        YYYYMM("yyyyMM"),
-        YYYY_MM("yyyy-MM"),
-        YYYY_MM_("yyyy/MM"),
-        YYYY_MM_CN("yyyy年MM月"),
-        MM_DD_CN("MM月dd日"),
-        MM_DD_HH_MM_CN("MM月dd日 HH:mm"),
-        YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),
-        YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),
-        YYYY_MM_DD_CN("yyyy年MM月dd日"),
-        YYYY_MM_DD_HH_MM_CN("yyyy年MM月dd日 HH:mm"),
-        YYYY_MM_DD_HH_MM_SS_CN("yyyy年MM月dd日 HH:mm:ss");
-
-        private final String format;
-
-        Format(String format) {
-            this.format = format;
-        }
-
-        public String getFormat() {
-            return format;
-        }
-
-    }
-
+    private static final String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM"
+            , "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM", "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss"
+            , "yyyy.MM.dd HH:mm", "yyyy.MM"};
     public static String YYYY = "yyyy";
 
     public static String YYYY_MM = "yyyy-MM";
@@ -59,10 +26,6 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
     public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
-
-    private static final String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM"
-            , "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM", "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss"
-            , "yyyy.MM.dd HH:mm", "yyyy.MM"};
 
     public static Date parseDate(Object str) {
         if (str == null) {
@@ -93,6 +56,14 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return dateTimeNow(YYYY_MM_DD);
     }
 
+    public static String dateTimeNow(final String format) {
+        return parseDateToStr(format, new Date());
+    }
+
+    public static String parseDateToStr(final String format, final Date date) {
+        return new SimpleDateFormat(format).format(date);
+    }
+
     public static String getTime() {
         return dateTimeNow(YYYY_MM_DD_HH_MM_SS);
     }
@@ -101,16 +72,8 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return dateTimeNow(YYYYMMDDHHMMSS);
     }
 
-    public static String dateTimeNow(final String format) {
-        return parseDateToStr(format, new Date());
-    }
-
     public static String dateTime(final Date date) {
         return parseDateToStr(YYYY_MM_DD, date);
-    }
-
-    public static String parseDateToStr(final String format, final Date date) {
-        return new SimpleDateFormat(format).format(date);
     }
 
     public static Date dateTime(final String format, final String ts) {
@@ -229,32 +192,6 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return sdf.format(date);
     }
 
-    public static Date format2Date(String dateValue, Format format) {
-
-        if (null == dateValue || dateValue.trim().length() < 1) {
-            return null;
-        }
-
-        try {
-            SimpleDateFormat dd = new SimpleDateFormat(format.getFormat());
-            return dd.parse(dateValue);
-        } catch (Exception e) {
-
-            log.error("format2Date error", e.getMessage());
-
-            return null;
-        }
-
-    }
-
-    public static Date addDays(Date date, int amount) {
-        return org.apache.commons.lang3.time.DateUtils.addDays(date, amount);
-    }
-
-    public static Date addMonths(Date date, int amount) {
-        return org.apache.commons.lang3.time.DateUtils.addMonths(date, amount);
-    }
-
     public static Date addYears(Date date, int amount) {
         return org.apache.commons.lang3.time.DateUtils.addYears(date, amount);
     }
@@ -282,6 +219,12 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return new Date();
     }
 
+    public static String getNextYear(Date date) {
+        Date nextYear = org.apache.commons.lang3.time.DateUtils.addYears(date, 1);
+
+        return getYear(nextYear);
+    }
+
     public static String getYear(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -291,14 +234,12 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return year + "";
     }
 
-    public static String getNextYear(Date date) {
-        Date nextYear = org.apache.commons.lang3.time.DateUtils.addYears(date, 1);
-
-        return getYear(nextYear);
-    }
-
     public static Date getPreviousMonth(Date date) {
         return addMonths(date, -1);
+    }
+
+    public static Date addMonths(Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addMonths(date, amount);
     }
 
     public static Date getNextMonth(Date date) {
@@ -357,29 +298,6 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return calendar.get(Calendar.SECOND);
     }
 
-    public static Date clearMs(Date date) {
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-
-        return cal.getTime();
-    }
-
-    public static Date clearHms(Date date) {
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-
-        return cal.getTime();
-    }
-
     public static Date clearSec(Date date) {
 
         Calendar cal = Calendar.getInstance();
@@ -390,14 +308,6 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return cal.getTime();
     }
 
-    public static int dayOfWeek(Date date) {
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-
-        return cal.get(Calendar.DAY_OF_WEEK) - 1;
-    }
-
     public static Date startOfWeek(Date date) {
         int dayOfWeek = dayOfWeek(date);
 
@@ -406,6 +316,18 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         }
 
         return addDays(date, dayOfWeek * -1 + 1);
+    }
+
+    public static int dayOfWeek(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        return cal.get(Calendar.DAY_OF_WEEK) - 1;
+    }
+
+    public static Date addDays(Date date, int amount) {
+        return org.apache.commons.lang3.time.DateUtils.addDays(date, amount);
     }
 
     public static Date endOfWeek(Date date) {
@@ -431,6 +353,17 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return (end.getTime() - start.getTime()) / (1000 * 3600);
     }
 
+    public static Date clearMs(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        return cal.getTime();
+    }
+
     public static int daysBetween(Date start, Date end) {
 
         start = clearHms(start);
@@ -439,6 +372,18 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         Long days = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
 
         return days.intValue();
+    }
+
+    public static Date clearHms(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        return cal.getTime();
     }
 
     public static int dayNumberOfMonth(Date date) {
@@ -491,18 +436,9 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return calendar.getTime();
     }
 
-    public static Date startOfMonth(Date date) {
+    public static Date nowMonthEnd() {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-
-        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
-        calendar.set(Calendar.DATE, 1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-
-        return calendar.getTime();
+        return endOfMonth(getCurrentDate());
     }
 
     public static Date endOfMonth(Date date) {
@@ -518,15 +454,24 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return addDays(calendar.getTime(), -1);
     }
 
-    public static Date nowMonthEnd() {
-
-        return endOfMonth(getCurrentDate());
-    }
-
     public static Date nowMonthStart() {
 
         return startOfMonth(getCurrentDate());
 
+    }
+
+    public static Date startOfMonth(Date date) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        return calendar.getTime();
     }
 
     public static Date nowYearStart() {
@@ -615,6 +560,60 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
                         DateUtils.Format.YYYY_MM_DD_HH_MM);
 
         return startYMDHM.after(endYMDHM);
+
+    }
+
+    public static Date format2Date(String dateValue, Format format) {
+
+        if (null == dateValue || dateValue.trim().length() < 1) {
+            return null;
+        }
+
+        try {
+            SimpleDateFormat dd = new SimpleDateFormat(format.getFormat());
+            return dd.parse(dateValue);
+        } catch (Exception e) {
+
+            log.error("format2Date error", e.getMessage());
+
+            return null;
+        }
+
+    }
+
+    public enum Format {
+
+        YYYYMMDD("yyyyMMdd"),
+        YYYYMMDDE("yyyyMMdd E"),
+        HHMM("HH:mm"),
+        HHMMSS("HH:mm:ss"),
+        YYYY_P_MM_P_DD("yyyy.MM.dd"),
+        YYYY_P_MM_P_DD_HHMM("yyyy.MM.dd HH:mm"),
+        YYYYMMDDHHMMSS("yyyyMMddHHmmss"),
+        YYYYMMDDHHMM("yyyyMMddHHmm"),
+        YYYY_MM_DD("yyyy-MM-dd"),
+        YYYY_Y_MM_M_DD_D("yyyy年MM月dd日"),
+        YYYYMM("yyyyMM"),
+        YYYY_MM("yyyy-MM"),
+        YYYY_MM_("yyyy/MM"),
+        YYYY_MM_CN("yyyy年MM月"),
+        MM_DD_CN("MM月dd日"),
+        MM_DD_HH_MM_CN("MM月dd日 HH:mm"),
+        YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),
+        YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),
+        YYYY_MM_DD_CN("yyyy年MM月dd日"),
+        YYYY_MM_DD_HH_MM_CN("yyyy年MM月dd日 HH:mm"),
+        YYYY_MM_DD_HH_MM_SS_CN("yyyy年MM月dd日 HH:mm:ss");
+
+        private final String format;
+
+        Format(String format) {
+            this.format = format;
+        }
+
+        public String getFormat() {
+            return format;
+        }
 
     }
 

@@ -31,20 +31,6 @@ public class BaseController {
     }
 
     /**
-     * 返回成功
-     */
-    public RestMapResponse success() {
-        return RestMapResponse.success();
-    }
-
-    /**
-     * 返回失败消息
-     */
-    public RestMapResponse error() {
-        return RestMapResponse.error();
-    }
-
-    /**
      * 返回成功消息
      */
     public RestMapResponse success(String message) {
@@ -90,6 +76,20 @@ public class BaseController {
      */
     protected RestMapResponse toAjax(boolean result) {
         return result ? success() : error();
+    }
+
+    /**
+     * 返回成功
+     */
+    public RestMapResponse success() {
+        return RestMapResponse.success();
+    }
+
+    /**
+     * 返回失败消息
+     */
+    public RestMapResponse error() {
+        return RestMapResponse.error();
     }
 
     /**

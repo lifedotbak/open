@@ -40,37 +40,6 @@ public class SignCallBackUtil {
 
     }
 
-    @SneakyThrows
-    public String jsapi(CallBackAuth callBackAuth) {
-
-        String message = buildJsapiMessage(callBackAuth);
-
-        log.info("signJsapi message============>{}", message);
-
-        String signature = sign(message.getBytes(StandardCharsets.UTF_8));
-
-        log.info("signJsapi signature============>{}", signature);
-
-        return signature;
-
-    }
-
-    /**
-     * 构造的请求签名串
-     *
-     * @param method
-     * @param url
-     * @param timestamp
-     * @param nonceStr
-     * @param body
-     * @return
-     */
-    private String buildJsapiMessage(CallBackAuth callBackAuth) {
-
-        return callBackAuth.getAppId() + "\n" + callBackAuth.getTimeStamp() + "\n" + callBackAuth.getNonceStr() + "\n"
-                + callBackAuth.getPackageValue() + "\n";
-    }
-
     /**
      * 构造的请求签名串
      *
@@ -104,6 +73,37 @@ public class SignCallBackUtil {
         sign.update(message);
 
         return Base64.getEncoder().encodeToString(sign.sign());
+    }
+
+    @SneakyThrows
+    public String jsapi(CallBackAuth callBackAuth) {
+
+        String message = buildJsapiMessage(callBackAuth);
+
+        log.info("signJsapi message============>{}", message);
+
+        String signature = sign(message.getBytes(StandardCharsets.UTF_8));
+
+        log.info("signJsapi signature============>{}", signature);
+
+        return signature;
+
+    }
+
+    /**
+     * 构造的请求签名串
+     *
+     * @param method
+     * @param url
+     * @param timestamp
+     * @param nonceStr
+     * @param body
+     * @return
+     */
+    private String buildJsapiMessage(CallBackAuth callBackAuth) {
+
+        return callBackAuth.getAppId() + "\n" + callBackAuth.getTimeStamp() + "\n" + callBackAuth.getNonceStr() + "\n"
+                + callBackAuth.getPackageValue() + "\n";
     }
 
 }

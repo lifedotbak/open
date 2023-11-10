@@ -29,14 +29,6 @@ public class PlatformConfig {
      */
     private static String captchaType;
 
-    public static String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        PlatformConfig.profile = profile;
-    }
-
     public static boolean isAddressEnabled() {
         return addressEnabled;
     }
@@ -66,6 +58,14 @@ public class PlatformConfig {
      */
     public static String getImportPath() {
         return getProfile() + "/import";
+    }
+
+    public static String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        PlatformConfig.profile = profile;
     }
 
     /**

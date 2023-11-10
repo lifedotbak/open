@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_user")
-@Schema(name = "SysUser", description = "$!{table.comment}")
+@Schema(name = "SysUser", description = "用户信息表")
 public class SysUser implements Serializable {
 
     @Schema(description = "用户ID")

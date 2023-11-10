@@ -15,6 +15,12 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 @Slf4j
 public final class Pinyin4jUtils {
 
+    public static String convertTolowerCase(String chines) {
+
+        return convert(chines).toLowerCase();
+
+    }
+
     public static String convert(String chines) {
 
         if (null == chines || chines.trim().length() < 1) {
@@ -45,12 +51,6 @@ public final class Pinyin4jUtils {
             log.error("error -->{}", e);
             return "";
         }
-
-    }
-
-    public static String convertTolowerCase(String chines) {
-
-        return convert(chines).toLowerCase();
 
     }
 

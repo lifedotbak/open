@@ -1,5 +1,6 @@
 package com.spyker.commons.controller.common;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.config.ServerConfig;
 import com.spyker.framework.constant.Constants;
@@ -33,12 +34,12 @@ import java.util.List;
 @RequestMapping("/common/file")
 @RequiredArgsConstructor
 @Slf4j
+@SaCheckLogin
 public class FileController {
 
+    private static final String FILE_DELIMETER = ",";
     @Autowired
     private ServerConfig serverConfig;
-
-    private static final String FILE_DELIMETER = ",";
 
     /**
      * 通用下载请求

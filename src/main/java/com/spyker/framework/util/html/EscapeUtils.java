@@ -25,6 +25,17 @@ public class EscapeUtils {
         TEXT['>'] = "&#62;".toCharArray(); // 大于号
     }
 
+    public static void main(String[] args) {
+        String html = "<script>alert(1);</script>";
+        String escape = EscapeUtils.escape(html);
+        // String html = "<scr<script>ipt>alert(\"XSS\")</scr<script>ipt>";
+        // String html = "<123";
+        // String html = "123>";
+        System.out.println("clean: " + EscapeUtils.clean(html));
+        System.out.println("escape: " + escape);
+        System.out.println("unescape: " + EscapeUtils.unescape(escape));
+    }
+
     /**
      * 转义文本中的HTML字符为安全的字符
      *
@@ -36,16 +47,6 @@ public class EscapeUtils {
     }
 
     /**
-     * 还原被转义的HTML特殊字符
-     *
-     * @param content 包含转义符的HTML内容
-     * @return 转换后的字符串
-     */
-    public static String unescape(String content) {
-        return decode(content);
-    }
-
-    /**
      * 清除所有HTML标签，但是不删除标签内的内容
      *
      * @param content 文本
@@ -53,6 +54,16 @@ public class EscapeUtils {
      */
     public static String clean(String content) {
         return new HTMLFilter().filter(content);
+    }
+
+    /**
+     * 还原被转义的HTML特殊字符
+     *
+     * @param content 包含转义符的HTML内容
+     * @return 转换后的字符串
+     */
+    public static String unescape(String content) {
+        return decode(content);
     }
 
     /**
@@ -125,16 +136,5 @@ public class EscapeUtils {
             }
         }
         return tmp.toString();
-    }
-
-    public static void main(String[] args) {
-        String html = "<script>alert(1);</script>";
-        String escape = EscapeUtils.escape(html);
-        // String html = "<scr<script>ipt>alert(\"XSS\")</scr<script>ipt>";
-        // String html = "<123";
-        // String html = "123>";
-        System.out.println("clean: " + EscapeUtils.clean(html));
-        System.out.println("escape: " + escape);
-        System.out.println("unescape: " + EscapeUtils.unescape(escape));
     }
 }

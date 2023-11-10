@@ -12,6 +12,17 @@ public class RestResponse<T> {
     private String msg;
     private T result;
 
+    private RestResponse(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    private RestResponse(int code, String msg, T result) {
+        this.code = code;
+        this.msg = msg;
+        this.result = result;
+    }
+
     public static <T> RestResponse<T> success(T result) {
 
         RestResponse<T> response = new RestResponse<>(200, "success", result);
@@ -29,17 +40,6 @@ public class RestResponse<T> {
 
     public static <T> RestResponse<T> error(Integer code, String msg) {
         return new RestResponse<>(code, msg);
-    }
-
-    private RestResponse(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
-    private RestResponse(int code, String msg, T result) {
-        this.code = code;
-        this.msg = msg;
-        this.result = result;
     }
 
 }

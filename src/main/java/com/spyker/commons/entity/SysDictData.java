@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_dict_data")
-@Schema(name = "SysDictData", description = "$!{table.comment}")
+@Schema(name = "SysDictData", description = "字典数据表")
 public class SysDictData implements Serializable {
 
     private static final long serialVersionUID = 1L;

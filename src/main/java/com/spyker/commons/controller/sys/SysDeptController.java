@@ -1,6 +1,7 @@
 package com.spyker.commons.controller.sys;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysDept;
@@ -68,6 +69,7 @@ public class SysDeptController {
         return RestResponse.success(result);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
     public RestResponse<?> add(@RequestBody SysDept add) {
@@ -75,6 +77,7 @@ public class SysDeptController {
         return sysDeptService.insert(add);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
     public RestResponse<?> update(@RequestBody SysDept update) {
@@ -82,6 +85,7 @@ public class SysDeptController {
         return sysDeptService.update(update);
     }
 
+    @SaCheckRole("admin")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
     public RestResponse<?> delete(@RequestParam String id) {
