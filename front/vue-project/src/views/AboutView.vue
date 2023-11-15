@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>相关信息页面</h1>
   </div>
 </template>
 
