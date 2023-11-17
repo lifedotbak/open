@@ -65,8 +65,8 @@ spring :
   #数据源
   datasource :
     druid :
-      username : root
-      password : '123456'
+      username : xkeyjj9g
+      password : 'xyzAvx983357mgal'
       url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       driver-class-name : com.mysql.cj.jdbc.Driver
       minIdle : 3
