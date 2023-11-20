@@ -16,3 +16,5 @@ buildNumber.properties
 /open.iml
 /open.ipr
 /open.iws
+/front/vue-project/.vscode
+/front/vue-project/node_modules

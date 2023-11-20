@@ -66,6 +66,30 @@ const classObject = reactive({
 const activeClass = ref('active')
 const errorClass = ref('text-danger')
 
+const awesome = ref(true)
+
+const type = ref('c')
+
+const ok = ref('c')
+
+
+const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+
+const myObject = reactive({
+    title: 'How to do lists in Vue',
+    author: 'Jane Doe',
+    publishedAt: '2016-04-10'
+})
+
+
+function warn(message, event) {
+    // 这里可以访问原生事件
+    if (event) {
+        event.preventDefault()
+    }
+    alert(message)
+}
+
 
 </script>
 
@@ -73,9 +97,31 @@ const errorClass = ref('text-danger')
     <div>
 
 
+
+
+        <li v-for="n in 10" :key="n">{{ n }}</li>
+
+        <ul>
+            <li v-for="book in myObject" :key="book">
+                {{ book }}
+            </li>
+        </ul>
+
+        <li v-for="item in items" :key="item.message">
+            {{ item.message }}
+        </li>
+
+        <h1 v-show="ok">Hello!</h1>
+
         <div class="login">
             <h1>测试页面</h1>
         </div>
+
+        <button @click="awesome = !awesome">Toggle</button>
+        <button @click="warn('Form cannot be submitted yet.', $event)">xxx</button>
+
+        <h1 v-if="awesome">Vue is awesome!</h1>
+        <h1 v-else>Oh no 😢</h1>
 
         <div :class="{ active: isActive }">======>active: isActive is true</div>
         <div class="static" :class="{ active: isActive, 'text-danger': hasError }">======>active: isActive is
@@ -89,6 +135,20 @@ const errorClass = ref('text-danger')
         <span>{{ publishedBooksMessage }}</span><br>
         <span>{{ now }}</span><br>
         <span>{{ fullName }}</span><br>
+
+
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type === 'C'">
+            C
+        </div>
+        <div v-else>
+            Not A/B/C
+        </div>
 
 
         <div id="testApp">
