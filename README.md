@@ -34,6 +34,8 @@
   - 引入therapi-runtime-javadoc,javadoc生成swagger
   - 引入alibaba easyexcel完成excel生成
   - satoken进行权限相关认证
+  
+  - 前后端分离，前端采用vue3.0
 
 ## 2. 支持平台
   - unix

@@ -20,8 +20,8 @@ public class AliPushUtils {
 
         PushMessage pushMessage = new PushMessage();
 
-        pushMessage.setAccessKeyId("LTAI43KEvXvlpaEl");
-        pushMessage.setAccessKeySecret("wtgVSBWUi9EvO0qqMxZWgoaZ0QpoTW");
+        pushMessage.setAccessKeyId("xxx");
+        pushMessage.setAccessKeySecret("xxx");
         pushMessage.setSignName("初集健康");
         pushMessage.setAndroidKey(333383909);
         pushMessage.setIosKey(333383919);

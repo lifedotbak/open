@@ -25,8 +25,7 @@ public class AuthCode2SessionUtils {
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + jscode2sessionParameter.getAppId() +
                 "&secret=" + jscode2sessionParameter.getAppSecret() + "&js_code=" + jscode2sessionParameter.getJscode() + "&grant_type=authorization_code";
 
-        //		String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wxadec7f25753bcc26&secret=60d00f7edaad7c745a27f3e6a9f32693&js_code="
-        //				+ jscode + "&grant_type=authorization_code";
+
         String resultValue = "";
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
