@@ -36,6 +36,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.spyker.framework.response.RestResponse;
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import com.spyker.framework.enums.BusinessType;
+import com.spyker.framework.log.Log;
 
 
 /**
@@ -46,10 +48,10 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 * @author ${author}
 * @since ${date}
 */
+@Tag(name = "${table.comment!}", description = "${table.comment!}")
 @SaCheckLogin
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "${table.comment!}", description = "${table.comment!}")
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
 @Slf4j
 <#if superControllerClass??>
@@ -62,6 +64,7 @@ public class ${table.controllerName} {
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("list")
+    @Log(title = "${table.comment!}--列表", businessType = BusinessType.QUERY)
     public RestResponse<List<${entity}>> list(${entity}Search search) {
 
         List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
@@ -72,6 +75,7 @@ public class ${table.controllerName} {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
+    @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
     public RestResponse<IPage<${entity}>> list_page(${entity}Search search) {
         int current = 1;
         int size = 10;
@@ -91,6 +95,7 @@ public class ${table.controllerName} {
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("detail")
+    @Log(title = "${table.comment!}--详情", businessType = BusinessType.QUERY)
     public RestResponse<${entity}> detail(@RequestParam String id) {
       	${entity} result = ${table.serviceName?uncap_first}.get(id);
 
@@ -100,6 +105,7 @@ public class ${table.controllerName} {
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
+    @Log(title = "${table.comment!}--新增", businessType = BusinessType.INSERT)
     public RestResponse<?> add(@RequestBody ${entity} add) {
 
          ${table.serviceName?uncap_first}.insert(add);
@@ -110,6 +116,7 @@ public class ${table.controllerName} {
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
+    @Log(title = "${table.comment!}--修改", businessType = BusinessType.UPDATE)
     public RestResponse<?> update(@RequestBody ${entity} update) {
 
          ${table.serviceName?uncap_first}.update(update);
@@ -120,6 +127,7 @@ public class ${table.controllerName} {
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
+    @Log(title = "${table.comment!}--删除", businessType = BusinessType.DELETE)
     public RestResponse<?> delete(@RequestParam String id) {
 
          ${table.serviceName?uncap_first}.delete(id);
