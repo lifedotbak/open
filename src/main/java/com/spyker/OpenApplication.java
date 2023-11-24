@@ -7,7 +7,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
+ *
+ * 默认swagger访问地址
  * http://127.0.0.1:8080/open/swagger-ui/index.html
+ *
+ * knife4j优化后访问地址
+ * http://127.0.0.1:8080/open/doc.html
+ *
  */
 @SpringBootApplication
 @MapperScan({"com.spyker.*.mapper"})

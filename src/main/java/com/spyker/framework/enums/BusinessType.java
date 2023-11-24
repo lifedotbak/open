@@ -47,6 +47,11 @@ public enum BusinessType {
     FORCE,
 
     /**
+     * 强退
+     */
+    QUERY,
+
+    /**
      * 清空数据
      */
     CLEAN

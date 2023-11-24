@@ -6,13 +6,13 @@ import com.spyker.framework.third.tencent.pay.v3.entity.pay.PayNotify;
 import com.spyker.framework.third.tencent.pay.v3.entity.pay.PayNotifyCiphertextParse;
 import com.spyker.framework.third.tencent.pay.v3.entity.pay.PayNotifyResource;
 import com.spyker.framework.third.tencent.pay.v3.utils.AesUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -26,8 +26,12 @@ public class ParsePayNotifyAction {
     private PayConfig payConfig;
 
     public static void main(String[] args) {
-        String ss = "{\"mchid\":\"1627332486\",\"appid\":\"xxxxxx\"," + "\"out_trade_no" +
-                "\":\"xxxxx\"," + "\"transaction_id\":\"xxxxx\"," + "\"trade_type\":\"JSAPI\"," + "\"trade_state\":\"SUCCESS\",\"trade_state_desc\":\"支付成功\"," + "\"bank_type\":\"CMB_CREDIT\"," + "\"attach\":\"\",\"success_time\":\"2022-07-25T09:41:49+08:00\"," + "\"payer\":{\"openid\":\"odsEZ5TbgEfZqfNMRWkWKuEMgkI0\"},\"amount\":{\"total\":1,\"payer_total\":1," + "\"currency\":\"CNY\",\"payer_currency\":\"CNY\"}}";
+        String ss = "{\"mchid\":\"1627332486\",\"appid\":\"xxxxxx\"," + "\"out_trade_no" + "\":\"xxxxx\"," +
+                "\"transaction_id\":\"xxxxx\"," + "\"trade_type\":\"JSAPI\"," + "\"trade_state\":\"SUCCESS\"," +
+                "\"trade_state_desc\":\"支付成功\"," + "\"bank_type\":\"CMB_CREDIT\"," + "\"attach\":\"\"," +
+                "\"success_time\":\"2022-07-25T09:41:49+08:00\"," + "\"payer\":{\"openid" +
+                "\":\"odsEZ5TbgEfZqfNMRWkWKuEMgkI0\"},\"amount\":{\"total\":1,\"payer_total\":1," + "\"currency" +
+                "\":\"CNY\",\"payer_currency\":\"CNY\"}}";
 
         Gson gson = new Gson();
         PayNotifyCiphertextParse result = gson.fromJson(ss, PayNotifyCiphertextParse.class);

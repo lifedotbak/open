@@ -2,6 +2,8 @@ package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -14,6 +16,8 @@ import java.io.Serializable;
  * @since 2023-11-07
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @Schema(name = "SysDeptSearch对象", description = "部门表Search对象")
 public class SysDeptSearch implements Serializable {
 

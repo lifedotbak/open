@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.search.SysDeptSearch;
 import com.spyker.commons.service.SysDeptService;
+import com.spyker.framework.enums.BusinessType;
+import com.spyker.framework.log.Log;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,9 +26,9 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
+@Tag(name = "部门表", description = "部门表")
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "部门表", description = "部门表")
 @RequestMapping("/sys/sys-dept")
 @Slf4j
 @SaCheckLogin
@@ -45,6 +47,7 @@ public class SysDeptController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
+    @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
     public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
         int current = 1;
         int size = 10;
