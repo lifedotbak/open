@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.commons.mapper.RInfoMapper">
+
+    <select id="query" resultType="com.spyker.commons.entity.RInfo" parameterType="com.spyker.commons.search.RInfoSearch">
+        SELECT
+            a.*
+        FROM
+            r_info a
+        <where>
+            <if test="null != name " >
+                and a.name = #{name}
+            </if>
+            <if test="null != createDate " >
+                and a.create_date = #{createDate}
+            </if>
+            <if test="null != modifyDate " >
+                and a.modify_date = #{modifyDate}
+            </if>
+            <if test="null != info " >
+                and a.info = #{info}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPage" resultType="com.spyker.commons.entity.RInfo" parameterType="com.spyker.commons.search.RInfoSearch">
+        SELECT
+            a.*
+        FROM
+            r_info a
+        <where>
+            <if test="null != search.name " >
+                and a.name = #{search.name}
+            </if>
+            <if test="null != search.createDate " >
+                and a.create_date = #{search.createDate}
+            </if>
+            <if test="null != search.modifyDate " >
+                and a.modify_date = #{search.modifyDate}
+            </if>
+            <if test="null != search.info " >
+                and a.info = #{search.info}
+            </if>
+        </where>
+    </select>
+
+</mapper>

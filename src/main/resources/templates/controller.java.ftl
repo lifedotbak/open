@@ -38,6 +38,7 @@ import com.spyker.framework.response.RestResponse;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -63,7 +64,7 @@ public class ${table.controllerName} {
     private final ${table.serviceName} ${table.serviceName?uncap_first};
 
     @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
+    @GetMapping("/")
     @Log(title = "${table.comment!}--列表", businessType = BusinessType.QUERY)
     public RestResponse<List<${entity}>> list(${entity}Search search) {
 
@@ -74,7 +75,7 @@ public class ${table.controllerName} {
 
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
-    @GetMapping("list_page")
+    @GetMapping("/page")
     @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
     public RestResponse<IPage<${entity}>> list_page(${entity}Search search) {
         int current = 1;
@@ -94,9 +95,9 @@ public class ${table.controllerName} {
 
 
     @Operation(summary = "详情", description = "详情")
-    @GetMapping("detail")
+    @GetMapping("/{id}")
     @Log(title = "${table.comment!}--详情", businessType = BusinessType.QUERY)
-    public RestResponse<${entity}> detail(@RequestParam String id) {
+    public RestResponse<${entity}> detail(@PathVariable("id") String id) {
       	${entity} result = ${table.serviceName?uncap_first}.get(id);
 
         return RestResponse.success(result);
@@ -104,7 +105,7 @@ public class ${table.controllerName} {
 
 
     @Operation(summary = "新增", description = "新增")
-    @PostMapping("add")
+    @PostMapping("/")
     @Log(title = "${table.comment!}--新增", businessType = BusinessType.INSERT)
     public RestResponse<?> add(@RequestBody ${entity} add) {
 
@@ -115,9 +116,11 @@ public class ${table.controllerName} {
 
 
     @Operation(summary = "修改", description = "修改")
-    @PutMapping("update")
+    @PutMapping("/{id}")
     @Log(title = "${table.comment!}--修改", businessType = BusinessType.UPDATE)
-    public RestResponse<?> update(@RequestBody ${entity} update) {
+    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
+
+         update.setId("id");
 
          ${table.serviceName?uncap_first}.update(update);
 
@@ -126,9 +129,9 @@ public class ${table.controllerName} {
 
 
     @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("delete")
+    @DeleteMapping("/{id}")
     @Log(title = "${table.comment!}--删除", businessType = BusinessType.DELETE)
-    public RestResponse<?> delete(@RequestParam String id) {
+    public RestResponse<?> delete(@PathVariable("id") String id) {
 
          ${table.serviceName?uncap_first}.delete(id);
 
