@@ -3,6 +3,7 @@ package com.spyker.framework.core;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.StringUtils;
 import com.spyker.framework.util.date.DateUtils;
+import lombok.Data;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -99,4 +100,9 @@ public class BaseController {
         return StringUtils.format("redirect:{}", url);
     }
 
+    @Data
+    public class SearchPageInfo {
+        private Integer page = 1;
+        private Integer size = 10;
+    }
 }

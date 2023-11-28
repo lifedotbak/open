@@ -22,9 +22,6 @@ public class RInfoSearch implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer page = 1;
-    private Integer size = 10;
-
     @Schema(description = "")
     private String name;
 

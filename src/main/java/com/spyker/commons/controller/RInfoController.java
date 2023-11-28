@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.RInfo;
 import com.spyker.commons.search.RInfoSearch;
 import com.spyker.commons.service.RInfoService;
+import com.spyker.framework.core.BaseController;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,13 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-11-24
  */
-@Tag(name = "", description = "")
+@Tag(name = "R-info", description = "R-info")
 @SaCheckLogin
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/commons/r-info")
 @Slf4j
-public class RInfoController {
+public class RInfoController extends BaseController {
 
     private final RInfoService rInfoService;
 
@@ -45,16 +47,25 @@ public class RInfoController {
         return RestResponse.success(result);
     }
 
+    /**
+     * ps:@ModelAttribute属性解决get请求两个对象参数的问题
+     *
+     * @param search
+     * @param searchPageInfo
+     * @return
+     */
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<RInfo>> list_page(RInfoSearch search) {
+    public RestResponse<IPage<RInfo>> list_page(@ModelAttribute RInfoSearch search,
+            @ModelAttribute SearchPageInfo searchPageInfo) {
+
         int current = 1;
         int size = 10;
 
-        if (null != search) {
-            current = search.getPage();
-            size = search.getSize();
+        if (null != searchPageInfo) {
+            current = searchPageInfo.getPage();
+            size = searchPageInfo.getSize();
         }
 
         IPage<RInfo> page = new Page<>(current, size);
