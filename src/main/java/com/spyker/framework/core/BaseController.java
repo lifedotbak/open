@@ -101,7 +101,7 @@ public class BaseController {
     }
 
     @Data
-    public class SearchPageInfo {
+    public static class SearchPageInfo {
         private Integer page = 1;
         private Integer size = 10;
     }

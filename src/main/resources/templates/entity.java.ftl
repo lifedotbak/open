@@ -100,10 +100,10 @@ public class ${entity} {
     </#if>
     <#-- 更新插入填充 -->
     <#if field.propertyName == "createBy" || field.propertyName == "createTime" >
-    @TableField(fill = FieldFill.INSERT)
+   // @TableField(fill = FieldFill.INSERT)
     </#if>
     <#if field.propertyName == "updateBy" || field.propertyName == "updateTime" || field.propertyName == "modifyTime">
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+ //   @TableField(fill = FieldFill.INSERT_UPDATE)
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>

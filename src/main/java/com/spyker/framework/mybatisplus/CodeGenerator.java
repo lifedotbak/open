@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
+import com.spyker.framework.core.BaseController;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.yaml.snakeyaml.Yaml;
@@ -82,54 +83,88 @@ public class CodeGenerator {
             return;
         }
 
-        String dbUrl = applicationConfig.getUrl();
+        String dbUrl      = applicationConfig.getUrl();
         String dbUserName = applicationConfig.getUsername();
         String dbPassword = applicationConfig.getPassword();
 
         DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder(dbUrl, dbUserName, dbPassword).build();
-        AutoGenerator generator = new AutoGenerator(dataSourceConfig);
+        AutoGenerator    generator        = new AutoGenerator(dataSourceConfig);
 
         // 2 全局配置
         GlobalConfig globalConfig = new GlobalConfig.Builder().disableOpenDir() // 禁止打开输出目录 默认值:true
-                .outputDir(outputDir) // 指定输出目录 /opt/baomidou/ 默认值: windows:D:// linux or mac : /tmp
-                .dateType(DateType.ONLY_DATE) // 设置时间类型为java.util.date
-                .enableSpringdoc() // 支持spring doc
-                .author(auhtor) //
-                .enableSpringdoc().build();
+                                                              .outputDir(outputDir) // 指定输出目录 /opt/baomidou/ 默认值:
+                                                              // windows:D:// linux or mac : /tmp
+                                                              .dateType(DateType.ONLY_DATE) // 设置时间类型为java.util.date
+                                                              .enableSpringdoc() // 支持spring doc
+                                                              .author(auhtor) //
+                                                              .enableSpringdoc().build();
 
         generator.global(globalConfig);
 
         // 3 包配置
         // 3.1 自定义包名
         PackageConfig.Builder packageConfig = new PackageConfig.Builder().parent(basePackage) // 父包名 默认值:com.baomidou
-                .moduleName(applicationName) // 父包模块名 默认值:无
-                .pathInfo((Collections.singletonMap(OutputFile.xml, xmlPath)));
+                                                                         .moduleName(applicationName) // 父包模块名 默认值:无
+                                                                         .pathInfo((Collections.singletonMap(OutputFile.xml,
+                                                                                                             xmlPath)));
 
         // 4. 配置策略
         StrategyConfig strategyConfig = new StrategyConfig.Builder().addInclude(tableNames)
 
-                .controllerBuilder().enableRestStyle().enableHyphenStyle().enableFileOverride()
+                                                                    .controllerBuilder()
+                                                                    .enableRestStyle()
+                                                                    .enableHyphenStyle()
+                                                                    .enableFileOverride()
+                                                                    .superClass(BaseController.class)
 
-                .serviceBuilder().formatServiceFileName("%sService")
+                                                                    .serviceBuilder()
+                                                                    .formatServiceFileName("%sService")
 
-                .mapperBuilder()
+                                                                    .mapperBuilder()
 
-                .entityBuilder().enableLombok().enableFileOverride().idType(IdType.ASSIGN_ID).addTableFills(new Column("create_time", FieldFill.INSERT), new Column("modify_time", FieldFill.INSERT_UPDATE)).build();
+                                                                    .entityBuilder()
+                                                                    .enableLombok()
+                                                                    .enableChainModel()
+                                                                    .enableFileOverride()
+                                                                    .idType(IdType.ASSIGN_ID)
+                                                                    .addTableFills(new Column("create_time",
+                                                                                              FieldFill.INSERT),
+                                                                                   new Column("create_by",
+                                                                                              FieldFill.INSERT),
+                                                                                   new Column("modify_time",
+                                                                                              FieldFill.INSERT_UPDATE),
+                                                                                   new Column("update_by",
+                                                                                              FieldFill.INSERT_UPDATE))
+                                                                    .build();
 
         generator.strategy(strategyConfig);
 
-        CustomFile controllerTestFile =
-                new CustomFile.Builder().fileName("ControllerTest.java").enableFileOverride().filePath(testOutputDir).templatePath("/templates/controllerTest.java.ftl").packageName("controller").build();
+        CustomFile controllerTestFile = new CustomFile.Builder().fileName("ControllerTest.java")
+                                                                .enableFileOverride()
+                                                                .filePath(testOutputDir)
+                                                                .templatePath("/templates/controllerTest.java.ftl")
+                                                                .packageName("controller")
+                                                                .build();
 
-        CustomFile serviceTestFile =
-                new CustomFile.Builder().fileName("ServiceTest.java").enableFileOverride().filePath(testOutputDir).templatePath("/templates/serviceTest.java.ftl").packageName("service").build();
+        CustomFile serviceTestFile = new CustomFile.Builder().fileName("ServiceTest.java")
+                                                             .enableFileOverride()
+                                                             .filePath(testOutputDir)
+                                                             .templatePath("/templates/serviceTest.java.ftl")
+                                                             .packageName("service")
+                                                             .build();
 
-        CustomFile mapperTestFile =
-                new CustomFile.Builder().fileName("MapperTest.java").enableFileOverride().filePath(testOutputDir).templatePath("/templates/mapperTest.java.ftl").packageName("mapper").build();
+        CustomFile mapperTestFile = new CustomFile.Builder().fileName("MapperTest.java")
+                                                            .enableFileOverride()
+                                                            .filePath(testOutputDir)
+                                                            .templatePath("/templates/mapperTest.java.ftl")
+                                                            .packageName("mapper")
+                                                            .build();
 
-        CustomFile searchCustomFile =
-                new CustomFile.Builder().fileName("Search.java").enableFileOverride().templatePath("/templates/search"
-                        + ".java.ftl").packageName("search").build();
+        CustomFile searchCustomFile = new CustomFile.Builder().fileName("Search.java")
+                                                              .enableFileOverride()
+                                                              .templatePath("/templates/search" + ".java.ftl")
+                                                              .packageName("search")
+                                                              .build();
 
         List<CustomFile> customFiles = new ArrayList<>();
 
@@ -190,7 +225,7 @@ public class CodeGenerator {
 
             String userName = (String) druid.get("username");
             String password = (String) druid.get("password");
-            String url = (String) druid.get("url");
+            String url      = (String) druid.get("url");
 
             ApplicationConfig applicationConfig = new ApplicationConfig();
 

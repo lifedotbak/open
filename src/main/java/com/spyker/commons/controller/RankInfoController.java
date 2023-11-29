@@ -1,13 +1,7 @@
-package ${package.Controller};
+package com.spyker.commons.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-<#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
-<#else>
-import org.springframework.stereotype.Controller;
-</#if>
-<#if superControllerClassPackage??>
-import ${superControllerClassPackage};
-</#if>
+import com.spyker.framework.core.BaseController;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import ${package.Entity}.${entity};
-import ${package.Service}.${table.serviceName};
+import com.spyker.commons.entity.RankInfo;
+import com.spyker.commons.service.RankInfoService;
 
 import com.spyker.framework.core.BaseController;
 
-import ${package.Parent}.search.${entity}Search;
+import com.spyker.commons.search.RankInfoSearch;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,32 +39,28 @@ import org.springframework.web.bind.annotation.*;
 
 /**
 * <p>
-* ${table.comment!} 前端控制器
+* Rank表 前端控制器
 * </p>
 *
-* @author ${author}
-* @since ${date}
+* @author CodeGenerator
+* @since 2023-11-28
 */
-@Tag(name = "${table.comment!}", description = "${table.comment!}")
+@Tag(name = "Rank表", description = "Rank表")
 @SaCheckLogin
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
+@RequestMapping("/commons/rank-info")
 @Slf4j
-<#if superControllerClass??>
-public class ${table.controllerName} extends ${superControllerClass} {
-<#else>
-public class ${table.controllerName} {
-</#if>
+public class RankInfoController extends BaseController {
 
-    private final ${table.serviceName} ${table.serviceName?uncap_first};
+    private final RankInfoService rankInfoService;
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
-    @Log(title = "${table.comment!}--列表", businessType = BusinessType.QUERY)
-    public RestResponse<List<${entity}>> list(${entity}Search search) {
+    @Log(title = "Rank表--列表", businessType = BusinessType.QUERY)
+    public RestResponse<List<RankInfo>> list(RankInfoSearch search) {
 
-        List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
+        List<RankInfo> result = rankInfoService.query(search);
 
         return RestResponse.success(result);
     }
@@ -78,8 +68,8 @@ public class ${table.controllerName} {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
-    @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<${entity}>> list_page(@ModelAttribute ${entity}Search search, @ModelAttribute SearchPageInfo searchPageInfo) {
+    @Log(title = "Rank表--列表（分页）", businessType = BusinessType.QUERY)
+    public RestResponse<IPage<RankInfo>> list_page(@ModelAttribute RankInfoSearch search, @ModelAttribute SearchPageInfo searchPageInfo) {
         int current = 1;
         int size = 10;
 
@@ -88,9 +78,9 @@ public class ${table.controllerName} {
           size = searchPageInfo.getSize();
         }
 
-        IPage<${entity}> page = new Page<>(current, size);
+        IPage<RankInfo> page = new Page<>(current, size);
 
-        page = ${table.serviceName?uncap_first}.queryPage(page, search);
+        page = rankInfoService.queryPage(page, search);
 
         return RestResponse.success(page);
     }
@@ -98,9 +88,9 @@ public class ${table.controllerName} {
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("/{id}")
-    @Log(title = "${table.comment!}--详情", businessType = BusinessType.QUERY)
-    public RestResponse<${entity}> detail(@PathVariable("id") String id) {
-      	${entity} result = ${table.serviceName?uncap_first}.get(id);
+    @Log(title = "Rank表--详情", businessType = BusinessType.QUERY)
+    public RestResponse<RankInfo> detail(@PathVariable("id") String id) {
+      	RankInfo result = rankInfoService.get(id);
 
         return RestResponse.success(result);
     }
@@ -108,10 +98,10 @@ public class ${table.controllerName} {
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
-    @Log(title = "${table.comment!}--新增", businessType = BusinessType.INSERT)
-    public RestResponse<?> add(@RequestBody ${entity} add) {
+    @Log(title = "Rank表--新增", businessType = BusinessType.INSERT)
+    public RestResponse<?> add(@RequestBody RankInfo add) {
 
-         ${table.serviceName?uncap_first}.insert(add);
+         rankInfoService.insert(add);
 
          return RestResponse.success();
     }
@@ -119,12 +109,12 @@ public class ${table.controllerName} {
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
-    @Log(title = "${table.comment!}--修改", businessType = BusinessType.UPDATE)
-    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
+    @Log(title = "Rank表--修改", businessType = BusinessType.UPDATE)
+    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody RankInfo update) {
 
          update.setId("id");
 
-         ${table.serviceName?uncap_first}.update(update);
+         rankInfoService.update(update);
 
          return RestResponse.success();
     }
@@ -132,10 +122,10 @@ public class ${table.controllerName} {
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
-    @Log(title = "${table.comment!}--删除", businessType = BusinessType.DELETE)
+    @Log(title = "Rank表--删除", businessType = BusinessType.DELETE)
     public RestResponse<?> delete(@PathVariable("id") String id) {
 
-         ${table.serviceName?uncap_first}.delete(id);
+         rankInfoService.delete(id);
 
          return RestResponse.success();
     }
