@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Data;
@@ -30,9 +33,7 @@ public class RankInfoSearch implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer page = 1;
-    private Integer size = 10;
-
+    @NotBlank
     @Schema(description = "")
     private String name;
 

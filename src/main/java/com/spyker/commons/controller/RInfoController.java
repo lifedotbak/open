@@ -9,11 +9,13 @@ import com.spyker.commons.service.RInfoService;
 import com.spyker.framework.core.BaseController;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
+import com.spyker.framework.request.PageParamRequest;
 import com.spyker.framework.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,15 +58,15 @@ public class RInfoController extends BaseController {
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<RInfo>> list_page(@ModelAttribute RInfoSearch search,
-            @ModelAttribute SearchPageInfo searchPageInfo) {
+    public RestResponse<IPage<RInfo>> list_page(@ModelAttribute @Validated RInfoSearch search,
+            @ModelAttribute PageParamRequest searchPageInfo) {
 
         int current = 1;
-        int size = 10;
+        int size    = 10;
 
         if (null != searchPageInfo) {
             current = searchPageInfo.getPage();
-            size = searchPageInfo.getSize();
+            size    = searchPageInfo.getSize();
         }
 
         IPage<RInfo> page = new Page<>(current, size);

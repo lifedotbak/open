@@ -24,6 +24,7 @@ import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 
 import com.spyker.framework.core.BaseController;
+import com.spyker.framework.request.PageParamRequest;
 
 import ${package.Parent}.search.${entity}Search;
 
@@ -79,13 +80,13 @@ public class ${table.controllerName} {
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<${entity}>> list_page(@ModelAttribute ${entity}Search search, @ModelAttribute SearchPageInfo searchPageInfo) {
+    public RestResponse<IPage<${entity}>> list_page(@ModelAttribute ${entity}Search search, @ModelAttribute PageParamRequest pageParamRequest) {
         int current = 1;
         int size = 10;
 
-        if (null != searchPageInfo) {
-          current = searchPageInfo.getPage();
-          size = searchPageInfo.getSize();
+        if (null != pageParamRequest) {
+          current = pageParamRequest.getPage();
+          size = pageParamRequest.getSize();
         }
 
         IPage<${entity}> page = new Page<>(current, size);

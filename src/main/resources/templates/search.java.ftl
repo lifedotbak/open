@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 *
 * @author ${author}
 * @since ${date}
-*/vg
+*/
 <#if entityLombokModel>
 @Data
     <#if chainModel>

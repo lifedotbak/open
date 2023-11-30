@@ -100,9 +100,4 @@ public class BaseController {
         return StringUtils.format("redirect:{}", url);
     }
 
-    @Data
-    public static class SearchPageInfo {
-        private Integer page = 1;
-        private Integer size = 10;
-    }
 }

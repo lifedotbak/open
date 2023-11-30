@@ -84,7 +84,7 @@ public class LogAspect {
             //                operLog.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
             //            }
             // 设置方法名称
-            String className = joinPoint.getTarget().getClass().getName();
+            String className  = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
             operLog.setMethod(className + "." + methodName + "()");
             // 设置请求方式
@@ -94,7 +94,7 @@ public class LogAspect {
             // 设置消耗时间
             operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
 
-            log.error("operLog=====>{}", operLog);
+            log.info("operLog=====>{}", operLog);
             // 保存数据库
             //                        AsyncManager.me().execute(AsyncFactory.recordOper(operLog));
 
@@ -113,7 +113,10 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception
      */
-    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, SysOperLog operLog, Object jsonResult) throws Exception {
+    public void getControllerMethodDescription(JoinPoint joinPoint,
+            Log log,
+            SysOperLog operLog,
+            Object jsonResult) throws Exception {
         // 设置action动作
         operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
@@ -140,14 +143,17 @@ public class LogAspect {
     //     * @throws Exception 异常
     //     */
     private void setRequestValue(JoinPoint joinPoint, SysOperLog operLog, String[] excludeParamNames) throws Exception {
-        Map<?, ?> paramsMap = ServletUtils.getParamMap(ServletUtils.getRequest());
-        String requestMethod = operLog.getRequestMethod();
-        if (StringUtils.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod))) {
+        Map<?, ?> paramsMap     = ServletUtils.getParamMap(ServletUtils.getRequest());
+        String    requestMethod = operLog.getRequestMethod();
+        if (StringUtils.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name()
+                                                                                                             .equals(requestMethod))) {
             String params = argsArrayToString(joinPoint.getArgs(), excludeParamNames);
             operLog.setOperParam(StringUtils.substring(params, 0, 2000));
         } else {
             operLog.setOperParam(StringUtils.substring(JSON.toJSONString(paramsMap,
-                    excludePropertyPreFilter(excludeParamNames)), 0, 2000));
+                                                                         excludePropertyPreFilter(excludeParamNames)),
+                                                       0,
+                                                       2000));
         }
     }
 
