@@ -3,7 +3,7 @@ package com.spyker.framework.idempotent;
 import cn.dev33.satoken.SaManager;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.SecureUtil;
-import com.spyker.framework.exception.ServiceException;
+import com.spyker.framework.exception.BusinessException;
 import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestResponse;
 import com.spyker.framework.util.JsonUtils;
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 public class RepeatSubmitAspect {
 
     private static final ThreadLocal<String> KEY_CACHE = new ThreadLocal<>();
-    private static String REPEAT_SUBMIT_KEY = "repeat_submit:";
+    private static final String REPEAT_SUBMIT_KEY = "repeat_submit:";
     @Autowired
     private RedisService redisService;
 
@@ -46,7 +46,7 @@ public class RepeatSubmitAspect {
         long interval = repeatSubmit.timeUnit().toMillis(repeatSubmit.interval());
 
         if (interval < 1000) {
-            throw new ServiceException("重复提交间隔时间不能小于'1'秒");
+            throw new BusinessException("重复提交间隔时间不能小于'1'秒");
         }
 
         HttpServletRequest request = ServletUtils.getRequest();
@@ -70,7 +70,7 @@ public class RepeatSubmitAspect {
             if (StringUtils.startsWith(message, "{") && StringUtils.endsWith(message, "}")) {
                 message = MessageUtils.message(StringUtils.substring(message, 1, message.length() - 1));
             }
-            throw new ServiceException(message);
+            throw new BusinessException(message);
         }
     }
 
@@ -79,7 +79,7 @@ public class RepeatSubmitAspect {
      */
     private String argsArrayToString(Object[] paramsArray) {
         StringBuilder params = new StringBuilder();
-        if (paramsArray != null && paramsArray.length > 0) {
+        if (paramsArray != null) {
             for (Object o : paramsArray) {
                 if (ObjectUtil.isNotNull(o) && !isFilterObject(o)) {
                     try {

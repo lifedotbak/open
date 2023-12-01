@@ -164,7 +164,10 @@ public class HCUtils {
      * @param end         结束下载时间
      */
     @Async
-    public void downloadVideoRecordByTime(HCLoginInfo hCLoginInfo, int lDChannel, String fileName, Date start,
+    public void downloadVideoRecordByTime(HCLoginInfo hCLoginInfo,
+            int lDChannel,
+            String fileName,
+            Date start,
             Date end) {
 
         HCOpInfo hCOpInfo = login_V40(hCLoginInfo);

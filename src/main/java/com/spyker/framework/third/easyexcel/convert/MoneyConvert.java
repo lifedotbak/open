@@ -29,7 +29,8 @@ public class MoneyConvert implements Converter<Integer> {
     }
 
     @Override
-    public WriteCellData<String> convertToExcelData(Integer value, ExcelContentProperty contentProperty,
+    public WriteCellData<String> convertToExcelData(Integer value,
+            ExcelContentProperty contentProperty,
             GlobalConfiguration globalConfiguration) {
         BigDecimal result = BigDecimal.valueOf(value).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
         return new WriteCellData<>(result.toString());

@@ -39,8 +39,9 @@ public final class JwtUtils {
     public static String genToken(Map<String, String> claims) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
-            JWTCreator.Builder builder = JWT.create().withIssuer(ISSUER).withExpiresAt(DateUtils.addDays(new Date(),
-                    365));
+            JWTCreator.Builder builder = JWT.create()
+                                            .withIssuer(ISSUER)
+                                            .withExpiresAt(DateUtils.addDays(new Date(), 365));
             claims.forEach((k, v) -> builder.withClaim(k, v));
             return builder.sign(algorithm);
         } catch (Exception e) {

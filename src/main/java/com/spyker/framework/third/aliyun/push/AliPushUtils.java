@@ -47,8 +47,9 @@ public class AliPushUtils {
 
     private static void pushIos(PushMessage pushMessage) {
 
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", pushMessage.getAccessKeyId(),
-                pushMessage.getAccessKeySecret());
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
+                                                           pushMessage.getAccessKeyId(),
+                                                           pushMessage.getAccessKeySecret());
         DefaultAcsClient client = new DefaultAcsClient(profile);
         PushRequest pushRequest = new PushRequest();
         // 推送目标
@@ -135,8 +136,9 @@ public class AliPushUtils {
 
     private static void pushAndroid(PushMessage pushMessage) {
 
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", pushMessage.getAccessKeyId(),
-                pushMessage.getAccessKeySecret());
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
+                                                           pushMessage.getAccessKeyId(),
+                                                           pushMessage.getAccessKeySecret());
         DefaultAcsClient client = new DefaultAcsClient(profile);
         PushRequest pushRequest = new PushRequest();
         // 推送目标

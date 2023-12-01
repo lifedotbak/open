@@ -54,11 +54,11 @@ public class RankInfoController extends BaseController {
     public RestResponse<IPage<RankInfo>> list_page(@ModelAttribute @Validated RankInfoSearch search,
             @ModelAttribute PageParamRequest pageParamRequest) {
         int current = 1;
-        int size    = 10;
+        int size = 10;
 
         if (null != pageParamRequest) {
             current = pageParamRequest.getPage();
-            size    = pageParamRequest.getSize();
+            size = pageParamRequest.getSize();
         }
 
         IPage<RankInfo> page = new Page<>(current, size);

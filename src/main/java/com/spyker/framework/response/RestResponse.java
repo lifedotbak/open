@@ -9,17 +9,17 @@ import lombok.Data;
 public class RestResponse<T> {
 
     private int code;
-    private String msg;
+    private String message;
     private T result;
 
-    private RestResponse(int code, String msg) {
+    private RestResponse(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
-    private RestResponse(int code, String msg, T result) {
+    private RestResponse(int code, String message, T result) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.result = result;
     }
 
@@ -34,8 +34,8 @@ public class RestResponse<T> {
         return new RestResponse<>(200, "success");
     }
 
-    public static <T> RestResponse<T> error(ResponseErrorCode responseErrorCode) {
-        return new RestResponse<>(responseErrorCode.getCode(), responseErrorCode.getMsg());
+    public static <T> RestResponse<T> error(IResponseCode responseCode) {
+        return new RestResponse<>(responseCode.getCode(), responseCode.getMessage());
     }
 
     public static <T> RestResponse<T> error(Integer code, String msg) {

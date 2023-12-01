@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spyker.framework.response.RestResponse;
-import com.spyker.framework.result.CommonResultCode;
+import com.spyker.framework.response.ResponseCodeEnum;
 import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +29,14 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
 
+/**
+ * 系统异常处理
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private static String REQUESTBODY = "requestBodyMessage";
+    private static final String REQUESTBODY = "requestBodyMessage";
 
     //    @ExceptionHandler
     //    public RestResponse handlerException(Exception e) {
@@ -152,8 +155,8 @@ public class GlobalExceptionHandler {
      * 处理业务业务异常
      */
     @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(value = ServiceException.class)
-    public RestResponse serviceExceptionHandler(HttpServletRequest request, ServiceException e) {
+    @ExceptionHandler(value = BusinessException.class)
+    public RestResponse serviceExceptionHandler(HttpServletRequest request, BusinessException e) {
         doLog(request, e);
 
         return RestResponse.error(e.getCode(), e.getMessage());
@@ -177,7 +180,7 @@ public class GlobalExceptionHandler {
     public RestResponse parameterMissingExceptionHandler(HttpServletRequest request,
             MissingServletRequestParameterException e) {
         doLog(request, e);
-        return RestResponse.error(CommonResultCode.VALIDATE_FAILED.getCode(),
+        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(),
                                   "请求参数 " + e.getParameterName() + " 不能为空");
     }
 
@@ -189,7 +192,7 @@ public class GlobalExceptionHandler {
     public RestResponse parameterBodyMissingExceptionHandler(HttpServletRequest request,
             HttpMessageNotReadableException e) {
         doLog(request, e);
-        return RestResponse.error(CommonResultCode.VALIDATE_FAILED.getCode(), "参数体不能为空");
+        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "参数体不能为空");
     }
 
     /**
@@ -207,10 +210,10 @@ public class GlobalExceptionHandler {
             if (!errors.isEmpty()) {
                 // 这里列出了全部错误参数，按正常逻辑，只需要第一条错误即可
                 FieldError fieldError = (FieldError) errors.get(0);
-                return RestResponse.error(CommonResultCode.VALIDATE_FAILED.getCode(), fieldError.getDefaultMessage());
+                return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), fieldError.getDefaultMessage());
             }
         }
-        return RestResponse.error(CommonResultCode.VALIDATE_FAILED.getCode(), "请求参数校验异常");
+        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "请求参数校验异常");
     }
 
     /**
@@ -221,7 +224,7 @@ public class GlobalExceptionHandler {
     public RestResponse bindExceptionException(HttpServletRequest request, BindException e) {
         doLog(request, e);
         BindingResult bindingResult = e.getBindingResult();
-        return RestResponse.error(CommonResultCode.VALIDATE_FAILED.getCode(),
+        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(),
                                   Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
     }
 
@@ -233,7 +236,7 @@ public class GlobalExceptionHandler {
     public RestResponse httpMediaTypeNotSupportedExceptionException(HttpServletRequest request,
             HttpMediaTypeNotSupportedException e) {
         doLog(request, e);
-        return RestResponse.error(CommonResultCode.VALIDATE_FAILED.getCode(), Objects.requireNonNull(e.getMessage()));
+        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), Objects.requireNonNull(e.getMessage()));
     }
 
     /**

@@ -22,7 +22,7 @@ public class JacksonConfig {
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
 
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(BigDecimal.class,
-                ToStringSerializer.instance);
+                                                                                         ToStringSerializer.instance);
     }
 
 }

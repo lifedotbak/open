@@ -33,7 +33,7 @@ public class MoneyUtils {
      */
     public static BigDecimal calculateRatePrice(Number price, Number rate, int scale, RoundingMode roundingMode) {
         return NumberUtil.toBigDecimal(price).multiply(NumberUtil.toBigDecimal(rate)) // 乘以
-                .divide(BigDecimal.valueOf(100), scale, roundingMode); // 除以 100
+                         .divide(BigDecimal.valueOf(100), scale, roundingMode); // 除以 100
     }
 
     /**

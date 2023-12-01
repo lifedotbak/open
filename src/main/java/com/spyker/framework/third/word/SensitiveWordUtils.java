@@ -26,7 +26,7 @@ public class SensitiveWordUtils {
     // 判断是不是电子邮箱
     public static boolean isEmail(String str) {
         Pattern pattern = Pattern.compile("^[A-Z0-9a-zd]+([-_.][A-Za-zd]+)*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)" + "+[a"
-                + "-zA-Z]{1,5}$");
+                                                  + "-zA-Z]{1,5}$");
         Matcher isNum = pattern.matcher(str);
         return isNum.matches();
     }
@@ -64,7 +64,8 @@ public class SensitiveWordUtils {
 
     // 车牌号校验
     public static boolean carId(String str) {
-        return Pattern.matches("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$", str);
+        return Pattern.matches("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$",
+                               str);
     }
 
     // 车架号校验

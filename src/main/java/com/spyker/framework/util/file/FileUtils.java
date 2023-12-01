@@ -289,7 +289,8 @@ public class FileUtils {
      * @param fileName 文件名
      * @return 编码后的文件名
      */
-    public static String setFileDownloadHeader(HttpServletRequest request, String fileName) throws UnsupportedEncodingException {
+    public static String setFileDownloadHeader(HttpServletRequest request, String fileName) throws
+            UnsupportedEncodingException {
         final String agent = request.getHeader("USER-AGENT");
         String filename = fileName;
         if (agent.contains("MSIE")) {
@@ -315,7 +316,8 @@ public class FileUtils {
      * @param response     响应对象
      * @param realFileName 真实文件名
      */
-    public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) throws UnsupportedEncodingException {
+    public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) throws
+            UnsupportedEncodingException {
         String percentEncodedFileName = percentEncode(realFileName);
 
         String contentDispositionValue = "attachment; filename=" + percentEncodedFileName + ";" + "filename*=" + "utf"

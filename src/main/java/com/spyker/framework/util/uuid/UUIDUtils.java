@@ -1,7 +1,8 @@
 package com.spyker.framework.util.uuid;
 
-import com.spyker.framework.exception.UtilException;
+import cn.hutool.core.exceptions.UtilException;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -13,7 +14,8 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author spyker
  */
-public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUtils> {
+public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
+
     private static final long serialVersionUID = -1185015143654744140L;
     /**
      * 此UUID的最高64有效位
@@ -30,6 +32,7 @@ public final class UUIDUtils implements java.io.Serializable, Comparable<UUIDUti
      * @param data 数据
      */
     private UUIDUtils(byte[] data) {
+
         long msb = 0;
         long lsb = 0;
         assert data.length == 16 : "data must be 16 bytes in length";

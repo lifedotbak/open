@@ -44,8 +44,10 @@ public class XxlJobConfig {
             if (CollUtil.isEmpty(instances)) {
                 throw new RuntimeException("调度中心不存在!");
             }
-            String serverList = StreamUtils.join(instances, instance -> String.format("http://%s:%s",
-                    instance.getHost(), instance.getPort()));
+            String serverList = StreamUtils.join(instances,
+                                                 instance -> String.format("http://%s:%s",
+                                                                           instance.getHost(),
+                                                                           instance.getPort()));
 
             log.info(">>>>>>>>>>> serverList---->{}", serverList);
 

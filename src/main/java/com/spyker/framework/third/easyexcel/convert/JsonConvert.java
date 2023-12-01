@@ -25,7 +25,8 @@ public class JsonConvert implements Converter<Object> {
     }
 
     @Override
-    public WriteCellData<String> convertToExcelData(Object value, ExcelContentProperty contentProperty,
+    public WriteCellData<String> convertToExcelData(Object value,
+            ExcelContentProperty contentProperty,
             GlobalConfiguration globalConfiguration) {
         // 生成 Excel 小表格
         return new WriteCellData<>(JsonUtils.toJsonString(value));

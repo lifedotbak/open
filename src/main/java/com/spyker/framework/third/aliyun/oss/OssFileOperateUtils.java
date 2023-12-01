@@ -23,12 +23,13 @@ public class OssFileOperateUtils {
             // 创建OSSClient实例。
 
             OSS ossClient = new OSSClientBuilder().build(ossFileOperateParameters.getEndpoint(),
-                    ossFileOperateParameters.getAccessKeyId(), ossFileOperateParameters.getAccessKeySecret());
+                                                         ossFileOperateParameters.getAccessKeyId(),
+                                                         ossFileOperateParameters.getAccessKeySecret());
 
             // 下载文件。
             ossClient.getObject(new GetObjectRequest(ossFileOperateParameters.getBucketName(),
-                    ossFileOperateParameters.getObjectName()),
-                    new File(ossFileOperateParameters.getDownload2FilePath()));
+                                                     ossFileOperateParameters.getObjectName()),
+                                new File(ossFileOperateParameters.getDownload2FilePath()));
             // 关闭Client。
             ossClient.shutdown();
         }
@@ -48,13 +49,16 @@ public class OssFileOperateUtils {
 
             // 创建OSSClient实例。
             OSS ossClient = new OSSClientBuilder().build(ossFileOperateParameters.getEndpoint(),
-                    ossFileOperateParameters.getAccessKeyId(), ossFileOperateParameters.getAccessKeySecret());
+                                                         ossFileOperateParameters.getAccessKeyId(),
+                                                         ossFileOperateParameters.getAccessKeySecret());
 
             // 上传文件。
             PutObjectResult putObjectResult = ossClient.putObject(ossFileOperateParameters.getBucketName(),
-                    ossFileOperateParameters.getObjectName(), ossFileOperateParameters.getUploadFileInputStream());
+                                                                  ossFileOperateParameters.getObjectName(),
+                                                                  ossFileOperateParameters.getUploadFileInputStream());
 
-            if (null != putObjectResult && null != putObjectResult.getResponse() && putObjectResult.getResponse().isSuccessful()) {
+            if (null != putObjectResult && null != putObjectResult.getResponse() && putObjectResult.getResponse()
+                                                                                                   .isSuccessful()) {
 
                 log.info("putObjectResult ===> {}", putObjectResult);
                 log.info("RequestId ===> {}", putObjectResult.getRequestId());
@@ -81,12 +85,13 @@ public class OssFileOperateUtils {
 
             // 创建OSSClient实例。
             OSS ossClient = new OSSClientBuilder().build(ossFileOperateParameters.getEndpoint(),
-                    ossFileOperateParameters.getAccessKeyId(), ossFileOperateParameters.getAccessKeySecret());
+                                                         ossFileOperateParameters.getAccessKeyId(),
+                                                         ossFileOperateParameters.getAccessKeySecret());
 
             try {
                 // 上传文件。
                 ossClient.deleteObject(ossFileOperateParameters.getBucketName(),
-                        ossFileOperateParameters.getObjectName());
+                                       ossFileOperateParameters.getObjectName());
                 // 关闭Client。
                 ossClient.shutdown();
             } catch (Exception e) {

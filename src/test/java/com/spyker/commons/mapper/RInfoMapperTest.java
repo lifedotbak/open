@@ -1,16 +1,12 @@
 package com.spyker.commons.mapper;
 
-import com.spyker.commons.entity.RInfo;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.spyker.commons.mapper.RInfoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.spyker.BaseTest;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author CodeGenerator

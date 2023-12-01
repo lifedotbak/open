@@ -83,12 +83,12 @@ public class CodeGenerator {
             return;
         }
 
-        String dbUrl      = applicationConfig.getUrl();
+        String dbUrl = applicationConfig.getUrl();
         String dbUserName = applicationConfig.getUsername();
         String dbPassword = applicationConfig.getPassword();
 
         DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder(dbUrl, dbUserName, dbPassword).build();
-        AutoGenerator    generator        = new AutoGenerator(dataSourceConfig);
+        AutoGenerator generator = new AutoGenerator(dataSourceConfig);
 
         // 2 全局配置
         GlobalConfig globalConfig = new GlobalConfig.Builder().disableOpenDir() // 禁止打开输出目录 默认值:true
@@ -225,7 +225,7 @@ public class CodeGenerator {
 
             String userName = (String) druid.get("username");
             String password = (String) druid.get("password");
-            String url      = (String) druid.get("url");
+            String url = (String) druid.get("url");
 
             ApplicationConfig applicationConfig = new ApplicationConfig();
 

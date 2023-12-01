@@ -8,16 +8,16 @@
         FROM
             r_info a
         <where>
-            <if test="null != name " >
+            <if test="null != name ">
                 and a.name = #{name}
             </if>
-            <if test="null != createDate " >
+            <if test="null != createDate ">
                 and a.create_date = #{createDate}
             </if>
-            <if test="null != modifyDate " >
+            <if test="null != modifyDate ">
                 and a.modify_date = #{modifyDate}
             </if>
-            <if test="null != info " >
+            <if test="null != info ">
                 and a.info = #{info}
             </if>
         </where>
@@ -29,16 +29,16 @@
         FROM
             r_info a
         <where>
-            <if test="null != search.name " >
+            <if test="null != search.name ">
                 and a.name = #{search.name}
             </if>
-            <if test="null != search.createDate " >
+            <if test="null != search.createDate ">
                 and a.create_date = #{search.createDate}
             </if>
-            <if test="null != search.modifyDate " >
+            <if test="null != search.modifyDate ">
                 and a.modify_date = #{search.modifyDate}
             </if>
-            <if test="null != search.info " >
+            <if test="null != search.info ">
                 and a.info = #{search.info}
             </if>
         </where>

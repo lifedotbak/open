@@ -91,8 +91,13 @@ public class SignRequestAuthUtil {
             canonicalUrl.append("?").append(httpurl.encodedQuery());
         }
 
-        return prePayAuth.getMethod() + "\n" + canonicalUrl.append("\n").append(prePayAuth.getTimestamp()).append("\n"
-        ).append(prePayAuth.getNonce_str()).append("\n").append(prePayAuth.getBody()).append("\n");
+        return prePayAuth.getMethod() + "\n" + canonicalUrl.append("\n")
+                                                           .append(prePayAuth.getTimestamp())
+                                                           .append("\n")
+                                                           .append(prePayAuth.getNonce_str())
+                                                           .append("\n")
+                                                           .append(prePayAuth.getBody())
+                                                           .append("\n");
     }
 
     /**

@@ -55,7 +55,8 @@ public class ModbusMasterTcpUtils {
         //		Modbus.releaseSharedResources();
     }
 
-    public static float readFloatHoldingRegisters(int address, int quantity, int unitId) throws InterruptedException,
+    public static float readFloatHoldingRegisters(int address, int quantity, int unitId) throws
+            InterruptedException,
             ExecutionException {
 
         Number number = readHoldingRegisters(address, quantity, unitId);
@@ -90,11 +91,13 @@ public class ModbusMasterTcpUtils {
      * @throws InterruptedException 异常
      * @throws ExecutionException   异常
      */
-    public static Number readHoldingRegisters(int address, int quantity, int unitId) throws InterruptedException,
+    public static Number readHoldingRegisters(int address, int quantity, int unitId) throws
+            InterruptedException,
             ExecutionException {
         Number result = null;
-        CompletableFuture<ReadHoldingRegistersResponse> future =
-                master.sendRequest(new ReadHoldingRegistersRequest(address, quantity), unitId);
+        CompletableFuture<ReadHoldingRegistersResponse> future = master.sendRequest(new ReadHoldingRegistersRequest(
+                address,
+                quantity), unitId);
         ReadHoldingRegistersResponse readHoldingRegistersResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (readHoldingRegistersResponse != null) {
             ByteBuf buf = readHoldingRegistersResponse.getRegisters();
@@ -116,11 +119,13 @@ public class ModbusMasterTcpUtils {
      * @throws InterruptedException 异常
      * @throws ExecutionException   异常
      */
-    public static Number readInputRegisters(int address, int quantity, int unitId) throws InterruptedException,
+    public static Number readInputRegisters(int address, int quantity, int unitId) throws
+            InterruptedException,
             ExecutionException {
         Number result = null;
-        CompletableFuture<ReadInputRegistersResponse> future =
-                master.sendRequest(new ReadInputRegistersRequest(address, quantity), unitId);
+        CompletableFuture<ReadInputRegistersResponse> future = master.sendRequest(new ReadInputRegistersRequest(address,
+                                                                                                                quantity),
+                                                                                  unitId);
         ReadInputRegistersResponse readInputRegistersResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (readInputRegistersResponse != null) {
             ByteBuf buf = readInputRegistersResponse.getRegisters();
@@ -140,12 +145,13 @@ public class ModbusMasterTcpUtils {
      * @throws InterruptedException 异常
      * @throws ExecutionException   异常
      */
-    public static Boolean readCoils(int address, int quantity, int unitId) throws InterruptedException,
+    public static Boolean readCoils(int address, int quantity, int unitId) throws
+            InterruptedException,
             ExecutionException {
 
         Boolean result = null;
         CompletableFuture<ReadCoilsResponse> future = master.sendRequest(new ReadCoilsRequest(address, quantity),
-                unitId);
+                                                                         unitId);
         ReadCoilsResponse readCoilsResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (readCoilsResponse != null) {
             ByteBuf buf = readCoilsResponse.getCoilStatus();
@@ -165,11 +171,13 @@ public class ModbusMasterTcpUtils {
      * @throws InterruptedException 异常
      * @throws ExecutionException   异常
      */
-    public static Boolean readDiscreteInputs(int address, int quantity, int unitId) throws InterruptedException,
+    public static Boolean readDiscreteInputs(int address, int quantity, int unitId) throws
+            InterruptedException,
             ExecutionException {
         Boolean result = null;
-        CompletableFuture<ReadDiscreteInputsResponse> future =
-                master.sendRequest(new ReadDiscreteInputsRequest(address, quantity), unitId);
+        CompletableFuture<ReadDiscreteInputsResponse> future = master.sendRequest(new ReadDiscreteInputsRequest(address,
+                                                                                                                quantity),
+                                                                                  unitId);
         ReadDiscreteInputsResponse discreteInputsResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (discreteInputsResponse != null) {
             ByteBuf buf = discreteInputsResponse.getInputStatus();

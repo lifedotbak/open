@@ -8,10 +8,10 @@
         FROM
             rank_info a
         <where>
-            <if test="null != name " >
+            <if test="null != name ">
                 and a.name = #{name}
             </if>
-            <if test="null != rank " >
+            <if test="null != rank ">
                 and a.rank = #{rank}
             </if>
         </where>
@@ -23,10 +23,10 @@
         FROM
             rank_info a
         <where>
-            <if test="null != search.name " >
+            <if test="null != search.name ">
                 and a.name = #{search.name}
             </if>
-            <if test="null != search.rank " >
+            <if test="null != search.rank ">
                 and a.rank = #{search.rank}
             </if>
         </where>

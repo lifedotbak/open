@@ -19,7 +19,7 @@ import org.springframework.util.MultiValueMap;
 @Slf4j
 public class SysDictTypeControllerTest extends BaseTest {
 
-    private static String URL = "/application/sys-dict-type";
+    private static final String URL = "/application/sys-dict-type";
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,8 +29,12 @@ public class SysDictTypeControllerTest extends BaseTest {
     public void list_page() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        MvcResult mvcResult =
-                mockMvc.perform(MockMvcRequestBuilders.get(URL + "/list_page").accept(MediaType.APPLICATION_JSON).params(params)).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(URL + "/list_page")
+                                                                    .accept(MediaType.APPLICATION_JSON)
+                                                                    .params(params))
+                                     .andExpect(MockMvcResultMatchers.status().isOk())
+                                     .andDo(MockMvcResultHandlers.print())
+                                     .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
 
@@ -41,8 +45,12 @@ public class SysDictTypeControllerTest extends BaseTest {
     public void list() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        MvcResult mvcResult =
-                mockMvc.perform(MockMvcRequestBuilders.get(URL + "/list").accept(MediaType.APPLICATION_JSON).params(params)).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(URL + "/list")
+                                                                    .accept(MediaType.APPLICATION_JSON)
+                                                                    .params(params))
+                                     .andExpect(MockMvcResultMatchers.status().isOk())
+                                     .andDo(MockMvcResultHandlers.print())
+                                     .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
 
@@ -55,8 +63,12 @@ public class SysDictTypeControllerTest extends BaseTest {
 
         params.add("dictId", "1");
 
-        MvcResult mvcResult =
-                mockMvc.perform(MockMvcRequestBuilders.get(URL + "/detail").accept(MediaType.APPLICATION_JSON).params(params)).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(URL + "/detail")
+                                                                    .accept(MediaType.APPLICATION_JSON)
+                                                                    .params(params))
+                                     .andExpect(MockMvcResultMatchers.status().isOk())
+                                     .andDo(MockMvcResultHandlers.print())
+                                     .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
 
@@ -69,8 +81,12 @@ public class SysDictTypeControllerTest extends BaseTest {
 
         params.add("dictId", "1");
 
-        MvcResult mvcResult =
-                mockMvc.perform(MockMvcRequestBuilders.delete(URL + "/delete").accept(MediaType.APPLICATION_JSON).params(params)).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete(URL + "/delete")
+                                                                    .accept(MediaType.APPLICATION_JSON)
+                                                                    .params(params))
+                                     .andExpect(MockMvcResultMatchers.status().isOk())
+                                     .andDo(MockMvcResultHandlers.print())
+                                     .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
 
@@ -97,8 +113,12 @@ public class SysDictTypeControllerTest extends BaseTest {
 
         String jsonString = gson.toJson(add);
 
-        MvcResult mvcResult =
-                mockMvc.perform(MockMvcRequestBuilders.post(URL + "/add").content(jsonString).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(URL + "/add")
+                                                                    .content(jsonString)
+                                                                    .contentType(MediaType.APPLICATION_JSON))
+                                     .andExpect(MockMvcResultMatchers.status().isOk())
+                                     .andDo(MockMvcResultHandlers.print())
+                                     .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
 
@@ -127,8 +147,12 @@ public class SysDictTypeControllerTest extends BaseTest {
 
         String jsonString = gson.toJson(update);
 
-        MvcResult mvcResult =
-                mockMvc.perform(MockMvcRequestBuilders.put(URL + "/update").content(jsonString).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(URL + "/update")
+                                                                    .content(jsonString)
+                                                                    .contentType(MediaType.APPLICATION_JSON))
+                                     .andExpect(MockMvcResultMatchers.status().isOk())
+                                     .andDo(MockMvcResultHandlers.print())
+                                     .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
 

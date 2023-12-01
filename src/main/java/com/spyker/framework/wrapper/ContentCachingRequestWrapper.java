@@ -38,7 +38,7 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
     }
 
     private void loadBody(HttpServletRequest request) throws IOException {
-        body        = IOUtils.toByteArray(request.getInputStream());
+        body = IOUtils.toByteArray(request.getInputStream());
         inputStream = new RequestCachingInputStream(body);
     }
 

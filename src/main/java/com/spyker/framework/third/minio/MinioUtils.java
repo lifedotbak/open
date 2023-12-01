@@ -29,8 +29,16 @@ public class MinioUtils {
 
             InputStream inputStream = new FileInputStream(file);
 
-            ObjectWriteResponse objectWriteResponse =
-                    minioClient.putObject(PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey).stream(inputStream, -1, 10485760).contentType("application/octet-stream").build());
+            ObjectWriteResponse objectWriteResponse = minioClient.putObject(PutObjectArgs.builder()
+                                                                                         .bucket(minioProperties.getBucket())
+                                                                                         .object(fileKey)
+                                                                                         .stream(inputStream,
+                                                                                                 -1,
+                                                                                                 10485760)
+                                                                                         .contentType(
+                                                                                                 "application/octet" +
+                                                                                                         "-stream")
+                                                                                         .build());
 
             log.info("--->{}", objectWriteResponse.etag());
 

@@ -60,8 +60,10 @@ public class AddStreamProxyAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl, HttpMethod.POST, entity,
-                    String.class);
+            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
+                                                                          HttpMethod.POST,
+                                                                          entity,
+                                                                          String.class);
 
             String responseBody = exchangeResult.getBody();
 

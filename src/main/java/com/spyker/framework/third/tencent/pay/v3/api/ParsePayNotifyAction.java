@@ -58,9 +58,10 @@ public class ParsePayNotifyAction {
 
             // 解密后资源数据
             AesUtil aesUtil = new AesUtil(apiV3Key.getBytes(StandardCharsets.UTF_8));
-            String notifyResourceStr =
-                    aesUtil.decryptToString(resource.getAssociated_data().getBytes(StandardCharsets.UTF_8),
-                            resource.getNonce().getBytes(StandardCharsets.UTF_8), resource.getCiphertext());
+            String notifyResourceStr = aesUtil.decryptToString(resource.getAssociated_data()
+                                                                       .getBytes(StandardCharsets.UTF_8),
+                                                               resource.getNonce().getBytes(StandardCharsets.UTF_8),
+                                                               resource.getCiphertext());
 
             log.info("notifyResourceStr-->{}", notifyResourceStr);
 

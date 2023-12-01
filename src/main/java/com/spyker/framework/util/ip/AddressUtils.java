@@ -6,6 +6,7 @@ import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.util.StringUtils;
 import com.spyker.framework.util.http.HttpUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,12 +15,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author spyker
  */
+@Slf4j
 public class AddressUtils {
     // IP地址查询
     public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
+
     // 未知地址
     public static final String UNKNOWN = "XX XX";
-    private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
     public static String getRealAddressByIP(String ip) {
         // 内网不查询

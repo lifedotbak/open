@@ -84,7 +84,9 @@ public interface HCNetSDK extends Library {
     boolean NET_DVR_SetLogToFile(int bLogEnable, String strLogDir, boolean bAutoDel);
 
     // NET_DVR_SetDVRMessage的扩展
-    boolean NET_DVR_SetExceptionCallBack_V30(int nMessage, int hWnd, FExceptionCallBack fExceptionCallBack,
+    boolean NET_DVR_SetExceptionCallBack_V30(int nMessage,
+            int hWnd,
+            FExceptionCallBack fExceptionCallBack,
             Pointer pUser);
 
     boolean NET_DVR_Init();
@@ -103,18 +105,28 @@ public interface HCNetSDK extends Library {
 
     int NET_DVR_GetLastError();
 
-    boolean NET_DVR_GetDVRConfig(int lUserID, int dwCommand, int lChannel, Pointer lpOutBuffer, int dwOutBufferSize,
+    boolean NET_DVR_GetDVRConfig(int lUserID,
+            int dwCommand,
+            int lChannel,
+            Pointer lpOutBuffer,
+            int dwOutBufferSize,
             IntByReference lpBytesReturned);
 
-    int NET_DVR_RealPlay_V40(int lUserID, NET_DVR_PREVIEWINFO lpPreviewInfo,
-            FRealDataCallBack_V30 fRealDataCallBack_V30, Pointer pUser);
+    int NET_DVR_RealPlay_V40(int lUserID,
+            NET_DVR_PREVIEWINFO lpPreviewInfo,
+            FRealDataCallBack_V30 fRealDataCallBack_V30,
+            Pointer pUser);
 
     boolean NET_DVR_FindClose_V30(int lFindHandle);
 
     int NET_DVR_PlayBackByName(int lUserID, String sPlayBackFileName, HWND hWnd);
 
-    boolean NET_DVR_PlayBackControl_V40(int lPlayHandle, int dwControlCode, Pointer lpInBuffer, int dwInLen,
-            Pointer lpOutBuffer, IntByReference lpOutLen);
+    boolean NET_DVR_PlayBackControl_V40(int lPlayHandle,
+            int dwControlCode,
+            Pointer lpInBuffer,
+            int dwInLen,
+            Pointer lpOutBuffer,
+            IntByReference lpOutLen);
 
     int NET_DVR_GetDownloadPos(int lFileHandle);
 

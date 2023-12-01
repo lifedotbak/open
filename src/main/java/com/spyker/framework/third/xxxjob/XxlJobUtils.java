@@ -78,13 +78,14 @@ public class XxlJobUtils {
     public List<XxlJobInfo> getJobInfo(Integer jobGroupId, String executorHandler) {
         String url = xxlServerProperties.getUrl() + "/jobinfo/pageList";
         HttpResponse response = HttpRequest.post(url).form("jobGroup", jobGroupId)
-                //            .form("executorHandler", executorHandler)
-                .form("triggerStatus", -1).cookie(login()).execute();
+                                           //            .form("executorHandler", executorHandler)
+                                           .form("triggerStatus", -1).cookie(login()).execute();
 
         String body = response.body();
         JSONArray array = JSONUtil.parse(body).getByPath("data", JSONArray.class);
-        List<XxlJobInfo> list =
-                array.stream().map(o -> JSONUtil.toBean((JSONObject) o, XxlJobInfo.class)).collect(Collectors.toList());
+        List<XxlJobInfo> list = array.stream()
+                                     .map(o -> JSONUtil.toBean((JSONObject) o, XxlJobInfo.class))
+                                     .collect(Collectors.toList());
 
         for (XxlJobInfo xxlJobInfo : list) {
             log.info("xxlJobInfo----->{}", xxlJobInfo);
@@ -98,12 +99,15 @@ public class XxlJobUtils {
         Map<String, String> loginCookie = new HashMap<>();
         String url = xxlServerProperties.getUrl() + "/domain";
 
-        HttpResponse response = HttpRequest.post(url).form("userName", xxlServerProperties.getUserName()).form(
-                "password", xxlServerProperties.getPassword()).execute();
+        HttpResponse response = HttpRequest.post(url)
+                                           .form("userName", xxlServerProperties.getUserName())
+                                           .form("password", xxlServerProperties.getPassword())
+                                           .execute();
         List<HttpCookie> cookies = response.getCookies();
 
-        Optional<HttpCookie> cookieOpt = cookies.stream().filter(cookie -> cookie.getName().equals(
-                "XXL_JOB_LOGIN_IDENTITY")).findFirst();
+        Optional<HttpCookie> cookieOpt = cookies.stream()
+                                                .filter(cookie -> cookie.getName().equals("XXL_JOB_LOGIN_IDENTITY"))
+                                                .findFirst();
         if (!cookieOpt.isPresent()) {
             throw new RuntimeException("get xxl-job cookie error!");
         }
@@ -165,8 +169,11 @@ public class XxlJobUtils {
      */
     public boolean preciselyCheck(String appName, String title) {
         List<XxlJobGroup> jobGroup = getJobGroup(appName, title);
-        Optional<XxlJobGroup> has =
-                jobGroup.stream().filter(xxlJobGroup -> xxlJobGroup.getAppname().equals(appName) && xxlJobGroup.getTitle().equals(title)).findAny();
+        Optional<XxlJobGroup> has = jobGroup.stream()
+                                            .filter(xxlJobGroup -> xxlJobGroup.getAppname()
+                                                                              .equals(appName) && xxlJobGroup.getTitle()
+                                                                                                             .equals(title))
+                                            .findAny();
         return has.isPresent();
     }
 
@@ -179,13 +186,17 @@ public class XxlJobUtils {
      */
     public List<XxlJobGroup> getJobGroup(String appName, String title) {
         String url = xxlServerProperties.getUrl() + "/jobgroup/pageList";
-        HttpResponse response =
-                HttpRequest.post(url).form("appname", appName).form("title", title).cookie(login()).execute();
+        HttpResponse response = HttpRequest.post(url)
+                                           .form("appname", appName)
+                                           .form("title", title)
+                                           .cookie(login())
+                                           .execute();
 
         String body = response.body();
         JSONArray array = JSONUtil.parse(body).getByPath("data", JSONArray.class);
-        List<XxlJobGroup> list =
-                array.stream().map(o -> JSONUtil.toBean((JSONObject) o, XxlJobGroup.class)).collect(Collectors.toList());
+        List<XxlJobGroup> list = array.stream()
+                                      .map(o -> JSONUtil.toBean((JSONObject) o, XxlJobGroup.class))
+                                      .collect(Collectors.toList());
 
         for (XxlJobGroup xxlJobGroup : list) {
             log.info("xxlJobGroup----->{}", xxlJobGroup);
@@ -235,8 +246,11 @@ public class XxlJobUtils {
      */
     public boolean autoRegisterGroup(String appName, String title) {
         String url = xxlServerProperties.getUrl() + "/jobgroup/save";
-        HttpResponse response =
-                HttpRequest.post(url).form("appname", appName).form("title", title).cookie(login()).execute();
+        HttpResponse response = HttpRequest.post(url)
+                                           .form("appname", appName)
+                                           .form("title", title)
+                                           .cookie(login())
+                                           .execute();
         Object code = JSONUtil.parse(response.body()).getByPath("code");
 
         return code.equals(200);

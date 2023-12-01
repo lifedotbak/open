@@ -1,13 +1,11 @@
 package com.spyker.commons.service;
 
-import com.spyker.commons.entity.RankInfo;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import java.util.List;
-import com.spyker.framework.response.RestResponse;
-
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.spyker.commons.entity.RankInfo;
 import com.spyker.commons.search.RankInfoSearch;
+
+import java.util.List;
 
 /**
  * <p>

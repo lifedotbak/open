@@ -552,12 +552,12 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         String startHm = date2String(start, Format.HHMM);
         String endHm = date2String(end, Format.HHMM);
 
-        Date startYMDHM =
-                DateUtils.format2Date(DateUtils.date2String(startYmd, DateUtils.Format.YYYY_MM_DD) + " " + startHm,
-                        DateUtils.Format.YYYY_MM_DD_HH_MM);
-        Date endYMDHM =
-                DateUtils.format2Date(DateUtils.date2String(startYmd, DateUtils.Format.YYYY_MM_DD) + " " + endHm,
-                        DateUtils.Format.YYYY_MM_DD_HH_MM);
+        Date startYMDHM = DateUtils.format2Date(DateUtils.date2String(startYmd,
+                                                                      DateUtils.Format.YYYY_MM_DD) + " " + startHm,
+                                                DateUtils.Format.YYYY_MM_DD_HH_MM);
+        Date endYMDHM = DateUtils.format2Date(DateUtils.date2String(startYmd,
+                                                                    DateUtils.Format.YYYY_MM_DD) + " " + endHm,
+                                              DateUtils.Format.YYYY_MM_DD_HH_MM);
 
         return startYMDHM.after(endYMDHM);
 

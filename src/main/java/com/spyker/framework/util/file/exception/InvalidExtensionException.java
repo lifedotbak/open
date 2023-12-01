@@ -1,4 +1,4 @@
-package com.spyker.framework.exception.file;
+package com.spyker.framework.util.file.exception;
 
 import java.util.Arrays;
 
@@ -7,7 +7,8 @@ import java.util.Arrays;
  *
  * @author spyker
  */
-public class InvalidExtensionException extends FileUploadException {
+public class InvalidExtensionException extends Exception {
+
     private static final long serialVersionUID = 1L;
 
     private final String[] allowedExtension;

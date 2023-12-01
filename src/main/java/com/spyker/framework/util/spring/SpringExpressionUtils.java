@@ -98,7 +98,8 @@ public class SpringExpressionUtils {
      * @since 2023/6/18 11:20
      */
     // TODO @chenchen: 这个方法，和 parseExpressions 比较接近，是不是可以合并下；
-    public static Map<String, Object> parseExpression(JoinPoint joinPoint, Object info,
+    public static Map<String, Object> parseExpression(JoinPoint joinPoint,
+            Object info,
             List<String> expressionStrings) {
         // 如果为空，则不进行解析
         if (CollUtil.isEmpty(expressionStrings)) {

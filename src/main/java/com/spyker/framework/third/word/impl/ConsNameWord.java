@@ -32,7 +32,12 @@ public class ConsNameWord {
             } else if (length >= consNameCenterLenght && length <= consNameMaxLength) {
                 returnWord.append(repalceStr).append(repalceStr).append(word2, 2, length);
             } else if (length > consNameMaxLength) {
-                returnWord.append(word2, 0, 2).append(repalceStr).append(repalceStr).append(repalceStr).append(repalceStr).append(word2, 5, length);
+                returnWord.append(word2, 0, 2)
+                          .append(repalceStr)
+                          .append(repalceStr)
+                          .append(repalceStr)
+                          .append(repalceStr)
+                          .append(word2, 5, length);
             }
             returnWord.append(consNameSplit);
 

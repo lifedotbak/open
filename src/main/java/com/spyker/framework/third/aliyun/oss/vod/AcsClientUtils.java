@@ -19,8 +19,9 @@ public class AcsClientUtils {
     private static final String REGION_ID = "cn-shanghai";
 
     public static DefaultAcsClient getAcsClient(String accessKeyId, String accessKeySecret) {
-        DefaultAcsClient acsClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID, accessKeyId,
-                accessKeySecret));
+        DefaultAcsClient acsClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID,
+                                                                                    accessKeyId,
+                                                                                    accessKeySecret));
         return acsClient;
     }
 
@@ -32,15 +33,17 @@ public class AcsClientUtils {
      * @param videoid
      * @return
      */
-    public static GetVideoPlayAuthResponse getVideoPlayAuth(String accessKeyId, String accessKeySecret,
+    public static GetVideoPlayAuthResponse getVideoPlayAuth(String accessKeyId,
+            String accessKeySecret,
             String videoid) {
         GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
         request.setVideoId(videoid);
         GetVideoPlayAuthResponse response = null;
         try {
 
-            DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID, accessKeyId,
-                    accessKeySecret));
+            DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID,
+                                                                                           accessKeyId,
+                                                                                           accessKeySecret));
 
             response = aliyunClient.getAcsResponse(request);
 
@@ -68,8 +71,9 @@ public class AcsClientUtils {
         GetPlayInfoResponse response = null;
         try {
 
-            DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID, accessKeyId,
-                    accessKeySecret));
+            DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID,
+                                                                                           accessKeyId,
+                                                                                           accessKeySecret));
 
             response = aliyunClient.getAcsResponse(request);
 
@@ -90,15 +94,17 @@ public class AcsClientUtils {
      * @param videoid
      * @return
      */
-    public static GetMezzanineInfoResponse getSourceVideoPlayInfo(String accessKeyId, String accessKeySecret,
+    public static GetMezzanineInfoResponse getSourceVideoPlayInfo(String accessKeyId,
+            String accessKeySecret,
             String videoid) {
         GetMezzanineInfoRequest request = new GetMezzanineInfoRequest();
         request.setVideoId(videoid);
         GetMezzanineInfoResponse response = null;
         try {
 
-            DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID, accessKeyId,
-                    accessKeySecret));
+            DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID,
+                                                                                           accessKeyId,
+                                                                                           accessKeySecret));
 
             response = aliyunClient.getAcsResponse(request);
 
@@ -121,7 +127,9 @@ public class AcsClientUtils {
      * @return
      * @throws ClientException
      */
-    public static AssumeRoleResponse assumeRole(String accessKeyId, String accessKeySecret, String roleArn,
+    public static AssumeRoleResponse assumeRole(String accessKeyId,
+            String accessKeySecret,
+            String roleArn,
             String roleSessionName) throws ClientException {
 
         AssumeRoleResponse response = null;
@@ -158,10 +166,12 @@ public class AcsClientUtils {
      * @param uploadVideoInfo
      * @return
      */
-    public static CreateUploadVideoResponse getAcsResponse(String accessKeyId, String accessKeySecret,
+    public static CreateUploadVideoResponse getAcsResponse(String accessKeyId,
+            String accessKeySecret,
             UploadVideoInfo uploadVideoInfo) {
-        DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID, accessKeyId,
-                accessKeySecret));
+        DefaultAcsClient aliyunClient = new DefaultAcsClient(DefaultProfile.getProfile(REGION_ID,
+                                                                                       accessKeyId,
+                                                                                       accessKeySecret));
 
         CreateUploadVideoRequest request = new CreateUploadVideoRequest();
         CreateUploadVideoResponse response = null;

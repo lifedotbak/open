@@ -42,7 +42,9 @@ public class AesUtil {
      * @throws GeneralSecurityException
      * @throws IOException
      */
-    public String decryptToString(byte[] associatedData, byte[] nonce, String ciphertext) throws GeneralSecurityException, IOException {
+    public String decryptToString(byte[] associatedData, byte[] nonce, String ciphertext) throws
+            GeneralSecurityException,
+            IOException {
         try {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 

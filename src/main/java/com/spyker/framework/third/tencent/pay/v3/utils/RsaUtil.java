@@ -59,7 +59,8 @@ public class RsaUtil {
      * @throws BadPaddingException
      * @throws IOException
      */
-    public static String rsaDecryptOAEP(String ciphertext, PrivateKey privateKey) throws BadPaddingException,
+    public static String rsaDecryptOAEP(String ciphertext, PrivateKey privateKey) throws
+            BadPaddingException,
             IOException {
         try {
             Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");

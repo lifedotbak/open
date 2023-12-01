@@ -62,11 +62,11 @@ public class RInfoController extends BaseController {
             @ModelAttribute PageParamRequest searchPageInfo) {
 
         int current = 1;
-        int size    = 10;
+        int size = 10;
 
         if (null != searchPageInfo) {
             current = searchPageInfo.getPage();
-            size    = searchPageInfo.getSize();
+            size = searchPageInfo.getSize();
         }
 
         IPage<RInfo> page = new Page<>(current, size);

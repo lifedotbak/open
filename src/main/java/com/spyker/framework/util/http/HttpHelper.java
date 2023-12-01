@@ -1,6 +1,7 @@
 package com.spyker.framework.util.http;
 
 import jakarta.servlet.ServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +17,8 @@ import java.nio.charset.StandardCharsets;
  *
  * @author spyker
  */
+@Slf4j
 public class HttpHelper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);
 
     public static String getBodyString(ServletRequest request) {
         StringBuilder sb = new StringBuilder();
@@ -29,13 +30,13 @@ public class HttpHelper {
                 sb.append(line);
             }
         } catch (IOException e) {
-            LOGGER.warn("getBodyString出现问题！");
+            log.error("getBodyString出现问题！");
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    LOGGER.error(ExceptionUtils.getMessage(e));
+                    log.error(ExceptionUtils.getMessage(e));
                 }
             }
         }

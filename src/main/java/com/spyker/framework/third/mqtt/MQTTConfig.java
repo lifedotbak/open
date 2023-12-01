@@ -109,7 +109,8 @@ public class MQTTConfig implements ApplicationListener<ApplicationEvent> {
         log.info("appid -->{}", appid);
 
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(appid,
-                mqttPahoClientFactory, inputTopic);// 建立订阅连接
+                                                                                              mqttPahoClientFactory,
+                                                                                              inputTopic);// 建立订阅连接
         DefaultPahoMessageConverter converter = new DefaultPahoMessageConverter();
         converter.setPayloadAsBytes(true);// bytes类型接收
         adapter.setCompletionTimeout(CompletionTimeout);// 连接超时的时间

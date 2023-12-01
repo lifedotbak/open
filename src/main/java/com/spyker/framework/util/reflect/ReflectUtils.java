@@ -46,7 +46,9 @@ public class ReflectUtils {
      * 同时匹配方法名+参数类型，
      */
     @SuppressWarnings("unchecked")
-    public static <E> E invokeMethod(final Object obj, final String methodName, final Class<?>[] parameterTypes,
+    public static <E> E invokeMethod(final Object obj,
+            final String methodName,
+            final Class<?>[] parameterTypes,
             final Object[] args) {
         if (obj == null || methodName == null) {
             return null;
@@ -70,7 +72,8 @@ public class ReflectUtils {
      * 匹配函数名+参数类型。
      * 用于方法需要被多次调用的情况. 先使用本函数先取得Method,然后调用Method.invoke(Object obj, Object... args)
      */
-    public static Method getAccessibleMethod(final Object obj, final String methodName,
+    public static Method getAccessibleMethod(final Object obj,
+            final String methodName,
             final Class<?>... parameterTypes) {
         // 为空不报错。直接返回 null
         if (obj == null) {
@@ -106,7 +109,8 @@ public class ReflectUtils {
      * 改变private/protected的方法为public，尽量不调用实际改动的语句，避免JDK的SecurityManager抱怨。
      */
     public static void makeAccessible(Method method) {
-        if ((!Modifier.isPublic(method.getModifiers()) || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) && !method.isAccessible()) {
+        if ((!Modifier.isPublic(method.getModifiers()) || !Modifier.isPublic(method.getDeclaringClass()
+                                                                                   .getModifiers())) && !method.isAccessible()) {
             method.setAccessible(true);
         }
     }
@@ -249,7 +253,9 @@ public class ReflectUtils {
      * 改变private/protected的成员变量为public，尽量不调用实际改动的语句，避免JDK的SecurityManager抱怨。
      */
     public static void makeAccessible(Field field) {
-        if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) || Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
+        if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass()
+                                                                                 .getModifiers()) || Modifier.isFinal(
+                field.getModifiers())) && !field.isAccessible()) {
             field.setAccessible(true);
         }
     }

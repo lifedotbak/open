@@ -30,8 +30,10 @@ public class HCControl {
         net_dvr_jpegpara.wPicSize = 3;
         net_dvr_jpegpara.wPicQuality = 255;
 
-        boolean op = hCNetSDK.NET_DVR_CaptureJPEGPicture(loginSuccess.getLUserID(), loginSuccess.getLDChannel(),
-                net_dvr_jpegpara, realPicPath.getBytes());
+        boolean op = hCNetSDK.NET_DVR_CaptureJPEGPicture(loginSuccess.getLUserID(),
+                                                         loginSuccess.getLDChannel(),
+                                                         net_dvr_jpegpara,
+                                                         realPicPath.getBytes());
 
         if (!op) {
             log.error("NET_DVR_CaptureJPEGPicture 操作失败：" + hCNetSDK.NET_DVR_GetLastError());
@@ -48,8 +50,10 @@ public class HCControl {
      */
     public boolean gotoPreset(int dwPresetIndex) {
 
-        boolean opFlag = hCNetSDK.NET_DVR_PTZPreset_Other(loginSuccess.getLUserID(), loginSuccess.getLDChannel(),
-                HCNetSDK.GOTO_PRESET, dwPresetIndex);
+        boolean opFlag = hCNetSDK.NET_DVR_PTZPreset_Other(loginSuccess.getLUserID(),
+                                                          loginSuccess.getLDChannel(),
+                                                          HCNetSDK.GOTO_PRESET,
+                                                          dwPresetIndex);
 
         if (!opFlag) {
             log.error("NET_DVR_PTZPreset_Other 操作失败：" + hCNetSDK.NET_DVR_GetLastError());
@@ -83,8 +87,10 @@ public class HCControl {
         /**
          * 左转
          */
-        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(), loginSuccess.getLDChannel(), HCNetSDK.PAN_RIGHT,
-                0);
+        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(),
+                                          loginSuccess.getLDChannel(),
+                                          HCNetSDK.PAN_RIGHT,
+                                          0);
 
         try {
             Thread.sleep(200);
@@ -95,8 +101,10 @@ public class HCControl {
         /**
          * 停止转动
          */
-        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(), loginSuccess.getLDChannel(), HCNetSDK.PAN_RIGHT,
-                1);
+        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(),
+                                          loginSuccess.getLDChannel(),
+                                          HCNetSDK.PAN_RIGHT,
+                                          1);
 
     }
 
@@ -125,8 +133,10 @@ public class HCControl {
         /**
          * 左转
          */
-        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(), loginSuccess.getLDChannel(), HCNetSDK.TILT_DOWN,
-                0);
+        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(),
+                                          loginSuccess.getLDChannel(),
+                                          HCNetSDK.TILT_DOWN,
+                                          0);
 
         try {
             Thread.sleep(2000);
@@ -137,8 +147,10 @@ public class HCControl {
         /**
          * 停止转动
          */
-        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(), loginSuccess.getLDChannel(), HCNetSDK.TILT_DOWN,
-                1);
+        hCNetSDK.NET_DVR_PTZControl_Other(loginSuccess.getLUserID(),
+                                          loginSuccess.getLDChannel(),
+                                          HCNetSDK.TILT_DOWN,
+                                          1);
 
     }
 

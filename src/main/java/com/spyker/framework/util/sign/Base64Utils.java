@@ -159,7 +159,8 @@ public final class Base64Utils {
         for (; i < numberQuadruple - 1; i++) {
 
             if (!isData((d1 = base64Data[dataIndex++])) || !isData((d2 = base64Data[dataIndex++])) || !isData((d3 =
-                    base64Data[dataIndex++])) || !isData((d4 = base64Data[dataIndex++]))) {
+                    base64Data[dataIndex++])) || !isData(
+                    (d4 = base64Data[dataIndex++]))) {
                 return null;
             } // if found "no data" just return null
 

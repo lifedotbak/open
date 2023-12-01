@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysLogininforServiceImpl extends ServiceImpl<SysLogininforMapper, SysLogininfor> implements SysLogininforService {
+public class SysLogininforServiceImpl extends ServiceImpl<SysLogininforMapper, SysLogininfor>
+        implements SysLogininforService {
 
     private final SysLogininforMapper sysLogininforMapper;
 
