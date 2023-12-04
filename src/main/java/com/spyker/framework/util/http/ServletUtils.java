@@ -26,10 +26,13 @@ import java.util.Map;
 public class ServletUtils {
 
     /**
-     * 获取String参数
+     * 获取完整的请求路径，包括：域名，端口，上下文访问路径
+     *
+     * @return 服务地址
      */
-    public static String getParameter(String name) {
-        return getRequest().getParameter(name);
+    public static String getUrl() {
+        HttpServletRequest request = ServletUtils.getRequest();
+        return getDomain(request);
     }
 
     /**
@@ -39,9 +42,22 @@ public class ServletUtils {
         return getRequestAttributes().getRequest();
     }
 
+    public static String getDomain(HttpServletRequest request) {
+        StringBuffer url = request.getRequestURL();
+        String contextPath = request.getServletContext().getContextPath();
+        return url.delete(url.length() - request.getRequestURI().length(), url.length()).append(contextPath).toString();
+    }
+
     public static ServletRequestAttributes getRequestAttributes() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         return (ServletRequestAttributes) attributes;
+    }
+
+    /**
+     * 获取String参数
+     */
+    public static String getParameter(String name) {
+        return getRequest().getParameter(name);
     }
 
     /**

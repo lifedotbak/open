@@ -2,18 +2,17 @@ package com.spyker.commons.controller.common;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.spyker.framework.config.PlatformConfig;
-import com.spyker.framework.config.ServerConfig;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.StringUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
 import com.spyker.framework.util.file.FileUtils;
+import com.spyker.framework.util.http.ServletUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +37,6 @@ import java.util.List;
 public class FileController {
 
     private static final String FILE_DELIMETER = ",";
-    @Autowired
-    private ServerConfig serverConfig;
 
     /**
      * 通用下载请求
@@ -80,7 +77,7 @@ public class FileController {
             String filePath = PlatformConfig.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
-            String url = serverConfig.getUrl() + fileName;
+            String url = ServletUtils.getUrl() + fileName;
             RestMapResponse ajax = RestMapResponse.success();
             ajax.put("url", url);
             ajax.put("fileName", fileName);
@@ -107,7 +104,7 @@ public class FileController {
             for (MultipartFile file : files) {
                 // 上传并返回新文件名称
                 String fileName = FileUploadUtils.upload(filePath, file);
-                String url = serverConfig.getUrl() + fileName;
+                String url = ServletUtils.getUrl() + fileName;
                 urls.add(url);
                 fileNames.add(fileName);
                 newFileNames.add(FileUtils.getName(fileName));

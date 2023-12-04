@@ -6,6 +6,7 @@ package com.spyker.framework.enums;
  * @author spyker
  */
 public enum OperatorType {
+
     /**
      * 其它
      */

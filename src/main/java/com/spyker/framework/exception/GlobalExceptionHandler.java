@@ -10,6 +10,7 @@ import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -37,6 +38,9 @@ import java.util.*;
 public class GlobalExceptionHandler {
 
     private static final String REQUESTBODY = "requestBodyMessage";
+
+    @Autowired
+    private ExceptionLogService exceptionLogService;
 
     //    @ExceptionHandler
     //    public RestResponse handlerException(Exception e) {
@@ -139,7 +143,7 @@ public class GlobalExceptionHandler {
 
         log.error("exceptionLog ---> {}", exceptionLog);
 
-        //        exceptionLogService.save(exceptionLog);
+        exceptionLogService.doLog(exceptionLog);
     }
 
     @ResponseStatus(HttpStatus.OK)

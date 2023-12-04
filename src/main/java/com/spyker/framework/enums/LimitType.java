@@ -6,6 +6,7 @@ package com.spyker.framework.enums;
  * @author spyker
  */
 public enum LimitType {
+
     /**
      * 默认策略全局限流
      */

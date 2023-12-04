@@ -13,8 +13,8 @@ public class ExceptionLog {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "异常日志ID")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
 
     @Schema(description = "异常的url")
     private String expUrl;
