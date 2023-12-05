@@ -1,4 +1,4 @@
-package com.spyker.framework.exception;
+package com.spyker.framework.exception.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

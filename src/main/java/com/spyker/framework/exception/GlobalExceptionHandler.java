@@ -4,6 +4,9 @@ import cn.dev33.satoken.exception.SaTokenException;
 import cn.hutool.core.util.ObjectUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
+import com.spyker.framework.exception.entity.ExceptionLog;
+import com.spyker.framework.exception.handler.ExceptionLogHandler;
 import com.spyker.framework.response.RestResponse;
 import com.spyker.framework.response.ResponseCodeEnum;
 import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
@@ -38,9 +41,9 @@ import java.util.*;
 public class GlobalExceptionHandler {
 
     private static final String REQUESTBODY = "requestBodyMessage";
-
     @Autowired
-    private ExceptionLogService exceptionLogService;
+    private ExceptionLogUsableHandler exceptionChain;
+    //    private ExceptionLogService exceptionLogService;
 
     //    @ExceptionHandler
     //    public RestResponse handlerException(Exception e) {
@@ -143,7 +146,11 @@ public class GlobalExceptionHandler {
 
         log.error("exceptionLog ---> {}", exceptionLog);
 
-        exceptionLogService.doLog(exceptionLog);
+        ExceptionLogHandler exceptionLogHandler = exceptionChain.getHandler();
+
+        if (null != exceptionLogHandler) {
+            exceptionLogHandler.handler(exceptionLog);
+        }
     }
 
     @ResponseStatus(HttpStatus.OK)
