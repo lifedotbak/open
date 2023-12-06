@@ -1,8 +1,8 @@
 package com.spyker.framework.core;
 
 import com.spyker.framework.response.RestMapResponse;
-import com.spyker.framework.util.StringUtils;
-import com.spyker.framework.util.date.DateUtils;
+import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.date.ExDateUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -25,7 +25,7 @@ public class BaseController {
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) {
-                setValue(DateUtils.parseDate(text));
+                setValue(ExDateUtils.parseDate(text));
             }
         });
     }
@@ -96,7 +96,7 @@ public class BaseController {
      * 页面跳转
      */
     public String redirect(String url) {
-        return StringUtils.format("redirect:{}", url);
+        return ExStringUtils.format("redirect:{}", url);
     }
 
 }

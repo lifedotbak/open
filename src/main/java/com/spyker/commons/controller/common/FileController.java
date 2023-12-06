@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestMapResponse;
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
 import com.spyker.framework.util.file.FileUtils;
 import com.spyker.framework.util.http.ServletUtils;
@@ -51,7 +51,7 @@ public class FileController {
             HttpServletRequest request) {
         try {
             if (!FileUtils.checkAllowDownload(fileName)) {
-                throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
+                throw new Exception(ExStringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
             }
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = PlatformConfig.getDownloadPath() + fileName;
@@ -111,10 +111,10 @@ public class FileController {
                 originalFilenames.add(file.getOriginalFilename());
             }
             RestMapResponse ajax = RestMapResponse.success();
-            ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
-            ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));
-            ajax.put("newFileNames", StringUtils.join(newFileNames, FILE_DELIMETER));
-            ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMETER));
+            ajax.put("urls", ExStringUtils.join(urls, FILE_DELIMETER));
+            ajax.put("fileNames", ExStringUtils.join(fileNames, FILE_DELIMETER));
+            ajax.put("newFileNames", ExStringUtils.join(newFileNames, FILE_DELIMETER));
+            ajax.put("originalFilenames", ExStringUtils.join(originalFilenames, FILE_DELIMETER));
             return ajax;
         } catch (Exception e) {
             return RestMapResponse.error(e.getMessage());
@@ -129,14 +129,14 @@ public class FileController {
             Exception {
         try {
             if (!FileUtils.checkAllowDownload(resource)) {
-                throw new Exception(StringUtils.format("资源文件({})非法，不允许下载。 ", resource));
+                throw new Exception(ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
             }
             // 本地资源路径
             String localPath = PlatformConfig.getProfile();
             // 数据库资源地址
-            String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
+            String downloadPath = localPath + ExStringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
             // 下载名称
-            String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
+            String downloadName = ExStringUtils.substringAfterLast(downloadPath, "/");
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             FileUtils.setAttachmentResponseHeader(response, downloadName);
             FileUtils.writeBytes(downloadPath, response.getOutputStream());

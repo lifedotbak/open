@@ -25,7 +25,7 @@ import java.util.List;
  */
 @UtilityClass
 @Slf4j
-public class JsonUtils {
+public class ExJsonUtils {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
@@ -43,7 +43,7 @@ public class JsonUtils {
      * @param objectMapper ObjectMapper 对象
      */
     public static void init(ObjectMapper objectMapper) {
-        JsonUtils.objectMapper = objectMapper;
+        ExJsonUtils.objectMapper = objectMapper;
     }
 
     @SneakyThrows

@@ -6,7 +6,7 @@ import com.spyker.framework.third.tencent.pay.v3.entity.RequestAuth;
 import com.spyker.framework.third.tencent.pay.v3.entity.refunds.Refunds;
 import com.spyker.framework.third.tencent.pay.v3.entity.refunds.RefundsResult;
 import com.spyker.framework.third.tencent.pay.v3.sign.SignRequestAuthUtil;
-import com.spyker.framework.util.AppRandomStringUtils;
+import com.spyker.framework.util.ExRandomStringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -79,7 +79,7 @@ public class RefundAction {
         final Gson gson = new Gson();
         final String uos = gson.toJson(refundsr);
 
-        final String nonceStr = AppRandomStringUtils.random32();
+        final String nonceStr = ExRandomStringUtils.random32();
         final String timestamp = System.currentTimeMillis() / 1000 + "";
 
         final RequestAuth prePayAuthorizationInfo = new RequestAuth();

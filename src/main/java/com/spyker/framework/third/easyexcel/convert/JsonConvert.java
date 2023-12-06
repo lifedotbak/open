@@ -5,7 +5,7 @@ import com.alibaba.excel.enums.CellDataTypeEnum;
 import com.alibaba.excel.metadata.GlobalConfiguration;
 import com.alibaba.excel.metadata.data.WriteCellData;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
-import com.spyker.framework.util.JsonUtils;
+import com.spyker.framework.util.ExJsonUtils;
 
 /**
  * Excel Json 转换器
@@ -29,7 +29,7 @@ public class JsonConvert implements Converter<Object> {
             ExcelContentProperty contentProperty,
             GlobalConfiguration globalConfiguration) {
         // 生成 Excel 小表格
-        return new WriteCellData<>(JsonUtils.toJsonString(value));
+        return new WriteCellData<>(ExJsonUtils.toJsonString(value));
     }
 
 }

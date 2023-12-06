@@ -3,6 +3,7 @@ package com.spyker.framework.util.date;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
@@ -12,7 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Slf4j
-public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
+public final class ExDateUtils extends DateUtils {
 
     private static final String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM"
             , "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM", "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss"
@@ -211,7 +212,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
     public static String getCurrentMonth() {
-        return DateUtils.date2String(getCurrentDate(), DateUtils.Format.YYYY_MM);
+        return ExDateUtils.date2String(getCurrentDate(), ExDateUtils.Format.YYYY_MM);
     }
 
     public static Date getCurrentDate() {
@@ -552,12 +553,12 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         String startHm = date2String(start, Format.HHMM);
         String endHm = date2String(end, Format.HHMM);
 
-        Date startYMDHM = DateUtils.format2Date(DateUtils.date2String(startYmd,
-                                                                      DateUtils.Format.YYYY_MM_DD) + " " + startHm,
-                                                DateUtils.Format.YYYY_MM_DD_HH_MM);
-        Date endYMDHM = DateUtils.format2Date(DateUtils.date2String(startYmd,
-                                                                    DateUtils.Format.YYYY_MM_DD) + " " + endHm,
-                                              DateUtils.Format.YYYY_MM_DD_HH_MM);
+        Date startYMDHM = ExDateUtils.format2Date(ExDateUtils.date2String(startYmd,
+                                                                          ExDateUtils.Format.YYYY_MM_DD) + " " + startHm,
+                                                  ExDateUtils.Format.YYYY_MM_DD_HH_MM);
+        Date endYMDHM = ExDateUtils.format2Date(ExDateUtils.date2String(startYmd,
+                                                                        ExDateUtils.Format.YYYY_MM_DD) + " " + endHm,
+                                                ExDateUtils.Format.YYYY_MM_DD_HH_MM);
 
         return startYMDHM.after(endYMDHM);
 

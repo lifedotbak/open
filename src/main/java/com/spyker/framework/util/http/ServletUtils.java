@@ -1,7 +1,7 @@
 package com.spyker.framework.util.http;
 
 import cn.hutool.core.convert.Convert;
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -104,7 +104,7 @@ public class ServletUtils {
     public static Map<String, String> getParamMap(ServletRequest request) {
         Map<String, String> params = new HashMap<>();
         for (Map.Entry<String, String[]> entry : getParams(request).entrySet()) {
-            params.put(entry.getKey(), StringUtils.join(entry.getValue(), ","));
+            params.put(entry.getKey(), ExStringUtils.join(entry.getValue(), ","));
         }
         return params;
     }
@@ -168,12 +168,12 @@ public class ServletUtils {
         }
 
         String uri = request.getRequestURI();
-        if (StringUtils.inStringIgnoreCase(uri, ".json", ".xml")) {
+        if (ExStringUtils.inStringIgnoreCase(uri, ".json", ".xml")) {
             return true;
         }
 
         String ajax = request.getParameter("__ajax");
-        return StringUtils.inStringIgnoreCase(ajax, "json", "xml");
+        return ExStringUtils.inStringIgnoreCase(ajax, "json", "xml");
     }
 
     /**

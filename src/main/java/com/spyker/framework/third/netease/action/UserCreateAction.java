@@ -3,7 +3,7 @@ package com.spyker.framework.third.netease.action;
 import com.google.gson.Gson;
 import com.spyker.framework.third.netease.model.AccCreateResult;
 import com.spyker.framework.third.netease.utils.CheckSumBuilder;
-import com.spyker.framework.util.AppRandomStringUtils;
+import com.spyker.framework.util.ExRandomStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -55,7 +55,7 @@ public class UserCreateAction {
 
             HttpPost httpPost = new HttpPost(url);
 
-            String nonce = AppRandomStringUtils.random32();
+            String nonce = ExRandomStringUtils.random32();
             String curTime = String.valueOf(new Date().getTime() / 1000L);
             String checkSum = CheckSumBuilder.getCheckSum(appSecret, nonce, curTime);// 参考 计算CheckSum的java代码
 

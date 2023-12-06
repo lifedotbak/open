@@ -1,6 +1,6 @@
 package com.spyker.framework.util.text;
 
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.math.BigDecimal;
@@ -77,7 +77,7 @@ public class ConvertUtils {
         }
 
         final String valueStr = toStr(value, null);
-        return StringUtils.isEmpty(valueStr) ? defaultValue : valueStr.charAt(0);
+        return ExStringUtils.isEmpty(valueStr) ? defaultValue : valueStr.charAt(0);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ConvertUtils {
             return ((Number) value).byteValue();
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -154,7 +154,7 @@ public class ConvertUtils {
             return ((Number) value).shortValue();
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -193,7 +193,7 @@ public class ConvertUtils {
             return (Number) value;
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -235,7 +235,7 @@ public class ConvertUtils {
             return ((Number) value).intValue();
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -263,7 +263,7 @@ public class ConvertUtils {
      * @return 结果
      */
     public static Integer[] toIntArray(String split, String str) {
-        if (StringUtils.isEmpty(str)) {
+        if (ExStringUtils.isEmpty(str)) {
             return new Integer[]{};
         }
         String[] arr = str.split(split);
@@ -293,7 +293,7 @@ public class ConvertUtils {
      * @return 结果
      */
     public static Long[] toLongArray(String split, String str) {
-        if (StringUtils.isEmpty(str)) {
+        if (ExStringUtils.isEmpty(str)) {
             return new Long[]{};
         }
         String[] arr = str.split(split);
@@ -325,7 +325,7 @@ public class ConvertUtils {
             return ((Number) value).longValue();
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -401,7 +401,7 @@ public class ConvertUtils {
             return ((Number) value).doubleValue();
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -444,7 +444,7 @@ public class ConvertUtils {
             return ((Number) value).floatValue();
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -483,7 +483,7 @@ public class ConvertUtils {
             return (Boolean) value;
         }
         String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         valueStr = valueStr.trim().toLowerCase();
@@ -532,7 +532,7 @@ public class ConvertUtils {
             return myE;
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -574,7 +574,7 @@ public class ConvertUtils {
             return BigInteger.valueOf((Long) value);
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -622,7 +622,7 @@ public class ConvertUtils {
             return new BigDecimal((Integer) value);
         }
         final String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
+        if (ExStringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
         try {
@@ -721,7 +721,7 @@ public class ConvertUtils {
      * @return 字符串
      */
     public static String str(byte[] bytes, String charset) {
-        return str(bytes, StringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+        return str(bytes, ExStringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
     }
 
     /**

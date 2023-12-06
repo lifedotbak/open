@@ -3,7 +3,7 @@ package com.spyker.framework.util.number;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * 数字的工具类，补全 {@link cn.hutool.core.util.NumberUtil} 的功能
+ * 数字的工具类
  *
  * @author spyker
  */

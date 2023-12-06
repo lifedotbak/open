@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
 @Slf4j
-public final class GZIPUtils {
+public final class GZipUtils {
 
     public static String uncompressToString(byte[] bytes, String encoding) {
         if (bytes == null || bytes.length == 0) {

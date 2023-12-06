@@ -1,13 +1,14 @@
 package com.spyker.framework.util.file;
 
 import cn.hutool.core.io.FileTypeUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.spyker.framework.util.StringUtils;
-import com.spyker.framework.util.date.DateUtils;
-import com.spyker.framework.util.uuid.IdUtils;
+import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.date.ExDateUtils;
+import com.spyker.framework.util.uuid.ExUuidUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
@@ -27,6 +28,7 @@ import java.util.Date;
  * @author spyker
  */
 public class FileUtils {
+
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
 
     /**
@@ -40,7 +42,7 @@ public class FileUtils {
     public static File createTempFile(String data) {
         File file = createTempFile();
         // 写入内容
-        cn.hutool.core.io.FileUtil.writeUtf8String(data, file);
+        FileUtil.writeUtf8String(data, file);
         return file;
     }
 
@@ -70,7 +72,7 @@ public class FileUtils {
     public static File createTempFile(byte[] data) {
         File file = createTempFile();
         // 写入内容
-        cn.hutool.core.io.FileUtil.writeBytes(data, file);
+        FileUtil.writeBytes(data, file);
         return file;
     }
 
@@ -208,7 +210,8 @@ public class FileUtils {
         String pathName = "";
         try {
             String extension = getFileExtendName(data);
-            pathName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
+            //            pathName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
+            pathName = ExDateUtils.datePath() + "/" + ExUuidUtils.fastStringUUID() + "." + extension;
             File file = FileUploadUtils.getAbsoluteFile(uploadDir, pathName);
             fos = new FileOutputStream(file);
             fos.write(data);
@@ -272,7 +275,7 @@ public class FileUtils {
      */
     public static boolean checkAllowDownload(String resource) {
         // 禁止目录上跳级别
-        if (StringUtils.contains(resource, "..")) {
+        if (ExStringUtils.contains(resource, "..")) {
             return false;
         }
 

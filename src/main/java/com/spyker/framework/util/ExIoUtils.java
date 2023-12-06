@@ -11,7 +11,7 @@ import java.io.InputStream;
  *
  * @author spyker
  */
-public class IoUtils {
+public class ExIoUtils {
 
     /**
      * 从流中读取 UTF8 编码的内容

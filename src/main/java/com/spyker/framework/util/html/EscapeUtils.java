@@ -1,6 +1,6 @@
 package com.spyker.framework.util.html;
 
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 
 /**
  * 转义和反转义工具类
@@ -73,8 +73,8 @@ public class EscapeUtils {
      * @return 编码后的字符
      */
     private static String encode(String text) {
-        if (StringUtils.isEmpty(text)) {
-            return StringUtils.EMPTY;
+        if (ExStringUtils.isEmpty(text)) {
+            return ExStringUtils.EMPTY;
         }
 
         final StringBuilder tmp = new StringBuilder(text.length() * 6);
@@ -106,7 +106,7 @@ public class EscapeUtils {
      * @return 解码后的字符串
      */
     public static String decode(String content) {
-        if (StringUtils.isEmpty(content)) {
+        if (ExStringUtils.isEmpty(content)) {
             return content;
         }
 

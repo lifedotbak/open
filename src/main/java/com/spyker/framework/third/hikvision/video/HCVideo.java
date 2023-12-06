@@ -4,7 +4,7 @@ import com.spyker.framework.third.hikvision.data.HCOpInfo;
 import com.spyker.framework.third.hikvision.jna.HCNetSDK;
 import com.spyker.framework.third.hikvision.jna.PlayCtrl;
 import com.spyker.framework.third.hikvision.utils.CommonUtil;
-import com.spyker.framework.util.date.DateUtils;
+import com.spyker.framework.util.date.ExDateUtils;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.ByteByReference;
 import com.sun.jna.ptr.IntByReference;
@@ -534,7 +534,7 @@ public class HCVideo {
 
             hCNetSDK.NET_DVR_PlayBackControl(m_lLoadHandle, HCNetSDK.NET_DVR_PLAYSTART, 0, null);
 
-            log.info("开始下载时间---->{}", DateUtils.getCurrentDate());
+            log.info("开始下载时间---->{}", ExDateUtils.getCurrentDate());
 
             downloadtimer = new Timer();// 新建定时器
             downloadtimer.schedule(new DownloadTask(), 0, 5000);// 0秒后开始响应函数

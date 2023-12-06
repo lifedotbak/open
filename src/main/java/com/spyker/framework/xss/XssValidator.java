@@ -1,6 +1,6 @@
 package com.spyker.framework.xss;
 
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -17,7 +17,7 @@ public class XssValidator implements ConstraintValidator<Xss, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-        if (StringUtils.isBlank(value)) {
+        if (ExStringUtils.isBlank(value)) {
             return true;
         }
         return !containsHtml(value);

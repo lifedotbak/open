@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author spyker
  */
-public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
+public final class ExUuidUtils implements Serializable, Comparable<ExUuidUtils> {
 
     private static final long serialVersionUID = -1185015143654744140L;
     /**
@@ -31,7 +31,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      *
      * @param data 数据
      */
-    private UUIDUtils(byte[] data) {
+    private ExUuidUtils(byte[] data) {
 
         long msb = 0;
         long lsb = 0;
@@ -52,18 +52,79 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      * @param mostSigBits  用于 {@code UUID} 的最高有效 64 位
      * @param leastSigBits 用于 {@code UUID} 的最低有效 64 位
      */
-    public UUIDUtils(long mostSigBits, long leastSigBits) {
+    public ExUuidUtils(long mostSigBits, long leastSigBits) {
         this.mostSigBits = mostSigBits;
         this.leastSigBits = leastSigBits;
     }
 
     /**
-     * 获取类型 4（伪随机生成的）UUID 的静态工厂。
+     * 获取随机UUID
+     *
+     * @return 随机UUID
+     */
+    public static String randomStringUUID() {
+        return randomUUID().toString();
+    }
+
+    /**
+     * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
      *
      * @return 随机生成的 {@code UUID}
      */
-    public static UUIDUtils fastUUID() {
-        return randomUUID(false);
+    public static ExUuidUtils randomUUID() {
+        return randomUUID(true);
+    }
+
+    /**
+     * 返回此{@code UUID} 的字符串表现形式。
+     *
+     * <p>
+     * UUID 的字符串表示形式由此 BNF 描述：
+     *
+     * <pre>
+     * {@code
+     * UUID                   = <time_low>-<time_mid>-<time_high_and_version>-<variant_and_sequence>-<node>
+     * time_low               = 4*<hexOctet>
+     * time_mid               = 2*<hexOctet>
+     * time_high_and_version  = 2*<hexOctet>
+     * variant_and_sequence   = 2*<hexOctet>
+     * node                   = 6*<hexOctet>
+     * hexOctet               = <hexDigit><hexDigit>
+     * hexDigit               = [0-9a-fA-F]
+     * }
+     * </pre>
+     *
+     * </blockquote>
+     *
+     * @param isSimple 是否简单模式，简单模式为不带'-'的UUID字符串
+     * @return 此{@code UUID} 的字符串表现形式
+     */
+    public String toString(boolean isSimple) {
+        final StringBuilder builder = new StringBuilder(isSimple ? 32 : 36);
+        // time_low
+        builder.append(digits(mostSigBits >> 32, 8));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // time_mid
+        builder.append(digits(mostSigBits >> 16, 4));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // time_high_and_version
+        builder.append(digits(mostSigBits, 4));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // variant_and_sequence
+        builder.append(digits(leastSigBits >> 48, 4));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // node
+        builder.append(digits(leastSigBits, 12));
+
+        return builder.toString();
     }
 
     /**
@@ -72,7 +133,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      * @param isSecure 是否使用{@link SecureRandom}如果是可以获得更安全的随机码，否则可以得到更好的性能
      * @return 随机生成的 {@code UUID}
      */
-    public static UUIDUtils randomUUID(boolean isSecure) {
+    public static ExUuidUtils randomUUID(boolean isSecure) {
         final Random ng = isSecure ? Holder.numberGenerator : getRandom();
 
         byte[] randomBytes = new byte[16];
@@ -81,7 +142,19 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
         randomBytes[6] |= 0x40; /* set to version 4 */
         randomBytes[8] &= 0x3f; /* clear variant */
         randomBytes[8] |= 0x80; /* set to IETF variant */
-        return new UUIDUtils(randomBytes);
+        return new ExUuidUtils(randomBytes);
+    }
+
+    /**
+     * 返回指定数字对应的hex值
+     *
+     * @param val    值
+     * @param digits 位
+     * @return 值
+     */
+    private static String digits(long val, int digits) {
+        long hi = 1L << (digits * 4);
+        return Long.toHexString(hi | (val & (hi - 1))).substring(1);
     }
 
     /**
@@ -95,12 +168,39 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
     }
 
     /**
-     * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
+     * 简化的UUID，去掉了横线，使用性能更好的ThreadLocalRandom生成UUID
+     *
+     * @return 简化的UUID，去掉了横线
+     */
+    public static String fastSimpleStringUUID() {
+        return fastUUID().toString(true);
+    }
+
+    /**
+     * 获取类型 4（伪随机生成的）UUID 的静态工厂。
      *
      * @return 随机生成的 {@code UUID}
      */
-    public static UUIDUtils randomUUID() {
-        return randomUUID(true);
+    public static ExUuidUtils fastUUID() {
+        return randomUUID(false);
+    }
+
+    /**
+     * 简化的UUID，去掉了横线
+     *
+     * @return 简化的UUID，去掉了横线
+     */
+    public static String simpleStringUUID() {
+        return randomUUID().toString(true);
+    }
+
+    /**
+     * 获取随机UUID，使用性能更好的ThreadLocalRandom生成UUID
+     *
+     * @return 随机UUID
+     */
+    public static String fastStringUUID() {
+        return fastUUID().toString();
     }
 
     /**
@@ -109,7 +209,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      * @param name 用于构造 UUID 的字节数组。
      * @return 根据指定数组生成的 {@code UUID}
      */
-    public static UUIDUtils nameUUIDFromBytes(byte[] name) {
+    public static ExUuidUtils nameUUIDFromBytes(byte[] name) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
@@ -121,7 +221,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
         md5Bytes[6] |= 0x30; /* set to version 3 */
         md5Bytes[8] &= 0x3f; /* clear variant */
         md5Bytes[8] |= 0x80; /* set to IETF variant */
-        return new UUIDUtils(md5Bytes);
+        return new ExUuidUtils(md5Bytes);
     }
 
     /**
@@ -131,7 +231,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      * @return 具有指定值的 {@code UUID}
      * @throws IllegalArgumentException 如果 name 与 {@link #toString} 中描述的字符串表示形式不符抛出此异常
      */
-    public static UUIDUtils fromString(String name) {
+    public static ExUuidUtils fromString(String name) {
         String[] components = name.split("-");
         if (components.length != 5) {
             throw new IllegalArgumentException("Invalid UUID string: " + name);
@@ -150,7 +250,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
         leastSigBits <<= 48;
         leastSigBits |= Long.decode(components[4]).longValue();
 
-        return new UUIDUtils(mostSigBits, leastSigBits);
+        return new ExUuidUtils(mostSigBits, leastSigBits);
     }
 
     /**
@@ -287,6 +387,8 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
         return leastSigBits & 0x0000FFFFFFFFFFFFL;
     }
 
+    // Comparison Operations
+
     /**
      * 返回此 UUID 的哈希码。
      *
@@ -298,6 +400,9 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
         return ((int) (hilo >> 32)) ^ (int) hilo;
     }
 
+    // -------------------------------------------------------------------------------------------------------------------
+    // Private method start
+
     /**
      * 将此对象与指定对象比较。
      * <p>
@@ -308,14 +413,12 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      */
     @Override
     public boolean equals(Object obj) {
-        if ((null == obj) || (obj.getClass() != UUIDUtils.class)) {
+        if ((null == obj) || (obj.getClass() != ExUuidUtils.class)) {
             return false;
         }
-        UUIDUtils id = (UUIDUtils) obj;
+        ExUuidUtils id = (ExUuidUtils) obj;
         return (mostSigBits == id.mostSigBits && leastSigBits == id.leastSigBits);
     }
-
-    // Comparison Operations
 
     /**
      * 返回此{@code UUID} 的字符串表现形式。
@@ -346,73 +449,6 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
         return toString(false);
     }
 
-    // -------------------------------------------------------------------------------------------------------------------
-    // Private method start
-
-    /**
-     * 返回此{@code UUID} 的字符串表现形式。
-     *
-     * <p>
-     * UUID 的字符串表示形式由此 BNF 描述：
-     *
-     * <pre>
-     * {@code
-     * UUID                   = <time_low>-<time_mid>-<time_high_and_version>-<variant_and_sequence>-<node>
-     * time_low               = 4*<hexOctet>
-     * time_mid               = 2*<hexOctet>
-     * time_high_and_version  = 2*<hexOctet>
-     * variant_and_sequence   = 2*<hexOctet>
-     * node                   = 6*<hexOctet>
-     * hexOctet               = <hexDigit><hexDigit>
-     * hexDigit               = [0-9a-fA-F]
-     * }
-     * </pre>
-     *
-     * </blockquote>
-     *
-     * @param isSimple 是否简单模式，简单模式为不带'-'的UUID字符串
-     * @return 此{@code UUID} 的字符串表现形式
-     */
-    public String toString(boolean isSimple) {
-        final StringBuilder builder = new StringBuilder(isSimple ? 32 : 36);
-        // time_low
-        builder.append(digits(mostSigBits >> 32, 8));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // time_mid
-        builder.append(digits(mostSigBits >> 16, 4));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // time_high_and_version
-        builder.append(digits(mostSigBits, 4));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // variant_and_sequence
-        builder.append(digits(leastSigBits >> 48, 4));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // node
-        builder.append(digits(leastSigBits, 12));
-
-        return builder.toString();
-    }
-
-    /**
-     * 返回指定数字对应的hex值
-     *
-     * @param val    值
-     * @param digits 位
-     * @return 值
-     */
-    private static String digits(long val, int digits) {
-        long hi = 1L << (digits * 4);
-        return Long.toHexString(hi | (val & (hi - 1))).substring(1);
-    }
-
     /**
      * 将此 UUID 与指定的 UUID 比较。
      *
@@ -423,7 +459,7 @@ public final class UUIDUtils implements Serializable, Comparable<UUIDUtils> {
      * @return 在此 UUID 小于、等于或大于 val 时，分别返回 -1、0 或 1。
      */
     @Override
-    public int compareTo(UUIDUtils val) {
+    public int compareTo(ExUuidUtils val) {
         // The ordering is intentionally set up so that the UUIDs
         // can simply be numerically compared as two numbers
         return (this.mostSigBits < val.mostSigBits ? -1 : //

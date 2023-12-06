@@ -1,5 +1,6 @@
 package com.spyker.framework.util.sign;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -16,8 +17,8 @@ import java.security.MessageDigest;
  *
  * @author spyker
  */
+@Slf4j
 public class Md5Utils {
-    private static final Logger log = LoggerFactory.getLogger(Md5Utils.class);
 
     public static String hash(String s) {
         try {
@@ -53,7 +54,7 @@ public class Md5Utils {
             byte[] messageDigest = algorithm.digest();
             return messageDigest;
         } catch (Exception e) {
-            log.error("MD5 Error...", e);
+            log.error("MD5 Error...{}", e);
         }
         return null;
     }

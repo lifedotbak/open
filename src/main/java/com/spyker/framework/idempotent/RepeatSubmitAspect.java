@@ -6,7 +6,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.spyker.framework.exception.BusinessException;
 import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestResponse;
-import com.spyker.framework.util.JsonUtils;
+import com.spyker.framework.util.ExJsonUtils;
 import com.spyker.framework.util.MessageUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -83,7 +83,7 @@ public class RepeatSubmitAspect {
             for (Object o : paramsArray) {
                 if (ObjectUtil.isNotNull(o) && !isFilterObject(o)) {
                     try {
-                        params.append(JsonUtils.toJsonString(o)).append(" ");
+                        params.append(ExJsonUtils.toJsonString(o)).append(" ");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

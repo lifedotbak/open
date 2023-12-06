@@ -1,8 +1,7 @@
 package com.spyker.framework.exception;
 
-import cn.dev33.satoken.exception.SaTokenException;
 import com.spyker.framework.util.MessageUtils;
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 
 /**
  * 全局异常
@@ -53,7 +52,7 @@ public class GlobalException extends RuntimeException {
     @Override
     public String getMessage() {
         String message = null;
-        if (!StringUtils.isEmpty(code)) {
+        if (!ExStringUtils.isEmpty(code)) {
             message = MessageUtils.message(code, args);
         }
         if (message == null) {

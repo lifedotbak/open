@@ -1,7 +1,7 @@
 package com.spyker.framework.util.uuid;
 
-import com.spyker.framework.util.StringUtils;
-import com.spyker.framework.util.date.DateUtils;
+import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.date.ExDateUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -54,7 +54,7 @@ public class SeqUtils {
      * @return 序列值
      */
     public static String getId(AtomicInteger atomicInt, int length) {
-        String result = DateUtils.dateTimeNow();
+        String result = ExDateUtils.dateTimeNow();
         result += machineCode;
         result += getSeq(atomicInt, length);
         return result;
@@ -75,6 +75,6 @@ public class SeqUtils {
             atomicInt.set(1);
         }
         // 转字符串，用0左补齐
-        return StringUtils.padl(value, length);
+        return ExStringUtils.padl(value, length);
     }
 }

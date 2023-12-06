@@ -1,6 +1,6 @@
 package com.spyker.framework.util.text;
 
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 
 /**
  * 字符串格式化
@@ -27,7 +27,7 @@ public class StrFormatterUtils {
      * @return 结果
      */
     public static String format(final String strPattern, final Object... argArray) {
-        if (StringUtils.isEmpty(strPattern) || StringUtils.isEmpty(argArray)) {
+        if (ExStringUtils.isEmpty(strPattern) || ExStringUtils.isEmpty(argArray)) {
             return strPattern;
         }
         final int strPatternLength = strPattern.length();

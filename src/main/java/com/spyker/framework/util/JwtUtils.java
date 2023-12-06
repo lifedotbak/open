@@ -6,14 +6,16 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.spyker.framework.util.date.DateUtils;
+import com.spyker.framework.util.date.ExDateUtils;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @NoArgsConstructor
+@Slf4j
 public final class JwtUtils {
 
     private static final String SECRET = "app-spyker-jwt";
@@ -33,7 +35,8 @@ public final class JwtUtils {
 
         re = verifyToken(token);
 
-        System.out.println(re);
+        log.info("re--->{}", re);
+
     }
 
     public static String genToken(Map<String, String> claims) {
@@ -41,10 +44,13 @@ public final class JwtUtils {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             JWTCreator.Builder builder = JWT.create()
                                             .withIssuer(ISSUER)
-                                            .withExpiresAt(DateUtils.addDays(new Date(), 365));
+                                            .withExpiresAt(ExDateUtils.addDays(new Date(), 365));
             claims.forEach((k, v) -> builder.withClaim(k, v));
             return builder.sign(algorithm);
         } catch (Exception e) {
+
+            log.error("genToken--->{}", e);
+
             throw new RuntimeException(e);
         }
     }
@@ -54,6 +60,9 @@ public final class JwtUtils {
         try {
             algorithm = Algorithm.HMAC256(SECRET);
         } catch (Exception e) {
+
+            log.error("verifyToken--->{}", e);
+
             throw new RuntimeException(e);
         }
         JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUER).build();

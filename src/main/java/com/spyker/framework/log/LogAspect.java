@@ -3,7 +3,7 @@ package com.spyker.framework.log;
 import com.alibaba.fastjson2.JSON;
 import com.spyker.commons.entity.SysOperLog;
 import com.spyker.framework.filter.PropertyPreExcludeFilter;
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.ip.IpUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -74,7 +74,7 @@ public class LogAspect {
             //            // 请求的地址
             String ip = IpUtils.getIpAddr();
             operLog.setOperIp(ip);
-            operLog.setOperUrl(StringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
+            operLog.setOperUrl(ExStringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
             //            if (loginUser != null) {
             //                operLog.setOperName(loginUser.getUsername());
             //            }
@@ -129,8 +129,8 @@ public class LogAspect {
             setRequestValue(joinPoint, operLog, log.excludeParamNames());
         }
         // 是否需要保存response，参数和值
-        if (log.isSaveResponseData() && StringUtils.isNotNull(jsonResult)) {
-            operLog.setJsonResult(StringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
+        if (log.isSaveResponseData() && ExStringUtils.isNotNull(jsonResult)) {
+            operLog.setJsonResult(ExStringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
         }
     }
 
@@ -145,15 +145,15 @@ public class LogAspect {
     private void setRequestValue(JoinPoint joinPoint, SysOperLog operLog, String[] excludeParamNames) throws Exception {
         Map<?, ?> paramsMap = ServletUtils.getParamMap(ServletUtils.getRequest());
         String requestMethod = operLog.getRequestMethod();
-        if (StringUtils.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name()
-                                                                                                             .equals(requestMethod))) {
+        if (ExStringUtils.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name()
+                                                                                                               .equals(requestMethod))) {
             String params = argsArrayToString(joinPoint.getArgs(), excludeParamNames);
-            operLog.setOperParam(StringUtils.substring(params, 0, 2000));
+            operLog.setOperParam(ExStringUtils.substring(params, 0, 2000));
         } else {
-            operLog.setOperParam(StringUtils.substring(JSON.toJSONString(paramsMap,
-                                                                         excludePropertyPreFilter(excludeParamNames)),
-                                                       0,
-                                                       2000));
+            operLog.setOperParam(ExStringUtils.substring(JSON.toJSONString(paramsMap,
+                                                                           excludePropertyPreFilter(excludeParamNames)),
+                                                         0,
+                                                         2000));
         }
     }
 
@@ -165,7 +165,7 @@ public class LogAspect {
         String params = "";
         if (paramsArray != null) {
             for (Object o : paramsArray) {
-                if (StringUtils.isNotNull(o) && !isFilterObject(o)) {
+                if (ExStringUtils.isNotNull(o) && !isFilterObject(o)) {
                     try {
                         String jsonObj = JSON.toJSONString(o, excludePropertyPreFilter(excludeParamNames));
                         params += jsonObj + " ";

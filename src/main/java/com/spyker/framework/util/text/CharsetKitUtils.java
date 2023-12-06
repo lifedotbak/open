@@ -1,6 +1,6 @@
 package com.spyker.framework.util.text;
 
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -44,7 +44,7 @@ public class CharsetKitUtils {
      * @return Charset
      */
     public static Charset charset(String charset) {
-        return StringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset);
+        return ExStringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CharsetKitUtils {
             destCharset = StandardCharsets.UTF_8;
         }
 
-        if (StringUtils.isEmpty(source) || srcCharset.equals(destCharset)) {
+        if (ExStringUtils.isEmpty(source) || srcCharset.equals(destCharset)) {
             return source;
         }
         return new String(source.getBytes(srcCharset), destCharset);

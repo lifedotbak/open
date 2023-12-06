@@ -8,7 +8,7 @@ import com.spyker.framework.constant.Constants;
 import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
-import com.spyker.framework.util.uuid.IdUtils;
+import com.spyker.framework.util.uuid.ExUuidUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,8 @@ public class CaptchaController {
         }
 
         // 保存验证码信息
-        String uuid = IdUtils.simpleUUID();
+        //        String uuid = IdUtils.simpleUUID();
+        String uuid = ExUuidUtils.simpleStringUUID();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
         String capStr = null, code = null;

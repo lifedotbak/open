@@ -2,7 +2,7 @@ package com.spyker.framework.util.file;
 
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.Constants;
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.util.IOUtils;
 
@@ -64,7 +64,7 @@ public class ImageUtils {
             } else {
                 // 本机地址
                 String localPath = PlatformConfig.getProfile();
-                String downloadPath = localPath + StringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
+                String downloadPath = localPath + ExStringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
                 in = new FileInputStream(downloadPath);
             }
             return IOUtils.toByteArray(in);

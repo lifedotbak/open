@@ -1,7 +1,7 @@
 package com.spyker.framework.response;
 
 import com.spyker.framework.constant.HttpStatus;
-import com.spyker.framework.util.StringUtils;
+import com.spyker.framework.util.ExStringUtils;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -55,7 +55,7 @@ public class RestMapResponse extends HashMap<String, Object> {
     private RestMapResponse(int code, String msg, Object data) {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data)) {
+        if (ExStringUtils.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }
     }

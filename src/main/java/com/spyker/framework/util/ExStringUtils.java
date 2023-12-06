@@ -1,7 +1,9 @@
 package com.spyker.framework.util;
 
 import cn.hutool.core.text.StrFormatter;
+import cn.hutool.core.util.StrUtil;
 import com.spyker.framework.constant.Constants;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.*;
@@ -11,7 +13,7 @@ import java.util.*;
  *
  * @author spyker
  */
-public class StringUtils extends org.apache.commons.lang3.StringUtils {
+public class ExStringUtils extends StringUtils {
     /**
      * 空字符串
      */
@@ -233,7 +235,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @return 结果
      */
     public static boolean ishttp(String link) {
-        return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
+        return ExStringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
     }
 
     /**
@@ -258,17 +260,17 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static final List<String> str2List(String str, String sep, boolean filterBlank, boolean trim) {
         List<String> list = new ArrayList<String>();
-        if (StringUtils.isEmpty(str)) {
+        if (ExStringUtils.isEmpty(str)) {
             return list;
         }
 
         // 过滤空白字符串
-        if (filterBlank && StringUtils.isBlank(str)) {
+        if (filterBlank && ExStringUtils.isBlank(str)) {
             return list;
         }
         String[] split = str.split(sep);
         for (String string : split) {
-            if (filterBlank && StringUtils.isBlank(string)) {
+            if (filterBlank && ExStringUtils.isBlank(string)) {
                 continue;
             }
             if (trim) {
@@ -524,5 +526,27 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 字符串分割，转化为数组
+     *
+     * @param str   字符串
+     * @param regex 分隔符有
+     * @return List<String>
+     */
+    public static List<String> stringToArrayStrRegex(String str, String regex) {
+        List<String> list = new ArrayList<>();
+        if (str.contains(regex)) {
+            String[] split = str.split(regex);
+            for (String value : split) {
+                if (StrUtil.isNotBlank(value)) {
+                    list.add(value);
+                }
+            }
+        } else {
+            list.add(str);
+        }
+        return list;
     }
 }

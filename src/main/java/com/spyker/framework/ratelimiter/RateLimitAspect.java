@@ -21,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RateLimitAspect {
 
     private final ConcurrentHashMap<String, RateLimiter> RATE_LIMITER = new ConcurrentHashMap<>();
+
     private RateLimiter rateLimiter;
 
     //    @Pointcut("@annotation(com.spyker.framework.ratelimiter.Limiting)")

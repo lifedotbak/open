@@ -2,7 +2,7 @@ package com.spyker.framework.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-public final class AppRandomStringUtils {
+public final class ExRandomStringUtils {
 
     public static String random32() {
 

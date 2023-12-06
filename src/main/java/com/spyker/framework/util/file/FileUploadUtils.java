@@ -3,8 +3,8 @@ package com.spyker.framework.util.file;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.exception.GlobalException;
-import com.spyker.framework.util.StringUtils;
-import com.spyker.framework.util.date.DateUtils;
+import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.date.ExDateUtils;
 import com.spyker.framework.util.file.exception.InvalidExtensionException;
 import com.spyker.framework.util.uuid.SeqUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -137,11 +137,11 @@ public class FileUploadUtils {
      * 编码文件名
      */
     public static final String extractFilename(MultipartFile file) {
-        return StringUtils.format("{}/{}_{}.{}",
-                                  DateUtils.datePath(),
-                                  FilenameUtils.getBaseName(file.getOriginalFilename()),
-                                  SeqUtils.getId(SeqUtils.uploadSeqType),
-                                  getExtension(file));
+        return ExStringUtils.format("{}/{}_{}.{}",
+                                    ExDateUtils.datePath(),
+                                    FilenameUtils.getBaseName(file.getOriginalFilename()),
+                                    SeqUtils.getId(SeqUtils.uploadSeqType),
+                                    getExtension(file));
     }
 
     public static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException {
@@ -157,7 +157,7 @@ public class FileUploadUtils {
 
     public static final String getPathFileName(String uploadDir, String fileName) throws IOException {
         int dirLastIndex = PlatformConfig.getProfile().length() + 1;
-        String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
+        String currentDir = ExStringUtils.substring(uploadDir, dirLastIndex);
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }
 
@@ -169,7 +169,7 @@ public class FileUploadUtils {
      */
     public static final String getExtension(MultipartFile file) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        if (StringUtils.isEmpty(extension)) {
+        if (ExStringUtils.isEmpty(extension)) {
             extension = MimeTypeUtils.getExtension(Objects.requireNonNull(file.getContentType()));
         }
         return extension;

@@ -10,6 +10,7 @@ import java.io.File;
  * @author spyker
  */
 public class FileTypeUtils {
+
     /**
      * 获取文件类型
      * <p>
