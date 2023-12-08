@@ -1,140 +1,143 @@
 package com.spyker.framework.third.minio;
 
-import io.minio.MinioClient;
-import io.minio.ObjectWriteResponse;
-import io.minio.PutObjectArgs;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+
+import io.minio.GetPresignedObjectUrlArgs;
+import io.minio.MinioClient;
+import io.minio.ObjectWriteResponse;
+import io.minio.PutObjectArgs;
+import io.minio.http.Method;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @AutoConfiguration
-@ConditionalOnClass({MinioClient.class, MinioProperties.class})
+@ConditionalOnClass({ MinioClient.class, MinioProperties.class })
 public class MinioUtils {
 
-    @Autowired
-    private MinioClient minioClient;
+	@Autowired
+	private MinioClient minioClient;
 
-    @Autowired
-    private MinioProperties minioProperties;
+	@Autowired
+	private MinioProperties minioProperties;
 
-    public String getBucket() {
-        return minioProperties.getBucket();
-    }
+	public String getBucket() {
+		return minioProperties.getBucket();
+	}
 
-    /**
-     * minio需要配置Access Rules--->(*,readonlu),负责获取文件会有过期以及无权限问题
-     * <p>
-     * https://blog.csdn.net/hanjun0612/article/details/118100616
-     *
-     * @param fileKey
-     * @return url
-     */
-    public String getUrlByKey(String fileKey) {
+	/**
+	 * minio需要配置Access Rules--->(*,readonlu),负责获取文件会有过期以及无权限问题
+	 * <p>
+	 * https://blog.csdn.net/hanjun0612/article/details/118100616
+	 *
+	 * @param fileKey
+	 * @return url
+	 */
+	public String getUrlByKey(String fileKey) {
 
-        String result = "";
+		String result = "";
 
-        try {
-            GetPresignedObjectUrlArgs getPresignedObjectUrlArgs =
-                    GetPresignedObjectUrlArgs.builder().method(Method.GET).bucket(minioProperties.getBucket())
-                                             .object(fileKey).build();
+		try {
+			GetPresignedObjectUrlArgs getPresignedObjectUrlArgs = GetPresignedObjectUrlArgs.builder().method(Method.GET)
+					.bucket(minioProperties.getBucket()).object(fileKey).build();
 
-            result = minioClient.getPresignedObjectUrl(getPresignedObjectUrlArgs);
+			result = minioClient.getPresignedObjectUrl(getPresignedObjectUrlArgs);
 
-            log.info("url--->{}", result);
-        } catch (Exception e) {
-            log.error("------------>{}", e);
-        }
+			log.info("url--->{}", result);
+		} catch (Exception e) {
+			log.error("------------>{}", e);
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    public boolean put(String fileKey, File file) {
+	public boolean put(String fileKey, File file) {
 
-        try {
+		try {
 
-            InputStream inputStream = new FileInputStream(file);
+			InputStream inputStream = new FileInputStream(file);
 
-            ObjectWriteResponse objectWriteResponse = minioClient.putObject(
-                    PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
-                                 .stream(inputStream, -1, 10485760).contentType("application/octet-stream").build());
+			ObjectWriteResponse objectWriteResponse = minioClient
+					.putObject(PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
+							.stream(inputStream, -1, 10485760).contentType("application/octet-stream").build());
 
-            log.info("--->{}", objectWriteResponse.etag());
+			log.info("--->{}", objectWriteResponse.etag());
 
-            return true;
-        } catch (Exception e) {
+			return true;
+		} catch (Exception e) {
 
-            log.error("--->{}", e);
-            return false;
-        }
+			log.error("--->{}", e);
+			return false;
+		}
 
-    }
+	}
 
-    public boolean put(String fileKey, File file, @NotNull ContentTypeEnum contentTypeEnum) {
+	public boolean put(String fileKey, File file, @NotNull ContentTypeEnum contentTypeEnum) {
 
-        try {
+		try {
 
-            InputStream inputStream = new FileInputStream(file);
+			InputStream inputStream = new FileInputStream(file);
 
-            ObjectWriteResponse objectWriteResponse = minioClient.putObject(
-                    PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
-                                 .stream(inputStream, -1, 10485760).contentType(contentTypeEnum.getContent()).build());
+			ObjectWriteResponse objectWriteResponse = minioClient
+					.putObject(PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
+							.stream(inputStream, -1, 10485760).contentType(contentTypeEnum.getContent()).build());
 
-            log.info("--->{}", objectWriteResponse.etag());
+			log.info("--->{}", objectWriteResponse.etag());
 
-            return true;
-        } catch (Exception e) {
+			return true;
+		} catch (Exception e) {
 
-            log.error("--->{}", e);
-            return false;
-        }
+			log.error("--->{}", e);
+			return false;
+		}
 
-    }
+	}
 
-    public boolean put(String fileKey, InputStream inputStream, String contentType) {
+	public boolean put(String fileKey, InputStream inputStream, String contentType) {
 
-        try {
+		try {
 
-            ObjectWriteResponse objectWriteResponse = minioClient.putObject(
-                    PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
-                                 .stream(inputStream, -1, 10485760).contentType(contentType).build());
-            //                             .stream(inputStream, -1, 10485760).contentType("application/octet-stream")
-            //                             .build());
+			ObjectWriteResponse objectWriteResponse = minioClient
+					.putObject(PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
+							.stream(inputStream, -1, 10485760).contentType(contentType).build());
+			// .stream(inputStream, -1, 10485760).contentType("application/octet-stream")
+			// .build());
 
-            log.info("--->{}", objectWriteResponse.etag());
+			log.info("--->{}", objectWriteResponse.etag());
 
-            return true;
-        } catch (Exception e) {
+			return true;
+		} catch (Exception e) {
 
-            log.error("--->{}", e);
-            return false;
-        }
+			log.error("--->{}", e);
+			return false;
+		}
 
-    }
+	}
 
-    public boolean put(String fileKey, InputStream inputStream, @NotNull ContentTypeEnum contentTypeEnum) {
+	public boolean put(String fileKey, InputStream inputStream, @NotNull ContentTypeEnum contentTypeEnum) {
 
-        try {
+		try {
 
-            ObjectWriteResponse objectWriteResponse = minioClient.putObject(
-                    PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
-                                 .stream(inputStream, -1, 10485760).contentType(contentTypeEnum.getContent()).build());
-            //                             .stream(inputStream, -1, 10485760).contentType("application/octet-stream")
-            //                             .build());
+			ObjectWriteResponse objectWriteResponse = minioClient
+					.putObject(PutObjectArgs.builder().bucket(minioProperties.getBucket()).object(fileKey)
+							.stream(inputStream, -1, 10485760).contentType(contentTypeEnum.getContent()).build());
+			// .stream(inputStream, -1, 10485760).contentType("application/octet-stream")
+			// .build());
 
-            log.info("--->{}", objectWriteResponse.etag());
+			log.info("--->{}", objectWriteResponse.etag());
 
-            return true;
-        } catch (Exception e) {
+			return true;
+		} catch (Exception e) {
 
-            log.error("--->{}", e);
-            return false;
-        }
+			log.error("--->{}", e);
+			return false;
+		}
 
-    }
+	}
 }

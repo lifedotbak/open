@@ -17,4 +17,9 @@ buildNumber.properties
 /open.ipr
 /open.iws
 /front/vue-project/.vscode
-/front/vue-project/node_modules
+/.apt_generated/
+/.apt_generated_tests/
+/*.factorypath
+/*.classpath
+/*.project
+/.settings
