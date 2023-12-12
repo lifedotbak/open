@@ -1,6 +1,8 @@
 package com.spyker.framework.util;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.PrimitiveArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -62,7 +64,7 @@ public class ExJsonUtils {
     }
 
     public static <T> T parseObject(String text, Class<T> clazz) {
-        if (StrUtil.isEmpty(text)) {
+        if (CharSequenceUtil.isEmpty(text)) {
             return null;
         }
         try {
@@ -74,7 +76,7 @@ public class ExJsonUtils {
     }
 
     public static <T> T parseObject(String text, Type type) {
-        if (StrUtil.isEmpty(text)) {
+        if (CharSequenceUtil.isEmpty(text)) {
             return null;
         }
         try {
@@ -95,14 +97,14 @@ public class ExJsonUtils {
      * @return 对象
      */
     public static <T> T parseObject2(String text, Class<T> clazz) {
-        if (StrUtil.isEmpty(text)) {
+        if (CharSequenceUtil.isEmpty(text)) {
             return null;
         }
         return JSONUtil.toBean(text, clazz);
     }
 
     public static <T> T parseObject(byte[] bytes, Class<T> clazz) {
-        if (ArrayUtil.isEmpty(bytes)) {
+        if (PrimitiveArrayUtil.isEmpty(bytes)) {
             return null;
         }
         try {
@@ -123,7 +125,7 @@ public class ExJsonUtils {
     }
 
     public static <T> List<T> parseArray(String text, Class<T> clazz) {
-        if (StrUtil.isEmpty(text)) {
+        if (CharSequenceUtil.isEmpty(text)) {
             return new ArrayList<>();
         }
         try {

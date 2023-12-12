@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 获取IP方法
  *
@@ -88,7 +90,7 @@ public class IpUtils {
      * @return 是否未知
      */
     public static boolean isUnknown(String checkString) {
-        return ExStringUtils.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
+        return StringUtils.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
     }
 
     /**
@@ -272,14 +274,14 @@ public class IpUtils {
      * 是否为IP
      */
     public static boolean isIP(String ip) {
-        return ExStringUtils.isNotBlank(ip) && ip.matches(REGX_IP);
+        return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP);
     }
 
     /**
      * 是否为IP，或 *为间隔的通配符地址
      */
     public static boolean isIpWildCard(String ip) {
-        return ExStringUtils.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
+        return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
     }
 
     /**
@@ -302,7 +304,7 @@ public class IpUtils {
      * 是否为特定格式如:“10.10.10.1-10.10.10.99”的ip段字符串
      */
     public static boolean isIPSegment(String ipSeg) {
-        return ExStringUtils.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
+        return StringUtils.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
     }
 
     /**

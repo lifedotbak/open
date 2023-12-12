@@ -3,6 +3,7 @@ package com.spyker.framework.util.file;
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileNameUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
@@ -15,6 +16,7 @@ import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.net.URLEncoder;
@@ -86,9 +88,9 @@ public class FileUtils {
     public static String generatePath(byte[] content, String originalName) {
         String sha256Hex = DigestUtil.sha256Hex(content);
         // 情况一：如果存在 name，则优先使用 name 的后缀
-        if (StrUtil.isNotBlank(originalName)) {
+        if (CharSequenceUtil.isNotBlank(originalName)) {
             String extName = FileNameUtil.extName(originalName);
-            return StrUtil.isBlank(extName) ? sha256Hex : sha256Hex + "." + extName;
+            return CharSequenceUtil.isBlank(extName) ? sha256Hex : sha256Hex + "." + extName;
         }
         // 情况二：基于 content 计算
         return sha256Hex + '.' + FileTypeUtil.getType(new ByteArrayInputStream(content));
@@ -275,7 +277,7 @@ public class FileUtils {
      */
     public static boolean checkAllowDownload(String resource) {
         // 禁止目录上跳级别
-        if (ExStringUtils.contains(resource, "..")) {
+        if (StringUtils.contains(resource, "..")) {
             return false;
         }
 

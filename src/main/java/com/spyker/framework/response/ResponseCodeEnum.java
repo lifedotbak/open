@@ -1,5 +1,6 @@
 package com.spyker.framework.response;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 
@@ -52,7 +53,8 @@ public enum ResponseCodeEnum implements IResponseCode {
         this.message = message;
     }
 
-    public int getCode() {
+    @Override
+	public int getCode() {
         return code;
     }
 
@@ -61,9 +63,10 @@ public enum ResponseCodeEnum implements IResponseCode {
         return this;
     }
 
-    public String getMessage() {
+    @Override
+	public String getMessage() {
         if (ArrayUtil.isNotEmpty(msgParams)) {
-            return StrUtil.format(message, msgParams);
+            return CharSequenceUtil.format(message, msgParams);
         }
         return message;
     }

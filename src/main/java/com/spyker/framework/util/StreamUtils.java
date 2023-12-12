@@ -2,6 +2,7 @@ package com.spyker.framework.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -55,7 +56,7 @@ public class StreamUtils {
      */
     public static <E> String join(Collection<E> collection, Function<E, String> function, CharSequence delimiter) {
         if (CollUtil.isEmpty(collection)) {
-            return StrUtil.EMPTY;
+            return CharSequenceUtil.EMPTY;
         }
         return collection.stream().map(function).filter(Objects::nonNull).collect(Collectors.joining(delimiter));
     }

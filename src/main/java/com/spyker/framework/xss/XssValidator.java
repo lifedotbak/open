@@ -7,6 +7,8 @@ import jakarta.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 自定义xss校验注解实现
  *
@@ -17,7 +19,7 @@ public class XssValidator implements ConstraintValidator<Xss, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-        if (ExStringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             return true;
         }
         return !containsHtml(value);

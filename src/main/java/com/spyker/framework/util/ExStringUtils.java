@@ -1,5 +1,6 @@
 package com.spyker.framework.util;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrFormatter;
 import cn.hutool.core.util.StrUtil;
 import com.spyker.framework.constant.Constants;
@@ -235,7 +236,7 @@ public class ExStringUtils extends StringUtils {
      * @return 结果
      */
     public static boolean ishttp(String link) {
-        return ExStringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
+        return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
     }
 
     /**
@@ -265,12 +266,12 @@ public class ExStringUtils extends StringUtils {
         }
 
         // 过滤空白字符串
-        if (filterBlank && ExStringUtils.isBlank(str)) {
+        if (filterBlank && StringUtils.isBlank(str)) {
             return list;
         }
         String[] split = str.split(sep);
         for (String string : split) {
-            if (filterBlank && ExStringUtils.isBlank(string)) {
+            if (filterBlank && StringUtils.isBlank(string)) {
                 continue;
             }
             if (trim) {
@@ -540,7 +541,7 @@ public class ExStringUtils extends StringUtils {
         if (str.contains(regex)) {
             String[] split = str.split(regex);
             for (String value : split) {
-                if (StrUtil.isNotBlank(value)) {
+                if (CharSequenceUtil.isNotBlank(value)) {
                     list.add(value);
                 }
             }

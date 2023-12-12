@@ -5,6 +5,9 @@ import com.spyker.framework.util.ExStringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.net.ssl.*;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -28,7 +31,7 @@ public class HttpUtils {
      * @return 所代表远程资源的响应结果
      */
     public static String sendGet(String url) {
-        return sendGet(url, ExStringUtils.EMPTY);
+        return sendGet(url, StringUtils.EMPTY);
     }
 
     /**
@@ -54,7 +57,7 @@ public class HttpUtils {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try {
-            String urlNameString = ExStringUtils.isNotBlank(param) ? url + "?" + param : url;
+            String urlNameString = StringUtils.isNotBlank(param) ? url + "?" + param : url;
             log.info("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();

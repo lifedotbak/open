@@ -1,6 +1,7 @@
 package com.spyker.framework.third.easyexcel.util;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +35,7 @@ public class ExcelUtils {
             Class<T> head,
             List<T> data) throws IOException {
         // 输出 Excel
-        EasyExcel.write(response.getOutputStream(), head).autoCloseStream(false) // 不要自动关闭，交给 Servlet 自己处理
+        EasyExcelFactory.write(response.getOutputStream(), head).autoCloseStream(false) // 不要自动关闭，交给 Servlet 自己处理
                  .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()) // 基于 column 长度，自动适配。最大 255 宽度
                  .sheet(sheetName).doWrite(data);
         // 设置 header 和 contentType。写在最后的原因是，避免报错时，响应 contentType 已经被修改了
@@ -44,7 +45,7 @@ public class ExcelUtils {
     }
 
     public static <T> List<T> read(MultipartFile file, Class<T> head) throws IOException {
-        return EasyExcel.read(file.getInputStream(), head, null).autoCloseStream(false)  // 不要自动关闭，交给 Servlet 自己处理
+        return EasyExcelFactory.read(file.getInputStream(), head, null).autoCloseStream(false)  // 不要自动关闭，交给 Servlet 自己处理
                         .doReadAllSync();
     }
 

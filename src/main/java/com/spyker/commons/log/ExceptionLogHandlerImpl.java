@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ExceptionLogHandlerImpl implements ExceptionLogHandler {
 
-    public void handler(ExceptionLog exceptionLog) {
+    @Override
+	public void handler(ExceptionLog exceptionLog) {
 
         log.error("exceptionLogHandlerImpl -->{}", exceptionLog);
     }

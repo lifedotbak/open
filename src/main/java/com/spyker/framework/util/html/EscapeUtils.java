@@ -1,5 +1,7 @@
 package com.spyker.framework.util.html;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.spyker.framework.util.ExStringUtils;
 
 /**
@@ -74,7 +76,7 @@ public class EscapeUtils {
      */
     private static String encode(String text) {
         if (ExStringUtils.isEmpty(text)) {
-            return ExStringUtils.EMPTY;
+            return StringUtils.EMPTY;
         }
 
         final StringBuilder tmp = new StringBuilder(text.length() * 6);

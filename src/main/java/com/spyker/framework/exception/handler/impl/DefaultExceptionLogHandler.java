@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DefaultExceptionLogHandler implements ExceptionLogHandler {
 
-    public void handler(ExceptionLog exceptionLog) {
+    @Override
+	public void handler(ExceptionLog exceptionLog) {
 
         log.error("defaultExceptionLogHandler -->{}", exceptionLog);
     }

@@ -1,5 +1,6 @@
 package com.spyker.framework.util.number;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
@@ -10,7 +11,7 @@ import cn.hutool.core.util.StrUtil;
 public class NumberUtils {
 
     public static Long parseLong(String str) {
-        return StrUtil.isNotEmpty(str) ? Long.valueOf(str) : null;
+        return CharSequenceUtil.isNotEmpty(str) ? Long.valueOf(str) : null;
     }
 
 }
