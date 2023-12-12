@@ -1,13 +1,12 @@
 package com.spyker.framework.config;
 
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import java.math.BigDecimal;
+
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 /**
  * Jackjson配置组件
@@ -15,16 +14,16 @@ import java.util.Date;
 @Configuration
 public class JacksonConfig {
 
-    /**
-     * Jackson全局转化BigDecimal类型为String，解决jackson序列化时BigDecimal类型缺失精度问题
-     *
-     * @return Jackson2ObjectMapperBuilderCustomizer 注入的对象
-     */
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+	/**
+	 * Jackson全局转化BigDecimal类型为String，解决jackson序列化时BigDecimal类型缺失精度问题
+	 *
+	 * @return Jackson2ObjectMapperBuilderCustomizer 注入的对象
+	 */
+	@Bean
+	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
 
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(BigDecimal.class,
-                                                                                         ToStringSerializer.instance);
-    }
+		return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(BigDecimal.class,
+				ToStringSerializer.instance);
+	}
 
 }

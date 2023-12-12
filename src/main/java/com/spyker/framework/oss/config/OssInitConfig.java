@@ -1,7 +1,7 @@
 package com.spyker.framework.oss.config;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.spyker.framework.oss.constant.CacheNames;
 import com.spyker.framework.oss.constant.OssConstant;
@@ -13,12 +13,14 @@ import com.spyker.framework.util.RedisUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Configurable
+@Configuration
 @Slf4j
 public class OssInitConfig {
 
 	@Bean
 	public void init() {
+
+		log.info("====OssInitConfig Init====");
 
 		SysOssConfig config = new SysOssConfig();
 

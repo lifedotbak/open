@@ -27,11 +27,12 @@ public class OssFactory {
 		log.info("初始化OSS工厂");
 		RedisUtils.subscribe(OssConstant.DEFAULT_CONFIG_KEY, String.class, configKey -> {
 			OssClient client = getClient(configKey);
-			// 未初始化不处理
+			// 如果client为空则初始化
 			if (client != null) {
 				refresh(configKey);
 				log.info("订阅刷新OSS配置 => " + configKey);
 			} else {
+				log.info("初始化OSS配置 => " + configKey);
 				instance();
 			}
 
