@@ -13,8 +13,6 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * spring redis 工具类
  *
@@ -22,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Configuration
 @ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
-@Slf4j
 public class RedisService {
 
 	@Autowired

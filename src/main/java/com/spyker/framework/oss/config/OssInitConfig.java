@@ -25,6 +25,11 @@ public class OssInitConfig {
 		SysOssConfig config = new SysOssConfig();
 
 		config.setStatus("0");
+		config.setConfigKey("minio");
+		config.setAccessKey("e0Ui4uY4FBetHELN");
+		config.setSecretKey("ynQa9ZhOMH6mJ7Q8JPRAdmAVqzgKFmp6");
+		config.setBucketName("grid-cloud");
+		config.setEndpoint("192.168.200.65:29000");
 
 		String configKey = config.getConfigKey();
 		if ("0".equals(config.getStatus())) {
