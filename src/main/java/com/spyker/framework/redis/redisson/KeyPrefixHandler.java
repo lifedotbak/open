@@ -1,4 +1,4 @@
-package com.spyker.framework.redis;
+package com.spyker.framework.redis.redisson;
 
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.NameMapper;

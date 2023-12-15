@@ -1,4 +1,4 @@
-package com.spyker.framework.redis;
+package com.spyker.framework.redis.redisson;
 
 import org.redisson.config.ReadMode;
 import org.redisson.config.SubscriptionMode;

@@ -1,4 +1,4 @@
-package com.spyker.framework.redis;
+package com.spyker.framework.redis.redisson;
 
 import java.util.Collection;
 import java.util.Collections;

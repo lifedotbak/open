@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spyker.framework.redis.redisson.KeyPrefixHandler;
+import com.spyker.framework.redis.redisson.PlusSpringCacheManager;
+import com.spyker.framework.redis.redisson.RedissonProperties;
 
 import cn.hutool.core.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
