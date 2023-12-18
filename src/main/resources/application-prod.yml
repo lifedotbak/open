@@ -77,6 +77,28 @@ spring :
   resources :
     static-locations : classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
 
+############################### redisson config ###############################
+redisson:
+  # redis key前缀
+  keyPrefix: redis-key
+  # 线程池数量
+  threads: 4
+  # Netty线程池数量
+  nettyThreads: 8
+  # 单节点配置
+  singleServerConfig:
+    # 客户端名称
+    clientName: ${spring.application.name}
+    # 最小空闲连接数
+    connectionMinimumIdleSize: 8
+    # 连接池大小
+    connectionPoolSize: 32
+    # 连接空闲超时，单位：毫秒
+    idleConnectionTimeout: 10000
+    # 命令等待超时，单位：毫秒
+    timeout: 3000
+    # 发布和订阅连接池大小
+    subscriptionConnectionPoolSize: 50
 
 ############################### springboot admin config ###############################
 management :
@@ -87,7 +109,7 @@ management :
     exposure :
       include : health,info
 
-#=======================mybatis-plus日志输出==========================
+#=======================打开mybatis-plus,SQL执行日志输出==========================
 mybatis-plus :
   configuration :
     log-impl : org.apache.ibatis.logging.stdout.StdOutImpl
@@ -211,10 +233,10 @@ zlmediakit :
 #========================minio配置config================================
 minio :
   enabled : false
-  endpoint :
-  bucket :
-  accesskey :
-  secretkey :
+  endpoint : http://127.0.0.1:29000
+  bucket : ${spring.application.name}
+  accesskey : uV5ZA5ghEizVFSuo
+  secretkey : djG0WzOTNAXtEyYTw4gQgVcMCOCfo9MG
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token :

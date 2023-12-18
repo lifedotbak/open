@@ -80,7 +80,7 @@ spring :
 ############################### redisson config ###############################
 redisson:
   # redis key前缀
-  keyPrefix:
+  keyPrefix: redis-key
   # 线程池数量
   threads: 4
   # Netty线程池数量
@@ -109,7 +109,7 @@ management :
     exposure :
       include : health,info
 
-#=======================mybatis-plus日志输出==========================
+#=======================打开mybatis-plus,SQL执行日志输出==========================
 mybatis-plus :
   configuration :
     log-impl : org.apache.ibatis.logging.stdout.StdOutImpl
@@ -233,10 +233,10 @@ zlmediakit :
 #========================minio配置config================================
 minio :
   enabled : false
-  endpoint :
-  bucket :
-  accesskey :
-  secretkey :
+  endpoint : http://127.0.0.1:29000
+  bucket : ${spring.application.name}
+  accesskey : uV5ZA5ghEizVFSuo
+  secretkey : djG0WzOTNAXtEyYTw4gQgVcMCOCfo9MG
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token :
