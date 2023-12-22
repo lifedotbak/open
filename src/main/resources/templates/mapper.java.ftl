@@ -5,6 +5,7 @@ import ${superMapperClassPackage};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
 import ${package.Parent}.search.${entity}Search;
 
@@ -16,6 +17,7 @@ import ${package.Parent}.search.${entity}Search;
  * @author ${author}
  * @since ${date}
  */
+@Mapper
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
   
     List<${entity}> query(${entity}Search search);

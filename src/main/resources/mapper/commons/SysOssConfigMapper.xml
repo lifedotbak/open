@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.commons.mapper.SysOssConfigMapper">
+
+    <select id="query" resultType="com.spyker.commons.entity.SysOssConfig" parameterType="com.spyker.commons.search.SysOssConfigSearch">
+        SELECT
+            a.*
+        FROM
+            sys_oss_config a
+        <where>
+            <if test="null != configKey " >
+                and a.config_key = #{configKey}
+            </if>
+            <if test="null != accessKey " >
+                and a.access_key = #{accessKey}
+            </if>
+            <if test="null != secretKey " >
+                and a.secret_key = #{secretKey}
+            </if>
+            <if test="null != bucketName " >
+                and a.bucket_name = #{bucketName}
+            </if>
+            <if test="null != prefix " >
+                and a.prefix = #{prefix}
+            </if>
+            <if test="null != endpoint " >
+                and a.endpoint = #{endpoint}
+            </if>
+            <if test="null != domain " >
+                and a.domain = #{domain}
+            </if>
+            <if test="null != isHttps " >
+                and a.is_https = #{isHttps}
+            </if>
+            <if test="null != region " >
+                and a.region = #{region}
+            </if>
+            <if test="null != accessPolicy " >
+                and a.access_policy = #{accessPolicy}
+            </if>
+            <if test="null != status " >
+                and a.status = #{status}
+            </if>
+            <if test="null != ext1 " >
+                and a.ext1 = #{ext1}
+            </if>
+            <if test="null != createBy " >
+                and a.create_by = #{createBy}
+            </if>
+            <if test="null != updateBy " >
+                and a.update_by = #{updateBy}
+            </if>
+            <if test="null != remark " >
+                and a.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPage" resultType="com.spyker.commons.entity.SysOssConfig" parameterType="com.spyker.commons.search.SysOssConfigSearch">
+        SELECT
+            a.*
+        FROM
+            sys_oss_config a
+        <where>
+            <if test="null != search.configKey " >
+                and a.config_key = #{search.configKey}
+            </if>
+            <if test="null != search.accessKey " >
+                and a.access_key = #{search.accessKey}
+            </if>
+            <if test="null != search.secretKey " >
+                and a.secret_key = #{search.secretKey}
+            </if>
+            <if test="null != search.bucketName " >
+                and a.bucket_name = #{search.bucketName}
+            </if>
+            <if test="null != search.prefix " >
+                and a.prefix = #{search.prefix}
+            </if>
+            <if test="null != search.endpoint " >
+                and a.endpoint = #{search.endpoint}
+            </if>
+            <if test="null != search.domain " >
+                and a.domain = #{search.domain}
+            </if>
+            <if test="null != search.isHttps " >
+                and a.is_https = #{search.isHttps}
+            </if>
+            <if test="null != search.region " >
+                and a.region = #{search.region}
+            </if>
+            <if test="null != search.accessPolicy " >
+                and a.access_policy = #{search.accessPolicy}
+            </if>
+            <if test="null != search.status " >
+                and a.status = #{search.status}
+            </if>
+            <if test="null != search.ext1 " >
+                and a.ext1 = #{search.ext1}
+            </if>
+            <if test="null != search.createBy " >
+                and a.create_by = #{search.createBy}
+            </if>
+            <if test="null != search.updateBy " >
+                and a.update_by = #{search.updateBy}
+            </if>
+            <if test="null != search.remark " >
+                and a.remark = #{search.remark}
+            </if>
+        </where>
+    </select>
+
+</mapper>

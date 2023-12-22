@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
  * @author ${author}
  * @since ${date}
  */
-
 @Slf4j
 public class ${table.serviceName}Test extends BaseTest {
 
@@ -35,6 +34,7 @@ public class ${table.serviceName}Test extends BaseTest {
     public void get(){
 
         ${entity} result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -60,6 +60,8 @@ public class ${table.serviceName}Test extends BaseTest {
 
             </#if>
         </#list>
+        
+        log.info("add------>{}", add);
 
         service.insert(add);
     }
@@ -79,6 +81,9 @@ public class ${table.serviceName}Test extends BaseTest {
                 </#if>
             </#if>
         </#list>
+        
+        log.info("update------>{}", update);
+
 
         service.update(update);
     }

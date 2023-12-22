@@ -1,11 +1,13 @@
 package com.spyker.commons.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spyker.commons.entity.SysRole;
 import com.spyker.commons.search.SysRoleSearch;
-
-import java.util.List;
 
 /**
  * <p>
@@ -15,10 +17,11 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
+@Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
-    List<SysRole> query(SysRoleSearch search);
+	List<SysRole> query(SysRoleSearch search);
 
-    IPage<SysRole> queryPage(IPage<SysRole> page, SysRoleSearch search);
+	IPage<SysRole> queryPage(IPage<SysRole> page, SysRoleSearch search);
 
 }

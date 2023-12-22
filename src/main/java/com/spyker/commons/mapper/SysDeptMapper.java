@@ -1,11 +1,13 @@
 package com.spyker.commons.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.search.SysDeptSearch;
-
-import java.util.List;
 
 /**
  * <p>
@@ -15,10 +17,11 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
+@Mapper
 public interface SysDeptMapper extends BaseMapper<SysDept> {
 
-    List<SysDept> query(SysDeptSearch search);
+	List<SysDept> query(SysDeptSearch search);
 
-    IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search);
+	IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search);
 
 }

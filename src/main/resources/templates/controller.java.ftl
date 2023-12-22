@@ -72,6 +72,8 @@ public class ${table.controllerName} {
     public RestResponse<List<${entity}>> list(${entity}Search search) {
 
         List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
+        
+        log.info("result------>{}", result);
 
         return RestResponse.success(result);
     }
@@ -92,6 +94,8 @@ public class ${table.controllerName} {
         IPage<${entity}> page = new Page<>(current, size);
 
         page = ${table.serviceName?uncap_first}.queryPage(page, search);
+        
+        log.info("page------>{}", page);
 
         return RestResponse.success(page);
     }
@@ -101,6 +105,7 @@ public class ${table.controllerName} {
     @GetMapping("/{id}")
     @Log(title = "${table.comment!}--详情", businessType = BusinessType.QUERY)
     public RestResponse<${entity}> detail(@PathVariable("id") String id) {
+    
       	${entity} result = ${table.serviceName?uncap_first}.get(id);
 
         return RestResponse.success(result);
@@ -123,11 +128,17 @@ public class ${table.controllerName} {
     @Log(title = "${table.comment!}--修改", businessType = BusinessType.UPDATE)
     public RestResponse<?> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
 
-         update.setId("id");
+        update.setId(id);
+         
+        <#list table.fields as field>
+          <#if field.keyFlag>
+            update.set${field.capitalName}("1");
+          </#if>
+        </#list>
 
-         ${table.serviceName?uncap_first}.update(update);
+        ${table.serviceName?uncap_first}.update(update);
 
-         return RestResponse.success();
+        return RestResponse.success();
     }
 
 

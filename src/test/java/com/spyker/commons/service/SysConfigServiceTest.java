@@ -1,13 +1,15 @@
 package com.spyker.commons.service;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysConfig;
 import com.spyker.commons.search.SysConfigSearch;
+
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -21,77 +23,79 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class SysConfigServiceTest extends BaseTest {
 
-    @Autowired
-    private SysConfigService service;
+	@Autowired
+	private SysConfigService service;
 
-    @Test
-    public void get() {
+	@Test
+	public void get() {
 
-        SysConfig result = service.getById("1");
-    }
+		SysConfig result = service.getById("1");
 
-    @Test
-    public void delete() {
+		log.info("result---->{}", result);
+	}
 
-        service.delete("1");
-    }
+	@Test
+	public void delete() {
 
-    @Test
-    public void add() {
-        SysConfig add = new SysConfig();
+		service.delete("1");
+	}
 
-        add.setConfigName("configName");
+	@Test
+	public void add() {
+		SysConfig add = new SysConfig();
 
-        service.insert(add);
-    }
+		add.setConfigName("configName");
 
-    @Test
-    public void update() {
-        SysConfig update = new SysConfig();
+		service.insert(add);
+	}
 
-        update.setConfigId("configId");
+	@Test
+	public void update() {
+		SysConfig update = new SysConfig();
 
-        update.setConfigName("configName");
+		update.setConfigId("configId");
 
-        update.setConfigKey("configKey");
+		update.setConfigName("configName");
 
-        update.setConfigValue("configValue");
+		update.setConfigKey("configKey");
 
-        update.setConfigType("configType");
+		update.setConfigValue("configValue");
 
-        update.setCreateBy("createBy");
+		update.setConfigType("configType");
 
-        update.setUpdateBy("updateBy");
+		update.setCreateBy("createBy");
 
-        update.setRemark("remark");
+		update.setUpdateBy("updateBy");
 
-        service.update(update);
-    }
+		update.setRemark("remark");
 
-    @Test
-    public void query() {
-        SysConfigSearch search = new SysConfigSearch();
+		service.update(update);
+	}
 
-        search.setConfigName("configName");
-        search.setConfigKey("configKey");
-        search.setConfigType("configType");
+	@Test
+	public void query() {
+		SysConfigSearch search = new SysConfigSearch();
 
-        service.query(search);
-    }
+		search.setConfigName("configName");
+		search.setConfigKey("configKey");
+		search.setConfigType("configType");
 
-    @Test
-    public void queryPage() {
-        IPage<SysConfig> page = new Page<>(1, 10);
+		service.query(search);
+	}
 
-        SysConfigSearch search = new SysConfigSearch();
+	@Test
+	public void queryPage() {
+		IPage<SysConfig> page = new Page<>(1, 10);
 
-        search.setConfigName("configName");
+		SysConfigSearch search = new SysConfigSearch();
 
-        search.setConfigKey("configKey");
+		search.setConfigName("configName");
 
-        search.setConfigType("configType");
+		search.setConfigKey("configKey");
 
-        service.queryPage(page, search);
-    }
+		search.setConfigType("configType");
+
+		service.queryPage(page, search);
+	}
 
 }

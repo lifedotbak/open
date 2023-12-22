@@ -1,11 +1,13 @@
 package com.spyker.commons.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spyker.commons.entity.SysLogininfor;
 import com.spyker.commons.search.SysLogininforSearch;
-
-import java.util.List;
 
 /**
  * <p>
@@ -15,10 +17,11 @@ import java.util.List;
  * @author CodeGenerator
  * @since 2023-09-28
  */
+@Mapper
 public interface SysLogininforMapper extends BaseMapper<SysLogininfor> {
 
-    List<SysLogininfor> query(SysLogininforSearch search);
+	List<SysLogininfor> query(SysLogininforSearch search);
 
-    IPage<SysLogininfor> queryPage(IPage<SysLogininfor> page, SysLogininforSearch search);
+	IPage<SysLogininfor> queryPage(IPage<SysLogininfor> page, SysLogininforSearch search);
 
 }

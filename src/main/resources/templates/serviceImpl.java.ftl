@@ -35,14 +35,18 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Override
     public List<${entity}> query(${entity}Search search){
+    
         List<${entity}> result =  ${table.mapperName?uncap_first}.query(search);
+        log.info("result------>{}", result);
 
         return result;
     }
 
     @Override
     public IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search){
+    
         page =  ${table.mapperName?uncap_first}.queryPage(page, search);
+        log.info("page------>{}", page);
 
         return page;
     }
@@ -65,7 +69,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Override
     public boolean delete(String id){
-        return    removeById(id);
+        return removeById(id);
     }
 
 }
