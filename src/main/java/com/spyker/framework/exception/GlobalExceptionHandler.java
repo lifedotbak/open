@@ -1,17 +1,11 @@
 package com.spyker.framework.exception;
 
-import cn.dev33.satoken.exception.SaTokenException;
-import cn.hutool.core.util.ObjectUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
-import com.spyker.framework.exception.entity.ExceptionLog;
-import com.spyker.framework.exception.handler.ExceptionLogHandler;
-import com.spyker.framework.response.RestResponse;
-import com.spyker.framework.response.ResponseCodeEnum;
-import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.Objects;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,10 +22,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.*;
+import com.spyker.framework.exception.entity.ExceptionLog;
+import com.spyker.framework.exception.handler.ExceptionLogHandler;
+import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
+import com.spyker.framework.response.ResponseCodeEnum;
+import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
+
+import cn.dev33.satoken.exception.SaTokenException;
+import cn.hutool.core.util.ObjectUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 系统异常处理
@@ -40,233 +41,238 @@ import java.util.*;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private static final String REQUESTBODY = "requestBodyMessage";
-    @Autowired
-    private ExceptionLogUsableHandler exceptionChain;
-    //    private ExceptionLogService exceptionLogService;
+	private static final String REQUESTBODY = "requestBodyMessage";
 
-    //    @ExceptionHandler
-    //    public RestResponse handlerException(Exception e) {
-    //
-    //        log.error("----->{}", e);
-    //
-    //        /**
-    //         * 权限异常处理
-    //         */
-    //        if (e instanceof SaTokenException) {
-    //            return RestResponse.error(-1, "权限认证失败");
-    //        }
-    //
-    //        /**
-    //         * 验证异常处理
-    //         */
-    //        if (e instanceof BindException) {
-    //
-    //            List<FieldError> fieldErrors = ((BindException) e).getFieldErrors();
-    //            List<String> msgList = fieldErrors.stream().map(o -> o.getDefaultMessage()).collect(Collectors
-    //            .toList());
-    //            String messages = StringUtils.join(msgList.toArray(), ";");
-    //
-    //            log.error("Validation格式校验异常:-------------->{}", messages);
-    //
-    //            return RestResponse.error(-1, messages);
-    //        }
-    //
-    //        /**
-    //         * 其他异常处理
-    //         */
-    //        return RestResponse.error(-1, "系统异常");
-    //
-    //    }
+	@Autowired
+	private ExceptionLogUsableHandler exceptionChain;
 
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(value = SaTokenException.class)
-    public RestResponse saTokenExceptionHandler(HttpServletRequest request, SaTokenException e) {
+	// private ExceptionLogService exceptionLogService;
 
-        doLog(request, e);
+	// @ExceptionHandler
+	// public RestResponse handlerException(Exception e) {
+	//
+	// log.error("----->{}", e);
+	//
+	// /**
+	// * 权限异常处理
+	// */
+	// if (e instanceof SaTokenException) {
+	// return RestResponse.error(-1, "权限认证失败");
+	// }
+	//
+	// /**
+	// * 验证异常处理
+	// */
+	// if (e instanceof BindException) {
+	//
+	// List<FieldError> fieldErrors = ((BindException) e).getFieldErrors();
+	// List<String> msgList = fieldErrors.stream().map(o ->
+	// o.getDefaultMessage()).collect(Collectors
+	// .toList());
+	// String messages = StringUtils.join(msgList.toArray(), ";");
+	//
+	// log.error("Validation格式校验异常:-------------->{}", messages);
+	//
+	// return RestResponse.error(-1, messages);
+	// }
+	//
+	// /**
+	// * 其他异常处理
+	// */
+	// return RestResponse.error(-1, "系统异常");
+	//
+	// }
 
-        return RestResponse.error(-1, "权限认证失败");
-    }
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(value = SaTokenException.class)
+	public RestResponse<?> saTokenExceptionHandler(HttpServletRequest request, SaTokenException e) {
 
-    private void doLog(HttpServletRequest request, Exception e) {
-        log.error("捕获到异常：", e);
-        // 加入数据库日志记录
-        StringWriter sw = new StringWriter();
-        e.printStackTrace(new PrintWriter(sw, true));
-        // 异常的详情
-        String expDetail = sw.toString();
+		doLog(request, e);
 
-        try {
-            sw.close();
-        } catch (IOException ioException) {
-            log.error("异常日志：关闭异常详情Writer异常");
-        }
+		return RestResponse.error(-1, "权限认证失败");
+	}
 
-        // 异常的url
-        String expUrl = request.getRequestURI();
+	private void doLog(HttpServletRequest request, Exception e) {
 
-        // 异常的参数
-        Object body = request.getAttribute(REQUESTBODY);
-        String expParams = ObjectUtil.isNotNull(body) ? body.toString() : "";
+		log.error("捕获到异常：{}", e);
+		// 加入数据库日志记录
+		StringWriter sw = new StringWriter();
 
-        String headerLog = "";
-        Enumeration<String> headerNames = request.getHeaderNames();
-        Map<String, String> headers = new HashMap<>();
-        while (headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            headers.put(headerName, request.getHeader(headerName));
-        }
-        if (!headers.isEmpty()) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                headerLog = objectMapper.writeValueAsString(headers);
-            } catch (JsonProcessingException jsonProcessingException) {
-                jsonProcessingException.printStackTrace();
-                log.error("写异常日志objectMapper.writeValueAsString(headers)发生异常,原异常详情： {}", expDetail);
-            }
-        }
+		e.printStackTrace(new PrintWriter(sw, true));
 
-        // 异常的类型
-        String expType = e.getClass().getName();
+		// 异常的详情
+		String expDetail = sw.toString();
 
-        // 异常的类名
-        StackTraceElement stackTraceElement = e.getStackTrace()[0];
-        String expController = stackTraceElement.getClassName();
+		try {
+			sw.close();
+		} catch (IOException ioException) {
+			log.error("异常日志：关闭异常详情Writer异常");
+		}
 
-        // 异常的方法名
-        String expMethod = stackTraceElement.getMethodName();
+		// 异常的url
+		String expUrl = request.getRequestURI();
 
-        ExceptionLog exceptionLog = new ExceptionLog();
-        exceptionLog.setExpUrl(expUrl);
-        exceptionLog.setExpParams(expParams);
-        exceptionLog.setExpType(expType);
-        exceptionLog.setExpController(expController);
-        exceptionLog.setExpMethod(expMethod);
-        exceptionLog.setExpDetail(expDetail);
+		// 异常的参数
+		Object body = request.getAttribute(REQUESTBODY);
+		String expParams = ObjectUtil.isNotNull(body) ? body.toString() : "";
 
-        log.error("exceptionLog ---> {}", exceptionLog);
+//		String headerLog = "";
+//		Enumeration<String> headerNames = request.getHeaderNames();
+//		Map<String, String> headers = new HashMap<>();
+//		while (headerNames.hasMoreElements()) {
+//			String headerName = headerNames.nextElement();
+//			headers.put(headerName, request.getHeader(headerName));
+//		}
+//		if (!headers.isEmpty()) {
+//			ObjectMapper objectMapper = new ObjectMapper();
+//			try {
+//				headerLog = objectMapper.writeValueAsString(headers);
+//			} catch (JsonProcessingException jsonProcessingException) {
+//				jsonProcessingException.printStackTrace();
+//				log.error("写异常日志objectMapper.writeValueAsString(headers)发生异常,原异常详情： {}", expDetail);
+//			}
+//		}
 
-        ExceptionLogHandler exceptionLogHandler = exceptionChain.getHandler();
+		// 异常的类型
+		String expType = e.getClass().getName();
 
-        if (null != exceptionLogHandler) {
-            exceptionLogHandler.handler(exceptionLog);
-        }
-    }
+		// 异常的类名
+		StackTraceElement stackTraceElement = e.getStackTrace()[0];
+		String expController = stackTraceElement.getClassName();
 
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(value = GlobalException.class)
-    public RestResponse globalExceptionHandler(HttpServletRequest request, GlobalException e) {
+		// 异常的方法名
+		String expMethod = stackTraceElement.getMethodName();
 
-        doLog(request, e);
+		ExceptionLog exceptionLog = new ExceptionLog();
+		exceptionLog.setExpUrl(expUrl);
+		exceptionLog.setExpParams(expParams);
+		exceptionLog.setExpType(expType);
+		exceptionLog.setExpController(expController);
+		exceptionLog.setExpMethod(expMethod);
+		exceptionLog.setExpDetail(expDetail);
 
-        return RestResponse.error(-1, e.getMessage());
-    }
+		log.error("exceptionLog ---> {}", exceptionLog);
 
-    /**
-     * 处理业务业务异常
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(value = BusinessException.class)
-    public RestResponse serviceExceptionHandler(HttpServletRequest request, BusinessException e) {
-        doLog(request, e);
+		ExceptionLogHandler exceptionLogHandler = exceptionChain.getHandler();
 
-        return RestResponse.error(e.getCode(), e.getMessage());
-    }
+		if (null != exceptionLogHandler) {
+			exceptionLogHandler.handler(exceptionLog);
+		}
+	}
 
-    /**
-     * 统一处理非自定义异常外的所有异常
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(value = Exception.class)
-    public RestResponse exceptionHandler(HttpServletRequest request, Exception e) {
-        doLog(request, e);
-        return RestResponse.error(-1, e.getMessage());
-    }
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(value = GlobalException.class)
+	public RestResponse<?> globalExceptionHandler(HttpServletRequest request, GlobalException e) {
 
-    /**
-     * 兼容Validation校验框架：忽略参数异常处理器
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public RestResponse parameterMissingExceptionHandler(HttpServletRequest request,
-            MissingServletRequestParameterException e) {
-        doLog(request, e);
-        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(),
-                                  "请求参数 " + e.getParameterName() + " 不能为空");
-    }
+		doLog(request, e);
 
-    /**
-     * 兼容Validation校验框架：缺少请求体异常处理器
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public RestResponse parameterBodyMissingExceptionHandler(HttpServletRequest request,
-            HttpMessageNotReadableException e) {
-        doLog(request, e);
-        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "参数体不能为空");
-    }
+		return RestResponse.error(-1, e.getMessage());
+	}
 
-    /**
-     * 兼容Validation校验框架：参数效验异常处理器
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public RestResponse parameterExceptionHandler(HttpServletRequest request, MethodArgumentNotValidException e) {
-        doLog(request, e);
-        // 获取异常信息
-        BindingResult exceptions = e.getBindingResult();
-        // 判断异常中是否有错误信息，如果存在就使用异常中的消息，否则使用默认消息
-        if (exceptions.hasErrors()) {
-            List<ObjectError> errors = exceptions.getAllErrors();
-            if (!errors.isEmpty()) {
-                // 这里列出了全部错误参数，按正常逻辑，只需要第一条错误即可
-                FieldError fieldError = (FieldError) errors.get(0);
-                return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), fieldError.getDefaultMessage());
-            }
-        }
-        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "请求参数校验异常");
-    }
+	/**
+	 * 处理业务业务异常
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(value = BusinessException.class)
+	public RestResponse<?> serviceExceptionHandler(HttpServletRequest request, BusinessException e) {
+		doLog(request, e);
 
-    /**
-     * 拦截表单参数校验
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler({BindException.class})
-    public RestResponse bindExceptionException(HttpServletRequest request, BindException e) {
-        doLog(request, e);
-        BindingResult bindingResult = e.getBindingResult();
-        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(),
-                                  Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
-    }
+		return RestResponse.error(e.getCode(), e.getMessage());
+	}
 
-    /**
-     * 拦截参数类型不正确
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public RestResponse httpMediaTypeNotSupportedExceptionException(HttpServletRequest request,
-            HttpMediaTypeNotSupportedException e) {
-        doLog(request, e);
-        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), Objects.requireNonNull(e.getMessage()));
-    }
+	/**
+	 * 统一处理非自定义异常外的所有异常
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(value = Exception.class)
+	public RestResponse<?> exceptionHandler(HttpServletRequest request, Exception e) {
+		doLog(request, e);
+		return RestResponse.error(-1, e.getMessage());
+	}
 
-    /**
-     * 由于body在接口读取后无法获取，这里把body提前取出放到参数中，在上面处理异常时使用
-     */
-    @ModelAttribute
-    public void getBobyInfo(HttpServletRequest request) {
-        //获取requestBody
-        try {
-            ContentCachingRequestWrapper requestWapper = null;
-            if (request instanceof HttpServletRequest) {
-                requestWapper = (ContentCachingRequestWrapper) request;
+	/**
+	 * 兼容Validation校验框架：忽略参数异常处理器
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(MissingServletRequestParameterException.class)
+	public RestResponse<?> parameterMissingExceptionHandler(HttpServletRequest request,
+			MissingServletRequestParameterException e) {
+		doLog(request, e);
+		return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "请求参数 " + e.getParameterName() + " 不能为空");
+	}
 
-                String body = IOUtils.toString(requestWapper.getBody(), request.getCharacterEncoding());
-                request.setAttribute(REQUESTBODY, body);
-            }
-        } catch (Exception e) {
+	/**
+	 * 兼容Validation校验框架：缺少请求体异常处理器
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public RestResponse<?> parameterBodyMissingExceptionHandler(HttpServletRequest request,
+			HttpMessageNotReadableException e) {
+		doLog(request, e);
+		return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "参数体不能为空");
+	}
 
-        }
+	/**
+	 * 兼容Validation校验框架：参数效验异常处理器
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public RestResponse<?> parameterExceptionHandler(HttpServletRequest request, MethodArgumentNotValidException e) {
+		doLog(request, e);
+		// 获取异常信息
+		BindingResult exceptions = e.getBindingResult();
+		// 判断异常中是否有错误信息，如果存在就使用异常中的消息，否则使用默认消息
+		if (exceptions.hasErrors()) {
+			List<ObjectError> errors = exceptions.getAllErrors();
+			if (!errors.isEmpty()) {
+				// 这里列出了全部错误参数，按正常逻辑，只需要第一条错误即可
+				FieldError fieldError = (FieldError) errors.get(0);
+				return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), fieldError.getDefaultMessage());
+			}
+		}
+		return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "请求参数校验异常");
+	}
 
-    }
+	/**
+	 * 拦截表单参数校验
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler({ BindException.class })
+	public RestResponse<?> bindExceptionException(HttpServletRequest request, BindException e) {
+		doLog(request, e);
+		BindingResult bindingResult = e.getBindingResult();
+		return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(),
+				Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+	}
+
+	/**
+	 * 拦截参数类型不正确
+	 */
+	@ResponseStatus(HttpStatus.OK)
+	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+	public RestResponse<?> httpMediaTypeNotSupportedExceptionException(HttpServletRequest request,
+			HttpMediaTypeNotSupportedException e) {
+		doLog(request, e);
+		return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), Objects.requireNonNull(e.getMessage()));
+	}
+
+	/**
+	 * 由于body在接口读取后无法获取，这里把body提前取出放到参数中，在上面处理异常时使用
+	 */
+	@ModelAttribute
+	public void getBobyInfo(HttpServletRequest request) {
+		// 获取requestBody
+		try {
+			ContentCachingRequestWrapper requestWapper = null;
+			if (request instanceof HttpServletRequest) {
+				requestWapper = (ContentCachingRequestWrapper) request;
+
+				String body = IOUtils.toString(requestWapper.getBody(), request.getCharacterEncoding());
+				request.setAttribute(REQUESTBODY, body);
+			}
+		} catch (Exception e) {
+
+		}
+
+	}
 }

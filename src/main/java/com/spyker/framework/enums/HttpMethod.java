@@ -1,9 +1,9 @@
 package com.spyker.framework.enums;
 
-import org.springframework.lang.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.lang.Nullable;
 
 /**
  * 请求方式
@@ -12,36 +12,36 @@ import java.util.Map;
  */
 public enum HttpMethod {
 
-    GET,
+	GET,
 
-    HEAD,
+	HEAD,
 
-    POST,
+	POST,
 
-    PUT,
+	PUT,
 
-    PATCH,
+	PATCH,
 
-    DELETE,
+	DELETE,
 
-    OPTIONS,
+	OPTIONS,
 
-    TRACE;
+	TRACE;
 
-    private static final Map<String, HttpMethod> mappings = new HashMap<>(16);
+	private static final Map<String, HttpMethod> mappings = new HashMap<>(16);
 
-    static {
-        for (HttpMethod httpMethod : values()) {
-            mappings.put(httpMethod.name(), httpMethod);
-        }
-    }
+	static {
+		for (HttpMethod httpMethod : values()) {
+			mappings.put(httpMethod.name(), httpMethod);
+		}
+	}
 
-    public boolean matches(String method) {
-        return (this == resolve(method));
-    }
+	public boolean matches(String method) {
+		return (this == resolve(method));
+	}
 
-    @Nullable
-    public static HttpMethod resolve(@Nullable String method) {
-        return (method != null ? mappings.get(method) : null);
-    }
+	@Nullable
+	public static HttpMethod resolve(@Nullable String method) {
+		return (method != null ? mappings.get(method) : null);
+	}
 }
