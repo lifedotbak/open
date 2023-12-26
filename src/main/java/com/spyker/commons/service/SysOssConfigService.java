@@ -1,12 +1,10 @@
 package com.spyker.commons.service;
 
-import com.spyker.commons.entity.SysOssConfig;
-import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.List;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import java.util.List;
-import com.spyker.framework.response.RestResponse;
-
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.spyker.commons.entity.SysOssConfig;
 import com.spyker.commons.search.SysOssConfigSearch;
 
 /**
@@ -19,16 +17,16 @@ import com.spyker.commons.search.SysOssConfigSearch;
  */
 public interface SysOssConfigService extends IService<SysOssConfig> {
 
-    List<SysOssConfig> query(SysOssConfigSearch search);
+	List<SysOssConfig> query(SysOssConfigSearch search);
 
-    IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search);
+	IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search);
 
-    SysOssConfig get(String id);
+	SysOssConfig get(String id);
 
-    boolean insert(SysOssConfig SysOssConfig);
+	boolean insert(SysOssConfig SysOssConfig);
 
-    boolean update(SysOssConfig SysOssConfig);
+	boolean update(SysOssConfig SysOssConfig);
 
-    boolean delete(String id);
+	boolean delete(String id);
 
 }

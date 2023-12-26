@@ -1,250 +1,237 @@
 package com.spyker.framework.mybatisplus;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import org.yaml.snakeyaml.Yaml;
+
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.InjectionConfig;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import com.spyker.framework.core.BaseController;
+
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.*;
 
 public class CodeGenerator {
 
-    private static final String auhtor = "CodeGenerator";
+	private static final String auhtor = "CodeGenerator";
 
-    private static final String basePackage = "com.spyker";
+	private static final String basePackage = "com.spyker";
 
-    //    private static final String applicationName = "application";
+	// private static final String applicationName = "application";
 
-    private static final String mainSoure = "/src/main/java";
+	private static final String mainSoure = "/src/main/java";
 
-    private static final String testSoure = "/src/test/java";
+	private static final String testSoure = "/src/test/java";
 
-    private static final String ymlSoure = "/src/main/resources/application-dev.yml";
+	private static final String ymlSoure = "/src/main/resources/application-dev.yml";
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        String projectPath = System.getProperty("user.dir");
+		String projectPath = System.getProperty("user.dir");
 
-        String applicationName = scanner("applicationName(应用名称)!");
+		String applicationName = scanner("applicationName(应用名称)!");
 
-        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
+		List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
 
-        generatorCode(tableNames, projectPath, applicationName);
+		generatorCode(tableNames, projectPath, applicationName);
 
-    }
+	}
 
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
+	/**
+	 * <p>
+	 * 读取控制台内容
+	 * </p>
+	 */
+	public static String scanner(String tip) {
+		Scanner scanner = new Scanner(System.in);
 
-        System.out.println("请输入" + tip + ":");
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "!");
-    }
-
-    // 处理 all 情况
-    private static List<String> getTables(String tables) {
-        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
-    }
+		System.out.println("请输入" + tip + ":");
+		if (scanner.hasNext()) {
+			String ipt = scanner.next();
+			if (StringUtils.isNotEmpty(ipt)) {
+				return ipt;
+			}
+		}
+		throw new MybatisPlusException("请输入正确的" + tip + "!");
+	}
 
-    private static void generatorCode(List<String> tableNames, String projectPath, String applicationName) {
+	// 处理 all 情况
+	private static List<String> getTables(String tables) {
+		return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
+	}
 
-        String xmlPath = projectPath + "/src/main/resources/mapper/" + applicationName;
-
-        String outputDir = projectPath + mainSoure;
+	private static void generatorCode(List<String> tableNames, String projectPath, String applicationName) {
 
-        String testOutputDir = projectPath + testSoure + generatorTestDir(basePackage, applicationName);
+		String xmlPath = projectPath + "/src/main/resources/mapper/" + applicationName;
 
-        ApplicationConfig applicationConfig = readYaml();
+		String outputDir = projectPath + mainSoure;
 
-        if (null == applicationConfig) {
-            return;
-        }
+		String testOutputDir = projectPath + testSoure + generatorTestDir(basePackage, applicationName);
 
-        String dbUrl = applicationConfig.getUrl();
-        String dbUserName = applicationConfig.getUsername();
-        String dbPassword = applicationConfig.getPassword();
+		ApplicationConfig applicationConfig = readYaml();
 
-        DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder(dbUrl, dbUserName, dbPassword).build();
-        AutoGenerator generator = new AutoGenerator(dataSourceConfig);
+		if (null == applicationConfig) {
+			return;
+		}
 
-        // 2 全局配置
-        GlobalConfig globalConfig = new GlobalConfig.Builder().disableOpenDir() // 禁止打开输出目录 默认值:true
-                                                              .outputDir(outputDir) // 指定输出目录 /opt/baomidou/ 默认值:
-                                                              // windows:D:// linux or mac : /tmp
-                                                              .dateType(DateType.ONLY_DATE) // 设置时间类型为java.util.date
-                                                              .enableSpringdoc() // 支持spring doc
-                                                              .author(auhtor) //
-                                                              .enableSpringdoc().build();
+		String dbUrl = applicationConfig.getUrl();
+		String dbUserName = applicationConfig.getUsername();
+		String dbPassword = applicationConfig.getPassword();
 
-        generator.global(globalConfig);
+		DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder(dbUrl, dbUserName, dbPassword).build();
+		AutoGenerator generator = new AutoGenerator(dataSourceConfig);
 
-        // 3 包配置
-        // 3.1 自定义包名
-        PackageConfig.Builder packageConfig = new PackageConfig.Builder().parent(basePackage) // 父包名 默认值:com.baomidou
-                                                                         .moduleName(applicationName) // 父包模块名 默认值:无
-                                                                         .pathInfo((Collections.singletonMap(OutputFile.xml,
-                                                                                                             xmlPath)));
+		// 2 全局配置
+		GlobalConfig globalConfig = new GlobalConfig.Builder().disableOpenDir() // 禁止打开输出目录 默认值:true
+				.outputDir(outputDir) // 指定输出目录 /opt/baomidou/ 默认值:
+				// windows:D:// linux or mac : /tmp
+				.dateType(DateType.ONLY_DATE) // 设置时间类型为java.util.date
+				.enableSpringdoc() // 支持spring doc
+				.author(auhtor) //
+				.enableSpringdoc().build();
 
-        // 4. 配置策略
-        StrategyConfig strategyConfig = new StrategyConfig.Builder().addInclude(tableNames)
+		generator.global(globalConfig);
 
-                                                                    .controllerBuilder()
-                                                                    .enableRestStyle()
-                                                                    .enableHyphenStyle()
-                                                                    .enableFileOverride()
-                                                                    .superClass(BaseController.class)
+		// 3 包配置
+		// 3.1 自定义包名
+		PackageConfig.Builder packageConfig = new PackageConfig.Builder().parent(basePackage) // 父包名 默认值:com.baomidou
+				.moduleName(applicationName) // 父包模块名 默认值:无
+				.pathInfo((Collections.singletonMap(OutputFile.xml, xmlPath)));
 
-                                                                    .serviceBuilder()
-                                                                    .formatServiceFileName("%sService")
+		// 4. 配置策略
+		StrategyConfig strategyConfig = new StrategyConfig.Builder().addInclude(tableNames)
 
-                                                                    .mapperBuilder()
+				.controllerBuilder().enableRestStyle().enableHyphenStyle().enableFileOverride()
+				.superClass(BaseController.class)
 
-                                                                    .entityBuilder()
-                                                                    .enableLombok()
-                                                                    .enableChainModel()
-                                                                    .enableFileOverride()
-                                                                    .idType(IdType.ASSIGN_ID)
-                                                                    .addTableFills(new Column("create_time",
-                                                                                              FieldFill.INSERT),
-                                                                                   new Column("create_by",
-                                                                                              FieldFill.INSERT),
-                                                                                   new Column("modify_time",
-                                                                                              FieldFill.INSERT_UPDATE),
-                                                                                   new Column("update_by",
-                                                                                              FieldFill.INSERT_UPDATE))
-                                                                    .build();
+				.serviceBuilder().formatServiceFileName("%sService")
 
-        generator.strategy(strategyConfig);
+				.mapperBuilder()
 
-        CustomFile controllerTestFile = new CustomFile.Builder().fileName("ControllerTest.java")
-                                                                .enableFileOverride()
-                                                                .filePath(testOutputDir)
-                                                                .templatePath("/templates/controllerTest.java.ftl")
-                                                                .packageName("controller")
-                                                                .build();
+				.entityBuilder().enableLombok().enableChainModel().enableFileOverride().idType(IdType.ASSIGN_ID)
+				.addTableFills(new Column("create_time", FieldFill.INSERT), new Column("create_by", FieldFill.INSERT),
+						new Column("modify_time", FieldFill.INSERT_UPDATE),
+						new Column("update_time", FieldFill.INSERT_UPDATE),
+						new Column("update_by", FieldFill.INSERT_UPDATE))
+				.build();
 
-        CustomFile serviceTestFile = new CustomFile.Builder().fileName("ServiceTest.java")
-                                                             .enableFileOverride()
-                                                             .filePath(testOutputDir)
-                                                             .templatePath("/templates/serviceTest.java.ftl")
-                                                             .packageName("service")
-                                                             .build();
+		generator.strategy(strategyConfig);
 
-        CustomFile mapperTestFile = new CustomFile.Builder().fileName("MapperTest.java")
-                                                            .enableFileOverride()
-                                                            .filePath(testOutputDir)
-                                                            .templatePath("/templates/mapperTest.java.ftl")
-                                                            .packageName("mapper")
-                                                            .build();
+		CustomFile controllerTestFile = new CustomFile.Builder().fileName("ControllerTest.java").enableFileOverride()
+				.filePath(testOutputDir).templatePath("/templates/controllerTest.java.ftl").packageName("controller")
+				.build();
 
-        CustomFile searchCustomFile = new CustomFile.Builder().fileName("Search.java")
-                                                              .enableFileOverride()
-                                                              .templatePath("/templates/search" + ".java.ftl")
-                                                              .packageName("search")
-                                                              .build();
+		CustomFile serviceTestFile = new CustomFile.Builder().fileName("ServiceTest.java").enableFileOverride()
+				.filePath(testOutputDir).templatePath("/templates/serviceTest.java.ftl").packageName("service").build();
 
-        List<CustomFile> customFiles = new ArrayList<>();
+		CustomFile mapperTestFile = new CustomFile.Builder().fileName("MapperTest.java").enableFileOverride()
+				.filePath(testOutputDir).templatePath("/templates/mapperTest.java.ftl").packageName("mapper").build();
 
-        customFiles.add(controllerTestFile);
-        customFiles.add(serviceTestFile);
-        customFiles.add(mapperTestFile);
-        customFiles.add(searchCustomFile);
+		CustomFile searchCustomFile = new CustomFile.Builder().fileName("Search.java").enableFileOverride()
+				.templatePath("/templates/search" + ".java.ftl").packageName("search").build();
 
-        InjectionConfig ic = new InjectionConfig.Builder().customFile(customFiles).build();
+		List<CustomFile> customFiles = new ArrayList<>();
 
-        generator.injection(ic);
+		customFiles.add(controllerTestFile);
+		customFiles.add(serviceTestFile);
+		customFiles.add(mapperTestFile);
+		customFiles.add(searchCustomFile);
 
-        generator.packageInfo(packageConfig.build());
+		InjectionConfig ic = new InjectionConfig.Builder().customFile(customFiles).build();
 
-        generator.execute(new FreemarkerTemplateEngine());
+		generator.injection(ic);
 
-    }
+		generator.packageInfo(packageConfig.build());
 
-    private static String generatorTestDir(String basePackage, String applicationName) {
+		generator.execute(new FreemarkerTemplateEngine());
 
-        String[] basePackageDirs = basePackage.split("\\.");
+	}
 
-        String result = "";
+	private static String generatorTestDir(String basePackage, String applicationName) {
 
-        for (String dir : basePackageDirs) {
-            result = result + "/" + dir;
-        }
+		String[] basePackageDirs = basePackage.split("\\.");
 
-        result = result + "/" + applicationName;
+		String result = "";
 
-        return result;
+		for (String dir : basePackageDirs) {
+			result = result + "/" + dir;
+		}
 
-    }
+		result = result + "/" + applicationName;
 
-    @SneakyThrows
-    private static ApplicationConfig readYaml() {
+		return result;
 
-        String projectPath = System.getProperty("user.dir");
+	}
 
-        String yamlPath = projectPath + ymlSoure;
+	@SneakyThrows
+	private static ApplicationConfig readYaml() {
 
-        File yamlFile = new File(yamlPath);
+		String projectPath = System.getProperty("user.dir");
 
-        if (yamlFile.exists()) {
+		String yamlPath = projectPath + ymlSoure;
 
-            Yaml yaml = new Yaml();
+		File yamlFile = new File(yamlPath);
 
-            InputStream is = new FileInputStream(yamlFile);
+		if (yamlFile.exists()) {
 
-            Map<String, Object> obj = yaml.load(is);
+			Yaml yaml = new Yaml();
 
-            @SuppressWarnings("unchecked") Map<String, Object> spring = (Map<String, Object>) obj.get("spring");
+			InputStream is = new FileInputStream(yamlFile);
 
-            @SuppressWarnings("unchecked") Map<String, Object> datasource = (Map<String, Object>) spring.get(
-                    "datasource");
+			Map<String, Object> obj = yaml.load(is);
 
-            @SuppressWarnings("unchecked") Map<String, Object> druid = (Map<String, Object>) datasource.get("druid");
+			@SuppressWarnings("unchecked")
+			Map<String, Object> spring = (Map<String, Object>) obj.get("spring");
 
-            String userName = (String) druid.get("username");
-            String password = (String) druid.get("password");
-            String url = (String) druid.get("url");
+			@SuppressWarnings("unchecked")
+			Map<String, Object> datasource = (Map<String, Object>) spring.get("datasource");
 
-            ApplicationConfig applicationConfig = new ApplicationConfig();
+			@SuppressWarnings("unchecked")
+			Map<String, Object> druid = (Map<String, Object>) datasource.get("druid");
 
-            applicationConfig.setUsername(userName);
-            applicationConfig.setPassword(password);
-            applicationConfig.setUrl(url);
+			String userName = (String) druid.get("username");
+			String password = (String) druid.get("password");
+			String url = (String) druid.get("url");
 
-            return applicationConfig;
-        }
+			ApplicationConfig applicationConfig = new ApplicationConfig();
 
-        return null;
-    }
+			applicationConfig.setUsername(userName);
+			applicationConfig.setPassword(password);
+			applicationConfig.setUrl(url);
 
-    @Data
-    public static class ApplicationConfig {
+			return applicationConfig;
+		}
 
-        private String username;
-        private String password;
-        private String url;
-    }
+		return null;
+	}
+
+	@Data
+	public static class ApplicationConfig {
+
+		private String username;
+		private String password;
+		private String url;
+	}
 
 }

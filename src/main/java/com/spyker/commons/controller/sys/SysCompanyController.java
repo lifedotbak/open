@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spyker.commons.entity.SysOssConfig;
-import com.spyker.commons.search.SysOssConfigSearch;
-import com.spyker.commons.service.SysOssConfigService;
+import com.spyker.commons.entity.SysCompany;
+import com.spyker.commons.search.SysCompanySearch;
+import com.spyker.commons.service.SysCompanyService;
 import com.spyker.framework.core.BaseController;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
@@ -31,28 +31,28 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
- * 对象存储配置表 前端控制器
+ * 部门表 前端控制器
  * </p>
  *
  * @author CodeGenerator
- * @since 2023-12-21
+ * @since 2023-12-25
  */
-@Tag(name = "对象存储配置表", description = "对象存储配置表")
+@Tag(name = "部门表", description = "部门表")
 @SaCheckLogin
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/sys/sys-oss-config")
+@RequestMapping("/sys/sys-company")
 @Slf4j
-public class SysOssConfigController extends BaseController {
+public class SysCompanyController extends BaseController {
 
-	private final SysOssConfigService sysOssConfigService;
+	private final SysCompanyService sysCompanyService;
 
 	@Operation(summary = "列表", description = "列表")
 	@GetMapping("/")
-	@Log(title = "对象存储配置表--列表", businessType = BusinessType.QUERY)
-	public RestResponse<List<SysOssConfig>> list(SysOssConfigSearch search) {
+	@Log(title = "部门表--列表", businessType = BusinessType.QUERY)
+	public RestResponse<List<SysCompany>> list(SysCompanySearch search) {
 
-		List<SysOssConfig> result = sysOssConfigService.query(search);
+		List<SysCompany> result = sysCompanyService.query(search);
 
 		log.info("result------>{}", result);
 
@@ -61,10 +61,9 @@ public class SysOssConfigController extends BaseController {
 
 	@Operation(summary = "列表（分页）", description = "列表（分页）")
 	@GetMapping("/page")
-	@Log(title = "对象存储配置表--列表（分页）", businessType = BusinessType.QUERY)
-	public RestResponse<IPage<SysOssConfig>> list_page(@ModelAttribute SysOssConfigSearch search,
+	@Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
+	public RestResponse<IPage<SysCompany>> list_page(@ModelAttribute SysCompanySearch search,
 			@ModelAttribute PageParamRequest pageParamRequest) {
-
 		int current = 1;
 		int size = 10;
 
@@ -73,50 +72,55 @@ public class SysOssConfigController extends BaseController {
 			size = pageParamRequest.getSize();
 		}
 
-		IPage<SysOssConfig> page = new Page<>(current, size);
+		IPage<SysCompany> page = new Page<>(current, size);
 
-		page = sysOssConfigService.queryPage(page, search);
+		page = sysCompanyService.queryPage(page, search);
+
+		log.info("page------>{}", page);
 
 		return RestResponse.success(page);
 	}
 
 	@Operation(summary = "详情", description = "详情")
 	@GetMapping("/{id}")
-	@Log(title = "对象存储配置表--详情", businessType = BusinessType.QUERY)
-	public RestResponse<SysOssConfig> detail(@PathVariable("id") String id) {
-		SysOssConfig result = sysOssConfigService.get(id);
+	@Log(title = "部门表--详情", businessType = BusinessType.QUERY)
+	public RestResponse<SysCompany> detail(@PathVariable("id") String id) {
+
+		SysCompany result = sysCompanyService.get(id);
 
 		return RestResponse.success(result);
 	}
 
 	@Operation(summary = "新增", description = "新增")
 	@PostMapping("/")
-	@Log(title = "对象存储配置表--新增", businessType = BusinessType.INSERT)
-	public RestResponse<?> add(@RequestBody SysOssConfig add) {
+	@Log(title = "部门表--新增", businessType = BusinessType.INSERT)
+	public RestResponse<?> add(@RequestBody SysCompany add) {
 
-		sysOssConfigService.insert(add);
+		sysCompanyService.insert(add);
 
 		return RestResponse.success();
 	}
 
 	@Operation(summary = "修改", description = "修改")
 	@PutMapping("/{id}")
-	@Log(title = "对象存储配置表--修改", businessType = BusinessType.UPDATE)
-	public RestResponse<?> update(@PathVariable("ossConfigId") String ossConfigId, @RequestBody SysOssConfig update) {
+	@Log(title = "部门表--修改", businessType = BusinessType.UPDATE)
+	public RestResponse<?> update(@PathVariable("id") String id, @RequestBody SysCompany update) {
 
-		update.setOssConfigId(ossConfigId);
+		update.setId(id);
 
-		sysOssConfigService.update(update);
+		update.setId("1");
+
+		sysCompanyService.update(update);
 
 		return RestResponse.success();
 	}
 
 	@Operation(summary = "删除", description = "删除")
-	@DeleteMapping("/{ossConfigId}")
-	@Log(title = "对象存储配置表--删除", businessType = BusinessType.DELETE)
-	public RestResponse<?> delete(@PathVariable("ossConfigId") String ossConfigId) {
+	@DeleteMapping("/{id}")
+	@Log(title = "部门表--删除", businessType = BusinessType.DELETE)
+	public RestResponse<?> delete(@PathVariable("id") String id) {
 
-		sysOssConfigService.delete(ossConfigId);
+		sysCompanyService.delete(id);
 
 		return RestResponse.success();
 	}
