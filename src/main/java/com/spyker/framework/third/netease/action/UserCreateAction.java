@@ -8,9 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -35,67 +37,67 @@ import java.util.List;
 @Slf4j
 public class UserCreateAction {
 
-    private static final String url = "https://api.netease.im/nimserver/user/create.action";
+	private static final String url = "https://api.netease.im/nimserver/user/create.action";
 
-    private final String appKey;
-    private final String appSecret;
+	private final String appKey;
+	private final String appSecret;
 
-    public UserCreateAction(String appKey, String appSecret) {
-        this.appKey = appKey;
-        this.appSecret = appSecret;
-    }
+	public UserCreateAction(String appKey, String appSecret) {
+		this.appKey = appKey;
+		this.appSecret = appSecret;
+	}
 
-    public String execute(String accId) {
+	public String execute(String accId) {
 
-        String result = "";
+		String result = "";
 
-        try {
+		try {
 
-            DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpClient httpClient = HttpClientBuilder.create().build();
 
-            HttpPost httpPost = new HttpPost(url);
+			HttpPost httpPost = new HttpPost(url);
 
-            String nonce = ExRandomStringUtils.random32();
-            String curTime = String.valueOf(new Date().getTime() / 1000L);
-            String checkSum = CheckSumBuilder.getCheckSum(appSecret, nonce, curTime);// 参考 计算CheckSum的java代码
+			String nonce = ExRandomStringUtils.random32();
+			String curTime = String.valueOf(new Date().getTime() / 1000L);
+			String checkSum = CheckSumBuilder.getCheckSum(appSecret, nonce, curTime);// 参考 计算CheckSum的java代码
 
-            // 设置请求的header
-            httpPost.addHeader("AppKey", appKey);
-            httpPost.addHeader("Nonce", nonce);
-            httpPost.addHeader("CurTime", curTime);
-            httpPost.addHeader("CheckSum", checkSum);
-            httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+			// 设置请求的header
+			httpPost.addHeader("AppKey", appKey);
+			httpPost.addHeader("Nonce", nonce);
+			httpPost.addHeader("CurTime", curTime);
+			httpPost.addHeader("CheckSum", checkSum);
+			httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-            // 设置请求的参数
-            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-            nvps.add(new BasicNameValuePair("accid", accId));
-            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+			// 设置请求的参数
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+			nvps.add(new BasicNameValuePair("accid", accId));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
 
-            // 执行请求
-            HttpResponse response = httpClient.execute(httpPost);
+			// 执行请求
+			HttpResponse response = httpClient.execute(httpPost);
 
-            HttpEntity httpEntity = response.getEntity();
+			HttpEntity httpEntity = response.getEntity();
 
-            String httpResult = EntityUtils.toString(httpEntity, "UTF-8");
+			String httpResult = EntityUtils.toString(httpEntity, "UTF-8");
 
-            log.info(httpResult);
+			log.info(httpResult);
 
-            Gson gson = new Gson();
+			Gson gson = new Gson();
 
-            AccCreateResult accCreateResult = gson.fromJson(httpResult, AccCreateResult.class);
+			AccCreateResult accCreateResult = gson.fromJson(httpResult, AccCreateResult.class);
 
-            // 打印执行结果
-            log.info("accCreateResult --> {}", accCreateResult);
+			// 打印执行结果
+			log.info("accCreateResult --> {}", accCreateResult);
 
-            if (null != accCreateResult && 200 == accCreateResult.getCode()) {
-                result = accCreateResult.getInfo().getToken();
-            }
+			if (null != accCreateResult && 200 == accCreateResult.getCode()) {
+				result = accCreateResult.getInfo().getToken();
+			}
 
-        } catch (Exception e) {
-            log.error("create netease user exception --> {}", e);
-        }
+		} catch (Exception e) {
+			log.error("create netease user exception --> {}", e);
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 }

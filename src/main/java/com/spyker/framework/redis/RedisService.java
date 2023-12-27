@@ -19,7 +19,7 @@ import org.springframework.data.redis.core.ValueOperations;
  * @author ruoyi
  **/
 @Configuration
-@ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
+//@ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
 public class RedisService {
 
 	@Autowired
