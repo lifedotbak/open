@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * xxl-job config
+ * 依赖spring-cloud-commons包
  *
  * @author Lion Li
  */
@@ -26,44 +27,44 @@ import java.util.List;
 @AllArgsConstructor
 public class XxlJobConfig {
 
-    private final XxlJobProperties xxlJobProperties;
+	private final XxlJobProperties xxlJobProperties;
 
-    private final DiscoveryClient discoveryClient;
+	private final DiscoveryClient discoveryClient;
 
-    @Bean
-    public XxlJobSpringExecutor xxlJobExecutor() {
-        log.info(
-                "=======================================================================================================================");
-        log.info(">>>>>>>>>>> xxl-job config init.");
-        XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
-        if (StringUtils.isNotBlank(xxlJobProperties.getAdminAppname())) {
-            List<ServiceInstance> instances = discoveryClient.getInstances(xxlJobProperties.getAdminAppname());
+	@Bean
+	public XxlJobSpringExecutor xxlJobExecutor() {
+		log.info(
+				"=======================================================================================================================");
+		log.info(">>>>>>>>>>> xxl-job config init.");
+		XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
+		if (StringUtils.isNotBlank(xxlJobProperties.getAdminAppname())) {
+			List<ServiceInstance> instances = discoveryClient.getInstances(xxlJobProperties.getAdminAppname());
 
-            log.info(">>>>>>>>>>> instances---->{}", instances);
+			log.info(">>>>>>>>>>> instances---->{}", instances);
 
-            if (CollUtil.isEmpty(instances)) {
-                throw new RuntimeException("调度中心不存在!");
-            }
-            String serverList = StreamUtils.join(instances,
-                                                 instance -> String.format("http://%s:%s",
-                                                                           instance.getHost(),
-                                                                           instance.getPort()));
+			if (CollUtil.isEmpty(instances)) {
+				throw new RuntimeException("调度中心不存在!");
+			}
+			String serverList = StreamUtils.join(instances,
+					instance -> String.format("http://%s:%s",
+							instance.getHost(),
+							instance.getPort()));
 
-            log.info(">>>>>>>>>>> serverList---->{}", serverList);
+			log.info(">>>>>>>>>>> serverList---->{}", serverList);
 
-            xxlJobSpringExecutor.setAdminAddresses(serverList);
-        } else {
-            xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
-        }
-        xxlJobSpringExecutor.setAccessToken(xxlJobProperties.getAccessToken());
-        XxlJobProperties.Executor executor = xxlJobProperties.getExecutor();
-        xxlJobSpringExecutor.setAppname(executor.getAppname());
-        xxlJobSpringExecutor.setAddress(executor.getAddress());
-        xxlJobSpringExecutor.setIp(executor.getIp());
-        xxlJobSpringExecutor.setPort(executor.getPort());
-        xxlJobSpringExecutor.setLogPath(executor.getLogPath());
-        xxlJobSpringExecutor.setLogRetentionDays(executor.getLogRetentionDays());
-        return xxlJobSpringExecutor;
-    }
+			xxlJobSpringExecutor.setAdminAddresses(serverList);
+		} else {
+			xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
+		}
+		xxlJobSpringExecutor.setAccessToken(xxlJobProperties.getAccessToken());
+		XxlJobProperties.Executor executor = xxlJobProperties.getExecutor();
+		xxlJobSpringExecutor.setAppname(executor.getAppname());
+		xxlJobSpringExecutor.setAddress(executor.getAddress());
+		xxlJobSpringExecutor.setIp(executor.getIp());
+		xxlJobSpringExecutor.setPort(executor.getPort());
+		xxlJobSpringExecutor.setLogPath(executor.getLogPath());
+		xxlJobSpringExecutor.setLogRetentionDays(executor.getLogRetentionDays());
+		return xxlJobSpringExecutor;
+	}
 
 }

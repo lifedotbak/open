@@ -10,6 +10,11 @@
 	<!-- 日志存放路径 -->
 	<property name="log.base" value="logs/open" />
 	
+	<!-- excludePackageNames传入需要过滤包的关键字，以分号分割 -->
+    <turboFilter class="com.spyker.framework.logback.ExcludeTurboFilter">
+        <excludePackageNames>job.core;test</excludePackageNames>
+    </turboFilter>
+	
 	<!-- 打印sleuth对应日志信息 -->
 	<property name="TRACE_LOG_PATTERN" value="%d [%thread] %-5level %logger{35} [%L] [TraceId=%X{X-B3-TraceId:-},SpanId=%X{X-B3-SpanId:-},ParentSpanId=%X{X-B3-ParentSpanId:-}] - %msg%n" />
     

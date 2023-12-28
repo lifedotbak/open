@@ -1,11 +1,10 @@
 package com.spyker.commons.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.spyker.commons.log.ExceptionLogHandlerImpl;
 import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 启用此注解，DbLogServiceImpl会覆盖DefaultLogServiceImpl日志处理具体方法
@@ -19,7 +18,7 @@ public class ExceptionLogUsableHandlerConfig {
 	@Autowired
 	private ExceptionLogHandlerImpl dbLogServiceImpl;
 
-	@Bean
+	@PostConstruct
 	public void addChian() {
 
 		exceptionLogUsableHandler.initHandler(dbLogServiceImpl);

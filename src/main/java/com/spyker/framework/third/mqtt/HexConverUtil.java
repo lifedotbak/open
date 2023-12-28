@@ -1,64 +1,55 @@
 package com.spyker.framework.third.mqtt;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.util.encoders.Hex;
 import org.springframework.lang.NonNull;
-import org.springframework.security.crypto.codec.Hex;
 
 public final class HexConverUtil {
 
-    private HexConverUtil() {
+	private HexConverUtil() {
 
-    }
+	}
 
-    /**
-     * 接收的队列消息，转hex的string的串
-     *
-     * @param bytes
-     * @return
-     */
-    public static String hexInPayload2String(@NonNull byte[] bytes) {
-        char[] chars = Hex.encode(bytes);
+	/**
+	 * 接收的队列消息，转hex的string的串
+	 *
+	 * @param bytes
+	 * @return
+	 */
+	public static String hexInPayload2String(@NonNull byte[] bytes) {
 
-        String result = "";
+		return Hex.toHexString(bytes);
+	}
 
-        if (null != chars && bytes.length > 0) {
-            for (char c : chars) {
-                result = result + c;
-            }
-        }
+	/**
+	 * 发送到队列的消息，hex的string串转byte[]
+	 *
+	 * @param hexString
+	 * @return
+	 */
+	public static byte[] hexString2Byte(@NonNull String hexString) {
 
-        return result;
-    }
+		hexString = hexString.replace(" ", "");
+		return Hex.decode(hexString);
+	}
 
-    /**
-     * 发送到队列的消息，hex的string串转byte[]
-     *
-     * @param hexString
-     * @return
-     */
-    public static byte[] hexString2Byte(@NonNull String hexString) {
+	public static String hex2(long value) {
+		return hexLeftPad(value, 2);
+	}
 
-        hexString = hexString.replace(" ", "");
-        return Hex.decode(hexString);
-    }
+	private static String hexLeftPad(long value, int lenght) {
 
-    public static String hex2(long value) {
-        return hexLeftPad(value, 2);
-    }
+		String result = Long.toHexString(value);
 
-    private static String hexLeftPad(long value, int lenght) {
+		if (result.length() < lenght) {
+			result = StringUtils.leftPad(result, lenght, "0");
+		}
 
-        String result = Long.toHexString(value);
+		return result;
+	}
 
-        if (result.length() < lenght) {
-            result = StringUtils.leftPad(result, lenght, "0");
-        }
+	public static int converHex210(String value) {
 
-        return result;
-    }
-
-    public static int converHex210(String value) {
-
-        return Integer.parseInt(value, 16);
-    }
+		return Integer.parseInt(value, 16);
+	}
 }

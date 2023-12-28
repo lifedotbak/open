@@ -16,15 +16,15 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(prefix = "xxl-server", name = "enabled", havingValue = "true")
 public class XxlServerProperties {
 
-    private String url;
-    private String userName;
-    private String password;
+	private String url;
+	private String userName;
+	private String password;
 
-    private int jobGroup;
-    private String author;
-    private String jobDesc;
-    private String glueType;
-    private String executorRouteStrategy;
-    private String misfireStrategy;
-    private String executorBlockStrategy;
+	private int jobGroup;
+	private String author;
+	private String jobDesc;
+	private String glueType;
+	private String executorRouteStrategy;
+	private String misfireStrategy;
+	private String executorBlockStrategy;
 }

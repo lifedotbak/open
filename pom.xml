@@ -40,7 +40,7 @@
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<springdoc-openapi-starter-webmvc-ui.version>2.3.0</springdoc-openapi-starter-webmvc-ui.version>
 		<mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
-		<mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+		<mybatis-plus.version>3.5.5</mybatis-plus.version>
 		<mysql-connector-j.version>8.2.0</mysql-connector-j.version>
 		<druid.version>1.2.20</druid.version>
 		<java-jwt.version>4.4.0</java-jwt.version>
@@ -461,7 +461,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-commons</artifactId>
-			<version>4.0.4</version>
+			<version>4.1.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.github.sftwnd.crayfish.common/crayfish-common-crc -->

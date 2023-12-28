@@ -1,5 +1,6 @@
 package com.spyker.framework.oss.config;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OssInitConfig {
 
-	@Bean
+	@PostConstruct
 	public void init() {
 
 		log.info("====OssInitConfig Init====");
