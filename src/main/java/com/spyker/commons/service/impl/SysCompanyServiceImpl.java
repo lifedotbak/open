@@ -9,17 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import java.util.List;
 import java.util.ArrayList;
+
 import com.spyker.commons.search.SysCompanySearch;
 import lombok.RequiredArgsConstructor;
 
 import com.spyker.framework.response.RestResponse;
 
-
 /**
  * <p>
- * 部门表 服务实现类
+ * 公司表 服务实现类
  * </p>
  *
  * @author CodeGenerator
@@ -31,45 +32,45 @@ import com.spyker.framework.response.RestResponse;
 @RequiredArgsConstructor
 public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysCompany> implements SysCompanyService {
 
-    private final SysCompanyMapper sysCompanyMapper;
+	private final SysCompanyMapper sysCompanyMapper;
 
-    @Override
-    public List<SysCompany> query(SysCompanySearch search){
-    
-        List<SysCompany> result =  sysCompanyMapper.query(search);
-        log.info("result------>{}", result);
+	@Override
+	public List<SysCompany> query(SysCompanySearch search) {
 
-        return result;
-    }
+		List<SysCompany> result = sysCompanyMapper.query(search);
+		log.info("result------>{}", result);
 
-    @Override
-    public IPage<SysCompany> queryPage(IPage<SysCompany> page, SysCompanySearch search){
-    
-        page =  sysCompanyMapper.queryPage(page, search);
-        log.info("page------>{}", page);
+		return result;
+	}
 
-        return page;
-    }
+	@Override
+	public IPage<SysCompany> queryPage(IPage<SysCompany> page, SysCompanySearch search) {
 
-    @Override
-    public SysCompany get(String id){
-         SysCompany result = getById(id);
-         return result;
-    }
+		page = sysCompanyMapper.queryPage(page, search);
+		log.info("page------>{}", page);
 
-    @Override
-    public boolean insert(SysCompany SysCompany){
-        return  save(SysCompany);
-    }
+		return page;
+	}
 
-    @Override
-    public boolean update(SysCompany SysCompany){
-       return  updateById(SysCompany);
-    }
+	@Override
+	public SysCompany get(String id) {
+		SysCompany result = getById(id);
+		return result;
+	}
 
-    @Override
-    public boolean delete(String id){
-        return removeById(id);
-    }
+	@Override
+	public boolean insert(SysCompany SysCompany) {
+		return save(SysCompany);
+	}
+
+	@Override
+	public boolean update(SysCompany SysCompany) {
+		return updateById(SysCompany);
+	}
+
+	@Override
+	public boolean delete(String id) {
+		return removeById(id);
+	}
 
 }

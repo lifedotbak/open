@@ -9,7 +9,7 @@ import com.spyker.commons.search.SysCompanySearch;
 
 /**
  * <p>
- * 部门表 服务类
+ * 公司表 服务类
  * </p>
  *
  * @author CodeGenerator

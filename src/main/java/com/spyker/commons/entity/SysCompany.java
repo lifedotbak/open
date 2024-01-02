@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName("sys_company")
-@Schema(name = "SysCompany", description = "部门表对象")
+@Schema(name = "SysCompany", description = "公司表对象")
 public class SysCompany implements Serializable {
 
 	private static final long serialVersionUID = 1L;

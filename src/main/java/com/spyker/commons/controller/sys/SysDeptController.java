@@ -1,7 +1,16 @@
 package com.spyker.commons.controller.sys;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckRole;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysDept;
@@ -10,13 +19,13 @@ import com.spyker.commons.service.SysDeptService;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
 import com.spyker.framework.response.RestResponse;
+
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -34,66 +43,68 @@ import java.util.List;
 @SaCheckLogin
 public class SysDeptController {
 
-    private final SysDeptService sysDeptService;
+	private final SysDeptService sysDeptService;
 
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("list")
-    public RestResponse<List<SysDept>> list(SysDeptSearch search) {
+	@Operation(summary = "列表", description = "列表")
+	@GetMapping("list")
+	public RestResponse<List<SysDept>> list(SysDeptSearch search) {
 
-        List<SysDept> result = sysDeptService.query(search);
+		List<SysDept> result = sysDeptService.query(search);
 
-        return RestResponse.success(result);
-    }
+		log.info("--->{}", result);
 
-    @Operation(summary = "列表（分页）", description = "列表（分页）")
-    @GetMapping("list_page")
-    @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
-        int current = 1;
-        int size = 10;
+		return RestResponse.success(result);
+	}
 
-        if (null != search) {
-            current = search.getPage();
-            size = search.getSize();
-        }
+	@Operation(summary = "列表（分页）", description = "列表（分页）")
+	@GetMapping("list_page")
+	@Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
+	public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
+		int current = 1;
+		int size = 10;
 
-        IPage<SysDept> page = new Page<>(current, size);
+		if (null != search) {
+			current = search.getPage();
+			size = search.getSize();
+		}
 
-        page = sysDeptService.queryPage(page, search);
+		IPage<SysDept> page = new Page<>(current, size);
 
-        return RestResponse.success(page);
-    }
+		page = sysDeptService.queryPage(page, search);
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("detail")
-    public RestResponse<SysDept> detail(@RequestParam String id) {
-        SysDept result = sysDeptService.get(id);
+		return RestResponse.success(page);
+	}
 
-        return RestResponse.success(result);
-    }
+	@Operation(summary = "详情", description = "详情")
+	@GetMapping("detail")
+	public RestResponse<SysDept> detail(@RequestParam String id) {
+		SysDept result = sysDeptService.get(id);
 
-    @SaCheckRole("admin")
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysDept add) {
+		return RestResponse.success(result);
+	}
 
-        return sysDeptService.insert(add);
-    }
+	@SaCheckRole("admin")
+	@Operation(summary = "新增", description = "新增")
+	@PostMapping("add")
+	public RestResponse<?> add(@RequestBody SysDept add) {
 
-    @SaCheckRole("admin")
-    @Operation(summary = "修改", description = "修改")
-    @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysDept update) {
+		return sysDeptService.insert(add);
+	}
 
-        return sysDeptService.update(update);
-    }
+	@SaCheckRole("admin")
+	@Operation(summary = "修改", description = "修改")
+	@PutMapping("update")
+	public RestResponse<?> update(@RequestBody SysDept update) {
 
-    @SaCheckRole("admin")
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
+		return sysDeptService.update(update);
+	}
 
-        return sysDeptService.delete(id);
-    }
+	@SaCheckRole("admin")
+	@Operation(summary = "删除", description = "删除")
+	@DeleteMapping("delete")
+	public RestResponse<?> delete(@RequestParam String id) {
+
+		return sysDeptService.delete(id);
+	}
 
 }

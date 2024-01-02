@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>com.spyker</groupId>
@@ -18,8 +18,7 @@
 
 	<repositories>
 		<repository>
-			<!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id
-			就会覆盖中央仓库的配置 -->
+			<!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id 就会覆盖中央仓库的配置 -->
 			<id>mvnrepository</id>
 			<name>mvnrepository</name>
 			<url>http://www.mvnrepository.com/</url>
@@ -36,7 +35,7 @@
 	<properties>
 		<code.encoding>UTF-8</code.encoding>
 		<java.version>17</java.version>
-		<!--		https://spring.io/projects/spring-cloud/-->
+		<!-- https://spring.io/projects/spring-cloud/ -->
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<springdoc-openapi-starter-webmvc-ui.version>2.3.0</springdoc-openapi-starter-webmvc-ui.version>
 		<mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
@@ -120,6 +119,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
 		<!-- =======================================spring doc依赖 ======================================= -->
@@ -273,7 +278,7 @@
 			<version>${sa-token.version}</version>
 		</dependency>
 
-		<!-- Sa-Token 整合 jwt 注意: sa-token-jwt 显式依赖 hutool-jwt 5.7.14 版本，保险起见：你的项目中要么不引入 hutool，要么引入版本 >= 5.7.14 的 hutool 版本。 hutool
+		<!-- Sa-Token 整合 jwt 注意: sa-token-jwt 显式依赖 hutool-jwt 5.7.14 版本，保险起见：你的项目中要么不引入 hutool，要么引入版本 >= 5.7.14 的 hutool 版本。 hutool 
 			5.8.13 和 5.8.14 版本下会出现类型转换问题 -->
 		<dependency>
 			<groupId>cn.dev33</groupId>
@@ -332,7 +337,7 @@
 		</dependency>
 
 		<!-- ======================================= 其他相关依赖 ======================================= -->
-		<!--lombok用来简化实体类：需要安装lombok插件 jdk17+需要lombok最低版本1.18.30-->
+		<!--lombok用来简化实体类：需要安装lombok插件 jdk17+需要lombok最低版本1.18.30 -->
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

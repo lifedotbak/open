@@ -26,7 +26,7 @@ public class MybatisPlusConfig {
 		/**
 		 * 非法SQL拦截插件 IllegalSQLInnerIntercepto
 		 */
-		interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
+//		interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
 
 		/**
 		 * 防全表更新与删除插件 BlockAttackInnerInterceptor

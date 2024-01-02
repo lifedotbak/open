@@ -37,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author CodeGenerator
  * @since 2023-12-25
  */
-@Tag(name = "部门表", description = "部门表")
+@Tag(name = "公司表", description = "公司表")
 @SaCheckLogin
 @RequiredArgsConstructor
 @RestController
@@ -63,7 +63,7 @@ public class SysCompanyController extends BaseController {
 	@GetMapping("/page")
 	@Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
 	public RestResponse<IPage<SysCompany>> list_page(@ModelAttribute SysCompanySearch search,
-			@ModelAttribute PageParamRequest pageParamRequest) {
+	                                                 @ModelAttribute PageParamRequest pageParamRequest) {
 		int current = 1;
 		int size = 10;
 

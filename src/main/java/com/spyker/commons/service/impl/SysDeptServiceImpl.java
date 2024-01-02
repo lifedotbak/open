@@ -1,5 +1,12 @@
 package com.spyker.commons.service.impl;
 
+import java.util.List;
+
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spyker.commons.entity.SysDept;
@@ -7,12 +14,8 @@ import com.spyker.commons.mapper.SysDeptMapper;
 import com.spyker.commons.search.SysDeptSearch;
 import com.spyker.commons.service.SysDeptService;
 import com.spyker.framework.response.RestResponse;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 /**
  * <p>
@@ -24,52 +27,53 @@ import java.util.List;
  */
 @Service
 @Transactional
-@Slf4j
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "SysDept")
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements SysDeptService {
 
-    private final SysDeptMapper sysDeptMapper;
+	private final SysDeptMapper sysDeptMapper;
 
-    @Override
-    public List<SysDept> query(SysDeptSearch search) {
-        List<SysDept> result = sysDeptMapper.query(search);
+	@Override
+	public List<SysDept> query(SysDeptSearch search) {
+		List<SysDept> result = sysDeptMapper.query(search);
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-    public IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search) {
-        page = sysDeptMapper.queryPage(page, search);
+	@Override
+	public IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search) {
+		page = sysDeptMapper.queryPage(page, search);
 
-        return page;
-    }
+		return page;
+	}
 
-    @Override
-    public SysDept get(String id) {
-        SysDept result = getById(id);
+	@Cacheable
+	@Override
+	public SysDept get(String id) {
+		SysDept result = getById(id);
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-    public RestResponse<?> insert(SysDept SysDept) {
-        save(SysDept);
+	@Override
+	public RestResponse<?> insert(SysDept SysDept) {
+		save(SysDept);
 
-        return RestResponse.success(SysDept);
-    }
+		return RestResponse.success(SysDept);
+	}
 
-    @Override
-    public RestResponse<?> update(SysDept SysDept) {
-        updateById(SysDept);
+	@Override
+	public RestResponse<?> update(SysDept SysDept) {
+		updateById(SysDept);
 
-        return RestResponse.success();
-    }
+		return RestResponse.success();
+	}
 
-    @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+	@Override
+	public RestResponse<?> delete(String id) {
+		removeById(id);
 
-        return RestResponse.success();
-    }
+		return RestResponse.success();
+	}
 
 }

@@ -46,6 +46,13 @@ spring:
   redis:
     redisson:
       file: classpath:redisson.yml
+  cache:
+    #指定缓存类型
+    type: redis
+    #指定存活时间（ms）
+    redis.time-to-live: 86400000
+    #是否缓存空值，可以防止缓存穿透
+    redis.cache-null-values: true
 
   #    enabled: true
   #    lettuce:
