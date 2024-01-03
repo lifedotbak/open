@@ -88,7 +88,9 @@ public class SysDeptController {
 	@PostMapping("add")
 	public RestResponse<?> add(@RequestBody SysDept add) {
 
-		return sysDeptService.insert(add);
+		sysDeptService.insert(add);
+
+		return RestResponse.success();
 	}
 
 	@SaCheckRole("admin")
@@ -96,7 +98,9 @@ public class SysDeptController {
 	@PutMapping("update")
 	public RestResponse<?> update(@RequestBody SysDept update) {
 
-		return sysDeptService.update(update);
+		sysDeptService.update(update);
+
+		return RestResponse.success();
 	}
 
 	@SaCheckRole("admin")

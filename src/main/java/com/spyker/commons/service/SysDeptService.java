@@ -18,16 +18,16 @@ import java.util.List;
  */
 public interface SysDeptService extends IService<SysDept> {
 
-    List<SysDept> query(SysDeptSearch search);
+	List<SysDept> query(SysDeptSearch search);
 
-    IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search);
+	IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search);
 
-    SysDept get(String id);
+	SysDept get(String id);
 
-    RestResponse<?> insert(SysDept SysDept);
+	SysDept insert(SysDept SysDept);
 
-    RestResponse<?> update(SysDept SysDept);
+	SysDept update(SysDept SysDept);
 
-    RestResponse<?> delete(String id);
+	RestResponse<?> delete(String id);
 
 }

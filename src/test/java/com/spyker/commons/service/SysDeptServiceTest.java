@@ -21,125 +21,155 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class SysDeptServiceTest extends BaseTest {
 
-    @Autowired
-    private SysDeptService service;
+	@Autowired
+	private SysDeptService service;
 
-    @Test
-    public void get() {
+	@Test
+	public void testCache() {
 
-        SysDept result = service.getById("1");
-    }
+		/**
+		 * get
+		 */
+		SysDept result = service.get("100");
+		log.info("result-->{}", result);
 
-    @Test
-    public void delete() {
+		/**
+		 * update
+		 */
+		result.setLeader("张招锋");
+		service.update(result);
 
-        service.delete("1");
-    }
+		log.info("result-->{}", result);
 
-    @Test
-    public void add() {
-        SysDept add = new SysDept();
+		/**
+		 * delete
+		 */
+		service.delete("100");
+		result = service.get("100");
+		log.info("result-->{}", result);
+	}
 
-        add.setParentId("parentId");
+	@Test
+	public void get() {
 
-        add.setAncestors("ancestors");
+		SysDept result = service.get("100");
+		log.info("result-->{}", result);
+		result = service.get("100");
+		log.info("result-->{}", result);
+		result = service.get("100");
+		log.info("result-->{}", result);
+	}
 
-        add.setDeptName("deptName");
+	@Test
+	public void delete() {
 
-        add.setOrderNum(1);
+		service.delete("1");
+	}
 
-        add.setLeader("leader");
+	@Test
+	public void add() {
+		SysDept add = new SysDept();
 
-        add.setPhone("phone");
+		add.setParentId("parentId");
 
-        add.setEmail("email");
+		add.setAncestors("ancestors");
 
-        add.setStatus("status");
+		add.setDeptName("deptName");
 
-        add.setDelFlag("delFlag");
+		add.setOrderNum(1);
 
-        add.setCreateBy("createBy");
+		add.setLeader("leader");
 
-        add.setUpdateBy("updateBy");
+		add.setPhone("phone");
 
-        service.insert(add);
-    }
+		add.setEmail("email");
 
-    @Test
-    public void update() {
-        SysDept update = new SysDept();
+		add.setStatus("status");
 
-        update.setDeptId("deptId");
+		add.setDelFlag("delFlag");
 
-        update.setParentId("parentId");
+		add.setCreateBy("createBy");
 
-        update.setAncestors("ancestors");
+		add.setUpdateBy("updateBy");
 
-        update.setDeptName("deptName");
-        update.setOrderNum(1);
+		service.insert(add);
+	}
 
-        update.setLeader("leader");
+	@Test
+	public void update() {
+		SysDept update = new SysDept();
 
-        update.setPhone("phone");
+		update.setDeptId("deptId");
 
-        update.setEmail("email");
+		update.setParentId("parentId");
 
-        update.setDelFlag("delFlag");
+		update.setAncestors("ancestors");
 
-        update.setCreateBy("createBy");
+		update.setDeptName("deptName");
+		update.setOrderNum(1);
 
-        update.setUpdateBy("updateBy");
+		update.setLeader("leader");
 
-        service.update(update);
-    }
+		update.setPhone("phone");
 
-    @Test
-    public void query() {
-        SysDeptSearch search = new SysDeptSearch();
+		update.setEmail("email");
 
-        search.setParentId("parentId");
-        search.setAncestors("ancestors");
-        search.setDeptName("deptName");
-        search.setLeader("leader");
-        search.setPhone("phone");
-        search.setEmail("email");
-        search.setStatus("status");
-        search.setDelFlag("delFlag");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
+		update.setDelFlag("delFlag");
 
-        service.query(search);
-    }
+		update.setCreateBy("createBy");
 
-    @Test
-    public void queryPage() {
-        IPage<SysDept> page = new Page<>(1, 10);
+		update.setUpdateBy("updateBy");
 
-        SysDeptSearch search = new SysDeptSearch();
+		service.update(update);
+	}
 
-        search.setParentId("parentId");
+	@Test
+	public void query() {
+		SysDeptSearch search = new SysDeptSearch();
 
-        search.setAncestors("ancestors");
+		search.setParentId("parentId");
+		search.setAncestors("ancestors");
+		search.setDeptName("deptName");
+		search.setLeader("leader");
+		search.setPhone("phone");
+		search.setEmail("email");
+		search.setStatus("status");
+		search.setDelFlag("delFlag");
+		search.setCreateBy("createBy");
+		search.setUpdateBy("updateBy");
 
-        search.setDeptName("deptName");
+		service.query(search);
+	}
 
-        search.setOrderNum(1);
+	@Test
+	public void queryPage() {
+		IPage<SysDept> page = new Page<>(1, 10);
 
-        search.setLeader("leader");
+		SysDeptSearch search = new SysDeptSearch();
 
-        search.setPhone("phone");
+		search.setParentId("parentId");
 
-        search.setEmail("email");
+		search.setAncestors("ancestors");
 
-        search.setStatus("status");
+		search.setDeptName("deptName");
 
-        search.setDelFlag("delFlag");
+		search.setOrderNum(1);
 
-        search.setCreateBy("createBy");
+		search.setLeader("leader");
 
-        search.setUpdateBy("updateBy");
+		search.setPhone("phone");
 
-        service.queryPage(page, search);
-    }
+		search.setEmail("email");
+
+		search.setStatus("status");
+
+		search.setDelFlag("delFlag");
+
+		search.setCreateBy("createBy");
+
+		search.setUpdateBy("updateBy");
+
+		service.queryPage(page, search);
+	}
 
 }
