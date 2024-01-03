@@ -14,62 +14,98 @@ import java.util.ArrayList;
 import ${package.Parent}.search.${entity}Search;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+
 import com.spyker.framework.response.RestResponse;
 
 
 /**
- * <p>
- * ${table.comment!} 服务实现类
- * </p>
- *
- * @author ${author}
- * @since ${date}
- */
+* <p>
+	* ${table.comment!} 服务实现类
+	* </p>
+*
+* @author ${author}
+* @since ${date}
+*/
 @Service
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "${entity}")
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
-    private final ${table.mapperName} ${table.mapperName?uncap_first};
+private final ${table.mapperName} ${table.mapperName?uncap_first};
 
-    @Override
-    public List<${entity}> query(${entity}Search search){
-    
-        List<${entity}> result =  ${table.mapperName?uncap_first}.query(search);
-        log.info("result------>{}", result);
+@Override
+public List<${entity}> query(${entity}Search search){
 
-        return result;
-    }
+List<${entity}> result =  ${table.mapperName?uncap_first}.query(search);
+log.info("result------>{}", result);
 
-    @Override
-    public IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search){
-    
-        page =  ${table.mapperName?uncap_first}.queryPage(page, search);
-        log.info("page------>{}", page);
+return result;
+}
 
-        return page;
-    }
+@Override
+public IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search){
 
-    @Override
-    public ${entity} get(String id){
-         ${entity} result = getById(id);
-         return result;
-    }
+page =  ${table.mapperName?uncap_first}.queryPage(page, search);
+log.info("page------>{}", page);
 
-    @Override
-    public boolean insert(${entity} ${entity}){
-        return  save(${entity});
-    }
+return page;
+}
 
-    @Override
-    public boolean update(${entity} ${entity}){
-       return  updateById(${entity});
-    }
+/**
+* @param id
+* @return
+* @Cacheable
+* @Cacheble注解表示这个方法有了缓存的功能，方法的返回值会被缓存下来，下一次调用该方法前， 会去检查是否缓存中已经有值
+* ，如果有就直接返回，不调用方法。如果没有，就调用方法，然后把结果缓存起来。这个注解一般用在查询方法上。
+*/
+@Override
+//@Cacheable(key = "#id")
+public ${entity} get(String id){
+${entity} result = getById(id);
+return result;
+}
 
-    @Override
-    public boolean delete(String id){
-        return removeById(id);
-    }
+
+/**
+* @param sysDept
+* @return
+* @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来，
+* 供其它地方使用。它通常用在新增方法上。
+*/
+@Override
+//@CachePut(key = "#${entity?uncap_first}.id")
+public ${entity} insert(${entity} ${entity?uncap_first}){
+return  save(${entity?uncap_first});
+}
+
+/**
+* @param sysDept
+* @return
+* @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来，
+* 供其它地方使用。它通常用在新增方法上。
+*/
+@Override
+//@CachePut(key = "#${entity?uncap_first}.id")
+public ${entity} update(${entity} ${entity?uncap_first}){
+return  updateById(${entity?uncap_first});
+}
+
+/**
+* @param id
+* @return
+* @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。
+* 一般用在更新或者删除的方法上。
+*/
+@Override
+//@CacheEvict(key = "#id")
+public boolean delete(String id){
+return removeById(id);
+}
 
 }
