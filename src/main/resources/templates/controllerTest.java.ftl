@@ -26,38 +26,40 @@ import ${package.Entity}.${entity};
 @Slf4j
 public class ${table.controllerName}Test extends BaseTest {
 
+// @formatter:off
+
     private static String BASE_URL ="<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>";
 
     /*分页查询*/
     private static String LIST_PAGE_URL =BASE_URL + "/list_page";
-    
+
     /*查询*/
     private static String LIST_URL =BASE_URL + "/list";
-    
+
     /*详情*/
     private static String DETAIL_URL =BASE_URL + "/detail";
-    
+
     /*删除*/
     private static String DELETE_URL =BASE_URL + "/delete";
-    
+
     /*修改*/
     private static String UPDATE_URL =BASE_URL + "/update";
-    
+
     /*新增*/
     private static String ADD_URL =BASE_URL + "/add";
 
   //  @Autowired
  //   private MockMvc mockMvc;
-    
-    
+
+
     //  @Autowired
   private MockMvc mockMvc;
   //
     @Autowired
     private WebApplicationContext webApplicationContext;
-  
+
   //  private WebTestClient client;
-  
+
     @BeforeEach
     void setUp() {
   //    client = MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
@@ -68,7 +70,7 @@ public class ${table.controllerName}Test extends BaseTest {
     @SneakyThrows
     public void list_page() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-        
+
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.get(LIST_PAGE_URL)
                 .accept(MediaType.APPLICATION_JSON).params(params))
@@ -83,7 +85,7 @@ public class ${table.controllerName}Test extends BaseTest {
     @SneakyThrows
     public void list() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-        
+
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.get(LIST_URL)
                 .accept(MediaType.APPLICATION_JSON).params(params))
@@ -92,7 +94,6 @@ public class ${table.controllerName}Test extends BaseTest {
         log.info(mvcResult.getResponse().getContentAsString());
 
     }
-
 
     @Test
     @SneakyThrows
@@ -104,7 +105,7 @@ public class ${table.controllerName}Test extends BaseTest {
         params.add("${field.propertyName}","1");
             </#if>
         </#list>
-        
+
 
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.get(DETAIL_URL)
@@ -158,7 +159,7 @@ public class ${table.controllerName}Test extends BaseTest {
         Gson gson = new Gson();
 
         String jsonString = gson.toJson(add);
-        
+
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.post(ADD_URL).content(jsonString)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -191,7 +192,7 @@ public class ${table.controllerName}Test extends BaseTest {
         Gson gson = new Gson();
 
         String jsonString = gson.toJson(update);
-        
+
         MvcResult mvcResult = mockMvc
             .perform(MockMvcRequestBuilders.put(UPDATE_URL).content(jsonString)
                 .contentType(MediaType.APPLICATION_JSON))

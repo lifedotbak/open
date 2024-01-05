@@ -1,5 +1,7 @@
 package ${package.Parent}.search;
 
+// @formatter:off
+
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
@@ -19,9 +21,7 @@ import lombok.experimental.Accessors;
 </#if>
 
 /**
-* <p>
-* ${table.comment!}
-* </p>
+* ${table.comment!}查询类
 *
 * @author ${author}
 * @since ${date}

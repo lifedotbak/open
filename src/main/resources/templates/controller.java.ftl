@@ -1,12 +1,12 @@
 package ${package.Controller};
 import org.springframework.web.bind.annotation.RequestMapping;
 <#if restControllerStyle>
-import org.springframework.web.bind.annotation.RestController;
+	import org.springframework.web.bind.annotation.RestController;
 <#else>
-import org.springframework.stereotype.Controller;
+	import org.springframework.stereotype.Controller;
 </#if>
 <#if superControllerClassPackage??>
-import ${superControllerClassPackage};
+	import ${superControllerClassPackage};
 </#if>
 import java.util.Date;
 import java.util.List;
@@ -45,9 +45,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
-* <p>
 * ${table.comment!} 前端控制器
-* </p>
 *
 * @author ${author}
 * @since ${date}
@@ -59,10 +57,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
 @Slf4j
 <#if superControllerClass??>
-public class ${table.controllerName} extends ${superControllerClass} {
+	public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
-public class ${table.controllerName} {
+	public class ${table.controllerName} {
 </#if>
+
+// @formatter:off
 
     private final ${table.serviceName} ${table.serviceName?uncap_first};
 
@@ -72,12 +72,11 @@ public class ${table.controllerName} {
     public RestResponse<List<${entity}>> list(${entity}Search search) {
 
         List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
-        
+
         log.info("result------>{}", result);
 
         return RestResponse.success(result);
     }
-
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
@@ -94,7 +93,7 @@ public class ${table.controllerName} {
         IPage<${entity}> page = new Page<>(current, size);
 
         page = ${table.serviceName?uncap_first}.queryPage(page, search);
-        
+
         log.info("page------>{}", page);
 
         return RestResponse.success(page);
@@ -105,7 +104,7 @@ public class ${table.controllerName} {
     @GetMapping("/{id}")
     @Log(title = "${table.comment!}--详情", businessType = BusinessType.QUERY)
     public RestResponse<${entity}> detail(@PathVariable("id") String id) {
-    
+
       	${entity} result = ${table.serviceName?uncap_first}.get(id);
 
         return RestResponse.success(result);
@@ -129,7 +128,7 @@ public class ${table.controllerName} {
     public RestResponse<?> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
 
         update.setId(id);
-         
+
         <#list table.fields as field>
           <#if field.keyFlag>
             update.set${field.capitalName}("1");

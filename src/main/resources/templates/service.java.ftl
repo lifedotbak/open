@@ -10,25 +10,25 @@ import com.spyker.framework.response.RestResponse;
 import ${package.Parent}.search.${entity}Search;
 
 /**
-* <p>
-	* ${table.comment!} 服务类
-	* </p>
+* ${table.comment!} 服务接口
 *
 * @author ${author}
 * @since ${date}
 */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
-List<${entity}> query(${entity}Search search);
+// @formatter:off
 
-IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search);
+	List<${entity}> query(${entity}Search search);
 
-${entity} get(String id);
+	IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search);
 
-${entity} insert(${entity} ${entity?uncap_first});
+	${entity} get(String id);
 
-${entity} update(${entity} ${entity?uncap_first});
+	${entity} insert(${entity} ${entity?uncap_first});
 
-boolean delete(String id);
+	${entity} update(${entity} ${entity?uncap_first});
+
+	boolean delete(String id);
 
 }

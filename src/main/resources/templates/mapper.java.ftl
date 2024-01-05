@@ -10,18 +10,18 @@ import org.apache.ibatis.annotations.Mapper;
 import ${package.Parent}.search.${entity}Search;
 
 /**
- * <p>
- * ${table.comment!} Mapper 接口
- * </p>
- *
- * @author ${author}
- * @since ${date}
- */
+*
+* ${table.comment!} Mapper 接口
+* @author ${author}
+* @since ${date}
+*/
 @Mapper
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
-  
+
+// @formatter:off
+
     List<${entity}> query(${entity}Search search);
-    
+
     IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search);
-  
+
 }

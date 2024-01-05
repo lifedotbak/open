@@ -17,29 +17,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>
- * ${table.comment!} 服务类
- * </p>
- *
- * @author ${author}
- * @since ${date}
- */
+*
+* ${table.comment!} 服务测试类
+*
+* @author ${author}
+* @since ${date}
+*/
 @Slf4j
 public class ${table.serviceName}Test extends BaseTest {
+
+// @formatter:off
 
     @Autowired
     private ${table.serviceName} service;
 
     @Test
     public void get(){
-
         ${entity} result = service.getById("1");
         log.info("result------>{}", result);
     }
 
     @Test
     public void delete(){
-
         service.delete("1");
     }
 
@@ -60,7 +59,7 @@ public class ${table.serviceName}Test extends BaseTest {
 
             </#if>
         </#list>
-        
+
         log.info("add------>{}", add);
 
         service.insert(add);
@@ -81,9 +80,8 @@ public class ${table.serviceName}Test extends BaseTest {
                 </#if>
             </#if>
         </#list>
-        
-        log.info("update------>{}", update);
 
+        log.info("update------>{}", update);
 
         service.update(update);
     }
