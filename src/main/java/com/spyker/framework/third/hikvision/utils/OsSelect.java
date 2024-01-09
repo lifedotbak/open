@@ -1,8 +1,6 @@
 package com.spyker.framework.third.hikvision.utils;
 
-/**
- * 操作系统util
- */
+/** 操作系统util */
 public final class OsSelect {
 
     public static boolean isLinux() {

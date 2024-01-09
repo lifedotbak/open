@@ -6,17 +6,17 @@ import com.spyker.commons.entity.SysConfig;
 import com.spyker.commons.mapper.SysConfigMapper;
 import com.spyker.commons.search.SysConfigSearch;
 import com.spyker.commons.service.SysConfigService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 参数配置表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -25,7 +25,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements SysConfigService {
+public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig>
+        implements SysConfigService {
 
     private final SysConfigMapper sysConfigMapper;
 
@@ -35,8 +36,9 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
         SysConfig sysConfig = sysConfigMapper.getByConfigKey("sys.account.captchaEnabled");
 
         if (null != sysConfig) {
-            return "true".equalsIgnoreCase(sysConfig.getConfigValue()) || "yes".equalsIgnoreCase(sysConfig.getConfigValue()) || "1".equalsIgnoreCase(
-                    sysConfig.getConfigValue());
+            return "true".equalsIgnoreCase(sysConfig.getConfigValue())
+                    || "yes".equalsIgnoreCase(sysConfig.getConfigValue())
+                    || "1".equalsIgnoreCase(sysConfig.getConfigValue());
         }
 
         return false;
@@ -76,5 +78,4 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
     public boolean delete(String id) {
         return removeById(id);
     }
-
 }

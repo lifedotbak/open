@@ -28,9 +28,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
  * 部门表 前端控制器
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -43,72 +41,71 @@ import lombok.extern.slf4j.Slf4j;
 @SaCheckLogin
 public class SysDeptController {
 
-	private final SysDeptService sysDeptService;
+    private final SysDeptService sysDeptService;
 
-	@Operation(summary = "列表", description = "列表")
-	@GetMapping("list")
-	public RestResponse<List<SysDept>> list(SysDeptSearch search) {
+    @Operation(summary = "列表", description = "列表")
+    @GetMapping("list")
+    public RestResponse<List<SysDept>> list(SysDeptSearch search) {
 
-		List<SysDept> result = sysDeptService.query(search);
+        List<SysDept> result = sysDeptService.query(search);
 
-		log.info("--->{}", result);
+        log.info("--->{}", result);
 
-		return RestResponse.success(result);
-	}
+        return RestResponse.success(result);
+    }
 
-	@Operation(summary = "列表（分页）", description = "列表（分页）")
-	@GetMapping("list_page")
-	@Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
-	public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
-		int current = 1;
-		int size = 10;
+    @Operation(summary = "列表（分页）", description = "列表（分页）")
+    @GetMapping("list_page")
+    @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
+    public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
+        int current = 1;
+        int size = 10;
 
-		if (null != search) {
-			current = search.getPage();
-			size = search.getSize();
-		}
+        if (null != search) {
+            current = search.getPage();
+            size = search.getSize();
+        }
 
-		IPage<SysDept> page = new Page<>(current, size);
+        IPage<SysDept> page = new Page<>(current, size);
 
-		page = sysDeptService.queryPage(page, search);
+        page = sysDeptService.queryPage(page, search);
 
-		return RestResponse.success(page);
-	}
+        return RestResponse.success(page);
+    }
 
-	@Operation(summary = "详情", description = "详情")
-	@GetMapping("detail")
-	public RestResponse<SysDept> detail(@RequestParam String id) {
-		SysDept result = sysDeptService.get(id);
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("detail")
+    public RestResponse<SysDept> detail(@RequestParam String id) {
+        SysDept result = sysDeptService.get(id);
 
-		return RestResponse.success(result);
-	}
+        return RestResponse.success(result);
+    }
 
-	@SaCheckRole("admin")
-	@Operation(summary = "新增", description = "新增")
-	@PostMapping("add")
-	public RestResponse<?> add(@RequestBody SysDept add) {
+    @SaCheckRole("admin")
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("add")
+    public RestResponse<?> add(@RequestBody SysDept add) {
 
-		sysDeptService.insert(add);
+        sysDeptService.insert(add);
 
-		return RestResponse.success();
-	}
+        return RestResponse.success();
+    }
 
-	@SaCheckRole("admin")
-	@Operation(summary = "修改", description = "修改")
-	@PutMapping("update")
-	public RestResponse<?> update(@RequestBody SysDept update) {
+    @SaCheckRole("admin")
+    @Operation(summary = "修改", description = "修改")
+    @PutMapping("update")
+    public RestResponse<?> update(@RequestBody SysDept update) {
 
-		sysDeptService.update(update);
+        sysDeptService.update(update);
 
-		return RestResponse.success();
-	}
+        return RestResponse.success();
+    }
 
-	@SaCheckRole("admin")
-	@Operation(summary = "删除", description = "删除")
-	@DeleteMapping("delete")
-	public RestResponse<?> delete(@RequestParam String id) {
+    @SaCheckRole("admin")
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("delete")
+    public RestResponse<?> delete(@RequestParam String id) {
 
-		return sysDeptService.delete(id);
-	}
-
+        return sysDeptService.delete(id);
+    }
 }

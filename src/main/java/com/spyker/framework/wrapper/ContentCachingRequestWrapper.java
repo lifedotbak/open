@@ -12,11 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @ClassName ContentCachingRequestWrapper
- * @Description 用于重复读取requestBody
- * @Author HZW
- * @Date 2023/2/22 18:01
- * @Version 1.0
+ * @ClassName ContentCachingRequestWrapper @Description 用于重复读取requestBody @Author HZW @Date
+ * 2023/2/22 18:01 @Version 1.0
  */
 public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
@@ -86,8 +83,6 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
         }
 
         @Override
-        public void setReadListener(ReadListener readlistener) {
-        }
-
+        public void setReadListener(ReadListener readlistener) {}
     }
 }

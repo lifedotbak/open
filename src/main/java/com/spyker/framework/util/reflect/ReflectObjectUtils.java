@@ -14,7 +14,8 @@ public final class ReflectObjectUtils {
         Map<String, String> result = new HashMap<String, String>();
 
         // 得到类对象
-        @SuppressWarnings("rawtypes") Class userCla = obj.getClass();
+        @SuppressWarnings("rawtypes")
+        Class userCla = obj.getClass();
 
         /* 得到类中的所有属性集合 */
         Field[] fs = userCla.getDeclaredFields();
@@ -27,18 +28,24 @@ public final class ReflectObjectUtils {
                 val = f.get(obj);
 
                 if (null != val) {
-                    /**
-                     * 简单类型判断
-                     */
-                    if (val instanceof String || val instanceof Byte || val instanceof Short || val instanceof Integer || val instanceof Long || val instanceof Character || val instanceof Float || val instanceof Double || val instanceof Long || val instanceof Long) {
+                    /** 简单类型判断 */
+                    if (val instanceof String
+                            || val instanceof Byte
+                            || val instanceof Short
+                            || val instanceof Integer
+                            || val instanceof Long
+                            || val instanceof Character
+                            || val instanceof Float
+                            || val instanceof Double
+                            || val instanceof Long
+                            || val instanceof Long) {
                         if ("openid".equals(f.getName())) {
                             if (!StringUtils.isBlank(val.toString())) {
-                                result.put(f.getName(), val.toString());// 设置键值
+                                result.put(f.getName(), val.toString()); // 设置键值
                             }
                         } else {
-                            result.put(f.getName(), val.toString());// 设置键值
+                            result.put(f.getName(), val.toString()); // 设置键值
                         }
-
                     }
                 }
 
@@ -46,7 +53,6 @@ public final class ReflectObjectUtils {
 
                 log.error("error -->{}", e);
             }
-
         }
 
         log.error("result -->{}", result);

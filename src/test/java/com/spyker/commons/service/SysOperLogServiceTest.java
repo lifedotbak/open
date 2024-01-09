@@ -10,19 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 操作日志记录 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @Slf4j
 public class SysOperLogServiceTest extends BaseTest {
 
-    @Autowired
-    private SysOperLogService service;
+    @Autowired private SysOperLogService service;
 
     @Test
     public void get() {
@@ -160,5 +156,4 @@ public class SysOperLogServiceTest extends BaseTest {
 
         service.queryPage(page, search);
     }
-
 }

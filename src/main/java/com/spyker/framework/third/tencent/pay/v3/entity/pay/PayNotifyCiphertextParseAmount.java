@@ -14,5 +14,4 @@ public class PayNotifyCiphertextParseAmount {
     private int total;
     private String currency;
     private String payer_currency;
-
 }

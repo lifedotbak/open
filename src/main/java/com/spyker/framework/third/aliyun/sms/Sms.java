@@ -12,9 +12,7 @@ public class Sms {
 
     private String templeteCode;
 
-    /**
-     * json 格式 "{\"code\":\"888888\"}"
-     */
+    /** json 格式 "{\"code\":\"888888\"}" */
     // private String templateParam;
     private String outId;
 
@@ -38,5 +36,4 @@ public class Sms {
 
         return result;
     }
-
 }

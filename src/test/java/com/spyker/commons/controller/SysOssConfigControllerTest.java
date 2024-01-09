@@ -24,202 +24,224 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SysOssConfigControllerTest extends BaseTest {
 
-	private static String BASE_URL = "/commons/sys-oss-config";
+    private static String BASE_URL = "/commons/sys-oss-config";
+
+    /* 分页查询 */
+    private static String LIST_PAGE_URL = BASE_URL + "/list_page";
+
+    /* 查询 */
+    private static String LIST_URL = BASE_URL + "/list";
+
+    /* 详情 */
+    private static String DETAIL_URL = BASE_URL + "/detail";
+
+    /* 删除 */
+    private static String DELETE_URL = BASE_URL + "/{ossConfigId}";
+
+    /* 修改 */
+    private static String UPDATE_URL = BASE_URL + "/update";
+
+    /* 新增 */
+    private static String ADD_URL = BASE_URL + "/add";
+
+    //	@Autowired
+    private MockMvc mockMvc;
+    //
+    @Autowired private WebApplicationContext webApplicationContext;
+
+    //	private WebTestClient client;
+
+    @BeforeEach
+    void setUp() {
+        //		client =
+        // MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+    }
+
+    //	@Before
+    //	public void setup() {
+    //		// 实例化方式一
+    ////		mockMvc = MockMvcBuilders.standaloneSetup(new HelloWorldController()).build();
+    //		// 实例化方式二
+    //		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    //	}
+
+    @Test
+    @SneakyThrows
+    public void list_page() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-	/* 分页查询 */
-	private static String LIST_PAGE_URL = BASE_URL + "/list_page";
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get(LIST_PAGE_URL)
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
-	/* 查询 */
-	private static String LIST_URL = BASE_URL + "/list";
+        log.info(mvcResult.getResponse().getContentAsString());
+    }
 
-	/* 详情 */
-	private static String DETAIL_URL = BASE_URL + "/detail";
+    @Test
+    @SneakyThrows
+    public void list() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-	/* 删除 */
-	private static String DELETE_URL = BASE_URL + "/{ossConfigId}";
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get(LIST_URL)
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
-	/* 修改 */
-	private static String UPDATE_URL = BASE_URL + "/update";
+        log.info(mvcResult.getResponse().getContentAsString());
+    }
 
-	/* 新增 */
-	private static String ADD_URL = BASE_URL + "/add";
+    @Test
+    @SneakyThrows
+    public void detail() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-//	@Autowired
-	private MockMvc mockMvc;
-//
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+        params.add("ossConfigId", "1");
 
-//	private WebTestClient client;
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get(DETAIL_URL)
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
-	@BeforeEach
-	void setUp() {
-//		client = MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
-		mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-	}
+        log.info(mvcResult.getResponse().getContentAsString());
+    }
 
-//	@Before
-//	public void setup() {
-//		// 实例化方式一
-////		mockMvc = MockMvcBuilders.standaloneSetup(new HelloWorldController()).build();
-//		// 实例化方式二
-//		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-//	}
+    @Test
+    @SneakyThrows
+    public void delete() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-	@Test
-	@SneakyThrows
-	public void list_page() {
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        //		MvcResult mvcResult = mockMvc
+        //
+        //	.perform(MockMvcRequestBuilders.delete(DELETE_URL).accept(MediaType.APPLICATION_JSON).params(params))
+        //
+        //	.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 
-		MvcResult mvcResult = mockMvc
-				.perform(MockMvcRequestBuilders.get(LIST_PAGE_URL).accept(MediaType.APPLICATION_JSON).params(params))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.delete(DELETE_URL, 1)
+                                        .accept(MediaType.APPLICATION_JSON))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
-		log.info(mvcResult.getResponse().getContentAsString());
+        log.info(mvcResult.getResponse().getContentAsString());
+    }
 
-	}
+    @Test
+    @SneakyThrows
+    public void add() {
+        SysOssConfig add = new SysOssConfig();
 
-	@Test
-	@SneakyThrows
-	public void list() {
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        add.setConfigKey("configKey");
 
-		MvcResult mvcResult = mockMvc
-				.perform(MockMvcRequestBuilders.get(LIST_URL).accept(MediaType.APPLICATION_JSON).params(params))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        add.setAccessKey("accessKey");
 
-		log.info(mvcResult.getResponse().getContentAsString());
+        add.setSecretKey("secretKey");
 
-	}
+        add.setBucketName("bucketName");
 
-	@Test
-	@SneakyThrows
-	public void detail() {
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        add.setPrefix("prefix");
 
-		params.add("ossConfigId", "1");
+        add.setEndpoint("endpoint");
 
-		MvcResult mvcResult = mockMvc
-				.perform(MockMvcRequestBuilders.get(DETAIL_URL).accept(MediaType.APPLICATION_JSON).params(params))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        add.setDomain("domain");
 
-		log.info(mvcResult.getResponse().getContentAsString());
+        add.setIsHttps("isHttps");
 
-	}
+        add.setRegion("region");
 
-	@Test
-	@SneakyThrows
-	public void delete() {
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        add.setAccessPolicy("accessPolicy");
 
-//		MvcResult mvcResult = mockMvc
-//				.perform(MockMvcRequestBuilders.delete(DELETE_URL).accept(MediaType.APPLICATION_JSON).params(params))
-//				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        add.setStatus("status");
 
-		MvcResult mvcResult = mockMvc
-				.perform(MockMvcRequestBuilders.delete(DELETE_URL, 1).accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        add.setExt1("ext1");
 
-		log.info(mvcResult.getResponse().getContentAsString());
+        add.setCreateBy("createBy");
 
-	}
+        add.setUpdateBy("updateBy");
 
-	@Test
-	@SneakyThrows
-	public void add() {
-		SysOssConfig add = new SysOssConfig();
+        add.setRemark("remark");
 
-		add.setConfigKey("configKey");
+        Gson gson = new Gson();
 
-		add.setAccessKey("accessKey");
+        String jsonString = gson.toJson(add);
 
-		add.setSecretKey("secretKey");
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.post(ADD_URL)
+                                        .content(jsonString)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
-		add.setBucketName("bucketName");
+        log.info(mvcResult.getResponse().getContentAsString());
+    }
 
-		add.setPrefix("prefix");
+    @Test
+    @SneakyThrows
+    public void update() {
+        SysOssConfig update = new SysOssConfig();
 
-		add.setEndpoint("endpoint");
+        update.setOssConfigId("ossConfigId");
 
-		add.setDomain("domain");
+        update.setConfigKey("configKey");
 
-		add.setIsHttps("isHttps");
+        update.setAccessKey("accessKey");
 
-		add.setRegion("region");
+        update.setSecretKey("secretKey");
 
-		add.setAccessPolicy("accessPolicy");
+        update.setBucketName("bucketName");
 
-		add.setStatus("status");
+        update.setPrefix("prefix");
 
-		add.setExt1("ext1");
+        update.setEndpoint("endpoint");
 
-		add.setCreateBy("createBy");
+        update.setDomain("domain");
 
-		add.setUpdateBy("updateBy");
+        update.setIsHttps("isHttps");
 
-		add.setRemark("remark");
+        update.setRegion("region");
 
-		Gson gson = new Gson();
+        update.setAccessPolicy("accessPolicy");
 
-		String jsonString = gson.toJson(add);
+        update.setStatus("status");
 
-		MvcResult mvcResult = mockMvc
-				.perform(MockMvcRequestBuilders.post(ADD_URL).content(jsonString)
-						.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        update.setExt1("ext1");
 
-		log.info(mvcResult.getResponse().getContentAsString());
+        update.setCreateBy("createBy");
 
-	}
+        update.setUpdateBy("updateBy");
 
-	@Test
-	@SneakyThrows
-	public void update() {
-		SysOssConfig update = new SysOssConfig();
+        update.setRemark("remark");
 
-		update.setOssConfigId("ossConfigId");
+        Gson gson = new Gson();
 
-		update.setConfigKey("configKey");
+        String jsonString = gson.toJson(update);
 
-		update.setAccessKey("accessKey");
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.put(UPDATE_URL)
+                                        .content(jsonString)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
-		update.setSecretKey("secretKey");
-
-		update.setBucketName("bucketName");
-
-		update.setPrefix("prefix");
-
-		update.setEndpoint("endpoint");
-
-		update.setDomain("domain");
-
-		update.setIsHttps("isHttps");
-
-		update.setRegion("region");
-
-		update.setAccessPolicy("accessPolicy");
-
-		update.setStatus("status");
-
-		update.setExt1("ext1");
-
-		update.setCreateBy("createBy");
-
-		update.setUpdateBy("updateBy");
-
-		update.setRemark("remark");
-
-		Gson gson = new Gson();
-
-		String jsonString = gson.toJson(update);
-
-		MvcResult mvcResult = mockMvc
-				.perform(MockMvcRequestBuilders.put(UPDATE_URL).content(jsonString)
-						.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
-
-		log.info(mvcResult.getResponse().getContentAsString());
-
-	}
-
+        log.info(mvcResult.getResponse().getContentAsString());
+    }
 }

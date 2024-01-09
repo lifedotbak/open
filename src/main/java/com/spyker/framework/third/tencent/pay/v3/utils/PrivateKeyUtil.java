@@ -23,19 +23,21 @@ public final class PrivateKeyUtil {
     @SneakyThrows
     public static PrivateKey getPrivateKey(String filename) {
 
-        String content = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
+        String content =
+                new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
         try {
-            String privateKey = content.replace("-----BEGIN PRIVATE KEY-----", "")
-                                       .replace("-----END PRIVATE " + "KEY" + "-----", "")
-                                       .replaceAll("\\s+", "");
+            String privateKey =
+                    content.replace("-----BEGIN PRIVATE KEY-----", "")
+                            .replace("-----END PRIVATE " + "KEY" + "-----", "")
+                            .replaceAll("\\s+", "");
 
             KeyFactory kf = KeyFactory.getInstance("RSA");
-            return kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey)));
+            return kf.generatePrivate(
+                    new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey)));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("当前Java环境不支持RSA", e);
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException("无效的密钥格式");
         }
     }
-
 }

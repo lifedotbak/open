@@ -18,5 +18,4 @@ public final class ExRandomStringUtils {
 
         return RandomStringUtils.randomAlphanumeric(32).toLowerCase();
     }
-
 }

@@ -22,8 +22,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 /**
  * 申请退款API
- * <p>
- * https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_9.shtml
+ *
+ * <p>https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_9.shtml
  *
  * @author spyker
  */
@@ -36,8 +36,7 @@ public class RefundAction {
 
     private static final String http_method = "POST";
 
-    @Autowired
-    private PayConfig payConfig;
+    @Autowired private PayConfig payConfig;
 
     @SneakyThrows
     public RefundsResult execue(Refunds refunds) {
@@ -71,7 +70,6 @@ public class RefundAction {
         log.info("refundResult -->{}", refundResult);
 
         return refundResult;
-
     }
 
     private RequestAuth create(Refunds refundsr) {
@@ -93,7 +91,5 @@ public class RefundAction {
         prePayAuthorizationInfo.setTimestamp(timestamp);
 
         return prePayAuthorizationInfo;
-
     }
-
 }

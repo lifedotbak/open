@@ -7,24 +7,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PolicyType {
 
-	/**
-	 * 只读
-	 */
-	READ("read-only"),
+    /** 只读 */
+    READ("read-only"),
 
-	/**
-	 * 只写
-	 */
-	WRITE("write-only"),
+    /** 只写 */
+    WRITE("write-only"),
 
-	/**
-	 * 读写
-	 */
-	READ_WRITE("read-write");
+    /** 读写 */
+    READ_WRITE("read-write");
 
-	/**
-	 * 类型
-	 */
-	private final String type;
-
+    /** 类型 */
+    private final String type;
 }

@@ -6,16 +6,16 @@ package com.spyker.framework.util.sign;
  * @author spyker
  */
 public final class Base64Utils {
-    static private final int BASELENGTH = 128;
-    static private final int LOOKUPLENGTH = 64;
-    static private final int TWENTYFOURBITGROUP = 24;
-    static private final int EIGHTBIT = 8;
-    static private final int SIXTEENBIT = 16;
-    static private final int FOURBYTE = 4;
-    static private final int SIGN = -128;
-    static private final char PAD = '=';
-    static final private byte[] base64Alphabet = new byte[BASELENGTH];
-    static final private char[] lookUpBase64Alphabet = new char[LOOKUPLENGTH];
+    private static final int BASELENGTH = 128;
+    private static final int LOOKUPLENGTH = 64;
+    private static final int TWENTYFOURBITGROUP = 24;
+    private static final int EIGHTBIT = 8;
+    private static final int SIXTEENBIT = 16;
+    private static final int FOURBYTE = 4;
+    private static final int SIGN = -128;
+    private static final char PAD = '=';
+    private static final byte[] base64Alphabet = new byte[BASELENGTH];
+    private static final char[] lookUpBase64Alphabet = new char[LOOKUPLENGTH];
 
     static {
         for (int i = 0; i < BASELENGTH; ++i) {
@@ -138,7 +138,7 @@ public final class Base64Utils {
         int len = removeWhiteSpace(base64Data);
 
         if (len % FOURBYTE != 0) {
-            return null;// should be divisible by four
+            return null; // should be divisible by four
         }
 
         int numberQuadruple = (len / FOURBYTE);
@@ -158,9 +158,10 @@ public final class Base64Utils {
 
         for (; i < numberQuadruple - 1; i++) {
 
-            if (!isData((d1 = base64Data[dataIndex++])) || !isData((d2 = base64Data[dataIndex++])) || !isData((d3 =
-                    base64Data[dataIndex++])) || !isData(
-                    (d4 = base64Data[dataIndex++]))) {
+            if (!isData((d1 = base64Data[dataIndex++]))
+                    || !isData((d2 = base64Data[dataIndex++]))
+                    || !isData((d3 = base64Data[dataIndex++]))
+                    || !isData((d4 = base64Data[dataIndex++]))) {
                 return null;
             } // if found "no data" just return null
 
@@ -175,7 +176,7 @@ public final class Base64Utils {
         }
 
         if (!isData((d1 = base64Data[dataIndex++])) || !isData((d2 = base64Data[dataIndex++]))) {
-            return null;// if found "no data" just return null
+            return null; // if found "no data" just return null
         }
 
         b1 = base64Alphabet[d1];
@@ -183,9 +184,9 @@ public final class Base64Utils {
 
         d3 = base64Data[dataIndex++];
         d4 = base64Data[dataIndex++];
-        if (!isData((d3)) || !isData((d4))) {// Check if they are PAD characters
+        if (!isData((d3)) || !isData((d4))) { // Check if they are PAD characters
             if (isPad(d3) && isPad(d4)) {
-                if ((b2 & 0xf) != 0)// last 4 bits should be zero
+                if ((b2 & 0xf) != 0) // last 4 bits should be zero
                 {
                     return null;
                 }
@@ -195,7 +196,7 @@ public final class Base64Utils {
                 return tmp;
             } else if (!isPad(d3) && isPad(d4)) {
                 b3 = base64Alphabet[d3];
-                if ((b3 & 0x3) != 0)// last 2 bits should be zero
+                if ((b3 & 0x3) != 0) // last 2 bits should be zero
                 {
                     return null;
                 }
@@ -213,7 +214,6 @@ public final class Base64Utils {
             decodedData[encodedIndex++] = (byte) (b1 << 2 | b2 >> 4);
             decodedData[encodedIndex++] = (byte) (((b2 & 0xf) << 4) | ((b3 >> 2) & 0xf));
             decodedData[encodedIndex++] = (byte) (b3 << 6 | b4);
-
         }
         return decodedData;
     }

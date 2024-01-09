@@ -1,6 +1,7 @@
 package com.spyker.commons.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spyker.commons.entity.SysUser;
@@ -10,17 +11,17 @@ import com.spyker.commons.service.SysUserService;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestResponse;
 import com.spyker.framework.util.BCryptUtils;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 用户信息表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,7 +30,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
+        implements SysUserService {
 
     private final SysUserMapper sysUserMapper;
 
@@ -90,10 +92,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
                 return true;
             }
-
         }
 
         return false;
     }
-
 }

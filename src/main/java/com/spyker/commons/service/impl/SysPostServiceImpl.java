@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysPostMapper;
 import com.spyker.commons.search.SysPostSearch;
 import com.spyker.commons.service.SysPostService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 岗位信息表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements SysPostService {
+public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost>
+        implements SysPostService {
 
     private final SysPostMapper sysPostMapper;
 
@@ -71,5 +72,4 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
         return RestResponse.success();
     }
-
 }

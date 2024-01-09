@@ -10,13 +10,9 @@ import lombok.Data;
 @Data
 public class HCOpInfo {
 
-    /**
-     * 用户句柄
-     */
+    /** 用户句柄 */
     private int lUserID = -1;
-    /**
-     * 预览通道号
-     */
-    private int lDChannel;
 
+    /** 预览通道号 */
+    private int lDChannel;
 }

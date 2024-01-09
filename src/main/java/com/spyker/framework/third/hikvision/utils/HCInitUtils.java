@@ -18,8 +18,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 @Slf4j
 public class HCInitUtils {
 
-    @Autowired
-    private HCProperties hCProperties;
+    @Autowired private HCProperties hCProperties;
 
     private HCNetSDK hCNetSDK;
 
@@ -30,9 +29,7 @@ public class HCInitUtils {
         return hCNetSDK;
     }
 
-    /**
-     * 系统启动执行init代码
-     */
+    /** 系统启动执行init代码 */
     //    @PostConstruct
     public void init() {
 
@@ -90,7 +87,6 @@ public class HCInitUtils {
 
         // 启动SDK写日志
         hCNetSDK.NET_DVR_SetLogToFile(3, "./sdkLog", false);
-
     }
 
     /**
@@ -145,7 +141,8 @@ public class HCInitUtils {
                     playControl = (PlayCtrl) Native.loadLibrary(strPlayPath, PlayCtrl.class);
 
                 } catch (Exception ex) {
-                    System.out.println("loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
+                    System.out.println(
+                            "loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
                     return false;
                 }
             }
@@ -160,9 +157,7 @@ public class HCInitUtils {
         return playControl;
     }
 
-    /**
-     * 系统关闭执行cleanUp代码
-     */
+    /** 系统关闭执行cleanUp代码 */
     //    @PreDestroy
     public void cleanUp() {
 
@@ -171,5 +166,4 @@ public class HCInitUtils {
             hCNetSDK.NET_DVR_Cleanup();
         }
     }
-
 }

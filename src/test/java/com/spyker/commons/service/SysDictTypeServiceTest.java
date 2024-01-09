@@ -10,19 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 字典类型表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @Slf4j
 public class SysDictTypeServiceTest extends BaseTest {
 
-    @Autowired
-    private SysDictTypeService service;
+    @Autowired private SysDictTypeService service;
 
     @Test
     public void get() {
@@ -110,5 +106,4 @@ public class SysDictTypeServiceTest extends BaseTest {
 
         service.queryPage(page, search);
     }
-
 }

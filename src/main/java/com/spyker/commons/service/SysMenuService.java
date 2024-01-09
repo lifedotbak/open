@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 菜单权限表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysMenuService extends IService<SysMenu> {
     RestResponse<?> update(SysMenu SysMenu);
 
     RestResponse<?> delete(String id);
-
 }

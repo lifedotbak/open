@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysOperLogMapper;
 import com.spyker.commons.search.SysOperLogSearch;
 import com.spyker.commons.service.SysOperLogService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 操作日志记录 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOperLog> implements SysOperLogService {
+public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOperLog>
+        implements SysOperLogService {
 
     private final SysOperLogMapper sysOperLogMapper;
 
@@ -71,5 +72,4 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
 
         return RestResponse.success();
     }
-
 }

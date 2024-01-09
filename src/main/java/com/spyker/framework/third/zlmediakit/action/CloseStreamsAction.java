@@ -20,14 +20,17 @@ import java.util.Map;
 public class CloseStreamsAction {
 
     private static final String method = "/index/api/close_streams";
-    @Autowired
-    private ZLMediaKitProperties zlMediaKitProperties;
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
+    @Autowired private RestTemplate restTemplate;
 
     public OpResult execute(String vhost, String app, String stream, Boolean isForceClose) {
 
-        String postUrl = "http://" + zlMediaKitProperties.getIp() + ":" + zlMediaKitProperties.getPort() + method;
+        String postUrl =
+                "http://"
+                        + zlMediaKitProperties.getIp()
+                        + ":"
+                        + zlMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -59,10 +62,8 @@ public class CloseStreamsAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
-                                                                          HttpMethod.POST,
-                                                                          entity,
-                                                                          String.class);
+            ResponseEntity<String> exchangeResult =
+                    restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
             String responseBody = exchangeResult.getBody();
 
@@ -77,10 +78,8 @@ public class CloseStreamsAction {
         } catch (Exception e) {
 
             log.error("e-->{}", e);
-
         }
 
         return result;
     }
-
 }

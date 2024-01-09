@@ -11,7 +11,5 @@ public class FExceptionCallBackImpl implements HCNetSDK.FExceptionCallBack {
     public void invoke(int dwType, int lUserID, int lHandle, Pointer pUser) {
 
         log.info("异常事件类型:--->{}", dwType);
-
     }
-
 }

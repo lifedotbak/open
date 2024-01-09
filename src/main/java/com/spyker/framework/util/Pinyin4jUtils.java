@@ -18,7 +18,6 @@ public final class Pinyin4jUtils {
     public static String convertTolowerCase(String chines) {
 
         return convert(chines).toLowerCase();
-
     }
 
     public static String convert(String chines) {
@@ -37,7 +36,9 @@ public final class Pinyin4jUtils {
             for (int i = 0; i < nameChar.length; i++) {
                 if (nameChar[i] > 128) {
                     try {
-                        pinyinName.append(PinyinHelper.toHanyuPinyinStringArray(nameChar[i], defaultFormat)[0]);
+                        pinyinName.append(
+                                PinyinHelper.toHanyuPinyinStringArray(nameChar[i], defaultFormat)[
+                                        0]);
                     } catch (BadHanyuPinyinOutputFormatCombination e) {
                         log.error("error -->{}", e);
                     }
@@ -51,7 +52,5 @@ public final class Pinyin4jUtils {
             log.error("error -->{}", e);
             return "";
         }
-
     }
-
 }

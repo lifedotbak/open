@@ -47,9 +47,11 @@ public class AliPushUtils {
 
     private static void pushIos(PushMessage pushMessage) {
 
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
-                                                           pushMessage.getAccessKeyId(),
-                                                           pushMessage.getAccessKeySecret());
+        IClientProfile profile =
+                DefaultProfile.getProfile(
+                        "cn-hangzhou",
+                        pushMessage.getAccessKeyId(),
+                        pushMessage.getAccessKeySecret());
         DefaultAcsClient client = new DefaultAcsClient(profile);
         PushRequest pushRequest = new PushRequest();
         // 推送目标
@@ -65,14 +67,16 @@ public class AliPushUtils {
         // 推送配置: iOS
         pushRequest.setIOSBadge(5); // iOS应用图标右上角角标
         pushRequest.setIOSMusic("default"); // iOS通知声音
-        pushRequest.setIOSSubtitle(pushMessage.getIosSubtitle());// iOS10通知副标题的内容
-        pushRequest.setIOSNotificationCategory(pushMessage.getIosNotificationCategory());// 指定iOS10通知Category
-        pushRequest.setIOSMutableContent(true);// 是否允许扩展iOS通知内容
+        pushRequest.setIOSSubtitle(pushMessage.getIosSubtitle()); // iOS10通知副标题的内容
+        pushRequest.setIOSNotificationCategory(
+                pushMessage.getIosNotificationCategory()); // 指定iOS10通知Category
+        pushRequest.setIOSMutableContent(true); // 是否允许扩展iOS通知内容
 
-        pushRequest.setIOSApnsEnv("PRODUCT");// iOS的通知是通过APNs中心来发送的，需要填写对应的环境信息。"DEV"
+        pushRequest.setIOSApnsEnv("PRODUCT"); // iOS的通知是通过APNs中心来发送的，需要填写对应的环境信息。"DEV"
         // : 表示开发环境 "PRODUCT" : 表示生产环境
-        pushRequest.setIOSRemind(true); // 消息推送时设备不在线（既与移动推送的服务端的长连接通道不通），则这条推送会做为通知，通过苹果的APNs通道送达一次。注意：离线消息转通知仅适用于生产环境
-        pushRequest.setIOSRemindBody("iOSRemindBody");// iOS消息转通知时使用的iOS通知内容，仅当iOSApnsEnv=PRODUCT
+        pushRequest.setIOSRemind(
+                true); // 消息推送时设备不在线（既与移动推送的服务端的长连接通道不通），则这条推送会做为通知，通过苹果的APNs通道送达一次。注意：离线消息转通知仅适用于生产环境
+        pushRequest.setIOSRemindBody("iOSRemindBody"); // iOS消息转通知时使用的iOS通知内容，仅当iOSApnsEnv=PRODUCT
         // && iOSRemind为true时有效
 
         pushRequest.setIOSExtParameters(pushMessage.getExtParameters()); // 通知的扩展属性(注意
@@ -81,11 +85,11 @@ public class AliPushUtils {
         // map的格式传入,否则会解析出错)
 
         // 推送配置: Android
-        pushRequest.setAndroidNotifyType("BOTH");// 通知的提醒方式 "VIBRATE" : 震动
+        pushRequest.setAndroidNotifyType("BOTH"); // 通知的提醒方式 "VIBRATE" : 震动
         // "SOUND" : 声音 "BOTH" :
         // 声音和震动 NONE : 静音
-        pushRequest.setAndroidNotificationBarType(1);// 通知栏自定义样式0-100
-        pushRequest.setAndroidNotificationBarPriority(1);// 通知栏自定义样式0-100
+        pushRequest.setAndroidNotificationBarType(1); // 通知栏自定义样式0-100
+        pushRequest.setAndroidNotificationBarPriority(1); // 通知栏自定义样式0-100
         pushRequest.setAndroidNotificationChannel("1");
         pushRequest.setAndroidOpenType(pushMessage.getAndroidOpenType().getType()); // 点击通知后动作
         // "APPLICATION"
@@ -96,10 +100,12 @@ public class AliPushUtils {
         // 打开URL "NONE" : 无跳转
         pushRequest.setAndroidOpenUrl(pushMessage.getAndroidOpenUrl()); // Android收到推送后打开对应的url,
         // 仅当AndroidOpenType="URL"有效
-        pushRequest.setAndroidActivity(pushMessage.getAndroidActivity()); // 设定通知打开的activity，仅当AndroidOpenType
+        pushRequest.setAndroidActivity(
+                pushMessage.getAndroidActivity()); // 设定通知打开的activity，仅当AndroidOpenType
         // ="Activity"有效
         pushRequest.setAndroidMusic("default"); // Android通知音乐
-        pushRequest.setAndroidPopupActivity(pushMessage.getAndroidPopupActivity());// 设置该参数后启动辅助弹窗功能,
+        pushRequest.setAndroidPopupActivity(
+                pushMessage.getAndroidPopupActivity()); // 设置该参数后启动辅助弹窗功能,
         // 此处指定通知点击后跳转的Activity（辅助弹窗的前提条件：1.
         // 集成第三方辅助通道；2.
         // StoreOffline参数设为true）
@@ -116,7 +122,9 @@ public class AliPushUtils {
         // 也可以设置成你指定固定时间
         String pushTime = ParameterHelper.getISO8601Time(pushDate);
         pushRequest.setPushTime(pushTime); // 延后推送。可选，如果不设置表示立即推送
-        String expireTime = ParameterHelper.getISO8601Time(new Date(System.currentTimeMillis() + 12 * 3600 * 1000));
+        String expireTime =
+                ParameterHelper.getISO8601Time(
+                        new Date(System.currentTimeMillis() + 12 * 3600 * 1000));
         // 12小时后消息失效,
         // 不会再发送
         pushRequest.setExpireTime(expireTime);
@@ -126,19 +134,24 @@ public class AliPushUtils {
         try {
             pushResponse = client.getAcsResponse(pushRequest);
 
-            log.info("MessageId = " + pushResponse.getMessageId() + ",RequestId = " + pushResponse.getRequestId());
+            log.info(
+                    "MessageId = "
+                            + pushResponse.getMessageId()
+                            + ",RequestId = "
+                            + pushResponse.getRequestId());
 
         } catch (Exception e) {
             log.error("error ==> {}", e);
         }
-
     }
 
     private static void pushAndroid(PushMessage pushMessage) {
 
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
-                                                           pushMessage.getAccessKeyId(),
-                                                           pushMessage.getAccessKeySecret());
+        IClientProfile profile =
+                DefaultProfile.getProfile(
+                        "cn-hangzhou",
+                        pushMessage.getAccessKeyId(),
+                        pushMessage.getAccessKeySecret());
         DefaultAcsClient client = new DefaultAcsClient(profile);
         PushRequest pushRequest = new PushRequest();
         // 推送目标
@@ -154,14 +167,16 @@ public class AliPushUtils {
         // 推送配置: iOS
         pushRequest.setIOSBadge(5); // iOS应用图标右上角角标
         pushRequest.setIOSMusic("default"); // iOS通知声音
-        pushRequest.setIOSSubtitle(pushMessage.getIosSubtitle());// iOS10通知副标题的内容
-        pushRequest.setIOSNotificationCategory(pushMessage.getIosNotificationCategory());// 指定iOS10通知Category
-        pushRequest.setIOSMutableContent(true);// 是否允许扩展iOS通知内容
+        pushRequest.setIOSSubtitle(pushMessage.getIosSubtitle()); // iOS10通知副标题的内容
+        pushRequest.setIOSNotificationCategory(
+                pushMessage.getIosNotificationCategory()); // 指定iOS10通知Category
+        pushRequest.setIOSMutableContent(true); // 是否允许扩展iOS通知内容
 
-        pushRequest.setIOSApnsEnv("PRODUCT");// iOS的通知是通过APNs中心来发送的，需要填写对应的环境信息。"DEV"
+        pushRequest.setIOSApnsEnv("PRODUCT"); // iOS的通知是通过APNs中心来发送的，需要填写对应的环境信息。"DEV"
         // : 表示开发环境 "PRODUCT" : 表示生产环境
-        pushRequest.setIOSRemind(true); // 消息推送时设备不在线（既与移动推送的服务端的长连接通道不通），则这条推送会做为通知，通过苹果的APNs通道送达一次。注意：离线消息转通知仅适用于生产环境
-        pushRequest.setIOSRemindBody("iOSRemindBody");// iOS消息转通知时使用的iOS通知内容，仅当iOSApnsEnv=PRODUCT
+        pushRequest.setIOSRemind(
+                true); // 消息推送时设备不在线（既与移动推送的服务端的长连接通道不通），则这条推送会做为通知，通过苹果的APNs通道送达一次。注意：离线消息转通知仅适用于生产环境
+        pushRequest.setIOSRemindBody("iOSRemindBody"); // iOS消息转通知时使用的iOS通知内容，仅当iOSApnsEnv=PRODUCT
         // && iOSRemind为true时有效
 
         pushRequest.setIOSExtParameters(pushMessage.getExtParameters()); // 通知的扩展属性(注意
@@ -170,11 +185,11 @@ public class AliPushUtils {
         // map的格式传入,否则会解析出错)
 
         // 推送配置: Android
-        pushRequest.setAndroidNotifyType("BOTH");// 通知的提醒方式 "VIBRATE" : 震动
+        pushRequest.setAndroidNotifyType("BOTH"); // 通知的提醒方式 "VIBRATE" : 震动
         // "SOUND" : 声音 "BOTH" :
         // 声音和震动 NONE : 静音
-        pushRequest.setAndroidNotificationBarType(1);// 通知栏自定义样式0-100
-        pushRequest.setAndroidNotificationBarPriority(1);// 通知栏自定义样式0-100
+        pushRequest.setAndroidNotificationBarType(1); // 通知栏自定义样式0-100
+        pushRequest.setAndroidNotificationBarPriority(1); // 通知栏自定义样式0-100
         pushRequest.setAndroidNotificationChannel("1");
         pushRequest.setAndroidOpenType(pushMessage.getAndroidOpenType().getType()); // 点击通知后动作
         // "APPLICATION"
@@ -185,10 +200,12 @@ public class AliPushUtils {
         // 打开URL "NONE" : 无跳转
         pushRequest.setAndroidOpenUrl(pushMessage.getAndroidOpenUrl()); // Android收到推送后打开对应的url,
         // 仅当AndroidOpenType="URL"有效
-        pushRequest.setAndroidActivity(pushMessage.getAndroidActivity()); // 设定通知打开的activity，仅当AndroidOpenType
+        pushRequest.setAndroidActivity(
+                pushMessage.getAndroidActivity()); // 设定通知打开的activity，仅当AndroidOpenType
         // ="Activity"有效
         pushRequest.setAndroidMusic("default"); // Android通知音乐
-        pushRequest.setAndroidPopupActivity(pushMessage.getAndroidPopupActivity());// 设置该参数后启动辅助弹窗功能,
+        pushRequest.setAndroidPopupActivity(
+                pushMessage.getAndroidPopupActivity()); // 设置该参数后启动辅助弹窗功能,
         // 此处指定通知点击后跳转的Activity（辅助弹窗的前提条件：1.
         // 集成第三方辅助通道；2.
         // StoreOffline参数设为true）
@@ -205,7 +222,9 @@ public class AliPushUtils {
         // 也可以设置成你指定固定时间
         String pushTime = ParameterHelper.getISO8601Time(pushDate);
         pushRequest.setPushTime(pushTime); // 延后推送。可选，如果不设置表示立即推送
-        String expireTime = ParameterHelper.getISO8601Time(new Date(System.currentTimeMillis() + 12 * 3600 * 1000));
+        String expireTime =
+                ParameterHelper.getISO8601Time(
+                        new Date(System.currentTimeMillis() + 12 * 3600 * 1000));
         // 12小时后消息失效,
         // 不会再发送
         pushRequest.setExpireTime(expireTime);
@@ -215,11 +234,14 @@ public class AliPushUtils {
         try {
             pushResponse = client.getAcsResponse(pushRequest);
 
-            log.info("MessageId = " + pushResponse.getMessageId() + ",RequestId = " + pushResponse.getRequestId());
+            log.info(
+                    "MessageId = "
+                            + pushResponse.getMessageId()
+                            + ",RequestId = "
+                            + pushResponse.getRequestId());
 
         } catch (Exception e) {
             log.error("error ==> {}", e);
         }
-
     }
 }

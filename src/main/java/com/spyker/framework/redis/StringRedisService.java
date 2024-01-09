@@ -15,8 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class StringRedisService {
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    @Autowired private StringRedisTemplate stringRedisTemplate;
 
     /**
      * @param key
@@ -36,15 +35,14 @@ public class StringRedisService {
     /**
      * 普通缓存放入
      *
-     * @param key        键
-     * @param value      值
+     * @param key 键
+     * @param value 值
      * @param expireTime 超时时间(秒)
      * @return true成功 false失败
      */
     public void set(String key, String value, int expireTime) {
 
         stringRedisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
-
     }
 
     /**
@@ -53,7 +51,6 @@ public class StringRedisService {
      * @param key 键
      * @return 值
      */
-
     public String get(String key) {
         return key == null ? null : stringRedisTemplate.opsForValue().get(key);
     }
@@ -61,11 +58,10 @@ public class StringRedisService {
     /**
      * 在原有的值基础上新增字符串到末尾。
      *
-     * @param key   键
+     * @param key 键
      * @param value 追加的值
      * @return true成功 false失败
      */
-
     public void append(String key, String value) {
         stringRedisTemplate.opsForValue().append(key, value);
     }
@@ -73,9 +69,9 @@ public class StringRedisService {
     /**
      * 截取key键对应值得字符串，从开始下标位置开始到结束下标的位置(包含结束下标)的字符串。
      *
-     * @param key   键
+     * @param key 键
      * @param start 开始位置
-     * @param end   结束位置
+     * @param end 结束位置
      * @return
      */
     public String get(String key, long start, long end) {
@@ -85,7 +81,7 @@ public class StringRedisService {
     /**
      * 获取原来key键对应的值并重新赋新值。
      *
-     * @param key   键
+     * @param key 键
      * @param value 值
      * @return 原来旧值
      */
@@ -117,7 +113,7 @@ public class StringRedisService {
     /**
      * 递增
      *
-     * @param key   键
+     * @param key 键
      * @param delta 要增加几(大于0)
      * @return 返回增加后的值
      */
@@ -131,7 +127,7 @@ public class StringRedisService {
     /**
      * 递减
      *
-     * @param key   键
+     * @param key 键
      * @param delta 要减少几(小于0)
      * @return 返回减少后的值
      */
@@ -160,5 +156,4 @@ public class StringRedisService {
     public List<String> multiGet(List<String> list) {
         return stringRedisTemplate.opsForValue().multiGet(list);
     }
-
 }

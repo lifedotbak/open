@@ -28,8 +28,7 @@ import java.util.Date;
 @Slf4j
 public class HCUtils {
 
-    @Autowired
-    private HCProperties hCProperties;
+    @Autowired private HCProperties hCProperties;
     private HCNetSDK hCNetSDK;
     private PlayCtrl playControl;
 
@@ -48,14 +47,20 @@ public class HCUtils {
         String now = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
 
         String realPath =
-                hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_" + loginDeviceInfo.getLDChannel() + "_" + now + ".jpg";
+                hCProperties.getSystemPic()
+                        + File.separator
+                        + loginDeviceInfo.getIp()
+                        + "_"
+                        + loginDeviceInfo.getLDChannel()
+                        + "_"
+                        + now
+                        + ".jpg";
 
         hcControl.NET_DVR_CaptureJPEGPicture(realPath);
 
         logout(loginSuccess.getLUserID());
 
         return realPath;
-
     }
 
     /**
@@ -74,23 +79,28 @@ public class HCUtils {
 
         HCOpInfo result = new HCOpInfo();
 
-        int lUserID = -1;// 用户句柄
+        int lUserID = -1; // 用户句柄
 
         // 注册
-        HCNetSDK.NET_DVR_USER_LOGIN_INFO m_strLoginInfo = new HCNetSDK.NET_DVR_USER_LOGIN_INFO();// 设备登录信息
-        HCNetSDK.NET_DVR_DEVICEINFO_V40 m_strDeviceInfo = new HCNetSDK.NET_DVR_DEVICEINFO_V40();// 设备信息
+        HCNetSDK.NET_DVR_USER_LOGIN_INFO m_strLoginInfo =
+                new HCNetSDK.NET_DVR_USER_LOGIN_INFO(); // 设备登录信息
+        HCNetSDK.NET_DVR_DEVICEINFO_V40 m_strDeviceInfo =
+                new HCNetSDK.NET_DVR_DEVICEINFO_V40(); // 设备信息
 
-        String m_sDeviceIP = ip;// 设备ip地址
+        String m_sDeviceIP = ip; // 设备ip地址
         m_strLoginInfo.sDeviceAddress = new byte[HCNetSDK.NET_DVR_DEV_ADDRESS_MAX_LEN];
-        System.arraycopy(m_sDeviceIP.getBytes(), 0, m_strLoginInfo.sDeviceAddress, 0, m_sDeviceIP.length());
+        System.arraycopy(
+                m_sDeviceIP.getBytes(), 0, m_strLoginInfo.sDeviceAddress, 0, m_sDeviceIP.length());
 
-        String m_sUsername = user;// 设备用户名
+        String m_sUsername = user; // 设备用户名
         m_strLoginInfo.sUserName = new byte[HCNetSDK.NET_DVR_LOGIN_USERNAME_MAX_LEN];
-        System.arraycopy(m_sUsername.getBytes(), 0, m_strLoginInfo.sUserName, 0, m_sUsername.length());
+        System.arraycopy(
+                m_sUsername.getBytes(), 0, m_strLoginInfo.sUserName, 0, m_sUsername.length());
 
-        String m_sPassword = psw;// 设备密码
+        String m_sPassword = psw; // 设备密码
         m_strLoginInfo.sPassword = new byte[HCNetSDK.NET_DVR_LOGIN_PASSWD_MAX_LEN];
-        System.arraycopy(m_sPassword.getBytes(), 0, m_strLoginInfo.sPassword, 0, m_sPassword.length());
+        System.arraycopy(
+                m_sPassword.getBytes(), 0, m_strLoginInfo.sPassword, 0, m_sPassword.length());
 
         m_strLoginInfo.wPort = port;
         m_strLoginInfo.bUseAsynLogin = false; // 是否异步登录：0- 否，1- 是
@@ -110,7 +120,8 @@ public class HCUtils {
 
             // 相机一般只有一个通道号，热成像相机有2个通道号，通道号为1或1,2
             // byStartDChan为IP通道起始通道号, 预览回放NVR的IP通道时需要根据起始通道号进行取值
-            //			if (m_strDeviceInfo.struDeviceV30.byStartDChan == 1 && m_strDeviceInfo.struDeviceV30
+            //			if (m_strDeviceInfo.struDeviceV30.byStartDChan == 1 &&
+            // m_strDeviceInfo.struDeviceV30
             //			.byStartDChan == 33) {
             //				// byStartDChan为IP通道起始通道号, 预览回放NVR的IP通道时需要根据起始通道号进行取值,NVR起始通道号一般是33或者1开始
             //				lDChannel = m_strDeviceInfo.struDeviceV30.byStartDChan;
@@ -133,7 +144,6 @@ public class HCUtils {
 
             log.info("注销成功--->{}", lUserID);
         }
-
     }
 
     /**
@@ -153,22 +163,18 @@ public class HCUtils {
         hcControl.controlLeft();
 
         logout(hCOpInfo.getLUserID());
-
     }
 
     /**
      * @param hCLoginInfo 设备登录信息
-     * @param lDChannel   通道号
-     * @param fileName    生成的文件名
-     * @param start       开始下载时间
-     * @param end         结束下载时间
+     * @param lDChannel 通道号
+     * @param fileName 生成的文件名
+     * @param start 开始下载时间
+     * @param end 结束下载时间
      */
     @Async
-    public void downloadVideoRecordByTime(HCLoginInfo hCLoginInfo,
-            int lDChannel,
-            String fileName,
-            Date start,
-            Date end) {
+    public void downloadVideoRecordByTime(
+            HCLoginInfo hCLoginInfo, int lDChannel, String fileName, Date start, Date end) {
 
         HCOpInfo hCOpInfo = login_V40(hCLoginInfo);
 
@@ -182,7 +188,6 @@ public class HCUtils {
         hcVideo.downloadRecordByTime(fileName, start, end);
 
         logout(hCOpInfo.getLUserID());
-
     }
 
     /**
@@ -192,7 +197,8 @@ public class HCUtils {
      * @param iChannelNo
      * @return
      */
-    public boolean findExistVideoFile(HCLoginInfo loginDeviceInfo, int iChannelNo, Date start, Date end) {
+    public boolean findExistVideoFile(
+            HCLoginInfo loginDeviceInfo, int iChannelNo, Date start, Date end) {
 
         HCOpInfo loginSuccess = login_V40(loginDeviceInfo);
 
@@ -223,7 +229,6 @@ public class HCUtils {
         hcVideo.getDvrIPChannelInfo(loginSuccess.getLUserID());
 
         logout(loginSuccess.getLUserID());
-
     }
 
     /**
@@ -241,14 +246,20 @@ public class HCUtils {
         String newName = sf.format(new Date());
 
         String realPath =
-                hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_" + loginDeviceInfo.getLDChannel() + "_" + newName + ".jpg";
+                hCProperties.getSystemPic()
+                        + File.separator
+                        + loginDeviceInfo.getIp()
+                        + "_"
+                        + loginDeviceInfo.getLDChannel()
+                        + "_"
+                        + newName
+                        + ".jpg";
         // 实时取流
         realPath = hcVideo.getPicByPlayCtrl(realPath);
 
         logout(loginSuccess.getLUserID());
 
         return realPath;
-
     }
 
     /**
@@ -283,9 +294,7 @@ public class HCUtils {
 
         HCControl hcControl = new HCControl(hCNetSDK, loginSuccess);
 
-        /**
-         * 海康摄像头，预置点 1--300。
-         */
+        /** 海康摄像头，预置点 1--300。 */
         if (dwPresetIndex > 0 && dwPresetIndex < 300) {
             boolean opGotoPreset = hcControl.gotoPreset(dwPresetIndex);
 
@@ -297,7 +306,16 @@ public class HCUtils {
         String now = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
 
         String realPath =
-                hCProperties.getSystemPic() + File.separator + loginDeviceInfo.getIp() + "_C" + loginDeviceInfo.getLDChannel() + "_P" + dwPresetIndex + "_" + now + ".jpg";
+                hCProperties.getSystemPic()
+                        + File.separator
+                        + loginDeviceInfo.getIp()
+                        + "_C"
+                        + loginDeviceInfo.getLDChannel()
+                        + "_P"
+                        + dwPresetIndex
+                        + "_"
+                        + now
+                        + ".jpg";
 
         boolean opCapturePic = hcControl.NET_DVR_CaptureJPEGPicture(realPath);
 
@@ -310,9 +328,7 @@ public class HCUtils {
         return result;
     }
 
-    /**
-     * 系统关闭执行cleanUp代码
-     */
+    /** 系统关闭执行cleanUp代码 */
     @PreDestroy
     public void cleanUp() {
 
@@ -322,9 +338,7 @@ public class HCUtils {
         }
     }
 
-    /**
-     * 系统启动执行init代码
-     */
+    /** 系统启动执行init代码 */
     @PostConstruct
     public void init() {
 
@@ -383,7 +397,6 @@ public class HCUtils {
 
         // 启动SDK写日志
         hCNetSDK.NET_DVR_SetLogToFile(3, "./sdkLog", false);
-
     }
 
     /**
@@ -438,7 +451,8 @@ public class HCUtils {
                     playControl = (PlayCtrl) Native.loadLibrary(strPlayPath, PlayCtrl.class);
 
                 } catch (Exception ex) {
-                    System.out.println("loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
+                    System.out.println(
+                            "loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
                     return false;
                 }
             }
@@ -458,7 +472,6 @@ public class HCUtils {
         hcVideo.playBackBytime(fileName, start, end);
 
         logout(hCOpInfo.getLUserID());
-
     }
 
     /**
@@ -476,6 +489,5 @@ public class HCUtils {
         hcVideo.realPlay("D:\\testxxx.mp4");
 
         logout(loginSuccess.getLUserID());
-
     }
 }

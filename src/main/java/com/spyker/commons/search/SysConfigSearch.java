@@ -1,14 +1,13 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * <p>
  * 参数配置表
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -30,5 +29,4 @@ public class SysConfigSearch implements Serializable {
 
     @Schema(description = "系统内置（Y是 N否）")
     private String configType;
-
 }

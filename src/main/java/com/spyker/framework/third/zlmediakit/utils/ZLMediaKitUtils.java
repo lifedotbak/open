@@ -4,9 +4,16 @@ import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
 
 public final class ZLMediaKitUtils {
 
-    public static String generateRtspUrl(ZLMediaKitProperties zLMediaKitProperties, String urlPath) {
+    public static String generateRtspUrl(
+            ZLMediaKitProperties zLMediaKitProperties, String urlPath) {
 
-        String result = "rtsp://" + zLMediaKitProperties.getIp() + ":" + zLMediaKitProperties.getPort() + "/" + urlPath;
+        String result =
+                "rtsp://"
+                        + zLMediaKitProperties.getIp()
+                        + ":"
+                        + zLMediaKitProperties.getPort()
+                        + "/"
+                        + urlPath;
 
         return result;
     }
@@ -14,10 +21,14 @@ public final class ZLMediaKitUtils {
     public static String generateFlvUrl(ZLMediaKitProperties zLMediaKitProperties, String urlPath) {
 
         String result =
-                "http://" + zLMediaKitProperties.getIp() + ":" + zLMediaKitProperties.getPort() + "/" + urlPath +
-                        ".live.flv";
+                "http://"
+                        + zLMediaKitProperties.getIp()
+                        + ":"
+                        + zLMediaKitProperties.getPort()
+                        + "/"
+                        + urlPath
+                        + ".live.flv";
 
         return result;
     }
-
 }

@@ -1,15 +1,14 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
  * 系统访问记录
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -49,5 +48,4 @@ public class SysLogininforSearch implements Serializable {
 
     @Schema(description = "访问时间")
     private Date loginTime;
-
 }

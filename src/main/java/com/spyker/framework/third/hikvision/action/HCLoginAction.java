@@ -14,8 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 @ConditionalOnClass(HCInitUtils.class)
 public class HCLoginAction {
 
-    @Autowired
-    private HCInitUtils hCInitUtils;
+    @Autowired private HCInitUtils hCInitUtils;
 
     /**
      * 设备登录V40 与V30功能一致
@@ -33,23 +32,28 @@ public class HCLoginAction {
 
         HCOpInfo result = new HCOpInfo();
 
-        int lUserID = -1;// 用户句柄
+        int lUserID = -1; // 用户句柄
 
         // 注册
-        HCNetSDK.NET_DVR_USER_LOGIN_INFO m_strLoginInfo = new HCNetSDK.NET_DVR_USER_LOGIN_INFO();// 设备登录信息
-        HCNetSDK.NET_DVR_DEVICEINFO_V40 m_strDeviceInfo = new HCNetSDK.NET_DVR_DEVICEINFO_V40();// 设备信息
+        HCNetSDK.NET_DVR_USER_LOGIN_INFO m_strLoginInfo =
+                new HCNetSDK.NET_DVR_USER_LOGIN_INFO(); // 设备登录信息
+        HCNetSDK.NET_DVR_DEVICEINFO_V40 m_strDeviceInfo =
+                new HCNetSDK.NET_DVR_DEVICEINFO_V40(); // 设备信息
 
-        String m_sDeviceIP = ip;// 设备ip地址
+        String m_sDeviceIP = ip; // 设备ip地址
         m_strLoginInfo.sDeviceAddress = new byte[HCNetSDK.NET_DVR_DEV_ADDRESS_MAX_LEN];
-        System.arraycopy(m_sDeviceIP.getBytes(), 0, m_strLoginInfo.sDeviceAddress, 0, m_sDeviceIP.length());
+        System.arraycopy(
+                m_sDeviceIP.getBytes(), 0, m_strLoginInfo.sDeviceAddress, 0, m_sDeviceIP.length());
 
-        String m_sUsername = user;// 设备用户名
+        String m_sUsername = user; // 设备用户名
         m_strLoginInfo.sUserName = new byte[HCNetSDK.NET_DVR_LOGIN_USERNAME_MAX_LEN];
-        System.arraycopy(m_sUsername.getBytes(), 0, m_strLoginInfo.sUserName, 0, m_sUsername.length());
+        System.arraycopy(
+                m_sUsername.getBytes(), 0, m_strLoginInfo.sUserName, 0, m_sUsername.length());
 
-        String m_sPassword = psw;// 设备密码
+        String m_sPassword = psw; // 设备密码
         m_strLoginInfo.sPassword = new byte[HCNetSDK.NET_DVR_LOGIN_PASSWD_MAX_LEN];
-        System.arraycopy(m_sPassword.getBytes(), 0, m_strLoginInfo.sPassword, 0, m_sPassword.length());
+        System.arraycopy(
+                m_sPassword.getBytes(), 0, m_strLoginInfo.sPassword, 0, m_sPassword.length());
 
         m_strLoginInfo.wPort = port;
         m_strLoginInfo.bUseAsynLogin = false; // 是否异步登录：0- 否，1- 是
@@ -66,7 +70,6 @@ public class HCLoginAction {
         } else {
 
             log.info(ip + ":设备登录成功！");
-
         }
 
         result.setLDChannel(loginDeviceInfo.getLDChannel());
@@ -84,6 +87,5 @@ public class HCLoginAction {
 
             log.info("注销成功--->{}", lUserID);
         }
-
     }
 }

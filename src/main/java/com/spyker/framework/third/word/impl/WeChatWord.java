@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created with IntelliJ IDEA. User: Administrator Date: 18-6-5 Time: 下午3:44 To
- * change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: Administrator Date: 18-6-5 Time: 下午3:44 To change this template
+ * use File | Settings | File Templates.
  */
 public class WeChatWord {
 
@@ -52,7 +52,8 @@ public class WeChatWord {
         par = par.replace("op", "00");
 
         Pattern pattern = Pattern.compile(par);
-        Matcher m = pattern.matcher("C0A86EFF48444C4D495241434C45AAAA10280201BC0032FFFF01F8000400D418");
+        Matcher m =
+                pattern.matcher("C0A86EFF48444C4D495241434C45AAAA10280201BC0032FFFF01F8000400D418");
         System.out.println(m.matches());
     }
 }

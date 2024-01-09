@@ -1,81 +1,81 @@
 # 项目相关配置###############################
-server :
-  name : open
-  http :
-    port : 8080
-  servlet :
-    context-path : /${server.name}
+server:
+  name: open
+  http:
+    port: 8080
+  servlet:
+    context-path: /${server.name}
 
-platform :
+platform:
   # 名称
-  name : ${server.name}
+  name: ${server.name}
   # 文件路径 示例（ Windows配置D:/platform/uploadPath，Linux配置 /home/platform/uploadPath）
-  profile : D:/platform/
+  profile: D:/platform/
   # 获取ip地址开关
-  addressEnabled : true
+  addressEnabled: true
   # 验证码开关
-  captchaEnabled : open
+  captchaEnabled: open
   # 验证码类型 math 数字计算 char 字符验证
-  captchaType : math
+  captchaType: math
 
 ###############################文件上传配置,配置默认文件保存位置###############################
-upload :
-  localtion : /${server.name}
+upload:
+  localtion: /${server.name}
 
 # Spring配置
-spring :
-  application :
-    name : ${server.name}
+spring:
+  application:
+    name: ${server.name}
   #  boot :
   #    admin :
   #      client :
   #        name : ${server.name}
   #        url : http://127.0.0.1:8080/open
-  jackson :
-    time-zone : Asia/Shanghai
+  jackson:
+    time-zone: Asia/Shanghai
   #    date-format: yyyy-MM-dd HH:mm:ss
   #  profiles:
   #    active: druid
   # 文件上传
-  servlet :
-    multipart :
+  servlet:
+    multipart:
       # 单个文件大小
-      max-file-size : 100MB
+      max-file-size: 100MB
       # 设置总上传的文件大小
-      max-request-size : 1000MB
-  redis :
-    enabled : true
-    host : 127.0.0.1
-    password :
-    port : 6379
-    timeout : 6000
-    lettuce :
-      pool :
-        max-active : 8
-        max-wait : 10000
-        max-idle : 8
-        min-idle : 1
-      shutdown-timeout : 100
+      max-request-size: 1000MB
+  redis:
+    enabled: true
+    host: 127.0.0.1
+    password:
+    port: 6379
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 10000
+        max-idle: 8
+        min-idle: 1
+      shutdown-timeout: 100
 
-  mvc :
-    view :
-      prefix : /
-      suffix : .html
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
 
   #数据源
-  datasource :
-    druid :
-      username : root
-      password : '123456'
-      url : jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      driver-class-name : com.mysql.cj.jdbc.Driver
-      minIdle : 3
-      maxWait : 10000
-      validationQuery : SELECT 'x'
-      timeBetweenEvictionRunsMillis : 60000
-      minEvictableIdleTimeMillis : 300000
-  resources :
-    static-locations : classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
+  datasource:
+    druid:
+      username: root
+      password: '123456'
+      url: jdbc:mysql://127.0.0.1:3306/open?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      minIdle: 3
+      maxWait: 10000
+      validationQuery: SELECT 'x'
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
 
 ############################### redisson config ###############################
 redisson:
@@ -101,158 +101,158 @@ redisson:
     subscriptionConnectionPoolSize: 50
 
 ############################### springboot admin config ###############################
-management :
-  endpoints :
-    shutdown :
-      enabled : true
-  jmx :
-    exposure :
-      include : health,info
+management:
+  endpoints:
+    shutdown:
+      enabled: true
+  jmx:
+    exposure:
+      include: health,info
 
 #=======================打开mybatis-plus,SQL执行日志输出==========================
-mybatis-plus :
-  configuration :
-    log-impl : org.apache.ibatis.logging.stdout.StdOutImpl
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #======================阿里云配置================================
-aliyun :
-  enabled : false
-  push :
-    accessKeyId :
-    accessKeySecret :
-    signName :
-    androidKey :
-    iosKey :
-  sms :
-    accessKeyId :
-    accessKeySecret :
-    signName :
-  oss :
-    accessKeyId :
-    accessKeySecret :
-    bucketName :
-    endPoint :
-    out :
-      imgUrl :
-  ram :
-    accessKeyId :
-    accessKeySecret :
-    roleArn :
-    roleSessionName :
-    durationSeconds : 3600
+aliyun:
+  enabled: false
+  push:
+    accessKeyId:
+    accessKeySecret:
+    signName:
+    androidKey:
+    iosKey:
+  sms:
+    accessKeyId:
+    accessKeySecret:
+    signName:
+  oss:
+    accessKeyId:
+    accessKeySecret:
+    bucketName:
+    endPoint:
+    out:
+      imgUrl:
+  ram:
+    accessKeyId:
+    accessKeySecret:
+    roleArn:
+    roleSessionName:
+    durationSeconds: 3600
 
 #======================微信配置================================
-weixin :
-  enabled : false
-  miniprogram :
-    appId :
-    appSecret :
-  pay :
-    appId :
-    mchId :
-    certificateSerialNo :
-    apiclientKeyPath :
-    notifyUrl :
-    apiV3key :
-    refundNotifyUrl :
+weixin:
+  enabled: false
+  miniprogram:
+    appId:
+    appSecret:
+  pay:
+    appId:
+    mchId:
+    certificateSerialNo:
+    apiclientKeyPath:
+    notifyUrl:
+    apiV3key:
+    refundNotifyUrl:
 
 #========================网易云信================================
-netease :
-  enabled : false
-  im :
-    appKey :
-    appSecret :
+netease:
+  enabled: false
+  im:
+    appKey:
+    appSecret:
 
 # ======================Mqtt配置===lighting-x7etg8 =============================
 # =======  input--->采集器接收命令的队列，服务器从input获取命令操作结果
 # =======  out--->采集器返回命令结果的队列，服务器象out队列发送命令
-mqtt :
-  enabled : false
-  services : tcp://192.168.200.66:1883
-  user :
-  password :
-  topic :
-    input : mqttpub
-    out : mqttsub
+mqtt:
+  enabled: false
+  services: tcp://192.168.200.66:1883
+  user:
+  password:
+  topic:
+    input: mqttpub
+    out: mqttsub
 
 #========================xxl-server config================================
-xxl :
-  job :
+xxl:
+  job:
     # 执行器开关
-    enabled : false
+    enabled: false
     # 调度中心地址：如调度中心集群部署存在多个地址则用逗号分隔。
     # admin-addresses: http://localhost:9900
     # 调度中心应用名 通过服务名连接调度中心(启用admin-appname会导致admin-addresses不生效)
-    admin-appname : xxl-job-admin
+    admin-appname: xxl-job-admin
     # 执行器通讯TOKEN：非空时启用
-    access-token : xxl-job
+    access-token: xxl-job
     # 执行器配置
-    executor :
+    executor:
       # 执行器AppName：执行器心跳注册分组依据；为空则关闭自动注册
-      appname : ${spring.application.name}-executor
+      appname: ${spring.application.name}-executor
       # 执行器端口号 执行器从19901开始往后写
-      port : 9902
+      port: 9902
       # 执行器注册：默认IP:PORT
-      address :
+      address:
       # 执行器IP：默认自动获取IP
-      ip :
+      ip:
       # 执行器运行日志文件存储磁盘路径
-      logpath : ./logs/${spring.application.name}/xxl-job
+      logpath: ./logs/${spring.application.name}/xxl-job
       # 执行器日志文件保存天数：大于3生效
-      logretentiondays : 30
-xxl-server :
-  enabled : false
-  url : http://192.168.200.65:9900
-  user-name :
-  password :
-  job-group : 3
-  author :
-  job-desc :
-  glue-type : BEAN
-  executor-route-strategy : FIRST
-  misfire-strategy : DO_NOTHING
-  executor-block-strategy : SERIAL_EXECUTION
+      logretentiondays: 30
+xxl-server:
+  enabled: false
+  url: http://192.168.200.65:9900
+  user-name:
+  password:
+  job-group: 3
+  author:
+  job-desc:
+  glue-type: BEAN
+  executor-route-strategy: FIRST
+  misfire-strategy: DO_NOTHING
+  executor-block-strategy: SERIAL_EXECUTION
 
 #========================海康威视硬盘录像机config================================
-hik :
-  enabled : false
-  win-lib :
-  win-pic :
-  win-video :
-  linux-lib :
-  linux-pic :
-  linux-video :
+hik:
+  enabled: false
+  win-lib:
+  win-pic:
+  win-video:
+  linux-lib:
+  linux-pic:
+  linux-video:
 
 #========================zlmediakit配置config================================
-zlmediakit :
-  enabled : false
-  ip :
-  port :
-  secret :
+zlmediakit:
+  enabled: false
+  ip:
+  port:
+  secret:
 
 #========================minio配置config================================
-minio :
-  enabled : false
-  endpoint : http://127.0.0.1:29000
-  bucket : ${spring.application.name}
-  accesskey : uV5ZA5ghEizVFSuo
-  secretkey : djG0WzOTNAXtEyYTw4gQgVcMCOCfo9MG
+minio:
+  enabled: false
+  endpoint: http://127.0.0.1:29000
+  bucket: ${spring.application.name}
+  accesskey: uV5ZA5ghEizVFSuo
+  secretkey: djG0WzOTNAXtEyYTw4gQgVcMCOCfo9MG
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
-sa-token :
+sa-token:
   # token 名称（同时也是 cookie 名称）
-  token-name : satoken
+  token-name: satoken
   # token 有效期（单位：秒） 默认30天，-1 代表永久有效
-  timeout : 3600
+  timeout: 3600
   # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
-  active-timeout : 1800
+  active-timeout: 1800
   # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
-  is-concurrent : true
+  is-concurrent: true
   # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
-  is-share : true
+  is-share: true
   # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
-  token-style : random-128
+  token-style: random-128
   # 是否输出操作日志
-  is-log : true
+  is-log: true
   # sa-token-temp-jwt 模块的秘钥 （定义的密钥）
-  jwt-secret-key : app-spyker-sa-token-temp-jwt
+  jwt-secret-key: app-spyker-sa-token-temp-jwt

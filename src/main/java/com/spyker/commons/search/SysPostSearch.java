@@ -1,14 +1,13 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * <p>
  * 岗位信息表
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -46,5 +45,4 @@ public class SysPostSearch implements Serializable {
 
     @Schema(description = "备注")
     private String remark;
-
 }

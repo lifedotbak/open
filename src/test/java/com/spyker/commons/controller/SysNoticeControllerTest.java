@@ -21,23 +21,23 @@ public class SysNoticeControllerTest extends BaseTest {
 
     private static final String URL = "/application/sys-notice";
 
-    @Autowired
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
     @Test
     @SneakyThrows
     public void list_page() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(URL + "/list_page")
-                                                                    .accept(MediaType.APPLICATION_JSON)
-                                                                    .params(params))
-                                     .andExpect(MockMvcResultMatchers.status().isOk())
-                                     .andDo(MockMvcResultHandlers.print())
-                                     .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get(URL + "/list_page")
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -45,15 +45,16 @@ public class SysNoticeControllerTest extends BaseTest {
     public void list() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(URL + "/list")
-                                                                    .accept(MediaType.APPLICATION_JSON)
-                                                                    .params(params))
-                                     .andExpect(MockMvcResultMatchers.status().isOk())
-                                     .andDo(MockMvcResultHandlers.print())
-                                     .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get(URL + "/list")
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -63,15 +64,16 @@ public class SysNoticeControllerTest extends BaseTest {
 
         params.add("noticeId", "1");
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(URL + "/detail")
-                                                                    .accept(MediaType.APPLICATION_JSON)
-                                                                    .params(params))
-                                     .andExpect(MockMvcResultMatchers.status().isOk())
-                                     .andDo(MockMvcResultHandlers.print())
-                                     .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get(URL + "/detail")
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -81,15 +83,16 @@ public class SysNoticeControllerTest extends BaseTest {
 
         params.add("noticeId", "1");
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete(URL + "/delete")
-                                                                    .accept(MediaType.APPLICATION_JSON)
-                                                                    .params(params))
-                                     .andExpect(MockMvcResultMatchers.status().isOk())
-                                     .andDo(MockMvcResultHandlers.print())
-                                     .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.delete(URL + "/delete")
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -113,15 +116,16 @@ public class SysNoticeControllerTest extends BaseTest {
 
         String jsonString = gson.toJson(add);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(URL + "/add")
-                                                                    .content(jsonString)
-                                                                    .contentType(MediaType.APPLICATION_JSON))
-                                     .andExpect(MockMvcResultMatchers.status().isOk())
-                                     .andDo(MockMvcResultHandlers.print())
-                                     .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.post(URL + "/add")
+                                        .content(jsonString)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -147,15 +151,15 @@ public class SysNoticeControllerTest extends BaseTest {
 
         String jsonString = gson.toJson(update);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(URL + "/update")
-                                                                    .content(jsonString)
-                                                                    .contentType(MediaType.APPLICATION_JSON))
-                                     .andExpect(MockMvcResultMatchers.status().isOk())
-                                     .andDo(MockMvcResultHandlers.print())
-                                     .andReturn();
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                MockMvcRequestBuilders.put(URL + "/update")
+                                        .content(jsonString)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print())
+                        .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
-
     }
-
 }

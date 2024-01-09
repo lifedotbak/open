@@ -22,22 +22,29 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class ParsePayNotifyAction {
 
-    @Autowired
-    private PayConfig payConfig;
+    @Autowired private PayConfig payConfig;
 
     public static void main(String[] args) {
-        String ss = "{\"mchid\":\"1627332486\",\"appid\":\"xxxxxx\"," + "\"out_trade_no" + "\":\"xxxxx\"," +
-                "\"transaction_id\":\"xxxxx\"," + "\"trade_type\":\"JSAPI\"," + "\"trade_state\":\"SUCCESS\"," +
-                "\"trade_state_desc\":\"支付成功\"," + "\"bank_type\":\"CMB_CREDIT\"," + "\"attach\":\"\"," +
-                "\"success_time\":\"2022-07-25T09:41:49+08:00\"," + "\"payer\":{\"openid" +
-                "\":\"odsEZ5TbgEfZqfNMRWkWKuEMgkI0\"},\"amount\":{\"total\":1,\"payer_total\":1," + "\"currency" +
-                "\":\"CNY\",\"payer_currency\":\"CNY\"}}";
+        String ss =
+                "{\"mchid\":\"1627332486\",\"appid\":\"xxxxxx\","
+                        + "\"out_trade_no"
+                        + "\":\"xxxxx\","
+                        + "\"transaction_id\":\"xxxxx\","
+                        + "\"trade_type\":\"JSAPI\","
+                        + "\"trade_state\":\"SUCCESS\","
+                        + "\"trade_state_desc\":\"支付成功\","
+                        + "\"bank_type\":\"CMB_CREDIT\","
+                        + "\"attach\":\"\","
+                        + "\"success_time\":\"2022-07-25T09:41:49+08:00\","
+                        + "\"payer\":{\"openid"
+                        + "\":\"odsEZ5TbgEfZqfNMRWkWKuEMgkI0\"},\"amount\":{\"total\":1,\"payer_total\":1,"
+                        + "\"currency"
+                        + "\":\"CNY\",\"payer_currency\":\"CNY\"}}";
 
         Gson gson = new Gson();
         PayNotifyCiphertextParse result = gson.fromJson(ss, PayNotifyCiphertextParse.class);
 
         System.out.println(result);
-
     }
 
     @SneakyThrows
@@ -58,24 +65,24 @@ public class ParsePayNotifyAction {
 
             // 解密后资源数据
             AesUtil aesUtil = new AesUtil(apiV3Key.getBytes(StandardCharsets.UTF_8));
-            String notifyResourceStr = aesUtil.decryptToString(resource.getAssociated_data()
-                                                                       .getBytes(StandardCharsets.UTF_8),
-                                                               resource.getNonce().getBytes(StandardCharsets.UTF_8),
-                                                               resource.getCiphertext());
+            String notifyResourceStr =
+                    aesUtil.decryptToString(
+                            resource.getAssociated_data().getBytes(StandardCharsets.UTF_8),
+                            resource.getNonce().getBytes(StandardCharsets.UTF_8),
+                            resource.getCiphertext());
 
             log.info("notifyResourceStr-->{}", notifyResourceStr);
 
             gson = new Gson();
-            PayNotifyCiphertextParse result = gson.fromJson(notifyResourceStr, PayNotifyCiphertextParse.class);
+            PayNotifyCiphertextParse result =
+                    gson.fromJson(notifyResourceStr, PayNotifyCiphertextParse.class);
 
             log.info("result-->{}", result);
 
             return result;
-
         }
 
         return null;
-
     }
 
     @SneakyThrows
@@ -90,9 +97,7 @@ public class ParsePayNotifyAction {
         //		log.info("Wechatpay_Signature=" + request.getHeader(Wechatpay_Signature));
         //		log.info("decodeBase64 Wechatpay_Signature=" + signature);
 
-        /**
-         * 应答报文主体,获取微信调用我们notify_url的返回信息
-         */
+        /** 应答报文主体,获取微信调用我们notify_url的返回信息 */
         InputStream inStream = request.getInputStream();
         ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
@@ -108,7 +113,5 @@ public class ParsePayNotifyAction {
         log.info("request body-->{}", body);
 
         return body;
-
     }
-
 }

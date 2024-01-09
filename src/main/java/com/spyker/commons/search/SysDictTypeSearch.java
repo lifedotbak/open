@@ -1,14 +1,13 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * <p>
  * 字典类型表
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -42,5 +41,4 @@ public class SysDictTypeSearch implements Serializable {
 
     @Schema(description = "备注")
     private String remark;
-
 }

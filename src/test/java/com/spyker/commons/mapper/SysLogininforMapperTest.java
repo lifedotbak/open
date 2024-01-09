@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 系统访问记录 Mapper 接口
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -15,7 +13,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class SysLogininforMapperTest extends BaseTest {
 
-    @Autowired
-    private SysLogininforMapper sysLogininforMapper;
-
+    @Autowired private SysLogininforMapper sysLogininforMapper;
 }

@@ -19,10 +19,8 @@ import java.util.Map;
 public class DelStreamProxyAction {
 
     private static final String method = "/index/api/delStreamProxy";
-    @Autowired
-    private ZLMediaKitProperties zlMediaKitProperties;
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
+    @Autowired private RestTemplate restTemplate;
 
     /**
      * 关闭ffmpeg拉流代理
@@ -32,7 +30,12 @@ public class DelStreamProxyAction {
      */
     public OpResult execute(String key) {
 
-        String postUrl = "http://" + zlMediaKitProperties.getIp() + ":" + zlMediaKitProperties.getPort() + method;
+        String postUrl =
+                "http://"
+                        + zlMediaKitProperties.getIp()
+                        + ":"
+                        + zlMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -52,10 +55,8 @@ public class DelStreamProxyAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
-                                                                          HttpMethod.POST,
-                                                                          entity,
-                                                                          String.class);
+            ResponseEntity<String> exchangeResult =
+                    restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
             String responseBody = exchangeResult.getBody();
 
@@ -73,7 +74,5 @@ public class DelStreamProxyAction {
         }
 
         return result;
-
     }
-
 }

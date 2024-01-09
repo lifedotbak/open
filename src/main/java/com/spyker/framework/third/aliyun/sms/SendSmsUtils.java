@@ -15,7 +15,9 @@ public final class SendSmsUtils {
 
     public static void sendSms(Sms sms) {
 
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", sms.getAccessKeyId(), sms.getAccessSecret());
+        DefaultProfile profile =
+                DefaultProfile.getProfile(
+                        "cn-hangzhou", sms.getAccessKeyId(), sms.getAccessSecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -43,5 +45,4 @@ public final class SendSmsUtils {
             log.error(e.getErrMsg());
         }
     }
-
 }

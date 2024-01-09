@@ -8,9 +8,7 @@ import com.spyker.BaseTest;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
  * 菜单权限表 Mapper 接口
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -18,12 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SysMenuMapperTest extends BaseTest {
 
-	@Autowired
-	private SysMenuMapper sysMenuMapper;
+    @Autowired private SysMenuMapper sysMenuMapper;
 
-	@Test
-	public void get() {
-		sysMenuMapper.selectById("1");
-	}
-
+    @Test
+    public void get() {
+        sysMenuMapper.selectById("1");
+    }
 }

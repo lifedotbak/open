@@ -7,9 +7,7 @@ import com.spyker.BaseTest;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
  * 部门表 Mapper 接口
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-12-25
@@ -17,7 +15,5 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SysCompanyMapperTest extends BaseTest {
 
-	@Autowired
-	private SysCompanyMapper sysCompanyMapper;
-
+    @Autowired private SysCompanyMapper sysCompanyMapper;
 }

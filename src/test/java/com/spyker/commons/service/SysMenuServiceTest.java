@@ -10,19 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 菜单权限表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @Slf4j
 public class SysMenuServiceTest extends BaseTest {
 
-    @Autowired
-    private SysMenuService service;
+    @Autowired private SysMenuService service;
 
     @Test
     public void get() {
@@ -175,5 +171,4 @@ public class SysMenuServiceTest extends BaseTest {
 
         service.queryPage(page, search);
     }
-
 }

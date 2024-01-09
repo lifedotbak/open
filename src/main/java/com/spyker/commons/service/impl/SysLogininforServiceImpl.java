@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysLogininforMapper;
 import com.spyker.commons.search.SysLogininforSearch;
 import com.spyker.commons.service.SysLogininforService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 系统访问记录 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -72,5 +72,4 @@ public class SysLogininforServiceImpl extends ServiceImpl<SysLogininforMapper, S
 
         return RestResponse.success();
     }
-
 }

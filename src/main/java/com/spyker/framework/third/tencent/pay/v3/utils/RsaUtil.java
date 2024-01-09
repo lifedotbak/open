@@ -16,8 +16,8 @@ import java.util.Base64;
 
 /**
  * 敏感信息加解密
- * <p>
- * https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi
+ *
+ * <p>https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi
  *
  * @author zhangzhaofeng
  */
@@ -59,9 +59,8 @@ public class RsaUtil {
      * @throws BadPaddingException
      * @throws IOException
      */
-    public static String rsaDecryptOAEP(String ciphertext, PrivateKey privateKey) throws
-            BadPaddingException,
-            IOException {
+    public static String rsaDecryptOAEP(String ciphertext, PrivateKey privateKey)
+            throws BadPaddingException, IOException {
         try {
             Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
@@ -76,5 +75,4 @@ public class RsaUtil {
             throw new BadPaddingException("解密失败");
         }
     }
-
 }

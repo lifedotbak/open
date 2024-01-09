@@ -14,16 +14,21 @@ import java.io.IOException;
 @Slf4j
 public class AuthCode2SessionUtils {
 
-    private AuthCode2SessionUtils() {
+    private AuthCode2SessionUtils() {}
 
-    }
-
-    public static AuthorizationCodeResult code2Session(Jscode2sessionParameter jscode2sessionParameter) {
+    public static AuthorizationCodeResult code2Session(
+            Jscode2sessionParameter jscode2sessionParameter) {
 
         AuthorizationCodeResult result = new AuthorizationCodeResult();
 
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + jscode2sessionParameter.getAppId() +
-                "&secret=" + jscode2sessionParameter.getAppSecret() + "&js_code=" + jscode2sessionParameter.getJscode() + "&grant_type=authorization_code";
+        String url =
+                "https://api.weixin.qq.com/sns/jscode2session?appid="
+                        + jscode2sessionParameter.getAppId()
+                        + "&secret="
+                        + jscode2sessionParameter.getAppSecret()
+                        + "&js_code="
+                        + jscode2sessionParameter.getJscode()
+                        + "&grant_type=authorization_code";
 
         String resultValue = "";
 

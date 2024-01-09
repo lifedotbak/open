@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum ContentTypeEnum {
-
     DEFAULT("default", "application/octet-stream"),
     JPG("jpg", "image/jpeg"),
     TIFF("tiff", "image/tiff"),

@@ -10,9 +10,7 @@ import com.spyker.commons.entity.SysJob;
 import com.spyker.commons.search.SysJobSearch;
 
 /**
- * <p>
  * 定时任务调度表 Mapper 接口
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -20,8 +18,7 @@ import com.spyker.commons.search.SysJobSearch;
 @Mapper
 public interface SysJobMapper extends BaseMapper<SysJob> {
 
-	List<SysJob> query(SysJobSearch search);
+    List<SysJob> query(SysJobSearch search);
 
-	IPage<SysJob> queryPage(IPage<SysJob> page, SysJobSearch search);
-
+    IPage<SysJob> queryPage(IPage<SysJob> page, SysJobSearch search);
 }

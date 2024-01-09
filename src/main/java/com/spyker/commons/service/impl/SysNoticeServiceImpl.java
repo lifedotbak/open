@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysNoticeMapper;
 import com.spyker.commons.search.SysNoticeSearch;
 import com.spyker.commons.service.SysNoticeService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 通知公告表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice> implements SysNoticeService {
+public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice>
+        implements SysNoticeService {
 
     private final SysNoticeMapper sysNoticeMapper;
 
@@ -71,5 +72,4 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
 
         return RestResponse.success();
     }
-
 }

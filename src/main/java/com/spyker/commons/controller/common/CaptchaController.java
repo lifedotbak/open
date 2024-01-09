@@ -1,6 +1,7 @@
 package com.spyker.commons.controller.common;
 
 import cn.dev33.satoken.annotation.SaIgnore;
+
 import com.google.code.kaptcha.Producer;
 import com.spyker.framework.config.PlatformConfig;
 import com.spyker.framework.constant.CacheConstants;
@@ -9,19 +10,23 @@ import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
 import com.spyker.framework.util.uuid.ExUuidUtils;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 
 /**
  * 验证码操作处理
@@ -34,18 +39,15 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class CaptchaController {
 
+    @Autowired private RedisService redisService;
+
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
 
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
 
-    @Autowired
-    private RedisService redisService;
-
-    /**
-     * 生成验证码
-     */
+    /** 生成验证码 */
     @SaIgnore
     @PostMapping("/captchaImage")
     public RestMapResponse createCode() throws IOException {
@@ -76,7 +78,8 @@ public class CaptchaController {
             image = captchaProducer.createImage(capStr);
         }
 
-        redisService.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
+        redisService.setCacheObject(
+                verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try {

@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysMenuMapper;
 import com.spyker.commons.search.SysMenuSearch;
 import com.spyker.commons.service.SysMenuService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 菜单权限表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
+        implements SysMenuService {
 
     private final SysMenuMapper sysMenuMapper;
 
@@ -71,5 +72,4 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
         return RestResponse.success();
     }
-
 }

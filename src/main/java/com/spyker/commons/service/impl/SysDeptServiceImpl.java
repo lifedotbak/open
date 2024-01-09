@@ -1,14 +1,5 @@
 package com.spyker.commons.service.impl;
 
-import java.util.List;
-
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spyker.commons.entity.SysDept;
@@ -19,10 +10,17 @@ import com.spyker.framework.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 /**
- * <p>
  * 部门表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -31,73 +29,67 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "SysDept")
-public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements SysDeptService {
+public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept>
+        implements SysDeptService {
 
-	private final SysDeptMapper sysDeptMapper;
+    private final SysDeptMapper sysDeptMapper;
 
-	@Override
-	public List<SysDept> query(SysDeptSearch search) {
-		List<SysDept> result = sysDeptMapper.query(search);
+    @Override
+    public List<SysDept> query(SysDeptSearch search) {
+        List<SysDept> result = sysDeptMapper.query(search);
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search) {
-		page = sysDeptMapper.queryPage(page, search);
+    @Override
+    public IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search) {
+        page = sysDeptMapper.queryPage(page, search);
 
-		return page;
-	}
+        return page;
+    }
 
-	/**
-	 * @param id
-	 * @return
-	 * @Cacheable
-	 * @Cacheble注解表示这个方法有了缓存的功能，方法的返回值会被缓存下来，下一次调用该方法前， 会去检查是否缓存中已经有值
-	 * ，如果有就直接返回，不调用方法。如果没有，就调用方法，然后把结果缓存起来。这个注解一般用在查询方法上。
-	 */
-	@Override
-	@Cacheable(key = "#id")
-	public SysDept get(String id) {
-		SysDept result = getById(id);
+    /**
+     * @param id
+     * @return @Cacheable @Cacheble注解表示这个方法有了缓存的功能，方法的返回值会被缓存下来，下一次调用该方法前， 会去检查是否缓存中已经有值
+     *     ，如果有就直接返回，不调用方法。如果没有，就调用方法，然后把结果缓存起来。这个注解一般用在查询方法上。
+     */
+    @Override
+    @Cacheable(key = "#id")
+    public SysDept get(String id) {
+        SysDept result = getById(id);
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * @param sysDept
-	 * @return
-	 * @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来，
-	 * 供其它地方使用。它通常用在新增方法上。
-	 */
-	@Override
-	@CachePut(key = "#sysDept.deptId")
-	public SysDept insert(SysDept sysDept) {
-		save(sysDept);
+    /**
+     * @param sysDept
+     * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
+     */
+    @Override
+    @CachePut(key = "#sysDept.deptId")
+    public SysDept insert(SysDept sysDept) {
+        save(sysDept);
 
-		return sysDept;
-	}
+        return sysDept;
+    }
 
-	@Override
-	@CachePut(key = "#sysDept.deptId")
-	public SysDept update(SysDept sysDept) {
+    @Override
+    @CachePut(key = "#sysDept.deptId")
+    public SysDept update(SysDept sysDept) {
 
-		updateById(sysDept);
-		return sysDept;
-	}
+        updateById(sysDept);
+        return sysDept;
+    }
 
-	/**
-	 * @param id
-	 * @return
-	 * @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。
-	 * 一般用在更新或者删除的方法上。
-	 */
-	@CacheEvict(key = "#id")
-	@Override
-	public RestResponse<?> delete(String id) {
-		removeById(id);
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
+    @CacheEvict(key = "#id")
+    @Override
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-		return RestResponse.success();
-	}
-
+        return RestResponse.success();
+    }
 }

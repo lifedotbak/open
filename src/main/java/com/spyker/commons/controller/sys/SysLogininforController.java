@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
  * 系统访问记录 前端控制器
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -59,5 +57,4 @@ public class SysLogininforController {
 
         return RestResponse.success(result);
     }
-
 }

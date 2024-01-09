@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 判断是不是固定电话 g格式：区号+3-4位区域信息+4位流水号 d规则：区号不隐藏，7-8位电话号码保留最后3位，其它用*代替
- */
+/** 判断是不是固定电话 g格式：区号+3-4位区域信息+4位流水号 d规则：区号不隐藏，7-8位电话号码保留最后3位，其它用*代替 */
 public class TelPhoneWord {
 
     private static final String phoheSplit = "-";

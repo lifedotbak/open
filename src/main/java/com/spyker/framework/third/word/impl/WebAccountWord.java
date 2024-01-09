@@ -3,9 +3,7 @@ package com.spyker.framework.third.word.impl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * 网站账户脱敏(分段屏蔽，每隔2位用*替换2位。)
- */
+/** 网站账户脱敏(分段屏蔽，每隔2位用*替换2位。) */
 public class WebAccountWord {
 
     private static final String replaceChart = "*";
@@ -43,13 +41,13 @@ public class WebAccountWord {
 
     public static void main(String[] args) {
         String message = "C0A86EFF48444C4D495241434C45AAAA10280201BC0032FFFF01F8000400D418";
-        String par = "^[-A-Za-z0-9]{34}([-A-Za-z0-9]{4})[-A-Za-z0-9]{4}0032[-A-Za-z0-9]{4}([-A-Za-z0-9]{2})F8";
+        String par =
+                "^[-A-Za-z0-9]{34}([-A-Za-z0-9]{4})[-A-Za-z0-9]{4}0032[-A-Za-z0-9]{4}([-A-Za-z0-9]{2})F8";
 
         Pattern pattern = Pattern.compile(par);
 
         Matcher m = pattern.matcher(message);
 
         System.out.println(m.matches());
-
     }
 }

@@ -8,25 +8,22 @@ import com.spyker.commons.entity.SysOssConfig;
 import com.spyker.commons.search.SysOssConfigSearch;
 
 /**
- * <p>
  * 对象存储配置表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-12-21
  */
 public interface SysOssConfigService extends IService<SysOssConfig> {
 
-	List<SysOssConfig> query(SysOssConfigSearch search);
+    List<SysOssConfig> query(SysOssConfigSearch search);
 
-	IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search);
+    IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search);
 
-	SysOssConfig get(String id);
+    SysOssConfig get(String id);
 
-	boolean insert(SysOssConfig SysOssConfig);
+    boolean insert(SysOssConfig SysOssConfig);
 
-	boolean update(SysOssConfig SysOssConfig);
+    boolean update(SysOssConfig SysOssConfig);
 
-	boolean delete(String id);
-
+    boolean delete(String id);
 }

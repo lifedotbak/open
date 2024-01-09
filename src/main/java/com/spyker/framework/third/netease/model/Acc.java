@@ -10,6 +10,7 @@ public class Acc {
      * 会统一小写处理，请注意以此接口返回结果中的accid为准）。
      */
     private String accid;
+
     private String name;
     private String icon;
     private String token;
@@ -19,5 +20,4 @@ public class Acc {
     private String mobile;
     private String gender;
     private String ex;
-
 }

@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysRoleMapper;
 import com.spyker.commons.search.SysRoleSearch;
 import com.spyker.commons.service.SysRoleService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 角色信息表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
+        implements SysRoleService {
 
     private final SysRoleMapper sysRoleMapper;
 
@@ -71,5 +72,4 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
         return RestResponse.success();
     }
-
 }

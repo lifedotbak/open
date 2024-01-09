@@ -26,5 +26,4 @@ public class OpenApiConfig {
 
         return new Info().title(application).description(application).version("V-0.0.1");
     }
-
 }

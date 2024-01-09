@@ -34,19 +34,16 @@ import java.util.Map;
 @Slf4j
 public class LogAspect {
 
-    /**
-     * 排除敏感属性字段
-     */
-    public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
+    /** 排除敏感属性字段 */
+    public static final String[] EXCLUDE_PROPERTIES = {
+        "password", "oldPassword", "newPassword", "confirmPassword"
+    };
 
-    /**
-     * 计算操作消耗时间
-     */
-    private static final ThreadLocal<Long> TIME_THREADLOCAL = new NamedThreadLocal<Long>("Cost Time");
+    /** 计算操作消耗时间 */
+    private static final ThreadLocal<Long> TIME_THREADLOCAL =
+            new NamedThreadLocal<Long>("Cost Time");
 
-    /**
-     * 处理请求前执行
-     */
+    /** 处理请求前执行 */
     @Before(value = "@annotation(controllerLog)")
     public void boBefore(JoinPoint joinPoint, Log controllerLog) {
         TIME_THREADLOCAL.set(System.currentTimeMillis());
@@ -62,7 +59,8 @@ public class LogAspect {
         handleLog(joinPoint, controllerLog, null, jsonResult);
     }
 
-    protected void handleLog(final JoinPoint joinPoint, Log controllerLog, final Exception e, Object jsonResult) {
+    protected void handleLog(
+            final JoinPoint joinPoint, Log controllerLog, final Exception e, Object jsonResult) {
         try {
 
             // 获取当前的用户
@@ -74,7 +72,8 @@ public class LogAspect {
             //            // 请求的地址
             String ip = IpUtils.getIpAddr();
             operLog.setOperIp(ip);
-            operLog.setOperUrl(ExStringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
+            operLog.setOperUrl(
+                    ExStringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
             //            if (loginUser != null) {
             //                operLog.setOperName(loginUser.getUsername());
             //            }
@@ -109,14 +108,12 @@ public class LogAspect {
     /**
      * 获取注解中对方法的描述信息 用于Controller层注解
      *
-     * @param log     日志
+     * @param log 日志
      * @param operLog 操作日志
      * @throws Exception
      */
-    public void getControllerMethodDescription(JoinPoint joinPoint,
-            Log log,
-            SysOperLog operLog,
-            Object jsonResult) throws Exception {
+    public void getControllerMethodDescription(
+            JoinPoint joinPoint, Log log, SysOperLog operLog, Object jsonResult) throws Exception {
         // 设置action动作
         operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
@@ -142,18 +139,22 @@ public class LogAspect {
     //     *
     //     * @throws Exception 异常
     //     */
-    private void setRequestValue(JoinPoint joinPoint, SysOperLog operLog, String[] excludeParamNames) throws Exception {
+    private void setRequestValue(
+            JoinPoint joinPoint, SysOperLog operLog, String[] excludeParamNames) throws Exception {
         Map<?, ?> paramsMap = ServletUtils.getParamMap(ServletUtils.getRequest());
         String requestMethod = operLog.getRequestMethod();
-        if (ExStringUtils.isEmpty(paramsMap) && (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name()
-                                                                                                               .equals(requestMethod))) {
+        if (ExStringUtils.isEmpty(paramsMap)
+                && (HttpMethod.PUT.name().equals(requestMethod)
+                        || HttpMethod.POST.name().equals(requestMethod))) {
             String params = argsArrayToString(joinPoint.getArgs(), excludeParamNames);
             operLog.setOperParam(ExStringUtils.substring(params, 0, 2000));
         } else {
-            operLog.setOperParam(ExStringUtils.substring(JSON.toJSONString(paramsMap,
-                                                                           excludePropertyPreFilter(excludeParamNames)),
-                                                         0,
-                                                         2000));
+            operLog.setOperParam(
+                    ExStringUtils.substring(
+                            JSON.toJSONString(
+                                    paramsMap, excludePropertyPreFilter(excludeParamNames)),
+                            0,
+                            2000));
         }
     }
 
@@ -167,7 +168,8 @@ public class LogAspect {
             for (Object o : paramsArray) {
                 if (ExStringUtils.isNotNull(o) && !isFilterObject(o)) {
                     try {
-                        String jsonObj = JSON.toJSONString(o, excludePropertyPreFilter(excludeParamNames));
+                        String jsonObj =
+                                JSON.toJSONString(o, excludePropertyPreFilter(excludeParamNames));
                         params += jsonObj + " ";
                     } catch (Exception e) {
                     }
@@ -182,7 +184,8 @@ public class LogAspect {
     //     * 忽略敏感属性
     //     */
     public PropertyPreExcludeFilter excludePropertyPreFilter(String[] excludeParamNames) {
-        return new PropertyPreExcludeFilter().addExcludes(ArrayUtils.addAll(EXCLUDE_PROPERTIES, excludeParamNames));
+        return new PropertyPreExcludeFilter()
+                .addExcludes(ArrayUtils.addAll(EXCLUDE_PROPERTIES, excludeParamNames));
     }
 
     /**
@@ -212,14 +215,17 @@ public class LogAspect {
                 }
             }
         }
-        return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse || o instanceof BindingResult;
+        return o instanceof MultipartFile
+                || o instanceof HttpServletRequest
+                || o instanceof HttpServletResponse
+                || o instanceof BindingResult;
     }
 
     /**
      * 拦截异常操作
      *
      * @param joinPoint 切点
-     * @param e         异常
+     * @param e 异常
      */
     @AfterThrowing(value = "@annotation(controllerLog)", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Log controllerLog, Exception e) {

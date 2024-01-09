@@ -37,7 +37,6 @@ public class SignCallBackUtil {
         log.info("signApp signature============>{}", signature);
 
         return signature;
-
     }
 
     /**
@@ -52,8 +51,14 @@ public class SignCallBackUtil {
      */
     private String buildAppMessage(CallBackAuth callBackAuth) {
 
-        return callBackAuth.getAppId() + "\n" + callBackAuth.getTimeStamp() + "\n" + callBackAuth.getNonceStr() + "\n"
-                + callBackAuth.getPrepayid() + "\n";
+        return callBackAuth.getAppId()
+                + "\n"
+                + callBackAuth.getTimeStamp()
+                + "\n"
+                + callBackAuth.getNonceStr()
+                + "\n"
+                + callBackAuth.getPrepayid()
+                + "\n";
     }
 
     /**
@@ -87,7 +92,6 @@ public class SignCallBackUtil {
         log.info("signJsapi signature============>{}", signature);
 
         return signature;
-
     }
 
     /**
@@ -102,8 +106,13 @@ public class SignCallBackUtil {
      */
     private String buildJsapiMessage(CallBackAuth callBackAuth) {
 
-        return callBackAuth.getAppId() + "\n" + callBackAuth.getTimeStamp() + "\n" + callBackAuth.getNonceStr() + "\n"
-                + callBackAuth.getPackageValue() + "\n";
+        return callBackAuth.getAppId()
+                + "\n"
+                + callBackAuth.getTimeStamp()
+                + "\n"
+                + callBackAuth.getNonceStr()
+                + "\n"
+                + callBackAuth.getPackageValue()
+                + "\n";
     }
-
 }

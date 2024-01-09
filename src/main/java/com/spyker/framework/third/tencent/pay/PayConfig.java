@@ -11,10 +11,9 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(prefix = "weixin", name = "enabled", havingValue = "true")
 public class PayConfig {
 
-    /**
-     * V3 支付信息
-     */
+    /** V3 支付信息 */
     private String appId;
+
     private String mchId;
     private String certificateSerialNo;
     private String apiclientKeyPath;
@@ -22,5 +21,4 @@ public class PayConfig {
 
     private String notifyUrl;
     private String refundNotifyUrl;
-
 }

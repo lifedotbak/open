@@ -1,10 +1,5 @@
 package com.spyker.commons.service.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spyker.commons.entity.SysOssConfig;
@@ -15,10 +10,13 @@ import com.spyker.commons.service.SysOssConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 /**
- * <p>
  * 对象存储配置表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-12-21
@@ -28,46 +26,45 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class SysOssConfigServiceImpl extends ServiceImpl<SysOssConfigMapper, SysOssConfig>
-		implements SysOssConfigService {
+        implements SysOssConfigService {
 
-	private final SysOssConfigMapper sysOssConfigMapper;
+    private final SysOssConfigMapper sysOssConfigMapper;
 
-	@Override
-	public List<SysOssConfig> query(SysOssConfigSearch search) {
-		List<SysOssConfig> result = sysOssConfigMapper.query(search);
+    @Override
+    public List<SysOssConfig> query(SysOssConfigSearch search) {
+        List<SysOssConfig> result = sysOssConfigMapper.query(search);
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search) {
-		page = sysOssConfigMapper.queryPage(page, search);
+    @Override
+    public IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search) {
+        page = sysOssConfigMapper.queryPage(page, search);
 
-		return page;
-	}
+        return page;
+    }
 
-	@Override
-	public SysOssConfig get(String id) {
-		SysOssConfig result = getById(id);
+    @Override
+    public SysOssConfig get(String id) {
+        SysOssConfig result = getById(id);
 
-		log.info("result--->{}", result);
+        log.info("result--->{}", result);
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public boolean insert(SysOssConfig SysOssConfig) {
-		return save(SysOssConfig);
-	}
+    @Override
+    public boolean insert(SysOssConfig SysOssConfig) {
+        return save(SysOssConfig);
+    }
 
-	@Override
-	public boolean update(SysOssConfig SysOssConfig) {
-		return updateById(SysOssConfig);
-	}
+    @Override
+    public boolean update(SysOssConfig SysOssConfig) {
+        return updateById(SysOssConfig);
+    }
 
-	@Override
-	public boolean delete(String id) {
-		return removeById(id);
-	}
-
+    @Override
+    public boolean delete(String id) {
+        return removeById(id);
+    }
 }

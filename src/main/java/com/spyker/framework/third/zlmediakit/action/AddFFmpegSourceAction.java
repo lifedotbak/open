@@ -25,23 +25,26 @@ public class AddFFmpegSourceAction {
 
     private static final String method = "/index/api/addFFmpegSource";
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private RestTemplate restTemplate;
 
-    @Autowired
-    private ZLMediaKitProperties zLMediaKitProperties;
+    @Autowired private ZLMediaKitProperties zLMediaKitProperties;
 
     /**
      * 通过fork FFmpeg进程的方式拉流代理，支持任意协议
      *
      * @param srcUrl FFmpeg拉流地址,支持任意协议或格式(只要FFmpeg支持即可)
      * @param dstUrl FFmpeg rtmp推流地址，一般都是推给自己，例如rtmp://127.0.0.1/live/stream_form_ffmpeg
-     *               rtsp://192.168.200.73:8554/live/171
+     *     rtsp://192.168.200.73:8554/live/171
      * @return
      */
     public OpResult execute(String srcUrl, String dstUrl) {
 
-        String postUrl = "http://" + zLMediaKitProperties.getIp() + ":" + zLMediaKitProperties.getPort() + method;
+        String postUrl =
+                "http://"
+                        + zLMediaKitProperties.getIp()
+                        + ":"
+                        + zLMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -63,10 +66,8 @@ public class AddFFmpegSourceAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
-                                                                          HttpMethod.POST,
-                                                                          entity,
-                                                                          String.class);
+            ResponseEntity<String> exchangeResult =
+                    restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
             String responseBody = exchangeResult.getBody();
 
@@ -85,5 +86,4 @@ public class AddFFmpegSourceAction {
 
         return result;
     }
-
 }

@@ -20,14 +20,12 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 public class ModbusMasterTcpUtils {
 
-    /**
-     * 默认端口
-     */
-    public final static String DEFAULT_COMMUNICATION_MANAGER_PORT = "502";
-    /**
-     * 默认slave Id
-     */
-    public final static int DEFAULT_COMMUNICATION_MANAGER_SLAVE_ID = 200;
+    /** 默认端口 */
+    public static final String DEFAULT_COMMUNICATION_MANAGER_PORT = "502";
+
+    /** 默认slave Id */
+    public static final int DEFAULT_COMMUNICATION_MANAGER_SLAVE_ID = 200;
+
     static ModbusTcpMaster master;
 
     /**
@@ -38,9 +36,9 @@ public class ModbusMasterTcpUtils {
     public static void initModbusTcpMaster(String ip, int port) {
         if (master == null) {
             // 创建配置
-            ModbusTcpMasterConfig config = new ModbusTcpMasterConfig.Builder(ip).setPort(port).build();
+            ModbusTcpMasterConfig config =
+                    new ModbusTcpMasterConfig.Builder(ip).setPort(port).build();
             master = new ModbusTcpMaster(config);
-
         }
     }
 
@@ -55,9 +53,8 @@ public class ModbusMasterTcpUtils {
         //		Modbus.releaseSharedResources();
     }
 
-    public static float readFloatHoldingRegisters(int address, int quantity, int unitId) throws
-            InterruptedException,
-            ExecutionException {
+    public static float readFloatHoldingRegisters(int address, int quantity, int unitId)
+            throws InterruptedException, ExecutionException {
 
         Number number = readHoldingRegisters(address, quantity, unitId);
 
@@ -78,27 +75,25 @@ public class ModbusMasterTcpUtils {
         }
 
         return result;
-
     }
 
     /**
      * 读取HoldingRegister数据
      *
-     * @param address  寄存器地址
+     * @param address 寄存器地址
      * @param quantity 寄存器数量
-     * @param unitId   id
+     * @param unitId id
      * @return 读取结果
      * @throws InterruptedException 异常
-     * @throws ExecutionException   异常
+     * @throws ExecutionException 异常
      */
-    public static Number readHoldingRegisters(int address, int quantity, int unitId) throws
-            InterruptedException,
-            ExecutionException {
+    public static Number readHoldingRegisters(int address, int quantity, int unitId)
+            throws InterruptedException, ExecutionException {
         Number result = null;
-        CompletableFuture<ReadHoldingRegistersResponse> future = master.sendRequest(new ReadHoldingRegistersRequest(
-                address,
-                quantity), unitId);
-        ReadHoldingRegistersResponse readHoldingRegistersResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
+        CompletableFuture<ReadHoldingRegistersResponse> future =
+                master.sendRequest(new ReadHoldingRegistersRequest(address, quantity), unitId);
+        ReadHoldingRegistersResponse readHoldingRegistersResponse =
+                future.get(); // 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (readHoldingRegistersResponse != null) {
             ByteBuf buf = readHoldingRegistersResponse.getRegisters();
 
@@ -112,21 +107,20 @@ public class ModbusMasterTcpUtils {
     /**
      * 读取InputRegisters模拟量数据
      *
-     * @param address  寄存器开始地址
+     * @param address 寄存器开始地址
      * @param quantity 数量
-     * @param unitId   ID
+     * @param unitId ID
      * @return 读取值
      * @throws InterruptedException 异常
-     * @throws ExecutionException   异常
+     * @throws ExecutionException 异常
      */
-    public static Number readInputRegisters(int address, int quantity, int unitId) throws
-            InterruptedException,
-            ExecutionException {
+    public static Number readInputRegisters(int address, int quantity, int unitId)
+            throws InterruptedException, ExecutionException {
         Number result = null;
-        CompletableFuture<ReadInputRegistersResponse> future = master.sendRequest(new ReadInputRegistersRequest(address,
-                                                                                                                quantity),
-                                                                                  unitId);
-        ReadInputRegistersResponse readInputRegistersResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
+        CompletableFuture<ReadInputRegistersResponse> future =
+                master.sendRequest(new ReadInputRegistersRequest(address, quantity), unitId);
+        ReadInputRegistersResponse readInputRegistersResponse =
+                future.get(); // 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (readInputRegistersResponse != null) {
             ByteBuf buf = readInputRegistersResponse.getRegisters();
             result = buf.readFloat();
@@ -138,21 +132,20 @@ public class ModbusMasterTcpUtils {
     /**
      * 读取Coils开关量
      *
-     * @param address  寄存器开始地址
+     * @param address 寄存器开始地址
      * @param quantity 数量
-     * @param unitId   ID
+     * @param unitId ID
      * @return 读取值
      * @throws InterruptedException 异常
-     * @throws ExecutionException   异常
+     * @throws ExecutionException 异常
      */
-    public static Boolean readCoils(int address, int quantity, int unitId) throws
-            InterruptedException,
-            ExecutionException {
+    public static Boolean readCoils(int address, int quantity, int unitId)
+            throws InterruptedException, ExecutionException {
 
         Boolean result = null;
-        CompletableFuture<ReadCoilsResponse> future = master.sendRequest(new ReadCoilsRequest(address, quantity),
-                                                                         unitId);
-        ReadCoilsResponse readCoilsResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
+        CompletableFuture<ReadCoilsResponse> future =
+                master.sendRequest(new ReadCoilsRequest(address, quantity), unitId);
+        ReadCoilsResponse readCoilsResponse = future.get(); // 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (readCoilsResponse != null) {
             ByteBuf buf = readCoilsResponse.getCoilStatus();
             result = buf.readBoolean();
@@ -164,21 +157,20 @@ public class ModbusMasterTcpUtils {
     /**
      * 读取readDiscreteInputs开关量
      *
-     * @param address  寄存器开始地址
+     * @param address 寄存器开始地址
      * @param quantity 数量
-     * @param unitId   ID
+     * @param unitId ID
      * @return 读取值
      * @throws InterruptedException 异常
-     * @throws ExecutionException   异常
+     * @throws ExecutionException 异常
      */
-    public static Boolean readDiscreteInputs(int address, int quantity, int unitId) throws
-            InterruptedException,
-            ExecutionException {
+    public static Boolean readDiscreteInputs(int address, int quantity, int unitId)
+            throws InterruptedException, ExecutionException {
         Boolean result = null;
-        CompletableFuture<ReadDiscreteInputsResponse> future = master.sendRequest(new ReadDiscreteInputsRequest(address,
-                                                                                                                quantity),
-                                                                                  unitId);
-        ReadDiscreteInputsResponse discreteInputsResponse = future.get();// 工具类做的同步返回.实际使用推荐结合业务进行异步处理
+        CompletableFuture<ReadDiscreteInputsResponse> future =
+                master.sendRequest(new ReadDiscreteInputsRequest(address, quantity), unitId);
+        ReadDiscreteInputsResponse discreteInputsResponse =
+                future.get(); // 工具类做的同步返回.实际使用推荐结合业务进行异步处理
         if (discreteInputsResponse != null) {
             ByteBuf buf = discreteInputsResponse.getInputStatus();
             result = buf.readBoolean();
@@ -186,5 +178,4 @@ public class ModbusMasterTcpUtils {
         }
         return result;
     }
-
 }

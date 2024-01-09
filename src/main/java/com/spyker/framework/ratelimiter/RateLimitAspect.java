@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * 采用guava，令牌桶算法实现
- */
+/** 采用guava，令牌桶算法实现 */
 @Aspect
 @Component
 @Slf4j
@@ -31,17 +29,18 @@ public class RateLimitAspect {
     //    @Around("serviceLimit()")
     @Around("@annotation(Limiting)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
-        //获取拦截的方法名
+        // 获取拦截的方法名
         Signature sig = point.getSignature();
-        //获取拦截的方法名
+        // 获取拦截的方法名
         MethodSignature msig = (MethodSignature) sig;
-        //返回被织入增加处理目标对象
+        // 返回被织入增加处理目标对象
         Object target = point.getTarget();
-        //为了获取注解信息
-        Method currentMethod = target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
-        //获取注解信息
+        // 为了获取注解信息
+        Method currentMethod =
+                target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
+        // 获取注解信息
         Limiting annotation = currentMethod.getAnnotation(Limiting.class);
-        double limitNum = annotation.limitNum(); //获取注解每秒加入桶中的token
+        double limitNum = annotation.limitNum(); // 获取注解每秒加入桶中的token
         String functionName = msig.getName(); // 注解所在方法名区分不同的限流策略
 
         if (RATE_LIMITER.containsKey(functionName)) {

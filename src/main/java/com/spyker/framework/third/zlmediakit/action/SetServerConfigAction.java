@@ -21,8 +21,7 @@ public class SetServerConfigAction {
 
     private static final String method = "/index/api/setServerConfig";
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private RestTemplate restTemplate;
 
     @Value("${zlmediakit.ip}")
     private String ip;
@@ -45,7 +44,8 @@ public class SetServerConfigAction {
         Map<String, Object> body = new HashMap<>();
 
         body.put("secret", secret);
-        //		body.put("ffmpeg.cmd", "%s -re -i %s -c:a aac -strict -2 -ar 44100 -ab 48k -c:v libx264 -f flv %s");
+        //		body.put("ffmpeg.cmd", "%s -re -i %s -c:a aac -strict -2 -ar 44100 -ab 48k -c:v libx264
+        // -f flv %s");
         body.put("ffmpeg.cmd", "%s -re -i %s -vcodec h264 -f rtsp -rtsp_transport tcp %s");
 
         log.info("requestBody-->{}", body);
@@ -56,10 +56,8 @@ public class SetServerConfigAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
-                                                                          HttpMethod.POST,
-                                                                          entity,
-                                                                          String.class);
+            ResponseEntity<String> exchangeResult =
+                    restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
             String responseBody = exchangeResult.getBody();
 
@@ -78,5 +76,4 @@ public class SetServerConfigAction {
 
         return result;
     }
-
 }

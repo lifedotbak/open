@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysJobMapper;
 import com.spyker.commons.search.SysJobSearch;
 import com.spyker.commons.service.SysJobService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 定时任务调度表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -71,5 +71,4 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
 
         return RestResponse.success();
     }
-
 }

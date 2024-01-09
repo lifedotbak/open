@@ -26,8 +26,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 /**
  * 微信统一下单(个人到公司)
- * <p>
- * 商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再在APP里面调起支付。
+ *
+ * <p>商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再在APP里面调起支付。
  *
  * @author zhangzhaofeng
  */
@@ -40,8 +40,7 @@ public class JsapiPrePayOrderAction {
 
     private static final String http_method = "POST";
 
-    @Autowired
-    private PayConfig payConfig;
+    @Autowired private PayConfig payConfig;
 
     @SneakyThrows
     public JsapiPrePayOrderResult execue(final PrePayOrder prePayOrder) {
@@ -93,7 +92,6 @@ public class JsapiPrePayOrderAction {
             signCallback(jsapiPrePayOrderResult);
 
             return jsapiPrePayOrderResult;
-
         }
 
         return null;
@@ -122,10 +120,10 @@ public class JsapiPrePayOrderAction {
         prePayAuthorizationInfo.setTimestamp(timestamp);
 
         return prePayAuthorizationInfo;
-
     }
 
-    private JsapiPrePayOrderResult signCallback(final JsapiPrePayOrderResult jsapiPrePayOrderResult) {
+    private JsapiPrePayOrderResult signCallback(
+            final JsapiPrePayOrderResult jsapiPrePayOrderResult) {
 
         final CallBackAuth callBackAuth = new CallBackAuth();
 
@@ -139,6 +137,5 @@ public class JsapiPrePayOrderAction {
         jsapiPrePayOrderResult.setPaySign(signCallBackUtil.jsapi(callBackAuth));
 
         return jsapiPrePayOrderResult;
-
     }
 }

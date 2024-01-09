@@ -26,5 +26,4 @@ public class UploadVideoInfo {
     private String transcodeMode;
     private String coverURL;
     private Long fileSize;
-
 }

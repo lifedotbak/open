@@ -7,14 +7,9 @@ import lombok.Data;
 @Builder
 public class UploadResult {
 
-	/**
-	 * 文件路径
-	 */
-	private String url;
+    /** 文件路径 */
+    private String url;
 
-	/**
-	 * 文件名
-	 */
-	private String filename;
-
+    /** 文件名 */
+    private String filename;
 }

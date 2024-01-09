@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 电子邮箱脱敏 邮箱名+@+邮件服务地址 (“@”前小于等于5位的，隐藏前2位；大于5位的，保留前3位，其余用*代替。)
- */
+/** 电子邮箱脱敏 邮箱名+@+邮件服务地址 (“@”前小于等于5位的，隐藏前2位；大于5位的，保留前3位，其余用*代替。) */
 public class EmailWord {
 
     private static final String emailSplit = "@";
@@ -36,6 +34,5 @@ public class EmailWord {
         } else {
             return word;
         }
-
     }
 }

@@ -9,27 +9,27 @@ import groovy.util.logging.Slf4j;
 @Slf4j
 public class LogbackFilter extends Filter<ILoggingEvent> {
 
-	Level level;
+    Level level;
 
-	@Override
-	public FilterReply decide(ILoggingEvent event) {
+    @Override
+    public FilterReply decide(ILoggingEvent event) {
 
-		if (!isStarted()) {
-			return FilterReply.NEUTRAL;
-		}
+        if (!isStarted()) {
+            return FilterReply.NEUTRAL;
+        }
 
-		String loggerName = event.getLoggerName();
+        String loggerName = event.getLoggerName();
 
-		if (!loggerName.contains("job.core")) {
-			if (event.getLevel().isGreaterOrEqual(level)) {
-				return FilterReply.NEUTRAL;
-			}
-		}
+        if (!loggerName.contains("job.core")) {
+            if (event.getLevel().isGreaterOrEqual(level)) {
+                return FilterReply.NEUTRAL;
+            }
+        }
 
-		return FilterReply.DENY;
-	}
+        return FilterReply.DENY;
+    }
 
-	public void setLevel(String level) {
-		this.level = Level.toLevel(level);
-	}
+    public void setLevel(String level) {
+        this.level = Level.toLevel(level);
+    }
 }

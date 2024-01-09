@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 岗位信息表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysPostService extends IService<SysPost> {
     RestResponse<?> update(SysPost SysPost);
 
     RestResponse<?> delete(String id);
-
 }

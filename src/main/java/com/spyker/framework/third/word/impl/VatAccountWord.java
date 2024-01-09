@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 增值税账户脱敏（8-28位数字，为银行对公账户，开户行编号+卡种编号+流水号，保留最后4位，其余用*代替）
- */
+/** 增值税账户脱敏（8-28位数字，为银行对公账户，开户行编号+卡种编号+流水号，保留最后4位，其余用*代替） */
 public class VatAccountWord {
 
     public static String getValue(String word) {

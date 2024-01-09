@@ -14,5 +14,4 @@ public class PlatformConfigTest extends BaseTest {
         System.out.println(PlatformConfig.getCaptchaEnabled());
         System.out.println(PlatformConfig.getCaptchaType());
     }
-
 }

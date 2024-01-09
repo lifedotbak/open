@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 军人证号脱敏(汉字和数字组合字符串，军种3个汉字+番号4位数字+流水号4位数字，保留最后3位，其余用*代替)
- */
+/** 军人证号脱敏(汉字和数字组合字符串，军种3个汉字+番号4位数字+流水号4位数字，保留最后3位，其余用*代替) */
 public class SoldierCardWord {
     private static final String soldierCardRegx = "(\\d{5})(\\d{3})";
     private static final String soldierCardReplace = "*****$2";

@@ -10,19 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 通知公告表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @Slf4j
 public class SysNoticeServiceTest extends BaseTest {
 
-    @Autowired
-    private SysNoticeService service;
+    @Autowired private SysNoticeService service;
 
     @Test
     public void get() {
@@ -110,5 +106,4 @@ public class SysNoticeServiceTest extends BaseTest {
 
         service.queryPage(page, search);
     }
-
 }

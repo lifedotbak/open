@@ -12,90 +12,85 @@ import com.spyker.commons.search.SysConfigSearch;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
  * 参数配置表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @Slf4j
 public class SysConfigServiceTest extends BaseTest {
 
-	@Autowired
-	private SysConfigService service;
+    @Autowired private SysConfigService service;
 
-	@Test
-	public void get() {
+    @Test
+    public void get() {
 
-		SysConfig result = service.getById("1");
+        SysConfig result = service.getById("1");
 
-		log.info("result---->{}", result);
-	}
+        log.info("result---->{}", result);
+    }
 
-	@Test
-	public void delete() {
+    @Test
+    public void delete() {
 
-		service.delete("1");
-	}
+        service.delete("1");
+    }
 
-	@Test
-	public void add() {
-		SysConfig add = new SysConfig();
+    @Test
+    public void add() {
+        SysConfig add = new SysConfig();
 
-		add.setConfigName("configName");
+        add.setConfigName("configName");
 
-		service.insert(add);
-	}
+        service.insert(add);
+    }
 
-	@Test
-	public void update() {
-		SysConfig update = new SysConfig();
+    @Test
+    public void update() {
+        SysConfig update = new SysConfig();
 
-		update.setConfigId("configId");
+        update.setConfigId("configId");
 
-		update.setConfigName("configName");
+        update.setConfigName("configName");
 
-		update.setConfigKey("configKey");
+        update.setConfigKey("configKey");
 
-		update.setConfigValue("configValue");
+        update.setConfigValue("configValue");
 
-		update.setConfigType("configType");
+        update.setConfigType("configType");
 
-		update.setCreateBy("createBy");
+        update.setCreateBy("createBy");
 
-		update.setUpdateBy("updateBy");
+        update.setUpdateBy("updateBy");
 
-		update.setRemark("remark");
+        update.setRemark("remark");
 
-		service.update(update);
-	}
+        service.update(update);
+    }
 
-	@Test
-	public void query() {
-		SysConfigSearch search = new SysConfigSearch();
+    @Test
+    public void query() {
+        SysConfigSearch search = new SysConfigSearch();
 
-		search.setConfigName("configName");
-		search.setConfigKey("configKey");
-		search.setConfigType("configType");
+        search.setConfigName("configName");
+        search.setConfigKey("configKey");
+        search.setConfigType("configType");
 
-		service.query(search);
-	}
+        service.query(search);
+    }
 
-	@Test
-	public void queryPage() {
-		IPage<SysConfig> page = new Page<>(1, 10);
+    @Test
+    public void queryPage() {
+        IPage<SysConfig> page = new Page<>(1, 10);
 
-		SysConfigSearch search = new SysConfigSearch();
+        SysConfigSearch search = new SysConfigSearch();
 
-		search.setConfigName("configName");
+        search.setConfigName("configName");
 
-		search.setConfigKey("configKey");
+        search.setConfigKey("configKey");
 
-		search.setConfigType("configType");
+        search.setConfigType("configType");
 
-		service.queryPage(page, search);
-	}
-
+        service.queryPage(page, search);
+    }
 }

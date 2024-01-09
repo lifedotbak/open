@@ -27,8 +27,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class ParseRefundNotifyAction {
 
-    @Autowired
-    private PayConfig payConfig;
+    @Autowired private PayConfig payConfig;
 
     @SneakyThrows
     public RefundsCiphertextParse parseResource(HttpServletRequest request) {
@@ -47,21 +46,21 @@ public class ParseRefundNotifyAction {
 
             // 解密后资源数据
             AesUtil aesUtil = new AesUtil(apiV3Key.getBytes(StandardCharsets.UTF_8));
-            String notifyResourceStr = aesUtil.decryptToString(resource.getAssociated_data()
-                                                                       .getBytes(StandardCharsets.UTF_8),
-                                                               resource.getNonce().getBytes(StandardCharsets.UTF_8),
-                                                               resource.getCiphertext());
+            String notifyResourceStr =
+                    aesUtil.decryptToString(
+                            resource.getAssociated_data().getBytes(StandardCharsets.UTF_8),
+                            resource.getNonce().getBytes(StandardCharsets.UTF_8),
+                            resource.getCiphertext());
 
-            RefundsCiphertextParse result = gson.fromJson(notifyResourceStr, RefundsCiphertextParse.class);
+            RefundsCiphertextParse result =
+                    gson.fromJson(notifyResourceStr, RefundsCiphertextParse.class);
 
             log.info("RefundsCiphertextParse --> {}", result);
 
             return result;
-
         }
 
         return null;
-
     }
 
     @SneakyThrows
@@ -76,9 +75,7 @@ public class ParseRefundNotifyAction {
         //		log.info("Wechatpay_Signature=" + request.getHeader(Wechatpay_Signature));
         //		log.info("decodeBase64 Wechatpay_Signature=" + signature);
 
-        /**
-         * 应答报文主体,获取微信调用我们notify_url的返回信息
-         */
+        /** 应答报文主体,获取微信调用我们notify_url的返回信息 */
         InputStream inStream = request.getInputStream();
         ByteArrayOutputStream outSteam = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
@@ -92,7 +89,5 @@ public class ParseRefundNotifyAction {
         String body = outSteam.toString();
 
         return body;
-
     }
-
 }

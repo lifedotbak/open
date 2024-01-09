@@ -29,7 +29,6 @@ public class HCProperties {
         if (OsSelect.isLinux()) {
 
             return linuxLib;
-
         }
 
         return winLib;
@@ -40,7 +39,6 @@ public class HCProperties {
         if (OsSelect.isLinux()) {
 
             return linuxPic;
-
         }
 
         return winPic;
@@ -51,10 +49,8 @@ public class HCProperties {
         if (OsSelect.isLinux()) {
 
             return linuxVideo;
-
         }
 
         return winVideo;
     }
-
 }

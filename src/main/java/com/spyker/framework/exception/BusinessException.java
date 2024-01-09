@@ -7,59 +7,53 @@ package com.spyker.framework.exception;
  */
 public final class BusinessException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 错误码
-	 */
-	private Integer code;
+    /** 错误码 */
+    private Integer code;
 
-	/**
-	 * 错误提示
-	 */
-	private String message;
+    /** 错误提示 */
+    private String message;
 
-	/**
-	 * 错误明细，内部调试错误
-	 * <p>
-	 */
-	private String detailMessage;
+    /**
+     * 错误明细，内部调试错误
+     *
+     * <p>
+     */
+    private String detailMessage;
 
-	/**
-	 * 空构造方法，避免反序列化问题
-	 */
-	public BusinessException() {
-	}
+    /** 空构造方法，避免反序列化问题 */
+    public BusinessException() {}
 
-	public BusinessException(String message) {
-		this.message = message;
-	}
+    public BusinessException(String message) {
+        this.message = message;
+    }
 
-	public BusinessException(String message, Integer code) {
-		this.message = message;
-		this.code = code;
-	}
+    public BusinessException(String message, Integer code) {
+        this.message = message;
+        this.code = code;
+    }
 
-	public String getDetailMessage() {
-		return detailMessage;
-	}
+    public String getDetailMessage() {
+        return detailMessage;
+    }
 
-	public BusinessException setDetailMessage(String detailMessage) {
-		this.detailMessage = detailMessage;
-		return this;
-	}
+    public BusinessException setDetailMessage(String detailMessage) {
+        this.detailMessage = detailMessage;
+        return this;
+    }
 
-	@Override
-	public String getMessage() {
-		return message;
-	}
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
-	public BusinessException setMessage(String message) {
-		this.message = message;
-		return this;
-	}
+    public BusinessException setMessage(String message) {
+        this.message = message;
+        return this;
+    }
 
-	public Integer getCode() {
-		return code;
-	}
+    public Integer getCode() {
+        return code;
+    }
 }

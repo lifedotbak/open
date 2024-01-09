@@ -16,5 +16,4 @@ public class ZLMediaKitProperties {
     private int port;
 
     private String secret;
-
 }

@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created with IntelliJ IDEA. User: Administrator Date: 18-6-4 Time: 上午9:47 To
- * change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: Administrator Date: 18-6-4 Time: 上午9:47 To change this template
+ * use File | Settings | File Templates.
  */
 public class SensitiveWordUtils {
 
@@ -25,8 +25,11 @@ public class SensitiveWordUtils {
 
     // 判断是不是电子邮箱
     public static boolean isEmail(String str) {
-        Pattern pattern = Pattern.compile("^[A-Z0-9a-zd]+([-_.][A-Za-zd]+)*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)" + "+[a"
-                                                  + "-zA-Z]{1,5}$");
+        Pattern pattern =
+                Pattern.compile(
+                        "^[A-Z0-9a-zd]+([-_.][A-Za-zd]+)*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)"
+                                + "+[a"
+                                + "-zA-Z]{1,5}$");
         Matcher isNum = pattern.matcher(str);
         return isNum.matches();
     }
@@ -64,8 +67,9 @@ public class SensitiveWordUtils {
 
     // 车牌号校验
     public static boolean carId(String str) {
-        return Pattern.matches("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$",
-                               str);
+        return Pattern.matches(
+                "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$",
+                str);
     }
 
     // 车架号校验
@@ -92,5 +96,4 @@ public class SensitiveWordUtils {
     public static boolean vatAccountId(String str) {
         return Pattern.matches("[0-9]{8,28}$", str);
     }
-
 }

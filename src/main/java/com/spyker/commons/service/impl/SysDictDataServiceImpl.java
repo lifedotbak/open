@@ -7,17 +7,17 @@ import com.spyker.commons.mapper.SysDictDataMapper;
 import com.spyker.commons.search.SysDictDataSearch;
 import com.spyker.commons.service.SysDictDataService;
 import com.spyker.framework.response.RestResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * <p>
  * 字典数据表 服务实现类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -26,7 +26,8 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictData> implements SysDictDataService {
+public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictData>
+        implements SysDictDataService {
 
     private final SysDictDataMapper sysDictDataMapper;
 
@@ -71,5 +72,4 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
 
         return RestResponse.success();
     }
-
 }

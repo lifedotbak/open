@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 用户信息表 Mapper 接口
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -16,12 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class SysUserMapperTest extends BaseTest {
 
-    @Autowired
-    private SysUserMapper sysUserMapper;
+    @Autowired private SysUserMapper sysUserMapper;
 
     @Test
     public void queryRolesById() {
         sysUserMapper.queryRolesById("1");
     }
-
 }

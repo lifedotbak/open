@@ -12,24 +12,16 @@ import java.util.List;
 @Data
 public class Refunds {
 
-    /**
-     * 微信支付订单号 string[1, 32] (微信支付订单号,商户订单号二选一) 原支付交易对应的微信订单号
-     */
+    /** 微信支付订单号 string[1, 32] (微信支付订单号,商户订单号二选一) 原支付交易对应的微信订单号 */
     private String transaction_id;
 
-    /**
-     * 商户订单号 string[6, 32] (微信支付订单号,商户订单号二选一) 原支付交易对应的商户订单号
-     */
+    /** 商户订单号 string[6, 32] (微信支付订单号,商户订单号二选一) 原支付交易对应的商户订单号 */
     private String out_trade_no;
 
-    /**
-     * 商户退款单号 string[1, 64] 是 商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔。
-     */
+    /** 商户退款单号 string[1, 64] 是 商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔。 */
     private String out_refund_no;
 
-    /**
-     * 退款原因 否 若商户传入，会在下发给用户的退款消息中体现退款原因
-     */
+    /** 退款原因 否 若商户传入，会在下发给用户的退款消息中体现退款原因 */
     private String reason;
 
     /**
@@ -38,18 +30,12 @@ public class Refunds {
      */
     private String notify_url;
 
-    /**
-     * 退款资金来源 否 若传递此参数则使用对应的资金账户退款，否则默认使用未结算资金退款（仅对老资金流商户适用） 枚举值： AVAILABLE：可用余额账户
-     */
+    /** 退款资金来源 否 若传递此参数则使用对应的资金账户退款，否则默认使用未结算资金退款（仅对老资金流商户适用） 枚举值： AVAILABLE：可用余额账户 */
     private String funds_account;
 
-    /**
-     * 订单金额信息 是 body订单金额信息
-     */
+    /** 订单金额信息 是 body订单金额信息 */
     private RefundsAmount amount;
 
-    /**
-     * array 否 body指定商品退款需要传此参数，其他场景无需传递
-     */
+    /** array 否 body指定商品退款需要传此参数，其他场景无需传递 */
     private List<RefundsGoodsDetail> goods_detail;
 }

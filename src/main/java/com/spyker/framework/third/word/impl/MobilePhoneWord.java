@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 手机号脱敏(保留前3位和最后3位，其余用*代替。)
- */
+/** 手机号脱敏(保留前3位和最后3位，其余用*代替。) */
 public class MobilePhoneWord {
 
     private static final int phoneLength = 11;

@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 客户编号脱敏(保留前3位和最后3位，其余用*代替。) 长度为10
- */
+/** 客户编号脱敏(保留前3位和最后3位，其余用*代替。) 长度为10 */
 public class ConsNoWord {
 
     private static final int consNoLength = 10;
@@ -23,5 +21,4 @@ public class ConsNoWord {
             return word;
         }
     }
-
 }

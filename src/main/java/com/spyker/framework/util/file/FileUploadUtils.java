@@ -22,19 +22,13 @@ import java.util.Objects;
  * @author spyker
  */
 public class FileUploadUtils {
-    /**
-     * 默认大小 50M
-     */
+    /** 默认大小 50M */
     public static final long DEFAULT_MAX_SIZE = 50 * 1024 * 1024;
 
-    /**
-     * 默认的文件名最大长度 100
-     */
+    /** 默认的文件名最大长度 100 */
     public static final int DEFAULT_FILE_NAME_LENGTH = 100;
 
-    /**
-     * 默认上传的地址
-     */
+    /** 默认上传的地址 */
     private static String defaultBaseDir = "";
 
     /**
@@ -55,18 +49,16 @@ public class FileUploadUtils {
     /**
      * 文件上传
      *
-     * @param baseDir          相对应用的基目录
-     * @param file             上传的文件
+     * @param baseDir 相对应用的基目录
+     * @param file 上传的文件
      * @param allowedExtension 上传文件类型
      * @return 返回上传成功的文件名
      * @throws FileSizeLimitExceededException 如果超出最大大小
-     * @throws IOException                    比如读写文件出错时
-     * @throws InvalidExtensionException      文件校验异常
+     * @throws IOException 比如读写文件出错时
+     * @throws InvalidExtensionException 文件校验异常
      */
-    public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension) throws
-            FileSizeLimitExceededException,
-            IOException,
-            InvalidExtensionException {
+    public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
+            throws FileSizeLimitExceededException, IOException, InvalidExtensionException {
         int fileNamelength = Objects.requireNonNull(file.getOriginalFilename()).length();
 
         if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
@@ -98,50 +90,43 @@ public class FileUploadUtils {
      * @throws FileSizeLimitExceededException 如果超出最大大小
      * @throws InvalidExtensionException
      */
-    public static final void assertAllowed(MultipartFile file, String[] allowedExtension) throws
-            FileSizeLimitExceededException,
-            InvalidExtensionException {
+    public static final void assertAllowed(MultipartFile file, String[] allowedExtension)
+            throws FileSizeLimitExceededException, InvalidExtensionException {
         long size = file.getSize();
         if (size > DEFAULT_MAX_SIZE) {
-            throw new FileSizeLimitExceededException("FileSizeLimitExceededException",
-                                                     size,
-                                                     DEFAULT_MAX_SIZE / 1024 / 1024);
+            throw new FileSizeLimitExceededException(
+                    "FileSizeLimitExceededException", size, DEFAULT_MAX_SIZE / 1024 / 1024);
         }
 
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
             if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
-                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension,
-                                                                                   extension,
-                                                                                   fileName);
+                throw new InvalidExtensionException.InvalidImageExtensionException(
+                        allowedExtension, extension, fileName);
             } else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION) {
-                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension,
-                                                                                   extension,
-                                                                                   fileName);
+                throw new InvalidExtensionException.InvalidFlashExtensionException(
+                        allowedExtension, extension, fileName);
             } else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION) {
-                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension,
-                                                                                   extension,
-                                                                                   fileName);
+                throw new InvalidExtensionException.InvalidMediaExtensionException(
+                        allowedExtension, extension, fileName);
             } else if (allowedExtension == MimeTypeUtils.VIDEO_EXTENSION) {
-                throw new InvalidExtensionException.InvalidVideoExtensionException(allowedExtension,
-                                                                                   extension,
-                                                                                   fileName);
+                throw new InvalidExtensionException.InvalidVideoExtensionException(
+                        allowedExtension, extension, fileName);
             } else {
                 throw new InvalidExtensionException(allowedExtension, extension, fileName);
             }
         }
     }
 
-    /**
-     * 编码文件名
-     */
+    /** 编码文件名 */
     public static final String extractFilename(MultipartFile file) {
-        return ExStringUtils.format("{}/{}_{}.{}",
-                                    ExDateUtils.datePath(),
-                                    FilenameUtils.getBaseName(file.getOriginalFilename()),
-                                    SeqUtils.getId(SeqUtils.uploadSeqType),
-                                    getExtension(file));
+        return ExStringUtils.format(
+                "{}/{}_{}.{}",
+                ExDateUtils.datePath(),
+                FilenameUtils.getBaseName(file.getOriginalFilename()),
+                SeqUtils.getId(SeqUtils.uploadSeqType),
+                getExtension(file));
     }
 
     public static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException {
@@ -155,7 +140,8 @@ public class FileUploadUtils {
         return desc;
     }
 
-    public static final String getPathFileName(String uploadDir, String fileName) throws IOException {
+    public static final String getPathFileName(String uploadDir, String fileName)
+            throws IOException {
         int dirLastIndex = PlatformConfig.getProfile().length() + 1;
         String currentDir = ExStringUtils.substring(uploadDir, dirLastIndex);
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
@@ -195,7 +181,7 @@ public class FileUploadUtils {
      * 根据文件路径上传
      *
      * @param baseDir 相对应用的基目录
-     * @param file    上传的文件
+     * @param file 上传的文件
      * @return 文件名称
      * @throws IOException
      */

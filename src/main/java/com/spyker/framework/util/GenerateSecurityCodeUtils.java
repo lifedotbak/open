@@ -6,7 +6,8 @@ public final class GenerateSecurityCodeUtils {
 
     private static final int DEFAULT_LENGTH = 6;
 
-    private static final String MIX_BASE_STRING = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String MIX_BASE_STRING =
+            "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String BASE_STRING = "0123456789";
 
     public static String create() {
@@ -28,7 +29,6 @@ public final class GenerateSecurityCodeUtils {
     public static String createMix() {
 
         return createMix(DEFAULT_LENGTH);
-
     }
 
     public static String createMix(int length) {
@@ -41,5 +41,4 @@ public final class GenerateSecurityCodeUtils {
         }
         return sb.toString();
     }
-
 }

@@ -25,39 +25,37 @@ import java.util.Map;
  */
 public class SpringExpressionUtils {
 
-    /**
-     * spel表达式解析器
-     */
+    /** spel表达式解析器 */
     private static final ExpressionParser EXPRESSION_PARSER = new SpelExpressionParser();
 
-    /**
-     * 参数名发现器
-     */
-    private static final ParameterNameDiscoverer PARAMETER_NAME_DISCOVERER = new DefaultParameterNameDiscoverer();
+    /** 参数名发现器 */
+    private static final ParameterNameDiscoverer PARAMETER_NAME_DISCOVERER =
+            new DefaultParameterNameDiscoverer();
 
-    private SpringExpressionUtils() {
-    }
+    private SpringExpressionUtils() {}
 
     /**
      * 从切面中，单个解析 EL 表达式的结果
      *
-     * @param joinPoint        切面点
+     * @param joinPoint 切面点
      * @param expressionString EL 表达式数组
      * @return 执行界面
      */
     public static Object parseExpression(ProceedingJoinPoint joinPoint, String expressionString) {
-        Map<String, Object> result = parseExpressions(joinPoint, Collections.singletonList(expressionString));
+        Map<String, Object> result =
+                parseExpressions(joinPoint, Collections.singletonList(expressionString));
         return result.get(expressionString);
     }
 
     /**
      * 从切面中，批量解析 EL 表达式的结果
      *
-     * @param joinPoint         切面点
+     * @param joinPoint 切面点
      * @param expressionStrings EL 表达式数组
      * @return 结果，key 为表达式，value 为对应值
      */
-    public static Map<String, Object> parseExpressions(ProceedingJoinPoint joinPoint, List<String> expressionStrings) {
+    public static Map<String, Object> parseExpressions(
+            ProceedingJoinPoint joinPoint, List<String> expressionStrings) {
         // 如果为空，则不进行解析
         if (CollUtil.isEmpty(expressionStrings)) {
             return MapUtil.newHashMap();
@@ -81,26 +79,26 @@ public class SpringExpressionUtils {
 
         // 第二步，逐个参数解析
         Map<String, Object> result = MapUtil.newHashMap(expressionStrings.size(), true);
-        expressionStrings.forEach(key -> {
-            Object value = EXPRESSION_PARSER.parseExpression(key).getValue(context);
-            result.put(key, value);
-        });
+        expressionStrings.forEach(
+                key -> {
+                    Object value = EXPRESSION_PARSER.parseExpression(key).getValue(context);
+                    result.put(key, value);
+                });
         return result;
     }
 
     /**
      * JoinPoint 切面 批量解析 EL 表达式，转换 jspl参数
      *
-     * @param joinPoint         切面点
-     * @param info              返回值
+     * @param joinPoint 切面点
+     * @param info 返回值
      * @param expressionStrings EL 表达式数组
      * @return Map<String, Object> 结果
      * @author 陈賝
      * @since 2023/6/18 11:20
      */
-    public static Map<String, Object> parseExpression(JoinPoint joinPoint,
-            Object info,
-            List<String> expressionStrings) {
+    public static Map<String, Object> parseExpression(
+            JoinPoint joinPoint, Object info, List<String> expressionStrings) {
         // 如果为空，则不进行解析
         if (CollUtil.isEmpty(expressionStrings)) {
             return MapUtil.newHashMap();
@@ -115,7 +113,7 @@ public class SpringExpressionUtils {
         // Spring 的表达式上下文对象
         EvaluationContext context = new StandardEvaluationContext();
         if (ArrayUtil.isNotEmpty(parameterNames)) {
-            //获取方法参数值
+            // 获取方法参数值
             Object[] args = joinPoint.getArgs();
             for (int i = 0; i < args.length; i++) {
                 // 替换 SP EL 里的变量值为实际值， 比如 #user --> user对象
@@ -125,11 +123,11 @@ public class SpringExpressionUtils {
         }
         // 第二步，逐个参数解析
         Map<String, Object> result = MapUtil.newHashMap(expressionStrings.size(), true);
-        expressionStrings.forEach(key -> {
-            Object value = EXPRESSION_PARSER.parseExpression(key).getValue(context);
-            result.put(key, value);
-        });
+        expressionStrings.forEach(
+                key -> {
+                    Object value = EXPRESSION_PARSER.parseExpression(key).getValue(context);
+                    result.put(key, value);
+                });
         return result;
     }
-
 }

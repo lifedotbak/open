@@ -5,11 +5,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * @ClassName ResultCodeEnum
- * @Description 公共模块响应码枚举
- * @Author HZW
- * @Date 2023/2/21 16:10
- * @Version 1.0
+ * @ClassName ResultCodeEnum @Description 公共模块响应码枚举 @Author HZW @Date 2023/2/21 16:10 @Version 1.0
  */
 public enum ResponseCodeEnum implements IResponseCode {
 
@@ -35,17 +31,13 @@ public enum ResponseCodeEnum implements IResponseCode {
     ERROR(500, "系统异常，请稍后重试"),
     ;
 
-    /**
-     * 响应状态码
-     */
+    /** 响应状态码 */
     private Integer code;
-    /**
-     * 响应信息
-     */
+
+    /** 响应信息 */
     private String message;
-    /**
-     * 响应信息补充
-     */
+
+    /** 响应信息补充 */
     private Object[] msgParams;
 
     ResponseCodeEnum(Integer code, String message) {
@@ -54,7 +46,7 @@ public enum ResponseCodeEnum implements IResponseCode {
     }
 
     @Override
-	public int getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -64,7 +56,7 @@ public enum ResponseCodeEnum implements IResponseCode {
     }
 
     @Override
-	public String getMessage() {
+    public String getMessage() {
         if (ArrayUtil.isNotEmpty(msgParams)) {
             return CharSequenceUtil.format(message, msgParams);
         }

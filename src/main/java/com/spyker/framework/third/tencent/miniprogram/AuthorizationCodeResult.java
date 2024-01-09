@@ -12,5 +12,4 @@ public class AuthorizationCodeResult {
     private String errcode;
     private String errmsg;
     private int expires_in;
-
 }

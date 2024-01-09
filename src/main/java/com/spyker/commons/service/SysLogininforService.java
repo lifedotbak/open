@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 系统访问记录 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysLogininforService extends IService<SysLogininfor> {
     RestResponse<?> update(SysLogininfor SysLogininfor);
 
     RestResponse<?> delete(String id);
-
 }

@@ -39,8 +39,8 @@ public class ExJsonUtils {
 
     /**
      * 初始化 objectMapper 属性
-     * <p>
-     * 通过这样的方式，使用 Spring 创建的 ObjectMapper Bean
+     *
+     * <p>通过这样的方式，使用 Spring 创建的 ObjectMapper Bean
      *
      * @param objectMapper ObjectMapper 对象
      */
@@ -88,11 +88,10 @@ public class ExJsonUtils {
     }
 
     /**
-     * 将字符串解析成指定类型的对象
-     * 使用 {@link #parseObject(String, Class)} 时，在@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS) 的场景下，
-     * 如果 text 没有 class 属性，则会报错。此时，使用这个方法，可以解决。
+     * 将字符串解析成指定类型的对象 使用 {@link #parseObject(String, Class)} 时，在@JsonTypeInfo(use =
+     * JsonTypeInfo.Id.CLASS) 的场景下， 如果 text 没有 class 属性，则会报错。此时，使用这个方法，可以解决。
      *
-     * @param text  字符串
+     * @param text 字符串
      * @param clazz 类型
      * @return 对象
      */
@@ -129,8 +128,8 @@ public class ExJsonUtils {
             return new ArrayList<>();
         }
         try {
-            return objectMapper.readValue(text,
-                                          objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+            return objectMapper.readValue(
+                    text, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (IOException e) {
             log.error("json parse err,json:{}", text, e);
             throw new RuntimeException(e);
@@ -158,5 +157,4 @@ public class ExJsonUtils {
     public static boolean isJson(String text) {
         return JSONUtil.isTypeJSON(text);
     }
-
 }

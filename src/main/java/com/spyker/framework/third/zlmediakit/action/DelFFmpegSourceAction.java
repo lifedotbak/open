@@ -25,11 +25,9 @@ public class DelFFmpegSourceAction {
 
     private static final String method = "/index/api/delFFmpegSource";
 
-    @Autowired
-    private ZLMediaKitProperties zlMediaKitProperties;
+    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private RestTemplate restTemplate;
 
     /**
      * 关闭ffmpeg拉流代理
@@ -39,7 +37,12 @@ public class DelFFmpegSourceAction {
      */
     public OpResult execute(String key) {
 
-        String postUrl = "http://" + zlMediaKitProperties.getIp() + ":" + zlMediaKitProperties.getPort() + method;
+        String postUrl =
+                "http://"
+                        + zlMediaKitProperties.getIp()
+                        + ":"
+                        + zlMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -59,10 +62,8 @@ public class DelFFmpegSourceAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
-                                                                          HttpMethod.POST,
-                                                                          entity,
-                                                                          String.class);
+            ResponseEntity<String> exchangeResult =
+                    restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
             String responseBody = exchangeResult.getBody();
 
@@ -81,5 +82,4 @@ public class DelFFmpegSourceAction {
 
         return result;
     }
-
 }

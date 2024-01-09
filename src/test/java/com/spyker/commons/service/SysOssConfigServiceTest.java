@@ -17,9 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>
  * 对象存储配置表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-12-21
@@ -27,241 +25,174 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 public class SysOssConfigServiceTest extends BaseTest {
 
-    @Autowired
-    private SysOssConfigService service;
+    @Autowired private SysOssConfigService service;
 
     @Test
-    public void get(){
+    public void get() {
 
         SysOssConfig result = service.getById("1");
         log.info("result------>{}", result);
     }
 
     @Test
-    public void delete(){
+    public void delete() {
 
         service.delete("1");
     }
 
     @Test
-    public void add(){
+    public void add() {
         SysOssConfig add = new SysOssConfig();
 
+        add.setConfigKey("configKey");
 
+        add.setAccessKey("accessKey");
 
-                    add.setConfigKey("configKey");
+        add.setSecretKey("secretKey");
 
+        add.setBucketName("bucketName");
 
+        add.setPrefix("prefix");
 
-                    add.setAccessKey("accessKey");
+        add.setEndpoint("endpoint");
 
+        add.setDomain("domain");
 
+        add.setIsHttps("isHttps");
 
-                    add.setSecretKey("secretKey");
+        add.setRegion("region");
 
+        add.setAccessPolicy("accessPolicy");
 
+        add.setStatus("status");
 
-                    add.setBucketName("bucketName");
+        add.setExt1("ext1");
 
+        add.setCreateBy("createBy");
 
+        add.setUpdateBy("updateBy");
 
-                    add.setPrefix("prefix");
+        add.setRemark("remark");
 
-
-
-                    add.setEndpoint("endpoint");
-
-
-
-                    add.setDomain("domain");
-
-
-
-                    add.setIsHttps("isHttps");
-
-
-
-                    add.setRegion("region");
-
-
-
-                    add.setAccessPolicy("accessPolicy");
-
-
-
-                    add.setStatus("status");
-
-
-
-                    add.setExt1("ext1");
-
-
-
-                    add.setCreateBy("createBy");
-
-
-
-                    add.setUpdateBy("updateBy");
-
-
-
-                    add.setRemark("remark");
-
-        
         log.info("add------>{}", add);
 
         service.insert(add);
     }
 
     @Test
-    public void update(){
+    public void update() {
         SysOssConfig update = new SysOssConfig();
 
+        update.setOssConfigId("ossConfigId");
 
-                    update.setOssConfigId("ossConfigId");
+        update.setConfigKey("configKey");
 
-                    update.setConfigKey("configKey");
+        update.setAccessKey("accessKey");
 
-                    update.setAccessKey("accessKey");
+        update.setSecretKey("secretKey");
 
-                    update.setSecretKey("secretKey");
+        update.setBucketName("bucketName");
 
-                    update.setBucketName("bucketName");
+        update.setPrefix("prefix");
 
-                    update.setPrefix("prefix");
+        update.setEndpoint("endpoint");
 
-                    update.setEndpoint("endpoint");
+        update.setDomain("domain");
 
-                    update.setDomain("domain");
+        update.setIsHttps("isHttps");
 
-                    update.setIsHttps("isHttps");
+        update.setRegion("region");
 
-                    update.setRegion("region");
+        update.setAccessPolicy("accessPolicy");
 
-                    update.setAccessPolicy("accessPolicy");
+        update.setStatus("status");
 
-                    update.setStatus("status");
+        update.setExt1("ext1");
 
-                    update.setExt1("ext1");
+        update.setCreateBy("createBy");
 
-                    update.setCreateBy("createBy");
+        update.setUpdateBy("updateBy");
 
-                    update.setUpdateBy("updateBy");
+        update.setRemark("remark");
 
-                    update.setRemark("remark");
-        
         log.info("update------>{}", update);
-
 
         service.update(update);
     }
 
     @Test
-    public void query(){
+    public void query() {
         SysOssConfigSearch search = new SysOssConfigSearch();
 
+        search.setConfigKey("configKey");
 
-                    search.setConfigKey("configKey");
+        search.setAccessKey("accessKey");
 
-                    search.setAccessKey("accessKey");
+        search.setSecretKey("secretKey");
 
-                    search.setSecretKey("secretKey");
+        search.setBucketName("bucketName");
 
-                    search.setBucketName("bucketName");
+        search.setPrefix("prefix");
 
-                    search.setPrefix("prefix");
+        search.setEndpoint("endpoint");
 
-                    search.setEndpoint("endpoint");
+        search.setDomain("domain");
 
-                    search.setDomain("domain");
+        search.setIsHttps("isHttps");
 
-                    search.setIsHttps("isHttps");
+        search.setRegion("region");
 
-                    search.setRegion("region");
+        search.setAccessPolicy("accessPolicy");
 
-                    search.setAccessPolicy("accessPolicy");
+        search.setStatus("status");
 
-                    search.setStatus("status");
+        search.setExt1("ext1");
 
-                    search.setExt1("ext1");
+        search.setCreateBy("createBy");
 
-                    search.setCreateBy("createBy");
+        search.setUpdateBy("updateBy");
 
-                    search.setUpdateBy("updateBy");
-
-                    search.setRemark("remark");
+        search.setRemark("remark");
 
         service.query(search);
     }
 
     @Test
-    public void queryPage(){
+    public void queryPage() {
         IPage<SysOssConfig> page = new Page<>(1, 10);
 
         SysOssConfigSearch search = new SysOssConfigSearch();
 
+        search.setConfigKey("configKey");
 
+        search.setAccessKey("accessKey");
 
-                    search.setConfigKey("configKey");
+        search.setSecretKey("secretKey");
 
+        search.setBucketName("bucketName");
 
+        search.setPrefix("prefix");
 
-                    search.setAccessKey("accessKey");
+        search.setEndpoint("endpoint");
 
+        search.setDomain("domain");
 
+        search.setIsHttps("isHttps");
 
-                    search.setSecretKey("secretKey");
+        search.setRegion("region");
 
+        search.setAccessPolicy("accessPolicy");
 
+        search.setStatus("status");
 
-                    search.setBucketName("bucketName");
+        search.setExt1("ext1");
 
+        search.setCreateBy("createBy");
 
+        search.setUpdateBy("updateBy");
 
-                    search.setPrefix("prefix");
-
-
-
-                    search.setEndpoint("endpoint");
-
-
-
-                    search.setDomain("domain");
-
-
-
-                    search.setIsHttps("isHttps");
-
-
-
-                    search.setRegion("region");
-
-
-
-                    search.setAccessPolicy("accessPolicy");
-
-
-
-                    search.setStatus("status");
-
-
-
-                    search.setExt1("ext1");
-
-
-
-                    search.setCreateBy("createBy");
-
-
-
-                    search.setUpdateBy("updateBy");
-
-
-
-                    search.setRemark("remark");
-
+        search.setRemark("remark");
 
         service.queryPage(page, search);
     }
-
 }

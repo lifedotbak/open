@@ -28,5 +28,4 @@ public class DbDruidConfig {
         filter.setMergeSql(true);
         return filter;
     }
-
 }

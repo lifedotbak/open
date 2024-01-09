@@ -4,14 +4,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spyker.commons.entity.SysConfig;
 import com.spyker.commons.search.SysConfigSearch;
+
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * <p>
  * 参数配置表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -36,5 +35,4 @@ public interface SysConfigService extends IService<SysConfig> {
     boolean update(SysConfig SysConfig);
 
     boolean delete(String id);
-
 }

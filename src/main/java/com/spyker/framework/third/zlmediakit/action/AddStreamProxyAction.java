@@ -24,14 +24,17 @@ import java.util.Map;
 public class AddStreamProxyAction {
 
     private static final String method = "/index/api/addStreamProxy";
-    @Autowired
-    private ZLMediaKitProperties zlMediaKitProperties;
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
+    @Autowired private RestTemplate restTemplate;
 
     public OpResult execute(String vhost, String app, String stream, String url) {
 
-        String postUrl = "http://" + zlMediaKitProperties.getIp() + ":" + zlMediaKitProperties.getPort() + method;
+        String postUrl =
+                "http://"
+                        + zlMediaKitProperties.getIp()
+                        + ":"
+                        + zlMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -60,10 +63,8 @@ public class AddStreamProxyAction {
 
         try {
 
-            ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl,
-                                                                          HttpMethod.POST,
-                                                                          entity,
-                                                                          String.class);
+            ResponseEntity<String> exchangeResult =
+                    restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
             String responseBody = exchangeResult.getBody();
 
@@ -82,5 +83,4 @@ public class AddStreamProxyAction {
 
         return result;
     }
-
 }

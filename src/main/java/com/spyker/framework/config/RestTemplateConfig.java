@@ -22,8 +22,7 @@ import java.util.List;
 @Configuration
 public class RestTemplateConfig {
 
-    @Autowired
-    private RestTemplateBuilder builder;
+    @Autowired private RestTemplateBuilder builder;
 
     // 使用RestTemplateBuilder来实例化RestTemplate对象，spring默认已经注入了RestTemplateBuilder实例
     @Bean
@@ -38,13 +37,14 @@ public class RestTemplateConfig {
     @Bean
     public ClientHttpRequestFactory httpRequestFactory() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setReadTimeout(10000);//ms
-        factory.setConnectTimeout(15000);//ms
+        factory.setReadTimeout(10000); // ms
+        factory.setConnectTimeout(15000); // ms
         return factory;
     }
 
-    //解决微信返回json Content-Type 值却是 text/plain 的问题
-    public class WeChatMappingJackson2HttpMessageConverter extends MappingJackson2HttpMessageConverter {
+    // 解决微信返回json Content-Type 值却是 text/plain 的问题
+    public class WeChatMappingJackson2HttpMessageConverter
+            extends MappingJackson2HttpMessageConverter {
         public WeChatMappingJackson2HttpMessageConverter() {
             List<MediaType> mediaTypes = new ArrayList<>();
             mediaTypes.add(MediaType.TEXT_PLAIN);

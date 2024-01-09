@@ -10,9 +10,7 @@ import lombok.Data;
 @Data
 public class RefundsNotify {
 
-    /**
-     * 通知ID id string[1,36] 是 通知的唯一ID 示例值：EV-2018022511223320873
-     */
+    /** 通知ID id string[1,36] 是 通知的唯一ID 示例值：EV-2018022511223320873 */
     private String id;
 
     /**
@@ -25,24 +23,19 @@ public class RefundsNotify {
     private String create_time;
 
     /**
-     * 通知类型 event_type string[1,32] 是 通知的类型： REFUND.SUCCESS：退款成功通知
-     * REFUND.ABNORMAL：退款异常通知 REFUND.CLOSED：退款关闭通知 示例值：REFUND.SUCCESS
+     * 通知类型 event_type string[1,32] 是 通知的类型： REFUND.SUCCESS：退款成功通知 REFUND.ABNORMAL：退款异常通知
+     * REFUND.CLOSED：退款关闭通知 示例值：REFUND.SUCCESS
      */
     private String event_type;
 
-    /**
-     * 通知简要说明 summary string[1,16] 是 通知简要说明 示例值：退款成功
-     */
+    /** 通知简要说明 summary string[1,16] 是 通知简要说明 示例值：退款成功 */
     private String summary;
 
     /**
-     * 通知数据类型 resource_type string[1,32] 是 通知的资源数据类型，支付成功通知为encrypt-resource
-     * 示例值：encrypt-resource
+     * 通知数据类型 resource_type string[1,32] 是 通知的资源数据类型，支付成功通知为encrypt-resource 示例值：encrypt-resource
      */
     private String resource_type;
 
-    /**
-     * -通知数据 resource object 是 通知资源数据 json格式，见示例
-     */
+    /** -通知数据 resource object 是 通知资源数据 json格式，见示例 */
     private RefundsNotifyResource resource;
 }

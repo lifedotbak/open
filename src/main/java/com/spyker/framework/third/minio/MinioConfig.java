@@ -10,15 +10,15 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration
 public class MinioConfig {
 
-    @Autowired
-    private MinioProperties minioProperties;
+    @Autowired private MinioProperties minioProperties;
 
     @Bean
     public MinioClient minioClient() {
-        MinioClient client = MinioClient.builder()
-                                        .endpoint(minioProperties.getEndpoint())
-                                        .credentials(minioProperties.getAccesskey(), minioProperties.getSecretkey())
-                                        .build();
+        MinioClient client =
+                MinioClient.builder()
+                        .endpoint(minioProperties.getEndpoint())
+                        .credentials(minioProperties.getAccesskey(), minioProperties.getSecretkey())
+                        .build();
         return client;
     }
 }

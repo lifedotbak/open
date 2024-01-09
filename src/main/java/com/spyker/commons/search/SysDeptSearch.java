@@ -1,6 +1,7 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -8,9 +9,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * <p>
  * 部门表
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-11-07
@@ -61,5 +60,4 @@ public class SysDeptSearch implements Serializable {
 
     @Schema(description = "更新者")
     private String updateBy;
-
 }

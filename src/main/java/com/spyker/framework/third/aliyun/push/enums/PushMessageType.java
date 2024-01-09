@@ -1,7 +1,6 @@
 package com.spyker.framework.third.aliyun.push.enums;
 
 public enum PushMessageType {
-
     NOTICE("NOTICE", "通知"),
     MESSAGE("MESSAGE", "消息");
 

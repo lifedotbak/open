@@ -1,15 +1,14 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
  * 操作日志记录
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -73,5 +72,4 @@ public class SysOperLogSearch implements Serializable {
 
     @Schema(description = "消耗时间")
     private Long costTime;
-
 }

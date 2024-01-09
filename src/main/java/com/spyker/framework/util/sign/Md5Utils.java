@@ -19,7 +19,8 @@ public class Md5Utils {
 
     public static String hash(String s) {
         try {
-            return new String(toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+            return new String(
+                    toHex(md5(s)).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("not supported charset...{}", e);
             return s;
@@ -83,9 +84,7 @@ public class Md5Utils {
             } finally {
                 IOUtils.closeQuietly(is);
             }
-
         }
         return result;
     }
-
 }

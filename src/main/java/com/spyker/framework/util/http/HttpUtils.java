@@ -37,7 +37,7 @@ public class HttpUtils {
     /**
      * 向指定 URL 发送GET方法的请求
      *
-     * @param url   发送请求的 URL
+     * @param url 发送请求的 URL
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
@@ -48,8 +48,8 @@ public class HttpUtils {
     /**
      * 向指定 URL 发送GET方法的请求
      *
-     * @param url         发送请求的 URL
-     * @param param       请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @param url 发送请求的 URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @param contentType 编码类型
      * @return 所代表远程资源的响应结果
      */
@@ -63,9 +63,12 @@ public class HttpUtils {
             URLConnection connection = realUrl.openConnection();
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty(
+                    "user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             connection.connect();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), contentType));
+            in =
+                    new BufferedReader(
+                            new InputStreamReader(connection.getInputStream(), contentType));
             String line;
             while ((line = in.readLine()) != null) {
                 result.append(line);
@@ -74,7 +77,9 @@ public class HttpUtils {
         } catch (ConnectException e) {
             log.error("调用HttpUtils.sendGet ConnectException, url=" + url + ",param=" + param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendGet SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error(
+                    "调用HttpUtils.sendGet SocketTimeoutException, url=" + url + ",param=" + param,
+                    e);
         } catch (IOException e) {
             log.error("调用HttpUtils.sendGet IOException, url=" + url + ",param=" + param, e);
         } catch (Exception e) {
@@ -94,7 +99,7 @@ public class HttpUtils {
     /**
      * 向指定 URL 发送POST方法的请求
      *
-     * @param url   发送请求的 URL
+     * @param url 发送请求的 URL
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
@@ -108,7 +113,8 @@ public class HttpUtils {
             URLConnection conn = realUrl.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty(
+                    "user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
             conn.setDoOutput(true);
@@ -116,7 +122,9 @@ public class HttpUtils {
             out = new PrintWriter(conn.getOutputStream());
             out.print(param);
             out.flush();
-            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            in =
+                    new BufferedReader(
+                            new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line;
             while ((line = in.readLine()) != null) {
                 result.append(line);
@@ -125,7 +133,9 @@ public class HttpUtils {
         } catch (ConnectException e) {
             log.error("调用HttpUtils.sendPost ConnectException, url=" + url + ",param=" + param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendPost SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error(
+                    "调用HttpUtils.sendPost SocketTimeoutException, url=" + url + ",param=" + param,
+                    e);
         } catch (IOException e) {
             log.error("调用HttpUtils.sendPost IOException, url=" + url + ",param=" + param, e);
         } catch (Exception e) {
@@ -151,12 +161,16 @@ public class HttpUtils {
         try {
             log.info("sendSSLPost - {}", urlNameString);
             SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, new TrustManager[]{new TrustAnyTrustManager()}, new java.security.SecureRandom());
+            sc.init(
+                    null,
+                    new TrustManager[] {new TrustAnyTrustManager()},
+                    new java.security.SecureRandom());
             URL console = new URL(urlNameString);
             HttpsURLConnection conn = (HttpsURLConnection) console.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty(
+                    "user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
             conn.setDoOutput(true);
@@ -170,16 +184,25 @@ public class HttpUtils {
             String ret = "";
             while ((ret = br.readLine()) != null) {
                 if (ret != null && !"".equals(ret.trim())) {
-                    result.append(new String(ret.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
+                    result.append(
+                            new String(
+                                    ret.getBytes(StandardCharsets.ISO_8859_1),
+                                    StandardCharsets.UTF_8));
                 }
             }
             log.info("recv - {}", result);
             conn.disconnect();
             br.close();
         } catch (ConnectException e) {
-            log.error("调用HttpUtils.sendSSLPost ConnectException, url=" + url + ",param=" + param, e);
+            log.error(
+                    "调用HttpUtils.sendSSLPost ConnectException, url=" + url + ",param=" + param, e);
         } catch (SocketTimeoutException e) {
-            log.error("调用HttpUtils.sendSSLPost SocketTimeoutException, url=" + url + ",param=" + param, e);
+            log.error(
+                    "调用HttpUtils.sendSSLPost SocketTimeoutException, url="
+                            + url
+                            + ",param="
+                            + param,
+                    e);
         } catch (IOException e) {
             log.error("调用HttpUtils.sendSSLPost IOException, url=" + url + ",param=" + param, e);
         } catch (Exception e) {
@@ -190,16 +213,14 @@ public class HttpUtils {
 
     private static class TrustAnyTrustManager implements X509TrustManager {
         @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType) {
-        }
+        public void checkClientTrusted(X509Certificate[] chain, String authType) {}
 
         @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType) {
-        }
+        public void checkServerTrusted(X509Certificate[] chain, String authType) {}
 
         @Override
         public X509Certificate[] getAcceptedIssuers() {
-            return new X509Certificate[]{};
+            return new X509Certificate[] {};
         }
     }
 

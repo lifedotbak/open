@@ -41,5 +41,4 @@ public class RestResponse<T> {
     public static <T> RestResponse<T> error(Integer code, String msg) {
         return new RestResponse<>(code, msg);
     }
-
 }

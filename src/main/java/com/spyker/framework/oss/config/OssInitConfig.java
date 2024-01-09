@@ -18,36 +18,42 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OssInitConfig {
 
-	@PostConstruct
-	public void init() {
+    @PostConstruct
+    public void init() {
 
-		log.info("====OssInitConfig Init====");
+        log.info("====OssInitConfig Init====");
 
-		SysOssConfig config = new SysOssConfig();
+        SysOssConfig config = new SysOssConfig();
 
-		config.setStatus("0");
-		config.setConfigKey("minio");
-		config.setAccessKey("e0Ui4uY4FBetHELN");
-		config.setSecretKey("ynQa9ZhOMH6mJ7Q8JPRAdmAVqzgKFmp6");
-		config.setBucketName("grid-cloud");
-		config.setEndpoint("192.168.200.65:29000");
+        config.setStatus("0");
+        config.setConfigKey("minio");
+        config.setAccessKey("e0Ui4uY4FBetHELN");
+        config.setSecretKey("ynQa9ZhOMH6mJ7Q8JPRAdmAVqzgKFmp6");
+        config.setBucketName("grid-cloud");
+        config.setEndpoint("192.168.200.65:29000");
 
-		String configKey = config.getConfigKey();
-		if ("0".equals(config.getStatus())) {
-			RedisUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
-		}
-		setConfigCache(true, config);
+        String configKey = config.getConfigKey();
+        if ("0".equals(config.getStatus())) {
+            RedisUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
+        }
+        setConfigCache(true, config);
 
-		OssFactory.init();
-	}
+        OssFactory.init();
+    }
 
-	private boolean setConfigCache(boolean flag, SysOssConfig config) {
-		if (flag) {
-			CacheUtils.put(CacheNames.SYS_OSS_CONFIG, config.getConfigKey(), ExJsonUtils.toJsonString(config));
-			RedisUtils.publish(OssConstant.DEFAULT_CONFIG_KEY, config.getConfigKey(), msg -> {
-				log.info("发布刷新OSS配置 => " + msg);
-			});
-		}
-		return flag;
-	}
+    private boolean setConfigCache(boolean flag, SysOssConfig config) {
+        if (flag) {
+            CacheUtils.put(
+                    CacheNames.SYS_OSS_CONFIG,
+                    config.getConfigKey(),
+                    ExJsonUtils.toJsonString(config));
+            RedisUtils.publish(
+                    OssConstant.DEFAULT_CONFIG_KEY,
+                    config.getConfigKey(),
+                    msg -> {
+                        log.info("发布刷新OSS配置 => " + msg);
+                    });
+        }
+        return flag;
+    }
 }

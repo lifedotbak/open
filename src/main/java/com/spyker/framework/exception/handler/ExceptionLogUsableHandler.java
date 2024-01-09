@@ -2,14 +2,14 @@ package com.spyker.framework.exception.handler;
 
 public class ExceptionLogUsableHandler {
 
-	private ExceptionLogHandler exceptionLogHandler;
+    private ExceptionLogHandler exceptionLogHandler;
 
-	public void initHandler(ExceptionLogHandler exceptionLogHandler) {
+    public void initHandler(ExceptionLogHandler exceptionLogHandler) {
 
-		this.exceptionLogHandler = exceptionLogHandler;
-	}
+        this.exceptionLogHandler = exceptionLogHandler;
+    }
 
-	public ExceptionLogHandler getHandler() {
-		return exceptionLogHandler;
-	}
+    public ExceptionLogHandler getHandler() {
+        return exceptionLogHandler;
+    }
 }

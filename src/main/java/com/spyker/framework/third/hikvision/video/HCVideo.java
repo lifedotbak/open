@@ -28,7 +28,7 @@ import java.util.TimerTask;
 @Slf4j
 public class HCVideo {
 
-    static FRealDataCallBack_V30Impl fRealDataCallBack;// 预览回调函数实现
+    static FRealDataCallBack_V30Impl fRealDataCallBack; // 预览回调函数实现
     static FPlayDataCallBackImpl playBackCallBack; // 回放码流回调
     static int Count = 0;
     static boolean palybackFlay = false;
@@ -38,8 +38,8 @@ public class HCVideo {
     HCNetSDK hCNetSDK;
     PlayCtrl playControl;
     HCOpInfo hCOpInfo;
-    Timer downloadtimer;// 下载用定时器
-    Timer playbacktimer;// 回放用定时器
+    Timer downloadtimer; // 下载用定时器
+    Timer playbacktimer; // 回放用定时器
     int m_lLoadHandle;
     int iPlayBack; // 回放句柄
 
@@ -60,9 +60,7 @@ public class HCVideo {
 
         hCNetSDK.NET_DVR_SaveRealData(lPlay, vodioFileName);
 
-        /**
-         * 预览一段时间；如果要一直取流预览，需要保证程序一直运行
-         */
+        /** 预览一段时间；如果要一直取流预览，需要保证程序一直运行 */
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -80,9 +78,7 @@ public class HCVideo {
 
     private int openRealPlay() {
 
-        /**
-         * 预览句柄
-         */
+        /** 预览句柄 */
         int lPlay = -1;
 
         int userID = hCOpInfo.getLUserID();
@@ -99,7 +95,8 @@ public class HCVideo {
         strClientInfo.hPlayWnd = 0; // 窗口句柄，从回调取流不显示一般设置为空
         strClientInfo.lChannel = iChannelNo; // 通道号
         strClientInfo.dwStreamType = 0; // 0-主码流，1-子码流，2-三码流，3-虚拟码流，以此类推
-        strClientInfo.dwLinkMode = 7; // 连接方式：0- TCP方式，1- UDP方式，2- 多播方式，3- RTP方式，4- RTP/RTSP，5- RTP/HTTP，6-
+        strClientInfo.dwLinkMode =
+                7; // 连接方式：0- TCP方式，1- UDP方式，2- 多播方式，3- RTP方式，4- RTP/RTSP，5- RTP/HTTP，6-
         // HRUDP（可靠传输） ，7- RTSP/HTTPS，8- NPQ
         strClientInfo.bBlocked = 1;
         strClientInfo.write();
@@ -110,7 +107,9 @@ public class HCVideo {
         }
 
         // 开启预览
-        lPlay = hCNetSDK.NET_DVR_RealPlay_V40(userID, strClientInfo, fRealDataCallBack, Pointer.NULL);
+        lPlay =
+                hCNetSDK.NET_DVR_RealPlay_V40(
+                        userID, strClientInfo, fRealDataCallBack, Pointer.NULL);
 
         if (lPlay == -1) {
             int iErr = hCNetSDK.NET_DVR_GetLastError();
@@ -124,9 +123,7 @@ public class HCVideo {
         return lPlay;
     }
 
-    /**
-     * 取流解码过程中播放库从解码码流中抓图
-     */
+    /** 取流解码过程中播放库从解码码流中抓图 */
     public String getPicByPlayCtrl(String realPicPath) {
 
         openRealPlay();
@@ -153,7 +150,8 @@ public class HCVideo {
         HCNetSDK.BYTE_ARRAY picByte = new HCNetSDK.BYTE_ARRAY(picsize);
         picByte.write();
         Pointer pByte = picByte.getPointer();
-        boolean b_GetPic = playControl.PlayM4_GetJPEG(m_lPort.getValue(), pByte, picsize, RealPicSize);
+        boolean b_GetPic =
+                playControl.PlayM4_GetJPEG(m_lPort.getValue(), pByte, picsize, RealPicSize);
         if (!b_GetPic) {
 
             log.error("抓图失败--->{}" + playControl.PlayM4_GetLastError(m_lPort.getValue()));
@@ -185,7 +183,6 @@ public class HCVideo {
         }
 
         return realPicPath;
-
     }
 
     /**
@@ -223,7 +220,8 @@ public class HCVideo {
         net_dvr_vod_para.hWnd = null; // 回放的窗口句柄，若置为空，SDK仍能收到码流数据，但不解码显示
         net_dvr_vod_para.write();
 
-        int iPlayBack = hCNetSDK.NET_DVR_PlayBackByTime_V40(hCOpInfo.getLUserID(), net_dvr_vod_para);
+        int iPlayBack =
+                hCNetSDK.NET_DVR_PlayBackByTime_V40(hCOpInfo.getLUserID(), net_dvr_vod_para);
         if (iPlayBack <= -1) {
 
             log.error("按时间回放失败，错误码为--->{}", hCNetSDK.NET_DVR_GetLastError());
@@ -232,24 +230,29 @@ public class HCVideo {
         }
 
         // 开启取流
-        boolean bCrtl = hCNetSDK.NET_DVR_PlayBackControl(iPlayBack, HCNetSDK.NET_DVR_PLAYSTART, 0, null);
+        boolean bCrtl =
+                hCNetSDK.NET_DVR_PlayBackControl(iPlayBack, HCNetSDK.NET_DVR_PLAYSTART, 0, null);
         if (playBackCallBack == null) {
             playBackCallBack = new FPlayDataCallBackImpl();
         }
-        boolean bRet = hCNetSDK.NET_DVR_SetPlayDataCallBack_V40(iPlayBack, playBackCallBack, Pointer.NULL);
+        boolean bRet =
+                hCNetSDK.NET_DVR_SetPlayDataCallBack_V40(iPlayBack, playBackCallBack, Pointer.NULL);
         // 开始计时器
-        Timer Playbacktimer = new Timer();// 新建定时器
-        Playbacktimer.schedule(new PlaybackTask(), 0, end.getTime() - start.getTime());// 0秒后开始响应函数
+        Timer Playbacktimer = new Timer(); // 新建定时器
+        Playbacktimer.schedule(new PlaybackTask(), 0, end.getTime() - start.getTime()); // 0秒后开始响应函数
     }
 
     /**
      * 按文件回放录像
      *
-     * @param userID   用户ID
+     * @param userID 用户ID
      * @param lChannel 通道号
      */
     public void playBackByfile(int userID, int lChannel) {
-        File file = new File(System.getProperty("user.dir") + "\\Download\\Videodatabyfile.mp4"); // 保存回调函数的音频数据
+        File file =
+                new File(
+                        System.getProperty("user.dir")
+                                + "\\Download\\Videodatabyfile.mp4"); // 保存回调函数的音频数据
 
         if (!file.exists()) {
             try {
@@ -342,7 +345,6 @@ public class HCVideo {
 
                                         System.out.println("没有更多的文件，查找结束");
                                         break;
-
                                     }
                                 }
                             }
@@ -350,7 +352,6 @@ public class HCVideo {
                     }
                 }
             }
-
         }
         boolean b_CloseHandle = hCNetSDK.NET_DVR_FindClose_V30(FindFileHandle);
         if (!b_CloseHandle) {
@@ -365,12 +366,14 @@ public class HCVideo {
         }
         IntByReference intP1 = new IntByReference(0);
         IntByReference intInlen = new IntByReference(0);
-        boolean b_PlayBackStart = hCNetSDK.NET_DVR_PlayBackControl_V40(lPlayByFileHandle,
-                                                                       HCNetSDK.NET_DVR_PLAYSTART,
-                                                                       intP1.getPointer(),
-                                                                       4,
-                                                                       Pointer.NULL,
-                                                                       intInlen);
+        boolean b_PlayBackStart =
+                hCNetSDK.NET_DVR_PlayBackControl_V40(
+                        lPlayByFileHandle,
+                        HCNetSDK.NET_DVR_PLAYSTART,
+                        intP1.getPointer(),
+                        4,
+                        Pointer.NULL,
+                        intInlen);
         if (!b_PlayBackStart) {
             System.out.println("开始播放失败，错误码为" + hCNetSDK.NET_DVR_GetLastError());
             return;
@@ -378,7 +381,9 @@ public class HCVideo {
         if (playBackCallBack == null) {
             playBackCallBack = new FPlayDataCallBackImpl();
         }
-        boolean bRet = hCNetSDK.NET_DVR_SetPlayDataCallBack_V40(lPlayByFileHandle, playBackCallBack, Pointer.NULL);
+        boolean bRet =
+                hCNetSDK.NET_DVR_SetPlayDataCallBack_V40(
+                        lPlayByFileHandle, playBackCallBack, Pointer.NULL);
         while (true) {
             int Pos = hCNetSDK.NET_DVR_GetDownloadPos(lPlayByFileHandle);
             if (Pos != 100) {
@@ -401,7 +406,6 @@ public class HCVideo {
             return;
         }
         System.out.println("回放成功");
-
     }
 
     public boolean findExistVideoFile(int iChannelNo, Date start, Date end) {
@@ -485,7 +489,6 @@ public class HCVideo {
 
                                         log.info("没有更多的文件，查找结束");
                                         break;
-
                                     }
                                 }
                             }
@@ -493,11 +496,9 @@ public class HCVideo {
                     }
                 }
             }
-
         }
 
         return exist;
-
     }
 
     /**
@@ -536,8 +537,8 @@ public class HCVideo {
 
             log.info("开始下载时间---->{}", ExDateUtils.getCurrentDate());
 
-            downloadtimer = new Timer();// 新建定时器
-            downloadtimer.schedule(new DownloadTask(), 0, 5000);// 0秒后开始响应函数
+            downloadtimer = new Timer(); // 新建定时器
+            downloadtimer.schedule(new DownloadTask(), 0, 5000); // 0秒后开始响应函数
 
             log.info("DownloadTask m_lLoadHandle---->{}", m_lLoadHandle);
         } else {
@@ -546,9 +547,7 @@ public class HCVideo {
             return;
         }
 
-        /**
-         * 文件下载结束或者下载错误跳出循环
-         */
+        /** 文件下载结束或者下载错误跳出循环 */
         while (true) {
 
             if (-1 == m_lLoadHandle) {
@@ -572,17 +571,19 @@ public class HCVideo {
      * @param userID
      */
     public void getDvrIPChannelInfo(int userID) {
-        IntByReference ibrBytesReturned = new IntByReference(0);// 获取IP接入配置参数
+        IntByReference ibrBytesReturned = new IntByReference(0); // 获取IP接入配置参数
         HCNetSDK.NET_DVR_IPPARACFG_V40 m_strIpparaCfg = new HCNetSDK.NET_DVR_IPPARACFG_V40();
         m_strIpparaCfg.write();
         // lpIpParaConfig 接收数据的缓冲指针
         Pointer lpIpParaConfig = m_strIpparaCfg.getPointer();
-        boolean bRet = hCNetSDK.NET_DVR_GetDVRConfig(userID,
-                                                     HCNetSDK.NET_DVR_GET_IPPARACFG_V40,
-                                                     0,
-                                                     lpIpParaConfig,
-                                                     m_strIpparaCfg.size(),
-                                                     ibrBytesReturned);
+        boolean bRet =
+                hCNetSDK.NET_DVR_GetDVRConfig(
+                        userID,
+                        HCNetSDK.NET_DVR_GET_IPPARACFG_V40,
+                        0,
+                        lpIpParaConfig,
+                        m_strIpparaCfg.size(),
+                        ibrBytesReturned);
         m_strIpparaCfg.read();
 
         log.info("起始数字通道号--->{}", m_strIpparaCfg.dwStartDChan);
@@ -594,7 +595,8 @@ public class HCVideo {
             int channum = iChannum + m_strIpparaCfg.dwStartDChan;
             m_strIpparaCfg.struStreamMode[iChannum].read();
             if (m_strIpparaCfg.struStreamMode[iChannum].byGetStreamType == 0) {
-                m_strIpparaCfg.struStreamMode[iChannum].uGetStream.setType(HCNetSDK.NET_DVR_IPCHANINFO.class);
+                m_strIpparaCfg.struStreamMode[iChannum].uGetStream.setType(
+                        HCNetSDK.NET_DVR_IPCHANINFO.class);
                 m_strIpparaCfg.struStreamMode[iChannum].uGetStream.struChanInfo.read();
                 if (m_strIpparaCfg.struStreamMode[iChannum].uGetStream.struChanInfo.byEnable == 1) {
 
@@ -614,7 +616,9 @@ public class HCVideo {
             IntByReference nPos = new IntByReference(0);
 
             System.out.println("iPlayBack " + iPlayBack);
-            boolean bret = hCNetSDK.NET_DVR_PlayBackControl(iPlayBack, HCNetSDK.NET_DVR_PLAYGETPOS, 0, nPos);
+            boolean bret =
+                    hCNetSDK.NET_DVR_PlayBackControl(
+                            iPlayBack, HCNetSDK.NET_DVR_PLAYGETPOS, 0, nPos);
             if (bret) {
                 System.out.println("回放进度" + nPos.getValue());
             } else {
@@ -648,16 +652,15 @@ public class HCVideo {
                 }
                 palybackFlay = true;
                 System.out.println("按时间回放结束");
-
             }
         }
-
     }
 
     class FPlayDataCallBackImpl implements HCNetSDK.FPlayDataCallBack {
 
         @Override
-        public void invoke(int lPlayHandle, int dwDataType, Pointer pBuffer, int dwBufSize, int dwUser) {
+        public void invoke(
+                int lPlayHandle, int dwDataType, Pointer pBuffer, int dwBufSize, int dwUser) {
             log.info("回放码流回调...");
             // 将设备发送过来的回放码流数据写入文件
             long offset = 0;
@@ -671,7 +674,6 @@ public class HCVideo {
                 log.error("error--->{}", e);
             }
         }
-
     }
 
     /*************************************************
@@ -693,7 +695,6 @@ public class HCVideo {
                 downloadtimer.cancel();
 
                 log.error("由于网络原因或DVR忙,下载异常终止!");
-
             }
             if (nPos.getValue() == 100) {
 
@@ -705,9 +706,7 @@ public class HCVideo {
                 if (hCNetSDK.NET_DVR_Logout(hCOpInfo.getLUserID())) {
                     log.info("注销成功!");
                 }
-
             }
-
         }
     }
 
@@ -715,8 +714,13 @@ public class HCVideo {
 
         // 预览回调
         @Override
-        public void invoke(int lRealHandle, int dwDataType, ByteByReference pBuffer, int dwBufSize, Pointer pUser) {
-            if (Count == 100) {// 降低打印频率
+        public void invoke(
+                int lRealHandle,
+                int dwDataType,
+                ByteByReference pBuffer,
+                int dwBufSize,
+                Pointer pUser) {
+            if (Count == 100) { // 降低打印频率
                 System.out.println("码流数据回调...dwBufSize=" + dwBufSize);
                 System.out.println("dwDataType=" + dwDataType);
                 Count = 0;
@@ -726,18 +730,19 @@ public class HCVideo {
             // 播放库解码
             switch (dwDataType) {
                 case HCNetSDK.NET_DVR_SYSHEAD: // 系统头
-
                     if (!playControl.PlayM4_GetPort(m_lPort)) // 获取播放库未使用的通道号
                     {
                         break;
                     }
                     if (dwBufSize > 0) {
-                        if (!playControl.PlayM4_SetStreamOpenMode(m_lPort.getValue(), PlayCtrl.STREAME_REALTIME)) //
+                        if (!playControl.PlayM4_SetStreamOpenMode(
+                                m_lPort.getValue(), PlayCtrl.STREAME_REALTIME)) //
                         // 设置实时流播放模式
                         {
                             break;
                         }
-                        if (!playControl.PlayM4_OpenStream(m_lPort.getValue(), pBuffer, dwBufSize, 1024 * 1024)) //
+                        if (!playControl.PlayM4_OpenStream(
+                                m_lPort.getValue(), pBuffer, dwBufSize, 1024 * 1024)) //
                         // 打开流接口
                         {
                             break;
@@ -746,12 +751,11 @@ public class HCVideo {
                         {
                             break;
                         }
-
                     }
                 case HCNetSDK.NET_DVR_STREAMDATA: // 码流数据
-
                     if ((dwBufSize > 0) && (m_lPort.getValue() != -1)) {
-                        if (!playControl.PlayM4_InputData(m_lPort.getValue(), pBuffer, dwBufSize)) // 输入流数据
+                        if (!playControl.PlayM4_InputData(
+                                m_lPort.getValue(), pBuffer, dwBufSize)) // 输入流数据
                         {
                             break;
                         }
@@ -759,5 +763,4 @@ public class HCVideo {
             }
         }
     }
-
 }

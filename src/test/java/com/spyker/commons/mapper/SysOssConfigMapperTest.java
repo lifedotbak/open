@@ -9,9 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
  * 对象存储配置表 Mapper 接口
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-12-21
@@ -19,7 +17,5 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SysOssConfigMapperTest extends BaseTest {
 
-    @Autowired
-    private SysOssConfigMapper sysOssConfigMapper;
-
+    @Autowired private SysOssConfigMapper sysOssConfigMapper;
 }

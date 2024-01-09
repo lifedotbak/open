@@ -9,10 +9,9 @@ import com.spyker.framework.interceptor.IpInterceptor;
 @Configuration
 public class InterceptorConfigure implements WebMvcConfigurer {
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
 
-		registry.addInterceptor(new IpInterceptor()).addPathPatterns("/**");
-
-	}
+        registry.addInterceptor(new IpInterceptor()).addPathPatterns("/**");
+    }
 }

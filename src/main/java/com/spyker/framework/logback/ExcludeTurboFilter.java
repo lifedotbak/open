@@ -10,30 +10,34 @@ import ch.qos.logback.core.spi.FilterReply;
 
 public class ExcludeTurboFilter extends TurboFilter {
 
-	String excludePackageNames;
+    String excludePackageNames;
 
-	public void setExcludePackageNames(String excludePackageNames) {
-		this.excludePackageNames = excludePackageNames;
-	}
+    public void setExcludePackageNames(String excludePackageNames) {
+        this.excludePackageNames = excludePackageNames;
+    }
 
-	@Override
-	public FilterReply decide(Marker marker, Logger logger, Level level, String format, Object[] params, Throwable t) {
+    @Override
+    public FilterReply decide(
+            Marker marker,
+            Logger logger,
+            Level level,
+            String format,
+            Object[] params,
+            Throwable t) {
 
-		String loggerName = logger.getName();
+        String loggerName = logger.getName();
 
-		String[] excludePackageNameList = excludePackageNames.split(";");
+        String[] excludePackageNameList = excludePackageNames.split(";");
 
-		for (String excludePackageName : excludePackageNameList) {
+        for (String excludePackageName : excludePackageNameList) {
 
-			if (StringUtils.isNotBlank(excludePackageName)) {
-				if (loggerName.contains(excludePackageName)) {
-					return FilterReply.DENY;
-				}
-			}
+            if (StringUtils.isNotBlank(excludePackageName)) {
+                if (loggerName.contains(excludePackageName)) {
+                    return FilterReply.DENY;
+                }
+            }
+        }
 
-		}
-
-		return FilterReply.NEUTRAL;
-	}
-
+        return FilterReply.NEUTRAL;
+    }
 }

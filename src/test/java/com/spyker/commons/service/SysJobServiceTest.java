@@ -10,19 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 定时任务调度表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
  */
-
 @Slf4j
 public class SysJobServiceTest extends BaseTest {
 
-    @Autowired
-    private SysJobService service;
+    @Autowired private SysJobService service;
 
     @Test
     public void get() {
@@ -128,5 +124,4 @@ public class SysJobServiceTest extends BaseTest {
 
         service.queryPage(page, search);
     }
-
 }

@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
  * 定时任务调度日志表 前端控制器
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -59,5 +57,4 @@ public class SysJobLogController {
 
         return RestResponse.success(result);
     }
-
 }

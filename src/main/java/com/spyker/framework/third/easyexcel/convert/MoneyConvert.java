@@ -11,8 +11,8 @@ import java.math.RoundingMode;
 
 /**
  * 金额转换器
- * <p>
- * 金额单位：分
+ *
+ * <p>金额单位：分
  *
  * @author spyker
  */
@@ -29,11 +29,12 @@ public class MoneyConvert implements Converter<Integer> {
     }
 
     @Override
-    public WriteCellData<String> convertToExcelData(Integer value,
+    public WriteCellData<String> convertToExcelData(
+            Integer value,
             ExcelContentProperty contentProperty,
             GlobalConfiguration globalConfiguration) {
-        BigDecimal result = BigDecimal.valueOf(value).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
+        BigDecimal result =
+                BigDecimal.valueOf(value).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
         return new WriteCellData<>(result.toString());
     }
-
 }

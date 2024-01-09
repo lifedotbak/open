@@ -3,8 +3,8 @@ package com.spyker.framework.third.word.impl;
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
 /**
- * Created with IntelliJ IDEA. User: Administrator Date: 18-6-6 Time: 上午9:52 To
- * change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: Administrator Date: 18-6-6 Time: 上午9:52 To change this template
+ * use File | Settings | File Templates.
  */
 public class TaiwanCardWord {
 

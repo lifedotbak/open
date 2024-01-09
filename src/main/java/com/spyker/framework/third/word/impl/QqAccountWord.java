@@ -2,9 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * QQ账户脱敏(5-10位，分段屏蔽，每隔2位用*替换2位。)
- */
+/** QQ账户脱敏(5-10位，分段屏蔽，每隔2位用*替换2位。) */
 public class QqAccountWord {
 
     public static String getValue(String word) {

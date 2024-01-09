@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 字典类型表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysDictTypeService extends IService<SysDictType> {
     RestResponse<?> update(SysDictType SysDictType);
 
     RestResponse<?> delete(String id);
-
 }

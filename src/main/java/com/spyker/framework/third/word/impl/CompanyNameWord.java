@@ -3,8 +3,7 @@ package com.spyker.framework.third.word.impl;
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
 /**
- * 企业户名
- * 按长度分阶梯保留：长度4个字及以下的，首尾各保留1个字；长度5-6个字的，首尾各保留2个字；长度7个字及以上奇数，隐去中间3个字；长度8个字及以上偶数，隐去中间4个字；隐藏字用*代替。
+ * 企业户名 按长度分阶梯保留：长度4个字及以下的，首尾各保留1个字；长度5-6个字的，首尾各保留2个字；长度7个字及以上奇数，隐去中间3个字；长度8个字及以上偶数，隐去中间4个字；隐藏字用*代替。
  */
 public class CompanyNameWord {
 

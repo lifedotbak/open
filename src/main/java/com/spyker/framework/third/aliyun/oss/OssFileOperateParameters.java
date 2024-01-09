@@ -14,5 +14,4 @@ public class OssFileOperateParameters {
     private String objectName;
     private InputStream uploadFileInputStream;
     private String download2FilePath;
-
 }

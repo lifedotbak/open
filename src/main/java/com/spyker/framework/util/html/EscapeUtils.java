@@ -16,7 +16,7 @@ public class EscapeUtils {
 
     static {
         for (int i = 0; i < 64; i++) {
-            TEXT[i] = new char[]{(char) i};
+            TEXT[i] = new char[] {(char) i};
         }
 
         // special HTML characters

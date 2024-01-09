@@ -1,16 +1,16 @@
 package com.spyker.commons.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
  * 通知公告表
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28

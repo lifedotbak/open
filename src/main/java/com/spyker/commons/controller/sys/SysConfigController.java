@@ -16,9 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
  * 参数配置表 前端控制器
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -93,5 +91,4 @@ public class SysConfigController {
 
         return RestResponse.success();
     }
-
 }

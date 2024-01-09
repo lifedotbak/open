@@ -15,13 +15,22 @@ import org.apache.commons.lang3.StringUtils;
  * @author spyker
  */
 public class IpUtils {
-    public final static String REGX_0_255 = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)";
+    public static final String REGX_0_255 = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)";
     // 匹配 ip
-    public final static String REGX_IP = "((" + REGX_0_255 + "\\.){3}" + REGX_0_255 + ")";
+    public static final String REGX_IP = "((" + REGX_0_255 + "\\.){3}" + REGX_0_255 + ")";
     // 匹配网段
-    public final static String REGX_IP_SEG = "(" + REGX_IP + "\\-" + REGX_IP + ")";
-    public final static String REGX_IP_WILDCARD =
-            "(((\\*\\.){3}\\*)|(" + REGX_0_255 + "(\\.\\*){3})|(" + REGX_0_255 + "\\." + REGX_0_255 + ")(\\.\\*){2}" + "|((" + REGX_0_255 + "\\.){3}\\*))";
+    public static final String REGX_IP_SEG = "(" + REGX_IP + "\\-" + REGX_IP + ")";
+    public static final String REGX_IP_WILDCARD =
+            "(((\\*\\.){3}\\*)|("
+                    + REGX_0_255
+                    + "(\\.\\*){3})|("
+                    + REGX_0_255
+                    + "\\."
+                    + REGX_0_255
+                    + ")(\\.\\*){2}"
+                    + "|(("
+                    + REGX_0_255
+                    + "\\.){3}\\*))";
 
     /**
      * 获取客户端IP
@@ -246,7 +255,7 @@ public class IpUtils {
      * 校验ip是否符合过滤串规则
      *
      * @param filter 过滤IP列表,支持后缀'*'通配,支持网段如:`10.10.10.1-10.10.10.99`
-     * @param ip     校验IP地址
+     * @param ip 校验IP地址
      * @return boolean 结果
      */
     public static boolean isMatchedIp(String filter, String ip) {
@@ -270,23 +279,17 @@ public class IpUtils {
         return false;
     }
 
-    /**
-     * 是否为IP
-     */
+    /** 是否为IP */
     public static boolean isIP(String ip) {
         return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP);
     }
 
-    /**
-     * 是否为IP，或 *为间隔的通配符地址
-     */
+    /** 是否为IP，或 *为间隔的通配符地址 */
     public static boolean isIpWildCard(String ip) {
         return StringUtils.isNotBlank(ip) && ip.matches(REGX_IP_WILDCARD);
     }
 
-    /**
-     * 检测参数是否在ip通配符里
-     */
+    /** 检测参数是否在ip通配符里 */
     public static boolean ipIsInWildCardNoCheck(String ipWildCard, String ip) {
         String[] s1 = ipWildCard.split("\\.");
         String[] s2 = ip.split("\\.");
@@ -300,16 +303,12 @@ public class IpUtils {
         return isMatchedSeg;
     }
 
-    /**
-     * 是否为特定格式如:“10.10.10.1-10.10.10.99”的ip段字符串
-     */
+    /** 是否为特定格式如:“10.10.10.1-10.10.10.99”的ip段字符串 */
     public static boolean isIPSegment(String ipSeg) {
         return StringUtils.isNotBlank(ipSeg) && ipSeg.matches(REGX_IP_SEG);
     }
 
-    /**
-     * 判断ip是否在指定网段中
-     */
+    /** 判断ip是否在指定网段中 */
     public static boolean ipIsInNetNoCheck(String iparea, String ip) {
         int idx = iparea.indexOf('-');
         String[] sips = iparea.substring(0, idx).split("\\.");

@@ -14,26 +14,25 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 public class IndexController {
 
-	/**
-	 * 使用限流注解的接口1
-	 *
-	 * @return
-	 */
-	@GetMapping("/limit1")
-	@Limiting(limitNum = 1, name = "limiting1")
-	public RestResponse<String> Limit1() {
-		return RestResponse.success("limiting1");
-	}
+    /**
+     * 使用限流注解的接口1
+     *
+     * @return
+     */
+    @GetMapping("/limit1")
+    @Limiting(limitNum = 1, name = "limiting1")
+    public RestResponse<String> Limit1() {
+        return RestResponse.success("limiting1");
+    }
 
-	/**
-	 * 使用限流注解的接口2
-	 *
-	 * @return
-	 */
-	@GetMapping("/limit2")
-	@Limiting(limitNum = 5, name = "limiting2")
-	public RestResponse<String> Limit2() {
-		return RestResponse.success("limiting2");
-	}
-
+    /**
+     * 使用限流注解的接口2
+     *
+     * @return
+     */
+    @GetMapping("/limit2")
+    @Limiting(limitNum = 5, name = "limiting2")
+    public RestResponse<String> Limit2() {
+        return RestResponse.success("limiting2");
+    }
 }

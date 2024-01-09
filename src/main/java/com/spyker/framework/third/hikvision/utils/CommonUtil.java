@@ -54,5 +54,4 @@ public final class CommonUtil {
         structTime.dwSecond = Integer.parseInt(times[5]);
         return structTime;
     }
-
 }

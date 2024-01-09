@@ -14,5 +14,4 @@ public class RefundsCiphertextParseAmount {
     private int refund;
     private int payer_total;
     private int payer_refund;
-
 }

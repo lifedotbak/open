@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>
  * 岗位信息表 前端控制器
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -92,5 +90,4 @@ public class SysPostController {
 
         return sysPostService.delete(id);
     }
-
 }

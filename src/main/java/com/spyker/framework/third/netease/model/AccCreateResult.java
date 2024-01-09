@@ -7,5 +7,4 @@ public class AccCreateResult {
 
     private int code;
     private Acc info;
-
 }

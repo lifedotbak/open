@@ -2,10 +2,7 @@ package com.spyker.framework.third.word.impl;
 
 import com.spyker.framework.third.word.SensitiveWordUtils;
 
-/**
- * 普通户名 、联系人姓名
- * (3个字以内隐藏第1个字，4-6个字隐藏前2个字，大于6个字隐藏第3-6个字，隐藏字用*代替；对于姓名用“•”分为多部分的情况，每部分均采用上述规则进行脱敏。)
- */
+/** 普通户名 、联系人姓名 (3个字以内隐藏第1个字，4-6个字隐藏前2个字，大于6个字隐藏第3-6个字，隐藏字用*代替；对于姓名用“•”分为多部分的情况，每部分均采用上述规则进行脱敏。) */
 public class ConsNameWord {
 
     private static final int consNameMinLength = 3;
@@ -32,15 +29,15 @@ public class ConsNameWord {
             } else if (length >= consNameCenterLenght && length <= consNameMaxLength) {
                 returnWord.append(repalceStr).append(repalceStr).append(word2, 2, length);
             } else if (length > consNameMaxLength) {
-                returnWord.append(word2, 0, 2)
-                          .append(repalceStr)
-                          .append(repalceStr)
-                          .append(repalceStr)
-                          .append(repalceStr)
-                          .append(word2, 5, length);
+                returnWord
+                        .append(word2, 0, 2)
+                        .append(repalceStr)
+                        .append(repalceStr)
+                        .append(repalceStr)
+                        .append(repalceStr)
+                        .append(word2, 5, length);
             }
             returnWord.append(consNameSplit);
-
         }
         return returnWord.substring(0, returnWord.length() - 1);
     }

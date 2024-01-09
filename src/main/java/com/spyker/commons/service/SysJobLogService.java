@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 定时任务调度日志表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysJobLogService extends IService<SysJobLog> {
     RestResponse<?> update(SysJobLog SysJobLog);
 
     RestResponse<?> delete(String id);
-
 }

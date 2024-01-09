@@ -14,8 +14,8 @@ import java.util.Base64;
 
 /**
  * 证书和回调报文解密
- * <p>
- * https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/zheng-shu-he-hui-tiao-bao-wen-jie-mi
+ *
+ * <p>https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/zheng-shu-he-hui-tiao-bao-wen-jie-mi
  *
  * @author zhangzhaofeng
  */
@@ -42,9 +42,8 @@ public class AesUtil {
      * @throws GeneralSecurityException
      * @throws IOException
      */
-    public String decryptToString(byte[] associatedData, byte[] nonce, String ciphertext) throws
-            GeneralSecurityException,
-            IOException {
+    public String decryptToString(byte[] associatedData, byte[] nonce, String ciphertext)
+            throws GeneralSecurityException, IOException {
         try {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 
@@ -54,12 +53,12 @@ public class AesUtil {
             cipher.init(Cipher.DECRYPT_MODE, key, spec);
             cipher.updateAAD(associatedData);
 
-            return new String(cipher.doFinal(Base64.getDecoder().decode(ciphertext)), StandardCharsets.UTF_8);
+            return new String(
+                    cipher.doFinal(Base64.getDecoder().decode(ciphertext)), StandardCharsets.UTF_8);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new IllegalStateException(e);
         } catch (InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new IllegalArgumentException(e);
         }
     }
-
 }

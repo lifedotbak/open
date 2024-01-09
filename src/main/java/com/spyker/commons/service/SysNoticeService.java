@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 通知公告表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysNoticeService extends IService<SysNotice> {
     RestResponse<?> update(SysNotice SysNotice);
 
     RestResponse<?> delete(String id);
-
 }

@@ -22,15 +22,18 @@ public class GetMediaListAction {
 
     private static final String method = "/index/api/getMediaList";
 
-    @Autowired
-    private ZLMediaKitProperties zlMediaKitProperties;
+    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @Autowired private RestTemplate restTemplate;
 
     public JSONObject execute(String vhost, String app, String stream) {
 
-        String postUrl = "http://" + zlMediaKitProperties.getIp() + ":" + zlMediaKitProperties.getPort() + method;
+        String postUrl =
+                "http://"
+                        + zlMediaKitProperties.getIp()
+                        + ":"
+                        + zlMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -50,7 +53,8 @@ public class GetMediaListAction {
 
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> exchangeResult = restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> exchangeResult =
+                restTemplate.exchange(postUrl, HttpMethod.POST, entity, String.class);
 
         String responseBody = exchangeResult.getBody();
 
@@ -64,5 +68,4 @@ public class GetMediaListAction {
 
         return jsonObject;
     }
-
 }

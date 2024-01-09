@@ -23,7 +23,7 @@ public class StrFormatterUtils {
      * 转义\： format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
      *
      * @param strPattern 字符串模板
-     * @param argArray   参数列表
+     * @param argArray 参数列表
      * @return 结果
      */
     public static String format(final String strPattern, final Object... argArray) {
@@ -36,7 +36,7 @@ public class StrFormatterUtils {
         StringBuilder sbuf = new StringBuilder(strPatternLength + 50);
 
         int handledPosition = 0;
-        int delimIndex;// 占位符所在位置
+        int delimIndex; // 占位符所在位置
         for (int argIndex = 0; argIndex < argArray.length; argIndex++) {
             delimIndex = strPattern.indexOf(EMPTY_JSON, handledPosition);
             if (delimIndex == -1) {

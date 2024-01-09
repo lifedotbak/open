@@ -1,34 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysConfigMapper">
-    
-    <select id="query" resultType="com.spyker.commons.entity.SysConfig" parameterType="com.spyker.commons.search.SysConfigSearch">
-        SELECT a.* FROM sys_config a
-        <where>
-            <if test="null != configName ">
-                and a.config_name = #{configName}
-            </if>
-            <if test="null != configKey ">
-                and a.config_key = #{configKey}
-            </if>
-            <if test="null != configType ">
-                and a.config_type = #{configType}
-            </if>
-        </where>
-    </select>
-    
-    <select id="queryPage" resultType="com.spyker.commons.entity.SysConfig" parameterType="com.spyker.commons.search.SysConfigSearch">
-        SELECT a.* FROM sys_config a
-        <where>
-            <if test="null != search.configName ">
-                and a.config_name = #{search.configName}
-            </if>
-            <if test="null != search.configKey ">
-                and a.config_key = #{search.configKey}
-            </if>
-            <if test="null != search.configType ">
-                and a.config_type = #{search.configType}
-            </if>
-        </where>
-    </select>
+
+	<select id="query" resultType="com.spyker.commons.entity.SysConfig"
+			parameterType="com.spyker.commons.search.SysConfigSearch">
+		SELECT a.* FROM sys_config a
+		<where>
+			<if test="null != configName ">
+				and a.config_name = #{configName}
+			</if>
+			<if test="null != configKey ">
+				and a.config_key = #{configKey}
+			</if>
+			<if test="null != configType ">
+				and a.config_type = #{configType}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryPage" resultType="com.spyker.commons.entity.SysConfig"
+			parameterType="com.spyker.commons.search.SysConfigSearch">
+		SELECT a.* FROM sys_config a
+		<where>
+			<if test="null != search.configName ">
+				and a.config_name = #{search.configName}
+			</if>
+			<if test="null != search.configKey ">
+				and a.config_key = #{search.configKey}
+			</if>
+			<if test="null != search.configType ">
+				and a.config_type = #{search.configType}
+			</if>
+		</where>
+	</select>
 
 </mapper>

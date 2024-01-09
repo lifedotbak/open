@@ -13,15 +13,15 @@ import java.util.Base64;
 
 /**
  * 签名生成 商户可以按照下述步骤生成请求的签名。 创建微信支付请求签名
- * <p>
- * https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/qian-ming-sheng-cheng
- * <p>
- * // Authorization: <schema> <token> // GET - getToken("GET", httpurl, "") //
- * POST - getToken("POST", httpurl, json)
- * <p>
- * 示例：
- * <p>
- * Authorization: WECHATPAY2-SHA256-RSA2048
+ *
+ * <p>https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/qian-ming-sheng-cheng
+ *
+ * <p>// Authorization: <schema> <token> // GET - getToken("GET", httpurl, "") // POST -
+ * getToken("POST", httpurl, json)
+ *
+ * <p>示例：
+ *
+ * <p>Authorization: WECHATPAY2-SHA256-RSA2048
  * mchid="1900009191",nonce_str="593BEC0C930BF1AFEB40B4A08C8FB242",
  * signature="uOVRnA4qG/MNnYzdQxJanN+zU+lTgIcnU9BxGw5dKjK+VdEUz2FeIoC+D5sB/LN
  * +nGzX3hfZg6r5wT1pl2ZobmIc6p0ldN7J6yDgUzbX8Uk3sD4a4eZVPTBvqNDoUqcYMlZ9uuDdCvNv4TM3c1WzsXUrExwVkI1XO5jCNbgDJ25nkT
@@ -44,7 +44,7 @@ public class SignRequestAuthUtil {
      *
      * @param method
      * @param url
-     * @param body   json格式
+     * @param body json格式
      * @return
      * @throws Exception
      */
@@ -69,7 +69,21 @@ public class SignRequestAuthUtil {
         String message = buildMessage(requestAuth);
         String signature = sign(message.getBytes(StandardCharsets.UTF_8));
 
-        return "mchid=\"" + payConfig.getMchId() + "\"," + "nonce_str=\"" + nonceStr + "\"," + "timestamp=\"" + requestAuth.getTimestamp() + "\"," + "serial_no=\"" + payConfig.getCertificateSerialNo() + "\"," + "signature=\"" + signature + "\"";
+        return "mchid=\""
+                + payConfig.getMchId()
+                + "\","
+                + "nonce_str=\""
+                + nonceStr
+                + "\","
+                + "timestamp=\""
+                + requestAuth.getTimestamp()
+                + "\","
+                + "serial_no=\""
+                + payConfig.getCertificateSerialNo()
+                + "\","
+                + "signature=\""
+                + signature
+                + "\"";
     }
 
     /**
@@ -91,13 +105,16 @@ public class SignRequestAuthUtil {
             canonicalUrl.append("?").append(httpurl.encodedQuery());
         }
 
-        return prePayAuth.getMethod() + "\n" + canonicalUrl.append("\n")
-                                                           .append(prePayAuth.getTimestamp())
-                                                           .append("\n")
-                                                           .append(prePayAuth.getNonce_str())
-                                                           .append("\n")
-                                                           .append(prePayAuth.getBody())
-                                                           .append("\n");
+        return prePayAuth.getMethod()
+                + "\n"
+                + canonicalUrl
+                        .append("\n")
+                        .append(prePayAuth.getTimestamp())
+                        .append("\n")
+                        .append(prePayAuth.getNonce_str())
+                        .append("\n")
+                        .append(prePayAuth.getBody())
+                        .append("\n");
     }
 
     /**
@@ -118,5 +135,4 @@ public class SignRequestAuthUtil {
 
         return Base64.getEncoder().encodeToString(sign.sign());
     }
-
 }

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * 自动填充默认元对象处理器
- */
+/** 自动填充默认元对象处理器 */
 @Component
 @Slf4j
 public class DefaultMetaObjectHandler implements MetaObjectHandler {
@@ -52,5 +50,4 @@ public class DefaultMetaObjectHandler implements MetaObjectHandler {
         this.setFieldValByName("modifyTime", new Date(), metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
     }
-
 }

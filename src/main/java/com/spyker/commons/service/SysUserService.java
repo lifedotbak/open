@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 用户信息表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -31,5 +29,4 @@ public interface SysUserService extends IService<SysUser> {
     RestResponse<?> delete(String id);
 
     boolean login(String userName, String password);
-
 }

@@ -34,7 +34,8 @@ public interface PlayCtrl extends Library {
 
     int PlayM4_GetLastError(int var1);
 
-    boolean PlayM4_SetDecCallBackExMend(int var1, DecCallBack var2, Pointer var3, int var4, int var5);
+    boolean PlayM4_SetDecCallBackExMend(
+            int var1, DecCallBack var2, Pointer var3, int var4, int var5);
 
     interface DecCallBack extends Callback {
         void invoke(int var1, Pointer var2, int var3, FRAME_INFO var4, int var5, int var6);
@@ -48,7 +49,6 @@ public interface PlayCtrl extends Library {
         public int nFrameRate;
         public int dwFrameNum;
 
-        public FRAME_INFO() {
-        }
+        public FRAME_INFO() {}
     }
 }

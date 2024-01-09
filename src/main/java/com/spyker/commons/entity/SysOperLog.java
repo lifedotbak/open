@@ -3,16 +3,16 @@ package com.spyker.commons.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
  * 操作日志记录
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28

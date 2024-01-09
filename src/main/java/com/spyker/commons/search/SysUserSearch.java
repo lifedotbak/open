@@ -1,15 +1,14 @@
 package com.spyker.commons.search;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * <p>
  * 用户信息表
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -73,5 +72,4 @@ public class SysUserSearch implements Serializable {
 
     @Schema(description = "备注")
     private String remark;
-
 }

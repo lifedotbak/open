@@ -66,7 +66,8 @@ public class ImageUtils {
             } else {
                 // 本机地址
                 String localPath = PlatformConfig.getProfile();
-                String downloadPath = localPath + StringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
+                String downloadPath =
+                        localPath + StringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
                 in = new FileInputStream(downloadPath);
             }
             return IOUtils.toByteArray(in);

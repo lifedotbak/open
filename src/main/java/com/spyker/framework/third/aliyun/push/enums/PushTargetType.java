@@ -1,7 +1,6 @@
 package com.spyker.framework.third.aliyun.push.enums;
 
 public enum PushTargetType {
-
     DEVICE("DEVICE", "按设备"),
     ALIAS("ALIAS", "别名"),
     ACCOUNT("ACCOUNT", "帐号"),

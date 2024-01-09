@@ -9,9 +9,7 @@ import com.spyker.framework.response.RestResponse;
 import java.util.List;
 
 /**
- * <p>
  * 角色信息表 服务类
- * </p>
  *
  * @author CodeGenerator
  * @since 2023-09-28
@@ -29,5 +27,4 @@ public interface SysRoleService extends IService<SysRole> {
     RestResponse<?> update(SysRole SysRole);
 
     RestResponse<?> delete(String id);
-
 }

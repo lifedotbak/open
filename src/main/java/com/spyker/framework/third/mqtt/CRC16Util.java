@@ -7,9 +7,7 @@ import org.springframework.lang.NonNull;
 
 public final class CRC16Util {
 
-    private CRC16Util() {
-
-    }
+    private CRC16Util() {}
 
     // {"msg":"C0C0C0FF48444C4D495241434C45AAAA0FFDFEFFFE00312802010000007A83"}
     public static void main(String[] args) {
@@ -18,7 +16,7 @@ public final class CRC16Util {
     }
 
     /**
-     * CRC16_MODBUS  低位在前
+     * CRC16_MODBUS 低位在前
      *
      * @param validationData
      * @return
@@ -28,13 +26,12 @@ public final class CRC16Util {
         String result = crc(CrcModel.CRC16_MODBUS, validationData);
 
         return convertLowHigh(result);
-
     }
 
     /**
      * crc校验 高位字节在前
      *
-     * @param useModel       crc校验模式
+     * @param useModel crc校验模式
      * @param validationData crc 校验值
      * @return 检验结果 高位字节在前
      */
@@ -101,5 +98,4 @@ public final class CRC16Util {
 
         return crc(CrcModel.CRC16_XMODEM, validationData);
     }
-
 }

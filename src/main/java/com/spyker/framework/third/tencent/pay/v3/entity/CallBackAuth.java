@@ -15,5 +15,4 @@ public class CallBackAuth {
     private String nonceStr;
     private String prepayid;
     private String packageValue;
-
 }

@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysUserMapper">
-	
+
 	<select id="getUserByName" resultType="com.spyker.commons.entity.SysUser">
 		SELECT a.* FROM sys_user a where a.user_name = #{userName} limit 1
 	</select>
-	
+
 	<select id="queryPermsById" resultType="String">
 		SELECT DISTINCT
-			d.perms
+		d.perms
 		FROM
-			sys_user a,
-			sys_user_role b,
-			sys_role_menu c,
-			sys_menu d
+		sys_user a,
+		sys_user_role b,
+		sys_role_menu c,
+		sys_menu d
 		WHERE
-			a.user_id = b.user_id
-			AND b.role_id = c.role_id
-			AND c.menu_id = d.menu_id
-			AND d.perms != ''
-			AND a.user_id = #{userId}
+		a.user_id = b.user_id
+		AND b.role_id = c.role_id
+		AND c.menu_id = d.menu_id
+		AND d.perms != ''
+		AND a.user_id = #{userId}
 	</select>
-	
+
 	<select id="queryRolesById" resultType="String">
 		SELECT
-			DISTINCT
-			b.role_key
+		DISTINCT
+		b.role_key
 		FROM
-			sys_user_role a,
-			sys_role b,
-			sys_user c
+		sys_user_role a,
+		sys_role b,
+		sys_user c
 		WHERE
-			a.user_id = c.user_id
-			AND a.role_id = b.role_id
-			AND c.user_id = #{userId}
+		a.user_id = c.user_id
+		AND a.role_id = b.role_id
+		AND c.user_id = #{userId}
 	</select>
-	
-	<select id="query" resultType="com.spyker.commons.entity.SysUser" parameterType="com.spyker.commons.search.SysUserSearch">
+
+	<select id="query" resultType="com.spyker.commons.entity.SysUser"
+			parameterType="com.spyker.commons.search.SysUserSearch">
 		SELECT a.* FROM sys_user a
 		<where>
 			<if test="null != deptId ">
@@ -89,8 +90,9 @@
 			</if>
 		</where>
 	</select>
-	
-	<select id="queryPage" resultType="com.spyker.commons.entity.SysUser" parameterType="com.spyker.commons.search.SysUserSearch">
+
+	<select id="queryPage" resultType="com.spyker.commons.entity.SysUser"
+			parameterType="com.spyker.commons.search.SysUserSearch">
 		SELECT a.* FROM sys_user a
 		<where>
 			<if test="null != search.deptId ">
