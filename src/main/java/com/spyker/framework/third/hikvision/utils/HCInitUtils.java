@@ -6,7 +6,9 @@ import com.spyker.framework.third.hikvision.jna.HCNetSDK;
 import com.spyker.framework.third.hikvision.jna.PlayCtrl;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

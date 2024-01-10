@@ -1,10 +1,6 @@
 package com.spyker.framework.redis.redisson;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import com.spyker.framework.util.RedisUtils;
 
 import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;
@@ -16,18 +12,19 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.transaction.TransactionAwareCacheDecorator;
 import org.springframework.util.StringUtils;
 
-import com.spyker.framework.util.RedisUtils;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class PlusSpringCacheManager implements CacheManager {
 
-    private boolean dynamic = true;
-
-    private boolean allowNullValues = true;
-
-    private boolean transactionAware = true;
-
     Map<String, CacheConfig> configMap = new ConcurrentHashMap<>();
     ConcurrentMap<String, Cache> instanceMap = new ConcurrentHashMap<>();
+    private boolean dynamic = true;
+    private boolean allowNullValues = true;
+    private boolean transactionAware = true;
 
     /** Creates CacheManager supplied by Redisson instance */
     public PlusSpringCacheManager() {}
@@ -53,25 +50,6 @@ public class PlusSpringCacheManager implements CacheManager {
      */
     public void setTransactionAware(boolean transactionAware) {
         this.transactionAware = transactionAware;
-    }
-
-    /**
-     * Defines 'fixed' cache names. A new cache instance will not be created in dynamic for
-     * non-defined names.
-     *
-     * <p>`null` parameter setups dynamic mode
-     *
-     * @param names of caches
-     */
-    public void setCacheNames(Collection<String> names) {
-        if (names != null) {
-            for (String name : names) {
-                getCache(name);
-            }
-            dynamic = false;
-        } else {
-            dynamic = true;
-        }
     }
 
     /**
@@ -156,5 +134,24 @@ public class PlusSpringCacheManager implements CacheManager {
     @Override
     public Collection<String> getCacheNames() {
         return Collections.unmodifiableSet(configMap.keySet());
+    }
+
+    /**
+     * Defines 'fixed' cache names. A new cache instance will not be created in dynamic for
+     * non-defined names.
+     *
+     * <p>`null` parameter setups dynamic mode
+     *
+     * @param names of caches
+     */
+    public void setCacheNames(Collection<String> names) {
+        if (names != null) {
+            for (String name : names) {
+                getCache(name);
+            }
+            dynamic = false;
+        } else {
+            dynamic = true;
+        }
     }
 }

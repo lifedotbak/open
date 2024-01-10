@@ -1,6 +1,7 @@
 package com.spyker.framework.third.minio;
 
 import io.minio.MinioClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

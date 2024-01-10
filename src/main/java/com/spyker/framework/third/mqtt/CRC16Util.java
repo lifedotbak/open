@@ -2,6 +2,7 @@ package com.spyker.framework.third.mqtt;
 
 import com.github.sftwnd.crayfish.common.crc.CRC;
 import com.github.sftwnd.crayfish.common.crc.CrcModel;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 

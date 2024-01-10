@@ -2,6 +2,7 @@ package com.spyker.framework.third.hikvision.video;
 
 import com.spyker.framework.third.hikvision.data.HCOpInfo;
 import com.spyker.framework.third.hikvision.jna.HCNetSDK;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**

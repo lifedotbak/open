@@ -10,18 +10,21 @@ import com.spyker.framework.third.hikvision.video.HCControl;
 import com.spyker.framework.third.hikvision.video.HCVideo;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.scheduling.annotation.Async;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @ConditionalOnClass(HCProperties.class)
 @AutoConfiguration

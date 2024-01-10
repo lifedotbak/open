@@ -1,7 +1,9 @@
 package com.spyker.framework.third.tencent.miniprogram;
 
 import com.google.gson.Gson;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

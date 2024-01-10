@@ -1,13 +1,9 @@
 package com.spyker.framework.util;
 
-import java.time.Duration;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import com.spyker.framework.util.spring.SpringUtils;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import org.redisson.api.NameMapper;
 import org.redisson.api.ObjectListener;
@@ -26,10 +22,14 @@ import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 
-import com.spyker.framework.util.spring.SpringUtils;
-
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import java.time.Duration;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuppressWarnings(value = {"unchecked", "rawtypes"})

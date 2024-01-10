@@ -1,11 +1,11 @@
 package com.spyker.commons.service;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spyker.commons.entity.SysOssConfig;
 import com.spyker.commons.search.SysOssConfigSearch;
+
+import java.util.List;
 
 /**
  * 对象存储配置表 服务类

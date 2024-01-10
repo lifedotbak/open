@@ -2,6 +2,7 @@ package com.spyker.framework.third.hikvision.exception;
 
 import com.spyker.framework.third.hikvision.jna.HCNetSDK;
 import com.sun.jna.Pointer;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

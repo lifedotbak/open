@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.stereotype.Component;
 
 /**
  * 发送消息网关,其它需要发向服务器发送消息时，调用该接口

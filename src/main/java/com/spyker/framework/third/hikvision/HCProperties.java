@@ -1,8 +1,10 @@
 package com.spyker.framework.third.hikvision;
 
 import com.spyker.framework.third.hikvision.utils.OsSelect;
+
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;

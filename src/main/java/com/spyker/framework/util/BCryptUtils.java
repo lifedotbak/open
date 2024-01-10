@@ -1,6 +1,7 @@
 package com.spyker.framework.util;
 
 import lombok.NoArgsConstructor;
+
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @NoArgsConstructor

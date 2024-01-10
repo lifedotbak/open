@@ -4,7 +4,9 @@ import com.spyker.framework.third.hikvision.data.HCLoginInfo;
 import com.spyker.framework.third.hikvision.data.HCOpInfo;
 import com.spyker.framework.third.hikvision.jna.HCNetSDK;
 import com.spyker.framework.third.hikvision.utils.HCInitUtils;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

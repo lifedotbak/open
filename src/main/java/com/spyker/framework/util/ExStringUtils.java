@@ -2,8 +2,9 @@ package com.spyker.framework.util;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrFormatter;
-import cn.hutool.core.util.StrUtil;
+
 import com.spyker.framework.constant.Constants;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.AntPathMatcher;
 

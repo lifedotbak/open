@@ -81,6 +81,48 @@ public class OssClient {
         }
     }
 
+    private static String getPolicy(String bucketName, PolicyType policyType) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("{\n\"Statement\": [\n{\n\"Action\": [\n");
+        if (policyType == PolicyType.WRITE) {
+            builder.append("\"s3:GetBucketLocation\",\n\"s3:ListBucketMultipartUploads\"\n");
+        } else if (policyType == PolicyType.READ_WRITE) {
+            builder.append(
+                    "\"s3:GetBucketLocation\",\n\"s3:ListBucket\",\n\"s3:ListBucketMultipartUploads\"\n");
+        } else {
+            builder.append("\"s3:GetBucketLocation\"\n");
+        }
+        builder.append(
+                "],\n\"Effect\": \"Allow\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
+        builder.append(bucketName);
+        builder.append("\"\n},\n");
+        if (policyType == PolicyType.READ) {
+            builder.append(
+                    "{\n\"Action\": [\n\"s3:ListBucket\"\n],\n\"Effect\": \"Deny\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
+            builder.append(bucketName);
+            builder.append("\"\n},\n");
+        }
+        builder.append("{\n\"Action\": ");
+        switch (policyType) {
+            case WRITE:
+                builder.append(
+                        "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n");
+                break;
+            case READ_WRITE:
+                builder.append(
+                        "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:GetObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n");
+                break;
+            default:
+                builder.append("\"s3:GetObject\",\n");
+                break;
+        }
+        builder.append(
+                "\"Effect\": \"Allow\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
+        builder.append(bucketName);
+        builder.append("/*\"\n}\n],\n\"Version\": \"2012-10-17\"\n}\n");
+        return builder.toString();
+    }
+
     public void createBucket() {
         try {
             String bucketName = properties.getBucketName();
@@ -175,47 +217,5 @@ public class OssClient {
 
     public String getConfigKey() {
         return configKey;
-    }
-
-    private static String getPolicy(String bucketName, PolicyType policyType) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("{\n\"Statement\": [\n{\n\"Action\": [\n");
-        if (policyType == PolicyType.WRITE) {
-            builder.append("\"s3:GetBucketLocation\",\n\"s3:ListBucketMultipartUploads\"\n");
-        } else if (policyType == PolicyType.READ_WRITE) {
-            builder.append(
-                    "\"s3:GetBucketLocation\",\n\"s3:ListBucket\",\n\"s3:ListBucketMultipartUploads\"\n");
-        } else {
-            builder.append("\"s3:GetBucketLocation\"\n");
-        }
-        builder.append(
-                "],\n\"Effect\": \"Allow\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
-        builder.append(bucketName);
-        builder.append("\"\n},\n");
-        if (policyType == PolicyType.READ) {
-            builder.append(
-                    "{\n\"Action\": [\n\"s3:ListBucket\"\n],\n\"Effect\": \"Deny\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
-            builder.append(bucketName);
-            builder.append("\"\n},\n");
-        }
-        builder.append("{\n\"Action\": ");
-        switch (policyType) {
-            case WRITE:
-                builder.append(
-                        "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n");
-                break;
-            case READ_WRITE:
-                builder.append(
-                        "[\n\"s3:AbortMultipartUpload\",\n\"s3:DeleteObject\",\n\"s3:GetObject\",\n\"s3:ListMultipartUploadParts\",\n\"s3:PutObject\"\n],\n");
-                break;
-            default:
-                builder.append("\"s3:GetObject\",\n");
-                break;
-        }
-        builder.append(
-                "\"Effect\": \"Allow\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
-        builder.append(bucketName);
-        builder.append("/*\"\n}\n],\n\"Version\": \"2012-10-17\"\n}\n");
-        return builder.toString();
     }
 }

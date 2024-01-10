@@ -1,6 +1,7 @@
 package com.spyker.framework.third.mqtt;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Value;

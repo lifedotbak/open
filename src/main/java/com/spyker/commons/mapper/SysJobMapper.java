@@ -1,13 +1,13 @@
 package com.spyker.commons.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spyker.commons.entity.SysJob;
 import com.spyker.commons.search.SysJobSearch;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 定时任务调度表 Mapper 接口

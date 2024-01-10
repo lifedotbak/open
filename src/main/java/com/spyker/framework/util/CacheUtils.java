@@ -1,15 +1,15 @@
 package com.spyker.framework.util;
 
-import java.util.Set;
+import com.spyker.framework.util.spring.SpringUtils;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import org.redisson.api.RMap;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
-import com.spyker.framework.util.spring.SpringUtils;
-
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CacheUtils {

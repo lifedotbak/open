@@ -1,20 +1,22 @@
 package com.spyker.framework.third.minio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
 import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
 import io.minio.http.Method;
+
 import jakarta.validation.constraints.NotNull;
+
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 @Slf4j
 @AutoConfiguration

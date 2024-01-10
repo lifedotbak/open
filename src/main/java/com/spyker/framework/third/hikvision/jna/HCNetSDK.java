@@ -220,9 +220,8 @@ public interface HCNetSDK extends Library {
         public byte byAudioFile; // 音频文件0-否，1-是
         public byte byCourseFile; // 课程文件0-否，1-是
         public byte byDownload; // 是否下载 0-否，1-是
-        public byte
-                byOptimalStreamType; // 是否按最优码流类型回放
-                                     // 0-否，1-是（对于双码流设备，某一段时间内的录像文件与指定码流类型不同，则返回实际码流类型的录像）
+        public byte byOptimalStreamType; // 是否按最优码流类型回放
+        // 0-否，1-是（对于双码流设备，某一段时间内的录像文件与指定码流类型不同，则返回实际码流类型的录像）
         public byte[] byRes2 = new byte[20];
     }
 
@@ -239,9 +238,8 @@ public interface HCNetSDK extends Library {
         public int lChannel; // 通道号
         public int
                 dwStreamType; // 码流类型，0-主码流，1-子码流，2-码流3，3-码流4, 4-码流5,5-码流6,7-码流7,8-码流8,9-码流9,10-码流10
-        public int
-                dwLinkMode; // 0：TCP方式,1：UDP方式,2：多播方式,3 - RTP方式，4-RTP/RTSP,5-RSTP/HTTP ,6-
-                            // HRUDP（可靠传输）
+        public int dwLinkMode; // 0：TCP方式,1：UDP方式,2：多播方式,3 - RTP方式，4-RTP/RTSP,5-RSTP/HTTP ,6-
+        // HRUDP（可靠传输）
         // ,7-RTSP/HTTPS
         public int hPlayWnd; // 播放窗口的句柄,为NULL表示不播放图象
         public int bBlocked; // 0-非阻塞取流, 1-阻塞取流, 如果阻塞SDK内部connect失败将会有5s的超时才能够返回,不适合于轮询取流操作.
@@ -250,9 +248,8 @@ public interface HCNetSDK extends Library {
         public byte[] byStreamID = new byte[32]; // 流ID，lChannel为0xffffffff时启用此参数
         public byte byProtoType; // 应用层取流协议，0-私有协议，1-RTSP协议
         public byte byRes1;
-        public byte
-                byVideoCodingType; // 码流数据编解码类型 0-通用编码数据
-                                   // 1-热成像探测器产生的原始数据（温度数据的加密信息，通过去加密运算，将原始数据算出真实的温度值）
+        public byte byVideoCodingType; // 码流数据编解码类型 0-通用编码数据
+        // 1-热成像探测器产生的原始数据（温度数据的加密信息，通过去加密运算，将原始数据算出真实的温度值）
         public int dwDisplayBufNum; // 播放库播放缓冲区最大缓冲帧数，范围1-50，置0时默认为1
         public byte byNPQMode; // NPQ是直连模式，还是过流媒体 0-直连 1-过流媒体
         public byte[] byRes = new byte[215];
@@ -411,9 +408,8 @@ public interface HCNetSDK extends Library {
         public byte byPassWordResetLevel; // 0-无效，1
         // -管理员创建一个非管理员用户为其设置密码，该非管理员用户正确登录设备后要提示“请修改初始登录密码”，未修改的情况下，用户每次登入都会进行提醒；2
         // -当非管理员用户的密码被管理员修改，该非管理员用户再次正确登录设备后，需要提示“请重新设置登录密码”，未修改的情况下，用户每次登入都会进行提醒。
-        public byte
-                bySupportStreamEncrypt; // 能力集扩展，位与结果：0- 不支持，1- 支持 bySupportStreamEncrypt &
-                                        // 0x1:表示是否支持RTP/TLS取流
+        public byte bySupportStreamEncrypt; // 能力集扩展，位与结果：0- 不支持，1- 支持 bySupportStreamEncrypt &
+        // 0x1:表示是否支持RTP/TLS取流
         // bySupportStreamEncrypt & 0x2: 表示是否支持SRTP/UDP取流 bySupportStreamEncrypt &
         // 0x4: 表示是否支持SRTP/MULTICAST取流
         public byte byMarketType; // 0-无效（未知类型）,1-经销型，2-行业型
@@ -452,7 +448,7 @@ public interface HCNetSDK extends Library {
     class NET_DVR_ATMFINDINFO extends Structure {
         public byte
                 byTransactionType; // 交易类型 0-全部，1-查询， 2-取款， 3-存款， 4-修改密码，5-转账， 6-无卡查询 7-无卡存款， 8-吞钞
-                                   // 9-吞卡 10-自定义
+        // 9-吞卡 10-自定义
         public byte[] byRes = new byte[3]; // 保留
         public int dwTransationAmount; // 交易金额 ;
     }
