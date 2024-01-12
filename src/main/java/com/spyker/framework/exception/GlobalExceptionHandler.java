@@ -1,10 +1,18 @@
 package com.spyker.framework.exception;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.List;
-import java.util.Objects;
+import cn.dev33.satoken.exception.SaTokenException;
+import cn.hutool.core.util.ObjectUtil;
+
+import com.spyker.framework.exception.entity.ExceptionLog;
+import com.spyker.framework.exception.handler.ExceptionLogHandler;
+import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
+import com.spyker.framework.response.ResponseCodeEnum;
+import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +30,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.spyker.framework.exception.entity.ExceptionLog;
-import com.spyker.framework.exception.handler.ExceptionLogHandler;
-import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
-import com.spyker.framework.response.ResponseCodeEnum;
-import com.spyker.framework.response.RestResponse;
-import com.spyker.framework.wrapper.ContentCachingRequestWrapper;
-
-import cn.dev33.satoken.exception.SaTokenException;
-import cn.hutool.core.util.ObjectUtil;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.Objects;
 
 /** 系统异常处理 */
 @RestControllerAdvice
@@ -86,7 +88,7 @@ public class GlobalExceptionHandler {
 
         doLog(request, e);
 
-        return RestResponse.error(-1, "权限认证失败");
+        return RestResponse.error(-1,  e.getMessage());
     }
 
     private void doLog(HttpServletRequest request, Exception e) {
