@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-@ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
+//@ConditionalOnProperty(prefix = "spring.data.redis", name = "enabled", havingValue = "true")
 @Slf4j
 public class StringRedisService {
 

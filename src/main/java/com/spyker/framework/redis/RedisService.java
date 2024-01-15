@@ -1,10 +1,9 @@
 package com.spyker.framework.redis;
 
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,6 +22,29 @@ public class RedisService {
 
     @Autowired private RedisTemplate redisTemplate;
 
+    //    /** Redi s的 geospatial 操作，如 GEOADD、GEORADIUS 等。 */
+    @Resource(name="redisTemplate")
+    private GeoOperations geoOperations;
+
+    //
+    //    /** Redis hash 操作 */
+    //    private HashOperations hashOperations = redisTemplate.opsForHash();
+    //
+    //    /** Redis HyperLogLog 操作，如 PFADD，PFCOUNT，…​ */
+    //    private HyperLogLogOperations hyperLogLogOperations = redisTemplate.opsForHyperLogLog();
+    //
+    //    /** Redis list 操作 */
+    //    private ListOperations listOperations = redisTemplate.opsForList();
+    //
+    //    /** Redis set 操作 */
+    //    private SetOperations setOperations = redisTemplate.opsForSet();
+    //
+    //    /** Redis string (或 value) 操作 */
+    //    private ValueOperations valueOperations = redisTemplate.opsForValue();
+    //
+    //    /** Redis zset (或 sorted set) 操作 */
+    //    private ZSetOperations zSetOperations = redisTemplate.opsForZSet();
+
     /**
      * 缓存基本的对象，Integer、String、实体类等
      *
@@ -33,6 +55,7 @@ public class RedisService {
      */
     public <T> void setCacheObject(
             final String key, final T value, final Integer timeout, final TimeUnit timeUnit) {
+
         redisTemplate.opsForValue().set(key, value, timeout, timeUnit);
     }
 
