@@ -54,15 +54,6 @@ spring:
     #是否缓存空值，可以防止缓存穿透
     redis.cache-null-values: true
 
-  #    enabled: true
-  #    lettuce:
-  #      pool:
-  #        max-active: 8
-  #        max-wait: 10000
-  #        max-idle: 8
-  #        min-idle: 1
-  #      shutdown-timeout: 100
-
   mvc:
     view:
       prefix: /
@@ -86,6 +77,14 @@ spring:
       password:
       port: 6379
       timeout: 6000
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+        shutdown-timeout: 100
+
   web:
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}

@@ -1,6 +1,7 @@
 package com.spyker.framework.redis;
 
 import jakarta.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.*;
@@ -23,7 +24,7 @@ public class RedisService {
     @Autowired private RedisTemplate redisTemplate;
 
     //    /** Redi s的 geospatial 操作，如 GEOADD、GEORADIUS 等。 */
-    @Resource(name="redisTemplate")
+    @Resource(name = "redisTemplate")
     private GeoOperations geoOperations;
 
     //
