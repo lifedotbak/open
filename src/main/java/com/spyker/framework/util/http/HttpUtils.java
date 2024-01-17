@@ -1,10 +1,8 @@
 package com.spyker.framework.util.http;
 
 import com.spyker.framework.constant.Constants;
-import com.spyker.framework.util.ExStringUtils;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.net.ssl.*;
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,6 +13,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
+
+import javax.net.ssl.*;
 
 /**
  * 通用http发送方法

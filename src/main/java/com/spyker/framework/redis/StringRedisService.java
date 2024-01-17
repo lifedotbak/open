@@ -3,7 +3,6 @@ package com.spyker.framework.redis;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-//@ConditionalOnProperty(prefix = "spring.data.redis", name = "enabled", havingValue = "true")
+// @ConditionalOnProperty(prefix = "spring.data.redis", name = "enabled", havingValue = "true")
 @Slf4j
 public class StringRedisService {
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${package.Mapper}.${table.mapperName}">
 
-	// @formatter:off
+    // @formatter:off
 
     <select id="query" resultType="${package.Entity}.${entity}" parameterType="com.spyker.commons.search.${entity}Search">
         SELECT

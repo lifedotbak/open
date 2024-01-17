@@ -1,12 +1,12 @@
 package ${package.Controller};
 import org.springframework.web.bind.annotation.RequestMapping;
 <#if restControllerStyle>
-	import org.springframework.web.bind.annotation.RestController;
+    import org.springframework.web.bind.annotation.RestController;
 <#else>
-	import org.springframework.stereotype.Controller;
+    import org.springframework.stereotype.Controller;
 </#if>
 <#if superControllerClassPackage??>
-	import ${superControllerClassPackage};
+    import ${superControllerClassPackage};
 </#if>
 import java.util.Date;
 import java.util.List;
@@ -57,9 +57,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
 @Slf4j
 <#if superControllerClass??>
-	public class ${table.controllerName} extends ${superControllerClass} {
+    public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
-	public class ${table.controllerName} {
+    public class ${table.controllerName} {
 </#if>
 
 // @formatter:off

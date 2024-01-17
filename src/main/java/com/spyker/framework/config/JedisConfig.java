@@ -1,14 +1,14 @@
-//package com.spyker.framework.config;
+// package com.spyker.framework.config;
 //
-//import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
+// import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+// import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
 //
-//import redis.clients.jedis.JedisPool;
+// import redis.clients.jedis.JedisPool;
 //
-//@Configuration
-//public class JedisConfig {
+// @Configuration
+// public class JedisConfig {
 //
 //    @Value("${spring.data.redis.host}")
 //    private String host;
@@ -33,7 +33,8 @@
 //    @Bean
 //    public JedisPool jedisPool(GenericObjectPoolConfig genericObjectPoolConfig) {
 //
-//        JedisPool jedisPool = new JedisPool(genericObjectPoolConfig, host, port, timeout, password);
+//        JedisPool jedisPool = new JedisPool(genericObjectPoolConfig, host, port, timeout,
+// password);
 //        return jedisPool;
 //    }
-//}
+// }

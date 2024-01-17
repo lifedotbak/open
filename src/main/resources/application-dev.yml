@@ -117,12 +117,12 @@ aliyun:
     accessKeySecret:
     signName:
   oss:
-    accessKeyId:
-    accessKeySecret:
-    bucketName:
-    endPoint:
+    accessKeyId: xxx
+    accessKeySecret: yyyy
+    bucketName: zzz
+    endPoint: mmm
     out:
-      imgUrl:
+      imgUrl: uuuu
   ram:
     accessKeyId:
     accessKeySecret:

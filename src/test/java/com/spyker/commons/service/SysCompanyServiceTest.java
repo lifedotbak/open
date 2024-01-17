@@ -1,8 +1,5 @@
 package com.spyker.commons.service;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
@@ -10,6 +7,9 @@ import com.spyker.commons.entity.SysCompany;
 import com.spyker.commons.search.SysCompanySearch;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 部门表 服务类

@@ -88,75 +88,7 @@ public class GlobalExceptionHandler {
 
         doLog(request, e);
 
-        return RestResponse.error(-1,  e.getMessage());
-    }
-
-    private void doLog(HttpServletRequest request, Exception e) {
-
-        log.error("捕获到异常：{}", e);
-        // 加入数据库日志记录
-        StringWriter sw = new StringWriter();
-
-        e.printStackTrace(new PrintWriter(sw, true));
-
-        // 异常的详情
-        String expDetail = sw.toString();
-
-        try {
-            sw.close();
-        } catch (IOException ioException) {
-            log.error("异常日志：关闭异常详情Writer异常");
-        }
-
-        // 异常的url
-        String expUrl = request.getRequestURI();
-
-        // 异常的参数
-        Object body = request.getAttribute(REQUESTBODY);
-        String expParams = ObjectUtil.isNotNull(body) ? body.toString() : "";
-
-        //		String headerLog = "";
-        //		Enumeration<String> headerNames = request.getHeaderNames();
-        //		Map<String, String> headers = new HashMap<>();
-        //		while (headerNames.hasMoreElements()) {
-        //			String headerName = headerNames.nextElement();
-        //			headers.put(headerName, request.getHeader(headerName));
-        //		}
-        //		if (!headers.isEmpty()) {
-        //			ObjectMapper objectMapper = new ObjectMapper();
-        //			try {
-        //				headerLog = objectMapper.writeValueAsString(headers);
-        //			} catch (JsonProcessingException jsonProcessingException) {
-        //				jsonProcessingException.printStackTrace();
-        //				log.error("写异常日志objectMapper.writeValueAsString(headers)发生异常,原异常详情： {}", expDetail);
-        //			}
-        //		}
-
-        // 异常的类型
-        String expType = e.getClass().getName();
-
-        // 异常的类名
-        StackTraceElement stackTraceElement = e.getStackTrace()[0];
-        String expController = stackTraceElement.getClassName();
-
-        // 异常的方法名
-        String expMethod = stackTraceElement.getMethodName();
-
-        ExceptionLog exceptionLog = new ExceptionLog();
-        exceptionLog.setExpUrl(expUrl);
-        exceptionLog.setExpParams(expParams);
-        exceptionLog.setExpType(expType);
-        exceptionLog.setExpController(expController);
-        exceptionLog.setExpMethod(expMethod);
-        exceptionLog.setExpDetail(expDetail);
-
-        log.error("exceptionLog ---> {}", exceptionLog);
-
-        ExceptionLogHandler exceptionLogHandler = exceptionChain.getHandler();
-
-        if (null != exceptionLogHandler) {
-            exceptionLogHandler.handler(exceptionLog);
-        }
+        return RestResponse.error(-1, e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -263,6 +195,74 @@ public class GlobalExceptionHandler {
             }
         } catch (Exception e) {
 
+        }
+    }
+
+    private void doLog(HttpServletRequest request, Exception e) {
+
+        log.error("捕获到异常：{}", e);
+        // 加入数据库日志记录
+        StringWriter sw = new StringWriter();
+
+        e.printStackTrace(new PrintWriter(sw, true));
+
+        // 异常的详情
+        String expDetail = sw.toString();
+
+        try {
+            sw.close();
+        } catch (IOException ioException) {
+            log.error("异常日志：关闭异常详情Writer异常");
+        }
+
+        // 异常的url
+        String expUrl = request.getRequestURI();
+
+        // 异常的参数
+        Object body = request.getAttribute(REQUESTBODY);
+        String expParams = ObjectUtil.isNotNull(body) ? body.toString() : "";
+
+        //		String headerLog = "";
+        //		Enumeration<String> headerNames = request.getHeaderNames();
+        //		Map<String, String> headers = new HashMap<>();
+        //		while (headerNames.hasMoreElements()) {
+        //			String headerName = headerNames.nextElement();
+        //			headers.put(headerName, request.getHeader(headerName));
+        //		}
+        //		if (!headers.isEmpty()) {
+        //			ObjectMapper objectMapper = new ObjectMapper();
+        //			try {
+        //				headerLog = objectMapper.writeValueAsString(headers);
+        //			} catch (JsonProcessingException jsonProcessingException) {
+        //				jsonProcessingException.printStackTrace();
+        //				log.error("写异常日志objectMapper.writeValueAsString(headers)发生异常,原异常详情： {}", expDetail);
+        //			}
+        //		}
+
+        // 异常的类型
+        String expType = e.getClass().getName();
+
+        // 异常的类名
+        StackTraceElement stackTraceElement = e.getStackTrace()[0];
+        String expController = stackTraceElement.getClassName();
+
+        // 异常的方法名
+        String expMethod = stackTraceElement.getMethodName();
+
+        ExceptionLog exceptionLog = new ExceptionLog();
+        exceptionLog.setExpUrl(expUrl);
+        exceptionLog.setExpParams(expParams);
+        exceptionLog.setExpType(expType);
+        exceptionLog.setExpController(expController);
+        exceptionLog.setExpMethod(expMethod);
+        exceptionLog.setExpDetail(expDetail);
+
+        log.error("exceptionLog ---> {}", exceptionLog);
+
+        ExceptionLogHandler exceptionLogHandler = exceptionChain.getHandler();
+
+        if (null != exceptionLogHandler) {
+            exceptionLogHandler.handler(exceptionLog);
         }
     }
 }

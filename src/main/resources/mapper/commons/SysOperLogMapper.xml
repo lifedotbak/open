@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysOperLogMapper">
 
-	<select id="query" resultType="com.spyker.commons.entity.SysOperLog"
-			parameterType="com.spyker.commons.search.SysOperLogSearch">
-		SELECT a.* FROM sys_oper_log a
-		<where>
-			<if test="null != title ">
-				and a.title = #{title}
-			</if>
-			<if test="null != businessType ">
-				and a.business_type = #{businessType}
-			</if>
-			<if test="null != method ">
-				and a.method = #{method}
-			</if>
-			<if test="null != requestMethod ">
-				and a.request_method = #{requestMethod}
-			</if>
-			<if test="null != operatorType ">
-				and a.operator_type = #{operatorType}
-			</if>
-			<if test="null != operName ">
-				and a.oper_name = #{operName}
-			</if>
-			<if test="null != deptName ">
-				and a.dept_name = #{deptName}
-			</if>
-			<if test="null != operUrl ">
-				and a.oper_url = #{operUrl}
-			</if>
-			<if test="null != operIp ">
-				and a.oper_ip = #{operIp}
-			</if>
-			<if test="null != operLocation ">
-				and a.oper_location = #{operLocation}
-			</if>
-			<if test="null != operParam ">
-				and a.oper_param = #{operParam}
-			</if>
-			<if test="null != jsonResult ">
-				and a.json_result = #{jsonResult}
-			</if>
-			<if test="null != status ">
-				and a.status = #{status}
-			</if>
-			<if test="null != errorMsg ">
-				and a.error_msg = #{errorMsg}
-			</if>
-		</where>
-	</select>
+    <select id="query" resultType="com.spyker.commons.entity.SysOperLog"
+            parameterType="com.spyker.commons.search.SysOperLogSearch">
+        SELECT a.* FROM sys_oper_log a
+        <where>
+            <if test="null != title ">
+                and a.title = #{title}
+            </if>
+            <if test="null != businessType ">
+                and a.business_type = #{businessType}
+            </if>
+            <if test="null != method ">
+                and a.method = #{method}
+            </if>
+            <if test="null != requestMethod ">
+                and a.request_method = #{requestMethod}
+            </if>
+            <if test="null != operatorType ">
+                and a.operator_type = #{operatorType}
+            </if>
+            <if test="null != operName ">
+                and a.oper_name = #{operName}
+            </if>
+            <if test="null != deptName ">
+                and a.dept_name = #{deptName}
+            </if>
+            <if test="null != operUrl ">
+                and a.oper_url = #{operUrl}
+            </if>
+            <if test="null != operIp ">
+                and a.oper_ip = #{operIp}
+            </if>
+            <if test="null != operLocation ">
+                and a.oper_location = #{operLocation}
+            </if>
+            <if test="null != operParam ">
+                and a.oper_param = #{operParam}
+            </if>
+            <if test="null != jsonResult ">
+                and a.json_result = #{jsonResult}
+            </if>
+            <if test="null != status ">
+                and a.status = #{status}
+            </if>
+            <if test="null != errorMsg ">
+                and a.error_msg = #{errorMsg}
+            </if>
+        </where>
+    </select>
 
-	<select id="queryPage" resultType="com.spyker.commons.entity.SysOperLog"
-			parameterType="com.spyker.commons.search.SysOperLogSearch">
-		SELECT a.* FROM sys_oper_log a
-		<where>
-			<if test="null != search.title ">
-				and a.title = #{search.title}
-			</if>
-		</where>
-	</select>
+    <select id="queryPage" resultType="com.spyker.commons.entity.SysOperLog"
+            parameterType="com.spyker.commons.search.SysOperLogSearch">
+        SELECT a.* FROM sys_oper_log a
+        <where>
+            <if test="null != search.title ">
+                and a.title = #{search.title}
+            </if>
+        </where>
+    </select>
 
 </mapper>
