@@ -1,4 +1,4 @@
-package com.spyker.framework.config;
+package com.spyker.framework.third.kaptcha;
 
 import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 

@@ -3,7 +3,7 @@ package com.spyker.commons.controller.common;
 import cn.dev33.satoken.annotation.SaIgnore;
 
 import com.google.code.kaptcha.Producer;
-import com.spyker.framework.config.PlatformConfig;
+import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.constant.CacheConstants;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.redis.RedisService;
@@ -53,8 +53,8 @@ public class CaptchaController {
     public RestMapResponse createCode() throws IOException {
 
         RestMapResponse ajax = RestMapResponse.success();
-        ajax.put("captchaEnabled", PlatformConfig.getCaptchaEnabled());
-        if (!"open".equalsIgnoreCase(PlatformConfig.getCaptchaEnabled())) {
+        ajax.put("captchaEnabled", PlatformConfigProperties.getCaptchaEnabled());
+        if (!"open".equalsIgnoreCase(PlatformConfigProperties.getCaptchaEnabled())) {
             return ajax;
         }
 
@@ -67,7 +67,7 @@ public class CaptchaController {
         BufferedImage image = null;
 
         // 生成验证码
-        String captchaType = PlatformConfig.getCaptchaType();
+        String captchaType = PlatformConfigProperties.getCaptchaType();
         if ("math".equals(captchaType)) {
             String capText = captchaProducerMath.createText();
             capStr = capText.substring(0, capText.lastIndexOf("@"));

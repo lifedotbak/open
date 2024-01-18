@@ -2,7 +2,7 @@ package com.spyker.framework.util.ip;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.spyker.framework.config.PlatformConfig;
+import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.util.ExStringUtils;
 import com.spyker.framework.util.http.HttpUtils;
@@ -26,7 +26,7 @@ public class AddressUtils {
         if (IpUtils.internalIp(ip)) {
             return "内网IP";
         }
-        if (PlatformConfig.isAddressEnabled()) {
+        if (PlatformConfigProperties.isAddressEnabled()) {
             try {
                 String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
                 if (ExStringUtils.isEmpty(rspStr)) {

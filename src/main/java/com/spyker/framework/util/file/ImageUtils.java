@@ -1,8 +1,7 @@
 package com.spyker.framework.util.file;
 
-import com.spyker.framework.config.PlatformConfig;
+import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.constant.Constants;
-import com.spyker.framework.util.ExStringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
@@ -65,7 +64,7 @@ public class ImageUtils {
                 in = urlConnection.getInputStream();
             } else {
                 // 本机地址
-                String localPath = PlatformConfig.getProfile();
+                String localPath = PlatformConfigProperties.getProfile();
                 String downloadPath =
                         localPath + StringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
                 in = new FileInputStream(downloadPath);

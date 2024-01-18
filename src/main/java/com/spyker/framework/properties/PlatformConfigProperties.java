@@ -1,4 +1,4 @@
-package com.spyker.framework.config;
+package com.spyker.framework.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "platform", ignoreUnknownFields = true)
-public class PlatformConfig {
+public class PlatformConfigProperties {
 
     /** 上传路径 */
     private static String profile;
@@ -28,7 +28,7 @@ public class PlatformConfig {
     }
 
     public void setAddressEnabled(boolean addressEnabled) {
-        PlatformConfig.addressEnabled = addressEnabled;
+        PlatformConfigProperties.addressEnabled = addressEnabled;
     }
 
     public static String getCaptchaType() {
@@ -36,7 +36,7 @@ public class PlatformConfig {
     }
 
     public void setCaptchaType(String captchaType) {
-        PlatformConfig.captchaType = captchaType;
+        PlatformConfigProperties.captchaType = captchaType;
     }
 
     public static String getCaptchaEnabled() {
@@ -44,7 +44,7 @@ public class PlatformConfig {
     }
 
     public void setCaptchaEnabled(String captchaEnabled) {
-        PlatformConfig.captchaEnabled = captchaEnabled;
+        PlatformConfigProperties.captchaEnabled = captchaEnabled;
     }
 
     /** 获取导入上传路径 */
@@ -57,7 +57,7 @@ public class PlatformConfig {
     }
 
     public void setProfile(String profile) {
-        PlatformConfig.profile = profile;
+        PlatformConfigProperties.profile = profile;
     }
 
     /** 获取头像上传路径 */

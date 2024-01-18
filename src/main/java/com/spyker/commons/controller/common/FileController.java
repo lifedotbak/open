@@ -2,7 +2,7 @@ package com.spyker.commons.controller.common;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 
-import com.spyker.framework.config.PlatformConfig;
+import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.ExStringUtils;
@@ -62,7 +62,7 @@ public class FileController {
             }
             String realFileName =
                     System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-            String filePath = PlatformConfig.getDownloadPath() + fileName;
+            String filePath = PlatformConfigProperties.getDownloadPath() + fileName;
 
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             FileUtils.setAttachmentResponseHeader(response, realFileName);
@@ -80,7 +80,7 @@ public class FileController {
     public RestMapResponse uploadFile(MultipartFile file) throws Exception {
         try {
             // 上传文件路径
-            String filePath = PlatformConfig.getUploadPath();
+            String filePath = PlatformConfigProperties.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = ServletUtils.getUrl() + fileName;
@@ -100,7 +100,7 @@ public class FileController {
     public RestMapResponse uploadFiles(List<MultipartFile> files) throws Exception {
         try {
             // 上传文件路径
-            String filePath = PlatformConfig.getUploadPath();
+            String filePath = PlatformConfigProperties.getUploadPath();
             List<String> urls = new ArrayList<String>();
             List<String> fileNames = new ArrayList<String>();
             List<String> newFileNames = new ArrayList<String>();
@@ -135,7 +135,7 @@ public class FileController {
                 throw new Exception(ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
             }
             // 本地资源路径
-            String localPath = PlatformConfig.getProfile();
+            String localPath = PlatformConfigProperties.getProfile();
             // 数据库资源地址
             String downloadPath =
                     localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);

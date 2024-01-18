@@ -1,6 +1,6 @@
 package com.spyker.framework.util.file;
 
-import com.spyker.framework.config.PlatformConfig;
+import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.exception.GlobalException;
 import com.spyker.framework.util.ExStringUtils;
@@ -142,7 +142,7 @@ public class FileUploadUtils {
 
     public static final String getPathFileName(String uploadDir, String fileName)
             throws IOException {
-        int dirLastIndex = PlatformConfig.getProfile().length() + 1;
+        int dirLastIndex = PlatformConfigProperties.getProfile().length() + 1;
         String currentDir = ExStringUtils.substring(uploadDir, dirLastIndex);
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }

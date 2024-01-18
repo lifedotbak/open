@@ -1,4 +1,4 @@
-package com.spyker.framework.config;
+package com.spyker.framework.third.kaptcha;
 
 import static com.google.code.kaptcha.Constants.*;
 
@@ -68,7 +68,7 @@ public class CaptchaConfig {
         properties.setProperty(KAPTCHA_SESSION_CONFIG_KEY, "kaptchaCodeMath");
         // 验证码文本生成器
         properties.setProperty(
-                KAPTCHA_TEXTPRODUCER_IMPL, "com.spyker.framework.config.KaptchaTextCreator");
+                KAPTCHA_TEXTPRODUCER_IMPL, "com.spyker.framework.third.kaptcha.KaptchaTextCreator");
         // 验证码文本字符间距 默认为2
         properties.setProperty(KAPTCHA_TEXTPRODUCER_CHAR_SPACE, "3");
         // 验证码文本字符长度 默认为5

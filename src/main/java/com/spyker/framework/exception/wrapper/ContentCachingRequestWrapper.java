@@ -1,4 +1,4 @@
-package com.spyker.framework.wrapper;
+package com.spyker.framework.exception.wrapper;
 
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;

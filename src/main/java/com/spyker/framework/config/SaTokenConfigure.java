@@ -1,13 +1,13 @@
 package com.spyker.framework.config;
 
+import cn.dev33.satoken.interceptor.SaInterceptor;
+import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
+import cn.dev33.satoken.stp.StpLogic;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import cn.dev33.satoken.interceptor.SaInterceptor;
-import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
-import cn.dev33.satoken.stp.StpLogic;
 
 @Configuration
 public class SaTokenConfigure implements WebMvcConfigurer {
