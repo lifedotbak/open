@@ -10,4 +10,7 @@ public interface OssConstant {
 
     /** https 状态 */
     String IS_HTTPS = "Y";
+
+    /** OSS配置 */
+    String SYS_OSS_CONFIG_KEY = "sys_oss_config";
 }

@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.redis.redisson;
 
 import com.spyker.framework.util.spring.SpringUtils;
 
@@ -31,9 +31,12 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @NoArgsConstructor：生成无参构造器；access = AccessLevel.PRIVATE 用到单例模式，这时需要将构造器私有化
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
-public class RedisUtils {
+public class RedissonUtils {
 
     private static final RedissonClient CLIENT = SpringUtils.getBean(RedissonClient.class);
 

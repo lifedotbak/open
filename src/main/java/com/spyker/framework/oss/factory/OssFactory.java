@@ -3,7 +3,6 @@ package com.spyker.framework.oss.factory;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.spyker.framework.oss.constant.CacheNames;
 import com.spyker.framework.oss.constant.OssConstant;
 import com.spyker.framework.oss.core.OssClient;
 import com.spyker.framework.oss.exception.OssException;
@@ -11,7 +10,7 @@ import com.spyker.framework.oss.properties.OssProperties;
 import com.spyker.framework.util.CacheUtils;
 import com.spyker.framework.util.ExJsonUtils;
 import com.spyker.framework.util.ExStringUtils;
-import com.spyker.framework.util.RedisUtils;
+import com.spyker.framework.redis.redisson.RedissonUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +22,7 @@ public class OssFactory {
     /** 初始化工厂 */
     public static void init() {
         log.info("初始化OSS工厂");
-        RedisUtils.subscribe(
+        RedissonUtils.subscribe(
                 OssConstant.DEFAULT_CONFIG_KEY,
                 String.class,
                 configKey -> {
@@ -42,7 +41,7 @@ public class OssFactory {
     /** 获取默认实例 */
     public static OssClient instance() {
         // 获取redis 默认类型
-        String configKey = RedisUtils.getCacheObject(OssConstant.DEFAULT_CONFIG_KEY);
+        String configKey = RedissonUtils.getCacheObject(OssConstant.DEFAULT_CONFIG_KEY);
         if (ExStringUtils.isEmpty(configKey)) {
             throw new OssException("文件存储服务类型无法找到!");
         }
@@ -60,7 +59,7 @@ public class OssFactory {
     }
 
     private static void refresh(String configKey) {
-        String json = CacheUtils.get(CacheNames.SYS_OSS_CONFIG, configKey);
+        String json = CacheUtils.get(OssConstant.SYS_OSS_CONFIG_KEY, configKey);
         if (json == null) {
             throw new OssException("系统异常, '" + configKey + "'配置信息不存在!");
         }

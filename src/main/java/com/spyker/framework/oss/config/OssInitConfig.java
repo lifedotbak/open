@@ -1,16 +1,14 @@
 package com.spyker.framework.oss.config;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.spyker.framework.oss.constant.CacheNames;
 import com.spyker.framework.oss.constant.OssConstant;
 import com.spyker.framework.oss.entity.SysOssConfig;
 import com.spyker.framework.oss.factory.OssFactory;
 import com.spyker.framework.util.CacheUtils;
 import com.spyker.framework.util.ExJsonUtils;
-import com.spyker.framework.util.RedisUtils;
+import com.spyker.framework.redis.redisson.RedissonUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +32,7 @@ public class OssInitConfig {
 
         String configKey = config.getConfigKey();
         if ("0".equals(config.getStatus())) {
-            RedisUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
+            RedissonUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
         }
         setConfigCache(true, config);
 
@@ -44,10 +42,10 @@ public class OssInitConfig {
     private boolean setConfigCache(boolean flag, SysOssConfig config) {
         if (flag) {
             CacheUtils.put(
-                    CacheNames.SYS_OSS_CONFIG,
+                    OssConstant.SYS_OSS_CONFIG_KEY,
                     config.getConfigKey(),
                     ExJsonUtils.toJsonString(config));
-            RedisUtils.publish(
+            RedissonUtils.publish(
                     OssConstant.DEFAULT_CONFIG_KEY,
                     config.getConfigKey(),
                     msg -> {
