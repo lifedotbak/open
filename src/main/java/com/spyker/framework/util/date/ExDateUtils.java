@@ -1,7 +1,7 @@
 package com.spyker.framework.util.date;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -9,41 +9,27 @@ import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @Slf4j
 public final class ExDateUtils extends DateUtils {
 
-    private static final String[] parsePatterns = {
-        "yyyy-MM-dd",
-        "yyyy-MM-dd HH:mm:ss",
-        "yyyy-MM-dd HH:mm",
-        "yyyy-MM",
-        "yyyy/MM/dd",
-        "yyyy/MM/dd HH:mm:ss",
-        "yyyy/MM/dd HH:mm",
-        "yyyy/MM",
-        "yyyy.MM.dd",
-        "yyyy.MM.dd HH:mm:ss",
-        "yyyy.MM.dd HH:mm",
-        "yyyy.MM"
-    };
-    public static String YYYY = "yyyy";
-
-    public static String YYYY_MM = "yyyy-MM";
-
-    public static String YYYY_MM_DD = "yyyy-MM-dd";
-
-    public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
-
-    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
-
     public static Date parseDate(Object str) {
+
         if (str == null) {
             return null;
         }
         try {
+
+            List<String> parsePatternsList = new ArrayList<>();
+
+            for (Format format : Format.values()) {
+                parsePatternsList.add(format.getFormat());
+            }
+
+            String[] parsePatterns =
+                    parsePatternsList.toArray(new String[parsePatternsList.size()]);
+
             return parseDate(str.toString(), parsePatterns);
         } catch (ParseException e) {
             return null;
@@ -65,7 +51,7 @@ public final class ExDateUtils extends DateUtils {
      * @return String
      */
     public static String getDate() {
-        return dateTimeNow(YYYY_MM_DD);
+        return dateTimeNow(Format.YYYY_MM_DD.format);
     }
 
     public static String dateTimeNow(final String format) {
@@ -77,15 +63,15 @@ public final class ExDateUtils extends DateUtils {
     }
 
     public static String getTime() {
-        return dateTimeNow(YYYY_MM_DD_HH_MM_SS);
+        return dateTimeNow(Format.YYYY_MM_DD_HH_MM_SS.format);
     }
 
     public static String dateTimeNow() {
-        return dateTimeNow(YYYYMMDDHHMMSS);
+        return dateTimeNow(Format.YYYYMMDDHHMMSS.format);
     }
 
     public static String dateTime(final Date date) {
-        return parseDateToStr(YYYY_MM_DD, date);
+        return parseDateToStr(Format.YYYY_MM_DD.format, date);
     }
 
     public static Date dateTime(final String format, final String ts) {
@@ -99,13 +85,13 @@ public final class ExDateUtils extends DateUtils {
     /** 日期路径 即年/月/日 如2018/08/08 */
     public static String datePath() {
         Date now = new Date();
-        return DateFormatUtils.format(now, "yyyy/MM/dd");
+        return DateFormatUtils.format(now, Format.YYYY_MM_DD_.format);
     }
 
     /** 日期路径 即年/月/日 如20180808 */
     public static String dateTime() {
         Date now = new Date();
-        return DateFormatUtils.format(now, "yyyyMMdd");
+        return DateFormatUtils.format(now, Format.YMD.format);
     }
 
     /**
@@ -161,27 +147,6 @@ public final class ExDateUtils extends DateUtils {
         LocalDateTime localDateTime = LocalDateTime.of(temporalAccessor, LocalTime.of(0, 0, 0));
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         return Date.from(zdt.toInstant());
-    }
-
-    /**
-     * 2022-07-25T09:41:49+08:00
-     *
-     * @param dateValue
-     * @return
-     */
-    public static Date formatISO8601(String dateValue) {
-
-        String parseValue = StringUtils.substring(dateValue, 0, 19);
-
-        parseValue = parseValue.replace("T", " ");
-
-        SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        try {
-            return dd.parse(parseValue);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
     public static String date2String(long date, Format format) {
@@ -414,14 +379,14 @@ public final class ExDateUtils extends DateUtils {
 
     public static boolean isDayStart(Date date) {
 
-        String dateValue = date2String(date, Format.HHMMSS);
+        String dateValue = date2String(date, Format.HMS);
 
         return "00:00:00".equals(dateValue);
     }
 
     public static boolean isDayEnd(Date date) {
 
-        String dateValue = date2String(date, Format.HHMMSS);
+        String dateValue = date2String(date, Format.HMS);
 
         return "23:59:59".equals(dateValue);
     }
@@ -550,8 +515,8 @@ public final class ExDateUtils extends DateUtils {
      */
     public static boolean isDaySpan(Date start, Date end) {
         Date startYmd = clearHms(start);
-        String startHm = date2String(start, Format.HHMM);
-        String endHm = date2String(end, Format.HHMM);
+        String startHm = date2String(start, Format.HM);
+        String endHm = date2String(end, Format.HM);
 
         Date startYMDHM =
                 ExDateUtils.format2Date(
@@ -587,10 +552,10 @@ public final class ExDateUtils extends DateUtils {
     }
 
     public enum Format {
-        YYYYMMDD("yyyyMMdd"),
-        YYYYMMDDE("yyyyMMdd E"),
-        HHMM("HH:mm"),
-        HHMMSS("HH:mm:ss"),
+        YMD("yyyyMMdd"),
+        YMDE("yyyyMMdd E"),
+        HM("HH:mm"),
+        HMS("HH:mm:ss"),
         YYYY_P_MM_P_DD("yyyy.MM.dd"),
         YYYY_P_MM_P_DD_HHMM("yyyy.MM.dd HH:mm"),
         YYYYMMDDHHMMSS("yyyyMMddHHmmss"),
@@ -600,6 +565,7 @@ public final class ExDateUtils extends DateUtils {
         YYYYMM("yyyyMM"),
         YYYY_MM("yyyy-MM"),
         YYYY_MM_("yyyy/MM"),
+        YYYY_MM_DD_("yyyy/MM/dd"),
         YYYY_MM_CN("yyyy年MM月"),
         MM_DD_CN("MM月dd日"),
         MM_DD_HH_MM_CN("MM月dd日 HH:mm"),
@@ -618,5 +584,11 @@ public final class ExDateUtils extends DateUtils {
         public String getFormat() {
             return format;
         }
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(parseDate("2023年11月11日"));
+        System.out.println(Format.YYYYMMDDHHMMSS.format);
     }
 }

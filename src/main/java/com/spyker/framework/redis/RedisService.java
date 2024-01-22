@@ -277,4 +277,15 @@ public class RedisService {
     public <T> List<T> getMultiCacheMapValue(final String key, final Collection<Object> hKeys) {
         return redisTemplate.opsForHash().multiGet(key, hKeys);
     }
+
+    /**
+     * 将数据放入set缓存
+     *
+     * @param key
+     * @param value
+     * @param <T>
+     */
+    public <T> void sadd(final String key, final T... value) {
+        redisTemplate.opsForSet().add(key, value);
+    }
 }
