@@ -33,13 +33,12 @@ public class RedisServiceTest extends BaseTest {
 
         stringRedisService.set("Key2", "y");
 
-
-        redisService.sadd("set1",1);
-        redisService.sadd("set1",1);
-        redisService.sadd("set1",1);
-        redisService.sadd("set1",1);
-        redisService.sadd("set1",1);
-        redisService.sadd("set1",1);
-        redisService.sadd("set1",1);
+        redisService.sadd("set1", 1);
+        redisService.sadd("set1", 1);
+        redisService.sadd("set1", 1);
+        redisService.sadd("set1", 1);
+        redisService.sadd("set1", 1);
+        redisService.sadd("set1", 1);
+        redisService.sadd("set1", 1);
     }
 }

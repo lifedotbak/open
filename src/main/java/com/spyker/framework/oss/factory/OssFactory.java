@@ -1,28 +1,34 @@
 package com.spyker.framework.oss.factory;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.spyker.framework.oss.constant.OssConstant;
 import com.spyker.framework.oss.core.OssClient;
 import com.spyker.framework.oss.exception.OssException;
 import com.spyker.framework.oss.properties.OssProperties;
+import com.spyker.framework.redis.RedissonService;
 import com.spyker.framework.util.CacheUtils;
 import com.spyker.framework.util.ExJsonUtils;
 import com.spyker.framework.util.ExStringUtils;
-import com.spyker.framework.redis.redisson.RedissonUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 @Slf4j
+@Configuration
 public class OssFactory {
+
+    @Autowired private RedissonService redissonService;
 
     private static final Map<String, OssClient> CLIENT_CACHE = new ConcurrentHashMap<>();
 
     /** 初始化工厂 */
-    public static void init() {
+    public void init() {
         log.info("初始化OSS工厂");
-        RedissonUtils.subscribe(
+        redissonService.subscribe(
                 OssConstant.DEFAULT_CONFIG_KEY,
                 String.class,
                 configKey -> {
@@ -39,9 +45,9 @@ public class OssFactory {
     }
 
     /** 获取默认实例 */
-    public static OssClient instance() {
+    public OssClient instance() {
         // 获取redis 默认类型
-        String configKey = RedissonUtils.getCacheObject(OssConstant.DEFAULT_CONFIG_KEY);
+        String configKey = redissonService.getCacheObject(OssConstant.DEFAULT_CONFIG_KEY);
         if (ExStringUtils.isEmpty(configKey)) {
             throw new OssException("文件存储服务类型无法找到!");
         }
@@ -49,7 +55,7 @@ public class OssFactory {
     }
 
     /** 根据类型获取实例 */
-    public static OssClient instance(String configKey) {
+    public OssClient instance(String configKey) {
         OssClient client = getClient(configKey);
         if (client == null) {
             refresh(configKey);
@@ -58,7 +64,7 @@ public class OssFactory {
         return client;
     }
 
-    private static void refresh(String configKey) {
+    private void refresh(String configKey) {
         String json = CacheUtils.get(OssConstant.SYS_OSS_CONFIG_KEY, configKey);
         if (json == null) {
             throw new OssException("系统异常, '" + configKey + "'配置信息不存在!");
@@ -67,7 +73,7 @@ public class OssFactory {
         CLIENT_CACHE.put(configKey, new OssClient(configKey, properties));
     }
 
-    private static OssClient getClient(String configKey) {
+    private OssClient getClient(String configKey) {
         return CLIENT_CACHE.get(configKey);
     }
 }

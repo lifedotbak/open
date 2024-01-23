@@ -14,12 +14,13 @@ public class AppPropertiesTest extends BaseTest {
 
     @Autowired private DruidConfigProperties druidConfigProperties;
     @Autowired private AliyunConfigProperties aliyunConfigProperties;
-//    @Autowired private ZLMediaKitCofigProperties zLMediaKitCofigProperties;
+
+    //    @Autowired private ZLMediaKitCofigProperties zLMediaKitCofigProperties;
 
     @Test
     public void log() {
         log.info("druidConfigProperties-->{}", druidConfigProperties);
         log.info("aliyunConfigProperties-->{}", aliyunConfigProperties);
-//        log.info("zLMediaKitCofigProperties-->{}", zLMediaKitCofigProperties);
+        //        log.info("zLMediaKitCofigProperties-->{}", zLMediaKitCofigProperties);
     }
 }

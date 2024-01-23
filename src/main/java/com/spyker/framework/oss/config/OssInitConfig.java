@@ -1,20 +1,27 @@
 package com.spyker.framework.oss.config;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.context.annotation.Configuration;
-
 import com.spyker.framework.oss.constant.OssConstant;
 import com.spyker.framework.oss.entity.SysOssConfig;
 import com.spyker.framework.oss.factory.OssFactory;
+import com.spyker.framework.redis.RedissonService;
 import com.spyker.framework.util.CacheUtils;
 import com.spyker.framework.util.ExJsonUtils;
-import com.spyker.framework.redis.redisson.RedissonUtils;
+
+import jakarta.annotation.PostConstruct;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j
 public class OssInitConfig {
+
+    @Autowired
+    OssFactory ossFactory;
+
+    @Autowired private RedissonService redissonService;
 
     @PostConstruct
     public void init() {
@@ -32,11 +39,11 @@ public class OssInitConfig {
 
         String configKey = config.getConfigKey();
         if ("0".equals(config.getStatus())) {
-            RedissonUtils.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
+            redissonService.setCacheObject(OssConstant.DEFAULT_CONFIG_KEY, configKey);
         }
         setConfigCache(true, config);
 
-        OssFactory.init();
+        ossFactory.init();
     }
 
     private boolean setConfigCache(boolean flag, SysOssConfig config) {
@@ -45,7 +52,7 @@ public class OssInitConfig {
                     OssConstant.SYS_OSS_CONFIG_KEY,
                     config.getConfigKey(),
                     ExJsonUtils.toJsonString(config));
-            RedissonUtils.publish(
+            redissonService.publish(
                     OssConstant.DEFAULT_CONFIG_KEY,
                     config.getConfigKey(),
                     msg -> {

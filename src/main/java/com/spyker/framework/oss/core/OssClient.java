@@ -22,7 +22,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.spyker.framework.oss.constant.OssConstant;
 import com.spyker.framework.oss.entity.UploadResult;
-import com.spyker.framework.oss.enumd.PolicyType;
+import com.spyker.framework.oss.enums.PolicyType;
 import com.spyker.framework.oss.exception.OssException;
 import com.spyker.framework.oss.properties.OssProperties;
 import com.spyker.framework.util.date.ExDateUtils;

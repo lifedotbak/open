@@ -1,4 +1,4 @@
-package com.spyker.framework.oss.enumd;
+package com.spyker.framework.oss.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

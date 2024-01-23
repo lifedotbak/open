@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ExceptionLogUsableHandlerConfig {
 
-    @Autowired private ExceptionLogUsableHandler exceptionLogUsableHandler;
+    @Autowired  ExceptionLogUsableHandler exceptionLogUsableHandler;
 
-    @Autowired private ExceptionLogHandlerImpl dbLogServiceImpl;
+    @Autowired  ExceptionLogHandlerImpl dbLogServiceImpl;
 
     @PostConstruct
     public void addChian() {

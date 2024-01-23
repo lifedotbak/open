@@ -2,6 +2,7 @@ package com.spyker.framework.redis.redisson;
 
 import org.redisson.api.RMap;
 import org.redisson.api.RMapCache;
+import org.redisson.api.RedissonClient;
 import org.redisson.spring.cache.CacheConfig;
 import org.redisson.spring.cache.RedissonCache;
 import org.springframework.boot.convert.DurationStyle;
@@ -18,6 +19,8 @@ import java.util.concurrent.ConcurrentMap;
 
 public class PlusSpringCacheManager implements CacheManager {
 
+    private RedissonClient redissonClient;
+
     Map<String, CacheConfig> configMap = new ConcurrentHashMap<>();
     ConcurrentMap<String, Cache> instanceMap = new ConcurrentHashMap<>();
     private boolean dynamic = true;
@@ -25,7 +28,9 @@ public class PlusSpringCacheManager implements CacheManager {
     private boolean transactionAware = true;
 
     /** Creates CacheManager supplied by Redisson instance */
-    public PlusSpringCacheManager() {}
+    public PlusSpringCacheManager(RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
+    }
 
     /**
      * Defines possibility of storing {@code null} values.
@@ -100,7 +105,7 @@ public class PlusSpringCacheManager implements CacheManager {
     }
 
     private Cache createMap(String name, CacheConfig config) {
-        RMap<Object, Object> map = RedissonUtils.getClient().getMap(name);
+        RMap<Object, Object> map = redissonClient.getMap(name);
 
         Cache cache = new RedissonCache(map, allowNullValues);
         if (transactionAware) {
@@ -114,7 +119,7 @@ public class PlusSpringCacheManager implements CacheManager {
     }
 
     private Cache createMapCache(String name, CacheConfig config) {
-        RMapCache<Object, Object> map = RedissonUtils.getClient().getMapCache(name);
+        RMapCache<Object, Object> map = redissonClient.getMapCache(name);
 
         Cache cache = new RedissonCache(map, config, allowNullValues);
         if (transactionAware) {

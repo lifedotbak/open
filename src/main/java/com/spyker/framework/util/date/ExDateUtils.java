@@ -1,12 +1,13 @@
 package com.spyker.framework.util.date;
 
+import jakarta.validation.constraints.NotNull;
+
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
-import java.lang.management.ManagementFactory;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
@@ -14,7 +15,7 @@ import java.util.*;
 @Slf4j
 public final class ExDateUtils extends DateUtils {
 
-    public static Date parseDate(Object str) {
+    public static Date parse(Object str) {
 
         if (str == null) {
             return null;
@@ -31,18 +32,30 @@ public final class ExDateUtils extends DateUtils {
                     parsePatternsList.toArray(new String[parsePatternsList.size()]);
 
             return parseDate(str.toString(), parsePatterns);
-        } catch (ParseException e) {
+        } catch (Exception e) {
+            log.error("error-->{}", e.getMessage());
+
             return null;
         }
     }
 
-    /**
-     * 获取当前Date型日期
-     *
-     * @return Date() 当前日期
-     */
-    public static Date getNowDate() {
-        return new Date();
+    public static Date parse(@NotNull final String value, @NotNull final String format) {
+
+        if (StringUtils.isNotBlank(value)) {
+
+            try {
+                return parse(value, format);
+            } catch (Exception e) {
+                log.error("error-->{}", e.getMessage());
+                return null;
+            }
+        }
+
+        return null;
+    }
+
+    public static String format(final Date date, final String format) {
+        return DateFormatUtils.format(date, format);
     }
 
     /**
@@ -51,59 +64,21 @@ public final class ExDateUtils extends DateUtils {
      * @return String
      */
     public static String getDate() {
-        return dateTimeNow(Format.YYYY_MM_DD.format);
+        return dateTimeNow(Format.YMD_LINE.format);
     }
 
     public static String dateTimeNow(final String format) {
-        return parseDateToStr(format, new Date());
-    }
-
-    public static String parseDateToStr(final String format, final Date date) {
-        return new SimpleDateFormat(format).format(date);
-    }
-
-    public static String getTime() {
-        return dateTimeNow(Format.YYYY_MM_DD_HH_MM_SS.format);
+        return format(new Date(), format);
     }
 
     public static String dateTimeNow() {
-        return dateTimeNow(Format.YYYYMMDDHHMMSS.format);
-    }
-
-    public static String dateTime(final Date date) {
-        return parseDateToStr(Format.YYYY_MM_DD.format, date);
-    }
-
-    public static Date dateTime(final String format, final String ts) {
-        try {
-            return new SimpleDateFormat(format).parse(ts);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return dateTimeNow(Format.YMDHMS.format);
     }
 
     /** 日期路径 即年/月/日 如2018/08/08 */
     public static String datePath() {
         Date now = new Date();
-        return DateFormatUtils.format(now, Format.YYYY_MM_DD_.format);
-    }
-
-    /** 日期路径 即年/月/日 如20180808 */
-    public static String dateTime() {
-        Date now = new Date();
-        return DateFormatUtils.format(now, Format.YMD.format);
-    }
-
-    /**
-     * 日期型字符串转化为日期 格式
-     *
-     * <p>
-     *
-     * <p>/** 获取服务器启动时间
-     */
-    public static Date getServerStartDate() {
-        long time = ManagementFactory.getRuntimeMXBean().getStartTime();
-        return new Date(time);
+        return DateFormatUtils.format(now, Format.YMD_PATH.format);
     }
 
     /** 计算相差天数 */
@@ -158,35 +133,13 @@ public final class ExDateUtils extends DateUtils {
         return sdf.format(date);
     }
 
-    public static Date addYears(Date date, int amount) {
-        return org.apache.commons.lang3.time.DateUtils.addYears(date, amount);
-    }
-
-    public static Date addHours(Date date, int amount) {
-        return org.apache.commons.lang3.time.DateUtils.addHours(date, amount);
-    }
-
-    public static Date addMinutes(Date date, int amount) {
-
-        return org.apache.commons.lang3.time.DateUtils.addMinutes(date, amount);
-    }
-
-    public static Date addSeconds(Date date, int amount) {
-
-        return org.apache.commons.lang3.time.DateUtils.addSeconds(date, amount);
-    }
-
-    public static String getCurrentMonth() {
-        return ExDateUtils.date2String(getCurrentDate(), ExDateUtils.Format.YYYY_MM);
-    }
-
     public static Date getCurrentDate() {
 
         return new Date();
     }
 
     public static String getNextYear(Date date) {
-        Date nextYear = org.apache.commons.lang3.time.DateUtils.addYears(date, 1);
+        Date nextYear = addYears(date, 1);
 
         return getYear(nextYear);
     }
@@ -202,10 +155,6 @@ public final class ExDateUtils extends DateUtils {
 
     public static Date getPreviousMonth(Date date) {
         return addMonths(date, -1);
-    }
-
-    public static Date addMonths(Date date, int amount) {
-        return org.apache.commons.lang3.time.DateUtils.addMonths(date, amount);
     }
 
     public static Date getNextMonth(Date date) {
@@ -290,10 +239,6 @@ public final class ExDateUtils extends DateUtils {
         cal.setTime(date);
 
         return cal.get(Calendar.DAY_OF_WEEK) - 1;
-    }
-
-    public static Date addDays(Date date, int amount) {
-        return org.apache.commons.lang3.time.DateUtils.addDays(date, amount);
     }
 
     public static Date endOfWeek(Date date) {
@@ -506,34 +451,6 @@ public final class ExDateUtils extends DateUtils {
         return localDateTime.toLocalDate();
     }
 
-    /**
-     * 是否跨天
-     *
-     * @param start
-     * @param end
-     * @return
-     */
-    public static boolean isDaySpan(Date start, Date end) {
-        Date startYmd = clearHms(start);
-        String startHm = date2String(start, Format.HM);
-        String endHm = date2String(end, Format.HM);
-
-        Date startYMDHM =
-                ExDateUtils.format2Date(
-                        ExDateUtils.date2String(startYmd, ExDateUtils.Format.YYYY_MM_DD)
-                                + " "
-                                + startHm,
-                        ExDateUtils.Format.YYYY_MM_DD_HH_MM);
-        Date endYMDHM =
-                ExDateUtils.format2Date(
-                        ExDateUtils.date2String(startYmd, ExDateUtils.Format.YYYY_MM_DD)
-                                + " "
-                                + endHm,
-                        ExDateUtils.Format.YYYY_MM_DD_HH_MM);
-
-        return startYMDHM.after(endYMDHM);
-    }
-
     public static Date format2Date(String dateValue, Format format) {
 
         if (null == dateValue || dateValue.trim().length() < 1) {
@@ -541,8 +458,7 @@ public final class ExDateUtils extends DateUtils {
         }
 
         try {
-            SimpleDateFormat dd = new SimpleDateFormat(format.getFormat());
-            return dd.parse(dateValue);
+            return parse(dateValue, format.getFormat());
         } catch (Exception e) {
 
             log.error("format2Date error", e.getMessage());
@@ -551,29 +467,45 @@ public final class ExDateUtils extends DateUtils {
         }
     }
 
+    public static void main(String[] args) {
+
+        System.out.println(parse("2023年11月11日"));
+
+        Date date = format2Date("20231111222201121", Format.YMDHMSS);
+        System.out.println(date.getTime());
+    }
+
     public enum Format {
+
+        /** 大写的SSS是毫秒 */
+        YM("yyyyMM"),
+
+        YM_CN("yyyy年MM月"),
+
+        YM_POINT("yyyy.MM"),
+
+        YM_LINE("yyyy-MM"),
+
         YMD("yyyyMMdd"),
-        YMDE("yyyyMMdd E"),
-        HM("HH:mm"),
+
+        YMD_CN("yyyy年MM月dd日"),
+
+        YMD_P("yyyy.MM.dd"),
+
+        YMD_LINE("yyyy-MM-dd"),
+
+        YMD_LINE_HMS("yyyy-MM-dd HH:mm:ss"),
+
+        YMD_LINE_HMSS("yyyy-MM-dd HH:mm:ss.SSS"),
+
+        YMD_PATH("yyyy/MM/dd"),
+
+        YMDHMS("yyyyMMddHHmmSS"),
+
         HMS("HH:mm:ss"),
-        YYYY_P_MM_P_DD("yyyy.MM.dd"),
-        YYYY_P_MM_P_DD_HHMM("yyyy.MM.dd HH:mm"),
-        YYYYMMDDHHMMSS("yyyyMMddHHmmss"),
-        YYYYMMDDHHMM("yyyyMMddHHmm"),
-        YYYY_MM_DD("yyyy-MM-dd"),
-        YYYY_Y_MM_M_DD_D("yyyy年MM月dd日"),
-        YYYYMM("yyyyMM"),
-        YYYY_MM("yyyy-MM"),
-        YYYY_MM_("yyyy/MM"),
-        YYYY_MM_DD_("yyyy/MM/dd"),
-        YYYY_MM_CN("yyyy年MM月"),
-        MM_DD_CN("MM月dd日"),
-        MM_DD_HH_MM_CN("MM月dd日 HH:mm"),
-        YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),
-        YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),
-        YYYY_MM_DD_CN("yyyy年MM月dd日"),
-        YYYY_MM_DD_HH_MM_CN("yyyy年MM月dd日 HH:mm"),
-        YYYY_MM_DD_HH_MM_SS_CN("yyyy年MM月dd日 HH:mm:ss");
+
+        YMDHMSS("yyyyMMddHHmmssSSS"),
+        ;
 
         private final String format;
 
@@ -584,11 +516,5 @@ public final class ExDateUtils extends DateUtils {
         public String getFormat() {
             return format;
         }
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(parseDate("2023年11月11日"));
-        System.out.println(Format.YYYYMMDDHHMMSS.format);
     }
 }

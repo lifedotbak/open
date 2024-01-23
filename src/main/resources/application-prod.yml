@@ -44,18 +44,15 @@ spring:
       # 设置总上传的文件大小
       max-request-size: 1000MB
   redis:
-    enabled: true
-    host: 127.0.0.1
-    password:
-    port: 6379
-    timeout: 6000
-    lettuce:
-      pool:
-        max-active: 8
-        max-wait: 10000
-        max-idle: 8
-        min-idle: 1
-      shutdown-timeout: 100
+    redisson:
+      file: classpath:redisson.yml
+  cache:
+    #指定缓存类型
+    type: redis
+    #指定存活时间（ms）
+    redis.time-to-live: 86400000
+    #是否缓存空值，可以防止缓存穿透
+    redis.cache-null-values: true
 
   mvc:
     view:
@@ -74,31 +71,23 @@ spring:
       validationQuery: SELECT 'x'
       timeBetweenEvictionRunsMillis: 60000
       minEvictableIdleTimeMillis: 300000
-  resources:
-    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
+  data:
+    redis:
+      host: 127.0.0.1
+      password:
+      port: 6379
+      timeout: 6000
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+        shutdown-timeout: 100
 
-############################### redisson config ###############################
-redisson:
-  # redis key前缀
-  keyPrefix: redis-key
-  # 线程池数量
-  threads: 4
-  # Netty线程池数量
-  nettyThreads: 8
-  # 单节点配置
-  singleServerConfig:
-    # 客户端名称
-    clientName: ${spring.application.name}
-    # 最小空闲连接数
-    connectionMinimumIdleSize: 8
-    # 连接池大小
-    connectionPoolSize: 32
-    # 连接空闲超时，单位：毫秒
-    idleConnectionTimeout: 10000
-    # 命令等待超时，单位：毫秒
-    timeout: 3000
-    # 发布和订阅连接池大小
-    subscriptionConnectionPoolSize: 50
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
 
 ############################### springboot admin config ###############################
 management:
@@ -128,12 +117,12 @@ aliyun:
     accessKeySecret:
     signName:
   oss:
-    accessKeyId:
-    accessKeySecret:
-    bucketName:
-    endPoint:
+    accessKeyId: xxx
+    accessKeySecret: yyyy
+    bucketName: zzz
+    endPoint: mmm
     out:
-      imgUrl:
+      imgUrl: uuuu
   ram:
     accessKeyId:
     accessKeySecret:

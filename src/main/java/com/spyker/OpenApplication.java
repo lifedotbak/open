@@ -22,7 +22,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @EnableCaching
 @EnableRetry
-//@EnableConfigurationProperties
+// @EnableConfigurationProperties
 // @EnableAdminServer
 public class OpenApplication {
 

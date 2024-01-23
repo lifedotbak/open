@@ -26,7 +26,7 @@ public class BaseController {
                 new PropertyEditorSupport() {
                     @Override
                     public void setAsText(String text) {
-                        setValue(ExDateUtils.parseDate(text));
+                        setValue(ExDateUtils.parse(text));
                     }
                 });
     }
