@@ -7,6 +7,8 @@ package com.spyker.framework.constant;
  */
 public class CacheConstants {
 
+    private CacheConstants() {}
+
     /** 登录用户 redis key */
     public static final String LOGIN_TOKEN_KEY = "login_tokens:";
 

@@ -7,6 +7,8 @@ package com.spyker.framework.constant;
  */
 public class HttpStatus {
 
+    private HttpStatus(){}
+
     /** 操作成功 */
     public static final int SUCCESS = 200;
 

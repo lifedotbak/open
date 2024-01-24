@@ -1,6 +1,5 @@
 package com.spyker.framework.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +21,9 @@ import java.util.List;
 @Configuration
 public class RestTemplateConfig {
 
-    @Autowired private RestTemplateBuilder builder;
-
     // 使用RestTemplateBuilder来实例化RestTemplate对象，spring默认已经注入了RestTemplateBuilder实例
     @Bean
-    public RestTemplate restTemplate() {
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
         Duration readTime = Duration.ofMinutes(1);
         Duration connectTime = Duration.ofMinutes(1);

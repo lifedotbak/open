@@ -12,6 +12,6 @@ public class RedissonServiceTest extends BaseTest {
 
     @Test
     public void test() {
-        redissonService.setCacheObject("xxxx", "yyyyy");
+        redissonService.setCacheObject("xxxx", "88888888");
     }
 }

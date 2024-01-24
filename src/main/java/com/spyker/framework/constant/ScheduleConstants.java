@@ -7,6 +7,8 @@ package com.spyker.framework.constant;
  */
 public class ScheduleConstants {
 
+    private ScheduleConstants(){}
+
     public static final String TASK_CLASS_NAME = "TASK_CLASS_NAME";
 
     /** 执行目标key */

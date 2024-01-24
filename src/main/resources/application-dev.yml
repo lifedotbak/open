@@ -44,8 +44,9 @@ spring:
       # 设置总上传的文件大小
       max-request-size: 1000MB
   redis:
+#     放开redisson配置，其他都为空，redission-starter（RedissonAutoConfiguration）会选择配置SingleServerConfig，redis连接地址采用的是spring.data.redis下配置
     redisson:
-      file: classpath:redisson.yml
+#      file: classpath:redisson.yml
   cache:
     #指定缓存类型
     type: redis
@@ -74,7 +75,8 @@ spring:
   data:
     redis:
       host: 127.0.0.1
-      password:
+      # 如果不需要密码 password注释掉，jedis，redisson在连接redis时候，不注释password配置，会报错
+#      password:
       port: 6379
       timeout: 6000
       lettuce:

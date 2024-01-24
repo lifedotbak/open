@@ -3,9 +3,7 @@ package com.spyker.framework.config;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.spyker.framework.properties.DruidConfigProperties;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +13,7 @@ import java.sql.SQLException;
 @Configuration
 public class DbDruidConfig {
 
-    @Autowired DruidConfigProperties druidConfigProperties;
+//    @Autowired DruidConfigProperties druidConfigProperties;
 
     /**
      * 使用@ConfigurationProperties(prefix = "spring.datasource.druid")注解，会将对应参数注入到DruidDataSource中
@@ -54,7 +52,7 @@ public class DbDruidConfig {
      */
     @ConfigurationProperties(prefix = "spring.datasource.druid")
     @Bean(initMethod = "init", destroyMethod = "close")
-    public DruidDataSource dataSource(Filter statFilter) throws SQLException {
+    public DruidDataSource dataSource(Filter statFilter)  {
         DruidDataSource dataSource = new DruidDataSource();
 
         return dataSource;
