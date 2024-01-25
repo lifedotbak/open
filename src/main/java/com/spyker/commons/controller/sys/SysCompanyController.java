@@ -62,7 +62,7 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<SysCompany>> list_page(
+    public RestResponse<IPage<SysCompany>> listPage(
             @ModelAttribute SysCompanySearch search,
             @ModelAttribute PageParamRequest pageParamRequest) {
         int current = 1;
@@ -95,7 +95,7 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
     @Log(title = "部门表--新增", businessType = BusinessType.INSERT)
-    public RestResponse<?> add(@RequestBody SysCompany add) {
+    public RestResponse<SysCompany> add(@RequestBody SysCompany add) {
 
         sysCompanyService.insert(add);
 
@@ -105,7 +105,8 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @Log(title = "部门表--修改", businessType = BusinessType.UPDATE)
-    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody SysCompany update) {
+    public RestResponse<SysCompany> update(
+            @PathVariable("id") String id, @RequestBody SysCompany update) {
 
         update.setId(id);
 
@@ -119,7 +120,7 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
     @Log(title = "部门表--删除", businessType = BusinessType.DELETE)
-    public RestResponse<?> delete(@PathVariable("id") String id) {
+    public RestResponse<SysCompany> delete(@PathVariable("id") String id) {
 
         sysCompanyService.delete(id);
 

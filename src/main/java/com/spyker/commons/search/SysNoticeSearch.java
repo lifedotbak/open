@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 通知公告表
  *
@@ -14,9 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "SysNoticeSearch对象", description = "通知公告表Search对象")
-public class SysNoticeSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysNoticeSearch {
 
     private Integer page = 1;
     private Integer size = 10;

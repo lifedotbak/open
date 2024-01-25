@@ -33,9 +33,9 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
 
     @Override
     public List<SysDictType> query(SysDictTypeSearch search) {
-        List<SysDictType> SysDictTypeList = sysDictTypeMapper.query(search);
+        List<SysDictType> result = sysDictTypeMapper.query(search);
 
-        return SysDictTypeList;
+        return result;
     }
 
     @Override
@@ -47,9 +47,9 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
 
     @Override
     public SysDictType get(String id) {
-        SysDictType SysDictType = getById(id);
+        SysDictType result = getById(id);
 
-        return SysDictType;
+        return result;
     }
 
     @Override

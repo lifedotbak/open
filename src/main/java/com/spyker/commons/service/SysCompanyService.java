@@ -21,9 +21,9 @@ public interface SysCompanyService extends IService<SysCompany> {
 
     SysCompany get(String id);
 
-    boolean insert(SysCompany SysCompany);
+    boolean insert(SysCompany sysCompany);
 
-    boolean update(SysCompany SysCompany);
+    boolean update(SysCompany sysCompany);
 
     boolean delete(String id);
 }

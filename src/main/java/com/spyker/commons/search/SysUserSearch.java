@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -15,9 +14,7 @@ import java.sql.Timestamp;
  */
 @Data
 @Schema(name = "SysUserSearch对象", description = "用户信息表Search对象")
-public class SysUserSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysUserSearch {
 
     private Integer page = 1;
     private Integer size = 10;

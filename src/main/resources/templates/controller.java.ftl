@@ -81,7 +81,7 @@ import org.springframework.web.bind.annotation.*;
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<${entity}>> list_page(@ModelAttribute ${entity}Search search, @ModelAttribute PageParamRequest pageParamRequest) {
+    public RestResponse<IPage<${entity}>> listPage(@ModelAttribute ${entity}Search search, @ModelAttribute PageParamRequest pageParamRequest) {
         int current = 1;
         int size = 10;
 
@@ -114,7 +114,7 @@ import org.springframework.web.bind.annotation.*;
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
     @Log(title = "${table.comment!}--新增", businessType = BusinessType.INSERT)
-    public RestResponse<?> add(@RequestBody ${entity} add) {
+    public RestResponse<${entity}> add(@RequestBody ${entity} add) {
 
          ${table.serviceName?uncap_first}.insert(add);
 
@@ -125,7 +125,7 @@ import org.springframework.web.bind.annotation.*;
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @Log(title = "${table.comment!}--修改", businessType = BusinessType.UPDATE)
-    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
+    public RestResponse<${entity}> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
 
         update.setId(id);
 
@@ -144,7 +144,7 @@ import org.springframework.web.bind.annotation.*;
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
     @Log(title = "${table.comment!}--删除", businessType = BusinessType.DELETE)
-    public RestResponse<?> delete(@PathVariable("id") String id) {
+    public RestResponse<${entity}> delete(@PathVariable("id") String id) {
 
          ${table.serviceName?uncap_first}.delete(id);
 

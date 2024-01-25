@@ -38,7 +38,7 @@ public class SysJobLogController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysJobLog>> list_page(SysJobLogSearch search) {
+    public RestResponse<IPage<SysJobLog>> listPage(SysJobLogSearch search) {
         int current = 1;
         int size = 10;
 

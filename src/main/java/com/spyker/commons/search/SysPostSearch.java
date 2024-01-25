@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 岗位信息表
  *
@@ -14,9 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "SysPostSearch对象", description = "岗位信息表Search对象")
-public class SysPostSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysPostSearch {
 
     private Integer page = 1;
 

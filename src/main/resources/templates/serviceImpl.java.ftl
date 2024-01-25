@@ -43,19 +43,19 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	@Override
 	public List<${entity}> query(${entity}Search search){
 
-	List<${entity}> result =  ${table.mapperName?uncap_first}.query(search);
-	log.info("result------>{}", result);
+		List<${entity}> result =  ${table.mapperName?uncap_first}.query(search);
+		log.info("result------>{}", result);
 
-	return result;
+		return result;
 	}
 
 	@Override
 	public IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search){
 
-	page =  ${table.mapperName?uncap_first}.queryPage(page, search);
-	log.info("page------>{}", page);
+		page =  ${table.mapperName?uncap_first}.queryPage(page, search);
+		log.info("page------>{}", page);
 
-	return page;
+		return page;
 	}
 
 	/**
@@ -69,6 +69,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	//@Cacheable(key = "#id")
 	public ${entity} get(String id){
 		${entity} result = getById(id);
+
+		log.info("result------>{}", result);
+
 		return result;
 	}
 
@@ -82,7 +85,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	@Override
 	//@CachePut(key = "#${entity?uncap_first}.id")
 	public ${entity} insert(${entity} ${entity?uncap_first}){
-		return  save(${entity?uncap_first});
+		save(${entity?uncap_first});
+		return ${entity?uncap_first};
 	}
 
 	/**
@@ -94,7 +98,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	@Override
 	//@CachePut(key = "#${entity?uncap_first}.id")
 	public ${entity} update(${entity} ${entity?uncap_first}){
-		return  updateById(${entity?uncap_first});
+		updateById(${entity?uncap_first});
+		return ${entity?uncap_first};
 	}
 
 	/**

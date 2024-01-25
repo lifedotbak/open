@@ -59,7 +59,7 @@ public class SysDeptController {
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
     @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<SysDept>> list_page(SysDeptSearch search) {
+    public RestResponse<IPage<SysDept>> listPage(SysDeptSearch search) {
         int current = 1;
         int size = 10;
 
@@ -86,7 +86,7 @@ public class SysDeptController {
     @SaCheckRole("admin")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysDept add) {
+    public RestResponse<SysDept> add(@RequestBody SysDept add) {
 
         sysDeptService.insert(add);
 
@@ -96,7 +96,7 @@ public class SysDeptController {
     @SaCheckRole("admin")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysDept update) {
+    public RestResponse<SysDept> update(@RequestBody SysDept update) {
 
         sysDeptService.update(update);
 
@@ -106,8 +106,10 @@ public class SysDeptController {
     @SaCheckRole("admin")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
+    public RestResponse<SysDept> delete(@RequestParam String id) {
 
-        return sysDeptService.delete(id);
+        sysDeptService.delete(id);
+
+        return RestResponse.success();
     }
 }

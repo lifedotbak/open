@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 参数配置表
  *
@@ -14,9 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "SysConfigSearch对象", description = "参数配置表Search对象")
-public class SysConfigSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysConfigSearch {
 
     private Integer page = 1;
     private Integer size = 10;

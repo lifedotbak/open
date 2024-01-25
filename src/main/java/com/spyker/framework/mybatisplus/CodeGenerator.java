@@ -138,6 +138,7 @@ public class CodeGenerator {
                         .enableLombok()
                         .enableChainModel()
                         .enableFileOverride()
+                        .disableSerialVersionUID()
                         .idType(IdType.ASSIGN_ID)
                         .addTableFills(
                                 new Column("create_time", FieldFill.INSERT),

@@ -53,13 +53,17 @@ public class FileController {
     @GetMapping("/download")
     public void fileDownload(
             String fileName,
-            Boolean delete,
+            boolean delete,
             HttpServletResponse response,
             HttpServletRequest request) {
+
+        if (!FileUtils.checkAllowDownload(fileName)) {
+            throw new IllegalArgumentException(
+                    ExStringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
+        }
+
         try {
-            if (!FileUtils.checkAllowDownload(fileName)) {
-                throw new Exception(ExStringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
-            }
+
             String realFileName =
                     System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = PlatformConfigProperties.getDownloadPath() + fileName;
@@ -77,7 +81,7 @@ public class FileController {
 
     /** 通用上传请求（单个） */
     @PostMapping("/upload")
-    public RestMapResponse uploadFile(MultipartFile file) throws Exception {
+    public RestMapResponse uploadFile(MultipartFile file) {
         try {
             // 上传文件路径
             String filePath = PlatformConfigProperties.getUploadPath();
@@ -91,20 +95,21 @@ public class FileController {
             ajax.put("originalFilename", file.getOriginalFilename());
             return ajax;
         } catch (Exception e) {
+            log.error("error--->{}", e.getMessage());
             return RestMapResponse.error(e.getMessage());
         }
     }
 
     /** 通用上传请求（多个） */
     @PostMapping("/uploads")
-    public RestMapResponse uploadFiles(List<MultipartFile> files) throws Exception {
+    public RestMapResponse uploadFiles(List<MultipartFile> files) {
         try {
             // 上传文件路径
             String filePath = PlatformConfigProperties.getUploadPath();
-            List<String> urls = new ArrayList<String>();
-            List<String> fileNames = new ArrayList<String>();
-            List<String> newFileNames = new ArrayList<String>();
-            List<String> originalFilenames = new ArrayList<String>();
+            List<String> urls = new ArrayList<>();
+            List<String> fileNames = new ArrayList<>();
+            List<String> newFileNames = new ArrayList<>();
+            List<String> originalFilenames = new ArrayList<>();
             for (MultipartFile file : files) {
                 // 上传并返回新文件名称
                 String fileName = FileUploadUtils.upload(filePath, file);
@@ -121,6 +126,8 @@ public class FileController {
             ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMETER));
             return ajax;
         } catch (Exception e) {
+
+            log.error("error--->{}", e.getMessage());
             return RestMapResponse.error(e.getMessage());
         }
     }
@@ -128,12 +135,13 @@ public class FileController {
     /** 本地资源通用下载 */
     @GetMapping("/download/resource")
     public void resourceDownload(
-            String resource, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+            String resource, HttpServletRequest request, HttpServletResponse response) {
+
+        if (!FileUtils.checkAllowDownload(resource)) {
+            throw new IllegalArgumentException(ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
+        }
+
         try {
-            if (!FileUtils.checkAllowDownload(resource)) {
-                throw new Exception(ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
-            }
             // 本地资源路径
             String localPath = PlatformConfigProperties.getProfile();
             // 数据库资源地址

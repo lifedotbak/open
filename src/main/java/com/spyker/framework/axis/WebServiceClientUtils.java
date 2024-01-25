@@ -1,17 +1,21 @@
 package com.spyker.framework.axis;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 
-import javax.xml.namespace.QName;
 import java.io.FileInputStream;
+
+import javax.xml.namespace.QName;
 
 @Slf4j
 public class WebServiceClientUtils {
 
-    public static final String uploadCommonData(
-            String myUsername, String myPassword, byte[] Buffer) {
+    private static final String OPERATION_NAME = "uploadCommonData";
+
+    public static String uploadCommonData(
+            String myUsername, String myPassword, byte[] buffer) {
 
         String result = "";
 
@@ -29,7 +33,7 @@ public class WebServiceClientUtils {
             // 设置service所在URL
             call.setTargetEndpointAddress(endpoint);
             // qqCheckOnline 是net 那边的方法 "http://WebXml.com.cn/" 这个也要注意Namespace 的地址,不带也会报错
-            call.setOperationName(new QName(soapaction, "uploadCommonData"));
+            call.setOperationName(new QName(soapaction, OPERATION_NAME));
             // qqCode也是.NET那边方法的参数名，即qqCheckOnline的参数名
             call.addParameter(
                     new QName(soapaction, "myUsername"),
@@ -48,13 +52,14 @@ public class WebServiceClientUtils {
             // 避免Java调用.net的webService产生“服务器未能识别 HTTP 标头 SOAPAction 的值”错误
             call.setReturnType(org.apache.axis.encoding.XMLType.SOAP_STRING); // 返回参数的类型
             call.setUseSOAPAction(true);
-            call.setSOAPActionURI(soapaction + "uploadCommonData"); // 这个也要注意
+            call.setSOAPActionURI(soapaction + OPERATION_NAME); // 这个也要注意
 
             // Object 数组封装了参数
-            String ret = (String) call.invoke(new Object[] {myUsername, myPassword, Buffer});
-            System.out.println("--------" + ret);
+            String ret = (String) call.invoke(new Object[] {myUsername, myPassword, buffer});
 
             result = ret;
+
+            log.info("ret--->{}", ret);
 
         } catch (Exception e) {
             log.error("uploadCommonData error -> {}", e);
@@ -85,7 +90,7 @@ public class WebServiceClientUtils {
             // 设置service所在URL
             call.setTargetEndpointAddress(endpoint);
             // qqCheckOnline 是net 那边的方法 "http://WebXml.com.cn/" 这个也要注意Namespace 的地址,不带也会报错
-            call.setOperationName(new QName(soapaction, "uploadCommonData"));
+            call.setOperationName(new QName(soapaction, OPERATION_NAME));
             // qqCode也是.NET那边方法的参数名，即qqCheckOnline的参数名
             call.addParameter(
                     new QName(soapaction, "myUsername"),
@@ -105,14 +110,15 @@ public class WebServiceClientUtils {
 
             call.setReturnType(org.apache.axis.encoding.XMLType.SOAP_STRING); // 返回参数的类型
             call.setUseSOAPAction(true);
-            call.setSOAPActionURI(soapaction + "uploadCommonData"); // 这个也要注意
+            call.setSOAPActionURI(soapaction + OPERATION_NAME); // 这个也要注意
 
             FileInputStream input = new FileInputStream("D:\\cxf\\PlatfromService.xml");
             byte[] image = new byte[input.available()];
 
             // Object 数组封装了参数
             String ret = (String) call.invoke(new Object[] {"aaaaa", "vvvvv", image});
-            System.out.println("--------" + ret);
+
+            log.info("ret--->{}", ret);
 
         } catch (Exception e) {
             e.printStackTrace();

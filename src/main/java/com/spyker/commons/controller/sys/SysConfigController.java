@@ -38,7 +38,7 @@ public class SysConfigController {
     //    @SaCheckPermission(value = "user:get",orRole = "admin")
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysConfig>> list_page(SysConfigSearch search) {
+    public RestResponse<IPage<SysConfig>> listPage(SysConfigSearch search) {
         int current = 1;
         int size = 10;
 
@@ -67,7 +67,7 @@ public class SysConfigController {
     @SaCheckPermission("admin:add")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysConfig add) {
+    public RestResponse<SysConfig> add(@RequestBody SysConfig add) {
 
         sysConfigService.insert(add);
 
@@ -78,7 +78,7 @@ public class SysConfigController {
     @SaCheckPermission("admin:update")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysConfig update) {
+    public RestResponse<SysConfig> update(@RequestBody SysConfig update) {
 
         sysConfigService.update(update);
 
@@ -89,7 +89,7 @@ public class SysConfigController {
     @SaCheckPermission("admin:delete")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
+    public RestResponse<SysConfig> delete(@RequestParam String id) {
 
         sysConfigService.delete(id);
 

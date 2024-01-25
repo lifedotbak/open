@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
  * 部门表
  *
@@ -18,9 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @Schema(name = "SysDeptSearch对象", description = "部门表Search对象")
-public class SysDeptSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysDeptSearch {
 
     private Integer page = 1;
     private Integer size = 10;

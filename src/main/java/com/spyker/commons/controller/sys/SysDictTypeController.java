@@ -47,7 +47,7 @@ public class SysDictTypeController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysDictType>> list_page(SysDictTypeSearch search) {
+    public RestResponse<IPage<SysDictType>> listPage(SysDictTypeSearch search) {
         int current = 1;
         int size = 10;
 
@@ -74,24 +74,30 @@ public class SysDictTypeController {
     @SaCheckRole("admin")
     @Operation(summary = "新增", description = "新增")
     @PostMapping("add")
-    public RestResponse<?> add(@RequestBody SysDictType add) {
+    public RestResponse<SysDictType> add(@RequestBody SysDictType add) {
 
-        return sysDictTypeService.insert(add);
+        sysDictTypeService.insert(add);
+
+        return RestResponse.success();
     }
 
     @SaCheckRole("admin")
     @Operation(summary = "修改", description = "修改")
     @PutMapping("update")
-    public RestResponse<?> update(@RequestBody SysDictType update) {
+    public RestResponse<SysDictType> update(@RequestBody SysDictType update) {
 
-        return sysDictTypeService.update(update);
+        sysDictTypeService.update(update);
+
+        return RestResponse.success();
     }
 
     @SaCheckRole("admin")
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("delete")
-    public RestResponse<?> delete(@RequestParam String id) {
+    public RestResponse<SysDictType> delete(@RequestParam String id) {
 
-        return sysDictTypeService.delete(id);
+        sysDictTypeService.delete(id);
+
+        return RestResponse.success();
     }
 }

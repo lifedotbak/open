@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 字典数据表
  *
@@ -14,9 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "SysDictDataSearch对象", description = "字典数据表Search对象")
-public class SysDictDataSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysDictDataSearch {
 
     private Integer page = 1;
     private Integer size = 10;

@@ -5,8 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
  * 部门表
  *
@@ -16,9 +14,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysCompanySearch对象", description = "部门表Search对象")
-public class SysCompanySearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysCompanySearch {
 
     private Integer page = 1;
     private Integer size = 10;

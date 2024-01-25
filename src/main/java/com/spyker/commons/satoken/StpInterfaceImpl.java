@@ -4,16 +4,18 @@ import cn.dev33.satoken.stp.StpInterface;
 
 import com.spyker.commons.mapper.SysUserMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /** 定义权限加载接口实现类 */
 @Component
+@RequiredArgsConstructor
 public class StpInterfaceImpl implements StpInterface {
 
-    @Autowired private SysUserMapper sysUserMapper;
+    private final SysUserMapper sysUserMapper;
 
     @Override
     public List<String> getPermissionList(Object loginId, String s) {

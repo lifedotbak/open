@@ -6,9 +6,9 @@ import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.mapper.SysDeptMapper;
 import com.spyker.commons.search.SysDeptSearch;
 import com.spyker.commons.service.SysDeptService;
-import com.spyker.framework.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -29,6 +29,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "SysDept")
+@Slf4j
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept>
         implements SysDeptService {
 
@@ -37,6 +38,8 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept>
     @Override
     public List<SysDept> query(SysDeptSearch search) {
         List<SysDept> result = sysDeptMapper.query(search);
+
+        log.info("result------>{}", result);
 
         return result;
     }
@@ -58,6 +61,8 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept>
     public SysDept get(String id) {
         SysDept result = getById(id);
 
+        log.info("result------>{}", result);
+
         return result;
     }
 
@@ -68,8 +73,8 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept>
     @Override
     @CachePut(key = "#sysDept.deptId")
     public SysDept insert(SysDept sysDept) {
-        save(sysDept);
 
+        save(sysDept);
         return sysDept;
     }
 
@@ -87,9 +92,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept>
      */
     @CacheEvict(key = "#id")
     @Override
-    public RestResponse<?> delete(String id) {
+    public void delete(String id) {
         removeById(id);
-
-        return RestResponse.success();
     }
 }

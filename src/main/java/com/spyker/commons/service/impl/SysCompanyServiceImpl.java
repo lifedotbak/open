@@ -51,17 +51,20 @@ public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysComp
     @Override
     public SysCompany get(String id) {
         SysCompany result = getById(id);
+
+        log.info("result-->{}",result);
+
         return result;
     }
 
     @Override
-    public boolean insert(SysCompany SysCompany) {
-        return save(SysCompany);
+    public boolean insert(SysCompany sysCompany) {
+        return save(sysCompany);
     }
 
     @Override
-    public boolean update(SysCompany SysCompany) {
-        return updateById(SysCompany);
+    public boolean update(SysCompany sysCompany) {
+        return updateById(sysCompany);
     }
 
     @Override

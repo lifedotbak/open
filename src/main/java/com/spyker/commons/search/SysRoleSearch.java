@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 角色信息表
  *
@@ -14,9 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "SysRoleSearch对象", description = "角色信息表Search对象")
-public class SysRoleSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysRoleSearch {
 
     private Integer page = 1;
     private Integer size = 10;

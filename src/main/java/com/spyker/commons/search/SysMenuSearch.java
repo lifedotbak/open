@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * 菜单权限表
  *
@@ -14,9 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "SysMenuSearch对象", description = "菜单权限表Search对象")
-public class SysMenuSearch implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysMenuSearch {
 
     private Integer page = 1;
     private Integer size = 10;

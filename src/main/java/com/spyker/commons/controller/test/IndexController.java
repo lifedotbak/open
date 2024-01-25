@@ -21,7 +21,7 @@ public class IndexController {
      */
     @GetMapping("/limit1")
     @Limiting(limitNum = 1, name = "limiting1")
-    public RestResponse<String> Limit1() {
+    public RestResponse<String> limit1() {
         return RestResponse.success("limiting1");
     }
 
@@ -32,7 +32,7 @@ public class IndexController {
      */
     @GetMapping("/limit2")
     @Limiting(limitNum = 5, name = "limiting2")
-    public RestResponse<String> Limit2() {
+    public RestResponse<String> limit2() {
         return RestResponse.success("limiting2");
     }
 }

@@ -6,7 +6,6 @@ import com.spyker.commons.entity.SysDictData;
 import com.spyker.commons.mapper.SysDictDataMapper;
 import com.spyker.commons.search.SysDictDataSearch;
 import com.spyker.commons.service.SysDictDataService;
-import com.spyker.framework.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +32,11 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
 
     @Override
     public List<SysDictData> query(SysDictDataSearch search) {
-        List<SysDictData> SysDictDataList = sysDictDataMapper.query(search);
+        List<SysDictData> result = sysDictDataMapper.query(search);
 
-        return SysDictDataList;
+        log.info("result------>{}", result);
+
+        return result;
     }
 
     @Override
@@ -47,29 +48,31 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
 
     @Override
     public SysDictData get(String id) {
-        SysDictData SysDictData = getById(id);
+        SysDictData result = getById(id);
 
-        return SysDictData;
+        log.info("result------>{}", result);
+
+        return result;
     }
 
     @Override
-    public RestResponse<?> insert(SysDictData SysDictData) {
-        save(SysDictData);
+    public SysDictData insert(SysDictData sysDictData) {
 
-        return RestResponse.success(SysDictData);
+        save(sysDictData);
+
+        return sysDictData;
     }
 
     @Override
-    public RestResponse<?> update(SysDictData SysDictData) {
-        updateById(SysDictData);
+    public SysDictData update(SysDictData sysDictData) {
 
-        return RestResponse.success();
+        updateById(sysDictData);
+
+        return sysDictData;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
+    public void delete(String id) {
         removeById(id);
-
-        return RestResponse.success();
     }
 }

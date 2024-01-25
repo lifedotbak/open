@@ -26,5 +26,5 @@ public interface SysDeptService extends IService<SysDept> {
 
     SysDept update(SysDept SysDept);
 
-    RestResponse<?> delete(String id);
+    void delete(String id);
 }

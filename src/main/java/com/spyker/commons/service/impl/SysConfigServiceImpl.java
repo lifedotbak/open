@@ -46,9 +46,11 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 
     @Override
     public List<SysConfig> query(SysConfigSearch search) {
-        List<SysConfig> SysConfigList = sysConfigMapper.query(search);
+        List<SysConfig> sysConfigList = sysConfigMapper.query(search);
 
-        return SysConfigList;
+        log.info("result-->{}", sysConfigList);
+
+        return sysConfigList;
     }
 
     @Override
@@ -61,17 +63,20 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
     @Override
     public SysConfig get(String id) {
         SysConfig sysConfig = getById(id);
+
+        log.info("result-->{}", sysConfig);
+
         return sysConfig;
     }
 
     @Override
-    public boolean insert(SysConfig SysConfig) {
-        return save(SysConfig);
+    public boolean insert(SysConfig sysConfig) {
+        return save(sysConfig);
     }
 
     @Override
-    public boolean update(SysConfig SysConfig) {
-        return updateById(SysConfig);
+    public boolean update(SysConfig sysConfig) {
+        return updateById(sysConfig);
     }
 
     @Override

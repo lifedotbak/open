@@ -47,7 +47,7 @@ public class SysJobController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    public RestResponse<IPage<SysJob>> list_page(SysJobSearch search) {
+    public RestResponse<IPage<SysJob>> listPage(SysJobSearch search) {
         int current = 1;
         int size = 10;
 

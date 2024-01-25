@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +38,7 @@ import javax.imageio.ImageIO;
 @RequiredArgsConstructor
 public class CaptchaController {
 
-    @Autowired private RedisService redisService;
+    private final RedisService redisService;
 
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
@@ -59,11 +58,11 @@ public class CaptchaController {
         }
 
         // 保存验证码信息
-        //        String uuid = IdUtils.simpleUUID();
         String uuid = ExUuidUtils.simpleStringUUID();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
-        String capStr = null, code = null;
+        String capStr = null;
+        String code = null;
         BufferedImage image = null;
 
         // 生成验证码
