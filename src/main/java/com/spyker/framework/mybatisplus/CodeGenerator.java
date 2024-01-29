@@ -34,17 +34,17 @@ import lombok.SneakyThrows;
 
 public class CodeGenerator {
 
-    private static final String auhtor = "CodeGenerator";
+    private static final String CODE_AUTHOR = "CodeGenerator";
 
-    private static final String basePackage = "com.spyker";
+    private static final String BASE_PACKAGE = "com.spyker";
 
     // private static final String applicationName = "application";
 
-    private static final String mainSoure = "/src/main/java";
+    private static final String MAIN_SOURE = "/src/main/java";
 
-    private static final String testSoure = "/src/test/java";
+    private static final String TEST_SOURCE = "/src/test/java";
 
-    private static final String ymlSoure = "/src/main/resources/application-dev.yml";
+    private static final String YML_SOURE = "/src/main/resources/application-dev.yml";
 
     public static void main(String[] args) {
 
@@ -81,10 +81,10 @@ public class CodeGenerator {
 
         String xmlPath = projectPath + "/src/main/resources/mapper/" + applicationName;
 
-        String outputDir = projectPath + mainSoure;
+        String outputDir = projectPath + MAIN_SOURE;
 
         String testOutputDir =
-                projectPath + testSoure + generatorTestDir(basePackage, applicationName);
+                projectPath + TEST_SOURCE + generatorTestDir(BASE_PACKAGE, applicationName);
 
         ApplicationConfig applicationConfig = readYaml();
 
@@ -108,7 +108,7 @@ public class CodeGenerator {
                         // windows:D:// linux or mac : /tmp
                         .dateType(DateType.ONLY_DATE) // 设置时间类型为java.util.date
                         .enableSpringdoc() // 支持spring doc
-                        .author(auhtor) //
+                        .author(CODE_AUTHOR) //
                         .enableSpringdoc()
                         .build();
 
@@ -118,7 +118,7 @@ public class CodeGenerator {
         // 3.1 自定义包名
         PackageConfig.Builder packageConfig =
                 new PackageConfig.Builder()
-                        .parent(basePackage) // 父包名 默认值:com.baomidou
+                        .parent(BASE_PACKAGE) // 父包名 默认值:com.baomidou
                         .moduleName(applicationName) // 父包模块名 默认值:无
                         .pathInfo((Collections.singletonMap(OutputFile.xml, xmlPath)));
 
@@ -221,7 +221,7 @@ public class CodeGenerator {
 
         String projectPath = System.getProperty("user.dir");
 
-        String yamlPath = projectPath + ymlSoure;
+        String yamlPath = projectPath + YML_SOURE;
 
         File yamlFile = new File(yamlPath);
 

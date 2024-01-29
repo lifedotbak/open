@@ -11,6 +11,8 @@ import java.io.File;
 @Slf4j
 public class OssFileOperateUtils {
 
+    private OssFileOperateUtils(){}
+
     /**
      * 下载文件
      *

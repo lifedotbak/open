@@ -1,12 +1,12 @@
 package com.spyker.framework.logback;
 
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Marker;
-
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.turbo.TurboFilter;
 import ch.qos.logback.core.spi.FilterReply;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Marker;
 
 public class ExcludeTurboFilter extends TurboFilter {
 
@@ -31,10 +31,8 @@ public class ExcludeTurboFilter extends TurboFilter {
 
         for (String excludePackageName : excludePackageNameList) {
 
-            if (StringUtils.isNotBlank(excludePackageName)) {
-                if (loggerName.contains(excludePackageName)) {
+            if (StringUtils.isNotBlank(excludePackageName) && loggerName.contains(excludePackageName)) {
                     return FilterReply.DENY;
-                }
             }
         }
 

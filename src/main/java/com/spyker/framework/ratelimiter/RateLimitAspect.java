@@ -1,7 +1,9 @@
 package com.spyker.framework.ratelimiter;
 
 import com.google.common.util.concurrent.RateLimiter;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -18,9 +20,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class RateLimitAspect {
 
-    private final ConcurrentHashMap<String, RateLimiter> RATE_LIMITER = new ConcurrentHashMap<>();
-
-    private RateLimiter rateLimiter;
+    private final ConcurrentHashMap<String, RateLimiter> rateLimiterConcurrentHashMap =
+            new ConcurrentHashMap<>();
 
     //    @Pointcut("@annotation(com.spyker.framework.ratelimiter.Limiting)")
     //    public void serviceLimit() {
@@ -43,18 +44,19 @@ public class RateLimitAspect {
         double limitNum = annotation.limitNum(); // 获取注解每秒加入桶中的token
         String functionName = msig.getName(); // 注解所在方法名区分不同的限流策略
 
-        if (RATE_LIMITER.containsKey(functionName)) {
-            rateLimiter = RATE_LIMITER.get(functionName);
+        RateLimiter rateLimiter = null;
+        if (rateLimiterConcurrentHashMap.containsKey(functionName)) {
+            rateLimiter = rateLimiterConcurrentHashMap.get(functionName);
         } else {
-            RATE_LIMITER.put(functionName, RateLimiter.create(limitNum));
-            rateLimiter = RATE_LIMITER.get(functionName);
+            rateLimiterConcurrentHashMap.put(functionName, RateLimiter.create(limitNum));
+            rateLimiter = rateLimiterConcurrentHashMap.get(functionName);
         }
-        if (rateLimiter.tryAcquire()) {
+        if (null != rateLimiter && rateLimiter.tryAcquire()) {
             log.info("处理完成");
             return point.proceed();
         } else {
             log.error("服务器繁忙，请稍后再试。");
-            throw new RuntimeException("服务器繁忙，请稍后再试。");
+            throw new RateLimitException("服务器繁忙，请稍后再试!");
         }
     }
 }

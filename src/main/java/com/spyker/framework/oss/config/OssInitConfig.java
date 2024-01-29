@@ -9,19 +9,19 @@ import com.spyker.framework.util.ExJsonUtils;
 
 import jakarta.annotation.PostConstruct;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j
+@RequiredArgsConstructor
 public class OssInitConfig {
 
-    @Autowired
-    OssFactory ossFactory;
+    private final OssFactory ossFactory;
 
-    @Autowired private RedissonService redissonService;
+    private final RedissonService redissonService;
 
     @PostConstruct
     public void init() {
@@ -57,6 +57,7 @@ public class OssInitConfig {
                     config.getConfigKey(),
                     msg -> {
                         log.info("发布刷新OSS配置 => " + msg);
+                        log.info("发布刷新OSS配置详情 =>{} ", config);
                     });
         }
         return flag;

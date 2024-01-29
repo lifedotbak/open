@@ -9,10 +9,13 @@ import com.aliyuncs.profile.IClientProfile;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleRequest;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleResponse;
 import com.aliyuncs.vod.model.v20170321.*;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class AcsClientUtils {
+
+    private AcsClientUtils(){}
 
     private static final String END_POINT = "sts.aliyuncs.com";
 
@@ -47,8 +50,7 @@ public class AcsClientUtils {
             response = aliyunClient.getAcsResponse(request);
 
             log.info(response.getPlayAuth());
-        } catch (ServerException e) {
-            log.error("error -->{}", e);
+
         } catch (ClientException e) {
             log.error("error -->{}", e);
         }

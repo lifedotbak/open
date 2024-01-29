@@ -25,9 +25,7 @@ public class RestResponse<T> {
 
     public static <T> RestResponse<T> success(T result) {
 
-        RestResponse<T> response = new RestResponse<>(200, "success", result);
-
-        return response;
+        return new RestResponse<>(200, "success", result);
     }
 
     public static <T> RestResponse<T> success() {

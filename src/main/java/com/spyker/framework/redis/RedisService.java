@@ -2,7 +2,9 @@ package com.spyker.framework.redis;
 
 import jakarta.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.*;
 
@@ -18,10 +20,11 @@ import java.util.concurrent.TimeUnit;
  * @author ruoyi
  */
 @Configuration
+@RequiredArgsConstructor
 // @ConditionalOnProperty(prefix = "spring.redis", name = "enabled", havingValue = "true")
 public class RedisService {
 
-    @Autowired private RedisTemplate redisTemplate;
+    private final RedisTemplate redisTemplate;
 
     //    /** Redi s的 geospatial 操作，如 GEOADD、GEORADIUS 等。 */
     @Resource(name = "redisTemplate")
@@ -164,7 +167,7 @@ public class RedisService {
      *
      * @param key
      */
-    public boolean deleteObject(final String key) {
+    public boolean deleteObject(@NotNull final String key) {
         return redisTemplate.delete(key);
     }
 

@@ -9,9 +9,9 @@ import com.spyker.framework.util.CacheUtils;
 import com.spyker.framework.util.ExJsonUtils;
 import com.spyker.framework.util.ExStringUtils;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
@@ -19,9 +19,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 public class OssFactory {
 
-    @Autowired private RedissonService redissonService;
+    private final RedissonService redissonService;
 
     private static final Map<String, OssClient> CLIENT_CACHE = new ConcurrentHashMap<>();
 

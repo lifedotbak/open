@@ -1,8 +1,8 @@
 package com.spyker.framework.redis;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -13,9 +13,10 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 // @ConditionalOnProperty(prefix = "spring.data.redis", name = "enabled", havingValue = "true")
 @Slf4j
+@RequiredArgsConstructor
 public class StringRedisService {
 
-    @Autowired private StringRedisTemplate stringRedisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
 
     /**
      * @param key
@@ -119,7 +120,7 @@ public class StringRedisService {
      */
     public long incr(String key, long delta) {
         if (delta < 0) {
-            throw new RuntimeException("递增因子必须大于0");
+            throw new IllegalArgumentException("递增因子必须大于0");
         }
         return stringRedisTemplate.opsForValue().increment(key, delta);
     }
@@ -133,7 +134,7 @@ public class StringRedisService {
      */
     public long decr(String key, long delta) {
         if (delta < 0) {
-            throw new RuntimeException("递减因子必须大于0");
+            throw new IllegalArgumentException("递减因子必须大于0");
         }
         return stringRedisTemplate.opsForValue().increment(key, -delta);
     }
