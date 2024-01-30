@@ -75,7 +75,8 @@ public class HCControl {
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
-            log.error("InterruptedException");
+            log.error("InterruptedException-->{}", e);
+            Thread.currentThread().interrupt();
         }
 
         /** 停止转动 */
@@ -92,7 +93,8 @@ public class HCControl {
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
-            log.error("InterruptedException");
+            log.error("InterruptedException-->{}", e);
+            Thread.currentThread().interrupt();
         }
 
         /** 停止转动 */
@@ -109,7 +111,8 @@ public class HCControl {
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
-            log.error("InterruptedException");
+            log.error("InterruptedException-->{}", e);
+            Thread.currentThread().interrupt();
         }
 
         /** 停止转动 */
@@ -126,7 +129,8 @@ public class HCControl {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            log.error("InterruptedException");
+            log.error("InterruptedException-->{}", e);
+            Thread.currentThread().interrupt();
         }
 
         /** 停止转动 */

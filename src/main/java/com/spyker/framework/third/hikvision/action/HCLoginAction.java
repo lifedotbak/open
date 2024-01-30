@@ -5,18 +5,19 @@ import com.spyker.framework.third.hikvision.data.HCOpInfo;
 import com.spyker.framework.third.hikvision.jna.HCNetSDK;
 import com.spyker.framework.third.hikvision.utils.HCInitUtils;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 @AutoConfiguration
 @Slf4j
 @ConditionalOnClass(HCInitUtils.class)
+@RequiredArgsConstructor
 public class HCLoginAction {
 
-    @Autowired private HCInitUtils hCInitUtils;
+    private final HCInitUtils hCInitUtils;
 
     /**
      * 设备登录V40 与V30功能一致

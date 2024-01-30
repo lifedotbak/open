@@ -2,9 +2,13 @@ package com.spyker.framework.third.hikvision.utils;
 
 import com.spyker.framework.third.hikvision.jna.HCNetSDK;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CommonUtil {
 
     public static String generatePlayBackRtspName(String ip, int lDChannel) {

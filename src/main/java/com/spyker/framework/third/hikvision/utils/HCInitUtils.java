@@ -7,9 +7,9 @@ import com.spyker.framework.third.hikvision.jna.PlayCtrl;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -18,9 +18,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 @ConditionalOnClass(HCProperties.class)
 @Configurable
 @Slf4j
+@RequiredArgsConstructor
 public class HCInitUtils {
 
-    @Autowired private HCProperties hCProperties;
+    private final HCProperties hCProperties;
 
     private HCNetSDK hCNetSDK;
 
@@ -112,7 +113,7 @@ public class HCInitUtils {
                     }
                     hCNetSDK = (HCNetSDK) Native.loadLibrary(strDllPath, HCNetSDK.class);
                 } catch (Exception ex) {
-                    System.out.println("loadLibrary: " + strDllPath + " Error: " + ex.getMessage());
+                    log.info("loadLibrary: " + strDllPath + " Error: " + ex.getMessage());
                     return false;
                 }
             }
@@ -143,7 +144,7 @@ public class HCInitUtils {
                     playControl = (PlayCtrl) Native.loadLibrary(strPlayPath, PlayCtrl.class);
 
                 } catch (Exception ex) {
-                    System.out.println(
+                    log.info(
                             "loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
                     return false;
                 }

@@ -8,9 +8,13 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SendSmsUtils {
 
     public static void sendSms(Sms sms) {
@@ -33,13 +37,8 @@ public final class SendSmsUtils {
 
         try {
             CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
-
             log.info(response.getData());
-
         } catch (ServerException e) {
-            e.printStackTrace();
-
             log.error(e.getErrMsg());
         } catch (ClientException e) {
             log.error(e.getErrMsg());

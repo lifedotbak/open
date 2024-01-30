@@ -11,10 +11,10 @@ import com.spyker.framework.third.hikvision.video.HCVideo;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.scheduling.annotation.Async;
@@ -29,9 +29,10 @@ import javax.annotation.PreDestroy;
 @ConditionalOnClass(HCProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class HCUtils {
 
-    @Autowired private HCProperties hCProperties;
+    private final HCProperties hCProperties;
     private HCNetSDK hCNetSDK;
     private PlayCtrl playControl;
 
@@ -423,7 +424,7 @@ public class HCUtils {
                     }
                     hCNetSDK = (HCNetSDK) Native.loadLibrary(strDllPath, HCNetSDK.class);
                 } catch (Exception ex) {
-                    System.out.println("loadLibrary: " + strDllPath + " Error: " + ex.getMessage());
+                    log.error("loadLibrary: " + strDllPath + " Error: " + ex.getMessage());
                     return false;
                 }
             }
@@ -454,8 +455,7 @@ public class HCUtils {
                     playControl = (PlayCtrl) Native.loadLibrary(strPlayPath, PlayCtrl.class);
 
                 } catch (Exception ex) {
-                    System.out.println(
-                            "loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
+                    log.error("loadLibrary: " + strPlayPath + " Error: " + ex.getMessage());
                     return false;
                 }
             }

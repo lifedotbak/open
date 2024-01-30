@@ -17,10 +17,10 @@ import org.springframework.beans.factory.annotation.Value;
 public class SingleCallByTtsUtils {
 
     @Value("${aliyun.accessKeyId}")
-    private String accesskeyid;
+    private String accessKeyId;
 
     @Value("${aliyun.accessKeySecret}")
-    private String accesskeysecret;
+    private String accessKeySecret;
 
     /**
      * ${washItem}订单离支付失效还有5分钟，请尽快支付预付款
@@ -88,6 +88,7 @@ public class SingleCallByTtsUtils {
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());
+            log.info("TTS_197465247 response:{}", response.getData());
         } catch (Exception e) {
             log.error("TTS_197465247 exception:", e);
         }
@@ -95,7 +96,7 @@ public class SingleCallByTtsUtils {
 
     public void singleCallByTts(String calledNumber, String ttsParam, String ttsCode) {
 
-        DefaultProfile profile = DefaultProfile.getProfile("default", accesskeyid, accesskeysecret);
+        DefaultProfile profile = DefaultProfile.getProfile("default", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

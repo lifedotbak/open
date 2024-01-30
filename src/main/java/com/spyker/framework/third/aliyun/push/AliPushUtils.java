@@ -7,6 +7,8 @@ import com.aliyuncs.push.model.v20160801.PushRequest;
 import com.aliyuncs.push.model.v20160801.PushResponse;
 import com.aliyuncs.utils.ParameterHelper;
 import com.spyker.framework.third.aliyun.push.enums.PushMessageType;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AliPushUtils {
 
     public static void main(String[] args) {

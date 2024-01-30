@@ -5,6 +5,9 @@ import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy
 
 import jakarta.servlet.http.HttpServletResponse;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -13,10 +16,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * Excel 工具类
+ * Excel 工具类 @NoArgsConstructor(access = AccessLevel.PRIVATE) 定义一个私有构造函数
  *
  * @author spyker
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExcelUtils {
 
     /**

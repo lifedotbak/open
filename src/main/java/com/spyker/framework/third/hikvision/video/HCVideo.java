@@ -65,7 +65,8 @@ public class HCVideo {
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
-            log.error("InterruptedException");
+            log.error("InterruptedException-->{}", e);
+            Thread.currentThread().interrupt();
             return;
         }
 
@@ -133,7 +134,8 @@ public class HCVideo {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            log.error("InterruptedException");
+            log.error("InterruptedException-->{}", e);
+            Thread.currentThread().interrupt();
             return realPicPath;
         }
 
