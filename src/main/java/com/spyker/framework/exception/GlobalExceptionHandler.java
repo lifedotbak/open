@@ -12,10 +12,10 @@ import com.spyker.framework.response.RestResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -39,11 +39,12 @@ import java.util.Objects;
 /** 系统异常处理 */
 @RestControllerAdvice
 @Slf4j
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    private static final String REQUESTBODY = "requestBodyMessage";
+    private static final String REQUEST_BODY_MESSAGE = "requestBodyMessage";
 
-    @Autowired private ExceptionLogUsableHandler exceptionChain;
+    private final ExceptionLogUsableHandler exceptionChain;
 
     // private ExceptionLogService exceptionLogService;
 
@@ -191,7 +192,7 @@ public class GlobalExceptionHandler {
 
                 String body =
                         IOUtils.toString(requestWapper.getBody(), request.getCharacterEncoding());
-                request.setAttribute(REQUESTBODY, body);
+                request.setAttribute(REQUEST_BODY_MESSAGE, body);
             }
         } catch (Exception e) {
 
@@ -219,7 +220,7 @@ public class GlobalExceptionHandler {
         String expUrl = request.getRequestURI();
 
         // 异常的参数
-        Object body = request.getAttribute(REQUESTBODY);
+        Object body = request.getAttribute(REQUEST_BODY_MESSAGE);
         String expParams = ObjectUtil.isNotNull(body) ? body.toString() : "";
 
         //		String headerLog = "";
