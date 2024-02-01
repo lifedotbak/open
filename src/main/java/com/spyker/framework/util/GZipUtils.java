@@ -1,5 +1,7 @@
 package com.spyker.framework.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayInputStream;
@@ -7,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GZipUtils {
 
     public static String uncompressToString(byte[] bytes, String encoding) {

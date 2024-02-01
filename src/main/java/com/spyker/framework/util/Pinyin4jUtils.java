@@ -1,12 +1,13 @@
 package com.spyker.framework.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
  * 汉字转化为拼音
@@ -14,6 +15,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * @author SPYKER
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Pinyin4jUtils {
 
     public static String convertTolowerCase(String chines) {
@@ -36,13 +38,8 @@ public final class Pinyin4jUtils {
             defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
             for (int i = 0; i < nameChar.length; i++) {
                 if (nameChar[i] > 128) {
-                    try {
-                        pinyinName.append(
-                                PinyinHelper.toHanyuPinyinStringArray(nameChar[i], defaultFormat)[
-                                        0]);
-                    } catch (BadHanyuPinyinOutputFormatCombination e) {
-                        log.error("error -->{}", e);
-                    }
+                    pinyinName.append(
+                            PinyinHelper.toHanyuPinyinStringArray(nameChar[i], defaultFormat)[0]);
                 } else {
                     pinyinName.append(nameChar[i]);
                 }

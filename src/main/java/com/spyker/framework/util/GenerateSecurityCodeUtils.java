@@ -1,7 +1,11 @@
 package com.spyker.framework.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.Random;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GenerateSecurityCodeUtils {
 
     private static final int DEFAULT_LENGTH = 6;

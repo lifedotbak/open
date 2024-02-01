@@ -4,6 +4,9 @@ import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.InputStream;
 
 /**
@@ -11,6 +14,7 @@ import java.io.InputStream;
  *
  * @author spyker
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExIoUtils {
 
     /**

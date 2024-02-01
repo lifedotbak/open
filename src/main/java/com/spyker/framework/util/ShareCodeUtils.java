@@ -1,5 +1,8 @@
 package com.spyker.framework.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.Random;
 
 /**
@@ -12,6 +15,7 @@ import java.util.Random;
  *
  * @author open-open
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShareCodeUtils {
     /** 自定义进制(0,1没有加入,容易与o,l混淆) */
     private static final char[] r =

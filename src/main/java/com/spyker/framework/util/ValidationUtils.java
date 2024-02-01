@@ -1,5 +1,8 @@
 package com.spyker.framework.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import org.springframework.util.StringUtils;
 
 import java.util.regex.Pattern;
@@ -9,6 +12,7 @@ import java.util.regex.Pattern;
  *
  * @author spyker
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ValidationUtils {
 
     private static final Pattern PATTERN_MOBILE =

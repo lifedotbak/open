@@ -2,6 +2,9 @@ package com.spyker.framework.util;
 
 import com.spyker.framework.util.spring.SpringUtils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -10,6 +13,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  *
  * @author spyker
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageUtils {
 
     /**

@@ -1,10 +1,11 @@
 package com.spyker.framework.util;
 
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BCryptUtils {
 
     /**

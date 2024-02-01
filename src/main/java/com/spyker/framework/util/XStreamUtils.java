@@ -2,9 +2,12 @@ package com.spyker.framework.util;
 
 import com.thoughtworks.xstream.XStream;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class XStreamUtils {
 
     private static final String XML_HEARD = "<?xml version='1.0' encoding='UTF-8'?>";

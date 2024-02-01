@@ -5,6 +5,9 @@ import cn.hutool.core.text.StrFormatter;
 
 import com.spyker.framework.constant.Constants;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.AntPathMatcher;
 
@@ -15,9 +18,10 @@ import java.util.*;
  *
  * @author spyker
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExStringUtils extends StringUtils {
     /** 空字符串 */
-    private static final String NULLSTR = "";
+    private static final String NULL_STRING = "";
 
     /** 下划线 */
     private static final char SEPARATOR = '_';
@@ -118,7 +122,7 @@ public class ExStringUtils extends StringUtils {
      * @return true：为空 false：非空
      */
     public static boolean isEmpty(String str) {
-        return isNull(str) || NULLSTR.equals(str.trim());
+        return isNull(str) || NULL_STRING.equals(str.trim());
     }
 
     /**
@@ -150,7 +154,7 @@ public class ExStringUtils extends StringUtils {
      */
     public static String substring(final String str, int start) {
         if (str == null) {
-            return NULLSTR;
+            return NULL_STRING;
         }
 
         if (start < 0) {
@@ -161,7 +165,7 @@ public class ExStringUtils extends StringUtils {
             start = 0;
         }
         if (start > str.length()) {
-            return NULLSTR;
+            return NULL_STRING;
         }
 
         return str.substring(start);
@@ -177,7 +181,7 @@ public class ExStringUtils extends StringUtils {
      */
     public static String substring(final String str, int start, int end) {
         if (str == null) {
-            return NULLSTR;
+            return NULL_STRING;
         }
 
         if (end < 0) {
@@ -192,7 +196,7 @@ public class ExStringUtils extends StringUtils {
         }
 
         if (start > end) {
-            return NULLSTR;
+            return NULL_STRING;
         }
 
         if (start < 0) {
@@ -243,7 +247,7 @@ public class ExStringUtils extends StringUtils {
      * @return set集合
      */
     public static final Set<String> str2Set(String str, String sep) {
-        return new HashSet<String>(str2List(str, sep, true, false));
+        return new HashSet<>(str2List(str, sep, true, false));
     }
 
     /**
@@ -257,7 +261,7 @@ public class ExStringUtils extends StringUtils {
      */
     public static final List<String> str2List(
             String str, String sep, boolean filterBlank, boolean trim) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         if (ExStringUtils.isEmpty(str)) {
             return list;
         }

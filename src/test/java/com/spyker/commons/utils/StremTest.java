@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class StremTest {
 
     @Test
-    public void test1() {
+    public void lambda() {
 
         String[] args = new String[2];
         args[0] = "22";
@@ -32,5 +32,15 @@ public class StremTest {
         BinaryOperator<Integer> add = (a, b) -> a + b;
 
         System.out.println(add.apply(10, 20));
+
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("x", 11);
+
+        Integer x = map.computeIfAbsent("x", k -> 7);
+        Integer y = map.computeIfAbsent("y", k -> 7);
+
+        System.out.println(x);
+        System.out.println(y);
     }
 }
