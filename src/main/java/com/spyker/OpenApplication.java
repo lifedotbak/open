@@ -1,5 +1,7 @@
 package com.spyker;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +17,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  * <p>EnableRetry--->springboot 重试机制
  */
+/**
+ * 配置 ID，采用类似 package.class（如com.taobao.tc.refund.log.level）的命名规则保证全局唯一性，class
+ * 部分建议是配置的业务含义。全部字符小写。只允许英文字符和 4 种特殊字符（”.”、”:”、”-”、”_”），不超过 256 字节。
+ */
+// @NacosPropertySource(dataId = "open", groupId = "dev", autoRefreshed = true, type =
+// ConfigType.YAML)
 @SpringBootApplication
 @MapperScan({"com.spyker.*.mapper"})
 @EnableScheduling
@@ -23,6 +31,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableRetry
 // @EnableConfigurationProperties
 // @EnableAdminServer
+@Slf4j
 public class OpenApplication {
 
     public static void main(String[] args) {

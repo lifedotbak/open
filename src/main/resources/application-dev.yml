@@ -44,9 +44,9 @@ spring:
       # 设置总上传的文件大小
       max-request-size: 1000MB
   redis:
-#     放开redisson配置，其他都为空，redission-starter（RedissonAutoConfiguration）会选择配置SingleServerConfig，redis连接地址采用的是spring.data.redis下配置
+    #     放开redisson配置，其他都为空，redission-starter（RedissonAutoConfiguration）会选择配置SingleServerConfig，redis连接地址采用的是spring.data.redis下配置
     redisson:
-#      file: classpath:redisson.yml
+  #      file: classpath:redisson.yml
   cache:
     #指定缓存类型
     type: redis
@@ -76,7 +76,7 @@ spring:
     redis:
       host: 127.0.0.1
       # 如果不需要密码 password注释掉，jedis，redisson在连接redis时候，不注释password配置，会报错
-#      password:
+      #      password:
       port: 6379
       timeout: 6000
       lettuce:
@@ -247,3 +247,19 @@ sa-token:
   is-log: true
   # sa-token-temp-jwt 模块的秘钥 （定义的密钥）
   jwt-secret-key: app-spyker-sa-token-temp-jwt
+
+################ nacos配置 ##############
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    # 配置 ID，采用类似 package.class（如com.taobao.tc.refund.log.level）的命名规则保证全局唯一性，class部分建议是配置的业务含义。
+    # 全部字符小写。只允许英文字符和 4 种特殊字符（”.”、”:”、”-”、”_”），不超过 256 字节。
+    data-id: com.spyker.open
+    # 配置分组，建议填写产品名:模块名（Nacos）保证唯一性，只允许英文字符和4种特殊字符（”.”、”:”、”-”、”_”），不超过128字节。
+    group: dev
+    auto-refresh: true
+    # endpoint--->springboot endpoint暂时配置为空，但是不能少了这个字段，负责启动报错
+    endpoint:
+    # 开启预加载，@NacosValue 使用方可取得值
+    bootstrap:
+      enable: true

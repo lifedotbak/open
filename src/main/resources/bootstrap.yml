@@ -1,0 +1,17 @@
+#项目启动的时候需要提前知道 nacos 的环境信息，而 application.yml 在读取 nacos 配置后才会读取，
+#所以无法把 nacos 的相关信息配置在 application.yml 中，此时我们可以使用 bootstrap.yml文件。
+#bootstrap.ym是一个引导文件，优先级高于application.yml，它会在application.yml之前被读取。
+
+
+# bootstrap.yml配置是SpringCloud项目才会用到的。如果你的项目仅仅是一个SpringBoot项目，只会识别application.yml配置文件。
+
+############### nacos配置 ##############
+#nacos:
+#  config:
+#    server-addr: 127.0.0.1:8848
+#    # 配置 ID，采用类似 package.class（如com.taobao.tc.refund.log.level）的命名规则保证全局唯一性，class部分建议是配置的业务含义。
+#    # 全部字符小写。只允许英文字符和 4 种特殊字符（”.”、”:”、”-”、”_”），不超过 256 字节。
+#    data-id: com.spyker.open
+#    # 配置分组，建议填写产品名:模块名（Nacos）保证唯一性，只允许英文字符和4种特殊字符（”.”、”:”、”-”、”_”），不超过128字节。
+#    group: dev
+#    auto-refresh: true
