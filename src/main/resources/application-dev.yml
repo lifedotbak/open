@@ -10,7 +10,7 @@ platform:
   # 名称
   name: ${server.name}
   # 文件路径 示例（ Windows配置D:/platform/uploadPath，Linux配置 /home/platform/uploadPath）
-  profile: D:/platform/
+  profile: D:/${server.name}/
   # 获取ip地址开关
   addressEnabled: true
   # 验证码开关
@@ -90,6 +90,25 @@ spring:
   web:
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
+
+  flyway:
+    # 启用或禁用 flyway
+    enabled: true
+    # flyway 的 clean 命令会删除指定 schema 下的所有 table, 杀伤力太大了, 应该禁掉.
+    clean-disabled: true
+    # 设定 SQL 脚本的目录,多个路径使用逗号分隔, 比如取值为 classpath:db/migration,filesystem:/sql-migrations
+    locations: classpath:db/migration
+    # 开发环境最好开启 outOfOrder, 生产环境关闭 outOfOrder .
+    out-of-order: true
+    # 如果没有 flyway_schema_history 这个 metadata 表， 在执行 flyway migrate 命令之前, 必须先执行 flyway baseline 命令
+    # 设置为 true 后 flyway 将在需要 baseline 的时候, 自动执行一次 baseline。
+    baseline-on-migrate: true
+    # 指定 baseline 的版本号,默认值为 1, 低于该版本号的 SQL 文件, migrate 时会被忽略
+    baseline-version: 1
+    # 字符编码 默认 UTF-8
+    encoding: UTF-8
+    # 执行迁移时是否自动调用验证   当你的 版本不符合逻辑 比如 你先执行了 DML 而没有 对应的DDL 会抛出异常
+    validate-on-migrate: true
 
 ############################### springboot admin config ###############################
 management:
@@ -250,6 +269,7 @@ sa-token:
 
 ################ nacos配置 ##############
 nacos:
+  # 实现配置的动态变更
   config:
     server-addr: 127.0.0.1:8848
     # 配置 ID，采用类似 package.class（如com.taobao.tc.refund.log.level）的命名规则保证全局唯一性，class部分建议是配置的业务含义。
@@ -263,3 +283,9 @@ nacos:
     # 开启预加载，@NacosValue 使用方可取得值
     bootstrap:
       enable: true
+  # 服务的注册与发现
+  discovery:
+    auto-register: true
+    server-addr: 127.0.0.1:8848
+    register:
+      group-name: dev
