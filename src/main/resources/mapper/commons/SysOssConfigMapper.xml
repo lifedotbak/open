@@ -5,9 +5,9 @@
     <select id="query" resultType="com.spyker.commons.entity.SysOssConfig"
             parameterType="com.spyker.commons.search.SysOssConfigSearch">
         SELECT
-        a.*
+            a.*
         FROM
-        sys_oss_config a
+            sys_oss_config a
         <where>
             <if test="null != configKey ">
                 and a.config_key = #{configKey}
@@ -42,27 +42,16 @@
             <if test="null != status ">
                 and a.status = #{status}
             </if>
-            <if test="null != ext1 ">
-                and a.ext1 = #{ext1}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
-            </if>
+
         </where>
     </select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysOssConfig"
             parameterType="com.spyker.commons.search.SysOssConfigSearch">
         SELECT
-        a.*
+            a.*
         FROM
-        sys_oss_config a
+            sys_oss_config a
         <where>
             <if test="null != search.configKey ">
                 and a.config_key = #{search.configKey}
@@ -97,18 +86,7 @@
             <if test="null != search.status ">
                 and a.status = #{search.status}
             </if>
-            <if test="null != search.ext1 ">
-                and a.ext1 = #{search.ext1}
-            </if>
-            <if test="null != search.createBy ">
-                and a.create_by = #{search.createBy}
-            </if>
-            <if test="null != search.updateBy ">
-                and a.update_by = #{search.updateBy}
-            </if>
-            <if test="null != search.remark ">
-                and a.remark = #{search.remark}
-            </if>
+
         </where>
     </select>
 

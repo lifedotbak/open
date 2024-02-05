@@ -24,9 +24,6 @@
             <if test="null != status ">
                 and a.status = #{status}
             </if>
-            <if test="null != msg ">
-                and a.msg = #{msg}
-            </if>
         </where>
     </select>
 

@@ -26,9 +26,6 @@ public class SysMenuSearch {
     @Schema(description = "父菜单ID")
     private String parentId;
 
-    @Schema(description = "显示顺序")
-    private Integer orderNum;
-
     @Schema(description = "路由地址")
     private String path;
 

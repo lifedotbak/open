@@ -7,33 +7,34 @@
     </select>
 
     <select id="queryPermsById" resultType="String">
-        SELECT DISTINCT
-        d.perms
+        SELECT
+            DISTINCT
+            d.perms
         FROM
-        sys_user a,
-        sys_user_role b,
-        sys_role_menu c,
-        sys_menu d
+            sys_user a,
+            sys_user_role b,
+            sys_role_menu c,
+            sys_menu d
         WHERE
-        a.user_id = b.user_id
-        AND b.role_id = c.role_id
-        AND c.menu_id = d.menu_id
-        AND d.perms != ''
-        AND a.user_id = #{userId}
+            a.user_id = b.user_id
+            AND b.role_id = c.role_id
+            AND c.menu_id = d.menu_id
+            AND d.perms != ''
+            AND a.user_id = #{userId}
     </select>
 
     <select id="queryRolesById" resultType="String">
         SELECT
-        DISTINCT
-        b.role_key
+            DISTINCT
+            b.role_key
         FROM
-        sys_user_role a,
-        sys_role b,
-        sys_user c
+            sys_user_role a,
+            sys_role b,
+            sys_user c
         WHERE
-        a.user_id = c.user_id
-        AND a.role_id = b.role_id
-        AND c.user_id = #{userId}
+            a.user_id = c.user_id
+            AND a.role_id = b.role_id
+            AND c.user_id = #{userId}
     </select>
 
     <select id="query" resultType="com.spyker.commons.entity.SysUser"
@@ -61,12 +62,6 @@
             <if test="null != sex ">
                 and a.sex = #{sex}
             </if>
-            <if test="null != avatar ">
-                and a.avatar = #{avatar}
-            </if>
-            <if test="null != password ">
-                and a.password = #{password}
-            </if>
             <if test="null != status ">
                 and a.status = #{status}
             </if>
@@ -78,15 +73,6 @@
             </if>
             <if test="null != loginDate ">
                 and a.login_date = #{loginDate}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
             </if>
         </where>
     </select>

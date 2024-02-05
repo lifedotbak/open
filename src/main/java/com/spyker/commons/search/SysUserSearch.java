@@ -43,12 +43,6 @@ public class SysUserSearch {
     @Schema(description = "用户性别（0男 1女 2未知）")
     private String sex;
 
-    @Schema(description = "头像地址")
-    private String avatar;
-
-    @Schema(description = "密码")
-    private String password;
-
     @Schema(description = "帐号状态（0正常 1停用）")
     private String status;
 
@@ -60,13 +54,4 @@ public class SysUserSearch {
 
     @Schema(description = "最后登录时间")
     private Timestamp loginDate;
-
-    @Schema(description = "创建者")
-    private String createBy;
-
-    @Schema(description = "更新者")
-    private String updateBy;
-
-    @Schema(description = "备注")
-    private String remark;
 }

@@ -33,9 +33,6 @@ public class SysDeptSearch {
     @Schema(description = "部门名称")
     private String deptName;
 
-    @Schema(description = "显示顺序")
-    private Integer orderNum;
-
     @Schema(description = "负责人")
     private String leader;
 
@@ -50,10 +47,4 @@ public class SysDeptSearch {
 
     @Schema(description = "删除标志（0代表存在 2代表删除）")
     private String delFlag;
-
-    @Schema(description = "创建者")
-    private String createBy;
-
-    @Schema(description = "更新者")
-    private String updateBy;
 }

@@ -31,8 +31,9 @@ public class ExcludeTurboFilter extends TurboFilter {
 
         for (String excludePackageName : excludePackageNameList) {
 
-            if (StringUtils.isNotBlank(excludePackageName) && loggerName.contains(excludePackageName)) {
-                    return FilterReply.DENY;
+            if (StringUtils.isNotBlank(excludePackageName)
+                    && loggerName.contains(excludePackageName)) {
+                return FilterReply.DENY;
             }
         }
 

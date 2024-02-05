@@ -28,13 +28,4 @@ public class SysDictTypeSearch {
 
     @Schema(description = "状态（0正常 1停用）")
     private String status;
-
-    @Schema(description = "创建者")
-    private String createBy;
-
-    @Schema(description = "更新者")
-    private String updateBy;
-
-    @Schema(description = "备注")
-    private String remark;
 }

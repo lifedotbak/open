@@ -34,7 +34,4 @@ public class SysJobLogSearch {
 
     @Schema(description = "执行状态（0正常 1失败）")
     private String status;
-
-    @Schema(description = "异常信息")
-    private String exceptionInfo;
 }

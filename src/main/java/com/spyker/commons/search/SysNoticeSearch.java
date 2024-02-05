@@ -31,13 +31,4 @@ public class SysNoticeSearch {
 
     @Schema(description = "公告状态（0正常 1关闭）")
     private String status;
-
-    @Schema(description = "创建者")
-    private String createBy;
-
-    @Schema(description = "更新者")
-    private String updateBy;
-
-    @Schema(description = "备注")
-    private String remark;
 }

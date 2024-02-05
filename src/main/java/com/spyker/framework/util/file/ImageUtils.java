@@ -1,7 +1,8 @@
 package com.spyker.framework.util.file;
 
-import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.constant.Constants;
+import com.spyker.framework.properties.PlatformConfigProperties;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;

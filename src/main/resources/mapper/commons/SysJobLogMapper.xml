@@ -21,9 +21,7 @@
             <if test="null != status ">
                 and a.status = #{status}
             </if>
-            <if test="null != exceptionInfo ">
-                and a.exception_info = #{exceptionInfo}
-            </if>
+
         </where>
     </select>
 

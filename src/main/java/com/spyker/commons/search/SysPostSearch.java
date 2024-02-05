@@ -27,9 +27,6 @@ public class SysPostSearch {
     @Schema(description = "岗位名称")
     private String postName;
 
-    @Schema(description = "显示顺序")
-    private Integer postSort;
-
     @Schema(description = "状态（0正常 1停用）")
     private String status;
 

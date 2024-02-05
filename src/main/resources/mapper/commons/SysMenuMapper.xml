@@ -12,9 +12,6 @@
             <if test="null != parentId ">
                 and a.parent_id = #{parentId}
             </if>
-            <if test="null != orderNum ">
-                and a.order_num = #{orderNum}
-            </if>
             <if test="null != path ">
                 and a.path = #{path}
             </if>
@@ -41,18 +38,6 @@
             </if>
             <if test="null != perms ">
                 and a.perms = #{perms}
-            </if>
-            <if test="null != icon ">
-                and a.icon = #{icon}
-            </if>
-            <if test="null != createBy ">
-                and a.create_by = #{createBy}
-            </if>
-            <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
-            </if>
-            <if test="null != remark ">
-                and a.remark = #{remark}
             </if>
         </where>
     </select>
