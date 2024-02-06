@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysMenu;
 import com.spyker.commons.search.SysMenuSearch;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -140,8 +142,6 @@ public class SysMenuServiceTest extends BaseTest {
         search.setMenuName("menuName");
 
         search.setParentId("parentId");
-
-        search.setOrderNum(1);
 
         search.setPath("path");
 

@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysPost;
 import com.spyker.commons.search.SysPostSearch;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -98,8 +100,6 @@ public class SysPostServiceTest extends BaseTest {
         search.setPostCode("postCode");
 
         search.setPostName("postName");
-
-        search.setPostSort(1);
 
         search.setStatus("status");
 

@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.search.SysDeptSearch;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -125,8 +127,6 @@ public class SysDeptServiceTest extends BaseTest {
         search.setEmail("email");
         search.setStatus("status");
         search.setDelFlag("delFlag");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
 
         service.query(search);
     }
@@ -143,8 +143,6 @@ public class SysDeptServiceTest extends BaseTest {
 
         search.setDeptName("deptName");
 
-        search.setOrderNum(1);
-
         search.setLeader("leader");
 
         search.setPhone("phone");
@@ -154,10 +152,6 @@ public class SysDeptServiceTest extends BaseTest {
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
 
         service.queryPage(page, search);
     }

@@ -98,15 +98,6 @@ public class SysDictDataServiceTest extends BaseTest {
         SysDictDataSearch search = new SysDictDataSearch();
 
         search.setDictLabel("dictLabel");
-        search.setDictValue("dictValue");
-        search.setDictType("dictType");
-        search.setCssClass("cssClass");
-        search.setListClass("listClass");
-        search.setIsDefault("isDefault");
-        search.setStatus("status");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
-        search.setRemark("remark");
 
         service.query(search);
     }
@@ -117,27 +108,7 @@ public class SysDictDataServiceTest extends BaseTest {
 
         SysDictDataSearch search = new SysDictDataSearch();
 
-        search.setDictSort(1);
-
         search.setDictLabel("dictLabel");
-
-        search.setDictValue("dictValue");
-
-        search.setDictType("dictType");
-
-        search.setCssClass("cssClass");
-
-        search.setListClass("listClass");
-
-        search.setIsDefault("isDefault");
-
-        search.setStatus("status");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
-        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

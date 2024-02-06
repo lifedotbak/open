@@ -83,7 +83,6 @@ public class SysJobLogServiceTest extends BaseTest {
         search.setInvokeTarget("invokeTarget");
         search.setJobMessage("jobMessage");
         search.setStatus("status");
-        search.setExceptionInfo("exceptionInfo");
 
         service.query(search);
     }
@@ -103,8 +102,6 @@ public class SysJobLogServiceTest extends BaseTest {
         search.setJobMessage("jobMessage");
 
         search.setStatus("status");
-
-        search.setExceptionInfo("exceptionInfo");
 
         service.queryPage(page, search);
     }

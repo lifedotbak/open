@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysRole;
 import com.spyker.commons.search.SysRoleSearch;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -92,9 +94,6 @@ public class SysRoleServiceTest extends BaseTest {
         search.setDataScope("dataScope");
         search.setStatus("status");
         search.setDelFlag("delFlag");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
-        search.setRemark("remark");
 
         service.query(search);
     }
@@ -109,19 +108,11 @@ public class SysRoleServiceTest extends BaseTest {
 
         search.setRoleKey("roleKey");
 
-        search.setRoleSort(1);
-
         search.setDataScope("dataScope");
 
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
-        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

@@ -83,15 +83,10 @@ public class SysCompanyServiceTest extends BaseTest {
         SysCompanySearch search = new SysCompanySearch();
 
         search.setCompanyName("companyName");
-        search.setOrderNum(1);
 
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
 
         service.query(search);
     }
@@ -104,15 +99,9 @@ public class SysCompanyServiceTest extends BaseTest {
 
         search.setCompanyName("companyName");
 
-        search.setOrderNum(1);
-
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
 
         service.queryPage(page, search);
     }

@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysUser;
 import com.spyker.commons.search.SysUserSearch;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -119,14 +121,10 @@ public class SysUserServiceTest extends BaseTest {
         search.setEmail("email");
         search.setPhonenumber("phonenumber");
         search.setSex("sex");
-        search.setAvatar("avatar");
-        search.setPassword("password");
+
         search.setStatus("status");
         search.setDelFlag("delFlag");
         search.setLoginIp("loginIp");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
-        search.setRemark("remark");
 
         service.query(search);
     }
@@ -151,21 +149,11 @@ public class SysUserServiceTest extends BaseTest {
 
         search.setSex("sex");
 
-        search.setAvatar("avatar");
-
-        search.setPassword("password");
-
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
 
         search.setLoginIp("loginIp");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
-        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

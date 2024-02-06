@@ -81,9 +81,6 @@ public class SysNoticeServiceTest extends BaseTest {
         search.setNoticeTitle("noticeTitle");
         search.setNoticeType("noticeType");
         search.setStatus("status");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
-        search.setRemark("remark");
 
         service.query(search);
     }
@@ -99,12 +96,6 @@ public class SysNoticeServiceTest extends BaseTest {
         search.setNoticeType("noticeType");
 
         search.setStatus("status");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
-        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

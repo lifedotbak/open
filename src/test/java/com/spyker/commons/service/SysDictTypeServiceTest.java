@@ -81,9 +81,6 @@ public class SysDictTypeServiceTest extends BaseTest {
         search.setDictName("dictName");
         search.setDictType("dictType");
         search.setStatus("status");
-        search.setCreateBy("createBy");
-        search.setUpdateBy("updateBy");
-        search.setRemark("remark");
 
         service.query(search);
     }
@@ -99,12 +96,6 @@ public class SysDictTypeServiceTest extends BaseTest {
         search.setDictType("dictType");
 
         search.setStatus("status");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
-        search.setRemark("remark");
 
         service.queryPage(page, search);
     }
