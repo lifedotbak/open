@@ -110,6 +110,22 @@ spring:
     # 执行迁移时是否自动调用验证   当你的 版本不符合逻辑 比如 你先执行了 DML 而没有 对应的DDL 会抛出异常
     validate-on-migrate: true
 
+  # jdk21打开虚拟线程
+  #  threads:
+  #    virtual:
+  #      enabled: true
+  # sping task配置
+  task:
+    execution:
+      pool:
+        max-size: 16
+        queue-capacity: 100
+        keep-alive: "10s"
+    scheduling:
+      thread-name-prefix: "scheduling-"
+      pool:
+        size: 5
+
 ############################### springboot admin config ###############################
 management:
   endpoints:

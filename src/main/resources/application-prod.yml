@@ -90,9 +90,26 @@ spring:
   web:
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
+
   flyway:
     # 启用或禁用 flyway
     enabled: false
+
+  # jdk21打开虚拟线程
+  #  threads:
+  #    virtual:
+  #      enabled: true
+  # sping task配置
+  task:
+    execution:
+      pool:
+        max-size: 16
+        queue-capacity: 100
+        keep-alive: "10s"
+    scheduling:
+      thread-name-prefix: "scheduling-"
+      pool:
+        size: 5
 
 ############################### springboot admin config ###############################
 management:
