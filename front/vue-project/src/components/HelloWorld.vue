@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 defineProps<{
   msg: string
 }>()
@@ -9,8 +9,8 @@ defineProps<{
     <h1 class="green">{{ msg }}</h1>
     <h3>
       项目采用技术
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. 
+      <a href="https://vitejs.dev/" rel="noopener" target="_blank">Vite</a> +
+      <a href="https://vuejs.org/" rel="noopener" target="_blank">Vue 3</a>.
       下一步？
     </h3>
   </div>

@@ -1,14 +1,14 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+<script lang="ts" setup>
+import {RouterLink, RouterView} from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" height="125" src="@/assets/logo.svg" width="125"/>
 
     <div class="wrapper">
-      <HelloWorld msg="Open!" />
+      <HelloWorld msg="Open!"/>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -20,7 +20,7 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
 
-  <RouterView />
+  <RouterView/>
 </template>
 
 <style scoped>

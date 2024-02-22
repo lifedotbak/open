@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+<script lang="ts" setup>
+import {ref, reactive, computed} from 'vue'
 
 const count = ref(0)
 
@@ -7,10 +7,10 @@ function increment() {
   count.value++
 }
 
-const count_object = { id: ref(1) }
+const count_object = {id: ref(1)}
 
 const obj = ref({
-  nested: { count: 0 },
+  nested: {count: 0},
   arr: ['foo', 'bar']
 })
 
@@ -64,7 +64,7 @@ const type = ref('c')
 
 const ok = ref('c')
 
-const items = ref([{ message: 'Foo' }, { message: 'Bar' }])
+const items = ref([{message: 'Foo'}, {message: 'Bar'}])
 
 const myObject = reactive({
   title: 'How to do lists in Vue',
@@ -116,7 +116,7 @@ const selected2 = ref('')
     <h1 v-else>Oh no 😢</h1>
 
     <div :class="{ active: isActive }">======>active: isActive is true</div>
-    <div class="static" :class="{ active: isActive, 'text-danger': hasError }">
+    <div :class="{ active: isActive, 'text-danger': hasError }" class="static">
       ======>active: isActive is true，hasError===>{{ hasError }}
     </div>
 
@@ -125,13 +125,13 @@ const selected2 = ref('')
 
     <p>Has published books:</p>
     <span>{{ author.books.length > 0 ? 'Yes' : 'No' }}</span
-    ><br />
+    ><br/>
     <span>{{ publishedBooksMessage }}</span
-    ><br />
+    ><br/>
     <span>{{ now }}</span
-    ><br />
+    ><br/>
     <span>{{ fullName }}</span
-    ><br />
+    ><br/>
 
     <div v-if="type === 'A'">A</div>
     <div v-else-if="type === 'B'">B</div>
@@ -149,17 +149,17 @@ const selected2 = ref('')
     </div>
 
     <p>Message is: {{ message }}</p>
-    <input v-model="message" placeholder="edit me" />
+    <input v-model="message" placeholder="edit me"/>
 
     <div>Checked names: {{ checkedNames }}</div>
 
-    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+    <input id="jack" v-model="checkedNames" type="checkbox" value="Jack"/>
     <label for="jack">Jack</label>
 
-    <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+    <input id="john" v-model="checkedNames" type="checkbox" value="John"/>
     <label for="john">John</label>
 
-    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+    <input id="mike" v-model="checkedNames" type="checkbox" value="Mike"/>
     <label for="mike">Mike</label>
 
     <div>Selected: {{ selected }}</div>
@@ -173,10 +173,10 @@ const selected2 = ref('')
   </div>
 
   <!-- `picked` 在被选择时是字符串 "a" -->
-  <input type="radio" v-model="picked" value="a" />
+  <input v-model="picked" type="radio" value="a"/>
 
   <!-- `toggle` 只会为 true 或 false -->
-  <input type="checkbox" v-model="toggle" />
+  <input v-model="toggle" type="checkbox"/>
 
   <!-- `selected` 在第一项被选中时为字符串 "abc" -->
   <select id="xxxx" v-model="selected2">
