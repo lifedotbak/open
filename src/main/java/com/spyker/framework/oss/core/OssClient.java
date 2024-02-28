@@ -1,9 +1,6 @@
 package com.spyker.framework.oss.core;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.IdUtil;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
@@ -27,7 +24,10 @@ import com.spyker.framework.oss.exception.OssException;
 import com.spyker.framework.oss.properties.OssProperties;
 import com.spyker.framework.util.date.ExDateUtils;
 
-import cn.hutool.core.util.IdUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /**
  * S3 存储协议 所有兼容S3协议的云厂商均支持 阿里云 腾讯云 七牛云 minio

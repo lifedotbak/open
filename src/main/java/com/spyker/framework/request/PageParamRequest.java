@@ -1,7 +1,9 @@
 package com.spyker.framework.request;
 
 import com.spyker.framework.constant.Constants;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 @Data

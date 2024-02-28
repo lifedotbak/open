@@ -49,7 +49,7 @@ public class CaptchaController {
     /** 生成验证码 */
     @SaIgnore
     @PostMapping("/captchaImage")
-    public RestMapResponse createCode() throws IOException {
+    public RestMapResponse createCode() {
 
         RestMapResponse ajax = RestMapResponse.success();
         ajax.put("captchaEnabled", PlatformConfigProperties.getCaptchaEnabled());

@@ -15,11 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AcsClientUtils {
 
-    private AcsClientUtils(){}
-
     private static final String END_POINT = "sts.aliyuncs.com";
-
     private static final String REGION_ID = "cn-shanghai";
+
+    private AcsClientUtils() {}
 
     public static DefaultAcsClient getAcsClient(String accessKeyId, String accessKeySecret) {
         DefaultAcsClient acsClient =

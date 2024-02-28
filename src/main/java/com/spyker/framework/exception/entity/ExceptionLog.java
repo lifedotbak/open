@@ -1,12 +1,13 @@
 package com.spyker.framework.exception.entity;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class ExceptionLog {

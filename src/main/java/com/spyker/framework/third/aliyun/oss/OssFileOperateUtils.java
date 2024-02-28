@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.io.File;
 @Slf4j
 public class OssFileOperateUtils {
 
-    private OssFileOperateUtils(){}
+    private OssFileOperateUtils() {}
 
     /**
      * 下载文件

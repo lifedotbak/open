@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.search.SysDeptSearch;
-import com.spyker.framework.response.RestResponse;
 
 import java.util.List;
 

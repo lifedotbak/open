@@ -19,10 +19,9 @@ import java.util.concurrent.ConcurrentMap;
 
 public class PlusSpringCacheManager implements CacheManager {
 
-    private RedissonClient redissonClient;
-
     Map<String, CacheConfig> configMap = new ConcurrentHashMap<>();
     ConcurrentMap<String, Cache> instanceMap = new ConcurrentHashMap<>();
+    private final RedissonClient redissonClient;
     private boolean dynamic = true;
     private boolean allowNullValues = true;
     private boolean transactionAware = true;

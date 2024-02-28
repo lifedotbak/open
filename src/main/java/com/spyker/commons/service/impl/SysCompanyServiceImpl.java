@@ -52,7 +52,7 @@ public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysComp
     public SysCompany get(String id) {
         SysCompany result = getById(id);
 
-        log.info("result-->{}",result);
+        log.info("result-->{}", result);
 
         return result;
     }

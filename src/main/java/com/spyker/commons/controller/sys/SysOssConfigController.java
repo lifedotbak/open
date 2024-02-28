@@ -101,7 +101,7 @@ public class SysOssConfigController extends BaseController {
     }
 
     @Operation(summary = "修改", description = "修改")
-    @PutMapping("/{id}")
+    @PutMapping("/{ossConfigId}")
     @Log(title = "对象存储配置表--修改", businessType = BusinessType.UPDATE)
     public RestResponse<?> update(
             @PathVariable("ossConfigId") String ossConfigId, @RequestBody SysOssConfig update) {

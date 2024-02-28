@@ -3,7 +3,9 @@ package com.spyker.framework.third.tencent.pay.v3.sign;
 import com.spyker.framework.third.tencent.pay.PayConfig;
 import com.spyker.framework.third.tencent.pay.v3.entity.RequestAuth;
 import com.spyker.framework.third.tencent.pay.v3.utils.PrivateKeyUtil;
+
 import lombok.SneakyThrows;
+
 import okhttp3.HttpUrl;
 
 import java.nio.charset.StandardCharsets;

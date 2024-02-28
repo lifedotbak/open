@@ -10,8 +10,10 @@ import com.digitalpetri.modbus.responses.ReadCoilsResponse;
 import com.digitalpetri.modbus.responses.ReadDiscreteInputsResponse;
 import com.digitalpetri.modbus.responses.ReadHoldingRegistersResponse;
 import com.digitalpetri.modbus.responses.ReadInputRegistersResponse;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.util.ReferenceCountUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;

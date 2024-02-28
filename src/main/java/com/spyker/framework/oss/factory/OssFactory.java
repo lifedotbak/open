@@ -22,9 +22,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class OssFactory {
 
-    private final RedissonService redissonService;
-
     private static final Map<String, OssClient> CLIENT_CACHE = new ConcurrentHashMap<>();
+    private final RedissonService redissonService;
 
     /** 初始化工厂 */
     public void init() {

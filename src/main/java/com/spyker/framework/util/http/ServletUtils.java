@@ -17,7 +17,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -177,11 +176,7 @@ public class ServletUtils {
     public static String urlEncode(String str) {
 
         String result = "";
-        try {
-            result = URLEncoder.encode(str, StandardCharsets.UTF_8.name());
-        } catch (UnsupportedEncodingException e) {
-            log.error(e.getMessage());
-        }
+        result = URLEncoder.encode(str, StandardCharsets.UTF_8);
 
         return result;
     }
@@ -195,11 +190,7 @@ public class ServletUtils {
     public static String urlDecode(String str) {
 
         String result = "";
-        try {
-            result = URLDecoder.decode(str, StandardCharsets.UTF_8.name());
-        } catch (UnsupportedEncodingException e) {
-            log.error(e.getMessage());
-        }
+        result = URLDecoder.decode(str, StandardCharsets.UTF_8);
 
         return result;
     }

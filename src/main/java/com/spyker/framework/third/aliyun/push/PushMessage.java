@@ -3,7 +3,9 @@ package com.spyker.framework.third.aliyun.push;
 import com.spyker.framework.third.aliyun.push.enums.AndroidOpenType;
 import com.spyker.framework.third.aliyun.push.enums.PushMessageType;
 import com.spyker.framework.third.aliyun.push.enums.PushTargetType;
+
 import lombok.Data;
+
 import org.json.JSONObject;
 
 import java.util.Map;

@@ -7,8 +7,6 @@ package com.spyker.framework.constant;
  */
 public class ScheduleConstants {
 
-    private ScheduleConstants(){}
-
     public static final String TASK_CLASS_NAME = "TASK_CLASS_NAME";
 
     /** 执行目标key */
@@ -25,6 +23,8 @@ public class ScheduleConstants {
 
     /** 不触发立即执行 */
     public static final String MISFIRE_DO_NOTHING = "3";
+
+    private ScheduleConstants() {}
 
     public enum Status {
         /** 正常 */

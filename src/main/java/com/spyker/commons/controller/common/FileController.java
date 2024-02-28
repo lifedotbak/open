@@ -42,7 +42,7 @@ import java.util.List;
 @SaCheckLogin
 public class FileController {
 
-    private static final String FILE_DELIMETER = ",";
+    private static final String FILE_DELIMITER = ",";
 
     /**
      * 通用下载请求
@@ -120,10 +120,10 @@ public class FileController {
                 originalFilenames.add(file.getOriginalFilename());
             }
             RestMapResponse ajax = RestMapResponse.success();
-            ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
-            ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));
-            ajax.put("newFileNames", StringUtils.join(newFileNames, FILE_DELIMETER));
-            ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMETER));
+            ajax.put("urls", StringUtils.join(urls, FILE_DELIMITER));
+            ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMITER));
+            ajax.put("newFileNames", StringUtils.join(newFileNames, FILE_DELIMITER));
+            ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMITER));
             return ajax;
         } catch (Exception e) {
 
@@ -138,7 +138,8 @@ public class FileController {
             String resource, HttpServletRequest request, HttpServletResponse response) {
 
         if (!FileUtils.checkAllowDownload(resource)) {
-            throw new IllegalArgumentException(ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
+            throw new IllegalArgumentException(
+                    ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
         }
 
         try {

@@ -1,8 +1,8 @@
 package com.spyker.framework.redis;
 
 import jakarta.annotation.Resource;
-
 import jakarta.validation.constraints.NotNull;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.context.annotation.Configuration;

@@ -1,13 +1,12 @@
 package com.spyker.framework.xss;
 
-import com.spyker.framework.util.ExStringUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 自定义xss校验注解实现

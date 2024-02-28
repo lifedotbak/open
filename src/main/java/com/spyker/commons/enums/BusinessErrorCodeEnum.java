@@ -9,8 +9,8 @@ import lombok.Getter;
 public enum BusinessErrorCodeEnum implements IResponseCode {
     UNKNOWN_ERROR(-1, "未知异常");
 
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
     BusinessErrorCodeEnum(int code, String message) {
         this.code = code;

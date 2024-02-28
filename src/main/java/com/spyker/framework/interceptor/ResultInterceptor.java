@@ -22,8 +22,7 @@ public class ResultInterceptor implements HandlerInterceptor {
     public boolean preHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 正在处理请求的方法bean
-        if (handler instanceof HandlerMethod) {
-            final HandlerMethod handlerMethod = (HandlerMethod) handler;
+        if (handler instanceof HandlerMethod handlerMethod) {
             // 获取当前类
             final Class<?> clazz = handlerMethod.getBeanType();
             // 获取当前方法

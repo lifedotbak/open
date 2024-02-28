@@ -17,7 +17,7 @@ public class IndexController {
     /**
      * 使用限流注解的接口1
      *
-     * @return
+     * @return RestResponse<String>
      */
     @GetMapping("/limit1")
     @Limiting(limitNum = 1, name = "limiting1")
@@ -28,7 +28,7 @@ public class IndexController {
     /**
      * 使用限流注解的接口2
      *
-     * @return
+     * @return RestResponse<String>
      */
     @GetMapping("/limit2")
     @Limiting(limitNum = 5, name = "limiting2")
