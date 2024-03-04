@@ -6,7 +6,7 @@ import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
-/** https://springdoc.cn/spring-retry-guide/ */
+/** <a href="">https://springdoc.cn/spring-retry-guide/</a> */
 @Slf4j
 @Service
 public class RetryService {
