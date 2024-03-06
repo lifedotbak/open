@@ -4,12 +4,16 @@ import lombok.Data;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 /** Spring Data Redis 实现 domain 实体 */
 @RedisHash
 @Data
 public class Person {
     @Id String id;
-    String firstname;
+
+    /** indexed 二级索引 */
+    @Indexed String firstname;
+
     String lastname;
 }
