@@ -15,6 +15,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 import lombok.RequiredArgsConstructor;
 
+import jakarta.servlet.http.Cookie;
+
 import com.spyker.BaseTest;
 
 import lombok.SneakyThrows;
@@ -58,12 +60,15 @@ public class ${table.controllerName}Test extends BaseTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+private Cookie[] cookies;
+
   //  private WebTestClient client;
 
     @BeforeEach
     void setUp() {
   //    client = MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
       mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+cookies = getLoginCookies(LOGIN_URL, mockMvc);
     }
 
     @Test
@@ -72,7 +77,7 @@ public class ${table.controllerName}Test extends BaseTest {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
         MvcResult mvcResult = mockMvc
-            .perform(MockMvcRequestBuilders.get(LIST_PAGE_URL)
+            .perform(MockMvcRequestBuilders.get(LIST_PAGE_URL).cookie(cookies)
                 .accept(MediaType.APPLICATION_JSON).params(params))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 
@@ -87,7 +92,7 @@ public class ${table.controllerName}Test extends BaseTest {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
         MvcResult mvcResult = mockMvc
-            .perform(MockMvcRequestBuilders.get(LIST_URL)
+            .perform(MockMvcRequestBuilders.get(LIST_URL).cookie(cookies)
                 .accept(MediaType.APPLICATION_JSON).params(params))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 
@@ -108,7 +113,7 @@ public class ${table.controllerName}Test extends BaseTest {
 
 
         MvcResult mvcResult = mockMvc
-            .perform(MockMvcRequestBuilders.get(DETAIL_URL)
+            .perform(MockMvcRequestBuilders.get(DETAIL_URL).cookie(cookies)
                 .accept(MediaType.APPLICATION_JSON).params(params))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 
@@ -128,7 +133,7 @@ public class ${table.controllerName}Test extends BaseTest {
         </#list>
 
         MvcResult mvcResult = mockMvc
-            .perform(MockMvcRequestBuilders.delete(DELETE_URL)
+            .perform(MockMvcRequestBuilders.delete(DELETE_URL).cookie(cookies)
                 .accept(MediaType.APPLICATION_JSON).params(params))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 
@@ -161,7 +166,7 @@ public class ${table.controllerName}Test extends BaseTest {
         String jsonString = gson.toJson(add);
 
         MvcResult mvcResult = mockMvc
-            .perform(MockMvcRequestBuilders.post(ADD_URL).content(jsonString)
+            .perform(MockMvcRequestBuilders.post(ADD_URL).cookie(cookies).content(jsonString)
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 
@@ -194,7 +199,7 @@ public class ${table.controllerName}Test extends BaseTest {
         String jsonString = gson.toJson(update);
 
         MvcResult mvcResult = mockMvc
-            .perform(MockMvcRequestBuilders.put(UPDATE_URL).content(jsonString)
+            .perform(MockMvcRequestBuilders.put(UPDATE_URL).cookie(cookies).content(jsonString)
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
 

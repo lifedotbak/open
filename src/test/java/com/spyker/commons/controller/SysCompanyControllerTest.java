@@ -1,5 +1,14 @@
 package com.spyker.commons.controller;
 
+import com.google.gson.Gson;
+import com.spyker.BaseTest;
+import com.spyker.commons.entity.SysCompany;
+
+import jakarta.servlet.http.Cookie;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,22 +18,15 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.context.WebApplicationContext;
-
-import com.google.gson.Gson;
-import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysCompany;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SysCompanyControllerTest extends BaseTest {
 
-    private static String BASE_URL = "/commons/sys-company";
+    private static String LOGIN_URL = "/sys/login/login";
+
+    private static String BASE_URL = "/sys/sys-company";
 
     /* 分页查询 */
     private static String LIST_PAGE_URL = BASE_URL + "/list_page";
@@ -44,21 +46,13 @@ public class SysCompanyControllerTest extends BaseTest {
     /* 新增 */
     private static String ADD_URL = BASE_URL + "/add";
 
-    // @Autowired
-    // private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
-    // @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired private WebApplicationContext webApplicationContext;
-
-    // private WebTestClient client;
+    private Cookie[] cookies;
 
     @BeforeEach
-    void setUp() {
-        // client =
-        // MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
-        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+    public void setUp() {
+        cookies = getLoginCookies(LOGIN_URL, mockMvc);
     }
 
     @Test
@@ -69,6 +63,9 @@ public class SysCompanyControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get(LIST_PAGE_URL)
+                                        //
+                                        // .session(mockHttpSession)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -86,6 +83,7 @@ public class SysCompanyControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get(LIST_URL)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -105,6 +103,7 @@ public class SysCompanyControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get(DETAIL_URL)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -124,6 +123,7 @@ public class SysCompanyControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.delete(DELETE_URL)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -157,6 +157,7 @@ public class SysCompanyControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.post(ADD_URL)
+                                        .cookie(cookies)
                                         .content(jsonString)
                                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -192,6 +193,7 @@ public class SysCompanyControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.put(UPDATE_URL)
+                                        .cookie(cookies)
                                         .content(jsonString)
                                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(MockMvcResultMatchers.status().isOk())

@@ -3,8 +3,10 @@ package com.spyker.commons.controller;
 import com.google.gson.Gson;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysDictType;
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,7 +21,7 @@ import org.springframework.util.MultiValueMap;
 @Slf4j
 public class SysDictTypeControllerTest extends BaseTest {
 
-    private static final String URL = "/application/sys-dict-type";
+    private static final String URL = "/sys/sys-dict-type";
 
     @Autowired private MockMvc mockMvc;
 

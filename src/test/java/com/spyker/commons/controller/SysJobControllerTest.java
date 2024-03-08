@@ -21,7 +21,7 @@ import org.springframework.util.MultiValueMap;
 @Slf4j
 public class SysJobControllerTest extends BaseTest {
 
-    private static final String URL = "/application/sys-job";
+    private static final String URL = "/sys/sys-job";
 
     @Autowired private MockMvc mockMvc;
 

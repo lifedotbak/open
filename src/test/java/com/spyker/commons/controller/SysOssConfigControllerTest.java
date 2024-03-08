@@ -1,5 +1,14 @@
 package com.spyker.commons.controller;
 
+import com.google.gson.Gson;
+import com.spyker.BaseTest;
+import com.spyker.commons.entity.SysOssConfig;
+
+import jakarta.servlet.http.Cookie;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,22 +18,15 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.context.WebApplicationContext;
-
-import com.google.gson.Gson;
-import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysOssConfig;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SysOssConfigControllerTest extends BaseTest {
 
-    private static String BASE_URL = "/commons/sys-oss-config";
+    private static String LOGIN_URL = "/sys/login/login";
+
+    private static String BASE_URL = "/sys/sys-oss-config";
 
     /* 分页查询 */
     private static String LIST_PAGE_URL = BASE_URL + "/list_page";
@@ -44,18 +46,18 @@ public class SysOssConfigControllerTest extends BaseTest {
     /* 新增 */
     private static String ADD_URL = BASE_URL + "/add";
 
-    //	@Autowired
-    private MockMvc mockMvc;
-    //
-    @Autowired private WebApplicationContext webApplicationContext;
+    @Autowired private MockMvc mockMvc;
 
     //	private WebTestClient client;
 
+    // BeforeEach修饰在方法上，在每一个测试方法（所有@Test、@RepeatedTest、@ParameterizedTest或者@TestFactory注解的方法）之前执行一次。
+    // 例如：一个测试类有2个测试方法testA()和testB()，还有一个@BeforeEach的方法，执行这个测试类
+    // @BeforeEach的方法会在testA()之前执行一次，在testB()之前又执行一次。@BeforeEach的方法一共执行了2次。
+    private Cookie[] cookies;
+
     @BeforeEach
-    void setUp() {
-        //		client =
-        // MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
-        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+    public void setUp() {
+        cookies = getLoginCookies(LOGIN_URL, mockMvc);
     }
 
     //	@Before
