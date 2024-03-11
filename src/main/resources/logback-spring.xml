@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true" scan="true" scanPeriod="40 seconds">
 
-    <!-- 引用 Spring Boot 的 logback 基础配置 -->
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!-- Because the standard logback.xml configuration file is loaded too early,
+     you cannot use extensions in it.
+     You need to either use logback-spring.xml
+     gengor define a logging.config property. -->
 
-    <!-- application中spring.application.name值 -->
-    <springProperty scope="context" name="log.path" source="server.name"/>
+    <springProperty scope="context" name="name" source="server.name" defaultValue="application"/>
 
-    <!-- 日志存放路径 -->
-    <property name="log.base" value="logs/open"/>
+    <property name="log.base" value="logs/${name}"/>
+
+    <springProfile name="dev">
+    <!-- configuration to be enabled when the "staging" profile is active -->
+        <property name="log.base" value="logs/${name}-dev"/>
+    </springProfile>
 
     <!-- excludePackageNames传入需要过滤包的关键字，以分号分割 -->
     <turboFilter class="com.spyker.framework.logback.ExcludeTurboFilter">
