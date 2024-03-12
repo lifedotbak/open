@@ -73,7 +73,7 @@
         <hutool.version>5.8.26</hutool.version>
 
         <!-- flyway相关依赖版本 -->
-        <flyway.version>10.8.1</flyway.version>
+        <flyway.version>10.9.0</flyway.version>
 
         <!-- xxl-job相关依赖版本 -->
         <xxl-job-core.version>2.4.0</xxl-job-core.version>
@@ -688,6 +688,13 @@
 				<configuration>
 					<encoding>${code.encoding}</encoding><!-- 字符集编码 -->
 				</configuration>
+			</plugin>
+			<plugin>
+			<!-- ======================================= Jib 是一个 Maven 和 Gradle 插件，用来创建Docker镜像======================================= -->
+                <!-- https://mvnrepository.com/artifact/com.google.cloud.tools/jib-maven-plugin -->
+                <groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.1</version>
 			</plugin>
 		</plugins>
 	</build>
