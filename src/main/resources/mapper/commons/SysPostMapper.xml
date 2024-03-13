@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysPostMapper">
 
     <select id="query" resultType="com.spyker.commons.entity.SysPost"
             parameterType="com.spyker.commons.search.SysPostSearch">
-        SELECT a.* FROM sys_post a
+        SELECT
+            a.*
+        FROM
+            sys_post a
         <where>
             <if test="null != postCode ">
                 and a.post_code = #{postCode}
@@ -20,7 +23,10 @@
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysPost"
             parameterType="com.spyker.commons.search.SysPostSearch">
-        SELECT a.* FROM sys_post a
+        SELECT
+            a.*
+        FROM
+            sys_post a
         <where>
             <if test="null != search.postCode ">
                 and a.post_code = #{search.postCode}
