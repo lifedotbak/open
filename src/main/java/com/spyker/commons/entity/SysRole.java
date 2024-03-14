@@ -23,7 +23,7 @@ public class SysRole implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "角色ID")
-    @TableId(value = "role_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "role_id", type = IdType.ASSIGN_UUID)
     private String roleId;
 
     @Schema(description = "角色名称")

@@ -27,7 +27,7 @@ public class SysMenu implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "菜单ID")
-    @TableId(value = "menu_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "menu_id", type = IdType.ASSIGN_UUID)
     private String menuId;
 
     @Schema(description = "菜单名称")

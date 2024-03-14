@@ -23,7 +23,7 @@ public class SysDictData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "字典编码")
-    @TableId(value = "dict_code", type = IdType.ASSIGN_ID)
+    @TableId(value = "dict_code", type = IdType.ASSIGN_UUID)
     private String dictCode;
 
     @Schema(description = "字典排序")

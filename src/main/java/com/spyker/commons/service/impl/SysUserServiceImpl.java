@@ -12,6 +12,8 @@ import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestResponse;
 import com.spyker.framework.util.BCryptUtils;
 
+import jakarta.servlet.http.HttpSession;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,6 +36,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         implements SysUserService {
 
     private final SysUserMapper sysUserMapper;
+
+    private final HttpSession httpSession;
 
     @Override
     public List<SysUser> query(SysUserSearch search) {
@@ -89,6 +93,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
                 StpUtil.login(sysUser.getUserId());
 
                 StpUtil.getSession().set(Constants.LOGIN_USER_KEY, sysUser.getUserId());
+
+                httpSession.setAttribute(Constants.LOGIN_USER_KEY, sysUser.getUserId());
 
                 return true;
             }

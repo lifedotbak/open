@@ -29,7 +29,7 @@ public class SysCompany implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "公司id")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
     @Schema(description = "公司名称")

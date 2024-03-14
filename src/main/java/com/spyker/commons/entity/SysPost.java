@@ -23,7 +23,7 @@ public class SysPost implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "岗位ID")
-    @TableId(value = "post_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "post_id", type = IdType.ASSIGN_UUID)
     private String postId;
 
     @Schema(description = "岗位编码")

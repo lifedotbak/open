@@ -29,7 +29,7 @@ public class SysOssConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "主建")
-    @TableId(value = "oss_config_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "oss_config_id", type = IdType.ASSIGN_UUID)
     private String ossConfigId;
 
     @Schema(description = "配置key")

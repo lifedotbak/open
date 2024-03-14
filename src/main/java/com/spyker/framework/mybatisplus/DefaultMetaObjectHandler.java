@@ -1,5 +1,6 @@
 package com.spyker.framework.mybatisplus;
 
+import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
@@ -22,8 +23,28 @@ public class DefaultMetaObjectHandler implements MetaObjectHandler {
 
         String loginUserId = "";
 
+        //        try {
+        //
+        //            Object userKey = httpSession.getAttribute(Constants.LOGIN_USER_KEY);
+        //            if (null != userKey) {
+        //                loginUserId = (String) userKey;
+        //            }
+        //
+        //        } catch (Exception e) {
+        //            log.error("error-->{}", e);
+        //        }
+
         try {
-            loginUserId = (String) StpUtil.getSession().get(Constants.LOGIN_USER_KEY);
+
+            SaSession saSession = StpUtil.getSession();
+
+            if (null != saSession) {
+                Object userKey = saSession.get(Constants.LOGIN_USER_KEY);
+                if (null != userKey) {
+                    loginUserId = (String) userKey;
+                }
+            }
+
         } catch (Exception e) {
             log.error("error-->{}", e);
         }

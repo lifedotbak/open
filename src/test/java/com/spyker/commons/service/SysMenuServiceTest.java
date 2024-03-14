@@ -54,11 +54,9 @@ public class SysMenuServiceTest extends BaseTest {
 
         add.setIsCache(1);
 
-        add.setMenuType("menuType");
+        add.setMenuType("c");
 
         add.setVisible("visible");
-
-        add.setStatus("status");
 
         add.setPerms("perms");
 
@@ -97,8 +95,6 @@ public class SysMenuServiceTest extends BaseTest {
 
         update.setVisible("visible");
 
-        update.setStatus("status");
-
         update.setPerms("perms");
 
         update.setIcon("icon");
@@ -123,7 +119,6 @@ public class SysMenuServiceTest extends BaseTest {
         search.setQuery("query");
         search.setMenuType("menuType");
         search.setVisible("visible");
-        search.setStatus("status");
         search.setPerms("perms");
         search.setIcon("icon");
         search.setCreateBy("createBy");
@@ -156,8 +151,6 @@ public class SysMenuServiceTest extends BaseTest {
         search.setMenuType("menuType");
 
         search.setVisible("visible");
-
-        search.setStatus("status");
 
         search.setPerms("perms");
 

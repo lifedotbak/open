@@ -23,7 +23,7 @@ public class SysNotice implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "公告ID")
-    @TableId(value = "notice_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "notice_id", type = IdType.ASSIGN_UUID)
     private String noticeId;
 
     @Schema(description = "公告标题")

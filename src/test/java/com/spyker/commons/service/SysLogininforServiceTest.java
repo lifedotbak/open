@@ -48,8 +48,6 @@ public class SysLogininforServiceTest extends BaseTest {
 
         add.setOs("os");
 
-        add.setStatus("status");
-
         add.setMsg("msg");
 
         service.insert(add);
@@ -71,8 +69,6 @@ public class SysLogininforServiceTest extends BaseTest {
 
         update.setOs("os");
 
-        update.setStatus("status");
-
         update.setMsg("msg");
 
         service.update(update);
@@ -87,7 +83,6 @@ public class SysLogininforServiceTest extends BaseTest {
         search.setLoginLocation("loginLocation");
         search.setBrowser("browser");
         search.setOs("os");
-        search.setStatus("status");
         search.setMsg("msg");
 
         service.query(search);
@@ -108,8 +103,6 @@ public class SysLogininforServiceTest extends BaseTest {
         search.setBrowser("browser");
 
         search.setOs("os");
-
-        search.setStatus("status");
 
         search.setMsg("msg");
 

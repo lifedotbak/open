@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysJob;
 import com.spyker.commons.search.SysJobSearch;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,8 +46,6 @@ public class SysJobServiceTest extends BaseTest {
 
         add.setConcurrent("concurrent");
 
-        add.setStatus("status");
-
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
@@ -73,8 +73,6 @@ public class SysJobServiceTest extends BaseTest {
 
         update.setConcurrent("concurrent");
 
-        update.setStatus("status");
-
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
@@ -92,7 +90,7 @@ public class SysJobServiceTest extends BaseTest {
         search.setCronExpression("cronExpression");
         search.setMisfirePolicy("misfirePolicy");
         search.setConcurrent("concurrent");
-        search.setStatus("status");
+
         search.setCreateBy("createBy");
         search.setUpdateBy("updateBy");
         search.setRemark("remark");
@@ -113,8 +111,6 @@ public class SysJobServiceTest extends BaseTest {
         search.setMisfirePolicy("misfirePolicy");
 
         search.setConcurrent("concurrent");
-
-        search.setStatus("status");
 
         search.setCreateBy("createBy");
 

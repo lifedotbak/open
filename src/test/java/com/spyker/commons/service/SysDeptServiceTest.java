@@ -76,9 +76,7 @@ public class SysDeptServiceTest extends BaseTest {
 
         add.setEmail("email");
 
-        add.setStatus("status");
-
-        add.setDelFlag("delFlag");
+        add.setDelFlag("1");
 
         add.setCreateBy("createBy");
 
@@ -92,24 +90,15 @@ public class SysDeptServiceTest extends BaseTest {
         SysDept update = new SysDept();
 
         update.setDeptId("deptId");
-
         update.setParentId("parentId");
-
         update.setAncestors("ancestors");
-
         update.setDeptName("deptName");
         update.setOrderNum(1);
-
         update.setLeader("leader");
-
         update.setPhone("phone");
-
         update.setEmail("email");
-
-        update.setDelFlag("delFlag");
-
+        update.setDelFlag("1");
         update.setCreateBy("createBy");
-
         update.setUpdateBy("updateBy");
 
         service.update(update);
@@ -125,7 +114,6 @@ public class SysDeptServiceTest extends BaseTest {
         search.setLeader("leader");
         search.setPhone("phone");
         search.setEmail("email");
-        search.setStatus("status");
         search.setDelFlag("delFlag");
 
         service.query(search);
@@ -148,8 +136,6 @@ public class SysDeptServiceTest extends BaseTest {
         search.setPhone("phone");
 
         search.setEmail("email");
-
-        search.setStatus("status");
 
         search.setDelFlag("delFlag");
 

@@ -23,7 +23,7 @@ public class SysConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "参数主键")
-    @TableId(value = "config_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "config_id", type = IdType.ASSIGN_UUID)
     private String configId;
 
     @Schema(description = "参数名称")

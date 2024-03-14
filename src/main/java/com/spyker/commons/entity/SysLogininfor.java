@@ -25,7 +25,7 @@ public class SysLogininfor implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "访问ID")
-    @TableId(value = "info_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "info_id", type = IdType.ASSIGN_UUID)
     private String infoId;
 
     @Schema(description = "用户账号")

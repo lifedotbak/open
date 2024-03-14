@@ -52,8 +52,6 @@ public class SysDictDataServiceTest extends BaseTest {
 
         add.setIsDefault("isDefault");
 
-        add.setStatus("status");
-
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
@@ -81,8 +79,6 @@ public class SysDictDataServiceTest extends BaseTest {
         update.setListClass("listClass");
 
         update.setIsDefault("isDefault");
-
-        update.setStatus("status");
 
         update.setCreateBy("createBy");
 

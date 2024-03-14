@@ -27,7 +27,7 @@ public class SysDept implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "部门id")
-    @TableId(value = "dept_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "dept_id", type = IdType.ASSIGN_UUID)
     private String deptId;
 
     @Schema(description = "父部门id")

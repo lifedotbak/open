@@ -139,7 +139,7 @@ public class CodeGenerator {
                         .enableChainModel()
                         .enableFileOverride()
                         .disableSerialVersionUID()
-                        .idType(IdType.ASSIGN_ID)
+                        .idType(IdType.ASSIGN_UUID)
                         .addTableFills(
                                 new Column("create_time", FieldFill.INSERT),
                                 new Column("create_by", FieldFill.INSERT),

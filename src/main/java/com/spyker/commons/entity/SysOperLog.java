@@ -25,7 +25,7 @@ public class SysOperLog implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "日志主键")
-    @TableId(value = "oper_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "oper_id", type = IdType.ASSIGN_UUID)
     private String operId;
 
     @Schema(description = "模块标题")

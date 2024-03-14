@@ -46,8 +46,6 @@ public class SysJobLogServiceTest extends BaseTest {
 
         add.setJobMessage("jobMessage");
 
-        add.setStatus("status");
-
         add.setExceptionInfo("exceptionInfo");
 
         service.insert(add);

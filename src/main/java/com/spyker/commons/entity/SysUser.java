@@ -21,7 +21,7 @@ import java.util.Date;
 public class SysUser implements Serializable {
 
     @Schema(description = "用户ID")
-    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
     private String userId;
 
     @Schema(description = "部门ID")

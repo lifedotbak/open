@@ -23,7 +23,7 @@ public class SysJob implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "任务ID")
-    @TableId(value = "job_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "job_id", type = IdType.ASSIGN_UUID)
     private String jobId;
 
     @Schema(description = "任务名称")

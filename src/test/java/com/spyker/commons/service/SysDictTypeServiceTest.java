@@ -42,8 +42,6 @@ public class SysDictTypeServiceTest extends BaseTest {
 
         add.setDictType("dictType");
 
-        add.setStatus("status");
-
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
