@@ -52,15 +52,15 @@ public class SysJobServiceImpl extends ServiceImpl<SysJobMapper, SysJob> impleme
     }
 
     @Override
-    public RestResponse<?> insert(SysJob SysJob) {
-        save(SysJob);
+    public RestResponse<?> insert(SysJob sysJob) {
+        save(sysJob);
 
-        return RestResponse.success(SysJob);
+        return RestResponse.success(sysJob);
     }
 
     @Override
-    public RestResponse<?> update(SysJob SysJob) {
-        updateById(SysJob);
+    public RestResponse<?> update(SysJob sysJob) {
+        updateById(sysJob);
 
         return RestResponse.success();
     }

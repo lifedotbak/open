@@ -53,15 +53,15 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
     }
 
     @Override
-    public RestResponse<?> insert(SysOperLog SysOperLog) {
-        save(SysOperLog);
+    public RestResponse<?> insert(SysOperLog sysOperLog) {
+        save(sysOperLog);
 
-        return RestResponse.success(SysOperLog);
+        return RestResponse.success(sysOperLog);
     }
 
     @Override
-    public RestResponse<?> update(SysOperLog SysOperLog) {
-        updateById(SysOperLog);
+    public RestResponse<?> update(SysOperLog sysOperLog) {
+        updateById(sysOperLog);
 
         return RestResponse.success();
     }

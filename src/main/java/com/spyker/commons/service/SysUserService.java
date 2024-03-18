@@ -22,9 +22,9 @@ public interface SysUserService extends IService<SysUser> {
 
     SysUser get(String id);
 
-    RestResponse<?> insert(SysUser SysUser);
+    RestResponse<?> insert(SysUser sysUser);
 
-    RestResponse<?> update(SysUser SysUser);
+    RestResponse<?> update(SysUser sysUser);
 
     RestResponse<?> delete(String id);
 

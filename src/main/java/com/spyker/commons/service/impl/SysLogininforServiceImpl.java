@@ -53,15 +53,15 @@ public class SysLogininforServiceImpl extends ServiceImpl<SysLogininforMapper, S
     }
 
     @Override
-    public RestResponse<?> insert(SysLogininfor SysLogininfor) {
-        save(SysLogininfor);
+    public RestResponse<?> insert(SysLogininfor sysLogininfor) {
+        save(sysLogininfor);
 
-        return RestResponse.success(SysLogininfor);
+        return RestResponse.success(sysLogininfor);
     }
 
     @Override
-    public RestResponse<?> update(SysLogininfor SysLogininfor) {
-        updateById(SysLogininfor);
+    public RestResponse<?> update(SysLogininfor sysLogininfor) {
+        updateById(sysLogininfor);
 
         return RestResponse.success();
     }

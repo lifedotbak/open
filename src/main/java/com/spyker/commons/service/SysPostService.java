@@ -22,9 +22,9 @@ public interface SysPostService extends IService<SysPost> {
 
     SysPost get(String id);
 
-    RestResponse<?> insert(SysPost SysPost);
+    RestResponse<?> insert(SysPost sysPost);
 
-    RestResponse<?> update(SysPost SysPost);
+    RestResponse<?> update(SysPost sysPost);
 
     RestResponse<?> delete(String id);
 }

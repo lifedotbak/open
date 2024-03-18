@@ -53,15 +53,15 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
     }
 
     @Override
-    public RestResponse<?> insert(SysNotice SysNotice) {
-        save(SysNotice);
+    public RestResponse<?> insert(SysNotice sysNotice) {
+        save(sysNotice);
 
-        return RestResponse.success(SysNotice);
+        return RestResponse.success(sysNotice);
     }
 
     @Override
-    public RestResponse<?> update(SysNotice SysNotice) {
-        updateById(SysNotice);
+    public RestResponse<?> update(SysNotice sysNotice) {
+        updateById(sysNotice);
 
         return RestResponse.success();
     }

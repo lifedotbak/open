@@ -22,9 +22,9 @@ public interface SysLogininforService extends IService<SysLogininfor> {
 
     SysLogininfor get(String id);
 
-    RestResponse<?> insert(SysLogininfor SysLogininfor);
+    RestResponse<?> insert(SysLogininfor sysLogininfor);
 
-    RestResponse<?> update(SysLogininfor SysLogininfor);
+    RestResponse<?> update(SysLogininfor sysLogininfor);
 
     RestResponse<?> delete(String id);
 }

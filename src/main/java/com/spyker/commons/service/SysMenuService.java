@@ -22,9 +22,9 @@ public interface SysMenuService extends IService<SysMenu> {
 
     SysMenu get(String id);
 
-    RestResponse<?> insert(SysMenu SysMenu);
+    RestResponse<?> insert(SysMenu sysMenu);
 
-    RestResponse<?> update(SysMenu SysMenu);
+    RestResponse<?> update(SysMenu sysMenu);
 
     RestResponse<?> delete(String id);
 }

@@ -22,9 +22,9 @@ public interface SysOperLogService extends IService<SysOperLog> {
 
     SysOperLog get(String id);
 
-    RestResponse<?> insert(SysOperLog SysOperLog);
+    RestResponse<?> insert(SysOperLog sysOperLog);
 
-    RestResponse<?> update(SysOperLog SysOperLog);
+    RestResponse<?> update(SysOperLog sysOperLog);
 
     RestResponse<?> delete(String id);
 }

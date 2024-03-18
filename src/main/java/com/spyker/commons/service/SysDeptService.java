@@ -21,9 +21,9 @@ public interface SysDeptService extends IService<SysDept> {
 
     SysDept get(String id);
 
-    SysDept insert(SysDept SysDept);
+    SysDept insert(SysDept sysDept);
 
-    SysDept update(SysDept SysDept);
+    SysDept update(SysDept sysDept);
 
     void delete(String id);
 }

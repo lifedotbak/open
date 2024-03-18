@@ -22,9 +22,9 @@ public interface SysJobService extends IService<SysJob> {
 
     SysJob get(String id);
 
-    RestResponse<?> insert(SysJob SysJob);
+    RestResponse<?> insert(SysJob sysJob);
 
-    RestResponse<?> update(SysJob SysJob);
+    RestResponse<?> update(SysJob sysJob);
 
     RestResponse<?> delete(String id);
 }

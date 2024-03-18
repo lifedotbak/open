@@ -22,9 +22,9 @@ public interface SysRoleService extends IService<SysRole> {
 
     SysRole get(String id);
 
-    RestResponse<?> insert(SysRole SysRole);
+    RestResponse<?> insert(SysRole sysRole);
 
-    RestResponse<?> update(SysRole SysRole);
+    RestResponse<?> update(SysRole sysRole);
 
     RestResponse<?> delete(String id);
 }

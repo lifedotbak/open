@@ -54,13 +54,13 @@ public class SysOssConfigServiceImpl extends ServiceImpl<SysOssConfigMapper, Sys
     }
 
     @Override
-    public boolean insert(SysOssConfig SysOssConfig) {
-        return save(SysOssConfig);
+    public boolean insert(SysOssConfig sysOssConfig) {
+        return save(sysOssConfig);
     }
 
     @Override
-    public boolean update(SysOssConfig SysOssConfig) {
-        return updateById(SysOssConfig);
+    public boolean update(SysOssConfig sysOssConfig) {
+        return updateById(sysOssConfig);
     }
 
     @Override

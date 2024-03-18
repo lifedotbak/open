@@ -53,15 +53,15 @@ public class SysJobLogServiceImpl extends ServiceImpl<SysJobLogMapper, SysJobLog
     }
 
     @Override
-    public RestResponse<?> insert(SysJobLog SysJobLog) {
-        save(SysJobLog);
+    public RestResponse<?> insert(SysJobLog sysJobLog) {
+        save(sysJobLog);
 
-        return RestResponse.success(SysJobLog);
+        return RestResponse.success(sysJobLog);
     }
 
     @Override
-    public RestResponse<?> update(SysJobLog SysJobLog) {
-        updateById(SysJobLog);
+    public RestResponse<?> update(SysJobLog sysJobLog) {
+        updateById(sysJobLog);
 
         return RestResponse.success();
     }

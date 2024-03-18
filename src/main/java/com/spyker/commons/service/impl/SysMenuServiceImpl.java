@@ -33,9 +33,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
 
     @Override
     public List<SysMenu> query(SysMenuSearch search) {
-        List<SysMenu> SysMenuList = sysMenuMapper.query(search);
+        List<SysMenu> sysMenuList = sysMenuMapper.query(search);
 
-        return SysMenuList;
+        return sysMenuList;
     }
 
     @Override
@@ -47,21 +47,21 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
 
     @Override
     public SysMenu get(String id) {
-        SysMenu SysMenu = getById(id);
+        SysMenu sysMenu = getById(id);
 
-        return SysMenu;
+        return sysMenu;
     }
 
     @Override
-    public RestResponse<?> insert(SysMenu SysMenu) {
-        save(SysMenu);
+    public RestResponse<?> insert(SysMenu sysMenu) {
+        save(sysMenu);
 
-        return RestResponse.success(SysMenu);
+        return RestResponse.success(sysMenu);
     }
 
     @Override
-    public RestResponse<?> update(SysMenu SysMenu) {
-        updateById(SysMenu);
+    public RestResponse<?> update(SysMenu sysMenu) {
+        updateById(sysMenu);
 
         return RestResponse.success();
     }

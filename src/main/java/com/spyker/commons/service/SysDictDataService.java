@@ -21,9 +21,9 @@ public interface SysDictDataService extends IService<SysDictData> {
 
     SysDictData get(String id);
 
-    SysDictData insert(SysDictData SysDictData);
+    SysDictData insert(SysDictData sysDictData);
 
-    SysDictData update(SysDictData SysDictData);
+    SysDictData update(SysDictData sysDictData);
 
     void delete(String id);
 }

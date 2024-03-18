@@ -53,15 +53,15 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     }
 
     @Override
-    public RestResponse<?> insert(SysDictType SysDictType) {
-        save(SysDictType);
+    public RestResponse<?> insert(SysDictType sysDictType) {
+        save(sysDictType);
 
-        return RestResponse.success(SysDictType);
+        return RestResponse.success(sysDictType);
     }
 
     @Override
-    public RestResponse<?> update(SysDictType SysDictType) {
-        updateById(SysDictType);
+    public RestResponse<?> update(SysDictType sysDictType) {
+        updateById(sysDictType);
 
         return RestResponse.success();
     }

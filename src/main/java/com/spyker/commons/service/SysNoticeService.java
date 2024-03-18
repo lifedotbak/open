@@ -22,9 +22,9 @@ public interface SysNoticeService extends IService<SysNotice> {
 
     SysNotice get(String id);
 
-    RestResponse<?> insert(SysNotice SysNotice);
+    RestResponse<?> insert(SysNotice sysNotice);
 
-    RestResponse<?> update(SysNotice SysNotice);
+    RestResponse<?> update(SysNotice sysNotice);
 
     RestResponse<?> delete(String id);
 }

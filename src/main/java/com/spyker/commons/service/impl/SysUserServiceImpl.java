@@ -61,10 +61,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     }
 
     @Override
-    public RestResponse<?> insert(SysUser SysUser) {
-        save(SysUser);
+    public RestResponse<?> insert(SysUser sysUser) {
+        save(sysUser);
 
-        return RestResponse.success(SysUser);
+        return RestResponse.success(sysUser);
     }
 
     @Override

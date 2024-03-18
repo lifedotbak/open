@@ -53,15 +53,15 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
     }
 
     @Override
-    public RestResponse<?> insert(SysRole SysRole) {
-        save(SysRole);
+    public RestResponse<?> insert(SysRole sysRole) {
+        save(sysRole);
 
-        return RestResponse.success(SysRole);
+        return RestResponse.success(sysRole);
     }
 
     @Override
-    public RestResponse<?> update(SysRole SysRole) {
-        updateById(SysRole);
+    public RestResponse<?> update(SysRole sysRole) {
+        updateById(sysRole);
 
         return RestResponse.success();
     }

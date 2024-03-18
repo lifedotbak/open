@@ -22,9 +22,9 @@ public interface SysDictTypeService extends IService<SysDictType> {
 
     SysDictType get(String id);
 
-    RestResponse<?> insert(SysDictType SysDictType);
+    RestResponse<?> insert(SysDictType sysDictType);
 
-    RestResponse<?> update(SysDictType SysDictType);
+    RestResponse<?> update(SysDictType sysDictType);
 
     RestResponse<?> delete(String id);
 }

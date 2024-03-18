@@ -21,9 +21,9 @@ public interface SysOssConfigService extends IService<SysOssConfig> {
 
     SysOssConfig get(String id);
 
-    boolean insert(SysOssConfig SysOssConfig);
+    boolean insert(SysOssConfig sysOssConfig);
 
-    boolean update(SysOssConfig SysOssConfig);
+    boolean update(SysOssConfig sysOssConfig);
 
     boolean delete(String id);
 }

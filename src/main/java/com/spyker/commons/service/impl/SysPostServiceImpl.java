@@ -53,15 +53,15 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost>
     }
 
     @Override
-    public RestResponse<?> insert(SysPost SysPost) {
-        save(SysPost);
+    public RestResponse<?> insert(SysPost sysPost) {
+        save(sysPost);
 
-        return RestResponse.success(SysPost);
+        return RestResponse.success(sysPost);
     }
 
     @Override
-    public RestResponse<?> update(SysPost SysPost) {
-        updateById(SysPost);
+    public RestResponse<?> update(SysPost sysPost) {
+        updateById(sysPost);
 
         return RestResponse.success();
     }
