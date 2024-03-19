@@ -48,10 +48,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
-    - name: Setup Java JDK
+    - name: 设置jdk
       uses: actions/setup-java@v4.2.1
       with:
-        java-version: 18
+        distribution: 'temurin'
+        java-version: '18'
+        cache: 'maven'
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
