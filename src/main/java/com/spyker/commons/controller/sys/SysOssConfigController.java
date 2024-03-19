@@ -10,7 +10,6 @@ import com.spyker.commons.service.SysOssConfigService;
 import com.spyker.framework.core.BaseController;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
-import com.spyker.framework.request.PageParamRequest;
 import com.spyker.framework.response.RestResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,16 +60,17 @@ public class SysOssConfigController extends BaseController {
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "对象存储配置表--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<SysOssConfig>> list_page(
-            @ModelAttribute SysOssConfigSearch search,
-            @ModelAttribute PageParamRequest pageParamRequest) {
+    //    public RestResponse<IPage<SysOssConfig>> list_page(
+    //            @ModelAttribute SysOssConfigSearch search,
+    //            @ModelAttribute PageParamRequest pageParamRequest) {
+    public RestResponse<IPage<SysOssConfig>> list_page(SysOssConfigSearch search) {
 
         int current = 1;
         int size = 10;
 
-        if (null != pageParamRequest) {
-            current = pageParamRequest.getPage();
-            size = pageParamRequest.getSize();
+        if (null != search) {
+            current = search.getPage();
+            size = search.getSize();
         }
 
         IPage<SysOssConfig> page = new Page<>(current, size);

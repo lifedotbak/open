@@ -1,4 +1,4 @@
-FROM rajtatta/jdk-8-alpine-awscli
+FROM xldevops/jdk17-lts
 
 WORKDIR /usr/src/app
 
