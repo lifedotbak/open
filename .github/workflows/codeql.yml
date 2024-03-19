@@ -52,7 +52,7 @@ jobs:
       uses: actions/setup-java@v4.2.1
       with:
         distribution: 'temurin'
-        java-version: '18'
+        java-version: '17'
         cache: 'maven'
 
     # Initializes the CodeQL tools for scanning.
