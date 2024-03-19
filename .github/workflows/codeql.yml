@@ -51,9 +51,8 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
         cache: 'maven'
-        cache-dependency-path: 'sub-project/pom.xml' # optional
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package -DskipTests
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
