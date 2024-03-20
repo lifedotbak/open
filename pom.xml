@@ -88,7 +88,7 @@
 		
 		<!-- 其他相关依赖版本 -->
 		<java-jwt.version>4.4.0</java-jwt.version>
-		<aws-s3.version>1.12.672</aws-s3.version>
+		<aws-s3.version>1.12.681</aws-s3.version>
 		<commons-io.version>2.15.1</commons-io.version>
 		<jna.version>5.14.0</jna.version>
 		<json.version>20240303</json.version>
@@ -468,25 +468,25 @@
 		
 		<!-- ======================================= 本机系统监控 ======================================= -->
 		<!-- https://mvnrepository.com/artifact/com.github.oshi/oshi-core -->
-		<dependency>
-			<groupId>com.github.oshi</groupId>
-			<artifactId>oshi-core</artifactId>
-			<version>6.4.10</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>com.github.oshi</groupId>-->
+		<!--			<artifactId>oshi-core</artifactId>-->
+		<!--			<version>6.4.10</version>-->
+		<!--		</dependency>-->
 		
 		<!-- ======================================= oshi-core依赖jna最低版本 ======================================= -->
 		<!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
-		<dependency>
-			<groupId>net.java.dev.jna</groupId>
-			<artifactId>jna</artifactId>
-			<version>${jna.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform -->
-		<dependency>
-			<groupId>net.java.dev.jna</groupId>
-			<artifactId>jna-platform</artifactId>
-			<version>${jna.version}</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>net.java.dev.jna</groupId>-->
+		<!--			<artifactId>jna</artifactId>-->
+		<!--			<version>${jna.version}</version>-->
+		<!--		</dependency>-->
+		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform &ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>net.java.dev.jna</groupId>-->
+		<!--			<artifactId>jna-platform</artifactId>-->
+		<!--			<version>${jna.version}</version>-->
+		<!--		</dependency>-->
 		
 		<!-- ======================================= 本地关依赖 ======================================= -->
 		<dependency>
@@ -686,7 +686,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<encoding>${code.encoding}</encoding><!-- 字符集编码 -->
-					<source>${java.version}</source>
+		            <source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
