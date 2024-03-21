@@ -81,13 +81,13 @@ import org.springframework.web.bind.annotation.*;
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
     @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
-    public RestResponse<IPage<${entity}>> listPage(@ModelAttribute ${entity}Search search, @ModelAttribute PageParamRequest pageParamRequest) {
+    public RestResponse<IPage<${entity}>> listPage(@ModelAttribute ${entity}Search search) {
         int current = 1;
         int size = 10;
 
-        if (null != pageParamRequest) {
-          current = pageParamRequest.getPage();
-          size = pageParamRequest.getSize();
+        if (null != search) {
+          current = search.getPage();
+          size = search.getSize();
         }
 
         IPage<${entity}> page = new Page<>(current, size);
@@ -128,12 +128,6 @@ import org.springframework.web.bind.annotation.*;
     public RestResponse<${entity}> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
 
         update.setId(id);
-
-        <#list table.fields as field>
-          <#if field.keyFlag>
-            update.set${field.capitalName}("1");
-          </#if>
-        </#list>
 
         ${table.serviceName?uncap_first}.update(update);
 

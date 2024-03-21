@@ -110,8 +110,6 @@ public class SysCompanyController extends BaseController {
 
         update.setId(id);
 
-        update.setId("1");
-
         sysCompanyService.update(update);
 
         return RestResponse.success();

@@ -24,27 +24,27 @@ import org.springframework.util.MultiValueMap;
 @Slf4j
 public class SysCompanyControllerTest extends BaseTest {
 
-    private static String LOGIN_URL = "/sys/login/login";
+    private static final String LOGIN_URL = "/sys/login/login";
 
-    private static String BASE_URL = "/sys/sys-company";
+    private static final String BASE_URL = "/sys/sys-company";
 
     /* 分页查询 */
-    private static String LIST_PAGE_URL = BASE_URL + "/list_page";
+    private static final String LIST_PAGE_URL = BASE_URL + "/list_page";
 
     /* 查询 */
-    private static String LIST_URL = BASE_URL + "/list";
+    private static final String LIST_URL = BASE_URL + "/list";
 
     /* 详情 */
-    private static String DETAIL_URL = BASE_URL + "/detail";
+    private static final String DETAIL_URL = BASE_URL + "/detail";
 
     /* 删除 */
-    private static String DELETE_URL = BASE_URL + "/delete";
+    private static final String DELETE_URL = BASE_URL + "/delete";
 
     /* 修改 */
-    private static String UPDATE_URL = BASE_URL + "/update";
+    private static final String UPDATE_URL = BASE_URL + "/update";
 
     /* 新增 */
-    private static String ADD_URL = BASE_URL + "/add";
+    private static final String ADD_URL = BASE_URL + "/add";
 
     @Autowired private MockMvc mockMvc;
 
