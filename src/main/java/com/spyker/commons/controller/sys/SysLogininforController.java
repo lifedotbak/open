@@ -39,16 +39,15 @@ public class SysLogininforController {
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
     public RestResponse<IPage<SysLogininfor>> list_page(SysLogininforSearch search) {
+
         int current = 1;
         int size = 10;
-
         if (null != search) {
             current = search.getPage();
             size = search.getSize();
         }
 
         IPage<SysLogininfor> page = new Page<>(current, size);
-
         page = sysLogininforService.queryPage(page, search);
 
         return RestResponse.success(page);
