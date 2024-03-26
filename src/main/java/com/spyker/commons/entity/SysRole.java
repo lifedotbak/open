@@ -47,9 +47,6 @@ public class SysRole implements Serializable {
     @Schema(description = "角色状态（0正常 1停用）")
     private String status;
 
-    @Schema(description = "删除标志（0代表存在 2代表删除）")
-    private String delFlag;
-
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
     private String createBy;

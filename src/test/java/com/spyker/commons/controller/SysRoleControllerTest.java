@@ -112,8 +112,6 @@ public class SysRoleControllerTest extends BaseTest {
 
         add.setStatus("status");
 
-        add.setDelFlag("delFlag");
-
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
@@ -152,8 +150,6 @@ public class SysRoleControllerTest extends BaseTest {
         update.setDataScope("dataScope");
 
         update.setStatus("status");
-
-        update.setDelFlag("delFlag");
 
         update.setCreateBy("createBy");
 

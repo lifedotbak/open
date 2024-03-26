@@ -24,9 +24,6 @@
             <if test="null != status ">
                 and a.status = #{status}
             </if>
-            <if test="null != delFlag ">
-                and a.del_flag = #{delFlag}
-            </if>
 
         </where>
     </select>

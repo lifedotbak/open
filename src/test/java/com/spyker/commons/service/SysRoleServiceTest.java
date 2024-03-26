@@ -44,11 +44,9 @@ public class SysRoleServiceTest extends BaseTest {
 
         add.setRoleSort(1);
 
-        add.setDataScope("dataScope");
+        add.setDataScope("1");
 
-        add.setStatus("status");
-
-        add.setDelFlag("delFlag");
+        add.setStatus("1");
 
         add.setCreateBy("createBy");
 
@@ -74,8 +72,6 @@ public class SysRoleServiceTest extends BaseTest {
 
         update.setStatus("status");
 
-        update.setDelFlag("delFlag");
-
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
@@ -93,7 +89,6 @@ public class SysRoleServiceTest extends BaseTest {
         search.setRoleKey("roleKey");
         search.setDataScope("dataScope");
         search.setStatus("status");
-        search.setDelFlag("delFlag");
 
         service.query(search);
     }
@@ -111,8 +106,6 @@ public class SysRoleServiceTest extends BaseTest {
         search.setDataScope("dataScope");
 
         search.setStatus("status");
-
-        search.setDelFlag("delFlag");
 
         service.queryPage(page, search);
     }
