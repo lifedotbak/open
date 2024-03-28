@@ -22,6 +22,27 @@ import java.util.Random;
 
 @Slf4j
 public class PackageXml {
+
+    public static String getSnaoShotUri(String username, String password, String token) {
+        try {
+            Map<String, String> account = getWsseUsernameToken(username, password);
+            StringBuffer sb = getRequestXml("wsdl/get_snapshoturi.wsdl");
+            String streamXml =
+                    sb.toString()
+                            .replace("{username}", account.get("username"))
+                            .replace("{password}", account.get("password"))
+                            .replace("{nonce}", account.get("nonce"))
+                            .replace("{created}", account.get("created"))
+                            .replace("{token}", token);
+            return streamXml;
+        } catch (IOException e) {
+
+            log.error("error-->{}", e);
+
+            return null;
+        }
+    }
+
     /** ----------------------------------- 功能 -------------------------------------* */
     /***
      * 获取播放流地址

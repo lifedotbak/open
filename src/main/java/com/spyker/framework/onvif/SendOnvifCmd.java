@@ -1,5 +1,7 @@
 package com.spyker.framework.onvif;
 
+import com.spyker.framework.onvif.entity.OnvifLoginInfo;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -26,10 +28,64 @@ public class SendOnvifCmd {
 
     @Autowired private RestTemplate restTemplate;
 
+    /**
+     * 截图，返回照片的url
+     *
+     * @param onvifLoginInfo
+     * @return
+     */
+    public String getSnaoShotUri(OnvifLoginInfo onvifLoginInfo) {
+
+        // 判断是否已获取token
+        String token = getToken(onvifLoginInfo);
+
+        log.info("token-->{}", token);
+
+        // 构造http请求头
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
+        headers.setContentType(type);
+        HttpEntity<String> formEntity =
+                new HttpEntity<String>(
+                        PackageXml.getSnaoShotUri(
+                                onvifLoginInfo.getOnvifUserName(),
+                                onvifLoginInfo.getOnvifPassword(),
+                                token),
+                        headers);
+        // 返回结果
+        String resultStr =
+                restTemplate.postForObject(
+                        "http://"
+                                + onvifLoginInfo.getIp()
+                                + ":"
+                                + onvifLoginInfo.getOnvifPort()
+                                + "/onvif/device_service",
+                        formEntity,
+                        String.class);
+        // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
+        String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
+
+        log.info("xmlStr-->{}", xmlStr);
+
+        // JSONObject obj = XML.toJSONObject(tmpStr);
+        String reg = "<tt:Uri>(.*?)\\</tt:Uri>";
+        Pattern pattern = Pattern.compile(reg);
+        // 内容 与 匹配规则 的测试
+        Matcher matcher = pattern.matcher(xmlStr);
+        if (matcher.find()) {
+            // 包含前后的两个字符
+            String rtspUrl = matcher.group(1);
+            return rtspUrl;
+        } else {
+            // System.out.println(" 没有匹配到内容....");
+            return null;
+        }
+    }
+
     public String stream(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
 
         // 判断是否已获取token
-        String token = getToken(onvifUserName, onvifPassword, ip, onvifPort);
+        String token = getToken(new OnvifLoginInfo(ip, onvifPort, onvifUserName, onvifPassword));
 
         log.info("token-->{}", token);
 
@@ -76,7 +132,7 @@ public class SendOnvifCmd {
             String onvifUserName, String onvifPassword, String ip, int onvifPort) {
 
         // 判断是否已获取token
-        String token = getToken(onvifUserName, onvifPassword, ip, onvifPort);
+        String token = getToken(new OnvifLoginInfo(ip, onvifPort, onvifUserName, onvifPassword));
         // 构造http请求头
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
@@ -104,7 +160,8 @@ public class SendOnvifCmd {
     public Boolean gotoHome(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
 
         // 判断是否已获取token
-        String token = getToken(onvifUserName, onvifPassword, ip, onvifPort);
+        String token = getToken(new OnvifLoginInfo(ip, onvifPort, onvifUserName, onvifPassword));
+
         // 构造http请求头
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
@@ -137,7 +194,8 @@ public class SendOnvifCmd {
             String presetName) {
 
         // 判断是否已获取token
-        String token = getToken(onvifUserName, onvifPassword, ip, onvifPort);
+        String token = getToken(new OnvifLoginInfo(ip, onvifPort, onvifUserName, onvifPassword));
+
         // 构造http请求头
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
@@ -163,33 +221,27 @@ public class SendOnvifCmd {
     }
 
     public Boolean left(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
-        return ptz(onvifUserName, onvifPassword, ip, 80, 0.5, 0, 0);
+        return ptz(new OnvifLoginInfo(ip, 80, onvifUserName, onvifPassword), 0.5, 0, 0);
     }
 
     public Boolean up(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
-        return ptz(onvifUserName, onvifPassword, ip, 80, 0, 0.5, 0);
+        return ptz(new OnvifLoginInfo(ip, 80, onvifUserName, onvifPassword), 0, 0.5, 0);
     }
 
     public Boolean down(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
-        return ptz(onvifUserName, onvifPassword, ip, 80, 0, -0.5, 0);
+        return ptz(new OnvifLoginInfo(ip, 80, onvifUserName, onvifPassword), 0, -0.5, 0);
     }
 
     public Boolean right(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
-        return ptz(onvifUserName, onvifPassword, ip, 80, -0.5, 0, 0);
+        return ptz(new OnvifLoginInfo(ip, 80, onvifUserName, onvifPassword), -0.5, 0, 0);
     }
 
     public Boolean stop(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
-        return ptz(onvifUserName, onvifPassword, ip, 80, 0, 0, 0);
+        return ptz(new OnvifLoginInfo(ip, 80, onvifUserName, onvifPassword), 0, 0, 0);
     }
 
     private Boolean ptz(
-            String onvifUserName,
-            String onvifPassword,
-            String ip,
-            int onvifPort,
-            double leftRight,
-            double upDown,
-            double inOut) {
+            OnvifLoginInfo onvifLoginInfo, double leftRight, double upDown, double inOut) {
 
         if (leftRight > 1 && leftRight < -1) {
             return false;
@@ -202,19 +254,37 @@ public class SendOnvifCmd {
         }
 
         // 判断是否已获取token
-        String token = getToken(onvifUserName, onvifPassword, ip, onvifPort);
+        String token =
+                getToken(
+                        new OnvifLoginInfo(
+                                onvifLoginInfo.getIp(),
+                                onvifLoginInfo.getOnvifPort(),
+                                onvifLoginInfo.getOnvifUserName(),
+                                onvifLoginInfo.getOnvifPassword()));
+
         // 构造http请求头
         HttpHeaders headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
         headers.setContentType(type);
-        String xml = PackageXml.ptz(onvifUserName, onvifPassword, token, leftRight, upDown, inOut);
+        String xml =
+                PackageXml.ptz(
+                        onvifLoginInfo.getOnvifUserName(),
+                        onvifLoginInfo.getOnvifPassword(),
+                        token,
+                        leftRight,
+                        upDown,
+                        inOut);
         log.info("ptz xml-->{}", xml);
 
         HttpEntity<String> formEntity = new HttpEntity<String>(xml, headers);
         // 返回结果
         String resultStr =
                 restTemplate.postForObject(
-                        "http://" + ip + ":" + onvifPort + "/onvif/device_service",
+                        "http://"
+                                + onvifLoginInfo.getIp()
+                                + ":"
+                                + onvifLoginInfo.getOnvifPort()
+                                + "/onvif/device_service",
                         formEntity,
                         String.class);
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
@@ -225,18 +295,24 @@ public class SendOnvifCmd {
         return true;
     }
 
-    private String getToken(String onvifUserName, String onvifPassword, String ip, int onvifPort) {
+    private String getToken(OnvifLoginInfo onvifLoginInfo) {
         try {
             // 构造http请求头
             HttpHeaders headers = new HttpHeaders();
             MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
             headers.setContentType(type);
-            String tokenXml = PackageXml.token(onvifUserName, onvifPassword);
+            String tokenXml =
+                    PackageXml.token(
+                            onvifLoginInfo.getOnvifUserName(), onvifLoginInfo.getOnvifPassword());
             HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
             // 返回结果
             String resultStr =
                     restTemplate.postForObject(
-                            "http://" + ip + ":" + onvifPort + "/onvif/device_service",
+                            "http://"
+                                    + onvifLoginInfo.getIp()
+                                    + ":"
+                                    + onvifLoginInfo.getOnvifPort()
+                                    + "/onvif/device_service",
                             formEntity,
                             String.class);
             // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
