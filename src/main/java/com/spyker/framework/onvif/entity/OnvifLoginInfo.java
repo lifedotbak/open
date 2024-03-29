@@ -7,6 +7,12 @@ public class OnvifLoginInfo {
     private final String ip;
     private final int onvifPort;
 
+    /**
+     * @param onvifUserName
+     * @param onvifPassword
+     * @param ip
+     * @param onvifPort
+     */
     public OnvifLoginInfo(String ip, int onvifPort, String onvifUserName, String onvifPassword) {
         this.onvifUserName = onvifUserName;
         this.onvifPassword = onvifPassword;

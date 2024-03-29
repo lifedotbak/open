@@ -1,5 +1,7 @@
 package com.spyker.framework.onvif;
 
+import com.spyker.framework.onvif.entity.WsseUsernameToken;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.codec.binary.Base64;
@@ -7,17 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 
 @Slf4j
@@ -25,15 +22,19 @@ public class PackageXml {
 
     public static String getSnaoShotUri(String username, String password, String token) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/get_snapshoturi.wsdl");
+
             String streamXml =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"))
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
                             .replace("{token}", token);
+
             return streamXml;
         } catch (IOException e) {
 
@@ -53,14 +54,15 @@ public class PackageXml {
      */
     public static String streamUri(String username, String password, String token) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/stream.wsdl");
             String streamXml =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"))
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
                             .replace("{token}", token);
             return streamXml;
         } catch (IOException e) {
@@ -89,14 +91,15 @@ public class PackageXml {
             Double upDown,
             Double inOut) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/ptz.wsdl");
             String ptzXml =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"))
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
                             .replace("{token}", token)
                             .replace("{leftRight}", leftRight.toString())
                             .replace("{upDown}", upDown.toString())
@@ -111,18 +114,20 @@ public class PackageXml {
     }
 
     public static String gotoPreset(
-            String username, String password, String token, String presetName) {
+            String username, String password, String token, String presetToken) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/goto_preset.wsdl");
             String result =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"))
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
                             .replace("{token}", token)
-                            .replace("{indexPresetName}", presetName);
+                            .replace("{presetToken}", presetToken);
             return result;
         } catch (IOException e) {
 
@@ -134,14 +139,16 @@ public class PackageXml {
 
     public static String getPresets(String username, String password, String token) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/get_presets.wsdl");
             String result =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"))
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
                             .replace("{token}", token);
             return result;
         } catch (IOException e) {
@@ -154,14 +161,16 @@ public class PackageXml {
 
     public static String gotoHome(String username, String password, String token) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/goto_home.wsdl");
             String result =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"))
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
                             .replace("{token}", token);
             return result;
         } catch (IOException e) {
@@ -175,14 +184,16 @@ public class PackageXml {
     /** ----------------------------------- 鉴权 -------------------------------------* */
     public static String token(String username, String password) {
         try {
-            Map<String, String> account = getWsseUsernameToken(username, password);
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
             StringBuffer sb = getRequestXml("wsdl/token.wsdl");
             String tokenXml =
                     sb.toString()
-                            .replace("{username}", account.get("username"))
-                            .replace("{password}", account.get("password"))
-                            .replace("{nonce}", account.get("nonce"))
-                            .replace("{created}", account.get("created"));
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated());
             return tokenXml;
         } catch (IOException e) {
 
@@ -192,7 +203,7 @@ public class PackageXml {
         }
     }
 
-    private static Map<String, String> getWsseUsernameToken(String username, String password) {
+    private static WsseUsernameToken getWsseUsernameToken(String username, String password) {
         try {
             // nonce
             Random r = new Random();
@@ -219,15 +230,15 @@ public class PackageXml {
             b4 = md.digest();
             String passwd = new String(Base64.encodeBase64(b4)).trim();
             //
-            Map<String, String> result = new HashMap<String, String>();
-            result.put("username", username);
-            result.put("password", passwd);
-            result.put("nonce", nonce);
-            result.put("created", time);
+            WsseUsernameToken result = new WsseUsernameToken();
+            result.setUsername(username);
+            result.setPassword(passwd);
+            result.setNonce(nonce);
+            result.setCreated(time);
             return result;
         } catch (NoSuchAlgorithmException e) {
             log.error("error-->{}", e);
-            return null;
+            return new WsseUsernameToken();
         }
     }
 
@@ -246,23 +257,5 @@ public class PackageXml {
         isr.close();
         is.close();
         return sb;
-    }
-
-    private String replaceBaseInfo(
-            String xml,
-            String username,
-            String password,
-            String token,
-            String nonce,
-            String created) {
-
-        String result =
-                xml.replace("{username}", username)
-                        .replace("{password}", password)
-                        .replace("{nonce}", nonce)
-                        .replace("{created}", created)
-                        .replace("{token}", token);
-
-        return result;
     }
 }
