@@ -1,11 +1,11 @@
 package com.spyker.framework.onvif.entity;
 
-public class OnvifLoginInfo {
+public class OnvifDevice {
 
-    private final String onvifUserName;
-    private final String onvifPassword;
     private final String ip;
     private final int onvifPort;
+    private final String onvifUserName;
+    private final String onvifPassword;
 
     /**
      * @param onvifUserName
@@ -13,19 +13,11 @@ public class OnvifLoginInfo {
      * @param ip
      * @param onvifPort
      */
-    public OnvifLoginInfo(String ip, int onvifPort, String onvifUserName, String onvifPassword) {
+    public OnvifDevice(String ip, int onvifPort, String onvifUserName, String onvifPassword) {
         this.onvifUserName = onvifUserName;
         this.onvifPassword = onvifPassword;
         this.ip = ip;
         this.onvifPort = onvifPort;
-    }
-
-    public String getOnvifUserName() {
-        return onvifUserName;
-    }
-
-    public String getOnvifPassword() {
-        return onvifPassword;
     }
 
     public String getIp() {
@@ -34,5 +26,13 @@ public class OnvifLoginInfo {
 
     public int getOnvifPort() {
         return onvifPort;
+    }
+
+    public String getOnvifUserName() {
+        return onvifUserName;
+    }
+
+    public String getOnvifPassword() {
+        return onvifPassword;
     }
 }

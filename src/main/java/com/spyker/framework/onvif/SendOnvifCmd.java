@@ -1,6 +1,6 @@
 package com.spyker.framework.onvif;
 
-import com.spyker.framework.onvif.entity.OnvifLoginInfo;
+import com.spyker.framework.onvif.entity.OnvifDevice;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,14 +33,14 @@ public class SendOnvifCmd {
     /**
      * 截图，返回照片的url
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @return http://192.168.15.88/onvif-http/snapshot?Profile_101
      *     <p>http://admin:grid123456@192.168.15.88/onvif-http/snapshot?Profile_101
      */
-    public String getSnapShotUri(OnvifLoginInfo onvifLoginInfo) {
+    public String getSnapShotUri(OnvifDevice onvifDevice) {
 
         // 判断是否已获取token
-        String token = getToken(onvifLoginInfo);
+        String token = getToken(onvifDevice);
         log.info("token-->{}", token);
 
         // 构造http请求头
@@ -49,12 +49,12 @@ public class SendOnvifCmd {
         HttpEntity<String> formEntity =
                 new HttpEntity<String>(
                         PackageXml.getSnaoShotUri(
-                                onvifLoginInfo.getOnvifUserName(),
-                                onvifLoginInfo.getOnvifPassword(),
+                                onvifDevice.getOnvifUserName(),
+                                onvifDevice.getOnvifPassword(),
                                 token),
                         headers);
         // 返回结果
-        String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
 
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
         String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
@@ -79,14 +79,14 @@ public class SendOnvifCmd {
     /**
      * 获取视频流
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @return
      *     rtsp://admin:grid123456@192.168.15.88:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_101
      */
-    public String getStreamUri(OnvifLoginInfo onvifLoginInfo) {
+    public String getStreamUri(OnvifDevice onvifDevice) {
 
         // 判断是否已获取token
-        String token = getToken(onvifLoginInfo);
+        String token = getToken(onvifDevice);
 
         log.info("token-->{}", token);
 
@@ -95,12 +95,12 @@ public class SendOnvifCmd {
         HttpEntity<String> formEntity =
                 new HttpEntity<String>(
                         PackageXml.streamUri(
-                                onvifLoginInfo.getOnvifUserName(),
-                                onvifLoginInfo.getOnvifPassword(),
+                                onvifDevice.getOnvifUserName(),
+                                onvifDevice.getOnvifPassword(),
                                 token),
                         headers);
         // 返回结果
-        String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
 
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
         String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
@@ -121,9 +121,9 @@ public class SendOnvifCmd {
                             .replace(
                                     "rtsp://",
                                     "rtsp://"
-                                            + onvifLoginInfo.getOnvifUserName()
+                                            + onvifDevice.getOnvifUserName()
                                             + ":"
-                                            + onvifLoginInfo.getOnvifPassword()
+                                            + onvifDevice.getOnvifPassword()
                                             + "@");
             return rtspUrl;
         } else {
@@ -135,26 +135,24 @@ public class SendOnvifCmd {
     /**
      * 获取预置点位信息
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @return
      */
-    public Boolean getPresets(OnvifLoginInfo onvifLoginInfo) {
+    public Boolean getPresets(OnvifDevice onvifDevice) {
 
         // 判断是否已获取token
-        String token = getToken(onvifLoginInfo);
+        String token = getToken(onvifDevice);
         // 构造http请求头
         HttpHeaders headers = getHttpHeaders();
         String xml =
                 PackageXml.getPresets(
-                        onvifLoginInfo.getOnvifUserName(),
-                        onvifLoginInfo.getOnvifPassword(),
-                        token);
+                        onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword(), token);
 
         log.info("xml-->{}", xml);
 
         HttpEntity<String> formEntity = new HttpEntity<String>(xml, headers);
         // 返回结果
-        String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
 
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
         String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
@@ -168,27 +166,25 @@ public class SendOnvifCmd {
     /**
      * 返回摄像头起始位置
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @return
      */
-    public Boolean gotoHome(OnvifLoginInfo onvifLoginInfo) {
+    public Boolean gotoHome(OnvifDevice onvifDevice) {
 
         // 判断是否已获取token
-        String token = getToken(onvifLoginInfo);
+        String token = getToken(onvifDevice);
 
         // 构造http请求头
         HttpHeaders headers = getHttpHeaders();
         String xml =
                 PackageXml.gotoHome(
-                        onvifLoginInfo.getOnvifUserName(),
-                        onvifLoginInfo.getOnvifPassword(),
-                        token);
+                        onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword(), token);
 
         log.info("xml-->{}", xml);
 
         HttpEntity<String> formEntity = new HttpEntity<String>(xml, headers);
         // 返回结果
-        String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
 
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
         String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
@@ -202,22 +198,22 @@ public class SendOnvifCmd {
     /**
      * 调用此方法前往预设点。
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @param presetToken 预设点对应序号。
      * @return 布尔值，通常为true，表示操作成功。
      */
-    public Boolean gotoPreset(OnvifLoginInfo onvifLoginInfo, String presetToken) {
+    public Boolean gotoPreset(OnvifDevice onvifDevice, String presetToken) {
 
         // 判断是否已获取token
-        String token = getToken(onvifLoginInfo);
+        String token = getToken(onvifDevice);
 
         // 构造http请求头
         HttpHeaders headers = getHttpHeaders();
 
         String xml =
                 PackageXml.gotoPreset(
-                        onvifLoginInfo.getOnvifUserName(),
-                        onvifLoginInfo.getOnvifPassword(),
+                        onvifDevice.getOnvifUserName(),
+                        onvifDevice.getOnvifPassword(),
                         token,
                         presetToken);
 
@@ -225,7 +221,7 @@ public class SendOnvifCmd {
 
         HttpEntity<String> formEntity = new HttpEntity<String>(xml, headers);
         // 返回结果
-        String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
         String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
 
@@ -235,37 +231,36 @@ public class SendOnvifCmd {
         return true;
     }
 
-    public Boolean left(OnvifLoginInfo onvifLoginInfo) {
-        return ptz(onvifLoginInfo, 0.5, 0, 0);
+    public Boolean left(OnvifDevice onvifDevice) {
+        return ptz(onvifDevice, 0.5, 0, 0);
     }
 
-    public Boolean up(OnvifLoginInfo onvifLoginInfo) {
-        return ptz(onvifLoginInfo, 0, 0.5, 0);
+    public Boolean up(OnvifDevice onvifDevice) {
+        return ptz(onvifDevice, 0, 0.5, 0);
     }
 
-    public Boolean down(OnvifLoginInfo onvifLoginInfo) {
-        return ptz(onvifLoginInfo, 0, -0.5, 0);
+    public Boolean down(OnvifDevice onvifDevice) {
+        return ptz(onvifDevice, 0, -0.5, 0);
     }
 
-    public Boolean right(OnvifLoginInfo onvifLoginInfo) {
-        return ptz(onvifLoginInfo, -0.5, 0, 0);
+    public Boolean right(OnvifDevice onvifDevice) {
+        return ptz(onvifDevice, -0.5, 0, 0);
     }
 
-    public Boolean stop(OnvifLoginInfo onvifLoginInfo) {
-        return ptz(onvifLoginInfo, 0, 0, 0);
+    public Boolean stop(OnvifDevice onvifDevice) {
+        return ptz(onvifDevice, 0, 0, 0);
     }
 
     /**
      * 摄像头操控
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @param leftRight
      * @param upDown
      * @param inOut
      * @return
      */
-    private Boolean ptz(
-            OnvifLoginInfo onvifLoginInfo, double leftRight, double upDown, double inOut) {
+    private Boolean ptz(OnvifDevice onvifDevice, double leftRight, double upDown, double inOut) {
 
         if (leftRight > 1 && leftRight < -1) {
             return false;
@@ -278,14 +273,14 @@ public class SendOnvifCmd {
         }
 
         // 判断是否已获取token
-        String token = getToken(onvifLoginInfo);
+        String token = getToken(onvifDevice);
 
         // 构造http请求头
         HttpHeaders headers = getHttpHeaders();
         String xml =
                 PackageXml.ptz(
-                        onvifLoginInfo.getOnvifUserName(),
-                        onvifLoginInfo.getOnvifPassword(),
+                        onvifDevice.getOnvifUserName(),
+                        onvifDevice.getOnvifPassword(),
                         token,
                         leftRight,
                         upDown,
@@ -294,7 +289,7 @@ public class SendOnvifCmd {
 
         HttpEntity<String> formEntity = new HttpEntity<String>(xml, headers);
         // 返回结果
-        String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
         // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
         String result = StringEscapeUtils.unescapeXml(resultStr);
         log.info("result-->{}", result);
@@ -306,21 +301,21 @@ public class SendOnvifCmd {
     /**
      * 获取token
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @return token
      */
-    public String getToken(OnvifLoginInfo onvifLoginInfo) {
+    public String getToken(OnvifDevice onvifDevice) {
         try {
             // 构造http请求头
             HttpHeaders headers = getHttpHeaders();
 
             String tokenXml =
                     PackageXml.token(
-                            onvifLoginInfo.getOnvifUserName(), onvifLoginInfo.getOnvifPassword());
+                            onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword());
             HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
 
             // 返回结果
-            String resultStr = getSoapResponse(onvifLoginInfo, formEntity);
+            String resultStr = getSoapResponse(onvifDevice, formEntity);
 
             // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
             String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
@@ -350,19 +345,19 @@ public class SendOnvifCmd {
     /**
      * 请求报文，并获取相应
      *
-     * @param onvifLoginInfo
+     * @param onvifDevice
      * @param formEntity
      * @return
      */
     @Nullable
-    private String getSoapResponse(OnvifLoginInfo onvifLoginInfo, HttpEntity<String> formEntity) {
+    private String getSoapResponse(OnvifDevice onvifDevice, HttpEntity<String> formEntity) {
 
         String resultStr =
                 restTemplate.postForObject(
                         "http://"
-                                + onvifLoginInfo.getIp()
+                                + onvifDevice.getIp()
                                 + ":"
-                                + onvifLoginInfo.getOnvifPort()
+                                + onvifDevice.getOnvifPort()
                                 + "/onvif/device_service",
                         formEntity,
                         String.class);
