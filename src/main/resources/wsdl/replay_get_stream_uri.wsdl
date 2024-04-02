@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:trp1="http://www.onvif.org/ver10/replay/wsdl">
+  <s:Header xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+                   xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+      <wsse:UsernameToken>
+        <wsse:Username>{username}</wsse:Username>
+        <wsse:Password
+		        Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest">{password}</wsse:Password>
+        <wsse:Nonce>{nonce}</wsse:Nonce>
+        <wsu:Created>{created}</wsu:Created>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </s:Header>
+  <soap:Body>
+    <trp1:GetReplayUri>
+      <trp1:StreamSetup>
+        <trp1:Stream>RTP-Unicast</trp1:Stream>
+        <trp1:Transport>
+          <trp1:Protocol>UDP</trp1:Protocol>
+          <trp1:Tunnel>
+            <trp1:Protocol>HTTP</trp1:Protocol>
+          </trp1:Tunnel>
+        </trp1:Transport>
+      </trp1:StreamSetup>
+      <trp1:RecordingToken>{token}</trp1:RecordingToken>
+    </trp1:GetReplayUri>
+  </soap:Body>
+</soap:Envelope>

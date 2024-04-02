@@ -5,11 +5,18 @@ import com.spyker.framework.onvif.entity.WsseUsernameToken;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import java.io.*;
+import java.net.URI;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -17,15 +24,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-@Slf4j
-public class PackageXml {
+import javax.imageio.ImageIO;
 
-    public static String getSnaoShotUri(String username, String password, String token) {
+@Slf4j
+public class OnvifPackageXml {
+
+    public static String mdeia_get_snap_shot_uri(String username, String password, String token) {
         try {
 
             WsseUsernameToken account = getWsseUsernameToken(username, password);
 
-            StringBuffer sb = getRequestXml("wsdl/get_snapshoturi.wsdl");
+            StringBuffer sb = getRequestXml("wsdl/mdeia_get_snap_shot_uri.wsdl");
 
             String streamXml =
                     sb.toString()
@@ -44,7 +53,6 @@ public class PackageXml {
         }
     }
 
-    /** ----------------------------------- 功能 -------------------------------------* */
     /***
      * 获取播放流地址
      * @param username
@@ -52,7 +60,7 @@ public class PackageXml {
      * @param token
      * @return
      */
-    public static String streamUri(String username, String password, String token) {
+    public static String stream(String username, String password, String token) {
         try {
             WsseUsernameToken account = getWsseUsernameToken(username, password);
 
@@ -72,6 +80,8 @@ public class PackageXml {
             return null;
         }
     }
+
+    /** ----------------------------------- 功能 -------------------------------------* */
 
     /***
      * 云台控制
@@ -113,13 +123,13 @@ public class PackageXml {
         }
     }
 
-    public static String gotoPreset(
+    public static String ptz_goto_preset(
             String username, String password, String token, String presetToken) {
         try {
 
             WsseUsernameToken account = getWsseUsernameToken(username, password);
 
-            StringBuffer sb = getRequestXml("wsdl/goto_preset.wsdl");
+            StringBuffer sb = getRequestXml("wsdl/ptz_goto_preset.wsdl");
             String result =
                     sb.toString()
                             .replace("{username}", account.getUsername())
@@ -137,12 +147,12 @@ public class PackageXml {
         }
     }
 
-    public static String getPresets(String username, String password, String token) {
+    public static String ptz_get_presets(String username, String password, String token) {
         try {
 
             WsseUsernameToken account = getWsseUsernameToken(username, password);
 
-            StringBuffer sb = getRequestXml("wsdl/get_presets.wsdl");
+            StringBuffer sb = getRequestXml("wsdl/ptz_get_presets.wsdl");
             String result =
                     sb.toString()
                             .replace("{username}", account.getUsername())
@@ -159,12 +169,12 @@ public class PackageXml {
         }
     }
 
-    public static String gotoHome(String username, String password, String token) {
+    public static String ptz_goto_home(String username, String password, String token) {
         try {
 
             WsseUsernameToken account = getWsseUsernameToken(username, password);
 
-            StringBuffer sb = getRequestXml("wsdl/goto_home.wsdl");
+            StringBuffer sb = getRequestXml("wsdl/ptz_goto_home.wsdl");
             String result =
                     sb.toString()
                             .replace("{username}", account.getUsername())
@@ -257,5 +267,101 @@ public class PackageXml {
         isr.close();
         is.close();
         return sb;
+    }
+
+    public static void doGetSnap(String url, String filePath) {
+
+        //        WsseUsernameToken account = getWsseUsernameToken(userName, password);
+
+        // 创建Httpclient对象
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+
+        try {
+            URIBuilder builder = new URIBuilder(url);
+
+            URI uri = builder.build();
+
+            //            String username = "admin"; // 用户名
+            //            String password = "grid123456"; // 密码
+            //            String userPassword = userName + ":" + password; // 将用户名和密码拼接到一个字符串里中间用 :
+            // 分割
+            // 通过Base64京userPassword重新编码
+            //            String encoding = Base64.encodeBase64String(userPassword.getBytes());
+            // 这个设置不能少
+
+            // 创建GET请求
+            HttpGet httpGet = new HttpGet(uri);
+            //            httpGet.addHeader("Authorization", "Basic " + encoding);
+            // 发送请求
+            response = httpClient.execute(httpGet);
+            // 判断响应状态
+            if (response.getStatusLine().getStatusCode() == 200) {
+                InputStream result = response.getEntity().getContent();
+
+                File fout = new File(filePath);
+
+                FileUtils.createParentDirectories(fout);
+
+                ImageIO.write(ImageIO.read(result), "jpg", fout);
+                //
+                //        FileUtils.copyInputStreamToFile(dataInputStream, file);
+            }
+        } catch (Exception e) {
+            log.error("error-->{}", e);
+        } finally {
+            try {
+                response.close();
+                httpClient.close();
+            } catch (IOException e) {
+                log.error("error-->{}", e);
+            }
+        }
+    }
+
+    public static String replay_get_service_capabilities(String username, String password) {
+        try {
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
+            StringBuffer sb = getRequestXml("wsdl/replay_get_service_capabilities.wsdl");
+
+            String streamXml =
+                    sb.toString()
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated());
+
+            return streamXml;
+        } catch (IOException e) {
+
+            log.error("error-->{}", e);
+
+            return null;
+        }
+    }
+
+    public static String credential_get_service_capabilities(String username, String password) {
+        try {
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
+            StringBuffer sb = getRequestXml("wsdl/credential_get_service_capabilities.wsdl");
+
+            String streamXml =
+                    sb.toString()
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated());
+
+            return streamXml;
+        } catch (IOException e) {
+
+            log.error("error-->{}", e);
+
+            return null;
+        }
     }
 }

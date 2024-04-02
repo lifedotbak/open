@@ -2,10 +2,10 @@ package com.spyker.framework.onvif.entity;
 
 public class OnvifDevice {
 
-    private final String ip;
-    private final int onvifPort;
     private final String onvifUserName;
     private final String onvifPassword;
+    private final String ip;
+    private final int onvifPort;
 
     /**
      * @param onvifUserName
@@ -20,19 +20,19 @@ public class OnvifDevice {
         this.onvifPort = onvifPort;
     }
 
-    public String getIp() {
-        return ip;
-    }
-
-    public int getOnvifPort() {
-        return onvifPort;
-    }
-
     public String getOnvifUserName() {
         return onvifUserName;
     }
 
     public String getOnvifPassword() {
         return onvifPassword;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public int getOnvifPort() {
+        return onvifPort;
     }
 }
