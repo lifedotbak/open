@@ -408,7 +408,7 @@ public class OnvifDeviceCommand {
             // 返回结果
             String resultStr = getSoapResponse(onvifDevice, formEntity);
 
-            // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
+            // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转义
             String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
 
             //            log.error("xmlStr - >{}", xmlStr);
