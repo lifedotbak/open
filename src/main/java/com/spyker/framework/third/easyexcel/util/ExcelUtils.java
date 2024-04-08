@@ -23,6 +23,14 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExcelUtils {
 
+    public static void setResponse(HttpServletResponse response, String fileName) {
+        // 设置 header 和 contentType。写在最后的原因是，避免报错时，响应 contentType 已经被修改了
+        response.addHeader(
+                "Content-Disposition",
+                "attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+    }
+
     /**
      * 将列表以 Excel 响应给前端
      *

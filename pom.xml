@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-parent</artifactId>
-	    <version>3.2.3</version>
+	    <version>3.2.4</version>
 	</parent>
 
 	<groupId>com.spyker</groupId>
@@ -43,7 +43,7 @@
 		<!-- spring相关依赖版本 -->
 		<!-- https://spring.io/projects/spring-cloud/ -->
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-commons.version>4.1.1</spring-cloud-commons.version>
+        <spring-cloud-commons.version>4.1.2</spring-cloud-commons.version>
 		<springdoc.version>2.3.0</springdoc.version>
 		<knife4j-openapi3.version>4.5.0</knife4j-openapi3.version>
 		<spring-integration-redis.version>6.2.2</spring-integration-redis.version>
@@ -72,13 +72,13 @@
 		<hutool.version>5.8.26</hutool.version>
 		
 		<!-- flyway相关依赖版本 -->
-		<flyway.version>10.9.0</flyway.version>
+		<flyway.version>10.10.0</flyway.version>
 		
 		<!-- xxl-job相关依赖版本 -->
 		<xxl-job-core.version>2.4.0</xxl-job-core.version>
 		
 		<!-- redisson相关依赖版本 -->
-		<redisson.version>3.27.1</redisson.version>
+		<redisson.version>3.27.2</redisson.version>
 		
 		<!-- therapi相关依赖版本 -->
 		<therapi.version>0.15.0</therapi.version>
@@ -88,7 +88,7 @@
 		
 		<!-- 其他相关依赖版本 -->
 		<java-jwt.version>4.4.0</java-jwt.version>
-		<aws-s3.version>1.12.681</aws-s3.version>
+		<aws-s3.version>1.12.696</aws-s3.version>
 		<commons-io.version>2.15.1</commons-io.version>
 		<jna.version>5.14.0</jna.version>
 		<json.version>20240303</json.version>
@@ -509,7 +509,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.21.1</version>
+			<version>1.9.22</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
@@ -538,7 +538,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.30</version>
+			<version>1.18.32</version>
 			<scope>provided</scope>
 		</dependency>
 		
@@ -581,7 +581,7 @@
 		<dependency>
 			<groupId>com.digitalpetri.modbus</groupId>
 			<artifactId>modbus-master-tcp</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.1</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.github.sftwnd.crayfish.common/crayfish-common-crc -->
@@ -596,7 +596,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>easyexcel</artifactId>
-			<version>3.3.2</version>
+			<version>3.3.4</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
