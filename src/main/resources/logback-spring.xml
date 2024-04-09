@@ -5,25 +5,33 @@
      you cannot use extensions in it.
      You need to either use logback-spring.xml
      gengor define a logging.config property. -->
-
-    <springProperty scope="context" name="name" source="server.name" defaultValue="application"/>
+	
+	<springProperty scope="context" name="name" source="server.name" defaultValue="application"/>
 
     <property name="log.base" value="logs/${name}"/>
 
     <springProfile name="dev">
     <!-- configuration to be enabled when the "staging" profile is active -->
-        <property name="log.base" value="logs/${name}-dev"/>
+	    <property name="log.base" value="logs/${name}-dev"/>
     </springProfile>
-
-    <!-- excludePackageNames传入需要过滤包的关键字，以分号分割 -->
-    <turboFilter class="com.spyker.framework.logback.ExcludeTurboFilter">
+	
+	<!-- excludePackageNames传入需要过滤包的关键字，以分号分割 -->
+	<turboFilter class="com.spyker.framework.logback.ExcludeTurboFilter">
         <excludePackageNames>job.core;test</excludePackageNames>
     </turboFilter>
-
-    <!-- 打印sleuth对应日志信息 -->
-    <property name="TRACE_LOG_PATTERN"
-              value="%d [%thread] %-5level %logger{35} [%L] [TraceId=%X{X-B3-TraceId:-},SpanId=%X{X-B3-SpanId:-},ParentSpanId=%X{X-B3-ParentSpanId:-}] - %msg%n"/>
-
+	
+	<!-- 打印sleuth对应日志信息 -->
+	<!--	<property name="TRACE_LOG_PATTERN"-->
+	<!--	          value="%d [%thread] %-5level %logger{35} [%L] [TraceId=%X{X-B3-TraceId:-},SpanId=%X{X-B3-SpanId:-},ParentSpanId=%X{X-B3-ParentSpanId:-}] - %msg%n"/>-->
+	
+	<substitutionProperty name="TRACE_LOG_PATTERN"
+	                      value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%thread]) %clr(%5p) %clr(-->){faint} %clr(%logger{50}){cyan}%clr(:) %clr(%L){cyan} %m%n%wEx"/>
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex"
+	                converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx"
+	                converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
@@ -32,7 +40,7 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
                 - %msg%n</pattern> -->
-            <pattern>${TRACE_LOG_PATTERN}</pattern>
+	        <pattern>${TRACE_LOG_PATTERN}</pattern>
         </layout>
     </appender>
 
@@ -50,7 +58,7 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
                 - %msg%n</pattern> -->
-            <pattern>${TRACE_LOG_PATTERN}</pattern>
+	        <pattern>${TRACE_LOG_PATTERN}</pattern>
         </layout>
     </appender>
 
@@ -68,7 +76,7 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
                 - %msg%n</pattern> -->
-            <pattern>${TRACE_LOG_PATTERN}</pattern>
+	        <pattern>${TRACE_LOG_PATTERN}</pattern>
         </layout>
     </appender>
 
@@ -86,7 +94,7 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
                 - %msg%n</pattern> -->
-            <pattern>${TRACE_LOG_PATTERN}</pattern>
+	        <pattern>${TRACE_LOG_PATTERN}</pattern>
         </layout>
     </appender>
 
@@ -104,13 +112,13 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %class [%file:%line]
                 - %msg%n</pattern> -->
-            <pattern>${TRACE_LOG_PATTERN}</pattern>
+	        <pattern>${TRACE_LOG_PATTERN}</pattern>
         </layout>
     </appender>
 
     <root level="INFO">
         <!--        <appender-ref ref="FILE-DEBUG" />-->
-        <appender-ref ref="FILE-ERROR"/>
+	    <appender-ref ref="FILE-ERROR"/>
         <appender-ref ref="FILE-INFO"/>
         <appender-ref ref="CONSOLE"/>
     </root>
