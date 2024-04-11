@@ -634,6 +634,15 @@
             <version>2.1.4</version>
         </dependency>
 		
+		<!-- https://mvnrepository.com/artifact/jakarta.xml.soap/jakarta.xml.soap-api -->
+		<!-- https://mvnrepository.com/artifact/javax.xml.soap/javax.xml.soap-api -->
+		<dependency>
+		    <groupId>javax.xml.soap</groupId>
+		    <artifactId>javax.xml.soap-api</artifactId>
+		    <version>1.4.0</version>
+		</dependency>
+		
+		
 		<!-- flowable工作流 -->
 		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter -->
 		<!-- <dependency> -->
