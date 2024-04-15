@@ -12,25 +12,14 @@ class OnvifUtilsTest {
     @Test
     void getToken() throws Exception {
 
-        String cameraAddress = "192.168.3.138";
+        //        String cameraAddress = "192.168.3.138";
+        String cameraAddress = "192.168.15.184";
         String user = "admin";
         String password = "123456";
 
         OnvifUtils utils = new OnvifUtils(cameraAddress, user, password);
 
         log.info(utils.getToken());
-    }
-
-    @Test
-    void getSnapshotUri() throws Exception {
-
-        String cameraAddress = "192.168.3.138";
-        String user = "admin";
-        String password = "123456";
-
-        OnvifUtils utils = new OnvifUtils(cameraAddress, user, password);
-
-        log.info(utils.getSnapshotUri("mainMediaProfileToken"));
     }
 
     @Test

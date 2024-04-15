@@ -269,24 +269,24 @@ sa-token:
   jwt-secret-key: app-spyker-sa-token-temp-jwt
 
 ################ nacos配置 ##############
-nacos:
-  # 实现配置的动态变更
-  config:
-    server-addr: 127.0.0.1:8848
-    # 配置 ID，采用类似 package.class（如com.taobao.tc.refund.log.level）的命名规则保证全局唯一性，class部分建议是配置的业务含义。
-    # 全部字符小写。只允许英文字符和 4 种特殊字符（”.”、”:”、”-”、”_”），不超过 256 字节。
-    data-id: com.spyker.open
-    # 配置分组，建议填写产品名:模块名（Nacos）保证唯一性，只允许英文字符和4种特殊字符（”.”、”:”、”-”、”_”），不超过128字节。
-    group: prod
-    auto-refresh: true
-    # endpoint--->springboot endpoint暂时配置为空，但是不能少了这个字段，负责启动报错
-    endpoint:
-    # 开启预加载，@NacosValue 使用方可取得值
-    bootstrap:
-      enable: true
-  # 服务的注册与发现
-  discovery:
-    auto-register: true
-    server-addr: 127.0.0.1:8848
-    register:
-      group-name: prod
+#nacos:
+#  # 实现配置的动态变更
+#  config:
+#    server-addr: 127.0.0.1:8848
+#    # 配置 ID，采用类似 package.class（如com.taobao.tc.refund.log.level）的命名规则保证全局唯一性，class部分建议是配置的业务含义。
+#    # 全部字符小写。只允许英文字符和 4 种特殊字符（”.”、”:”、”-”、”_”），不超过 256 字节。
+#    data-id: com.spyker.open
+#    # 配置分组，建议填写产品名:模块名（Nacos）保证唯一性，只允许英文字符和4种特殊字符（”.”、”:”、”-”、”_”），不超过128字节。
+#    group: prod
+#    auto-refresh: true
+#    # endpoint--->springboot endpoint暂时配置为空，但是不能少了这个字段，负责启动报错
+#    endpoint:
+#    # 开启预加载，@NacosValue 使用方可取得值
+#    bootstrap:
+#      enable: true
+#  # 服务的注册与发现
+#  discovery:
+#    auto-register: true
+#    server-addr: 127.0.0.1:8848
+#    register:
+#      group-name: prod

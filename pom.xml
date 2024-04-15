@@ -297,18 +297,18 @@
 		<!-- springboot进行nacos配置管理，springcloud对应为springcloud相关依赖 -->
 		<!-- 注意：版本 0.2.x.RELEASE 对应的是 Spring Boot 2.x 版本，版本 0.1.x.RELEASE 对应的是 Spring Boot 1.x 版本。  -->
 		<!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-config-spring-boot-starter -->
-		<dependency>
-			<groupId>com.alibaba.boot</groupId>
-			<artifactId>nacos-config-spring-boot-starter</artifactId>
-			<version>${nacos.version}</version>
-		</dependency>
-		<!-- 通过 Nacos Server 和 nacos-discovery-spring-boot-starter 实现服务的注册与发现 -->
-		<!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-discovery-spring-boot-starter -->
-		<dependency>
-			<groupId>com.alibaba.boot</groupId>
-			<artifactId>nacos-discovery-spring-boot-starter</artifactId>
-			<version>${nacos.version}</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>com.alibaba.boot</groupId>-->
+		<!--			<artifactId>nacos-config-spring-boot-starter</artifactId>-->
+		<!--			<version>${nacos.version}</version>-->
+		<!--		</dependency>-->
+		<!--		&lt;!&ndash; 通过 Nacos Server 和 nacos-discovery-spring-boot-starter 实现服务的注册与发现 &ndash;&gt;-->
+		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/com.alibaba.boot/nacos-discovery-spring-boot-starter &ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.alibaba.boot</groupId>-->
+		<!--			<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+		<!--			<version>${nacos.version}</version>-->
+		<!--		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
 		<dependency>
 			<groupId>com.aliyun</groupId>
@@ -642,6 +642,13 @@
 		    <version>1.4.0</version>
 		</dependency>
 		
+		<dependency>
+            <groupId>rt.java</groupId>
+            <artifactId>rt</artifactId>
+            <version>1.8.0_361</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/rt.jar</systemPath>
+        </dependency>
 		
 		<!-- flowable工作流 -->
 		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter -->
