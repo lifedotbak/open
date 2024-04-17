@@ -44,15 +44,18 @@
 		<!-- https://spring.io/projects/spring-cloud/ -->
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-cloud-commons.version>4.1.2</spring-cloud-commons.version>
-		<springdoc.version>2.3.0</springdoc.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.5.0</springdoc-openapi-starter-webmvc-ui.version>
 		<knife4j-openapi3.version>4.5.0</knife4j-openapi3.version>
-		<spring-integration-redis.version>6.2.2</spring-integration-redis.version>
+		<spring-integration-redis.version>6.2.3</spring-integration-redis.version>
 		
 		<!-- 数据库相关依赖相关依赖版本 -->
+		<!-- mybatis,mybatis-plus,mybatis-spring-boot 注意版本需要同步更新，否则会出错 -->
 		<mybatis-spring-boot.version>3.0.3</mybatis-spring-boot.version>
-		<mybatis-plus.version>3.5.5</mybatis-plus.version>
+		<mybatis-plus.version>3.5.6</mybatis-plus.version>
+		<mybatis.version>3.5.16</mybatis.version>
+		
 		<mysql-connector-j.version>8.3.0</mysql-connector-j.version>
-		<druid.version>1.2.20</druid.version>
+		<druid.version>1.2.22</druid.version>
 		
 		<!-- nacos相关依赖版本 -->
 		<nacos.version>0.3.0-RC</nacos.version>
@@ -69,16 +72,16 @@
 		<sa-token.version>1.37.0</sa-token.version>
 		
 		<!-- hutool相关依赖版本 -->
-		<hutool.version>5.8.26</hutool.version>
+		<hutool.version>5.8.27</hutool.version>
 		
 		<!-- flyway相关依赖版本 -->
-		<flyway.version>10.10.0</flyway.version>
+		<flyway.version>10.11.0</flyway.version>
 		
 		<!-- xxl-job相关依赖版本 -->
 		<xxl-job-core.version>2.4.0</xxl-job-core.version>
 		
 		<!-- redisson相关依赖版本 -->
-		<redisson.version>3.27.2</redisson.version>
+		<redisson.version>3.28.0</redisson.version>
 		
 		<!-- therapi相关依赖版本 -->
 		<therapi.version>0.15.0</therapi.version>
@@ -88,7 +91,7 @@
 		
 		<!-- 其他相关依赖版本 -->
 		<java-jwt.version>4.4.0</java-jwt.version>
-		<aws-s3.version>1.12.696</aws-s3.version>
+		<aws-s3.version>1.12.701</aws-s3.version>
 		<commons-io.version>2.15.1</commons-io.version>
 		<jna.version>5.14.0</jna.version>
 		<json.version>20240303</json.version>
@@ -209,7 +212,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${springdoc.version}</version>
+			<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-openapi3-spring-boot-starter -->
@@ -238,6 +241,13 @@
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-generator</artifactId>
 			<version>${mybatis-plus.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>${mybatis.version}</version>
 		</dependency>
 		
 		<!-- 模板引擎 -->
@@ -587,7 +597,7 @@
 		<dependency>
 			<groupId>com.digitalpetri.modbus</groupId>
 			<artifactId>modbus-master-tcp</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.github.sftwnd.crayfish.common/crayfish-common-crc -->
@@ -609,7 +619,7 @@
 		<dependency>
 			<groupId>com.alibaba.fastjson2</groupId>
 			<artifactId>fastjson2</artifactId>
-			<version>2.0.47</version>
+			<version>2.0.48</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
