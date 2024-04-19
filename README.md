@@ -18,7 +18,7 @@
   - 网易云信接口接入
   - minio接入
   - modbus实现
-  - xxxjob接入
+  - xxxjob接入(待清理)
   - zlmedkit视频处理接入
   - ONVIF协议实现摄像头控制，摄像头基础操作，抓图
   
@@ -27,11 +27,11 @@
   - springboot
   - mybatis-plus
   - 阿里云文件存储，消息推送，sms短信发送，语音短信
-  - 海康威视摄像头控制
-  - modbus数据获取
+  - ONVIF协议实现摄像头控制
+  - modbus数据获取(待清理)
   - 网易云信接口接入
   - 微信支付，V2，V3
-  - xxxJob基于代码的任务控制
+  - xxxJob基于代码的任务控制(待清理)
   - zlmedkit视频处理
   - minio
   - mqtt
@@ -39,7 +39,7 @@
   - 引入therapi-runtime-javadoc,javadoc生成swagger
   - 引入alibaba easyexcel完成excel生成
   - satoken进行权限相关认证
-  - axis代码引入
+  - axis代码引入(待清理)
   
   - 前后端分离
     
@@ -50,5 +50,5 @@
 
 ## 3. 其他
 
-  - 视频涉及的jar包以及说明文档详见：https://github.com/lifedotbak/lib
+  - 视频相关采用onvif协议，计划加入国标
   - 采用github codeql分析代码
