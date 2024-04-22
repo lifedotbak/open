@@ -673,6 +673,14 @@
 		    <version>1.4.0</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/io.github.lunasaw/gb28181-server -->
+		<dependency>
+		    <groupId>io.github.lunasaw</groupId>
+		    <artifactId>gb28181-server</artifactId>
+		    <version>1.1.7</version>
+		</dependency>
+		
+		
 		<!-- flowable工作流 -->
 		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter -->
 		<!-- <dependency> -->
