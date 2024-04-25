@@ -1,5 +1,7 @@
 package com.genersoft.iot.vmp.gb28181.transmit.event.request.impl.message.notify.cmd;
 
+import static com.genersoft.iot.vmp.gb28181.utils.XmlUtil.getText;
+
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.genersoft.iot.vmp.conf.SipConfig;
@@ -16,25 +18,25 @@ import com.genersoft.iot.vmp.service.IDeviceChannelService;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.storager.IVideoManagerStorage;
 import com.genersoft.iot.vmp.utils.DateUtil;
+
 import gov.nist.javax.sip.message.SIPRequest;
+
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
+
+import java.text.ParseException;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.sip.InvalidArgumentException;
 import javax.sip.RequestEvent;
 import javax.sip.SipException;
 import javax.sip.message.Response;
-import java.text.ParseException;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import static com.genersoft.iot.vmp.gb28181.utils.XmlUtil.getText;
 
 /** 报警事件的处理，参考：9.4 */
 @Component
@@ -43,28 +45,16 @@ public class AlarmNotifyMessageHandler extends SIPRequestProcessorParent
 
     private final Logger logger = LoggerFactory.getLogger(AlarmNotifyMessageHandler.class);
     private final String cmdType = "Alarm";
-
+    private final ConcurrentLinkedQueue<SipMsgInfo> taskQueue = new ConcurrentLinkedQueue<>();
     @Autowired private NotifyMessageHandler notifyMessageHandler;
-
     @Autowired private EventPublisher publisher;
-
     @Autowired private UserSetting userSetting;
-
     @Autowired private SipConfig sipConfig;
-
     @Autowired private IVideoManagerStorage storager;
-
     @Autowired private IRedisCatchStorage redisCatchStorage;
-
     @Autowired private IDeviceAlarmService deviceAlarmService;
-
     @Autowired private IDeviceChannelService deviceChannelService;
-
-    private ConcurrentLinkedQueue<SipMsgInfo> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Autowired private EventPublisher eventPublisher;
 
@@ -94,7 +84,7 @@ public class AlarmNotifyMessageHandler extends SIPRequestProcessorParent
 
                                 Element deviceIdElement =
                                         sipMsgInfo.getRootElement().element("DeviceID");
-                                String channelId = deviceIdElement.getText().toString();
+                                String channelId = deviceIdElement.getText();
 
                                 DeviceAlarm deviceAlarm = new DeviceAlarm();
                                 deviceAlarm.setCreateTime(DateUtil.getNow());
@@ -239,7 +229,7 @@ public class AlarmNotifyMessageHandler extends SIPRequestProcessorParent
             logger.error("[命令发送失败] 国标级联 报警通知回复: {}", e.getMessage());
         }
         Element deviceIdElement = rootElement.element("DeviceID");
-        String channelId = deviceIdElement.getText().toString();
+        String channelId = deviceIdElement.getText();
 
         DeviceAlarm deviceAlarm = new DeviceAlarm();
         deviceAlarm.setCreateTime(DateUtil.getNow());

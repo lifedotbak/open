@@ -20,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -47,21 +46,13 @@ public class RecordInfoResponseMessageHandler extends SIPRequestProcessorParent
     private final Logger logger = LoggerFactory.getLogger(RecordInfoResponseMessageHandler.class);
     private final String cmdType = "RecordInfo";
 
-    private ConcurrentLinkedQueue<HandlerCatchData> taskQueue = new ConcurrentLinkedQueue<>();
-
+    private final ConcurrentLinkedQueue<HandlerCatchData> taskQueue = new ConcurrentLinkedQueue<>();
+    private final Long recordInfoTtl = 1800L;
     @Autowired private ResponseMessageHandler responseMessageHandler;
-
     @Autowired private DeferredResultHolder deferredResultHolder;
-
     @Autowired private EventPublisher eventPublisher;
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
     @Autowired private RedisTemplate<Object, Object> redisTemplate;
-
-    private Long recordInfoTtl = 1800L;
 
     @Override
     public void afterPropertiesSet() throws Exception {

@@ -2,6 +2,7 @@ package com.genersoft.iot.vmp.conf;
 
 import com.genersoft.iot.vmp.common.VersionPo;
 import com.genersoft.iot.vmp.utils.GitUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -42,24 +41,15 @@ public class MobilePositionNotifyMessageHandler extends SIPRequestProcessorParen
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "MobilePosition";
-    private Logger logger = LoggerFactory.getLogger(MobilePositionNotifyMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(MobilePositionNotifyMessageHandler.class);
+    private final ConcurrentLinkedQueue<SipMsgInfo> taskQueue = new ConcurrentLinkedQueue<>();
     @Autowired private NotifyMessageHandler notifyMessageHandler;
-
     @Autowired private UserSetting userSetting;
-
     @Autowired private IVideoManagerStorage storager;
-
     @Autowired private IRedisCatchStorage redisCatchStorage;
-
     @Autowired private IDeviceChannelService deviceChannelService;
-
     @Autowired private EventPublisher eventPublisher;
-
-    private ConcurrentLinkedQueue<SipMsgInfo> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void afterPropertiesSet() throws Exception {

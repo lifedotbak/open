@@ -5,15 +5,18 @@ import com.genersoft.iot.vmp.conf.DynamicTask;
 import com.genersoft.iot.vmp.gb28181.bean.Device;
 import com.genersoft.iot.vmp.gb28181.task.ISubscribeTask;
 import com.genersoft.iot.vmp.gb28181.transmit.cmd.ISIPCommander;
+
 import gov.nist.javax.sip.message.SIPRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.ParseException;
 
 import javax.sip.InvalidArgumentException;
 import javax.sip.ResponseEvent;
 import javax.sip.SipException;
 import javax.sip.header.ToHeader;
-import java.text.ParseException;
 
 /**
  * 移动位置订阅的定时更新
@@ -22,12 +25,11 @@ import java.text.ParseException;
  */
 public class MobilePositionSubscribeTask implements ISubscribeTask {
     private final Logger logger = LoggerFactory.getLogger(MobilePositionSubscribeTask.class);
-    private Device device;
-    private ISIPCommander sipCommander;
-
+    private final Device device;
+    private final ISIPCommander sipCommander;
+    private final DynamicTask dynamicTask;
+    private final String taskKey = "mobile-position-subscribe-timeout";
     private SIPRequest request;
-    private DynamicTask dynamicTask;
-    private String taskKey = "mobile-position-subscribe-timeout";
 
     public MobilePositionSubscribeTask(
             Device device, ISIPCommander sipCommander, DynamicTask dynamicTask) {

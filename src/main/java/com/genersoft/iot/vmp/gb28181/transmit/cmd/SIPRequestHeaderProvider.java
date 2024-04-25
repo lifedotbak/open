@@ -8,10 +8,15 @@ import com.genersoft.iot.vmp.gb28181.session.VideoStreamSessionManager;
 import com.genersoft.iot.vmp.gb28181.utils.SipUtils;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.utils.GitUtil;
+
 import gov.nist.javax.sip.message.SIPRequest;
 import gov.nist.javax.sip.message.SIPResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.sip.InvalidArgumentException;
 import javax.sip.PeerUnavailableException;
@@ -21,8 +26,6 @@ import javax.sip.address.Address;
 import javax.sip.address.SipURI;
 import javax.sip.header.*;
 import javax.sip.message.Request;
-import java.text.ParseException;
-import java.util.ArrayList;
 
 /**
  * @description:摄像头命令request创造器 TODO 冗余代码太多待优化

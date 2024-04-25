@@ -2,10 +2,10 @@ package com.genersoft.iot.vmp.service.redisMsg;
 
 import com.alibaba.fastjson2.JSON;
 import com.genersoft.iot.vmp.service.bean.MessageForPushChannelResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -27,17 +27,9 @@ public class RedisPushStreamResponseListener implements MessageListener {
     private static final Logger logger =
             LoggerFactory.getLogger(RedisPushStreamResponseListener.class);
 
-    private ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-
-    private Map<String, PushStreamResponseEvent> responseEvents = new ConcurrentHashMap<>();
-
-    public interface PushStreamResponseEvent {
-        void run(MessageForPushChannelResponse response);
-    }
+    private final ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
+    private final Map<String, PushStreamResponseEvent> responseEvents = new ConcurrentHashMap<>();
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
@@ -84,5 +76,9 @@ public class RedisPushStreamResponseListener implements MessageListener {
 
     public void removeEvent(String app, String stream) {
         responseEvents.remove(app + stream);
+    }
+
+    public interface PushStreamResponseEvent {
+        void run(MessageForPushChannelResponse response);
     }
 }

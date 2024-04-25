@@ -1,6 +1,7 @@
 package com.genersoft.iot.vmp.jt1078.proc.response;
 
 import com.genersoft.iot.vmp.jt1078.annotation.MsgId;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;

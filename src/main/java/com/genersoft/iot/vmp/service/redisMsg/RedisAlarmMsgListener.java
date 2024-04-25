@@ -13,7 +13,6 @@ import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -36,9 +35,7 @@ public class RedisAlarmMsgListener implements MessageListener {
     @Autowired private ISIPCommanderForPlatform commanderForPlatform;
     @Autowired private IVideoManagerStorage storage;
 
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Autowired private UserSetting userSetting;
 

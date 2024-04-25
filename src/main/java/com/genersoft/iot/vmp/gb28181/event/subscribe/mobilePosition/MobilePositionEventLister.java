@@ -6,16 +6,18 @@ import com.genersoft.iot.vmp.gb28181.bean.SubscribeInfo;
 import com.genersoft.iot.vmp.gb28181.transmit.cmd.impl.SIPCommanderFroPlatform;
 import com.genersoft.iot.vmp.service.bean.GPSMsgInfo;
 import com.genersoft.iot.vmp.storager.IVideoManagerStorage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import javax.sip.InvalidArgumentException;
-import javax.sip.SipException;
 import java.text.ParseException;
 import java.util.List;
+
+import javax.sip.InvalidArgumentException;
+import javax.sip.SipException;
 
 /** 移动位置通知消息转发 */
 @Component

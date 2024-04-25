@@ -17,26 +17,28 @@ import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.storager.IVideoManagerStorage;
 import com.genersoft.iot.vmp.utils.DateUtil;
 import com.genersoft.iot.vmp.utils.redis.RedisUtil;
+
 import gov.nist.javax.sip.message.SIPRequest;
+
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
+
+import java.text.ParseException;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.sip.InvalidArgumentException;
 import javax.sip.RequestEvent;
 import javax.sip.SipException;
 import javax.sip.header.FromHeader;
 import javax.sip.message.Response;
-import java.text.ParseException;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /** SIP命令类型： NOTIFY请求,这是作为上级发送订阅请求后，设备才会响应的 */
 @Component
@@ -45,6 +47,8 @@ public class NotifyRequestProcessor extends SIPRequestProcessorParent
 
     private static final Logger logger = LoggerFactory.getLogger(NotifyRequestProcessor.class);
     private final String method = "NOTIFY";
+    private final ConcurrentLinkedQueue<HandlerCatchData> taskQueue = new ConcurrentLinkedQueue<>();
+    private final int maxQueueCount = 30000;
     @Autowired private UserSetting userSetting;
     @Autowired private IVideoManagerStorage storager;
     @Autowired private EventPublisher eventPublisher;
@@ -52,18 +56,9 @@ public class NotifyRequestProcessor extends SIPRequestProcessorParent
     @Autowired private IRedisCatchStorage redisCatchStorage;
     @Autowired private EventPublisher publisher;
     @Autowired private SIPProcessorObserver sipProcessorObserver;
-
     @Autowired private IDeviceChannelService deviceChannelService;
-
     @Autowired private NotifyRequestForCatalogProcessor notifyRequestForCatalogProcessor;
-
-    private ConcurrentLinkedQueue<HandlerCatchData> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-
-    private int maxQueueCount = 30000;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -148,7 +143,7 @@ public class NotifyRequestProcessor extends SIPRequestProcessorParent
             mobilePosition.setCreateTime(DateUtil.getNow());
 
             Element deviceIdElement = rootElement.element("DeviceID");
-            String channelId = deviceIdElement.getTextTrim().toString();
+            String channelId = deviceIdElement.getTextTrim();
             Device device = redisCatchStorage.getDevice(deviceId);
 
             if (device == null) {
@@ -247,7 +242,7 @@ public class NotifyRequestProcessor extends SIPRequestProcessorParent
                 return;
             }
             Element deviceIdElement = rootElement.element("DeviceID");
-            String channelId = deviceIdElement.getText().toString();
+            String channelId = deviceIdElement.getText();
 
             Device device = redisCatchStorage.getDevice(deviceId);
             if (device == null) {

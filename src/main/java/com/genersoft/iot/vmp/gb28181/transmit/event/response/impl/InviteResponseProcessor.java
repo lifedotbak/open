@@ -7,12 +7,16 @@ import com.genersoft.iot.vmp.gb28181.transmit.SIPSender;
 import com.genersoft.iot.vmp.gb28181.transmit.cmd.SIPRequestHeaderProvider;
 import com.genersoft.iot.vmp.gb28181.transmit.event.response.SIPResponseProcessorAbstract;
 import com.genersoft.iot.vmp.gb28181.utils.SipUtils;
+
 import gov.nist.javax.sip.ResponseEventExt;
 import gov.nist.javax.sip.message.SIPResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.text.ParseException;
 
 import javax.sdp.SdpParseException;
 import javax.sdp.SessionDescription;
@@ -23,7 +27,6 @@ import javax.sip.SipFactory;
 import javax.sip.address.SipURI;
 import javax.sip.message.Request;
 import javax.sip.message.Response;
-import java.text.ParseException;
 
 /**
  * @description: 处理INVITE响应

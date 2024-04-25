@@ -5,6 +5,7 @@ import com.genersoft.iot.vmp.conf.DynamicTask;
 import com.genersoft.iot.vmp.conf.UserSetting;
 import com.genersoft.iot.vmp.gb28181.task.ISubscribeTask;
 import com.genersoft.iot.vmp.gb28181.task.impl.MobilePositionSubscribeHandlerTask;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +19,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class SubscribeHolder {
 
-    private static ConcurrentHashMap<String, SubscribeInfo> catalogMap = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, SubscribeInfo> mobilePositionMap =
+    private static final ConcurrentHashMap<String, SubscribeInfo> catalogMap =
+            new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, SubscribeInfo> mobilePositionMap =
             new ConcurrentHashMap<>();
     private final String taskOverduePrefix = "subscribe_overdue_";
     @Autowired private DynamicTask dynamicTask;
@@ -47,8 +49,7 @@ public class SubscribeHolder {
         catalogMap.remove(platformId);
         String taskOverdueKey = taskOverduePrefix + "catalog_" + platformId;
         Runnable runnable = dynamicTask.get(taskOverdueKey);
-        if (runnable instanceof ISubscribeTask) {
-            ISubscribeTask subscribeTask = (ISubscribeTask) runnable;
+        if (runnable instanceof ISubscribeTask subscribeTask) {
             subscribeTask.stop(null);
         }
         // 添加任务处理订阅过期
@@ -94,8 +95,7 @@ public class SubscribeHolder {
         dynamicTask.stop(key);
         String taskOverdueKey = taskOverduePrefix + "MobilePosition_" + platformId;
         Runnable runnable = dynamicTask.get(taskOverdueKey);
-        if (runnable instanceof ISubscribeTask) {
-            ISubscribeTask subscribeTask = (ISubscribeTask) runnable;
+        if (runnable instanceof ISubscribeTask subscribeTask) {
             subscribeTask.stop(null);
         }
         // 添加任务处理订阅过期

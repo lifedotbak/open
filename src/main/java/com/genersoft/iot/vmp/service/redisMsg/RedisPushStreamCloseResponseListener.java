@@ -14,6 +14,7 @@ import com.genersoft.iot.vmp.service.bean.MessageForPushChannel;
 import com.genersoft.iot.vmp.service.bean.MessageForPushChannelResponse;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.storager.IVideoManagerStorage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,13 @@ import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.stereotype.Component;
 
-import javax.sip.InvalidArgumentException;
-import javax.sip.SipException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.sip.InvalidArgumentException;
+import javax.sip.SipException;
 
 /**
  * 接收redis发送的结束推流请求
@@ -38,24 +40,13 @@ public class RedisPushStreamCloseResponseListener implements MessageListener {
 
     private static final Logger logger =
             LoggerFactory.getLogger(RedisPushStreamCloseResponseListener.class);
-
+    private final Map<String, PushStreamResponseEvent> responseEvents = new ConcurrentHashMap<>();
     @Autowired private IStreamPushService streamPushService;
-
     @Autowired private IRedisCatchStorage redisCatchStorage;
-
     @Autowired private IVideoManagerStorage storager;
-
     @Autowired private ISIPCommanderForPlatform commanderFroPlatform;
-
     @Autowired private UserSetting userSetting;
-
     @Autowired private IMediaServerService mediaServerService;
-
-    private Map<String, PushStreamResponseEvent> responseEvents = new ConcurrentHashMap<>();
-
-    public interface PushStreamResponseEvent {
-        void run(MessageForPushChannelResponse response);
-    }
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
@@ -124,5 +115,9 @@ public class RedisPushStreamCloseResponseListener implements MessageListener {
 
     public void removeEvent(String app, String stream) {
         responseEvents.remove(app + stream);
+    }
+
+    public interface PushStreamResponseEvent {
+        void run(MessageForPushChannelResponse response);
     }
 }

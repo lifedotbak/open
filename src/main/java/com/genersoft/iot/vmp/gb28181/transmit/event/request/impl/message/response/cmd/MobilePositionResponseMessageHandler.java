@@ -1,5 +1,7 @@
 package com.genersoft.iot.vmp.gb28181.transmit.event.request.impl.message.response.cmd;
 
+import static com.genersoft.iot.vmp.gb28181.utils.XmlUtil.getText;
+
 import com.genersoft.iot.vmp.conf.UserSetting;
 import com.genersoft.iot.vmp.gb28181.bean.Device;
 import com.genersoft.iot.vmp.gb28181.bean.DeviceChannel;
@@ -16,7 +18,9 @@ import com.genersoft.iot.vmp.service.IDeviceChannelService;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.storager.IVideoManagerStorage;
 import com.genersoft.iot.vmp.utils.DateUtil;
+
 import gov.nist.javax.sip.message.SIPRequest;
+
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.slf4j.Logger;
@@ -26,13 +30,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+import java.text.ParseException;
+
 import javax.sip.InvalidArgumentException;
 import javax.sip.RequestEvent;
 import javax.sip.SipException;
 import javax.sip.message.Response;
-import java.text.ParseException;
-
-import static com.genersoft.iot.vmp.gb28181.utils.XmlUtil.getText;
 
 /**
  * 移动设备位置数据查询回复
@@ -44,7 +47,8 @@ public class MobilePositionResponseMessageHandler extends SIPRequestProcessorPar
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "MobilePosition";
-    private Logger logger = LoggerFactory.getLogger(MobilePositionResponseMessageHandler.class);
+    private final Logger logger =
+            LoggerFactory.getLogger(MobilePositionResponseMessageHandler.class);
     @Autowired private ResponseMessageHandler responseMessageHandler;
 
     @Autowired private UserSetting userSetting;

@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,16 +27,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class RedisGpsMsgListener implements MessageListener {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisGpsMsgListener.class);
-
+    private final ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
     @Autowired private IRedisCatchStorage redisCatchStorage;
-
     @Autowired private IVideoManagerStorage storager;
-
-    private ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void onMessage(@NotNull Message message, byte[] bytes) {

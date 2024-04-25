@@ -2,6 +2,7 @@ package com.genersoft.iot.vmp.conf;
 
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.utils.SystemInfoUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Component
 public class SystemInfoTimerTask {
 
-    private Logger logger = LoggerFactory.getLogger(SystemInfoTimerTask.class);
+    private final Logger logger = LoggerFactory.getLogger(SystemInfoTimerTask.class);
 
     @Autowired private IRedisCatchStorage redisCatchStorage;
 

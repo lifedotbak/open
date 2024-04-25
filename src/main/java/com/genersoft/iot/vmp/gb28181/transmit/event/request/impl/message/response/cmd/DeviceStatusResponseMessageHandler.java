@@ -11,7 +11,9 @@ import com.genersoft.iot.vmp.gb28181.transmit.event.request.impl.message.respons
 import com.genersoft.iot.vmp.gb28181.utils.XmlUtil;
 import com.genersoft.iot.vmp.service.IDeviceService;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
+
 import gov.nist.javax.sip.message.SIPRequest;
+
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,18 +21,19 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+
 import javax.sip.InvalidArgumentException;
 import javax.sip.RequestEvent;
 import javax.sip.SipException;
 import javax.sip.message.Response;
-import java.text.ParseException;
 
 @Component
 public class DeviceStatusResponseMessageHandler extends SIPRequestProcessorParent
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "DeviceStatus";
-    private Logger logger = LoggerFactory.getLogger(DeviceStatusResponseMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(DeviceStatusResponseMessageHandler.class);
     @Autowired private ResponseMessageHandler responseMessageHandler;
 
     @Autowired private DeferredResultHolder deferredResultHolder;

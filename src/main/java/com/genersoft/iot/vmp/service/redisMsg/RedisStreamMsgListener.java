@@ -10,7 +10,6 @@ import com.genersoft.iot.vmp.media.zlm.dto.hook.OnStreamChangedHookParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -28,16 +27,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class RedisStreamMsgListener implements MessageListener {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisStreamMsgListener.class);
-
+    private final ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
     @Autowired private UserSetting userSetting;
-
     @Autowired private ZLMMediaListManager zlmMediaListManager;
-
-    private ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
@@ -86,7 +79,6 @@ public class RedisStreamMsgListener implements MessageListener {
                                 if (channelOnlineEventLister != null) {
                                     try {
                                         channelOnlineEventLister.run(app, stream, serverId);
-                                        ;
                                     } catch (ParseException e) {
                                         logger.error("addPush: ", e);
                                     }

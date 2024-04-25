@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,8 @@ import java.util.Objects;
  */
 public class UJson {
 
-    private static Logger logger = LoggerFactory.getLogger(UJson.class);
     public static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+    private static final Logger logger = LoggerFactory.getLogger(UJson.class);
 
     static {
         JSON_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -47,32 +48,6 @@ public class UJson {
 
     public UJson(ObjectNode node) {
         this.node = node;
-    }
-
-    public String asText(String key) {
-        JsonNode jsonNode = node.get(key);
-        if (Objects.isNull(jsonNode)) {
-            return "";
-        }
-        return jsonNode.asText();
-    }
-
-    public String asText(String key, String defaultVal) {
-        JsonNode jsonNode = node.get(key);
-        if (Objects.isNull(jsonNode)) {
-            return "";
-        }
-        return jsonNode.asText(defaultVal);
-    }
-
-    public UJson put(String key, String value) {
-        this.node.put(key, value);
-        return this;
-    }
-
-    public UJson put(String key, Integer value) {
-        this.node.put(key, value);
-        return this;
     }
 
     public static UJson json() {
@@ -102,6 +77,32 @@ public class UJson {
             logger.error(e.getMessage(), e);
             return "";
         }
+    }
+
+    public String asText(String key) {
+        JsonNode jsonNode = node.get(key);
+        if (Objects.isNull(jsonNode)) {
+            return "";
+        }
+        return jsonNode.asText();
+    }
+
+    public String asText(String key, String defaultVal) {
+        JsonNode jsonNode = node.get(key);
+        if (Objects.isNull(jsonNode)) {
+            return "";
+        }
+        return jsonNode.asText(defaultVal);
+    }
+
+    public UJson put(String key, String value) {
+        this.node.put(key, value);
+        return this;
+    }
+
+    public UJson put(String key, Integer value) {
+        this.node.put(key, value);
+        return this;
     }
 
     @Override

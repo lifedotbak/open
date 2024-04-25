@@ -3,7 +3,9 @@ package com.genersoft.iot.vmp.jt1078.proc.request;
 import com.genersoft.iot.vmp.jt1078.proc.Header;
 import com.genersoft.iot.vmp.jt1078.proc.response.Rs;
 import com.genersoft.iot.vmp.jt1078.session.Session;
+
 import io.netty.buffer.ByteBuf;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;

@@ -16,10 +16,10 @@ import com.genersoft.iot.vmp.service.bean.*;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
 import com.genersoft.iot.vmp.utils.redis.RedisUtil;
 import com.genersoft.iot.vmp.vmanager.bean.WVPResult;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -41,8 +41,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Component
 public class RedisGbPlayMsgListener implements MessageListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(RedisGbPlayMsgListener.class);
-
     public static final String WVP_PUSH_STREAM_KEY = "WVP_PUSH_STREAM";
 
     /** 流媒体不存在的错误玛 */
@@ -54,40 +52,19 @@ public class RedisGbPlayMsgListener implements MessageListener {
     /** 超时的错误玛 */
     public static final int ERROR_CODE_TIMEOUT = -3;
 
+    private static final Logger logger = LoggerFactory.getLogger(RedisGbPlayMsgListener.class);
     private final Map<String, PlayMsgCallback> callbacks = new ConcurrentHashMap<>();
     private final Map<String, PlayMsgCallbackForStartSendRtpStream> callbacksForStartSendRtpStream =
             new ConcurrentHashMap<>();
     private final Map<String, PlayMsgErrorCallback> callbacksForError = new ConcurrentHashMap<>();
-
-    @Autowired private UserSetting userSetting;
-
-    @Autowired private RedisTemplate<Object, Object> redisTemplate;
-
-    @Autowired private IMediaServerService mediaServerService;
-
-    @Autowired private IRedisCatchStorage redisCatchStorage;
-
-    @Autowired private DynamicTask dynamicTask;
-
-    @Autowired private HookSubscribe subscribe;
-
     private final ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-
-    public interface PlayMsgCallback {
-        void handler(ResponseSendItemMsg responseSendItemMsg) throws ParseException;
-    }
-
-    public interface PlayMsgCallbackForStartSendRtpStream {
-        void handler();
-    }
-
-    public interface PlayMsgErrorCallback {
-        void handler(WVPResult wvpResult);
-    }
+    @Autowired private UserSetting userSetting;
+    @Autowired private RedisTemplate<Object, Object> redisTemplate;
+    @Autowired private IMediaServerService mediaServerService;
+    @Autowired private IRedisCatchStorage redisCatchStorage;
+    @Autowired private DynamicTask dynamicTask;
+    @Autowired private HookSubscribe subscribe;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
@@ -586,5 +563,17 @@ public class RedisGbPlayMsgListener implements MessageListener {
             messageForPushChannel.setPlatFormIndex(streamMsg.getPlatFormIndex());
             redisCatchStorage.sendPlatformStopPlayMsg(messageForPushChannel);
         }
+    }
+
+    public interface PlayMsgCallback {
+        void handler(ResponseSendItemMsg responseSendItemMsg) throws ParseException;
+    }
+
+    public interface PlayMsgCallbackForStartSendRtpStream {
+        void handler();
+    }
+
+    public interface PlayMsgErrorCallback {
+        void handler(WVPResult wvpResult);
     }
 }

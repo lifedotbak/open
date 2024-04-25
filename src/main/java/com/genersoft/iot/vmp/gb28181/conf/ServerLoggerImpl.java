@@ -6,8 +6,9 @@ import gov.nist.core.StackLogger;
 import gov.nist.javax.sip.message.SIPMessage;
 import gov.nist.javax.sip.stack.SIPTransactionStack;
 
-import javax.sip.SipStack;
 import java.util.Properties;
+
+import javax.sip.SipStack;
 
 public class ServerLoggerImpl implements ServerLogger {
 
@@ -23,13 +24,8 @@ public class ServerLoggerImpl implements ServerLogger {
         if (!showLog) {
             return;
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(sender ? "发送：目标--->" + from : "接收：来自--->" + to)
-                .append("\r\n")
-                .append(message);
-        this.stackLogger.logInfo(stringBuilder.toString());
-
+        String stringBuilder = (sender ? "发送：目标--->" + from : "接收：来自--->" + to) + "\r\n" + message;
+        this.stackLogger.logInfo(stringBuilder);
     }
 
     @Override
@@ -38,12 +34,8 @@ public class ServerLoggerImpl implements ServerLogger {
         if (!showLog) {
             return;
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(sender ? "发送： 目标->" + from : "接收：来自->" + to)
-                .append("\r\n")
-                .append(message);
-        this.stackLogger.logInfo(stringBuilder.toString());
+        String stringBuilder = (sender ? "发送： 目标->" + from : "接收：来自->" + to) + "\r\n" + message;
+        this.stackLogger.logInfo(stringBuilder);
     }
 
     @Override
@@ -52,12 +44,8 @@ public class ServerLoggerImpl implements ServerLogger {
         if (!showLog) {
             return;
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(sender ? "发送： 目标->" + from : "接收：来自->" + to)
-                .append("\r\n")
-                .append(message);
-        this.stackLogger.logInfo(stringBuilder.toString());
+        String stringBuilder = (sender ? "发送： 目标->" + from : "接收：来自->" + to) + "\r\n" + message;
+        this.stackLogger.logInfo(stringBuilder);
     }
 
     @Override

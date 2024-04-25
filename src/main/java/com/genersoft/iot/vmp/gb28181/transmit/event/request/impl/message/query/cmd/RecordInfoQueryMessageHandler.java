@@ -9,10 +9,12 @@ import com.genersoft.iot.vmp.gb28181.transmit.cmd.impl.SIPCommanderFroPlatform;
 import com.genersoft.iot.vmp.gb28181.transmit.event.request.SIPRequestProcessorParent;
 import com.genersoft.iot.vmp.gb28181.transmit.event.request.impl.message.IMessageHandler;
 import com.genersoft.iot.vmp.gb28181.transmit.event.request.impl.message.query.QueryMessageHandler;
-import com.genersoft.iot.vmp.utils.DateUtil;
 import com.genersoft.iot.vmp.storager.IVideoManagerStorage;
 import com.genersoft.iot.vmp.storager.dao.dto.ChannelSourceInfo;
+import com.genersoft.iot.vmp.utils.DateUtil;
+
 import gov.nist.javax.sip.message.SIPRequest;
+
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,19 +22,20 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.util.List;
+
 import javax.sip.InvalidArgumentException;
 import javax.sip.RequestEvent;
 import javax.sip.SipException;
 import javax.sip.message.Response;
-import java.text.ParseException;
-import java.util.List;
 
 @Component
 public class RecordInfoQueryMessageHandler extends SIPRequestProcessorParent
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "RecordInfo";
-    private Logger logger = LoggerFactory.getLogger(RecordInfoQueryMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(RecordInfoQueryMessageHandler.class);
     @Autowired private QueryMessageHandler queryMessageHandler;
 
     @Autowired private IVideoManagerStorage storager;

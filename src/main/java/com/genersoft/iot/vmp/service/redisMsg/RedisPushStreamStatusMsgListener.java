@@ -7,10 +7,10 @@ import com.genersoft.iot.vmp.conf.UserSetting;
 import com.genersoft.iot.vmp.service.IStreamPushService;
 import com.genersoft.iot.vmp.service.bean.PushStreamStatusChangeFromRedisDto;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.data.redis.connection.Message;
@@ -30,20 +30,12 @@ public class RedisPushStreamStatusMsgListener implements MessageListener, Applic
 
     private static final Logger logger =
             LoggerFactory.getLogger(RedisPushStreamStatusMsgListener.class);
-
+    private final ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
     @Autowired private IRedisCatchStorage redisCatchStorage;
-
     @Autowired private IStreamPushService streamPushService;
-
     @Autowired private DynamicTask dynamicTask;
-
     @Autowired private UserSetting userSetting;
-
-    private ConcurrentLinkedQueue<Message> taskQueue = new ConcurrentLinkedQueue<>();
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void onMessage(Message message, byte[] bytes) {

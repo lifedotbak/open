@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
@@ -41,18 +40,13 @@ public class CatalogResponseMessageHandler extends SIPRequestProcessorParent
 
     private final String cmdType = "Catalog";
     private final ConcurrentLinkedQueue<HandlerCatchData> taskQueue = new ConcurrentLinkedQueue<>();
-    private Logger logger = LoggerFactory.getLogger(CatalogResponseMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(CatalogResponseMessageHandler.class);
+    private final AtomicBoolean processing = new AtomicBoolean(false);
     @Autowired private ResponseMessageHandler responseMessageHandler;
     @Autowired private IVideoManagerStorage storager;
-
     @Autowired private CatalogDataCatch catalogDataCatch;
-
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
     @Autowired private SipConfig sipConfig;
-    private AtomicBoolean processing = new AtomicBoolean(false);
 
     @Override
     public void afterPropertiesSet() throws Exception {

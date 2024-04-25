@@ -5,12 +5,14 @@ import com.genersoft.iot.vmp.jt1078.proc.factory.CodecFactory;
 import com.genersoft.iot.vmp.jt1078.proc.request.Re;
 import com.genersoft.iot.vmp.jt1078.proc.response.Rs;
 import com.genersoft.iot.vmp.jt1078.session.Session;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.CompositeByteBuf;
 import io.netty.buffer.UnpooledByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

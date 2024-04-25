@@ -1,7 +1,8 @@
 package com.genersoft.iot.vmp.gb28181.bean;
 
-import javax.sip.Dialog;
 import java.util.EventObject;
+
+import javax.sip.Dialog;
 
 public class DeviceNotFoundEvent extends EventObject {
 

@@ -2,6 +2,7 @@ package com.genersoft.iot.vmp.conf;
 
 import com.genersoft.iot.vmp.common.CivilCodePo;
 import com.genersoft.iot.vmp.utils.CivilCodeUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

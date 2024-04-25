@@ -1,6 +1,7 @@
 package com.genersoft.iot.vmp.gb28181.conf;
 
 import com.genersoft.iot.vmp.gb28181.transmit.event.request.impl.message.notify.cmd.AlarmNotifyMessageHandler;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

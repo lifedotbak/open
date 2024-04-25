@@ -2,6 +2,7 @@ package com.genersoft.iot.vmp.conf;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.genersoft.iot.vmp.storager.IRedisCatchStorage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;

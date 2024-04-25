@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -39,7 +38,7 @@ public class DeviceControlQueryMessageHandler extends SIPRequestProcessorParent
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "DeviceControl";
-    private Logger logger = LoggerFactory.getLogger(DeviceControlQueryMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(DeviceControlQueryMessageHandler.class);
     @Autowired private ControlMessageHandler controlMessageHandler;
 
     @Autowired private IVideoManagerStorage storager;
@@ -48,9 +47,7 @@ public class DeviceControlQueryMessageHandler extends SIPRequestProcessorParent
 
     @Autowired private SIPCommanderFroPlatform cmderFroPlatform;
 
-    @Qualifier("taskExecutor")
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
+    @Autowired private ThreadPoolTaskExecutor taskExecutor;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -236,7 +233,6 @@ public class DeviceControlQueryMessageHandler extends SIPRequestProcessorParent
         } catch (InvalidArgumentException | SipException | ParseException e) {
             logger.error("[命令发送失败] 重启: {}", e.getMessage());
         }
-
     }
 
     /**
@@ -259,21 +255,36 @@ public class DeviceControlQueryMessageHandler extends SIPRequestProcessorParent
             if (dragZoom == null) {
                 dragZoom = dragZoomRequest.getDragZoomOut();
             }
-            StringBuffer cmdXml = new StringBuffer(200);
-            cmdXml.append("<" + type.getVal() + ">\r\n");
-            cmdXml.append("<Length>" + dragZoom.getLength() + "</Length>\r\n");
-            cmdXml.append("<Width>" + dragZoom.getWidth() + "</Width>\r\n");
-            cmdXml.append("<MidPointX>" + dragZoom.getMidPointX() + "</MidPointX>\r\n");
-            cmdXml.append("<MidPointY>" + dragZoom.getMidPointY() + "</MidPointY>\r\n");
-            cmdXml.append("<LengthX>" + dragZoom.getLengthX() + "</LengthX>\r\n");
-            cmdXml.append("<LengthY>" + dragZoom.getLengthY() + "</LengthY>\r\n");
-            cmdXml.append("</" + type.getVal() + ">\r\n");
-            cmder.dragZoomCmd(device, channelId, cmdXml.toString());
+            String cmdXml =
+                    "<"
+                            + type.getVal()
+                            + ">\r\n"
+                            + "<Length>"
+                            + dragZoom.getLength()
+                            + "</Length>\r\n"
+                            + "<Width>"
+                            + dragZoom.getWidth()
+                            + "</Width>\r\n"
+                            + "<MidPointX>"
+                            + dragZoom.getMidPointX()
+                            + "</MidPointX>\r\n"
+                            + "<MidPointY>"
+                            + dragZoom.getMidPointY()
+                            + "</MidPointY>\r\n"
+                            + "<LengthX>"
+                            + dragZoom.getLengthX()
+                            + "</LengthX>\r\n"
+                            + "<LengthY>"
+                            + dragZoom.getLengthY()
+                            + "</LengthY>\r\n"
+                            + "</"
+                            + type.getVal()
+                            + ">\r\n";
+            cmder.dragZoomCmd(device, channelId, cmdXml);
             responseAck(request, Response.OK);
         } catch (Exception e) {
             logger.error("[命令发送失败] 拉框控制: {}", e.getMessage());
         }
-
     }
 
     /**

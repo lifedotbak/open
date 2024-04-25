@@ -1,6 +1,7 @@
 package com.genersoft.iot.vmp.jt1078.proc.response;
 
 import com.genersoft.iot.vmp.jt1078.proc.Header;
+
 import io.netty.buffer.ByteBuf;
 
 /**

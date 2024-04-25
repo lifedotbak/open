@@ -1,6 +1,7 @@
 package com.genersoft.iot.vmp.gb28181.transmit.callback;
 
 import com.genersoft.iot.vmp.vmanager.bean.DeferredResultEx;
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -55,7 +56,7 @@ public class DeferredResultHolder {
 
     public static final String CALLBACK_CMD_SNAP = "CALLBACK_SNAP";
 
-    private Map<String, Map<String, DeferredResultEx>> map = new ConcurrentHashMap<>();
+    private final Map<String, Map<String, DeferredResultEx>> map = new ConcurrentHashMap<>();
 
     public void put(String key, String id, DeferredResultEx result) {
         Map<String, DeferredResultEx> deferredResultMap = map.get(key);
