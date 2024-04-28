@@ -132,4 +132,14 @@ public class OnvifUtils {
 
         return cam.getMedia().getSnapshotUri(token);
     }
+
+    public String getRTSPStreamUri(String token) throws Exception {
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String rtsp = cam.getMedia().getRTSPStreamUri(token);
+
+        rtsp = rtsp.replace("rtsp://", "rtsp://" + userName + ":" + password + "@");
+
+        return rtsp;
+    }
 }
