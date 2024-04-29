@@ -4,12 +4,14 @@ import com.spyker.framework.onvif.OnvifUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.junit.jupiter.api.Test;
+
 @Slf4j
 class OnvifUtilsTest {
 
     private static final String cameraAddress = "192.168.15.225";
 
-    //    @Test
+    @Test
     void getToken() throws Exception {
 
         //        String cameraAddress = "192.168.3.138";

@@ -1,0 +1,24 @@
+package com.spyker.iot.vmp.web.gb28181;
+
+import com.spyker.iot.vmp.service.IUserService;
+import com.spyker.iot.vmp.storager.dao.dto.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(value = "/auth")
+public class AuthController {
+
+    @Autowired private IUserService userService;
+
+    @GetMapping("/login")
+    public String devices(String name, String passwd) {
+        User user = userService.getUser(name, passwd);
+        if (user != null) {
+            return "success";
+        } else {
+            return "fail";
+        }
+    }
+}
