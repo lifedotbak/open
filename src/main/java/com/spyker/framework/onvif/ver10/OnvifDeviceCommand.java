@@ -1,6 +1,6 @@
-package com.spyker.framework.onvif.bak;
+package com.spyker.framework.onvif.ver10;
 
-import com.spyker.framework.onvif.bak.entity.OnvifDeviceExtend;
+import com.spyker.framework.onvif.ver10.entity.OnvifDeviceExtend;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,7 +48,7 @@ public class OnvifDeviceCommand {
         HttpEntity<String> formEntity =
                 new HttpEntity<String>(
                         OnvifPackageXml.credential_get_service_capabilities(
-                                onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword()),
+                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword()),
                         headers);
         // 返回结果
         String resultStr = getSoapResponse(onvifDevice, formEntity);
@@ -75,7 +75,7 @@ public class OnvifDeviceCommand {
         HttpEntity<String> formEntity =
                 new HttpEntity<String>(
                         OnvifPackageXml.replay_get_service_capabilities(
-                                onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword()),
+                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword()),
                         headers);
         // 返回结果
         String resultStr = getSoapResponse(onvifDevice, formEntity);
@@ -123,9 +123,7 @@ public class OnvifDeviceCommand {
         HttpEntity<String> formEntity =
                 new HttpEntity<String>(
                         OnvifPackageXml.mdeia_get_snap_shot_uri(
-                                onvifDevice.getOnvifUserName(),
-                                onvifDevice.getOnvifPassword(),
-                                token),
+                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword(), token),
                         headers);
         // 返回结果
         String resultStr = getSoapResponse(onvifDevice, formEntity);
@@ -146,9 +144,9 @@ public class OnvifDeviceCommand {
                     rtspUrl.replace(
                             "http://",
                             "http://"
-                                    + onvifDevice.getOnvifUserName()
+                                    + onvifDevice.onvifUserName()
                                     + ":"
-                                    + onvifDevice.getOnvifPassword()
+                                    + onvifDevice.onvifPassword()
                                     + "@");
 
             return rtspUrl;
@@ -175,9 +173,7 @@ public class OnvifDeviceCommand {
         HttpEntity<String> formEntity =
                 new HttpEntity<String>(
                         OnvifPackageXml.stream(
-                                onvifDevice.getOnvifUserName(),
-                                onvifDevice.getOnvifPassword(),
-                                token),
+                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword(), token),
                         headers);
         // 返回结果
         String resultStr = getSoapResponse(onvifDevice, formEntity);
@@ -199,9 +195,9 @@ public class OnvifDeviceCommand {
                             .replace(
                                     "rtsp://",
                                     "rtsp://"
-                                            + onvifDevice.getOnvifUserName()
+                                            + onvifDevice.onvifUserName()
                                             + ":"
-                                            + onvifDevice.getOnvifPassword()
+                                            + onvifDevice.onvifPassword()
                                             + "@");
             return rtspUrl;
         } else {
@@ -224,7 +220,7 @@ public class OnvifDeviceCommand {
         HttpHeaders headers = getHttpHeaders();
         String xml =
                 OnvifPackageXml.ptz_get_presets(
-                        onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword(), token);
+                        onvifDevice.onvifUserName(), onvifDevice.onvifPassword(), token);
 
         log.info("xml-->{}", xml);
 
@@ -255,7 +251,7 @@ public class OnvifDeviceCommand {
         HttpHeaders headers = getHttpHeaders();
         String xml =
                 OnvifPackageXml.ptz_goto_home(
-                        onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword(), token);
+                        onvifDevice.onvifUserName(), onvifDevice.onvifPassword(), token);
 
         HttpEntity<String> formEntity = new HttpEntity<String>(xml, headers);
         // 返回结果
@@ -285,8 +281,8 @@ public class OnvifDeviceCommand {
 
         String xml =
                 OnvifPackageXml.ptz_goto_preset(
-                        onvifDevice.getOnvifUserName(),
-                        onvifDevice.getOnvifPassword(),
+                        onvifDevice.onvifUserName(),
+                        onvifDevice.onvifPassword(),
                         token,
                         presetToken);
 
@@ -349,8 +345,8 @@ public class OnvifDeviceCommand {
         HttpHeaders headers = getHttpHeaders();
         String xml =
                 OnvifPackageXml.ptz(
-                        onvifDevice.getOnvifUserName(),
-                        onvifDevice.getOnvifPassword(),
+                        onvifDevice.onvifUserName(),
+                        onvifDevice.onvifPassword(),
                         token,
                         leftRight,
                         upDown,
@@ -378,8 +374,7 @@ public class OnvifDeviceCommand {
             HttpHeaders headers = getHttpHeaders();
 
             String tokenXml =
-                    OnvifPackageXml.token(
-                            onvifDevice.getOnvifUserName(), onvifDevice.getOnvifPassword());
+                    OnvifPackageXml.token(onvifDevice.onvifUserName(), onvifDevice.onvifPassword());
             HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
 
             // 返回结果
@@ -422,9 +417,9 @@ public class OnvifDeviceCommand {
 
         String url =
                 "http://"
-                        + onvifDevice.getIp()
+                        + onvifDevice.ip()
                         + ":"
-                        + onvifDevice.getOnvifPort()
+                        + onvifDevice.onvifPort()
                         + "/onvif/device_service";
 
         String resultStr = restTemplate.postForObject(url, formEntity, String.class);

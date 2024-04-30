@@ -1,8 +1,8 @@
 package com.spyker.commons.onvif;
 
 import com.spyker.BaseTest;
-import com.spyker.framework.onvif.bak.OnvifDeviceCommand;
-import com.spyker.framework.onvif.bak.entity.OnvifDeviceExtend;
+import com.spyker.framework.onvif.ver10.OnvifDeviceCommand;
+import com.spyker.framework.onvif.ver10.entity.OnvifDeviceExtend;
 
 import lombok.extern.slf4j.Slf4j;
 

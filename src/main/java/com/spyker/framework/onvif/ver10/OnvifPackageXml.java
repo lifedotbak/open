@@ -1,6 +1,6 @@
-package com.spyker.framework.onvif.bak;
+package com.spyker.framework.onvif.ver10;
 
-import com.spyker.framework.onvif.bak.entity.WsseUsernameToken;
+import com.spyker.framework.onvif.ver10.entity.WsseUsernameToken;
 
 import lombok.extern.slf4j.Slf4j;
 

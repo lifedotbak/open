@@ -13,6 +13,7 @@ package ${package.Entity};
     import lombok.Getter;
     import lombok.Setter;
     import lombok.Data;
+    import lombok.ToString;
     <#if chainModel>
         import lombok.experimental.Accessors;
     </#if>
@@ -38,6 +39,7 @@ package ${package.Entity};
 <#elseif swagger>
     @ApiModel(value = "${entity}对象", description = "${table.comment!}对象")
 </#if>
+@ToString
 <#if superEntityClass??>
     public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
 <#elseif activeRecord>

@@ -1,4 +1,4 @@
-package com.spyker.framework.onvif.bak.entity;
+package com.spyker.framework.onvif.ver10.entity;
 
 import lombok.Data;
 
