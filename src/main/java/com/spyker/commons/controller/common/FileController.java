@@ -6,8 +6,8 @@ import com.spyker.framework.constant.Constants;
 import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.file.ExFileUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
-import com.spyker.framework.util.file.FileUtils;
 import com.spyker.framework.util.http.ServletUtils;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -57,7 +57,7 @@ public class FileController {
             HttpServletResponse response,
             HttpServletRequest request) {
 
-        if (!FileUtils.checkAllowDownload(fileName)) {
+        if (!ExFileUtils.checkAllowDownload(fileName)) {
             throw new IllegalArgumentException(
                     ExStringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
         }
@@ -69,10 +69,10 @@ public class FileController {
             String filePath = PlatformConfigProperties.getDownloadPath() + fileName;
 
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-            FileUtils.setAttachmentResponseHeader(response, realFileName);
-            FileUtils.writeBytes(filePath, response.getOutputStream());
+            ExFileUtils.setAttachmentResponseHeader(response, realFileName);
+            ExFileUtils.writeBytes(filePath, response.getOutputStream());
             if (delete) {
-                FileUtils.deleteFile(filePath);
+                ExFileUtils.deleteFile(filePath);
             }
         } catch (Exception e) {
             log.error("下载文件失败", e);
@@ -91,7 +91,7 @@ public class FileController {
             RestMapResponse ajax = RestMapResponse.success();
             ajax.put("url", url);
             ajax.put("fileName", fileName);
-            ajax.put("newFileName", FileUtils.getName(fileName));
+            ajax.put("newFileName", ExFileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
             return ajax;
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class FileController {
                 String url = ServletUtils.getUrl() + fileName;
                 urls.add(url);
                 fileNames.add(fileName);
-                newFileNames.add(FileUtils.getName(fileName));
+                newFileNames.add(ExFileUtils.getName(fileName));
                 originalFilenames.add(file.getOriginalFilename());
             }
             RestMapResponse ajax = RestMapResponse.success();
@@ -137,7 +137,7 @@ public class FileController {
     public void resourceDownload(
             String resource, HttpServletRequest request, HttpServletResponse response) {
 
-        if (!FileUtils.checkAllowDownload(resource)) {
+        if (!ExFileUtils.checkAllowDownload(resource)) {
             throw new IllegalArgumentException(
                     ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
         }
@@ -151,8 +151,8 @@ public class FileController {
             // 下载名称
             String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-            FileUtils.setAttachmentResponseHeader(response, downloadName);
-            FileUtils.writeBytes(downloadPath, response.getOutputStream());
+            ExFileUtils.setAttachmentResponseHeader(response, downloadName);
+            ExFileUtils.writeBytes(downloadPath, response.getOutputStream());
         } catch (Exception e) {
             log.error("下载文件失败", e);
         }

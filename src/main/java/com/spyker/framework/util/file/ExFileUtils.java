@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import lombok.SneakyThrows;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -39,7 +40,7 @@ import java.util.Date;
  *
  * @author spyker
  */
-public class FileUtils {
+public class ExFileUtils extends FileUtils {
 
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
 
@@ -139,13 +140,6 @@ public class FileUtils {
 
         if (file.exists()) {
             file.delete();
-        }
-    }
-
-    public static void delete(File deleteFile) {
-
-        if (deleteFile.exists()) {
-            deleteFile.delete();
         }
     }
 

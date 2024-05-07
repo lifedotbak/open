@@ -1,25 +1,21 @@
 package com.spyker.framework.onvif;
 
 import com.onvif.soap.OnvifDevice;
+import com.spyker.framework.util.file.ExFileUtils;
+
+import jakarta.validation.constraints.NotNull;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.onvif.ver10.schema.Profile;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.ConnectException;
-import java.net.URI;
+import java.net.URL;
 import java.util.List;
-
-import javax.imageio.ImageIO;
+import java.util.Objects;
 
 /** jdk1.8测试通过，jdk17未通过，jdk1.8以后移除了rt.jar */
 @Slf4j
@@ -35,45 +31,27 @@ public class OnvifUtils {
         this.password = password;
     }
 
-    private static void doGetSnap(String url, String filePath) {
+    private static void doGetSnap(@NotNull String url, @NotNull String filePath) {
 
-        // 创建Httpclient对象
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        CloseableHttpResponse response = null;
+        Objects.requireNonNull(url, "url");
+        Objects.requireNonNull(filePath, "filePath");
 
         try {
-            URIBuilder builder = new URIBuilder(url);
 
-            URI uri = builder.build();
+            File fout = new File(filePath);
 
-            // 创建GET请求
-            HttpGet httpGet = new HttpGet(uri);
-            //            httpGet.addHeader("Authorization", "Basic " + encoding);
-            // 发送请求
-            response = httpClient.execute(httpGet);
-            // 判断响应状态
-            if (response.getStatusLine().getStatusCode() == 200) {
-                InputStream result = response.getEntity().getContent();
+            FileUtils.createParentDirectories(fout);
+            ExFileUtils.copyURLToFile(new URL(url), fout);
 
-                File fout = new File(filePath);
-
-                FileUtils.createParentDirectories(fout);
-
-                ImageIO.write(ImageIO.read(result), "jpg", fout);
-            }
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error("error-->{}", e);
-        } finally {
-            try {
-                response.close();
-                httpClient.close();
-            } catch (IOException e) {
-                log.error("error-->{}", e);
-            }
         }
     }
 
-    public void snapshot(String token, String filePath) throws Exception {
+    public void snapshot(@NotNull String token, @NotNull String filePath) throws Exception {
+
+        Objects.requireNonNull(token, "token");
+        Objects.requireNonNull(filePath, "filePath");
 
         String getSnapshotUri = getSnapshotUri(token);
 
