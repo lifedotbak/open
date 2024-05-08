@@ -1,7 +1,7 @@
 package com.spyker.framework.onvif;
 
 import com.onvif.soap.OnvifDevice;
-import com.spyker.framework.util.file.ExFileUtils;
+import com.spyker.framework.util.ExFileUtils;
 
 import jakarta.validation.constraints.NotNull;
 

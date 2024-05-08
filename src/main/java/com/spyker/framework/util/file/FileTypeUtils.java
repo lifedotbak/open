@@ -35,6 +35,7 @@ public class FileTypeUtils {
      * @return 后缀（不含".")
      */
     public static String getFileType(String fileName) {
+
         int separatorIndex = fileName.lastIndexOf(".");
         if (separatorIndex < 0) {
             return "";

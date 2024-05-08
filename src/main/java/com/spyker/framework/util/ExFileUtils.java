@@ -1,4 +1,4 @@
-package com.spyker.framework.util.file;
+package com.spyker.framework.util;
 
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
@@ -8,6 +8,9 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 
 import com.spyker.framework.util.date.ExDateUtils;
+import com.spyker.framework.util.file.FileTypeUtils;
+import com.spyker.framework.util.file.FileUploadUtils;
+import com.spyker.framework.util.file.MimeTypeUtils;
 import com.spyker.framework.util.uuid.ExUuidUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
