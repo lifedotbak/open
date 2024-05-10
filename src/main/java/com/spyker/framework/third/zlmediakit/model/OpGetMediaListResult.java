@@ -82,9 +82,24 @@ public class OpGetMediaListResult {
         int codec_id;
         String codec_id_name;
         int codec_type;
+
         String ready;
         int frames;
         int sample_bit;
         int sample_rate;
+
+        /**
+         * "codec_id" : 0, # H264 = 0, H265 = 1, AAC = 2, G711A = 3, G711U = 4 "codec_id_name" :
+         * "CodecH264", # 编码类型名称 "codec_type" : 0, # Video = 0, Audio = 1 "fps" : 59, # 视频fps
+         * "frames" : 1119, #累计接收帧数，不包含sei/aud/sps/pps等不能解码的帧 "gop_interval_ms" : 1993,
+         * #gop间隔时间，单位毫秒 "gop_size" : 60, #gop大小，单位帧数 "key_frames" : 21, #累计接收关键帧数 "height" : 720, #
+         * 视频高 "ready" : true, # 轨道是否准备就绪 "width" : 1280 # 视频宽
+         */
+        int gop_interval_ms;
+
+        int gop_size;
+        int key_frames;
+        int height;
+        int width;
     }
 }

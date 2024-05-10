@@ -1,8 +1,8 @@
 package com.spyker.framework.third.zlmediakit.action;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
+import com.google.gson.Gson;
 import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.third.zlmediakit.model.OpGetMediaListResult;
 
 import jodd.util.StringUtil;
 
@@ -29,7 +29,7 @@ public class GetMediaListAction {
 
     @Autowired private RestTemplate restTemplate;
 
-    public JSONObject execute(String vhost, String app, String stream) {
+    public OpGetMediaListResult execute(String vhost, String app, String stream) {
 
         String postUrl =
                 "http://"
@@ -63,12 +63,16 @@ public class GetMediaListAction {
 
         log.info("responseBody--->{}", responseBody);
 
-        JSONObject jsonObject = null;
+        OpGetMediaListResult result = null;
 
         if (StringUtils.isNotBlank(responseBody)) {
-            jsonObject = JSON.parseObject(responseBody);
+            Gson gson = new Gson();
+
+            result = gson.fromJson(responseBody, OpGetMediaListResult.class);
+
+            log.info("opGetMediaListResult--->{}", result);
         }
 
-        return jsonObject;
+        return result;
     }
 }

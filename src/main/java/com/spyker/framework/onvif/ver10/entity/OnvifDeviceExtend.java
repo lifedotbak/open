@@ -1,6 +1,5 @@
 package com.spyker.framework.onvif.ver10.entity;
 
-import lombok.Getter;
 
 /**
  * java 17 record 记录类
@@ -10,7 +9,6 @@ import lombok.Getter;
  * @param onvifUserName
  * @param onvifPassword
  */
-@Getter
 public record OnvifDeviceExtend(
         String ip, int onvifPort, String onvifUserName, String onvifPassword) {
 
