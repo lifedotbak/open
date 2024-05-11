@@ -5,6 +5,7 @@ import com.spyker.iot.vmp.gb28181.bean.Device;
 import com.spyker.iot.vmp.gb28181.bean.DeviceChannel;
 import com.spyker.iot.vmp.gb28181.bean.SyncStatus;
 import com.spyker.iot.vmp.storager.IVideoManagerStorage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -89,11 +90,7 @@ public class CatalogDataCatch {
         syncStatus.setCurrent(catalogData.getChannelList().size());
         syncStatus.setTotal(catalogData.getTotal());
         syncStatus.setErrorMsg(catalogData.getErrorMsg());
-        if (catalogData.getStatus().equals(CatalogData.CatalogDataStatus.end)) {
-            syncStatus.setSyncIng(false);
-        } else {
-            syncStatus.setSyncIng(true);
-        }
+        syncStatus.setSyncIng(!catalogData.getStatus().equals(CatalogData.CatalogDataStatus.end));
         return syncStatus;
     }
 

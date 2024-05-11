@@ -1,10 +1,10 @@
 package com.spyker.iot.vmp.gb28181.transmit.event.request;
 
 import com.google.common.primitives.Bytes;
-
 import com.spyker.iot.vmp.gb28181.bean.ParentPlatform;
 import com.spyker.iot.vmp.gb28181.transmit.SIPSender;
 import com.spyker.iot.vmp.gb28181.utils.SipUtils;
+
 import gov.nist.javax.sip.message.SIPRequest;
 import gov.nist.javax.sip.message.SIPResponse;
 

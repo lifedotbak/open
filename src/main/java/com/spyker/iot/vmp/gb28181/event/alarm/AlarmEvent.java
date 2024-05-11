@@ -1,6 +1,7 @@
 package com.spyker.iot.vmp.gb28181.event.alarm;
 
 import com.spyker.iot.vmp.gb28181.bean.DeviceAlarm;
+
 import org.springframework.context.ApplicationEvent;
 
 /**

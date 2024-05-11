@@ -3,6 +3,7 @@ package com.spyker.iot.vmp.jt1078.config;
 import com.spyker.iot.vmp.jt1078.cmd.JT1078Template;
 import com.spyker.iot.vmp.jt1078.proc.response.J9101;
 import com.spyker.iot.vmp.vmanager.bean.WVPResult;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

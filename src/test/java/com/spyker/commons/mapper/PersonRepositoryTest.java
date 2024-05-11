@@ -15,12 +15,12 @@ import java.util.Optional;
 
 public class PersonRepositoryTest extends BaseTest {
 
-    @Autowired private PersonTestRepository personTestRepository;
-
     @Autowired Deque<Object> deque;
 
     @Resource(name = "redisTemplate")
     HashOperations hashOperations;
+
+    @Autowired private PersonTestRepository personTestRepository;
 
     @Test
     public void test() {

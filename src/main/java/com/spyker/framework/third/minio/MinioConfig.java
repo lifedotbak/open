@@ -2,16 +2,18 @@ package com.spyker.framework.third.minio;
 
 import io.minio.MinioClient;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 
 @ConditionalOnClass(MinioProperties.class)
 @AutoConfiguration
+@RequiredArgsConstructor
 public class MinioConfig {
 
-    @Autowired private MinioProperties minioProperties;
+    private final MinioProperties minioProperties;
 
     @Bean
     public MinioClient minioClient() {

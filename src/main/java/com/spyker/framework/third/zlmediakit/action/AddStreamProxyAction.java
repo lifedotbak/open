@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
 import com.spyker.framework.third.zlmediakit.model.OpResult;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -23,11 +23,14 @@ import java.util.Map;
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class AddStreamProxyAction {
 
     private static final String method = "/index/api/addStreamProxy";
-    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
-    @Autowired private RestTemplate restTemplate;
+
+    private final ZLMediaKitProperties zlMediaKitProperties;
+
+    private final RestTemplate restTemplate;
 
     public OpResult execute(String vhost, String app, String stream, String url) {
 

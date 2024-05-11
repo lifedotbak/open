@@ -6,10 +6,10 @@ import com.spyker.framework.third.zlmediakit.model.OpGetMediaListResult;
 
 import jodd.util.StringUtil;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -21,13 +21,14 @@ import java.util.Map;
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class GetMediaListAction {
 
     private static final String method = "/index/api/getMediaList";
 
-    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
+    private final ZLMediaKitProperties zlMediaKitProperties;
 
-    @Autowired private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public OpGetMediaListResult execute(String vhost, String app, String stream) {
 

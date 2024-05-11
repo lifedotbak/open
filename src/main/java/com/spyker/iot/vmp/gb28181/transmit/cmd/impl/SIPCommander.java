@@ -840,19 +840,32 @@ public class SIPCommander implements ISIPCommander {
                 });
         //
 
-        String content = "v=0\r\n" +
-                "o=" + channelId + " 0 0 IN IP4 " + mediaServerItem.getSdpIp() + "\r\n" +
-                "s=Talk\r\n" +
-                "c=IN IP4 " + mediaServerItem.getSdpIp() + "\r\n" +
-                "t=0 0\r\n" +
-                "m=audio " + sendRtpItem.getPort() + " TCP/RTP/AVP 8\r\n" +
-                "a=setup:passive\r\n" +
-                "a=connection:new\r\n" +
-                "a=sendrecv\r\n" +
-                "a=rtpmap:8 PCMA/8000\r\n" +
-                "y=" + sendRtpItem.getSsrc() + "\r\n" + // ssrc
-                // f字段:f= v/编码格式/分辨率/帧率/码率类型/码率大小a/编码格式/码率大小/采样率
-                "f=v/////a/1/8/1" + "\r\n";
+        String content =
+                "v=0\r\n"
+                        + "o="
+                        + channelId
+                        + " 0 0 IN IP4 "
+                        + mediaServerItem.getSdpIp()
+                        + "\r\n"
+                        + "s=Talk\r\n"
+                        + "c=IN IP4 "
+                        + mediaServerItem.getSdpIp()
+                        + "\r\n"
+                        + "t=0 0\r\n"
+                        + "m=audio "
+                        + sendRtpItem.getPort()
+                        + " TCP/RTP/AVP 8\r\n"
+                        + "a=setup:passive\r\n"
+                        + "a=connection:new\r\n"
+                        + "a=sendrecv\r\n"
+                        + "a=rtpmap:8 PCMA/8000\r\n"
+                        + "y="
+                        + sendRtpItem.getSsrc()
+                        + "\r\n"
+                        + // ssrc
+                        // f字段:f= v/编码格式/分辨率/帧率/码率类型/码率大小a/编码格式/码率大小/采样率
+                        "f=v/////a/1/8/1"
+                        + "\r\n";
 
         Request request =
                 headerProvider.createInviteRequest(
@@ -1353,12 +1366,19 @@ public class SIPCommander implements ISIPCommander {
             throws InvalidArgumentException, SipException, ParseException {
 
         String charset = device.getCharset();
-        String catalogXml = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\r\n" +
-                "<Query>\r\n" +
-                "<CmdType>DeviceStatus</CmdType>\r\n" +
-                "<SN>" + (int) ((Math.random() * 9 + 1) * 100000) + "</SN>\r\n" +
-                "<DeviceID>" + device.getDeviceId() + "</DeviceID>\r\n" +
-                "</Query>\r\n";
+        String catalogXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + charset
+                        + "\"?>\r\n"
+                        + "<Query>\r\n"
+                        + "<CmdType>DeviceStatus</CmdType>\r\n"
+                        + "<SN>"
+                        + (int) ((Math.random() * 9 + 1) * 100000)
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + device.getDeviceId()
+                        + "</DeviceID>\r\n"
+                        + "</Query>\r\n";
 
         Request request =
                 headerProvider.createMessageRequest(
@@ -1866,9 +1886,8 @@ public class SIPCommander implements ISIPCommander {
     @Override
     public void playPauseCmd(Device device, StreamInfo streamInfo)
             throws InvalidArgumentException, ParseException, SipException {
-        String content = "PAUSE RTSP/1.0\r\n" +
-                "CSeq: " + getInfoCseq() + "\r\n" +
-                "PauseTime: now\r\n";
+        String content =
+                "PAUSE RTSP/1.0\r\n" + "CSeq: " + getInfoCseq() + "\r\n" + "PauseTime: now\r\n";
 
         playbackControlCmd(device, streamInfo, content, null, null);
     }
@@ -1877,9 +1896,8 @@ public class SIPCommander implements ISIPCommander {
     @Override
     public void playResumeCmd(Device device, StreamInfo streamInfo)
             throws InvalidArgumentException, ParseException, SipException {
-        String content = "PLAY RTSP/1.0\r\n" +
-                "CSeq: " + getInfoCseq() + "\r\n" +
-                "Range: npt=now-\r\n";
+        String content =
+                "PLAY RTSP/1.0\r\n" + "CSeq: " + getInfoCseq() + "\r\n" + "Range: npt=now-\r\n";
 
         playbackControlCmd(device, streamInfo, content, null, null);
     }
@@ -1888,9 +1906,14 @@ public class SIPCommander implements ISIPCommander {
     @Override
     public void playSeekCmd(Device device, StreamInfo streamInfo, long seekTime)
             throws InvalidArgumentException, ParseException, SipException {
-        String content = "PLAY RTSP/1.0\r\n" +
-                "CSeq: " + getInfoCseq() + "\r\n" +
-                "Range: npt=" + Math.abs(seekTime) + "-\r\n";
+        String content =
+                "PLAY RTSP/1.0\r\n"
+                        + "CSeq: "
+                        + getInfoCseq()
+                        + "\r\n"
+                        + "Range: npt="
+                        + Math.abs(seekTime)
+                        + "-\r\n";
 
         playbackControlCmd(device, streamInfo, content, null, null);
     }
@@ -1899,9 +1922,14 @@ public class SIPCommander implements ISIPCommander {
     @Override
     public void playSpeedCmd(Device device, StreamInfo streamInfo, Double speed)
             throws InvalidArgumentException, ParseException, SipException {
-        String content = "PLAY RTSP/1.0\r\n" +
-                "CSeq: " + getInfoCseq() + "\r\n" +
-                "Scale: " + String.format("%.6f", speed) + "\r\n";
+        String content =
+                "PLAY RTSP/1.0\r\n"
+                        + "CSeq: "
+                        + getInfoCseq()
+                        + "\r\n"
+                        + "Scale: "
+                        + String.format("%.6f", speed)
+                        + "\r\n";
 
         playbackControlCmd(device, streamInfo, content, null, null);
     }
@@ -1963,25 +1991,42 @@ public class SIPCommander implements ISIPCommander {
                 deviceAlarm.getLatitude());
 
         String characterSet = device.getCharset();
-        String deviceStatusXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Notify>\r\n" +
-                "<CmdType>Alarm</CmdType>\r\n" +
-                "<SN>" + (int) ((Math.random() * 9 + 1) * 100000) + "</SN>\r\n" +
-                "<DeviceID>" + deviceAlarm.getChannelId() + "</DeviceID>\r\n" +
-                "<AlarmPriority>" + deviceAlarm.getAlarmPriority() + "</AlarmPriority>\r\n" +
-                "<AlarmMethod>" + deviceAlarm.getAlarmMethod() + "</AlarmMethod>\r\n" +
-                "<AlarmTime>"
-                + DateUtil.yyyy_MM_dd_HH_mm_ssToISO8601(deviceAlarm.getAlarmTime())
-                + "</AlarmTime>\r\n" +
-                "<AlarmDescription>"
-                + deviceAlarm.getAlarmDescription()
-                + "</AlarmDescription>\r\n" +
-                "<Longitude>" + deviceAlarm.getLongitude() + "</Longitude>\r\n" +
-                "<Latitude>" + deviceAlarm.getLatitude() + "</Latitude>\r\n" +
-                "<info>\r\n" +
-                "<AlarmType>" + deviceAlarm.getAlarmType() + "</AlarmType>\r\n" +
-                "</info>\r\n" +
-                "</Notify>\r\n";
+        String deviceStatusXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Notify>\r\n"
+                        + "<CmdType>Alarm</CmdType>\r\n"
+                        + "<SN>"
+                        + (int) ((Math.random() * 9 + 1) * 100000)
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + deviceAlarm.getChannelId()
+                        + "</DeviceID>\r\n"
+                        + "<AlarmPriority>"
+                        + deviceAlarm.getAlarmPriority()
+                        + "</AlarmPriority>\r\n"
+                        + "<AlarmMethod>"
+                        + deviceAlarm.getAlarmMethod()
+                        + "</AlarmMethod>\r\n"
+                        + "<AlarmTime>"
+                        + DateUtil.yyyy_MM_dd_HH_mm_ssToISO8601(deviceAlarm.getAlarmTime())
+                        + "</AlarmTime>\r\n"
+                        + "<AlarmDescription>"
+                        + deviceAlarm.getAlarmDescription()
+                        + "</AlarmDescription>\r\n"
+                        + "<Longitude>"
+                        + deviceAlarm.getLongitude()
+                        + "</Longitude>\r\n"
+                        + "<Latitude>"
+                        + deviceAlarm.getLatitude()
+                        + "</Latitude>\r\n"
+                        + "<info>\r\n"
+                        + "<AlarmType>"
+                        + deviceAlarm.getAlarmType()
+                        + "</AlarmType>\r\n"
+                        + "</info>\r\n"
+                        + "</Notify>\r\n";
 
         Request request =
                 headerProvider.createMessageRequest(

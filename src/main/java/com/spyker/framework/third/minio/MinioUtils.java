@@ -8,9 +8,9 @@ import io.minio.http.Method;
 
 import jakarta.validation.constraints.NotNull;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
@@ -21,11 +21,12 @@ import java.io.InputStream;
 @Slf4j
 @AutoConfiguration
 @ConditionalOnClass({MinioClient.class, MinioProperties.class})
+@RequiredArgsConstructor
 public class MinioUtils {
 
-    @Autowired private MinioClient minioClient;
+    private final MinioClient minioClient;
 
-    @Autowired private MinioProperties minioProperties;
+    private final MinioProperties minioProperties;
 
     public String getBucket() {
         return minioProperties.getBucket();

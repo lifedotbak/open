@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
 import com.spyker.framework.third.zlmediakit.model.OpResult;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -18,11 +18,14 @@ import java.util.Map;
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class DelStreamProxyAction {
 
     private static final String method = "/index/api/delStreamProxy";
-    @Autowired private ZLMediaKitProperties zlMediaKitProperties;
-    @Autowired private RestTemplate restTemplate;
+
+    private final ZLMediaKitProperties zlMediaKitProperties;
+
+    private final RestTemplate restTemplate;
 
     /**
      * 关闭ffmpeg拉流代理

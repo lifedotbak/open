@@ -1,6 +1,7 @@
 package com.spyker.iot.vmp.jt1078.proc.response;
 
 import com.spyker.iot.vmp.jt1078.annotation.MsgId;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.util.CharsetUtil;

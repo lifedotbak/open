@@ -2,6 +2,7 @@ package com.spyker.iot.vmp.jt1078.codec.encode;
 
 import com.spyker.iot.vmp.jt1078.proc.response.Rs;
 import com.spyker.iot.vmp.jt1078.session.Session;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;

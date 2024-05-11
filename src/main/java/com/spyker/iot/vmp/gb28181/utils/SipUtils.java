@@ -5,6 +5,7 @@ import com.spyker.iot.vmp.gb28181.bean.Gb28181Sdp;
 import com.spyker.iot.vmp.gb28181.bean.RemoteAddressInfo;
 import com.spyker.iot.vmp.utils.DateUtil;
 import com.spyker.iot.vmp.utils.GitUtil;
+
 import gov.nist.javax.sip.address.AddressImpl;
 import gov.nist.javax.sip.address.SipUri;
 import gov.nist.javax.sip.header.Subject;
@@ -245,7 +246,7 @@ public class SipUtils {
         if (mediaDescriptionIndex == 0 && ssrcIndex == 0) {
             sdp = SdpFactory.getInstance().createSessionDescription(sdpStr);
         } else {
-            String lines[] = sdpStr.split("\\r?\\n");
+            String[] lines = sdpStr.split("\\r?\\n");
             StringBuilder sdpBuffer = new StringBuilder();
             for (String line : lines) {
                 if (line.trim().startsWith("y=")) {
@@ -268,7 +269,7 @@ public class SipUtils {
         if (ssrcIndex == 0) {
             return null;
         }
-        String lines[] = sdpStr.split("\\r?\\n");
+        String[] lines = sdpStr.split("\\r?\\n");
         for (String line : lines) {
             if (line.trim().startsWith("y=")) {
                 return line.substring(2);

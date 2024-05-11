@@ -1,6 +1,5 @@
 package com.spyker.framework.onvif.ver10.entity;
 
-
 /**
  * java 17 record 记录类
  *

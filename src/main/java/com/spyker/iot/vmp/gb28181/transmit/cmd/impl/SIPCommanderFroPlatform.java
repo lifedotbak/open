@@ -186,15 +186,20 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
             SipSubscribe.Event okEvent)
             throws SipException, InvalidArgumentException, ParseException {
         String characterSet = parentPlatform.getCharacterSet();
-        String keepaliveXml = "<?xml version=\"1.0\" encoding=\"" +
-                characterSet +
-                "\"?>\r\n" +
-                "<Notify>\r\n" +
-                "<CmdType>Keepalive</CmdType>\r\n" +
-                "<SN>" + (int) ((Math.random() * 9 + 1) * 100000) + "</SN>\r\n" +
-                "<DeviceID>" + parentPlatform.getDeviceGBId() + "</DeviceID>\r\n" +
-                "<Status>OK</Status>\r\n" +
-                "</Notify>\r\n";
+        String keepaliveXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Notify>\r\n"
+                        + "<CmdType>Keepalive</CmdType>\r\n"
+                        + "<SN>"
+                        + (int) ((Math.random() * 9 + 1) * 100000)
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + parentPlatform.getDeviceGBId()
+                        + "</DeviceID>\r\n"
+                        + "<Status>OK</Status>\r\n"
+                        + "</Notify>\r\n";
 
         CallIdHeader callIdHeader =
                 sipSender.getNewCallIdHeader(
@@ -242,11 +247,7 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
 
         Request request =
                 headerProviderPlatformProvider.createMessageRequest(
-                        parentPlatform,
-                        catalogXml,
-                        fromTag,
-                        SipUtils.getNewViaTag(),
-                        callIdHeader);
+                        parentPlatform, catalogXml, fromTag, SipUtils.getNewViaTag(), callIdHeader);
         sipSender.transmitRequest(parentPlatform.getDeviceIp(), request);
     }
 
@@ -613,17 +614,32 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
         String model = device == null ? "platform" : device.getModel();
         String firmware = device == null ? gitUtil.getBuildVersion() : device.getFirmware();
         String characterSet = parentPlatform.getCharacterSet();
-        String deviceInfoXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Response>\r\n" +
-                "<CmdType>DeviceInfo</CmdType>\r\n" +
-                "<SN>" + sn + "</SN>\r\n" +
-                "<DeviceID>" + deviceId + "</DeviceID>\r\n" +
-                "<DeviceName>" + deviceName + "</DeviceName>\r\n" +
-                "<Manufacturer>" + manufacturer + "</Manufacturer>\r\n" +
-                "<Model>" + model + "</Model>\r\n" +
-                "<Firmware>" + firmware + "</Firmware>\r\n" +
-                "<Result>OK</Result>\r\n" +
-                "</Response>\r\n";
+        String deviceInfoXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Response>\r\n"
+                        + "<CmdType>DeviceInfo</CmdType>\r\n"
+                        + "<SN>"
+                        + sn
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + deviceId
+                        + "</DeviceID>\r\n"
+                        + "<DeviceName>"
+                        + deviceName
+                        + "</DeviceName>\r\n"
+                        + "<Manufacturer>"
+                        + manufacturer
+                        + "</Manufacturer>\r\n"
+                        + "<Model>"
+                        + model
+                        + "</Model>\r\n"
+                        + "<Firmware>"
+                        + firmware
+                        + "</Firmware>\r\n"
+                        + "<Result>OK</Result>\r\n"
+                        + "</Response>\r\n";
 
         CallIdHeader callIdHeader =
                 sipSender.getNewCallIdHeader(
@@ -660,15 +676,24 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
         }
         String statusStr = (status) ? "ONLINE" : "OFFLINE";
         String characterSet = parentPlatform.getCharacterSet();
-        String deviceStatusXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Response>\r\n" +
-                "<CmdType>DeviceStatus</CmdType>\r\n" +
-                "<SN>" + sn + "</SN>\r\n" +
-                "<DeviceID>" + channelId + "</DeviceID>\r\n" +
-                "<Result>OK</Result>\r\n" +
-                "<Online>" + statusStr + "</Online>\r\n" +
-                "<Status>OK</Status>\r\n" +
-                "</Response>\r\n";
+        String deviceStatusXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Response>\r\n"
+                        + "<CmdType>DeviceStatus</CmdType>\r\n"
+                        + "<SN>"
+                        + sn
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + channelId
+                        + "</DeviceID>\r\n"
+                        + "<Result>OK</Result>\r\n"
+                        + "<Online>"
+                        + statusStr
+                        + "</Online>\r\n"
+                        + "<Status>OK</Status>\r\n"
+                        + "</Response>\r\n";
 
         CallIdHeader callIdHeader =
                 sipSender.getNewCallIdHeader(
@@ -705,18 +730,37 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
         }
 
         String characterSet = parentPlatform.getCharacterSet();
-        String deviceStatusXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Notify>\r\n" +
-                "<CmdType>MobilePosition</CmdType>\r\n" +
-                "<SN>" + (int) ((Math.random() * 9 + 1) * 100000) + "</SN>\r\n" +
-                "<DeviceID>" + gpsMsgInfo.getId() + "</DeviceID>\r\n" +
-                "<Time>" + gpsMsgInfo.getTime() + "</Time>\r\n" +
-                "<Longitude>" + gpsMsgInfo.getLng() + "</Longitude>\r\n" +
-                "<Latitude>" + gpsMsgInfo.getLat() + "</Latitude>\r\n" +
-                "<Speed>" + gpsMsgInfo.getSpeed() + "</Speed>\r\n" +
-                "<Direction>" + gpsMsgInfo.getDirection() + "</Direction>\r\n" +
-                "<Altitude>" + gpsMsgInfo.getAltitude() + "</Altitude>\r\n" +
-                "</Notify>\r\n";
+        String deviceStatusXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Notify>\r\n"
+                        + "<CmdType>MobilePosition</CmdType>\r\n"
+                        + "<SN>"
+                        + (int) ((Math.random() * 9 + 1) * 100000)
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + gpsMsgInfo.getId()
+                        + "</DeviceID>\r\n"
+                        + "<Time>"
+                        + gpsMsgInfo.getTime()
+                        + "</Time>\r\n"
+                        + "<Longitude>"
+                        + gpsMsgInfo.getLng()
+                        + "</Longitude>\r\n"
+                        + "<Latitude>"
+                        + gpsMsgInfo.getLat()
+                        + "</Latitude>\r\n"
+                        + "<Speed>"
+                        + gpsMsgInfo.getSpeed()
+                        + "</Speed>\r\n"
+                        + "<Direction>"
+                        + gpsMsgInfo.getDirection()
+                        + "</Direction>\r\n"
+                        + "<Altitude>"
+                        + gpsMsgInfo.getAltitude()
+                        + "</Altitude>\r\n"
+                        + "</Notify>\r\n";
 
         sendNotify(
                 parentPlatform,
@@ -743,25 +787,42 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
                 deviceAlarm.getLatitude(),
                 JSON.toJSONString(deviceAlarm));
         String characterSet = parentPlatform.getCharacterSet();
-        String deviceStatusXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Notify>\r\n" +
-                "<CmdType>Alarm</CmdType>\r\n" +
-                "<SN>" + (int) ((Math.random() * 9 + 1) * 100000) + "</SN>\r\n" +
-                "<DeviceID>" + deviceAlarm.getChannelId() + "</DeviceID>\r\n" +
-                "<AlarmPriority>" + deviceAlarm.getAlarmPriority() + "</AlarmPriority>\r\n" +
-                "<AlarmMethod>" + deviceAlarm.getAlarmMethod() + "</AlarmMethod>\r\n" +
-                "<AlarmTime>"
-                + DateUtil.yyyy_MM_dd_HH_mm_ssToISO8601(deviceAlarm.getAlarmTime())
-                + "</AlarmTime>\r\n" +
-                "<AlarmDescription>"
-                + deviceAlarm.getAlarmDescription()
-                + "</AlarmDescription>\r\n" +
-                "<Longitude>" + deviceAlarm.getLongitude() + "</Longitude>\r\n" +
-                "<Latitude>" + deviceAlarm.getLatitude() + "</Latitude>\r\n" +
-                "<info>\r\n" +
-                "<AlarmType>" + deviceAlarm.getAlarmType() + "</AlarmType>\r\n" +
-                "</info>\r\n" +
-                "</Notify>\r\n";
+        String deviceStatusXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Notify>\r\n"
+                        + "<CmdType>Alarm</CmdType>\r\n"
+                        + "<SN>"
+                        + (int) ((Math.random() * 9 + 1) * 100000)
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + deviceAlarm.getChannelId()
+                        + "</DeviceID>\r\n"
+                        + "<AlarmPriority>"
+                        + deviceAlarm.getAlarmPriority()
+                        + "</AlarmPriority>\r\n"
+                        + "<AlarmMethod>"
+                        + deviceAlarm.getAlarmMethod()
+                        + "</AlarmMethod>\r\n"
+                        + "<AlarmTime>"
+                        + DateUtil.yyyy_MM_dd_HH_mm_ssToISO8601(deviceAlarm.getAlarmTime())
+                        + "</AlarmTime>\r\n"
+                        + "<AlarmDescription>"
+                        + deviceAlarm.getAlarmDescription()
+                        + "</AlarmDescription>\r\n"
+                        + "<Longitude>"
+                        + deviceAlarm.getLongitude()
+                        + "</Longitude>\r\n"
+                        + "<Latitude>"
+                        + deviceAlarm.getLatitude()
+                        + "</Latitude>\r\n"
+                        + "<info>\r\n"
+                        + "<AlarmType>"
+                        + deviceAlarm.getAlarmType()
+                        + "</AlarmType>\r\n"
+                        + "</info>\r\n"
+                        + "</Notify>\r\n";
 
         CallIdHeader callIdHeader =
                 sipSender.getNewCallIdHeader(
@@ -1112,13 +1173,20 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
         }
 
         String characterSet = parentPlatform.getCharacterSet();
-        String mediaStatusXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Notify>\r\n" +
-                "<CmdType>MediaStatus</CmdType>\r\n" +
-                "<SN>" + (int) ((Math.random() * 9 + 1) * 100000) + "</SN>\r\n" +
-                "<DeviceID>" + sendRtpItem.getChannelId() + "</DeviceID>\r\n" +
-                "<NotifyType>121</NotifyType>\r\n" +
-                "</Notify>\r\n";
+        String mediaStatusXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Notify>\r\n"
+                        + "<CmdType>MediaStatus</CmdType>\r\n"
+                        + "<SN>"
+                        + (int) ((Math.random() * 9 + 1) * 100000)
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + sendRtpItem.getChannelId()
+                        + "</DeviceID>\r\n"
+                        + "<NotifyType>121</NotifyType>\r\n"
+                        + "</Notify>\r\n";
 
         SIPRequest messageRequest =
                 (SIPRequest)
@@ -1215,13 +1283,22 @@ public class SIPCommanderFroPlatform implements ISIPCommanderForPlatform {
             return;
         }
         String characterSet = platform.getCharacterSet();
-        String mediaStatusXml = "<?xml version=\"1.0\" encoding=\"" + characterSet + "\"?>\r\n" +
-                "<Response>\r\n" +
-                "<CmdType>Broadcast</CmdType>\r\n" +
-                "<SN>" + sn + "</SN>\r\n" +
-                "<DeviceID>" + deviceChannel.getChannelId() + "</DeviceID>\r\n" +
-                "<Result>" + (result ? "OK" : "ERROR") + "</Result>\r\n" +
-                "</Response>\r\n";
+        String mediaStatusXml =
+                "<?xml version=\"1.0\" encoding=\""
+                        + characterSet
+                        + "\"?>\r\n"
+                        + "<Response>\r\n"
+                        + "<CmdType>Broadcast</CmdType>\r\n"
+                        + "<SN>"
+                        + sn
+                        + "</SN>\r\n"
+                        + "<DeviceID>"
+                        + deviceChannel.getChannelId()
+                        + "</DeviceID>\r\n"
+                        + "<Result>"
+                        + (result ? "OK" : "ERROR")
+                        + "</Result>\r\n"
+                        + "</Response>\r\n";
 
         CallIdHeader callIdHeader =
                 sipSender.getNewCallIdHeader(platform.getDeviceIp(), platform.getTransport());

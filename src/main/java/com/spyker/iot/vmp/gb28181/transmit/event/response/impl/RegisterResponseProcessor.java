@@ -11,6 +11,7 @@ import com.spyker.iot.vmp.service.IPlatformService;
 import com.spyker.iot.vmp.storager.IRedisCatchStorage;
 import com.spyker.iot.vmp.storager.IVideoManagerStorage;
 import com.spyker.iot.vmp.storager.dao.dto.PlatformRegisterInfo;
+
 import gov.nist.javax.sip.message.SIPResponse;
 
 import org.slf4j.Logger;

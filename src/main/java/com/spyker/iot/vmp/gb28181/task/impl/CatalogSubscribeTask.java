@@ -28,11 +28,9 @@ public class CatalogSubscribeTask implements ISubscribeTask {
     private final Logger logger = LoggerFactory.getLogger(CatalogSubscribeTask.class);
     private final ISIPCommander sipCommander;
     private final Device device;
-    private SIPRequest request;
-
     private final DynamicTask dynamicTask;
-
     private final String taskKey = "catalog-subscribe-timeout";
+    private SIPRequest request;
 
     public CatalogSubscribeTask(
             Device device, ISIPCommander sipCommander, DynamicTask dynamicTask) {

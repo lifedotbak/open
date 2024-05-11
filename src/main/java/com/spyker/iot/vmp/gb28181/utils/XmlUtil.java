@@ -2,13 +2,13 @@ package com.spyker.iot.vmp.gb28181.utils;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-
 import com.spyker.iot.vmp.common.CivilCodePo;
 import com.spyker.iot.vmp.gb28181.bean.Device;
 import com.spyker.iot.vmp.gb28181.bean.DeviceChannel;
 import com.spyker.iot.vmp.gb28181.event.subscribe.catalog.CatalogEvent;
 import com.spyker.iot.vmp.utils.CivilCodeUtil;
 import com.spyker.iot.vmp.utils.DateUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.dom4j.Attribute;
@@ -35,7 +35,7 @@ import javax.sip.message.Request;
 /** 基于dom4j的工具包 */
 public class XmlUtil {
     /** 日志服务 */
-    private static Logger logger = LoggerFactory.getLogger(XmlUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(XmlUtil.class);
 
     /**
      * 解析XML为Document对象
@@ -180,8 +180,7 @@ public class XmlUtil {
                 Object o = json.get(e.getName());
                 if (o != null) {
                     JSONArray jsona = null;
-                    if (o instanceof JSONObject) { // 如果此元素已存在,则转为jsonArray
-                        JSONObject jsono = (JSONObject) o;
+                    if (o instanceof JSONObject jsono) { // 如果此元素已存在,则转为jsonArray
                         json.remove(e.getName());
                         jsona = new JSONArray();
                         jsona.add(jsono);
@@ -278,11 +277,7 @@ public class XmlUtil {
             }
 
             int code = Integer.parseInt(channelId.substring(10, 13));
-            if (code == 136 || code == 137 || code == 138) {
-                deviceChannel.setHasAudio(true);
-            } else {
-                deviceChannel.setHasAudio(false);
-            }
+            deviceChannel.setHasAudio(code == 136 || code == 137 || code == 138);
             // 设备厂商
             String manufacturer = getText(itemDevice, "Manufacturer");
             // 设备型号

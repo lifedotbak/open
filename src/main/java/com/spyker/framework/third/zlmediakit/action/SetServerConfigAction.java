@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
 import com.spyker.framework.third.zlmediakit.model.OpResult;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -19,11 +19,12 @@ import java.util.Map;
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class SetServerConfigAction {
 
     private static final String method = "/index/api/setServerConfig";
 
-    @Autowired private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @Value("${zlmediakit.ip}")
     private String ip;

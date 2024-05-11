@@ -2,6 +2,7 @@ package com.spyker.iot.vmp.conf;
 
 import com.spyker.iot.vmp.common.VersionPo;
 import com.spyker.iot.vmp.utils.GitUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

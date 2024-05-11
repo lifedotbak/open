@@ -2,7 +2,6 @@ package com.spyker.iot.vmp.gb28181.transmit.event.request.impl;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-
 import com.spyker.iot.vmp.common.InviteSessionType;
 import com.spyker.iot.vmp.common.StreamInfo;
 import com.spyker.iot.vmp.common.VideoManagerConstants;
@@ -41,6 +40,7 @@ import com.spyker.iot.vmp.service.redisMsg.RedisPushStreamResponseListener;
 import com.spyker.iot.vmp.storager.IRedisCatchStorage;
 import com.spyker.iot.vmp.storager.IVideoManagerStorage;
 import com.spyker.iot.vmp.utils.DateUtil;
+
 import gov.nist.javax.sdp.TimeDescriptionImpl;
 import gov.nist.javax.sdp.fields.TimeField;
 import gov.nist.javax.sdp.fields.URIField;
@@ -1589,7 +1589,7 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent
             logger.warn("来自无效设备/平台的请求");
             try {
                 responseAck(request, Response.BAD_REQUEST);
-                ; // 不支持的格式，发415
+                // 不支持的格式，发415
             } catch (SipException | InvalidArgumentException | ParseException e) {
                 logger.error("[命令发送失败] invite 来自无效设备/平台的请求， {}", e.getMessage());
             }

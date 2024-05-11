@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
 import com.spyker.framework.third.zlmediakit.model.OpResult;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -23,13 +23,14 @@ import java.util.Map;
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class AddFFmpegSourceAction {
 
     private static final String method = "/index/api/addFFmpegSource";
 
-    @Autowired private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    @Autowired private ZLMediaKitProperties zLMediaKitProperties;
+    private final ZLMediaKitProperties zLMediaKitProperties;
 
     /**
      * 通过fork FFmpeg进程的方式拉流代理，支持任意协议

@@ -3,6 +3,7 @@ package com.spyker.iot.vmp.jt1078.proc.factory;
 import com.spyker.iot.vmp.jt1078.annotation.MsgId;
 import com.spyker.iot.vmp.jt1078.proc.request.Re;
 import com.spyker.iot.vmp.jt1078.util.ClassUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
