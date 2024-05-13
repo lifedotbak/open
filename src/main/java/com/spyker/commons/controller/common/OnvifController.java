@@ -1,11 +1,11 @@
 package com.spyker.commons.controller.common;
 
 import com.spyker.framework.onvif.OnvifUtils;
+import com.spyker.framework.onvif.ver10.entity.OnvifDeviceExtend;
 import com.spyker.framework.response.RestResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.ConnectException;
@@ -23,124 +23,189 @@ import javax.xml.soap.SOAPException;
 public class OnvifController {
 
     /**
-     * 拉远
+     * 双方向持续控制
      *
-     * @param ip
-     * @param userName
-     * @param password
      * @return
      * @throws SOAPException
      * @throws ConnectException
      */
-    @GetMapping("/zoom_out")
-    public RestResponse<?> zoom_out(
-            @RequestParam String ip, @RequestParam String userName, @RequestParam String password)
+    @GetMapping("/ptz_xy_c")
+    public RestResponse<?> ptz_xy_c(OnvifDeviceExtend onvifDeviceExtend, String op)
             throws SOAPException, ConnectException {
 
-        OnvifUtils utils = new OnvifUtils(ip, userName, password);
+        if (null != onvifDeviceExtend) {
+            OnvifUtils utils =
+                    new OnvifUtils(
+                            onvifDeviceExtend.ip(),
+                            onvifDeviceExtend.onvifUserName(),
+                            onvifDeviceExtend.onvifPassword());
 
-        utils.zoom_out();
+            if ("xy".equalsIgnoreCase(op)) {
+                utils.ptz_c(0.5f, 0.5f);
+            }
+
+            if ("x-y".equalsIgnoreCase(op)) {
+                utils.ptz_c(0.5f, -0.5f);
+            }
+
+            if ("-xy".equalsIgnoreCase(op)) {
+                utils.ptz_c(-0.5f, 0.5f);
+            }
+
+            if ("-x-y".equalsIgnoreCase(op)) {
+                utils.ptz_c(-0.5f, -0.5f);
+            }
+        }
 
         return RestResponse.success();
     }
 
     /**
-     * 拉近
+     * 双方向
      *
-     * @param ip
-     * @param userName
-     * @param password
      * @return
      * @throws SOAPException
      * @throws ConnectException
      */
-    @GetMapping("/zoom_in")
-    public RestResponse<?> zoom_in(
-            @RequestParam String ip, @RequestParam String userName, @RequestParam String password)
+    @GetMapping("/ptz_xy")
+    public RestResponse<?> ptz_xy(OnvifDeviceExtend onvifDeviceExtend, String op)
             throws SOAPException, ConnectException {
-        OnvifUtils utils = new OnvifUtils(ip, userName, password);
 
-        utils.zoom_in();
+        if (null != onvifDeviceExtend) {
+            OnvifUtils utils =
+                    new OnvifUtils(
+                            onvifDeviceExtend.ip(),
+                            onvifDeviceExtend.onvifUserName(),
+                            onvifDeviceExtend.onvifPassword());
+
+            /** 右上 */
+            if ("xy".equalsIgnoreCase(op)) {
+                utils.ptz(0.5f, 0.5f);
+            }
+
+            /** 右下 */
+            if ("x-y".equalsIgnoreCase(op)) {
+                utils.ptz(0.5f, -0.5f);
+            }
+
+            /** 左上 */
+            if ("-xy".equalsIgnoreCase(op)) {
+                utils.ptz(-0.5f, 0.5f);
+            }
+
+            /** 左下 */
+            if ("-x-y".equalsIgnoreCase(op)) {
+                utils.ptz(-0.5f, -0.5f);
+            }
+        }
+
         return RestResponse.success();
     }
 
     /**
-     * 左装
+     * 上下左右，放大缩小
      *
-     * @param ip
-     * @param userName
-     * @param password
      * @return
      * @throws SOAPException
      * @throws ConnectException
      */
-    @GetMapping("/ptz_left")
-    public RestResponse<?> ptz_left(
-            @RequestParam String ip, @RequestParam String userName, @RequestParam String password)
+    @GetMapping("/ptz")
+    public RestResponse<?> ptz(OnvifDeviceExtend onvifDeviceExtend, String op)
             throws SOAPException, ConnectException {
-        OnvifUtils utils = new OnvifUtils(ip, userName, password);
 
-        utils.ptz_left();
+        if (null != onvifDeviceExtend) {
+            OnvifUtils utils =
+                    new OnvifUtils(
+                            onvifDeviceExtend.ip(),
+                            onvifDeviceExtend.onvifUserName(),
+                            onvifDeviceExtend.onvifPassword());
+
+            if ("zoom_out".equalsIgnoreCase(op)) {
+                utils.zoom_out();
+            }
+
+            if ("zoom_in".equalsIgnoreCase(op)) {
+                utils.zoom_in();
+            }
+
+            if ("ptz_left".equalsIgnoreCase(op)) {
+                utils.ptz_left();
+            }
+
+            if ("ptz_right".equalsIgnoreCase(op)) {
+                utils.ptz_right();
+            }
+
+            if ("ptz_up".equalsIgnoreCase(op)) {
+                utils.ptz_up();
+            }
+
+            if ("ptz_down".equalsIgnoreCase(op)) {
+                utils.ptz_down();
+            }
+        }
+
         return RestResponse.success();
     }
 
     /**
-     * 右转
+     * 持续上下左右，放大缩小
      *
-     * @param ip
-     * @param userName
-     * @param password
-     * @return
      * @throws SOAPException
      * @throws ConnectException
      */
-    @GetMapping("/ptz_right")
-    public RestResponse<?> ptz_right(
-            @RequestParam String ip, @RequestParam String userName, @RequestParam String password)
+    @GetMapping("/ptz_c")
+    public RestResponse<?> ptz_c(OnvifDeviceExtend onvifDeviceExtend, String op)
             throws SOAPException, ConnectException {
-        OnvifUtils utils = new OnvifUtils(ip, userName, password);
 
-        utils.ptz_right();
+        if (null != onvifDeviceExtend) {
+            OnvifUtils utils =
+                    new OnvifUtils(
+                            onvifDeviceExtend.ip(),
+                            onvifDeviceExtend.onvifUserName(),
+                            onvifDeviceExtend.onvifPassword());
+
+            if ("zoom_out".equalsIgnoreCase(op)) {
+                utils.zoom_out_c();
+            }
+
+            if ("zoom_in".equalsIgnoreCase(op)) {
+                utils.zoom_in_c();
+            }
+
+            if ("ptz_left".equalsIgnoreCase(op)) {
+                utils.ptz_left_c();
+            }
+
+            if ("ptz_right".equalsIgnoreCase(op)) {
+                utils.ptz_right_c();
+            }
+
+            if ("ptz_up".equalsIgnoreCase(op)) {
+                utils.ptz_up_c();
+            }
+
+            if ("ptz_down".equalsIgnoreCase(op)) {
+                utils.ptz_down_c();
+            }
+        }
+
         return RestResponse.success();
     }
 
-    /**
-     * 上转
-     *
-     * @param ip
-     * @param userName
-     * @param password
-     * @return
-     * @throws SOAPException
-     * @throws ConnectException
-     */
-    @GetMapping("/up")
-    public RestResponse<?> up(
-            @RequestParam String ip, @RequestParam String userName, @RequestParam String password)
+    @GetMapping("/stop")
+    public RestResponse<?> stop(OnvifDeviceExtend onvifDeviceExtend)
             throws SOAPException, ConnectException {
-        OnvifUtils utils = new OnvifUtils(ip, userName, password);
 
-        utils.ptz_up();
-        return RestResponse.success();
-    }
+        if (null != onvifDeviceExtend) {
+            OnvifUtils utils =
+                    new OnvifUtils(
+                            onvifDeviceExtend.ip(),
+                            onvifDeviceExtend.onvifUserName(),
+                            onvifDeviceExtend.onvifPassword());
 
-    /**
-     * 下转
-     *
-     * @param ip
-     * @param userName
-     * @param password
-     * @return
-     * @throws SOAPException
-     * @throws ConnectException
-     */
-    @GetMapping("/down")
-    public RestResponse<?> down(
-            @RequestParam String ip, @RequestParam String userName, @RequestParam String password)
-            throws SOAPException, ConnectException {
-        OnvifUtils utils = new OnvifUtils(ip, userName, password);
-
-        utils.ptz_down();
+            utils.ptz_left();
+        }
         return RestResponse.success();
     }
 }

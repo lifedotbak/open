@@ -24,13 +24,116 @@ public class OnvifUtils {
     String userName;
     String password;
 
-    long continuousTime = 200;
+    long continuousTime = 500;
     float ptzSpeed = 0.2f;
 
     public OnvifUtils(String ip, String userName, String password) {
         this.ip = ip;
         this.userName = userName;
         this.password = password;
+    }
+
+    public void gotoHome() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.absoluteMove(token, 1f, 1f, 1f);
+    }
+
+    public void gotoPreset(String presetToken) throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.gotoPreset(presetToken, token);
+    }
+
+    public void ptz(float x, float y) throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, x, y, 0);
+
+        try {
+            Thread.sleep(continuousTime);
+        } catch (InterruptedException e) {
+            log.error("InterruptedException");
+        }
+
+        ptzDevices.stopMove(token);
+    }
+
+    public void ptz_c(float x, float y) throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, x, y, 0);
+    }
+
+    public void stop() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.stopMove(token);
     }
 
     /**
@@ -66,6 +169,25 @@ public class OnvifUtils {
         ptzDevices.stopMove(token);
     }
 
+    public void zoom_in_c() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, 0, 0, 0.5f);
+    }
+
     /**
      * 镜头拉远
      *
@@ -97,6 +219,25 @@ public class OnvifUtils {
         }
 
         ptzDevices.stopMove(token);
+    }
+
+    public void zoom_out_c() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, 0, 0, -0.5f);
     }
 
     /**
@@ -132,6 +273,25 @@ public class OnvifUtils {
         ptzDevices.stopMove(token);
     }
 
+    public void ptz_left_c() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, 0.5f, 0, 0);
+    }
+
     /**
      * 上
      *
@@ -163,6 +323,25 @@ public class OnvifUtils {
         }
 
         ptzDevices.stopMove(token);
+    }
+
+    public void ptz_up_c() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, 0, 0.5f, 0);
     }
 
     /**
@@ -198,6 +377,25 @@ public class OnvifUtils {
         ptzDevices.stopMove(token);
     }
 
+    public void ptz_down_c() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, 0, -0.5f, 0);
+    }
+
     /**
      * 右转
      *
@@ -229,6 +427,25 @@ public class OnvifUtils {
         }
 
         ptzDevices.stopMove(token);
+    }
+
+    public void ptz_right_c() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.continuousMove(token, -0.5f, 0, 0);
     }
 
     public void snapshot(String token, String filePath) throws Exception {
@@ -321,5 +538,24 @@ public class OnvifUtils {
         OnvifDevice cam = new OnvifDevice(ip, userName, password);
 
         return cam.getMedia().getSnapshotUri(token);
+    }
+
+    public void ptz_stop() throws SOAPException, ConnectException {
+
+        OnvifDevice cam = new OnvifDevice(ip, userName, password);
+
+        String token = "";
+
+        // 实例化后，调用api获取设备媒体信息（会存在主通道和子通道的区别，所以获取到的是个list）
+        List<Profile> profiles = cam.getDevices().getProfiles();
+        // 一般第一个是主通道
+        if (0 < profiles.size()) {
+            // 获取主通道的token信息 方便使用该token获取rtsp地址
+            token = profiles.get(0).getToken();
+        }
+
+        PtzDevices ptzDevices = cam.getPtz();
+
+        ptzDevices.stopMove(token);
     }
 }
