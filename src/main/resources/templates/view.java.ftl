@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
+    import lombok.ToString;
 </#if>
 
 /**
@@ -29,6 +30,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
     @TableName("${table.name}")
 </#if>
 @Schema(name = "${entity}对象", description="${table.comment!}对象")
+@ToString
 <#if superEntityClass??>
     public class ${entity}View extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
 <#elseif activeRecord>
