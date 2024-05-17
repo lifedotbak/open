@@ -1,6 +1,7 @@
 package com.spyker.iot.vmp.media.event.media;
 
 import com.spyker.iot.vmp.media.bean.MediaServer;
+
 import org.springframework.context.ApplicationEvent;
 
 /** 流到来事件 */

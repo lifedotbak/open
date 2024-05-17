@@ -13,9 +13,9 @@ import com.spyker.framework.third.xxxjob.model.XxlJobGroup;
 import com.spyker.framework.third.xxxjob.model.XxlJobInfo;
 import com.spyker.framework.third.xxxjob.properties.XxlServerProperties;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
@@ -29,12 +29,13 @@ import java.util.stream.Collectors;
 @ConditionalOnClass(XxlServerProperties.class)
 @AutoConfiguration
 @Slf4j
+@RequiredArgsConstructor
 public class XxlJobUtils {
 
     //    private static final String XXL_JOB_SERVER = "http://192.168.200.65:9900";
     //    private static final String USER_NAME = "admin";
     //    private static final String PASSWORD = "123456";
-    @Autowired private XxlServerProperties xxlServerProperties;
+    private final XxlServerProperties xxlServerProperties;
 
     public static void main(String[] args) {
         //        getLoginCookie();

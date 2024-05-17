@@ -2,6 +2,7 @@ package com.spyker.iot.vmp.conf;
 
 import com.spyker.iot.vmp.storager.IRedisCatchStorage;
 import com.spyker.iot.vmp.utils.SystemInfoUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

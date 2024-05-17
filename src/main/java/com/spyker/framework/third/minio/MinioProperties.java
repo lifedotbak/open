@@ -1,6 +1,7 @@
 package com.spyker.framework.third.minio;
 
 import lombok.Data;
+
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,6 +1,7 @@
 package com.spyker.iot.vmp.jt1078.proc.response;
 
 import com.spyker.iot.vmp.jt1078.proc.Header;
+
 import io.netty.buffer.ByteBuf;
 
 /**
