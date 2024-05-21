@@ -22,7 +22,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import java.util.Collections;
 
 /** 启动类 */
-@ServletComponentScan("com.genersoft.iot.vmp.conf")
+// @ServletComponentScan("com.genersoft.iot.vmp.conf")
+@ServletComponentScan("com.spyker.iot.vmp.conf")
 @SpringBootApplication
 @EnableScheduling
 @EnableCaching

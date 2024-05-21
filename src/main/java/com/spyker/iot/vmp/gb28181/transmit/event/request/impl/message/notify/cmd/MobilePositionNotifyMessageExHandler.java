@@ -37,11 +37,12 @@ import javax.sip.message.Response;
 
 /** 移动设备位置数据通知，设备主动发起，不需要上级订阅 */
 @Component
-public class MobilePositionNotifyMessageHandler extends SIPRequestProcessorParent
+public class MobilePositionNotifyMessageExHandler extends SIPRequestProcessorParent
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "MobilePosition";
-    private final Logger logger = LoggerFactory.getLogger(MobilePositionNotifyMessageHandler.class);
+    private final Logger logger =
+            LoggerFactory.getLogger(MobilePositionNotifyMessageExHandler.class);
     private final ConcurrentLinkedQueue<SipMsgInfo> taskQueue = new ConcurrentLinkedQueue<>();
     @Autowired private NotifyMessageHandler notifyMessageHandler;
     @Autowired private UserSetting userSetting;

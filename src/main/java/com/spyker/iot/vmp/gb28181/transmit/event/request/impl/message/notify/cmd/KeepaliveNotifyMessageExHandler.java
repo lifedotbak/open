@@ -32,11 +32,11 @@ import javax.sip.message.Response;
 
 /** 状态信息(心跳)报送 */
 @Component
-public class KeepaliveNotifyMessageHandler extends SIPRequestProcessorParent
+public class KeepaliveNotifyMessageExHandler extends SIPRequestProcessorParent
         implements InitializingBean, IMessageHandler {
 
     private static final String cmdType = "Keepalive";
-    private final Logger logger = LoggerFactory.getLogger(KeepaliveNotifyMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(KeepaliveNotifyMessageExHandler.class);
     @Autowired private NotifyMessageHandler notifyMessageHandler;
 
     @Autowired private IDeviceService deviceService;

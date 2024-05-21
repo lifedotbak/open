@@ -41,11 +41,11 @@ import javax.sip.message.Response;
 
 /** 媒体通知 */
 @Component
-public class MediaStatusNotifyMessageHandler extends SIPRequestProcessorParent
+public class MediaStatusNotifyMessageExHandler extends SIPRequestProcessorParent
         implements InitializingBean, IMessageHandler {
 
     private final String cmdType = "MediaStatus";
-    private final Logger logger = LoggerFactory.getLogger(MediaStatusNotifyMessageHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(MediaStatusNotifyMessageExHandler.class);
     @Autowired private NotifyMessageHandler notifyMessageHandler;
 
     @Autowired private SIPCommander cmder;
