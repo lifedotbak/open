@@ -24,6 +24,9 @@ upload:
 
 # Spring配置
 spring:
+  #  aop:
+  #    proxy-target-class: true
+  #    auto: true
   application:
     name: ${server.name}
   #  boot :

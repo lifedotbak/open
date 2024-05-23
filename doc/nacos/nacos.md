@@ -1,10 +1,11 @@
 # spingboot配置nacos说明
 
 ## 一. 初始化数据库
+
 运行D:\nacos-server-2.3.0\conf\mysql-schema.sql
 
-
 ## 二. 配置nacos连接mysql
+
 ~~~
 #*************** Config Module Related Configurations ***************#
 ### If use MySQL as datasource:
@@ -22,9 +23,11 @@ db.password.0=123456
 ~~~
 
 ### PS：
+
 如果没有执行mysql初始化语句，启动nacos会报错
 
 ## 三. springboot配置
+
 application.yml配置文件添加
 
 ~~~
@@ -43,4 +46,5 @@ nacos:
 ~~~
 
 ### PS：
+
 endpoint 配置必须存在，配置为空，负责应用启动失败

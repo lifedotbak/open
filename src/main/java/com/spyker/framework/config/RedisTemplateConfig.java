@@ -24,6 +24,25 @@ public class RedisTemplateConfig {
      * @return
      */
     @Bean
+    public RedisTemplate<Object, Object> redisObjectKeyTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(factory);
+
+        redisTemplate.setKeySerializer(RedisSerializer.string());
+        redisTemplate.setValueSerializer(RedisSerializer.json());
+
+        redisTemplate.setEnableTransactionSupport(false);
+
+        return redisTemplate;
+    }
+
+    /**
+     * RedisTemplate 线程安全
+     *
+     * @param factory
+     * @return
+     */
+    @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(factory);

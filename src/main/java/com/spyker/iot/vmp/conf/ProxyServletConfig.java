@@ -36,7 +36,7 @@ public class ProxyServletConfig {
 
     @Autowired private IMediaServerService mediaServerService;
 
-    @Value("${server.port}")
+    @Value("${server.http.port}")
     private int serverPort;
 
     @Bean
