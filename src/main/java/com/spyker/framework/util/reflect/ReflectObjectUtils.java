@@ -15,7 +15,6 @@ public final class ReflectObjectUtils {
         Map<String, String> result = new HashMap<String, String>();
 
         // 得到类对象
-        @SuppressWarnings("rawtypes")
         Class userCla = obj.getClass();
 
         /* 得到类中的所有属性集合 */

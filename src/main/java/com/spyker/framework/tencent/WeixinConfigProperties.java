@@ -1,4 +1,4 @@
-package com.spyker.framework.properties;
+package com.spyker.framework.tencent;
 
 import lombok.Data;
 

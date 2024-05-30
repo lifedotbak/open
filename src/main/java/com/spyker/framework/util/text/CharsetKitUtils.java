@@ -1,7 +1,5 @@
 package com.spyker.framework.util.text;
 
-import com.spyker.framework.util.ExStringUtils;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 

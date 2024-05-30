@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.text;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrFormatter;

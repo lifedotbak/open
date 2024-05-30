@@ -1,7 +1,5 @@
 package com.spyker.framework.util.text;
 
-import com.spyker.framework.util.ExStringUtils;
-
 /**
  * 字符串格式化
  *

@@ -1,12 +1,13 @@
-package com.spyker.framework.third.zlmediakit.action;
+package com.spyker.framework.zlmediakit.action;
 
 import com.google.gson.Gson;
-import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
-import com.spyker.framework.third.zlmediakit.model.OpResult;
+import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.model.OpResult;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -19,28 +20,24 @@ import java.util.Map;
 @AutoConfiguration
 @Slf4j
 @RequiredArgsConstructor
-public class DelStreamProxyAction {
+public class SetServerConfigAction {
 
-    private static final String method = "/index/api/delStreamProxy";
-
-    private final ZLMediaKitProperties zlMediaKitProperties;
+    private static final String method = "/index/api/setServerConfig";
 
     private final RestTemplate restTemplate;
 
-    /**
-     * 关闭ffmpeg拉流代理
-     *
-     * @param key
-     * @return
-     */
-    public OpResult execute(String key) {
+    @Value("${zlmediakit.ip}")
+    private String ip;
 
-        String postUrl =
-                "http://"
-                        + zlMediaKitProperties.getIp()
-                        + ":"
-                        + zlMediaKitProperties.getPort()
-                        + method;
+    @Value("${zlmediakit.port}")
+    private int port;
+
+    @Value("${zlmediakit.secret}")
+    private String secret;
+
+    public OpResult execute() {
+
+        String postUrl = "http://" + ip + ":" + port + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -49,8 +46,10 @@ public class DelStreamProxyAction {
         // 设置Http的body
         Map<String, Object> body = new HashMap<>();
 
-        body.put("secret", zlMediaKitProperties.getSecret());
-        body.put("key", key);
+        body.put("secret", secret);
+        //		body.put("ffmpeg.cmd", "%s -re -i %s -c:a aac -strict -2 -ar 44100 -ab 48k -c:v libx264
+        // -f flv %s");
+        body.put("ffmpeg.cmd", "%s -re -i %s -vcodec h264 -f rtsp -rtsp_transport tcp %s");
 
         log.info("requestBody-->{}", body);
 

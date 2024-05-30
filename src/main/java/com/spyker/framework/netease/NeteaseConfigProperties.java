@@ -1,4 +1,4 @@
-package com.spyker.framework.properties;
+package com.spyker.framework.netease;
 
 import lombok.Data;
 

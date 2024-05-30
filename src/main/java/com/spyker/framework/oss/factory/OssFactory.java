@@ -7,7 +7,7 @@ import com.spyker.framework.oss.properties.OssProperties;
 import com.spyker.framework.redis.RedissonService;
 import com.spyker.framework.util.CacheUtils;
 import com.spyker.framework.util.ExJsonUtils;
-import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

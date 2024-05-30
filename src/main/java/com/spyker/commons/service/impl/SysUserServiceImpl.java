@@ -10,7 +10,7 @@ import com.spyker.commons.search.SysUserSearch;
 import com.spyker.commons.service.SysUserService;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.response.RestResponse;
-import com.spyker.framework.util.BCryptUtils;
+import com.spyker.framework.util.sign.BCryptUtils;
 
 import jakarta.servlet.http.HttpSession;
 

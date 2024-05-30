@@ -1,6 +1,6 @@
 package com.spyker.commons.utils;
 
-import com.spyker.framework.util.BCryptUtils;
+import com.spyker.framework.util.sign.BCryptUtils;
 
 import lombok.extern.slf4j.Slf4j;
 

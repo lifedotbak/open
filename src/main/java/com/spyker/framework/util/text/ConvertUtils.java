@@ -1,7 +1,5 @@
 package com.spyker.framework.util.text;
 
-import com.spyker.framework.util.ExStringUtils;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.math.BigDecimal;

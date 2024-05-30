@@ -18,7 +18,6 @@ import java.util.Date;
  *
  * @author spyker
  */
-@SuppressWarnings("rawtypes")
 @Slf4j
 public class ReflectUtils {
     private static final String SETTER_PREFIX = "set";
@@ -28,7 +27,6 @@ public class ReflectUtils {
     private static final String CGLIB_CLASS_SEPARATOR = "$$";
 
     /** 调用Getter方法. 支持多级，如：对象名.对象名.方法 */
-    @SuppressWarnings("unchecked")
     public static <E> E invokeGetter(Object obj, String propertyName) {
         Object object = obj;
         for (String name : StringUtils.split(propertyName, ".")) {
@@ -42,7 +40,6 @@ public class ReflectUtils {
      * 直接调用对象方法, 无视private/protected修饰符. 用于一次性调用的情况，否则应使用getAccessibleMethod()函数获得Method后反复调用.
      * 同时匹配方法名+参数类型，
      */
-    @SuppressWarnings("unchecked")
     public static <E> E invokeMethod(
             final Object obj,
             final String methodName,
@@ -129,7 +126,6 @@ public class ReflectUtils {
      * 直接调用对象方法, 无视private/protected修饰符， 用于一次性调用的情况，否则应使用getAccessibleMethodByName()函数获得Method后反复调用.
      * 只匹配函数名，如果有多个同名函数调用第一个。
      */
-    @SuppressWarnings("unchecked")
     public static <E> E invokeMethodByName(
             final Object obj, final String methodName, final Object[] args) {
         Method method = getAccessibleMethodByName(obj, methodName, args.length);
@@ -201,7 +197,6 @@ public class ReflectUtils {
     }
 
     /** 直接读取对象属性值, 无视private/protected修饰符, 不经过getter函数. */
-    @SuppressWarnings("unchecked")
     public static <E> E getFieldValue(final Object obj, final String fieldName) {
         Field field = getAccessibleField(obj, fieldName);
         if (field == null) {
@@ -265,7 +260,6 @@ public class ReflectUtils {
     }
 
     /** 通过反射, 获得Class定义中声明的泛型参数的类型, 注意泛型必须定义在父类处 如无法找到, 返回Object.class. */
-    @SuppressWarnings("unchecked")
     public static <T> Class<T> getClassGenricType(final Class clazz) {
         return getClassGenricType(clazz, 0);
     }

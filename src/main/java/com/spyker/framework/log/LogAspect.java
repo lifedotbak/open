@@ -3,9 +3,9 @@ package com.spyker.framework.log;
 import com.alibaba.fastjson2.JSON;
 import com.spyker.commons.entity.SysOperLog;
 import com.spyker.framework.filter.PropertyPreExcludeFilter;
-import com.spyker.framework.util.ExStringUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.ip.IpUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

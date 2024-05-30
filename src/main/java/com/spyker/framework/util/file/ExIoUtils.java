@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.file;
 
 import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.core.io.IoUtil;

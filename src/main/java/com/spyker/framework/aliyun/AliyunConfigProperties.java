@@ -1,4 +1,4 @@
-package com.spyker.framework.properties;
+package com.spyker.framework.aliyun;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.spyker.framework.third.zlmediakit;
+package com.spyker.framework.zlmediakit;
 
 import lombok.Data;
 

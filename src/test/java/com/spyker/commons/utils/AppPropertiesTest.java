@@ -1,7 +1,7 @@
 package com.spyker.commons.utils;
 
 import com.spyker.BaseTest;
-import com.spyker.framework.properties.AliyunConfigProperties;
+import com.spyker.framework.aliyun.AliyunConfigProperties;
 import com.spyker.framework.properties.DruidConfigProperties;
 
 import lombok.extern.slf4j.Slf4j;

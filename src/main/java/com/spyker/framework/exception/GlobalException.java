@@ -1,7 +1,7 @@
 package com.spyker.framework.exception;
 
-import com.spyker.framework.util.ExStringUtils;
 import com.spyker.framework.util.MessageUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 /**
  * 全局异常

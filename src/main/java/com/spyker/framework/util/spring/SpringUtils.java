@@ -1,6 +1,6 @@
 package com.spyker.framework.util.spring;
 
-import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;

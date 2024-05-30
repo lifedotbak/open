@@ -1,6 +1,6 @@
 package com.spyker.framework.util.http;
 
-import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

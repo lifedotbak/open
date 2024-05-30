@@ -1,13 +1,12 @@
-package com.spyker.framework.third.zlmediakit.action;
+package com.spyker.framework.zlmediakit.action;
 
 import com.google.gson.Gson;
-import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
-import com.spyker.framework.third.zlmediakit.model.OpResult;
+import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.model.OpResult;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -16,28 +15,31 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 动态添加rtsp/rtmp/hls拉流代理(只支持H264/H265/aac/G711负载)
+ *
+ * @author spyker
+ */
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
 @RequiredArgsConstructor
-public class SetServerConfigAction {
+public class AddStreamProxyAction {
 
-    private static final String method = "/index/api/setServerConfig";
+    private static final String method = "/index/api/addStreamProxy";
+
+    private final ZLMediaKitProperties zlMediaKitProperties;
 
     private final RestTemplate restTemplate;
 
-    @Value("${zlmediakit.ip}")
-    private String ip;
+    public OpResult execute(String vhost, String app, String stream, String url) {
 
-    @Value("${zlmediakit.port}")
-    private int port;
-
-    @Value("${zlmediakit.secret}")
-    private String secret;
-
-    public OpResult execute() {
-
-        String postUrl = "http://" + ip + ":" + port + method;
+        String postUrl =
+                "http://"
+                        + zlMediaKitProperties.getIp()
+                        + ":"
+                        + zlMediaKitProperties.getPort()
+                        + method;
 
         // 设置Http的Header
         HttpHeaders headers = new HttpHeaders();
@@ -46,10 +48,17 @@ public class SetServerConfigAction {
         // 设置Http的body
         Map<String, Object> body = new HashMap<>();
 
-        body.put("secret", secret);
-        //		body.put("ffmpeg.cmd", "%s -re -i %s -c:a aac -strict -2 -ar 44100 -ab 48k -c:v libx264
-        // -f flv %s");
-        body.put("ffmpeg.cmd", "%s -re -i %s -vcodec h264 -f rtsp -rtsp_transport tcp %s");
+        body.put("secret", zlMediaKitProperties.getSecret());
+        body.put("vhost", vhost);
+        body.put("app", app);
+        body.put("stream", stream);
+        body.put("url", url);
+        body.put("rtp_type", 0);
+        body.put("enable_hls", 0);
+        body.put("enable_mp4", 0);
+        //        body.put("enable_rtsp", 0);
+        body.put("enable_ts", 0);
+        body.put("enable_fmp4", 0);
 
         log.info("requestBody-->{}", body);
 

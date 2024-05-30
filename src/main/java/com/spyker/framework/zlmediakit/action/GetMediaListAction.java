@@ -1,8 +1,8 @@
-package com.spyker.framework.third.zlmediakit.action;
+package com.spyker.framework.zlmediakit.action;
 
 import com.google.gson.Gson;
-import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
-import com.spyker.framework.third.zlmediakit.model.OpGetMediaListResult;
+import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.model.OpGetMediaListResult;
 
 import jodd.util.StringUtil;
 

@@ -1,6 +1,6 @@
 package com.spyker.framework.util.html;
 
-import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import org.apache.commons.lang3.StringUtils;
 

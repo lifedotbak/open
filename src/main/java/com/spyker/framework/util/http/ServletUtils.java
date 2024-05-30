@@ -2,7 +2,7 @@ package com.spyker.framework.util.http;
 
 import cn.hutool.core.convert.Convert;
 
-import com.spyker.framework.util.ExStringUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;

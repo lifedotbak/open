@@ -1,13 +1,12 @@
-package com.spyker.framework.third.zlmediakit.action;
+package com.spyker.framework.zlmediakit.action;
 
 import com.google.gson.Gson;
-import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
-import com.spyker.framework.third.zlmediakit.model.OpResult;
+import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.model.OpResult;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -20,15 +19,21 @@ import java.util.Map;
 @AutoConfiguration
 @Slf4j
 @RequiredArgsConstructor
-public class CloseStreamsAction {
+public class DelStreamProxyAction {
 
-    private static final String method = "/index/api/close_streams";
+    private static final String method = "/index/api/delStreamProxy";
 
     private final ZLMediaKitProperties zlMediaKitProperties;
 
     private final RestTemplate restTemplate;
 
-    public OpResult execute(String vhost, String app, String stream, Boolean isForceClose) {
+    /**
+     * 关闭ffmpeg拉流代理
+     *
+     * @param key
+     * @return
+     */
+    public OpResult execute(String key) {
 
         String postUrl =
                 "http://"
@@ -42,26 +47,14 @@ public class CloseStreamsAction {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         // 设置Http的body
-        Map<String, String> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<>();
 
         body.put("secret", zlMediaKitProperties.getSecret());
-        //		body.put("schema", schema);
-        if (StringUtils.isNotBlank(vhost)) {
-            body.put("vhost", vhost);
-        }
-        if (StringUtils.isNotBlank(app)) {
-            body.put("app", app);
-        }
-        if (StringUtils.isNotBlank(stream)) {
-            body.put("stream", stream);
-        }
-        if (null != isForceClose && isForceClose) {
-            body.put("force", "1");
-        }
+        body.put("key", key);
 
         log.info("requestBody-->{}", body);
 
-        HttpEntity<Map<String, String>> entity = new HttpEntity<>(body, headers);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
         OpResult result = null;
 

@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.sign;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

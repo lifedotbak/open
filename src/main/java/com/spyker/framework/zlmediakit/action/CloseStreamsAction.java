@@ -1,12 +1,13 @@
-package com.spyker.framework.third.zlmediakit.action;
+package com.spyker.framework.zlmediakit.action;
 
 import com.google.gson.Gson;
-import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
-import com.spyker.framework.third.zlmediakit.model.OpResult;
+import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.model.OpResult;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.*;
@@ -15,24 +16,19 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 动态添加rtsp/rtmp/hls拉流代理(只支持H264/H265/aac/G711负载)
- *
- * @author spyker
- */
 @ConditionalOnClass(ZLMediaKitProperties.class)
 @AutoConfiguration
 @Slf4j
 @RequiredArgsConstructor
-public class AddStreamProxyAction {
+public class CloseStreamsAction {
 
-    private static final String method = "/index/api/addStreamProxy";
+    private static final String method = "/index/api/close_streams";
 
     private final ZLMediaKitProperties zlMediaKitProperties;
 
     private final RestTemplate restTemplate;
 
-    public OpResult execute(String vhost, String app, String stream, String url) {
+    public OpResult execute(String vhost, String app, String stream, Boolean isForceClose) {
 
         String postUrl =
                 "http://"
@@ -46,23 +42,26 @@ public class AddStreamProxyAction {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         // 设置Http的body
-        Map<String, Object> body = new HashMap<>();
+        Map<String, String> body = new HashMap<>();
 
         body.put("secret", zlMediaKitProperties.getSecret());
-        body.put("vhost", vhost);
-        body.put("app", app);
-        body.put("stream", stream);
-        body.put("url", url);
-        body.put("rtp_type", 0);
-        body.put("enable_hls", 0);
-        body.put("enable_mp4", 0);
-        //        body.put("enable_rtsp", 0);
-        body.put("enable_ts", 0);
-        body.put("enable_fmp4", 0);
+        //		body.put("schema", schema);
+        if (StringUtils.isNotBlank(vhost)) {
+            body.put("vhost", vhost);
+        }
+        if (StringUtils.isNotBlank(app)) {
+            body.put("app", app);
+        }
+        if (StringUtils.isNotBlank(stream)) {
+            body.put("stream", stream);
+        }
+        if (null != isForceClose && isForceClose) {
+            body.put("force", "1");
+        }
 
         log.info("requestBody-->{}", body);
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
+        HttpEntity<Map<String, String>> entity = new HttpEntity<>(body, headers);
 
         OpResult result = null;
 

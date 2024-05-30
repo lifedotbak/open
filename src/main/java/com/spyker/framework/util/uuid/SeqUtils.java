@@ -1,7 +1,7 @@
 package com.spyker.framework.util.uuid;
 
-import com.spyker.framework.util.ExStringUtils;
 import com.spyker.framework.util.date.ExDateUtils;
+import com.spyker.framework.util.text.ExStringUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

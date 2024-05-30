@@ -1,4 +1,4 @@
-package com.spyker.framework.util;
+package com.spyker.framework.util.reflect;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
-package com.spyker.framework.third.zlmediakit.utils;
+package com.spyker.framework.zlmediakit.utils;
 
-import com.spyker.framework.third.zlmediakit.ZLMediaKitProperties;
+import com.spyker.framework.zlmediakit.ZLMediaKitProperties;
 
 public final class ZLMediaKitUtils {
 
