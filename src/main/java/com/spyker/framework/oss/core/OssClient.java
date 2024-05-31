@@ -19,7 +19,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.spyker.framework.oss.constant.OssConstant;
 import com.spyker.framework.oss.entity.UploadResult;
-import com.spyker.framework.oss.enums.PolicyType;
+import com.spyker.framework.oss.enums.OssPolicyType;
 import com.spyker.framework.oss.exception.OssException;
 import com.spyker.framework.oss.properties.OssProperties;
 import com.spyker.framework.util.date.ExDateUtils;
@@ -81,12 +81,12 @@ public class OssClient {
         }
     }
 
-    private static String getPolicy(String bucketName, PolicyType policyType) {
+    private static String getPolicy(String bucketName, OssPolicyType policyType) {
         StringBuilder builder = new StringBuilder();
         builder.append("{\n\"Statement\": [\n{\n\"Action\": [\n");
-        if (policyType == PolicyType.WRITE) {
+        if (policyType == OssPolicyType.WRITE) {
             builder.append("\"s3:GetBucketLocation\",\n\"s3:ListBucketMultipartUploads\"\n");
-        } else if (policyType == PolicyType.READ_WRITE) {
+        } else if (policyType == OssPolicyType.READ_WRITE) {
             builder.append(
                     "\"s3:GetBucketLocation\",\n\"s3:ListBucket\",\n\"s3:ListBucketMultipartUploads\"\n");
         } else {
@@ -96,7 +96,7 @@ public class OssClient {
                 "],\n\"Effect\": \"Allow\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
         builder.append(bucketName);
         builder.append("\"\n},\n");
-        if (policyType == PolicyType.READ) {
+        if (policyType == OssPolicyType.READ) {
             builder.append(
                     "{\n\"Action\": [\n\"s3:ListBucket\"\n],\n\"Effect\": \"Deny\",\n\"Principal\": \"*\",\n\"Resource\": \"arn:aws:s3:::");
             builder.append(bucketName);
@@ -132,7 +132,7 @@ public class OssClient {
             CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
             createBucketRequest.setCannedAcl(CannedAccessControlList.PublicRead);
             client.createBucket(createBucketRequest);
-            client.setBucketPolicy(bucketName, getPolicy(bucketName, PolicyType.READ));
+            client.setBucketPolicy(bucketName, getPolicy(bucketName, OssPolicyType.READ));
         } catch (Exception e) {
             throw new OssException("创建Bucket失败, 请核对配置信息:[" + e.getMessage() + "]");
         }

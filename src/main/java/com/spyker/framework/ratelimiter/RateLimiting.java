@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /** 限流注解 */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Limiting {
+public @interface RateLimiting {
 
     // 默认每秒放入桶中的token
     double limitNum() default 20;

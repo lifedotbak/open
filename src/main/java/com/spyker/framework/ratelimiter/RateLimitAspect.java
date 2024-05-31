@@ -28,7 +28,7 @@ public class RateLimitAspect {
     //    }
 
     //    @Around("serviceLimit()")
-    @Around("@annotation(Limiting)")
+    @Around("@annotation(com.spyker.framework.ratelimiter.RateLimiting)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         // 获取拦截的方法名
         Signature sig = point.getSignature();
@@ -40,7 +40,7 @@ public class RateLimitAspect {
         Method currentMethod =
                 target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
         // 获取注解信息
-        Limiting annotation = currentMethod.getAnnotation(Limiting.class);
+        RateLimiting annotation = currentMethod.getAnnotation(RateLimiting.class);
         double limitNum = annotation.limitNum(); // 获取注解每秒加入桶中的token
         String functionName = msig.getName(); // 注解所在方法名区分不同的限流策略
 

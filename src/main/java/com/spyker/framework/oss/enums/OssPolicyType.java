@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PolicyType {
+public enum OssPolicyType {
 
     /** 只读 */
     READ("read-only"),

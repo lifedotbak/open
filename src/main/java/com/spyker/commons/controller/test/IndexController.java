@@ -1,6 +1,6 @@
 package com.spyker.commons.controller.test;
 
-import com.spyker.framework.ratelimiter.Limiting;
+import com.spyker.framework.ratelimiter.RateLimiting;
 import com.spyker.framework.response.RestResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ public class IndexController {
      * @return RestResponse<String>
      */
     @GetMapping("/limit1")
-    @Limiting(limitNum = 1, name = "limiting1")
+    @RateLimiting(limitNum = 1, name = "limiting1")
     public RestResponse<String> limit1() {
         return RestResponse.success("limiting1");
     }
@@ -31,7 +31,7 @@ public class IndexController {
      * @return RestResponse<String>
      */
     @GetMapping("/limit2")
-    @Limiting(limitNum = 5, name = "limiting2")
+    @RateLimiting(limitNum = 5, name = "limiting2")
     public RestResponse<String> limit2() {
         return RestResponse.success("limiting2");
     }
