@@ -1,4 +1,4 @@
-package com.spyker.framework.core;
+package com.spyker.framework.base;
 
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.date.ExDateUtils;
@@ -49,26 +49,6 @@ public class BaseController {
     /** 返回警告消息 */
     public RestMapResponse warn(String message) {
         return RestMapResponse.warn(message);
-    }
-
-    /**
-     * 响应返回结果
-     *
-     * @param rows 影响行数
-     * @return 操作结果
-     */
-    protected RestMapResponse toAjax(int rows) {
-        return rows > 0 ? RestMapResponse.success() : RestMapResponse.error();
-    }
-
-    /**
-     * 响应返回结果
-     *
-     * @param result 结果
-     * @return 操作结果
-     */
-    protected RestMapResponse toAjax(boolean result) {
-        return result ? success() : error();
     }
 
     /** 返回成功 */

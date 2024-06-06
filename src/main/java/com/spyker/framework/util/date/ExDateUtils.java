@@ -131,8 +131,7 @@ public final class ExDateUtils extends DateUtils {
 
     /** 日期路径 即年/月/日 如2018/08/08 */
     public static String datePath() {
-        Date now = new Date();
-        return DateFormatUtils.format(now, Format.YMD_PATH.format);
+        return format(getCurrentDate(), Format.YMD_PATH.format);
     }
 
     public static String format(final Date date, final String format) {

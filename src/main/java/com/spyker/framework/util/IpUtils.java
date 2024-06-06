@@ -1,9 +1,16 @@
-package com.spyker.framework.util.ip;
+package com.spyker.framework.util;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.spyker.framework.constant.Constants;
+import com.spyker.framework.properties.PlatformConfigProperties;
+import com.spyker.framework.util.http.HttpUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.text.ExStringUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +22,15 @@ import java.net.UnknownHostException;
  *
  * @author spyker
  */
+@Slf4j
 public class IpUtils {
+
+    // IP地址查询
+    public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
+
+    // 未知地址
+    public static final String UNKNOWN = "XX XX";
+
     public static final String REGX_0_255 = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)";
     // 匹配 ip
     public static final String REGX_IP = "((" + REGX_0_255 + "\\.){3}" + REGX_0_255 + ")";
@@ -32,6 +47,29 @@ public class IpUtils {
                     + "|(("
                     + REGX_0_255
                     + "\\.){3}\\*))";
+
+    public static String getRealAddressByIP(String ip) {
+        // 内网不查询
+        if (internalIp(ip)) {
+            return "内网IP";
+        }
+        if (PlatformConfigProperties.isAddressEnabled()) {
+            try {
+                String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
+                if (ExStringUtils.isEmpty(rspStr)) {
+                    log.error("获取地理位置异常 {}", ip);
+                    return UNKNOWN;
+                }
+                JSONObject obj = JSON.parseObject(rspStr);
+                String region = obj.getString("pro");
+                String city = obj.getString("city");
+                return String.format("%s %s", region, city);
+            } catch (Exception e) {
+                log.error("获取地理位置异常 {}", ip);
+            }
+        }
+        return UNKNOWN;
+    }
 
     /**
      * 获取客户端IP
