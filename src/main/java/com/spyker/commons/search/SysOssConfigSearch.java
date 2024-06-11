@@ -55,9 +55,6 @@ public class SysOssConfigSearch {
     @Schema(description = "状态（0=正常,1=停用）")
     private String status;
 
-    @Schema(description = "扩展字段")
-    private String ext1;
-
     @Schema(description = "创建者")
     private String createBy;
 

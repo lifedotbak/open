@@ -37,6 +37,9 @@ import lombok.extern.slf4j.Slf4j;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import com.spyker.framework.response.RestResponse;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.spyker.framework.enums.BusinessType;
@@ -65,6 +68,8 @@ import org.springframework.web.bind.annotation.*;
 // @formatter:off
 
     private final ${table.serviceName} ${table.serviceName?uncap_first};
+    private final HttpServletRequest httpServletRequest;
+    private final HttpServletResponse httpServletResponse;
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")

@@ -1,6 +1,6 @@
 package com.spyker.framework.util;
 
-import com.spyker.framework.util.spring.SpringUtils;
+import com.spyker.framework.spring.SpringUtils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

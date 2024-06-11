@@ -139,14 +139,6 @@ public class SysOssConfigServiceTest extends BaseTest {
 
         search.setAccessPolicy("accessPolicy");
 
-        search.setStatus("status");
-
-        search.setExt1("ext1");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
-
         search.setRemark("remark");
 
         service.query(search);
@@ -177,14 +169,6 @@ public class SysOssConfigServiceTest extends BaseTest {
         search.setRegion("region");
 
         search.setAccessPolicy("accessPolicy");
-
-        search.setStatus("status");
-
-        search.setExt1("ext1");
-
-        search.setCreateBy("createBy");
-
-        search.setUpdateBy("updateBy");
 
         search.setRemark("remark");
 

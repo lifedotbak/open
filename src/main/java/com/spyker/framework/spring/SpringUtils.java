@@ -1,4 +1,4 @@
-package com.spyker.framework.util.spring;
+package com.spyker.framework.spring;
 
 import com.spyker.framework.util.text.ExStringUtils;
 

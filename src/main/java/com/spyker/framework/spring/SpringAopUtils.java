@@ -1,4 +1,4 @@
-package com.spyker.framework.util.spring;
+package com.spyker.framework.spring;
 
 import cn.hutool.core.bean.BeanUtil;
 
