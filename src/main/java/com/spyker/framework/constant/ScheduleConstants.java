@@ -27,6 +27,7 @@ public class ScheduleConstants {
     private ScheduleConstants() {}
 
     public enum Status {
+
         /** 正常 */
         NORMAL("0"),
         /** 暂停 */

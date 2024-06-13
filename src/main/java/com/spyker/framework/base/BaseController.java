@@ -11,7 +11,7 @@ import java.beans.PropertyEditorSupport;
 import java.util.Date;
 
 /**
- * web层通用数据处理
+ * controller基础类,web层通用数据处理
  *
  * @author spyker
  */
