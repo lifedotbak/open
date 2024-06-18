@@ -15,8 +15,8 @@ public class GpsUtil {
 
         double lng = Double.parseDouble(xx);
         double lat = Double.parseDouble(yy);
-        Double[] gcj02 = Coordtransform.WGS84ToGCJ02(lng, lat);
-        Double[] doubles = Coordtransform.GCJ02ToBD09(gcj02[0], gcj02[1]);
+        Double[] gcj02 = CoordTransform.WGS84ToGCJ02(lng, lat);
+        Double[] doubles = CoordTransform.GCJ02ToBD09(gcj02[0], gcj02[1]);
         BaiduPoint bdPoint = new BaiduPoint();
         bdPoint.setBdLng(doubles[0] + "");
         bdPoint.setBdLat(doubles[1] + "");

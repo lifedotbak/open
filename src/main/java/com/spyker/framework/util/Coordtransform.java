@@ -8,7 +8,7 @@ package com.spyker.framework.util;
  * @date 2016-03-18
  * @url https://github.com/xinconan/coordtransform
  */
-public class Coordtransform {
+public class CoordTransform {
 
     private static final double x_PI = 3.14159265358979324 * 3000.0 / 180.0;
     private static final double PI = 3.1415926535897932384626;

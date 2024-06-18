@@ -1,5 +1,7 @@
 package com.spyker.framework.util.date;
 
+import com.nlf.calendar.Lunar;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -369,6 +371,12 @@ public final class LunarCalendarUtils {
      */
     private static int leapMonth(int y) {
         return (int) (lunarInfo[y - 1900] & 0xf);
+    }
+
+    public static void main(String[] args) {
+        Lunar lunar = new Lunar();
+
+        System.out.println(lunar.getDayGanIndex());
     }
 
     /**

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-/** 一个优秀的颓废程序猿（CSDN） */
+/** 通过读取git.properties解析git相关信息 */
 @Component
 @PropertySource(
         value = {"classpath:git.properties"},

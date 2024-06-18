@@ -20,25 +20,9 @@ import java.util.Map;
 @Slf4j
 public final class JwtUtils {
 
-    private static final String SECRET = "app-spyker-jwt";
+    private static final String SECRET = "app_random_user_jwt";
 
-    private static final String ISSUER = "spyker";
-
-    public static void main(String[] args) {
-        Map<String, String> par = new HashMap<>();
-        par.put("name", "xxxx");
-        par.put("value", "xxxx");
-
-        String token = genToken(par);
-
-        System.out.println(token);
-
-        Map<String, String> re = new HashMap<>();
-
-        re = verifyToken(token);
-
-        log.info("re--->{}", re);
-    }
+    private static final String ISSUER = "random_user";
 
     public static String genToken(Map<String, String> claims) {
         try {

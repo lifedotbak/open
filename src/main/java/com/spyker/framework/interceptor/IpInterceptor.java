@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/** ip解析拦截器 */
 @Slf4j
 public class IpInterceptor implements HandlerInterceptor {
 

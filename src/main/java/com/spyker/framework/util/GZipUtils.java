@@ -8,10 +8,18 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
+/** 压缩处理 */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GZipUtils {
 
+    /**
+     * 解压
+     *
+     * @param bytes
+     * @param encoding
+     * @return
+     */
     public static String uncompressToString(byte[] bytes, String encoding) {
         if (bytes == null || bytes.length == 0) {
             return null;

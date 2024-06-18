@@ -2,9 +2,12 @@ package com.spyker.framework.util.file;
 
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IORuntimeException;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 
 import com.spyker.framework.util.date.ExDateUtils;
@@ -84,6 +87,18 @@ public class ExFileUtils extends FileUtils {
         // 写入内容
         FileUtil.writeBytes(data, file);
         return file;
+    }
+
+    /**
+     * 从流中读取 UTF8 编码的内容
+     *
+     * @param in 输入流
+     * @param isClose 是否关闭
+     * @return 内容
+     * @throws IORuntimeException IO 异常
+     */
+    public static String readUtf8(InputStream in, boolean isClose) throws IORuntimeException {
+        return StrUtil.utf8Str(IoUtil.read(in, isClose));
     }
 
     /**
@@ -292,8 +307,7 @@ public class ExFileUtils extends FileUtils {
         }
 
         // 检查允许下载的文件规则
-        return ArrayUtils.contains(
-                MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FileTypeUtils.getFileType(resource));
+        return ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, getFileType(resource));
 
         // 不在允许下载的文件规则
     }
