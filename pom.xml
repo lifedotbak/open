@@ -57,9 +57,6 @@
 		<mysql-connector-j.version>8.3.0</mysql-connector-j.version>
 		<druid.version>1.2.22</druid.version>
 		
-		<!-- nacos相关依赖版本 -->
-		<nacos.version>0.3.0-RC</nacos.version>
-		
 		<!-- 阿里云相关依赖版本 -->
 		<aliyun-core.version>4.6.4</aliyun-core.version>
 		<aliyun-oss.version>3.17.4</aliyun-oss.version>
@@ -78,7 +75,7 @@
 		<flyway.version>10.11.0</flyway.version>
 		
 		<!-- xxl-job相关依赖版本 -->
-		<xxl-job-core.version>2.4.0</xxl-job-core.version>
+		<xxl-job-core.version>2.4.1</xxl-job-core.version>
 		
 		<!-- redisson相关依赖版本 -->
 		<redisson.version>3.28.0</redisson.version>
@@ -308,23 +305,6 @@
 			<version>${flyway.version}</version>
 		</dependency>
 		
-		<!-- ======================================= 阿里相关依赖 ======================================= -->
-		<!-- 通过 Nacos Server 和 nacos-config-spring-boot-starter 实现配置的动态变更 -->
-		<!-- springboot进行nacos配置管理，springcloud对应为springcloud相关依赖 -->
-		<!-- 注意：版本 0.2.x.RELEASE 对应的是 Spring Boot 2.x 版本，版本 0.1.x.RELEASE 对应的是 Spring Boot 1.x 版本。  -->
-		<!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-config-spring-boot-starter -->
-		<!--		<dependency>-->
-		<!--			<groupId>com.alibaba.boot</groupId>-->
-		<!--			<artifactId>nacos-config-spring-boot-starter</artifactId>-->
-		<!--			<version>${nacos.version}</version>-->
-		<!--		</dependency>-->
-		<!--		&lt;!&ndash; 通过 Nacos Server 和 nacos-discovery-spring-boot-starter 实现服务的注册与发现 &ndash;&gt;-->
-		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/com.alibaba.boot/nacos-discovery-spring-boot-starter &ndash;&gt;-->
-		<!--		<dependency>-->
-		<!--			<groupId>com.alibaba.boot</groupId>-->
-		<!--			<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
-		<!--			<version>${nacos.version}</version>-->
-		<!--		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
 		<dependency>
 			<groupId>com.aliyun</groupId>
@@ -460,65 +440,13 @@
 			<version>${aws-s3.version}</version>
 		</dependency>
 		
-		<!-- ======================================= 项目监控中心 ======================================= -->
-		<!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
-		<!-- <dependency> -->
-		<!-- <groupId>de.codecentric</groupId> -->
-		<!-- <artifactId>spring-boot-admin-starter-client</artifactId> -->
-		<!-- <version>3.1.7</version> -->
-		<!-- </dependency> -->
-		
-		<!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-server -->
-		<!-- <dependency> -->
-		<!-- <groupId>de.codecentric</groupId> -->
-		<!-- <artifactId>spring-boot-admin-starter-server</artifactId> -->
-		<!-- <version>3.1.7</version> -->
-		<!-- </dependency> -->
-		
-		<!-- https://mvnrepository.com/artifact/org.jolokia/jolokia-core -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.jolokia</groupId> -->
-		<!-- <artifactId>jolokia-core</artifactId> -->
-		<!-- <version>1.7.2</version> -->
-		<!-- </dependency> -->
-		
 		<!-- ======================================= 本机系统监控 ======================================= -->
 		<!-- https://mvnrepository.com/artifact/com.github.oshi/oshi-core -->
-		<!--		<dependency>-->
-		<!--			<groupId>com.github.oshi</groupId>-->
-		<!--			<artifactId>oshi-core</artifactId>-->
-		<!--			<version>6.4.10</version>-->
-		<!--		</dependency>-->
-		
-		<!-- ======================================= oshi-core依赖jna最低版本 ======================================= -->
-		<!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
-		<!--		<dependency>-->
-		<!--			<groupId>net.java.dev.jna</groupId>-->
-		<!--			<artifactId>jna</artifactId>-->
-		<!--			<version>${jna.version}</version>-->
-		<!--		</dependency>-->
-		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform &ndash;&gt;-->
-		<!--		<dependency>-->
-		<!--			<groupId>net.java.dev.jna</groupId>-->
-		<!--			<artifactId>jna-platform</artifactId>-->
-		<!--			<version>${jna.version}</version>-->
-		<!--		</dependency>-->
-		
-		<!-- ======================================= 本地关依赖 ======================================= -->
-		<!--		<dependency>-->
-		<!--			<groupId>net.java.jna</groupId>-->
-		<!--			<artifactId>jna</artifactId>-->
-		<!--			<version>1.0.0</version>-->
-		<!--			<scope>system</scope>-->
-		<!--			<systemPath>${project.basedir}/hik-lib/jna.jar</systemPath>-->
-		<!--		</dependency>-->
-		<!--		<dependency>-->
-		<!--			<groupId>net.java.jna</groupId>-->
-		<!--			<artifactId>examples</artifactId>-->
-		<!--			<version>1.0.0</version>-->
-		<!--			<scope>system</scope>-->
-		<!--			<systemPath>${project.basedir}/hik-lib/examples.jar</systemPath>-->
-		<!--		</dependency>-->
+		<dependency>
+			<groupId>com.github.oshi</groupId>
+			<artifactId>oshi-core</artifactId>
+			<version>6.4.10</version>
+		</dependency>
 		
 		<!-- ======================================= 其他相关依赖 ======================================= -->
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
@@ -650,14 +578,6 @@
             <version>2.1.4</version>
         </dependency>
 		
-		<dependency>
-            <groupId>com.onvif</groupId>
-            <artifactId>onvif</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/ext-libs/onvif-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-		
 		<!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-ri -->
 		<dependency>
 		    <groupId>com.sun.xml.ws</groupId>
@@ -673,64 +593,13 @@
 		    <version>1.4.0</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/io.github.lunasaw/gb28181-server -->
-		<dependency>
-		    <groupId>io.github.lunasaw</groupId>
-		    <artifactId>gb28181-server</artifactId>
-		    <version>1.1.7</version>
-		</dependency>
-		
-		<!-- flowable工作流 -->
-		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.flowable</groupId> -->
-		<!-- <artifactId>flowable-spring-boot-starter</artifactId> -->
-		<!-- <version>7.0.0</version> -->
-		<!-- </dependency> -->
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
-		<!--        <dependency>-->
-		<!--			<groupId>org.apache.axis</groupId>-->
-		<!--			<artifactId>axis</artifactId>-->
-		<!--			<version>1.4</version>-->
-		<!--		</dependency>-->
-		<!-- https://mvnrepository.com/artifact/axis/axis-jaxrpc ，此包与java.xml包冲头javax.xml.namespace.QName-->
-		<!--        <dependency>-->
-		<!--        			<groupId>axis</groupId>-->
-		<!--        			<artifactId>axis-jaxrpc</artifactId>-->
-		<!--        			<version>1.4</version>-->
-		<!--        		</dependency>-->
-		<!-- https://mvnrepository.com/artifact/org.apache.axis/axis-saaj -->
-		<!--        <dependency>-->
-		<!--			<groupId>org.apache.axis</groupId>-->
-		<!--			<artifactId>axis-saaj</artifactId>-->
-		<!--			<version>1.4</version>-->
-		<!--		</dependency>-->
-		
-		<!-- https://mvnrepository.com/artifact/javax.sip/jain-sip-ri -->
-		<dependency>
-		    <groupId>javax.sip</groupId>
-		    <artifactId>jain-sip-ri</artifactId>
-		    <version>1.3.0-91</version>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<!--反向代理-->
-		<!-- https://mvnrepository.com/artifact/org.mitre.dsmiley.httpproxy/smiley-http-proxy-servlet -->
-		<dependency>
-		    <groupId>org.mitre.dsmiley.httpproxy</groupId>
-		    <artifactId>smiley-http-proxy-servlet</artifactId>
-		    <version>2.0</version>
-		</dependency>
-		
 		<!-- okhttp 调试日志 -->
 		<dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>logging-interceptor</artifactId>
             <version>4.10.0</version>
         </dependency>
-
-
+		
 	</dependencies>
 
 	<dependencyManagement>
