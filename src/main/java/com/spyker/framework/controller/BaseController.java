@@ -1,4 +1,4 @@
-package com.spyker.framework.base;
+package com.spyker.framework.controller;
 
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.date.ExDateUtils;

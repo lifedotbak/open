@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 
-import com.spyker.framework.base.BaseController;
+import com.spyker.framework.controller.BaseController;
 import com.spyker.framework.request.PageParamRequest;
 
 import ${package.Parent}.search.${entity}Search;

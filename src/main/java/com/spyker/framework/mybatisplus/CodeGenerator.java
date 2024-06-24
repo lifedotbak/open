@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
-import com.spyker.framework.base.BaseController;
+import com.spyker.framework.controller.BaseController;
 
 import lombok.Data;
 import lombok.SneakyThrows;

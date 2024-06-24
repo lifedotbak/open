@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysCompany;
 import com.spyker.commons.search.SysCompanySearch;
 import com.spyker.commons.service.SysCompanyService;
-import com.spyker.framework.base.BaseController;
+import com.spyker.framework.controller.BaseController;
 import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
 import com.spyker.framework.request.PageParamRequest;
