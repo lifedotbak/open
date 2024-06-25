@@ -20,7 +20,7 @@ platform:
 
 ###############################文件上传配置,配置默认文件保存位置###############################
 upload:
-  localtion: /${server.name}
+  location: /${server.name}
 
 # Spring配置
 spring:
@@ -92,7 +92,7 @@ spring:
 
   web:
     resources:
-      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.localtion}
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.location}
 
   flyway:
     # 启用或禁用 flyway
