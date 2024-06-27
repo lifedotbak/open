@@ -600,6 +600,15 @@
             <version>4.10.0</version>
         </dependency>
 		
+		<!-- ZLMediaKit开源工具包 -->
+		<!-- https://mvnrepository.com/artifact/io.github.lunasaw/zlm-spring-boot-starter -->
+		<dependency>
+		    <groupId>io.github.lunasaw</groupId>
+		    <artifactId>zlm-spring-boot-starter</artifactId>
+		    <version>1.0.3</version>
+		</dependency>
+
+		
 	</dependencies>
 
 	<dependencyManagement>

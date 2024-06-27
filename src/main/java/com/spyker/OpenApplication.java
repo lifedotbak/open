@@ -21,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @EnableCaching
 @EnableRetry
+// @ComponentScan(value = {"com.spyker", "io.github.lunasaw.zlm"})
 // @EnableAdminServer
 public class OpenApplication {
 

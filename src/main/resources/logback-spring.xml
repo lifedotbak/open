@@ -6,13 +6,14 @@
      You need to either use logback-spring.xml
      gengor define a logging.config property. -->
 	
-	<springProperty scope="context" name="name" source="server.name" defaultValue="application"/>
+	<!--	<springProperty scope="context" name="name" source="server.name" defaultValue="application"/>-->
+	<springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue=""/>
 
-    <property name="log.base" value="logs/${name}"/>
+    <property name="log.base" value="logs/${spring.application.name}"/>
 
     <springProfile name="dev">
     <!-- configuration to be enabled when the "staging" profile is active -->
-	    <property name="log.base" value="logs/${name}-dev"/>
+	    <property name="log.base" value="logs/${spring.application.name}-dev"/>
     </springProfile>
 	
 	<!-- excludePackageNames传入需要过滤包的关键字，以分号分割 -->
