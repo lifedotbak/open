@@ -259,6 +259,18 @@ zlmediakit:
   port:
   secret:
 
+#========================https://mvnrepository.com/artifact/io.github.lunasaw/zlm-spring-boot-starter配置config================================
+zlm:
+  enable: true
+  balance: round_robin
+  hook-enable: true
+  nodes:
+    - server-id: zlm
+      host: "http://192.168.200.81:8080"
+      secret: 035c73f7-bb6b-4889-a715-d9eb2d1925cc
+      enabled: true
+      hook-enabled: true
+
 #========================minio配置config================================
 minio:
   enabled: false

@@ -1,5 +1,6 @@
 package com.spyker.commons.controller.common;
 
+import io.github.lunasaw.zlm.api.ZlmRestService;
 import io.github.lunasaw.zlm.entity.ServerResponse;
 import io.github.lunasaw.zlm.entity.Version;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +29,7 @@ public class ZlmRestController {
     public ServerResponse<List<String>> getApiList() {
 
         ServerResponse<List<String>> result =
-                io.github.lunasaw.zlm.api.ZlmRestService.getApiList(
+                ZlmRestService.getApiList(
                         "http://192.168.200.81:8080", "035c73f7-bb6b-4889-a715-d9eb2d1925cc");
 
         return result;
@@ -38,7 +39,7 @@ public class ZlmRestController {
     public ServerResponse<Version> getVersion() {
 
         ServerResponse<Version> result =
-                io.github.lunasaw.zlm.api.ZlmRestService.getVersion(
+                ZlmRestService.getVersion(
                         "http://192.168.200.81:8080", "035c73f7-bb6b-4889-a715-d9eb2d1925cc");
 
         return result;

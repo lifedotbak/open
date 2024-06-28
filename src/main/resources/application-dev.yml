@@ -263,6 +263,7 @@ zlmediakit:
 zlm:
   enable: true
   balance: round_robin
+  hook-enable: true
   nodes:
     - server-id: zlm
       host: "http://192.168.200.81:8080"

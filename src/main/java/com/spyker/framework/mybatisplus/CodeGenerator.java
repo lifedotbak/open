@@ -185,12 +185,21 @@ public class CodeGenerator {
                         .packageName("search")
                         .build();
 
+        CustomFile redisRepository =
+                new CustomFile.Builder()
+                        .fileName("Repository.java")
+                        .enableFileOverride()
+                        .templatePath("/templates/redisRepository" + ".java.ftl")
+                        .packageName("repository.redis")
+                        .build();
+
         List<CustomFile> customFiles = new ArrayList<>();
 
         customFiles.add(controllerTestFile);
         customFiles.add(serviceTestFile);
         customFiles.add(mapperTestFile);
         customFiles.add(searchCustomFile);
+        customFiles.add(redisRepository);
 
         InjectionConfig ic = new InjectionConfig.Builder().customFile(customFiles).build();
 

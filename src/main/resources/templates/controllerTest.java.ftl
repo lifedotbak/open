@@ -32,6 +32,8 @@ public class ${table.controllerName}Test extends BaseTest {
 
     private static String BASE_URL ="<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>";
 
+    private static final String LOGIN_URL = BASE_URL + "/sys/login/login";
+
     /*分页查询*/
     private static String LIST_PAGE_URL =BASE_URL + "/list_page";
 

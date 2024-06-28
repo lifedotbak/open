@@ -77,7 +77,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
 
 	/**
-	* @param sysDept
+	* @param ${entity?uncap_first}
 	* @return
 	* @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来，
 	* 供其它地方使用。它通常用在新增方法上。
@@ -90,7 +90,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	}
 
 	/**
-	* @param sysDept
+	* @param ${entity?uncap_first}
 	* @return
 	* @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来，
 	* 供其它地方使用。它通常用在新增方法上。
