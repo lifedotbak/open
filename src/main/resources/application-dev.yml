@@ -320,3 +320,13 @@ sa-token:
 #    server-addr: 127.0.0.1:8848
 #    register:
 #      group-name: dev
+
+
+################ camunda登录信息配置 ################
+camunda.bpm:
+  admin-user:
+    id: admin  #用户名
+    password: 123456  #密码
+    firstName: yu
+  filter:
+    create: All tasks
