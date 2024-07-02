@@ -1,29 +1,32 @@
-package com.spyker.commons.controller.common;
+package com.spyker.framework.zlmediakit.controller;
+
+import com.spyker.framework.zlmediakit.config.ExZlmProperties;
 
 import io.github.lunasaw.zlm.api.ZlmRestService;
 import io.github.lunasaw.zlm.entity.ServerResponse;
 import io.github.lunasaw.zlm.entity.Version;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "zlm-spring-boot-starter接口", description = "zlm-spring-boot-starter接口")
+@Tag(name = "zlm-Service", description = "zlm-Service")
 @RequestMapping("/zlm")
 @RestController
 public class ZlmRestController {
 
-    //    @Autowired private ZlmProperties zlmProperties;
+    @Autowired private ExZlmProperties exZlmProperties;
 
-    //    @GetMapping("/getProperties")
-    //    public ServerResponse<ZlmProperties> getProperties() {
-    //        ServerResponse<ZlmProperties> result = new ServerResponse<>();
-    //        result.setData(zlmProperties);
-    //        return result;
-    //    }
+    @GetMapping("/getProperties")
+    public ServerResponse<ExZlmProperties> getProperties() {
+        ServerResponse<ExZlmProperties> result = new ServerResponse<>();
+        result.setData(exZlmProperties);
+        return result;
+    }
 
     @GetMapping("/getApiList")
     public ServerResponse<List<String>> getApiList() {

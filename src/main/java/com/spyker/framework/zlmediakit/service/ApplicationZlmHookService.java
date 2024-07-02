@@ -1,4 +1,4 @@
-package com.spyker.framework.zlmediakit;
+package com.spyker.framework.zlmediakit.service;
 
 import io.github.lunasaw.zlm.entity.ServerNodeConfig;
 import io.github.lunasaw.zlm.hook.param.*;
