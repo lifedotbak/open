@@ -6,7 +6,6 @@ import io.github.lunasaw.zlm.enums.LoadBalancerEnums;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 @Data
 @Component
 @Slf4j
-public class ExZlmProperties implements InitializingBean {
+public class ExZlmProperties {
 
     /** 对外NodeMap */
     public static Map<String, ZlmNode> nodeMap = new ConcurrentHashMap<>();
@@ -43,20 +42,16 @@ public class ExZlmProperties implements InitializingBean {
     }
 
     public Map<String, ZlmNode> getNodeMap() {
-        return nodeMap;
-    }
 
-    public List<ZlmNode> getNodes() {
-        return nodes;
-    }
-
-    @Override
-    public void afterPropertiesSet() {
         nodeMap =
                 nodes.stream()
                         .filter(ZlmNode::isEnabled)
                         .collect(Collectors.toMap(ZlmNode::getServerId, node -> node));
 
-        log.info(String.format("zlm nodeMap: %s", nodeMap));
+        return nodeMap;
+    }
+
+    public List<ZlmNode> getNodes() {
+        return nodes;
     }
 }
