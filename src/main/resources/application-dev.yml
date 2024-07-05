@@ -321,12 +321,15 @@ sa-token:
 #    register:
 #      group-name: dev
 
-
 ################ camunda登录信息配置 ################
+################ camunda.bpm.generic-properties.properties.historyTimeToLive:P1D如果不添加，解析bpmn会出错 ################
 camunda.bpm:
   admin-user:
     id: admin  #用户名
     password: 123456  #密码
-    firstName: yu
+    firstName: open
   filter:
     create: All tasks
+  generic-properties:
+    properties:
+      historyTimeToLive: P1D

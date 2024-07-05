@@ -12,6 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  * <p>集成camunda后，camunda管理平台访问地址-->http://127.0.0.1:8080/open
  *
+ * <p>camunda管理平台rest地址-->http://127.0.0.1:8080/open/rest
+ *
  * <p>knife4j优化后访问地址 http://127.0.0.1:8080/open/doc.html
  *
  * <p>EnableRetry--->springboot 重试机制
