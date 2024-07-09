@@ -1,0 +1,159 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  data:
+    redis:
+      ##redis地址
+      host: localhost
+      ##redis端口
+      port: 6379
+      ##使用的db
+      database: 13
+      password: 123456
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  application:
+    name: flyflow
+  datasource:
+    ##数据库地址
+    url: jdbc:mysql://localhost:3307/flyflow_os3?allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    ##数据库账号
+    username: root
+    ##数据库密码
+    password: 123456
+    hikari:
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 60000
+      login-timeout: 5
+      max-lifetime: 60000
+      maximum-pool-size: 5
+      minimum-idle: 5
+      read-only: false
+  jackson:
+    #字段为null时不返回该字段
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    deserialization:
+      fail-on-unknown-properties: false
+##允许端口
+server:
+  port: 26859
+##启用的日志文件
+logging:
+  config: classpath:logback.xml
+
+#mybatis配置
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-field: del_flag # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+      table-prefix: flyflow_
+    enable-sql-runner: false
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+
+file:
+  ##静态文件在磁盘位置，此处与nginx配置要一直
+  dir: /tmp/flyflow
+  ##静态文件访问路径
+  showUrl: http://127.0.0.1:${server.port}/file/show
+
+
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: Authorization
+  # token有效期，单位s 默认30天, -1代表永不过期
+  timeout: -1
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: false
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: true
+
+##钉钉模块访问路径
+dingtalk:
+  url: http://127.0.0.1:26860
+##企微模块访问路径
+wxcp:
+  url: http://127.0.0.1:26861
+##飞书模块访问路径
+fs:
+  url: http://127.0.0.1:26862
+
+##流程的数据api开关
+api:
+  ori: local
+  http:
+    baseUrl: http://127.0.0.1:26858/test/http/
+
+
+
+ko-time:
+  pointcut: execution(public * cc.flyflow.web.controller.*.*(..))
+  log-enable: false
+  saver: redis
+  data-prefix: kotime
+
+
+
+## 是否每个用户都是所有的权限
+role:
+  allPermission: false
+
+
+##账号密码登录页面：是否开启验证码
+login:
+  captcha: true
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: cc.flyflow.web.controller
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+#  不需要表单引擎 idm引擎
+flowable:
+  common:
+    app:
+      idm-url: /a.html
+      idm-admin:
+        user: a
+        password: a
+  form:
+    enabled: false
+  idm:
+    enabled: false
+  async-executor-activate: true
+
+
+node:
+  data:
+    store: remoteDateStore

@@ -409,39 +409,11 @@
 		</dependency>
 		
 		<!-- ======================================= hutool依赖 ======================================= -->
-		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-core -->
+		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
 		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-core</artifactId>
-			<version>${hutool.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-json -->
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-json</artifactId>
-			<version>${hutool.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-crypto -->
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-crypto</artifactId>
-			<version>${hutool.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-jwt -->
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-jwt</artifactId>
-			<version>${hutool.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-http -->
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-http</artifactId>
-			<version>${hutool.version}</version>
+		    <groupId>cn.hutool</groupId>
+		    <artifactId>hutool-all</artifactId>
+		    <version>${hutool.version}</version>
 		</dependency>
 		
 		<!-- ======================================= amazonaws依赖 ======================================= -->
@@ -621,24 +593,104 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.camunda.bpm.springboot/camunda-bpm-spring-boot-starter -->
-		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-		    <artifactId>camunda-bpm-spring-boot-starter</artifactId>
-		    <version>7.21.0</version>
-		</dependency>
+		<!--
+			<dependency>
+				<groupId>org.camunda.bpm.springboot</groupId>
+				<artifactId>camunda-bpm-spring-boot-starter</artifactId>
+				<version>7.21.0</version>
+			</dependency>
+		-->
 		
 		<!-- https://mvnrepository.com/artifact/org.camunda.bpm.springboot/camunda-bpm-spring-boot-starter-rest -->
-		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-		    <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-		    <version>7.21.0</version>
-		</dependency>
+		<!--
+			<dependency>
+				<groupId>org.camunda.bpm.springboot</groupId>
+				<artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+				<version>7.21.0</version>
+			</dependency>
+		-->
 		
 		<!-- https://mvnrepository.com/artifact/org.camunda.bpm.springboot/camunda-bpm-spring-boot-starter-webapp -->
+		<!--
+			<dependency>
+				<groupId>org.camunda.bpm.springboot</groupId>
+				<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+				<version>7.21.0</version>
+			</dependency>
+		-->
+		
+		<!--TLog 是一款国产的轻量级分布式日志标记追踪组件。集成方便，通过对日志打标签的方式实现了微服务的链路追踪。
+		支持 log4j、log4j2、logback 三大日志框架。支持 dubbo、dubbox、springcluod 三大RPC框架。-->
 		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-		    <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-		    <version>7.21.0</version>
+            <groupId>com.yomahub</groupId>
+            <artifactId>tlog-web-spring-boot-starter</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+		
+		<!--从 JDK 1.8 开始，Nashorn取代Rhino(JDK 1.6, JDK1.7) 成为 Java 的嵌入式 JavaScript 引擎。
+		Nashorn 完全支持 ECMAScript 5.1 规范以及一些扩展。它使用基于 JSR 292 的新语言特性
+		，其中包含在 JDK 7 中引入的 invokedynamic，将 JavaScript 编译成 Java 字节码。
+			与先前的 Rhino 实现相比，这带来了 2 到 10倍的性能提升。 -->
+		<!--为了支持jdk17 如果使用jdk17 请引入-->
+		<dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
+            <version>15.4</version>
+        </dependency>
+		
+		<!--分布式锁-->
+		<!-- https://mvnrepository.com/artifact/com.baomidou/lock4j-redis-template-spring-boot-starter -->
+		<dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>lock4j-redis-template-spring-boot-starter</artifactId>
+		    <version>2.2.7</version>
+		</dependency>
+		
+		<!--koTime是一个轻量级的springboot项目性能分析工具，通过追踪方法调用链路以及对应的运行时长快速定位性能瓶颈-->
+		<!-- https://mvnrepository.com/artifact/cn.langpy/ko-time -->
+		<dependency>
+		    <groupId>cn.langpy</groupId>
+		    <artifactId>ko-time</artifactId>
+		    <version>2.4.4</version>
+		</dependency>
+		
+		<!-- 流程 -->
+		<dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter</artifactId>
+            <version>7.0.1</version>
+        </dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+		<!-- 反射工具 -->
+		<dependency>
+		    <groupId>org.reflections</groupId>
+		    <artifactId>reflections</artifactId>
+		    <version>0.10.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.github.yulichang/mybatis-plus-join-boot-starter -->
+		<!-- mybatis-plus做连接查询的插件 -->
+		<dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join-boot-starter</artifactId>
+            <version>1.4.13</version>
+        </dependency>
+		
+		<!--        验证码-->
+		<!-- https://mvnrepository.com/artifact/cloud.tianai.captcha/tianai-captcha -->
+		<dependency>
+            <groupId>cloud.tianai.captcha</groupId>
+            <artifactId>tianai-captcha</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+		
+		<!--        验证码-->
+		<!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
+		<dependency>
+		    <groupId>com.github.whvcse</groupId>
+		    <artifactId>easy-captcha</artifactId>
+		    <version>1.6.2</version>
 		</dependency>
 	
 	</dependencies>
@@ -660,7 +712,28 @@
 
 	<build>
 		<finalName>open</finalName>
+		<resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+            </resource>
+        </resources>
 		<plugins>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>otf</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

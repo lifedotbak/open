@@ -1,0 +1,83 @@
+package cc.flyflow.core.node.impl;
+
+import cc.flyflow.common.constants.ProcessInstanceConstant;
+import cc.flyflow.common.dto.R;
+import cc.flyflow.common.dto.flow.Node;
+import cc.flyflow.common.dto.flow.node.parent.SuperUserNode;
+import cc.flyflow.common.dto.third.DeptDto;
+import cc.flyflow.core.node.AssignUserStrategy;
+import cc.flyflow.core.utils.BizHttpUtil;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
+
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 连续多级主管
+ *
+ * @author Huijun Zhao
+ * @description
+ * @date 2023-07-07 13:42
+ */
+@Component
+public class AssignUserLeaderTopStrategyImpl implements InitializingBean, AssignUserStrategy {
+    @Override
+    public List<String> handle(
+            Node node, String rootUserId, Map<String, Object> variables, String tenantId) {
+
+        SuperUserNode superUserNode = (SuperUserNode) node;
+
+        List<String> userIdList = new ArrayList<>();
+
+        // 去获取主管
+
+        //        R<List<DeptDto>> r = BizHttpUtil.queryParentDepListByUserId(rootUserId, tenantId);
+
+        R<List<DeptDto>> r =
+                BizHttpUtil.queryParentDeptList(
+                        MapUtil.getStr(
+                                variables,
+                                ProcessInstanceConstant.VariableKey.START_USER_MAIN_DEPTID_KEY),
+                        tenantId);
+
+        List<DeptDto> deptDtoList = r.getData();
+
+        // 上级主管依次审批
+
+        // 第几级主管审批截止
+        Integer level = superUserNode.getDeptLeaderLevel();
+
+        if (CollUtil.isNotEmpty(deptDtoList)) {
+            int index = 1;
+            for (DeptDto deptDto : deptDtoList) {
+                if (level != null && level < index) {
+                    break;
+                }
+                List<String> leaderUserIdList = deptDto.getLeaderUserIdList();
+                if (CollUtil.isNotEmpty(leaderUserIdList)) {
+                    for (String s : leaderUserIdList) {
+                        if (StrUtil.isNotBlank(s) && !userIdList.contains(s)) {
+                            userIdList.add((s));
+                        }
+                    }
+                }
+
+                index++;
+            }
+        }
+
+        return userIdList;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        afterPropertiesSet(ProcessInstanceConstant.AssignedTypeClass.LEADER_TOP);
+    }
+}

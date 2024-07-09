@@ -242,16 +242,6 @@ xxl-server:
   misfire-strategy: DO_NOTHING
   executor-block-strategy: SERIAL_EXECUTION
 
-#========================海康威视硬盘录像机config================================
-hik:
-  enabled: false
-  win-lib:
-  win-pic:
-  win-video:
-  linux-lib:
-  linux-pic:
-  linux-video:
-
 #========================zlmediakit配置config================================
 zlmediakit:
   enabled: false
