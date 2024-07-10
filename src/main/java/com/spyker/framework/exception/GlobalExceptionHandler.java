@@ -46,43 +46,6 @@ public class GlobalExceptionHandler {
 
     private final ExceptionLogUsableHandler exceptionChain;
 
-    // private ExceptionLogService exceptionLogService;
-
-    // @ExceptionHandler
-    // public RestResponse handlerException(Exception e) {
-    //
-    // log.error("----->{}", e);
-    //
-    // /**
-    // * 权限异常处理
-    // */
-    // if (e instanceof SaTokenException) {
-    // return RestResponse.error(-1, "权限认证失败");
-    // }
-    //
-    // /**
-    // * 验证异常处理
-    // */
-    // if (e instanceof BindException) {
-    //
-    // List<FieldError> fieldErrors = ((BindException) e).getFieldErrors();
-    // List<String> msgList = fieldErrors.stream().map(o ->
-    // o.getDefaultMessage()).collect(Collectors
-    // .toList());
-    // String messages = StringUtils.join(msgList.toArray(), ";");
-    //
-    // log.error("Validation格式校验异常:-------------->{}", messages);
-    //
-    // return RestResponse.error(-1, messages);
-    // }
-    //
-    // /**
-    // * 其他异常处理
-    // */
-    // return RestResponse.error(-1, "系统异常");
-    //
-    // }
-
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = SaTokenException.class)
     public RestResponse<?> saTokenExceptionHandler(HttpServletRequest request, SaTokenException e) {

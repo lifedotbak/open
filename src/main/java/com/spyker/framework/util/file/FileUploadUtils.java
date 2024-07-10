@@ -1,8 +1,8 @@
 package com.spyker.framework.util.file;
 
+import com.spyker.framework.config.PlatformConfigProperties;
 import com.spyker.framework.constant.Constants;
 import com.spyker.framework.exception.GlobalException;
-import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.util.date.ExDateUtils;
 import com.spyker.framework.util.file.exception.InvalidExtensionException;
 import com.spyker.framework.util.text.ExStringUtils;

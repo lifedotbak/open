@@ -22,7 +22,8 @@ public class ExZlmHookController {
 
     @Autowired private ZlmHookService zlmHookService;
 
-    @Qualifier("zlmHookTaskExecutor")
+    /** org.springframework.boot.autoconfigure.task.TaskExecutorConfigurations配置的executor */
+    @Qualifier("taskExecutor")
     @Autowired
     private AsyncTaskExecutor executor;
 

@@ -7,7 +7,8 @@ import io.github.lunasaw.zlm.entity.ServerResponse;
 import io.github.lunasaw.zlm.entity.Version;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,9 +18,10 @@ import java.util.List;
 @Tag(name = "zlm-Service", description = "zlm-Service")
 @RequestMapping("/zlm")
 @RestController
+@RequiredArgsConstructor
 public class ZlmRestController {
 
-    @Autowired private ExZlmProperties exZlmProperties;
+    private final ExZlmProperties exZlmProperties;
 
     @GetMapping("/getProperties")
     public ServerResponse<ExZlmProperties> getProperties() {

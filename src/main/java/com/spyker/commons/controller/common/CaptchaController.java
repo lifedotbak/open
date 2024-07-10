@@ -3,9 +3,9 @@ package com.spyker.commons.controller.common;
 import cn.dev33.satoken.annotation.SaIgnore;
 
 import com.google.code.kaptcha.Producer;
+import com.spyker.framework.config.PlatformConfigProperties;
 import com.spyker.framework.constant.CacheConstants;
 import com.spyker.framework.constant.Constants;
-import com.spyker.framework.properties.PlatformConfigProperties;
 import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
