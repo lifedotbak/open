@@ -9,6 +9,9 @@ import lombok.Data;
 @JsonInclude(Include.NON_NULL)
 public class RestResponse<T> {
 
+    /** 链路id */
+    private String traceId;
+
     private int code;
     private String message;
     private T result;

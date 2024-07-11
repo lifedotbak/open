@@ -2,11 +2,8 @@ package com.flyflow.web.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 
-import com.flyflow.biz.security.captcha.EasyCaptchaService;
 import com.flyflow.biz.service.ILoginService;
-import com.flyflow.biz.vo.CaptchaResult;
 import com.flyflow.biz.vo.UserBizVO;
-import com.flyflow.common.config.NotWriteLogAnno;
 import com.flyflow.common.dto.LoginUrlDto;
 import com.flyflow.common.dto.R;
 
@@ -28,20 +25,6 @@ import javax.annotation.Resource;
 public class LoginController {
 
     @Resource private ILoginService loginService;
-
-    @Resource private EasyCaptchaService captchaService;
-
-    /**
-     * 获取验证码
-     *
-     * @return
-     */
-    @Operation(summary = "获取验证码", description = "获取验证码")
-    @GetMapping("/captcha")
-    @NotWriteLogAnno(printResultLog = false)
-    public R<CaptchaResult> getCaptcha() {
-        return captchaService.getCaptcha();
-    }
 
     /**
      * 用户登录

@@ -9,6 +9,7 @@ import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
 import com.spyker.framework.exception.wrapper.ContentCachingRequestWrapper;
 import com.spyker.framework.response.ResponseCodeEnum;
 import com.spyker.framework.response.RestResponse;
+import com.yomahub.tlog.context.TLogContext;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -52,7 +53,11 @@ public class GlobalExceptionHandler {
 
         doLog(request, e);
 
-        return RestResponse.error(-1, e.getMessage());
+        RestResponse response = RestResponse.error(-1, e.getMessage());
+
+        response.setTraceId(TLogContext.getTraceId());
+
+        return response;
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -61,7 +66,11 @@ public class GlobalExceptionHandler {
 
         doLog(request, e);
 
-        return RestResponse.error(-1, e.getMessage());
+        RestResponse response = RestResponse.error(-1, e.getMessage());
+
+        response.setTraceId(TLogContext.getTraceId());
+
+        return response;
     }
 
     /** 处理业务业务异常 */
@@ -69,9 +78,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BusinessException.class)
     public RestResponse<?> serviceExceptionHandler(
             HttpServletRequest request, BusinessException e) {
+
         doLog(request, e);
 
-        return RestResponse.error(e.getCode(), e.getMessage());
+        RestResponse response = RestResponse.error(e.getCode(), e.getMessage());
+
+        response.setTraceId(TLogContext.getTraceId());
+
+        return response;
     }
 
     /** 统一处理非自定义异常外的所有异常 */
@@ -79,7 +93,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public RestResponse<?> exceptionHandler(HttpServletRequest request, Exception e) {
         doLog(request, e);
-        return RestResponse.error(-1, e.getMessage());
+
+        RestResponse response = RestResponse.error(-1, e.getMessage());
+
+        response.setTraceId(TLogContext.getTraceId());
+
+        return response;
     }
 
     /** 兼容Validation校验框架：忽略参数异常处理器 */
@@ -87,10 +106,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public RestResponse<?> parameterMissingExceptionHandler(
             HttpServletRequest request, MissingServletRequestParameterException e) {
+
         doLog(request, e);
-        return RestResponse.error(
-                ResponseCodeEnum.VALIDATE_FAILED.getCode(),
-                "请求参数 " + e.getParameterName() + " 不能为空");
+
+        RestResponse response =
+                RestResponse.error(
+                        ResponseCodeEnum.VALIDATE_FAILED.getCode(),
+                        "请求参数 " + e.getParameterName() + " 不能为空");
+
+        response.setTraceId(TLogContext.getTraceId());
+
+        return response;
     }
 
     /** 兼容Validation校验框架：缺少请求体异常处理器 */
@@ -98,8 +124,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public RestResponse<?> parameterBodyMissingExceptionHandler(
             HttpServletRequest request, HttpMessageNotReadableException e) {
+
         doLog(request, e);
-        return RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "参数体不能为空");
+
+        RestResponse response =
+                RestResponse.error(ResponseCodeEnum.VALIDATE_FAILED.getCode(), "参数体不能为空");
+
+        response.setTraceId(TLogContext.getTraceId());
+
+        return response;
     }
 
     /** 兼容Validation校验框架：参数效验异常处理器 */
