@@ -1,5 +1,11 @@
 package com.flyflow.biz.service.impl;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.useragent.UserAgent;
+
 import com.flyflow.biz.api.ApiStrategyFactory;
 import com.flyflow.biz.constants.SecurityConstants;
 import com.flyflow.biz.service.ILoginService;
@@ -7,20 +13,17 @@ import com.flyflow.biz.utils.DingTalkHttpUtil;
 import com.flyflow.biz.vo.UserBizVO;
 import com.flyflow.common.constants.LoginPlatEnum;
 import com.flyflow.common.dto.R;
-import com.flyflow.common.utils.PlatformUtil;
 import com.flyflow.common.utils.ThreadLocalUtil;
-import cn.dev33.satoken.stp.SaTokenInfo;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.useragent.UserAgent;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 @Component
 @Slf4j
@@ -111,15 +114,8 @@ public class LoginServiceImpl implements ILoginService {
             return R.fail("获取用户失败，请重试");
         }
 
-        String userAgentStr = ThreadLocalUtil.getUserAgentStr();
         UserAgent userAgent = ThreadLocalUtil.getUserAgent();
-        if (PlatformUtil.isDingTalk(userAgentStr)) {
-            StpUtil.login(userId, LoginPlatEnum.DING_TALK.getType());
-        } else if (PlatformUtil.isFeiShu(userAgentStr)) {
-            StpUtil.login(userId, LoginPlatEnum.FEI_SHU.getType());
-        } else if (PlatformUtil.isWxWork(userAgentStr)) {
-            StpUtil.login(userId, LoginPlatEnum.WX_WORK.getType());
-        } else if (userAgent.isMobile()) {
+        if (userAgent.isMobile()) {
             StpUtil.login(userId, LoginPlatEnum.H5.getType());
         } else {
             StpUtil.login(userId, LoginPlatEnum.ADMIN.getType());
