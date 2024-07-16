@@ -5,6 +5,8 @@ import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 
 import com.spyker.commons.service.SysUserService;
+import com.spyker.framework.constants.BusinessTypeEnum;
+import com.spyker.framework.log.Log;
 import com.spyker.framework.response.RestResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,6 +41,7 @@ public class SysLoginController {
      */
     @PostMapping("/login")
     @SaIgnore
+    @Log(title = "用户(登录)", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<?> login(String userName, String password) {
 
         if (sysuserService.login(userName, password)) {

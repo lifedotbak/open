@@ -1,4 +1,4 @@
-package com.spyker.framework.constant;
+package com.spyker.framework.constants;
 
 import io.jsonwebtoken.Claims;
 
@@ -7,7 +7,7 @@ import io.jsonwebtoken.Claims;
  *
  * @author spyker
  */
-public class Constants {
+public class CommonsConstants {
 
     // 默认分页
     public static final int DEFAULT_PAGE = 1;
@@ -85,5 +85,5 @@ public class Constants {
     /** LDAP 远程方法调用 */
     public static final String LOOKUP_LDAP = "ldap:";
 
-    private Constants() {}
+    private CommonsConstants() {}
 }

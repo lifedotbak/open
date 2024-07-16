@@ -1,11 +1,11 @@
-package com.spyker.framework.enums;
+package com.spyker.framework.constants;
 
 /**
  * 操作人类别
  *
  * @author spyker
  */
-public enum OperatorType {
+public enum OperatorTypeEnum {
 
     /** 其它 */
     OTHER,

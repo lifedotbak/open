@@ -3,7 +3,7 @@ package com.spyker.commons.controller.common;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 
 import com.spyker.framework.config.PlatformConfigProperties;
-import com.spyker.framework.constant.Constants;
+import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.file.ExFileUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
@@ -147,7 +147,9 @@ public class FileController {
             String localPath = PlatformConfigProperties.getProfile();
             // 数据库资源地址
             String downloadPath =
-                    localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
+                    localPath
+                            + StringUtils.substringAfter(
+                                    resource, CommonsConstants.RESOURCE_PREFIX);
             // 下载名称
             String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);

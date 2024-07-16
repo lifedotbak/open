@@ -3,7 +3,7 @@ package com.spyker.framework.util.text;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrFormatter;
 
-import com.spyker.framework.constant.Constants;
+import com.spyker.framework.constants.CommonsConstants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -236,7 +236,7 @@ public class ExStringUtils extends StringUtils {
      * @return 结果
      */
     public static boolean ishttp(String link) {
-        return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
+        return StringUtils.startsWithAny(link, CommonsConstants.HTTP, CommonsConstants.HTTPS);
     }
 
     /**

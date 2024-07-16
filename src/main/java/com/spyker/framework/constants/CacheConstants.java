@@ -1,4 +1,4 @@
-package com.spyker.framework.constant;
+package com.spyker.framework.constants;
 
 /**
  * 缓存的key 常量

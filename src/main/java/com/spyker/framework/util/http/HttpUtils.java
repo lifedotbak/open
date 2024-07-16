@@ -1,6 +1,6 @@
 package com.spyker.framework.util.http;
 
-import com.spyker.framework.constant.Constants;
+import com.spyker.framework.constants.CommonsConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +42,7 @@ public class HttpUtils {
      * @return 所代表远程资源的响应结果
      */
     public static String sendGet(String url, String param) {
-        return sendGet(url, param, Constants.UTF8);
+        return sendGet(url, param, CommonsConstants.UTF8);
     }
 
     /**

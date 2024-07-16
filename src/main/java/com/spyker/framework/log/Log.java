@@ -1,7 +1,7 @@
 package com.spyker.framework.log;
 
-import com.spyker.framework.enums.BusinessType;
-import com.spyker.framework.enums.OperatorType;
+import com.spyker.framework.constants.BusinessTypeEnum;
+import com.spyker.framework.constants.OperatorTypeEnum;
 
 import java.lang.annotation.*;
 
@@ -18,10 +18,10 @@ public @interface Log {
     String title() default "";
 
     /** 功能 */
-    BusinessType businessType() default BusinessType.OTHER;
+    BusinessTypeEnum businessType() default BusinessTypeEnum.OTHER;
 
     /** 操作人类别 */
-    OperatorType operatorType() default OperatorType.MANAGE;
+    OperatorTypeEnum operatorType() default OperatorTypeEnum.MANAGE;
 
     /** 是否保存请求的参数 */
     boolean isSaveRequestData() default true;

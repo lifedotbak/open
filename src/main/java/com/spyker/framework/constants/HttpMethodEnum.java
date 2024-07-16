@@ -1,4 +1,4 @@
-package com.spyker.framework.enums;
+package com.spyker.framework.constants;
 
 import org.springframework.lang.Nullable;
 
@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @author spyker
  */
-public enum HttpMethod {
+public enum HttpMethodEnum {
     GET,
 
     HEAD,
@@ -27,16 +27,16 @@ public enum HttpMethod {
 
     TRACE;
 
-    private static final Map<String, HttpMethod> mappings = new HashMap<>(16);
+    private static final Map<String, HttpMethodEnum> mappings = new HashMap<>(16);
 
     static {
-        for (HttpMethod httpMethod : values()) {
+        for (HttpMethodEnum httpMethod : values()) {
             mappings.put(httpMethod.name(), httpMethod);
         }
     }
 
     @Nullable
-    public static HttpMethod resolve(@Nullable String method) {
+    public static HttpMethodEnum resolve(@Nullable String method) {
         return (method != null ? mappings.get(method) : null);
     }
 

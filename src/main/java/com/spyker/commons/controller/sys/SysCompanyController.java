@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysCompany;
 import com.spyker.commons.search.SysCompanySearch;
 import com.spyker.commons.service.SysCompanyService;
+import com.spyker.framework.constants.BusinessTypeEnum;
 import com.spyker.framework.controller.BaseController;
-import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
 import com.spyker.framework.request.PageParamRequest;
 import com.spyker.framework.response.RestResponse;
@@ -49,7 +49,7 @@ public class SysCompanyController extends BaseController {
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
-    @Log(title = "部门表--列表", businessType = BusinessType.QUERY)
+    @Log(title = "部门表--列表", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<List<SysCompany>> list(SysCompanySearch search) {
 
         List<SysCompany> result = sysCompanyService.query(search);
@@ -61,7 +61,7 @@ public class SysCompanyController extends BaseController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
-    @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
+    @Log(title = "部门表--列表（分页）", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<IPage<SysCompany>> listPage(
             @ModelAttribute SysCompanySearch search,
             @ModelAttribute PageParamRequest pageParamRequest) {
@@ -84,7 +84,7 @@ public class SysCompanyController extends BaseController {
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("/{id}")
-    @Log(title = "部门表--详情", businessType = BusinessType.QUERY)
+    @Log(title = "部门表--详情", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<SysCompany> detail(@PathVariable("id") String id) {
 
         SysCompany result = sysCompanyService.get(id);
@@ -94,7 +94,7 @@ public class SysCompanyController extends BaseController {
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
-    @Log(title = "部门表--新增", businessType = BusinessType.INSERT)
+    @Log(title = "部门表--新增", businessType = BusinessTypeEnum.INSERT)
     public RestResponse<SysCompany> add(@RequestBody SysCompany add) {
 
         sysCompanyService.insert(add);
@@ -104,7 +104,7 @@ public class SysCompanyController extends BaseController {
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
-    @Log(title = "部门表--修改", businessType = BusinessType.UPDATE)
+    @Log(title = "部门表--修改", businessType = BusinessTypeEnum.UPDATE)
     public RestResponse<SysCompany> update(
             @PathVariable("id") String id, @RequestBody SysCompany update) {
 
@@ -117,7 +117,7 @@ public class SysCompanyController extends BaseController {
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
-    @Log(title = "部门表--删除", businessType = BusinessType.DELETE)
+    @Log(title = "部门表--删除", businessType = BusinessTypeEnum.DELETE)
     public RestResponse<SysCompany> delete(@PathVariable("id") String id) {
 
         sysCompanyService.delete(id);

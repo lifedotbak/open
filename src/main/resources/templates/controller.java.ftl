@@ -42,7 +42,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import com.spyker.framework.response.RestResponse;
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import com.spyker.framework.enums.BusinessType;
+import com.spyker.framework.constants.BusinessType;
 import com.spyker.framework.log.Log;
 import org.springframework.web.bind.annotation.*;
 

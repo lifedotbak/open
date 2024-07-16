@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysOssConfig;
 import com.spyker.commons.search.SysOssConfigSearch;
 import com.spyker.commons.service.SysOssConfigService;
+import com.spyker.framework.constants.BusinessTypeEnum;
 import com.spyker.framework.controller.BaseController;
-import com.spyker.framework.enums.BusinessType;
 import com.spyker.framework.log.Log;
 import com.spyker.framework.response.RestResponse;
 
@@ -47,7 +47,7 @@ public class SysOssConfigController extends BaseController {
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
-    @Log(title = "对象存储配置表--列表", businessType = BusinessType.QUERY)
+    @Log(title = "对象存储配置表--列表", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<List<SysOssConfig>> list(SysOssConfigSearch search) {
 
         List<SysOssConfig> result = sysOssConfigService.query(search);
@@ -59,7 +59,7 @@ public class SysOssConfigController extends BaseController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
-    @Log(title = "对象存储配置表--列表（分页）", businessType = BusinessType.QUERY)
+    @Log(title = "对象存储配置表--列表（分页）", businessType = BusinessTypeEnum.QUERY)
     //    public RestResponse<IPage<SysOssConfig>> list_page(
     //            @ModelAttribute SysOssConfigSearch search,
     //            @ModelAttribute PageParamRequest pageParamRequest) {
@@ -82,7 +82,7 @@ public class SysOssConfigController extends BaseController {
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("/{id}")
-    @Log(title = "对象存储配置表--详情", businessType = BusinessType.QUERY)
+    @Log(title = "对象存储配置表--详情", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<SysOssConfig> detail(@PathVariable("id") String id) {
         SysOssConfig result = sysOssConfigService.get(id);
 
@@ -91,7 +91,7 @@ public class SysOssConfigController extends BaseController {
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
-    @Log(title = "对象存储配置表--新增", businessType = BusinessType.INSERT)
+    @Log(title = "对象存储配置表--新增", businessType = BusinessTypeEnum.INSERT)
     public RestResponse<?> add(@RequestBody SysOssConfig add) {
 
         sysOssConfigService.insert(add);
@@ -101,7 +101,7 @@ public class SysOssConfigController extends BaseController {
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{ossConfigId}")
-    @Log(title = "对象存储配置表--修改", businessType = BusinessType.UPDATE)
+    @Log(title = "对象存储配置表--修改", businessType = BusinessTypeEnum.UPDATE)
     public RestResponse<?> update(
             @PathVariable("ossConfigId") String ossConfigId, @RequestBody SysOssConfig update) {
 
@@ -114,7 +114,7 @@ public class SysOssConfigController extends BaseController {
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{ossConfigId}")
-    @Log(title = "对象存储配置表--删除", businessType = BusinessType.DELETE)
+    @Log(title = "对象存储配置表--删除", businessType = BusinessTypeEnum.DELETE)
     public RestResponse<?> delete(@PathVariable("ossConfigId") String ossConfigId) {
 
         sysOssConfigService.delete(ossConfigId);

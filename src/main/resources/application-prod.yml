@@ -36,6 +36,11 @@ spring:
   #        url : http://127.0.0.1:8080/open
   jackson:
     time-zone: Asia/Shanghai
+    #字段为null时不返回该字段
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+    deserialization:
+      fail-on-unknown-properties: false
   #    date-format: yyyy-MM-dd HH:mm:ss
   #  profiles:
   #    active: druid
@@ -59,9 +64,19 @@ spring:
     redis.cache-null-values: true
 
   mvc:
+    # 设置接口超时时间
+    async:
+      request-timeout: 20000
     view:
       prefix: /
       suffix: .html
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    # [可选]上传文件大小限制
+    servlet:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 100MB
 
   #数据源
   datasource:
@@ -242,23 +257,7 @@ xxl-server:
   misfire-strategy: DO_NOTHING
   executor-block-strategy: SERIAL_EXECUTION
 
-#========================海康威视硬盘录像机config================================
-hik:
-  enabled: false
-  win-lib:
-  win-pic:
-  win-video:
-  linux-lib:
-  linux-pic:
-  linux-video:
-
 #========================zlmediakit配置config================================
-zlmediakit:
-  enabled: false
-  ip:
-  port:
-  secret:
-
 #========================https://mvnrepository.com/artifact/io.github.lunasaw/zlm-spring-boot-starter配置config================================
 zlm:
   enable: true
@@ -333,3 +332,26 @@ camunda.bpm:
   generic-properties:
     properties:
       historyTimeToLive: P1D
+
+################ flowable配置 ################
+# flowable 配置
+flowable:
+  # 关闭异步，不关闭历史数据的插入就是异步的，会在同一个事物里面，无法回滚
+  # 开发可开启会提高些效率，上线需要关闭
+  async-executor-activate: false
+  common:
+    app:
+      idm-url: /a.html
+      idm-admin:
+        user: open
+        password: open
+  form:
+    enabled: false
+  idm:
+    enabled: false
+
+ko-time:
+  pointcut: execution(public * com.spyker.*.controller.*.*(..))
+  log-enable: false
+  saver: redis
+  data-prefix: kotime

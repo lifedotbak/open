@@ -17,7 +17,7 @@
     </springProfile>
 	
 	<!-- excludePackageNames传入需要过滤包的关键字，以分号分割 -->
-	<turboFilter class="com.spyker.framework.logback.ExcludeTurboFilter">
+	<turboFilter class="com.spyker.framework.log.logback.ExcludeTurboFilter">
         <excludePackageNames>job.core;test</excludePackageNames>
     </turboFilter>
 	

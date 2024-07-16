@@ -4,8 +4,8 @@ import cn.dev33.satoken.annotation.SaIgnore;
 
 import com.google.code.kaptcha.Producer;
 import com.spyker.framework.config.PlatformConfigProperties;
-import com.spyker.framework.constant.CacheConstants;
-import com.spyker.framework.constant.Constants;
+import com.spyker.framework.constants.CacheConstants;
+import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.redis.RedisService;
 import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
@@ -78,7 +78,7 @@ public class CaptchaController {
         }
 
         redisService.setCacheObject(
-                verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
+                verifyKey, code, CommonsConstants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try {

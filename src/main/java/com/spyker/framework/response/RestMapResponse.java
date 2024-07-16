@@ -1,6 +1,6 @@
 package com.spyker.framework.response;
 
-import com.spyker.framework.constant.HttpStatus;
+import com.spyker.framework.constants.HttpStatus;
 import com.spyker.framework.util.text.ExStringUtils;
 
 import java.util.HashMap;

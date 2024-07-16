@@ -1,11 +1,11 @@
-package com.spyker.framework.enums;
+package com.spyker.framework.constants;
 
 /**
  * 限流类型
  *
  * @author spyker
  */
-public enum LimitType {
+public enum LimitTypeEnum {
 
     /** 默认策略全局限流 */
     DEFAULT,

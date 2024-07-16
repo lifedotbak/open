@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.search.SysDeptSearch;
 import com.spyker.commons.service.SysDeptService;
-import com.spyker.framework.enums.BusinessType;
+import com.spyker.framework.constants.BusinessTypeEnum;
 import com.spyker.framework.log.Log;
 import com.spyker.framework.response.RestResponse;
 
@@ -58,7 +58,7 @@ public class SysDeptController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    @Log(title = "部门表--列表（分页）", businessType = BusinessType.QUERY)
+    @Log(title = "部门表--列表（分页）", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<IPage<SysDept>> listPage(SysDeptSearch search) {
         int current = 1;
         int size = 10;

@@ -1,4 +1,4 @@
-package com.spyker.framework.constant;
+package com.spyker.framework.constants;
 
 /**
  * 任务调度通用常量

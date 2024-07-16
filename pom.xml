@@ -661,6 +661,15 @@
             <version>7.0.1</version>
         </dependency>
 		
+		<!-- flowable流程绘制 -->
+		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter-ui-modeler -->
+		<!--		<dependency>-->
+		<!--		    <groupId>org.flowable</groupId>-->
+		<!--		    <artifactId>flowable-spring-boot-starter-ui-modeler</artifactId>-->
+		<!--		    <version>6.8.1</version>-->
+		<!--		</dependency>-->
+		
+		
 		<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
 		<!-- 反射工具 -->
 		<dependency>

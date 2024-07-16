@@ -3,7 +3,7 @@ package com.spyker.framework.util;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.spyker.framework.config.PlatformConfigProperties;
-import com.spyker.framework.constant.Constants;
+import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.util.http.HttpUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.text.ExStringUtils;
@@ -55,7 +55,8 @@ public class IpUtils {
         }
         if (PlatformConfigProperties.isAddressEnabled()) {
             try {
-                String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
+                String rspStr =
+                        HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", CommonsConstants.GBK);
                 if (ExStringUtils.isEmpty(rspStr)) {
                     log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;

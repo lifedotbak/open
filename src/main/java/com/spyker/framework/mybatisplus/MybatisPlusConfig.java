@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.DataChangeRecorderInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.spyker.framework.constant.Constants;
+import com.spyker.framework.constants.CommonsConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,7 +70,7 @@ public class MybatisPlusConfig implements MetaObjectHandler {
             SaSession saSession = StpUtil.getSession();
 
             if (null != saSession) {
-                Object userKey = saSession.get(Constants.LOGIN_USER_KEY);
+                Object userKey = saSession.get(CommonsConstants.LOGIN_USER_KEY);
                 if (null != userKey) {
                     loginUserId = (String) userKey;
                 }
@@ -103,7 +103,7 @@ public class MybatisPlusConfig implements MetaObjectHandler {
         String loginUserId = "";
 
         try {
-            loginUserId = (String) StpUtil.getSession().get(Constants.LOGIN_USER_KEY);
+            loginUserId = (String) StpUtil.getSession().get(CommonsConstants.LOGIN_USER_KEY);
         } catch (Exception e) {
             log.error("error-->{}", e);
         }

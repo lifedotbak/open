@@ -347,6 +347,7 @@ flowable:
         password: open
   form:
     enabled: false
+  # Flowable-IDM功能：提供用户管理功能：提供用户分组功能：提供权限管理功能；提供单点登录管理：
   idm:
     enabled: false
 

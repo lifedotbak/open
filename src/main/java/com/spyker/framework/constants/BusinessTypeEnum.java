@@ -1,11 +1,11 @@
-package com.spyker.framework.enums;
+package com.spyker.framework.constants;
 
 /**
  * 业务操作类型
  *
  * @author spyker
  */
-public enum BusinessType {
+public enum BusinessTypeEnum {
 
     /** 其它 */
     OTHER,

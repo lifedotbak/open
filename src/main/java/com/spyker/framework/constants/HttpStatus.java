@@ -1,4 +1,4 @@
-package com.spyker.framework.constant;
+package com.spyker.framework.constants;
 
 /**
  * 返回状态码
