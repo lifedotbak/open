@@ -4,11 +4,11 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 
 import com.spyker.framework.config.PlatformConfigProperties;
 import com.spyker.framework.constants.CommonsConstants;
-import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.file.ExFileUtils;
 import com.spyker.framework.util.file.FileUploadUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.text.ExStringUtils;
+import com.spyker.framework.web.response.RestMapResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 

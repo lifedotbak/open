@@ -1,4 +1,4 @@
-package com.spyker.framework.response;
+package com.spyker.framework.web.response;
 
 import com.spyker.framework.constants.HttpStatus;
 import com.spyker.framework.util.text.ExStringUtils;

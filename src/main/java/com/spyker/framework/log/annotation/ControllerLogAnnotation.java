@@ -1,4 +1,4 @@
-package com.spyker.framework.log;
+package com.spyker.framework.log.annotation;
 
 import com.spyker.framework.constants.BusinessTypeEnum;
 import com.spyker.framework.constants.OperatorTypeEnum;
@@ -13,7 +13,8 @@ import java.lang.annotation.*;
 @Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Log {
+public @interface ControllerLogAnnotation {
+
     /** 模块 */
     String title() default "";
 

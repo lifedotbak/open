@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysNotice;
 import com.spyker.commons.mapper.SysNoticeMapper;
 import com.spyker.commons.search.SysNoticeSearch;
 import com.spyker.commons.service.SysNoticeService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

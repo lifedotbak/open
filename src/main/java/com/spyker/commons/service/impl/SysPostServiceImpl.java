@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysPost;
 import com.spyker.commons.mapper.SysPostMapper;
 import com.spyker.commons.search.SysPostSearch;
 import com.spyker.commons.service.SysPostService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

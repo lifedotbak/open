@@ -39,14 +39,6 @@ public interface ILoginService {
     R logout();
 
     /**
-     * 钉钉登录
-     *
-     * @param authCode
-     * @return
-     */
-    R loginAtDingTalk(String authCode);
-
-    /**
      * 获取登录地址
      *
      * @return

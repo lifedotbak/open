@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysRole;
 import com.spyker.commons.mapper.SysRoleMapper;
 import com.spyker.commons.search.SysRoleSearch;
 import com.spyker.commons.service.SysRoleService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

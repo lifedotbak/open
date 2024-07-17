@@ -1,8 +1,8 @@
-package com.spyker.framework.controller;
+package com.spyker.framework.web;
 
-import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.date.ExDateUtils;
 import com.spyker.framework.util.text.ExStringUtils;
+import com.spyker.framework.web.response.RestMapResponse;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;

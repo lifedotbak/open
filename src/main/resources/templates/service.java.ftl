@@ -5,7 +5,6 @@ import ${superServiceClassPackage};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.util.List;
-import com.spyker.framework.response.RestResponse;
 
 import ${package.Parent}.search.${entity}Search;
 

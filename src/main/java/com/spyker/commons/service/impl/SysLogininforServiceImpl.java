@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysLogininfor;
 import com.spyker.commons.mapper.SysLogininforMapper;
 import com.spyker.commons.search.SysLogininforSearch;
 import com.spyker.commons.service.SysLogininforService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

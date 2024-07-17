@@ -1,4 +1,4 @@
-package com.spyker.framework.request;
+package com.spyker.framework.web.request;
 
 import com.spyker.framework.constants.CommonsConstants;
 

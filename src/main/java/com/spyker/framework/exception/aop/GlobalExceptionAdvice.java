@@ -1,14 +1,17 @@
-package com.spyker.framework.exception;
+package com.spyker.framework.exception.aop;
 
 import cn.dev33.satoken.exception.SaTokenException;
 import cn.hutool.core.util.ObjectUtil;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spyker.framework.exception.BusinessException;
+import com.spyker.framework.exception.GlobalException;
 import com.spyker.framework.exception.entity.ExceptionLog;
 import com.spyker.framework.exception.handler.ExceptionLogHandler;
-import com.spyker.framework.exception.handler.ExceptionLogUsableHandler;
 import com.spyker.framework.exception.wrapper.ContentCachingRequestWrapper;
-import com.spyker.framework.response.ResponseCodeEnum;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.ResponseCodeEnum;
+import com.spyker.framework.web.response.RestResponse;
 import com.yomahub.tlog.context.TLogContext;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,18 +37,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /** 系统异常处理 */
 @RestControllerAdvice
 @Slf4j
 @RequiredArgsConstructor
-public class GlobalExceptionHandler {
+public class GlobalExceptionAdvice {
 
     private static final String REQUEST_BODY_MESSAGE = "requestBodyMessage";
 
-    private final ExceptionLogUsableHandler exceptionChain;
+    private final ExceptionLogHandler exceptionLogHandler;
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = SaTokenException.class)
@@ -219,22 +221,22 @@ public class GlobalExceptionHandler {
         Object body = request.getAttribute(REQUEST_BODY_MESSAGE);
         String expParams = ObjectUtil.isNotNull(body) ? body.toString() : "";
 
-        //		String headerLog = "";
-        //		Enumeration<String> headerNames = request.getHeaderNames();
-        //		Map<String, String> headers = new HashMap<>();
-        //		while (headerNames.hasMoreElements()) {
-        //			String headerName = headerNames.nextElement();
-        //			headers.put(headerName, request.getHeader(headerName));
-        //		}
-        //		if (!headers.isEmpty()) {
-        //			ObjectMapper objectMapper = new ObjectMapper();
-        //			try {
-        //				headerLog = objectMapper.writeValueAsString(headers);
-        //			} catch (JsonProcessingException jsonProcessingException) {
-        //				jsonProcessingException.printStackTrace();
-        //				log.error("写异常日志objectMapper.writeValueAsString(headers)发生异常,原异常详情： {}", expDetail);
-        //			}
-        //		}
+        String headerLog = "";
+        Enumeration<String> headerNames = request.getHeaderNames();
+        Map<String, String> headers = new HashMap<>();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            headers.put(headerName, request.getHeader(headerName));
+        }
+        if (!headers.isEmpty()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                headerLog = objectMapper.writeValueAsString(headers);
+            } catch (JsonProcessingException jsonProcessingException) {
+                jsonProcessingException.printStackTrace();
+                log.error("写异常日志objectMapper.writeValueAsString(headers)发生异常,原异常详情： {}", expDetail);
+            }
+        }
 
         // 异常的类型
         String expType = e.getClass().getName();
@@ -256,10 +258,6 @@ public class GlobalExceptionHandler {
 
         log.error("exceptionLog ---> {}", exceptionLog);
 
-        ExceptionLogHandler exceptionLogHandler = exceptionChain.getHandler();
-
-        if (null != exceptionLogHandler) {
-            exceptionLogHandler.handler(exceptionLog);
-        }
+        exceptionLogHandler.handler(exceptionLog);
     }
 }

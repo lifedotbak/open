@@ -9,8 +9,8 @@ import com.spyker.commons.entity.SysDept;
 import com.spyker.commons.search.SysDeptSearch;
 import com.spyker.commons.service.SysDeptService;
 import com.spyker.framework.constants.BusinessTypeEnum;
-import com.spyker.framework.log.Log;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.log.annotation.ControllerLogAnnotation;
+import com.spyker.framework.web.response.RestResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -58,7 +58,7 @@ public class SysDeptController {
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("list_page")
-    @Log(title = "部门表--列表（分页）", businessType = BusinessTypeEnum.QUERY)
+    @ControllerLogAnnotation(title = "部门表--列表（分页）", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<IPage<SysDept>> listPage(SysDeptSearch search) {
         int current = 1;
         int size = 10;

@@ -1,7 +1,7 @@
 package com.spyker.commons.controller.test;
 
 import com.spyker.framework.ratelimiter.RateLimiting;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 

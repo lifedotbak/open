@@ -9,7 +9,6 @@ import cn.hutool.http.useragent.UserAgent;
 import com.flyflow.biz.api.ApiStrategyFactory;
 import com.flyflow.biz.constants.SecurityConstants;
 import com.flyflow.biz.service.ILoginService;
-import com.flyflow.biz.utils.DingTalkHttpUtil;
 import com.flyflow.biz.vo.UserBizVO;
 import com.flyflow.common.constants.LoginPlatEnum;
 import com.flyflow.common.dto.R;
@@ -139,24 +138,6 @@ public class LoginServiceImpl implements ILoginService {
         }
 
         return R.success();
-    }
-
-    /**
-     * 钉钉登录
-     *
-     * @param authCode
-     * @return
-     */
-    @Override
-    public R loginAtDingTalk(String authCode) {
-
-        String userId = DingTalkHttpUtil.getUserIdByCodeAtMiniApp(authCode).getData();
-
-        StpUtil.login(userId, LoginPlatEnum.DING_TALK.getType());
-
-        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-
-        return R.success(tokenInfo);
     }
 
     /**

@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysOperLog;
 import com.spyker.commons.mapper.SysOperLogMapper;
 import com.spyker.commons.search.SysOperLogSearch;
 import com.spyker.commons.service.SysOperLogService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

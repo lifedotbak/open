@@ -20,9 +20,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
-import com.spyker.framework.response.RestResponse;
-
-
 /**
 *
 * ${table.comment!} 服务实现类

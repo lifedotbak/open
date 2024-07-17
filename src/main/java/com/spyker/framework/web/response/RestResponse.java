@@ -1,4 +1,4 @@
-package com.spyker.framework.response;
+package com.spyker.framework.web.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

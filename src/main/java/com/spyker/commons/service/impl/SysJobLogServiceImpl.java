@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysJobLog;
 import com.spyker.commons.mapper.SysJobLogMapper;
 import com.spyker.commons.search.SysJobLogSearch;
 import com.spyker.commons.service.SysJobLogService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.spyker.framework.response;
+package com.spyker.framework.web.response;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;

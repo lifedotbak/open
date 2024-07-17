@@ -23,8 +23,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 
-import com.spyker.framework.controller.BaseController;
-import com.spyker.framework.request.PageParamRequest;
+import com.spyker.framework.web.BaseController;
+import com.spyker.framework.web.request.PageParamRequest;
 
 import ${package.Parent}.search.${entity}Search;
 
@@ -40,10 +40,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import com.spyker.framework.constants.BusinessType;
-import com.spyker.framework.log.Log;
+import com.spyker.framework.constants.BusinessTypeEnum;
+import com.spyker.framework.log.annotation.ControllerLogAnnotation;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -73,7 +73,7 @@ import org.springframework.web.bind.annotation.*;
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
-    @Log(title = "${table.comment!}--列表", businessType = BusinessType.QUERY)
+    @ControllerLogAnnotation(title = "${table.comment!}--列表", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<List<${entity}>> list(${entity}Search search) {
 
         List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
@@ -85,7 +85,7 @@ import org.springframework.web.bind.annotation.*;
 
     @Operation(summary = "列表（分页）", description = "列表（分页）")
     @GetMapping("/page")
-    @Log(title = "${table.comment!}--列表（分页）", businessType = BusinessType.QUERY)
+    @ControllerLogAnnotation(title = "${table.comment!}--列表（分页）", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<IPage<${entity}>> listPage(@ModelAttribute ${entity}Search search) {
         int current = 1;
         int size = 10;
@@ -107,7 +107,7 @@ import org.springframework.web.bind.annotation.*;
 
     @Operation(summary = "详情", description = "详情")
     @GetMapping("/{id}")
-    @Log(title = "${table.comment!}--详情", businessType = BusinessType.QUERY)
+    @ControllerLogAnnotation(title = "${table.comment!}--详情", businessType = BusinessTypeEnum.QUERY)
     public RestResponse<${entity}> detail(@PathVariable("id") String id) {
 
       	${entity} result = ${table.serviceName?uncap_first}.get(id);
@@ -118,7 +118,7 @@ import org.springframework.web.bind.annotation.*;
 
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
-    @Log(title = "${table.comment!}--新增", businessType = BusinessType.INSERT)
+    @ControllerLogAnnotation(title = "${table.comment!}--新增", businessType = BusinessTypeEnum.INSERT)
     public RestResponse<${entity}> add(@RequestBody ${entity} add) {
 
          ${table.serviceName?uncap_first}.insert(add);
@@ -129,7 +129,7 @@ import org.springframework.web.bind.annotation.*;
 
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
-    @Log(title = "${table.comment!}--修改", businessType = BusinessType.UPDATE)
+    @ControllerLogAnnotation(title = "${table.comment!}--修改", businessType = BusinessTypeEnum.UPDATE)
     public RestResponse<${entity}> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
 
         update.setId(id);
@@ -142,7 +142,7 @@ import org.springframework.web.bind.annotation.*;
 
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
-    @Log(title = "${table.comment!}--删除", businessType = BusinessType.DELETE)
+    @ControllerLogAnnotation(title = "${table.comment!}--删除", businessType = BusinessTypeEnum.DELETE)
     public RestResponse<${entity}> delete(@PathVariable("id") String id) {
 
          ${table.serviceName?uncap_first}.delete(id);

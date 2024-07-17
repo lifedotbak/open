@@ -1,8 +1,14 @@
-package com.spyker.framework.log;
+package com.spyker.framework.log.aop;
+
+import cn.dev33.satoken.session.SaSession;
+import cn.dev33.satoken.stp.StpUtil;
 
 import com.alibaba.fastjson2.JSON;
-import com.spyker.commons.entity.SysOperLog;
+import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.filter.PropertyPreExcludeFilter;
+import com.spyker.framework.log.annotation.ControllerLogAnnotation;
+import com.spyker.framework.log.entity.OperationLog;
+import com.spyker.framework.log.handler.LogHandler;
 import com.spyker.framework.util.IpUtils;
 import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.text.ExStringUtils;
@@ -18,6 +24,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -25,6 +32,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -35,7 +43,7 @@ import java.util.Map;
 @Aspect
 @Component
 @Slf4j
-public class LogAspect {
+public class ControllerLogAnnotationAspect {
 
     /** 排除敏感属性字段 */
     public static final String[] EXCLUDE_PROPERTIES = {
@@ -46,9 +54,11 @@ public class LogAspect {
     private static final ThreadLocal<Long> TIME_THREADLOCAL =
             new NamedThreadLocal<Long>("Cost Time");
 
+    @Autowired LogHandler logHandler;
+
     /** 处理请求前执行 */
     @Before(value = "@annotation(controllerLog)")
-    public void boBefore(JoinPoint joinPoint, Log controllerLog) {
+    public void boBefore(JoinPoint joinPoint, ControllerLogAnnotation controllerLog) {
         TIME_THREADLOCAL.set(System.currentTimeMillis());
     }
 
@@ -58,33 +68,45 @@ public class LogAspect {
      * @param joinPoint 切点
      */
     @AfterReturning(pointcut = "@annotation(controllerLog)", returning = "jsonResult")
-    public void doAfterReturning(JoinPoint joinPoint, Log controllerLog, Object jsonResult) {
+    public void doAfterReturning(
+            JoinPoint joinPoint, ControllerLogAnnotation controllerLog, Object jsonResult) {
         handleLog(joinPoint, controllerLog, null, jsonResult);
     }
 
     protected void handleLog(
-            final JoinPoint joinPoint, Log controllerLog, final Exception e, Object jsonResult) {
+            final JoinPoint joinPoint,
+            ControllerLogAnnotation controllerLog,
+            final Exception e,
+            Object jsonResult) {
         try {
 
             // 获取当前的用户
-            //                        LoginUser loginUser = SecurityUtils.getLoginUser();
+            String loginUserId = "";
+
+            SaSession saSession = StpUtil.getSession();
+
+            if (null != saSession) {
+                Object userKey = saSession.get(CommonsConstants.LOGIN_USER_KEY);
+                if (null != userKey) {
+                    loginUserId = (String) userKey;
+                }
+            }
 
             // *========数据库日志=========*//
-            SysOperLog operLog = new SysOperLog();
-            //                        operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
-            //            // 请求的地址
+            OperationLog operLog = new OperationLog();
+            operLog.setStatus(0);
+            // 请求的地址
             String ip = IpUtils.getIpAddr();
+
+            operLog.setOperName(loginUserId);
             operLog.setOperIp(ip);
             operLog.setOperUrl(
                     ExStringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
-            //            if (loginUser != null) {
-            //                operLog.setOperName(loginUser.getUsername());
-            //            }
-            //
-            //            if (e != null) {
-            //                operLog.setStatus(BusinessStatus.FAIL.ordinal());
-            //                operLog.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
-            //            }
+
+            if (e != null) {
+                operLog.setStatus(1);
+                operLog.setErrorMsg(ExStringUtils.substring(e.getMessage(), 0, 2000));
+            }
             // 设置方法名称
             String className = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
@@ -96,9 +118,11 @@ public class LogAspect {
             // 设置消耗时间
             operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
 
-            log.info("operLog=====>{}", operLog);
-            // 保存数据库
-            //                        AsyncManager.me().execute(AsyncFactory.recordOper(operLog));
+            operLog.setOperTime(new Date());
+
+            log.info("controller op log=====>{}", operLog);
+
+            logHandler.handler(operLog);
 
         } catch (Exception exp) {
             // 记录本地异常日志
@@ -116,7 +140,11 @@ public class LogAspect {
      * @throws Exception
      */
     public void getControllerMethodDescription(
-            JoinPoint joinPoint, Log log, SysOperLog operLog, Object jsonResult) throws Exception {
+            JoinPoint joinPoint,
+            ControllerLogAnnotation log,
+            OperationLog operLog,
+            Object jsonResult)
+            throws Exception {
         // 设置action动作
         operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
@@ -134,16 +162,15 @@ public class LogAspect {
         }
     }
 
-    //
-    //    /**
-    //     * 获取请求的参数，放到log中
-    //     *
-    //     * @param operLog 操作日志
-    //     *
-    //     * @throws Exception 异常
-    //     */
+    /**
+     * 获取请求的参数，放到log中
+     *
+     * @param operLog 操作日志
+     * @throws Exception 异常
+     */
     private void setRequestValue(
-            JoinPoint joinPoint, SysOperLog operLog, String[] excludeParamNames) throws Exception {
+            JoinPoint joinPoint, OperationLog operLog, String[] excludeParamNames)
+            throws Exception {
         Map<?, ?> paramsMap = ServletUtils.getParamMap(ServletUtils.getRequest());
         String requestMethod = operLog.getRequestMethod();
         if (ExStringUtils.isEmpty(paramsMap)
@@ -161,10 +188,7 @@ public class LogAspect {
         }
     }
 
-    //
-    //    /**
-    //     * 参数拼装
-    //     */
+    /** 参数拼装 */
     private String argsArrayToString(Object[] paramsArray, String[] excludeParamNames) {
         String params = "";
         if (paramsArray != null) {
@@ -182,10 +206,7 @@ public class LogAspect {
         return params.trim();
     }
 
-    //
-    //    /**
-    //     * 忽略敏感属性
-    //     */
+    /** 忽略敏感属性 */
     public PropertyPreExcludeFilter excludePropertyPreFilter(String[] excludeParamNames) {
         return new PropertyPreExcludeFilter()
                 .addExcludes(ArrayUtils.addAll(EXCLUDE_PROPERTIES, excludeParamNames));
@@ -231,7 +252,8 @@ public class LogAspect {
      * @param e 异常
      */
     @AfterThrowing(value = "@annotation(controllerLog)", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, Log controllerLog, Exception e) {
+    public void doAfterThrowing(
+            JoinPoint joinPoint, ControllerLogAnnotation controllerLog, Exception e) {
         handleLog(joinPoint, controllerLog, e, null);
     }
 }

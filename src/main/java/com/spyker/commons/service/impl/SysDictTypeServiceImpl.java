@@ -6,7 +6,7 @@ import com.spyker.commons.entity.SysDictType;
 import com.spyker.commons.mapper.SysDictTypeMapper;
 import com.spyker.commons.search.SysDictTypeSearch;
 import com.spyker.commons.service.SysDictTypeService;
-import com.spyker.framework.response.RestResponse;
+import com.spyker.framework.web.response.RestResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

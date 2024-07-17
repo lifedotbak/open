@@ -81,18 +81,6 @@ public class LoginController {
     }
 
     /**
-     * 钉钉登录
-     *
-     * @param authCode 授权码
-     * @return
-     */
-    @Operation(summary = "钉钉登录", description = "钉钉登录")
-    @GetMapping("/loginAtDingTalk")
-    public R<SaTokenInfo> loginAtDingTalk(String authCode) {
-        return loginService.loginAtDingTalk(authCode);
-    }
-
-    /**
      * 根据不同平台获取登录地址，设计网页登录、钉钉登录
      *
      * @return

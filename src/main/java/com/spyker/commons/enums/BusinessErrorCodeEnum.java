@@ -1,6 +1,6 @@
 package com.spyker.commons.enums;
 
-import com.spyker.framework.response.IResponseCode;
+import com.spyker.framework.web.response.IResponseCode;
 
 import lombok.Getter;
 

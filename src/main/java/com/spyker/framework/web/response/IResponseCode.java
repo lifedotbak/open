@@ -1,4 +1,4 @@
-package com.spyker.framework.response;
+package com.spyker.framework.web.response;
 
 public interface IResponseCode {
 

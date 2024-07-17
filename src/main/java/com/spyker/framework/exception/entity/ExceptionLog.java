@@ -1,8 +1,5 @@
 package com.spyker.framework.exception.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -12,10 +9,7 @@ import java.util.Date;
 @Data
 public class ExceptionLog {
 
-    private static final long serialVersionUID = 1L;
-
     @Schema(description = "异常日志ID")
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
     @Schema(description = "异常的url")

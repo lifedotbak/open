@@ -7,9 +7,9 @@ import com.spyker.framework.config.PlatformConfigProperties;
 import com.spyker.framework.constants.CacheConstants;
 import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.redis.RedisService;
-import com.spyker.framework.response.RestMapResponse;
 import com.spyker.framework.util.sign.Base64Utils;
 import com.spyker.framework.util.uuid.ExUuidUtils;
+import com.spyker.framework.web.response.RestMapResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
