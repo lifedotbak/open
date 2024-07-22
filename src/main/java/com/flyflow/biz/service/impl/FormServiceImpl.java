@@ -1,5 +1,11 @@
 package com.flyflow.biz.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Dict;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.api.ApiStrategyFactory;
 import com.flyflow.biz.entity.Process;
 import com.flyflow.biz.entity.ProcessInstanceCopy;
@@ -26,17 +32,15 @@ import com.flyflow.common.utils.HttpUtil;
 import com.flyflow.common.utils.JsonUtil;
 import com.flyflow.common.utils.TenantUtil;
 import com.flyflow.common.utils.ThreadLocalUtil;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.StrUtil;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 @Service
 @Slf4j
@@ -78,7 +82,6 @@ public class FormServiceImpl implements IFormService {
         if (CollUtil.isNotEmpty(processParamMap)) {
             Object o = processParamMap.get(formItemVO.getId());
             formItemVOProps.setValue(o);
-            return;
         }
     }
 
@@ -363,13 +366,11 @@ public class FormServiceImpl implements IFormService {
         Node nodeDto = JsonUtil.parseObject(process, Node.class);
         Map<String, String> formPerms1 = null;
 
-        if (nodeDto instanceof RootNode) {
-            RootNode rootNode = (RootNode) nodeDto;
+        if (nodeDto instanceof RootNode rootNode) {
             formPerms1 = rootNode.getFormPerms();
         }
 
-        if (nodeDto instanceof SuperUserNode) {
-            SuperUserNode rootNode = (SuperUserNode) nodeDto;
+        if (nodeDto instanceof SuperUserNode rootNode) {
             formPerms1 = rootNode.getFormPerms();
         }
 
@@ -432,13 +433,11 @@ public class FormServiceImpl implements IFormService {
         Node node = nodeDataService.getNode(flowId, nodeId).getData();
         Map<String, String> formPerms = null;
 
-        if (node instanceof RootNode) {
-            RootNode rootNode = (RootNode) node;
+        if (node instanceof RootNode rootNode) {
             formPerms = rootNode.getFormPerms();
         }
 
-        if (node instanceof SuperUserNode) {
-            SuperUserNode rootNode = (SuperUserNode) node;
+        if (node instanceof SuperUserNode rootNode) {
             formPerms = rootNode.getFormPerms();
         }
 
@@ -486,13 +485,11 @@ public class FormServiceImpl implements IFormService {
 
         Map<String, String> formPerms = null;
 
-        if (startNode instanceof RootNode) {
-            RootNode rootNode = (RootNode) startNode;
+        if (startNode instanceof RootNode rootNode) {
             formPerms = rootNode.getFormPerms();
         }
 
-        if (startNode instanceof SuperUserNode) {
-            SuperUserNode rootNode = (SuperUserNode) startNode;
+        if (startNode instanceof SuperUserNode rootNode) {
             formPerms = rootNode.getFormPerms();
         }
 

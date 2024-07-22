@@ -1,14 +1,5 @@
 package com.spyker.commons.controller;
 
-import com.google.gson.Gson;
-import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysOssConfig;
-
-import jakarta.servlet.http.Cookie;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,55 +9,68 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.context.WebApplicationContext;
+import lombok.RequiredArgsConstructor;
+
+import jakarta.servlet.http.Cookie;
+
+import com.spyker.BaseTest;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import com.google.gson.Gson;
+
+import com.spyker.commons.entity.SysOssConfig;
 
 @Slf4j
 public class SysOssConfigControllerTest extends BaseTest {
 
-    private static final String LOGIN_URL = "/sys/login/login";
+    // @formatter:off
 
-    private static final String BASE_URL = "/sys/sys-oss-config";
+    private static final String BASE_URL = "/commons/sys-oss-config";
 
-    /* 分页查询 */
+    private static final String LOGIN_URL = BASE_URL + "/sys/login/login";
+
+    /*分页查询*/
     private static final String LIST_PAGE_URL = BASE_URL + "/list_page";
 
-    /* 查询 */
+    /*查询*/
     private static final String LIST_URL = BASE_URL + "/list";
 
-    /* 详情 */
+    /*详情*/
     private static final String DETAIL_URL = BASE_URL + "/detail";
 
-    /* 删除 */
-    private static final String DELETE_URL = BASE_URL + "/{ossConfigId}";
+    /*删除*/
+    private static final String DELETE_URL = BASE_URL + "/delete";
 
-    /* 修改 */
+    /*修改*/
     private static final String UPDATE_URL = BASE_URL + "/update";
 
-    /* 新增 */
+    /*新增*/
     private static final String ADD_URL = BASE_URL + "/add";
 
-    @Autowired private MockMvc mockMvc;
+    //  @Autowired
+    //   private MockMvc mockMvc;
 
-    //	private WebTestClient client;
+    //  @Autowired
+    private MockMvc mockMvc;
+    //
+    @Autowired private WebApplicationContext webApplicationContext;
 
-    // BeforeEach修饰在方法上，在每一个测试方法（所有@Test、@RepeatedTest、@ParameterizedTest或者@TestFactory注解的方法）之前执行一次。
-    // 例如：一个测试类有2个测试方法testA()和testB()，还有一个@BeforeEach的方法，执行这个测试类
-    // @BeforeEach的方法会在testA()之前执行一次，在testB()之前又执行一次。@BeforeEach的方法一共执行了2次。
     private Cookie[] cookies;
 
+    //  private WebTestClient client;
+
     @BeforeEach
-    public void setUp() {
+    void setUp() {
+        //    client =
+        // MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         cookies = getLoginCookies(LOGIN_URL, mockMvc);
     }
-
-    //	@Before
-    //	public void setup() {
-    //		// 实例化方式一
-    ////		mockMvc = MockMvcBuilders.standaloneSetup(new HelloWorldController()).build();
-    //		// 实例化方式二
-    //		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    //	}
 
     @Test
     @SneakyThrows
@@ -76,6 +80,7 @@ public class SysOssConfigControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get(LIST_PAGE_URL)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -93,6 +98,7 @@ public class SysOssConfigControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get(LIST_URL)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -112,6 +118,7 @@ public class SysOssConfigControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.get(DETAIL_URL)
+                                        .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -126,16 +133,14 @@ public class SysOssConfigControllerTest extends BaseTest {
     public void delete() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        //		MvcResult mvcResult = mockMvc
-        //
-        //	.perform(MockMvcRequestBuilders.delete(DELETE_URL).accept(MediaType.APPLICATION_JSON).params(params))
-        //
-        //	.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+        params.add("ossConfigId", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
-                                MockMvcRequestBuilders.delete(DELETE_URL, 1)
-                                        .accept(MediaType.APPLICATION_JSON))
+                                MockMvcRequestBuilders.delete(DELETE_URL)
+                                        .cookie(cookies)
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
                         .andDo(MockMvcResultHandlers.print())
                         .andReturn();
@@ -185,6 +190,7 @@ public class SysOssConfigControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.post(ADD_URL)
+                                        .cookie(cookies)
                                         .content(jsonString)
                                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -238,6 +244,7 @@ public class SysOssConfigControllerTest extends BaseTest {
         MvcResult mvcResult =
                 mockMvc.perform(
                                 MockMvcRequestBuilders.put(UPDATE_URL)
+                                        .cookie(cookies)
                                         .content(jsonString)
                                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(MockMvcResultMatchers.status().isOk())

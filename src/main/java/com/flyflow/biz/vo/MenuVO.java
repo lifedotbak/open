@@ -1,7 +1,8 @@
 package com.flyflow.biz.vo;
 
-import com.flyflow.biz.constants.MenuTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.flyflow.biz.constants.MenuTypeEnum;
+
 import lombok.Data;
 
 import java.util.List;

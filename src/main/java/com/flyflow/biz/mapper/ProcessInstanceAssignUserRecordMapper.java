@@ -1,7 +1,7 @@
 package com.flyflow.biz.mapper;
 
-import com.flyflow.biz.entity.ProcessInstanceAssignUserRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flyflow.biz.entity.ProcessInstanceAssignUserRecord;
 
 /**
  * 流程节点记录-执行人 Mapper 接口

@@ -1,5 +1,9 @@
 package com.flyflow.biz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.flyflow.biz.constants.ProcessInstanceNodeRecordStatusEnum;
 import com.flyflow.biz.entity.ProcessInstanceNodeRecord;
 import com.flyflow.biz.entity.ProcessInstanceRecord;
@@ -10,15 +14,15 @@ import com.flyflow.common.dto.ProcessInstanceNodeRecordParamDto;
 import com.flyflow.common.dto.R;
 import com.flyflow.common.dto.flow.Node;
 import com.flyflow.common.utils.JsonUtil;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 /**
  * 流程节点记录 服务实现类

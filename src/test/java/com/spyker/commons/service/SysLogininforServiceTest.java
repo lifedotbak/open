@@ -1,36 +1,42 @@
 package com.spyker.commons.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysLogininfor;
-import com.spyker.commons.search.SysLogininforSearch;
-
-import lombok.extern.slf4j.Slf4j;
-
-import org.junit.jupiter.api.Test;
+import com.spyker.commons.service.SysLogininforService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import com.spyker.commons.entity.SysLogininfor;
+import com.spyker.commons.service.SysLogininforService;
+
+import com.spyker.commons.search.SysLogininforSearch;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
 /**
- * 系统访问记录 服务类
+ * 系统访问记录 服务测试类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Slf4j
 public class SysLogininforServiceTest extends BaseTest {
+
+    // @formatter:off
 
     @Autowired private SysLogininforService service;
 
     @Test
     public void get() {
-
         SysLogininfor result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
     public void delete() {
-
         service.delete("1");
     }
 
@@ -48,7 +54,11 @@ public class SysLogininforServiceTest extends BaseTest {
 
         add.setOs("os");
 
+        add.setStatus("status");
+
         add.setMsg("msg");
+
+        log.info("add------>{}", add);
 
         service.insert(add);
     }
@@ -69,7 +79,11 @@ public class SysLogininforServiceTest extends BaseTest {
 
         update.setOs("os");
 
+        update.setStatus("status");
+
         update.setMsg("msg");
+
+        log.info("update------>{}", update);
 
         service.update(update);
     }
@@ -79,10 +93,17 @@ public class SysLogininforServiceTest extends BaseTest {
         SysLogininforSearch search = new SysLogininforSearch();
 
         search.setUserName("userName");
+
         search.setIpaddr("ipaddr");
+
         search.setLoginLocation("loginLocation");
+
         search.setBrowser("browser");
+
         search.setOs("os");
+
+        search.setStatus("status");
+
         search.setMsg("msg");
 
         service.query(search);
@@ -103,6 +124,8 @@ public class SysLogininforServiceTest extends BaseTest {
         search.setBrowser("browser");
 
         search.setOs("os");
+
+        search.setStatus("status");
 
         search.setMsg("msg");
 

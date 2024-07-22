@@ -7,22 +7,21 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 系统访问记录
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_logininfor")
-@Schema(name = "SysLogininfor", description = "系统访问记录")
-public class SysLogininfor implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Schema(name = "SysLogininfor", description = "系统访问记录对象")
+public class SysLogininfor {
 
     @Schema(description = "访问ID")
     @TableId(value = "info_id", type = IdType.ASSIGN_UUID)

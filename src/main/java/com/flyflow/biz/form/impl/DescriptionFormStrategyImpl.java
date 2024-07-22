@@ -1,9 +1,11 @@
 package com.flyflow.biz.form.impl;
 
+import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.form.FormStrategy;
 import com.flyflow.common.constants.FormTypeEnum;
 import com.flyflow.common.dto.flow.FormItemVO;
-import cn.hutool.core.util.StrUtil;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,7 @@
 package com.flyflow.biz.bo;
 
 import com.flyflow.biz.constants.MenuTypeEnum;
+
 import lombok.Data;
 
 import java.util.List;

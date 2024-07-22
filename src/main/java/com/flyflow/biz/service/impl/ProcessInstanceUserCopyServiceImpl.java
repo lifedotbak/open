@@ -1,10 +1,10 @@
 package com.flyflow.biz.service.impl;
 
-import com.flyflow.common.dto.R;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.flyflow.biz.api.ApiStrategyFactory;
@@ -17,15 +17,19 @@ import com.flyflow.biz.service.IProcessInstanceUserCopyService;
 import com.flyflow.biz.service.IProcessService;
 import com.flyflow.biz.vo.ProcessDataQueryVO;
 import com.flyflow.biz.vo.ProcessInstanceCopyVo;
+import com.flyflow.common.dto.R;
 import com.flyflow.common.dto.third.UserDto;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 @Service
 @Slf4j

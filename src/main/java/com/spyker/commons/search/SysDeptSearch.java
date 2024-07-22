@@ -1,19 +1,19 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * 部门表
+ * 部门表查询类
  *
  * @author CodeGenerator
- * @since 2023-11-07
+ * @since 2024-07-22
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @Schema(name = "SysDeptSearch对象", description = "部门表Search对象")
 public class SysDeptSearch {
@@ -33,6 +33,9 @@ public class SysDeptSearch {
     @Schema(description = "部门名称")
     private String deptName;
 
+    @Schema(description = "显示顺序")
+    private Integer orderNum;
+
     @Schema(description = "负责人")
     private String leader;
 
@@ -47,4 +50,10 @@ public class SysDeptSearch {
 
     @Schema(description = "删除标志（0代表存在 2代表删除）")
     private String delFlag;
+
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
+    private String updateBy;
 }

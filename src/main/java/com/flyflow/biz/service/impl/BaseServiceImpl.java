@@ -1,9 +1,15 @@
 package com.flyflow.biz.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.api.ApiStrategyFactory;
 import com.flyflow.biz.constants.SystemConstants;
-import com.flyflow.biz.entity.Process;
 import com.flyflow.biz.entity.*;
+import com.flyflow.biz.entity.Process;
 import com.flyflow.biz.service.*;
 import com.flyflow.biz.utils.CoreHttpUtil;
 import com.flyflow.biz.utils.NodeFormatUtil;
@@ -20,20 +26,18 @@ import com.flyflow.common.dto.flow.node.RootNode;
 import com.flyflow.common.dto.third.UserDto;
 import com.flyflow.common.utils.JsonUtil;
 import com.flyflow.common.utils.TenantUtil;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.io.resource.ClassPathResource;
-import cn.hutool.core.util.StrUtil;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 @Component
 @Slf4j
@@ -404,14 +408,12 @@ public class BaseServiceImpl implements IBaseService {
         taskOperDataResultVO.setTaskExist(currentTask);
         taskOperDataResultVO.setFrontJoinTask(taskResultDto.getFrontJoinTask());
 
-        if (node instanceof ApproveNode) {
-            ApproveNode approveNode = (ApproveNode) node;
+        if (node instanceof ApproveNode approveNode) {
             List operList = approveNode.getOperList();
             taskOperDataResultVO.setOperList(operList);
         }
 
-        if (node instanceof RootNode) {
-            RootNode rootNode = (RootNode) node;
+        if (node instanceof RootNode rootNode) {
             List operList = rootNode.getOperList();
             taskOperDataResultVO.setOperList(operList);
         }

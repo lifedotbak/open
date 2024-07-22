@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.commons.mapper.OpenDeptLeaderMapper">
+
+
+    <select id="query" resultType="com.spyker.commons.entity.OpenDeptLeader"
+            parameterType="com.spyker.commons.search.OpenDeptLeaderSearch">
+        SELECT
+        a.*
+        FROM
+        open_dept_leader a
+        <where>
+                    <if test="null != deptId ">
+                        and a.dept_id = #{deptId}
+                    </if>
+                    <if test="null != delFlag ">
+                        and a.del_flag = #{delFlag}
+                    </if>
+                    <if test="null != userId ">
+                        and a.user_id = #{userId}
+                    </if>
+                    <if test="null != tenantId ">
+                        and a.tenant_id = #{tenantId}
+                    </if>
+        </where>
+    </select>
+
+    <select id="queryPage" resultType="com.spyker.commons.entity.OpenDeptLeader"
+            parameterType="com.spyker.commons.search.OpenDeptLeaderSearch">
+        SELECT
+        a.*
+        FROM
+        open_dept_leader a
+        <where>
+                    <if test="null != search.deptId ">
+                        and a.dept_id = #{search.deptId}
+                    </if>
+                    <if test="null != search.delFlag ">
+                        and a.del_flag = #{search.delFlag}
+                    </if>
+                    <if test="null != search.userId ">
+                        and a.user_id = #{search.userId}
+                    </if>
+                    <if test="null != search.tenantId ">
+                        and a.tenant_id = #{search.tenantId}
+                    </if>
+        </where>
+    </select>
+
+</mapper>

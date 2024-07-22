@@ -9,22 +9,21 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 菜单权限表
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_menu")
-@Schema(name = "SysMenu", description = "菜单权限表")
-public class SysMenu implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Schema(name = "SysMenu", description = "菜单权限表对象")
+public class SysMenu {
 
     @Schema(description = "菜单ID")
     @TableId(value = "menu_id", type = IdType.ASSIGN_UUID)
@@ -51,11 +50,11 @@ public class SysMenu implements Serializable {
     @Schema(description = "路由参数")
     private String query;
 
-    @Schema(description = "是否为外链（0是 1否）")
-    private Integer isFrame;
-
     @Schema(description = "是否缓存（0缓存 1不缓存）")
     private Integer isCache;
+
+    @Schema(description = "是否为外链（0是 1否）")
+    private Integer isFrame;
 
     @Schema(description = "菜单类型（M目录 C菜单 F按钮）")
     private String menuType;
@@ -74,18 +73,22 @@ public class SysMenu implements Serializable {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")

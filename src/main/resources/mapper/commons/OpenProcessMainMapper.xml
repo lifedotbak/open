@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.commons.mapper.OpenProcessMainMapper">
+
+
+    <select id="query" resultType="com.spyker.commons.entity.OpenProcessMain"
+            parameterType="com.spyker.commons.search.OpenProcessMainSearch">
+        SELECT
+        a.*
+        FROM
+        open_process_main a
+        <where>
+                    <if test="null != delFlag ">
+                        and a.del_flag = #{delFlag}
+                    </if>
+                    <if test="null != name ">
+                        and a.name = #{name}
+                    </if>
+                    <if test="null != logo ">
+                        and a.logo = #{logo}
+                    </if>
+                    <if test="null != groupId ">
+                        and a.group_id = #{groupId}
+                    </if>
+                    <if test="null != sortValue ">
+                        and a.sort_value = #{sortValue}
+                    </if>
+                    <if test="null != uniqueId ">
+                        and a.unique_id = #{uniqueId}
+                    </if>
+                    <if test="null != rangeShow ">
+                        and a.range_show = #{rangeShow}
+                    </if>
+                    <if test="null != tenantId ">
+                        and a.tenant_id = #{tenantId}
+                    </if>
+        </where>
+    </select>
+
+    <select id="queryPage" resultType="com.spyker.commons.entity.OpenProcessMain"
+            parameterType="com.spyker.commons.search.OpenProcessMainSearch">
+        SELECT
+        a.*
+        FROM
+        open_process_main a
+        <where>
+                    <if test="null != search.delFlag ">
+                        and a.del_flag = #{search.delFlag}
+                    </if>
+                    <if test="null != search.name ">
+                        and a.name = #{search.name}
+                    </if>
+                    <if test="null != search.logo ">
+                        and a.logo = #{search.logo}
+                    </if>
+                    <if test="null != search.groupId ">
+                        and a.group_id = #{search.groupId}
+                    </if>
+                    <if test="null != search.sortValue ">
+                        and a.sort_value = #{search.sortValue}
+                    </if>
+                    <if test="null != search.uniqueId ">
+                        and a.unique_id = #{search.uniqueId}
+                    </if>
+                    <if test="null != search.rangeShow ">
+                        and a.range_show = #{search.rangeShow}
+                    </if>
+                    <if test="null != search.tenantId ">
+                        and a.tenant_id = #{search.tenantId}
+                    </if>
+        </where>
+    </select>
+
+</mapper>

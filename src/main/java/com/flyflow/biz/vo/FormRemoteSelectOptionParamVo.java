@@ -1,6 +1,7 @@
 package com.flyflow.biz.vo;
 
 import com.flyflow.common.dto.flow.HttpSetting;
+
 import lombok.Data;
 
 import java.util.Map;

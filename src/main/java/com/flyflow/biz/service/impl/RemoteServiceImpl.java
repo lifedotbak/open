@@ -1,35 +1,39 @@
 package com.flyflow.biz.service.impl;
 
-import com.flyflow.biz.api.ApiStrategyFactory;
-import com.flyflow.biz.constants.ProcessInstanceAssignUserRecordStatusEnum;
-import com.flyflow.biz.constants.ProcessInstanceNodeRecordStatusEnum;
-import com.flyflow.biz.constants.ProcessInstanceRecordStatusEnum;
-import com.flyflow.biz.entity.Process;
-import com.flyflow.biz.entity.*;
-import com.flyflow.biz.service.*;
-import com.flyflow.biz.utils.DataUtil;
-import com.flyflow.common.constants.MessageTypeEnum;
-import com.flyflow.common.constants.TaskTypeEnum;
-import com.flyflow.common.dto.ProcessInstanceParamDto;
-import com.flyflow.common.dto.*;
-import com.flyflow.common.dto.flow.Node;
-import com.flyflow.common.dto.third.MessageDto;
-import com.flyflow.common.dto.third.*;
-import com.flyflow.common.service.biz.IRemoteService;
-import com.flyflow.common.utils.JsonUtil;
-import com.flyflow.common.utils.NodeUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+
+import com.flyflow.biz.api.ApiStrategyFactory;
+import com.flyflow.biz.constants.ProcessInstanceAssignUserRecordStatusEnum;
+import com.flyflow.biz.constants.ProcessInstanceNodeRecordStatusEnum;
+import com.flyflow.biz.constants.ProcessInstanceRecordStatusEnum;
+import com.flyflow.biz.entity.*;
+import com.flyflow.biz.entity.Process;
+import com.flyflow.biz.service.*;
+import com.flyflow.biz.utils.DataUtil;
+import com.flyflow.common.constants.MessageTypeEnum;
+import com.flyflow.common.constants.TaskTypeEnum;
+import com.flyflow.common.dto.*;
+import com.flyflow.common.dto.ProcessInstanceParamDto;
+import com.flyflow.common.dto.flow.Node;
+import com.flyflow.common.dto.third.*;
+import com.flyflow.common.dto.third.MessageDto;
+import com.flyflow.common.service.biz.IRemoteService;
+import com.flyflow.common.utils.JsonUtil;
+import com.flyflow.common.utils.NodeUtil;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 @Service
 @Slf4j

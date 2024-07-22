@@ -1,5 +1,9 @@
 package com.flyflow.biz.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
+
 import com.flyflow.biz.api.ApiStrategyFactory;
 import com.flyflow.biz.service.*;
 import com.flyflow.biz.vo.UserListQueryVO;
@@ -8,17 +12,16 @@ import com.flyflow.common.dto.R;
 import com.flyflow.common.dto.third.PageResultDto;
 import com.flyflow.common.dto.third.UserDto;
 import com.flyflow.common.dto.third.UserQueryDto;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollUtil;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 /**
  * 用户表 服务实现类

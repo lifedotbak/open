@@ -1,36 +1,42 @@
 package com.spyker.commons.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysDictData;
-import com.spyker.commons.search.SysDictDataSearch;
-
-import lombok.extern.slf4j.Slf4j;
-
-import org.junit.jupiter.api.Test;
+import com.spyker.commons.service.SysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import com.spyker.commons.entity.SysDictData;
+import com.spyker.commons.service.SysDictDataService;
+
+import com.spyker.commons.search.SysDictDataSearch;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
 /**
- * 字典数据表 服务类
+ * 字典数据表 服务测试类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Slf4j
 public class SysDictDataServiceTest extends BaseTest {
+
+    // @formatter:off
 
     @Autowired private SysDictDataService service;
 
     @Test
     public void get() {
-
         SysDictData result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
     public void delete() {
-
         service.delete("1");
     }
 
@@ -52,11 +58,15 @@ public class SysDictDataServiceTest extends BaseTest {
 
         add.setIsDefault("isDefault");
 
+        add.setStatus("status");
+
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
 
         add.setRemark("remark");
+
+        log.info("add------>{}", add);
 
         service.insert(add);
     }
@@ -80,11 +90,15 @@ public class SysDictDataServiceTest extends BaseTest {
 
         update.setIsDefault("isDefault");
 
+        update.setStatus("status");
+
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
 
         update.setRemark("remark");
+
+        log.info("update------>{}", update);
 
         service.update(update);
     }
@@ -93,7 +107,27 @@ public class SysDictDataServiceTest extends BaseTest {
     public void query() {
         SysDictDataSearch search = new SysDictDataSearch();
 
+        search.setDictSort(1);
+
         search.setDictLabel("dictLabel");
+
+        search.setDictValue("dictValue");
+
+        search.setDictType("dictType");
+
+        search.setCssClass("cssClass");
+
+        search.setListClass("listClass");
+
+        search.setIsDefault("isDefault");
+
+        search.setStatus("status");
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
+
+        search.setRemark("remark");
 
         service.query(search);
     }
@@ -104,7 +138,27 @@ public class SysDictDataServiceTest extends BaseTest {
 
         SysDictDataSearch search = new SysDictDataSearch();
 
+        search.setDictSort(1);
+
         search.setDictLabel("dictLabel");
+
+        search.setDictValue("dictValue");
+
+        search.setDictType("dictType");
+
+        search.setCssClass("cssClass");
+
+        search.setListClass("listClass");
+
+        search.setIsDefault("isDefault");
+
+        search.setStatus("status");
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
+
+        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

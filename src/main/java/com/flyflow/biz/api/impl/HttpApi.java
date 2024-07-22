@@ -1,12 +1,15 @@
 package com.flyflow.biz.api.impl;
 
+import cn.hutool.core.lang.Dict;
+
 import com.flyflow.biz.api.ApiStrategy;
 import com.flyflow.biz.utils.ApiHttpUtil;
 import com.flyflow.common.dto.LoginUrlDto;
 import com.flyflow.common.dto.third.*;
 import com.flyflow.common.utils.JsonUtil;
-import cn.hutool.core.lang.Dict;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

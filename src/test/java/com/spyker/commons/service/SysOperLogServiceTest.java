@@ -1,36 +1,42 @@
 package com.spyker.commons.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysOperLog;
-import com.spyker.commons.search.SysOperLogSearch;
-
-import lombok.extern.slf4j.Slf4j;
-
-import org.junit.jupiter.api.Test;
+import com.spyker.commons.service.SysOperLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import com.spyker.commons.entity.SysOperLog;
+import com.spyker.commons.service.SysOperLogService;
+
+import com.spyker.commons.search.SysOperLogSearch;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
 /**
- * 操作日志记录 服务类
+ * 操作日志记录 服务测试类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Slf4j
 public class SysOperLogServiceTest extends BaseTest {
+
+    // @formatter:off
 
     @Autowired private SysOperLogService service;
 
     @Test
     public void get() {
-
         SysOperLog result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
     public void delete() {
-
         service.delete("1");
     }
 
@@ -66,6 +72,8 @@ public class SysOperLogServiceTest extends BaseTest {
 
         add.setErrorMsg("errorMsg");
 
+        log.info("add------>{}", add);
+
         service.insert(add);
     }
 
@@ -100,6 +108,8 @@ public class SysOperLogServiceTest extends BaseTest {
 
         update.setErrorMsg("errorMsg");
 
+        log.info("update------>{}", update);
+
         service.update(update);
     }
 
@@ -108,15 +118,28 @@ public class SysOperLogServiceTest extends BaseTest {
         SysOperLogSearch search = new SysOperLogSearch();
 
         search.setTitle("title");
+        search.setBusinessType(1);
+
         search.setMethod("method");
+
         search.setRequestMethod("requestMethod");
+        search.setOperatorType(1);
+
         search.setOperName("operName");
+
         search.setDeptName("deptName");
+
         search.setOperUrl("operUrl");
+
         search.setOperIp("operIp");
+
         search.setOperLocation("operLocation");
+
         search.setOperParam("operParam");
+
         search.setJsonResult("jsonResult");
+        search.setStatus(1);
+
         search.setErrorMsg("errorMsg");
 
         service.query(search);

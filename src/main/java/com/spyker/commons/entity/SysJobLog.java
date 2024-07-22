@@ -1,26 +1,29 @@
 package com.spyker.commons.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 定时任务调度日志表
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_job_log")
-@Schema(name = "SysJobLog", description = "定时任务调度日志表")
-public class SysJobLog implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Schema(name = "SysJobLog", description = "定时任务调度日志表对象")
+public class SysJobLog {
 
     @Schema(description = "任务日志ID")
     @TableId(value = "job_log_id", type = IdType.ASSIGN_UUID)
@@ -46,5 +49,6 @@ public class SysJobLog implements Serializable {
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 }

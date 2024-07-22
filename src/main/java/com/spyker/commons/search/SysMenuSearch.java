@@ -1,16 +1,20 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 菜单权限表
+ * 菜单权限表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysMenuSearch对象", description = "菜单权限表Search对象")
 public class SysMenuSearch {
 
@@ -26,6 +30,12 @@ public class SysMenuSearch {
     @Schema(description = "父菜单ID")
     private String parentId;
 
+    @Schema(description = "祖级id路径(parentid/sonid/id)")
+    private String ancestors;
+
+    @Schema(description = "显示顺序")
+    private Integer orderNum;
+
     @Schema(description = "路由地址")
     private String path;
 
@@ -35,11 +45,11 @@ public class SysMenuSearch {
     @Schema(description = "路由参数")
     private String query;
 
-    @Schema(description = "是否为外链（0是 1否）")
-    private Integer isFrame;
-
     @Schema(description = "是否缓存（0缓存 1不缓存）")
     private Integer isCache;
+
+    @Schema(description = "是否为外链（0是 1否）")
+    private Integer isFrame;
 
     @Schema(description = "菜单类型（M目录 C菜单 F按钮）")
     private String menuType;

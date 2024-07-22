@@ -1,7 +1,8 @@
 package com.flyflow.biz.utils;
 
-import com.flyflow.biz.entity.Menu;
 import cn.hutool.core.collection.CollUtil;
+
+import com.flyflow.biz.entity.Menu;
 import com.flyflow.common.dto.third.DeptDto;
 
 import java.util.ArrayList;

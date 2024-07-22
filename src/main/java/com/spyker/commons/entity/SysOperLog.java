@@ -3,26 +3,24 @@ package com.spyker.commons.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
+import java.util.Date;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.Date;
+import lombok.experimental.Accessors;
 
 /**
  * 操作日志记录
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_oper_log")
-@Schema(name = "SysOperLog", description = "操作日志记录")
-public class SysOperLog implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Schema(name = "SysOperLog", description = "操作日志记录对象")
+public class SysOperLog {
 
     @Schema(description = "日志主键")
     @TableId(value = "oper_id", type = IdType.ASSIGN_UUID)

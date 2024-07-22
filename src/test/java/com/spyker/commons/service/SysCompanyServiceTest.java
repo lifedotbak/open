@@ -1,37 +1,42 @@
 package com.spyker.commons.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spyker.BaseTest;
-import com.spyker.commons.entity.SysCompany;
-import com.spyker.commons.search.SysCompanySearch;
-
-import lombok.extern.slf4j.Slf4j;
-
-import org.junit.jupiter.api.Test;
+import com.spyker.commons.service.SysCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import com.spyker.commons.entity.SysCompany;
+import com.spyker.commons.service.SysCompanyService;
+
+import com.spyker.commons.search.SysCompanySearch;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
 /**
- * 部门表 服务类
+ * 部门表 服务测试类
  *
  * @author CodeGenerator
- * @since 2023-12-25
+ * @since 2024-07-22
  */
 @Slf4j
 public class SysCompanyServiceTest extends BaseTest {
+
+    // @formatter:off
 
     @Autowired private SysCompanyService service;
 
     @Test
     public void get() {
-
         SysCompany result = service.getById("1");
         log.info("result------>{}", result);
     }
 
     @Test
     public void delete() {
-
         service.delete("1");
     }
 
@@ -83,10 +88,15 @@ public class SysCompanyServiceTest extends BaseTest {
         SysCompanySearch search = new SysCompanySearch();
 
         search.setCompanyName("companyName");
+        search.setOrderNum(1);
 
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
 
         service.query(search);
     }
@@ -99,9 +109,15 @@ public class SysCompanyServiceTest extends BaseTest {
 
         search.setCompanyName("companyName");
 
+        search.setOrderNum(1);
+
         search.setStatus("status");
 
         search.setDelFlag("delFlag");
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
 
         service.queryPage(page, search);
     }

@@ -19,7 +19,9 @@ public enum NodeTypeEnum {
     DELAY("延时器", 7, false),
     ;
 
-    private String name;
+    private final String name;
+    private final Integer value;
+    private final Boolean branch;
 
     NodeTypeEnum(String name, Integer value, Boolean branch) {
         this.name = name;
@@ -33,7 +35,4 @@ public enum NodeTypeEnum {
                 .findAny()
                 .orElse(null);
     }
-
-    private Integer value;
-    private Boolean branch;
 }

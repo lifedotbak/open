@@ -1,26 +1,29 @@
 package com.spyker.commons.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 角色信息表
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_role")
-@Schema(name = "SysRole", description = "角色信息表")
-public class SysRole implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Schema(name = "SysRole", description = "角色信息表对象")
+public class SysRole {
 
     @Schema(description = "角色ID")
     @TableId(value = "role_id", type = IdType.ASSIGN_UUID)
@@ -47,20 +50,27 @@ public class SysRole implements Serializable {
     @Schema(description = "角色状态（0正常 1停用）")
     private String status;
 
+    @Schema(description = "删除标志（0代表存在 2代表删除）")
+    private String delFlag;
+
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")

@@ -1,5 +1,13 @@
 package com.flyflow.biz.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Dict;
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNode;
+import cn.hutool.core.lang.tree.TreeUtil;
+import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.api.ApiStrategyFactory;
 import com.flyflow.biz.entity.*;
 import com.flyflow.biz.entity.Process;
@@ -19,22 +27,17 @@ import com.flyflow.common.dto.flow.NodeUser;
 import com.flyflow.common.dto.third.DeptDto;
 import com.flyflow.common.dto.third.RoleDto;
 import com.flyflow.common.dto.third.UserDto;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.lang.tree.Tree;
-import cn.hutool.core.lang.tree.TreeNode;
-import cn.hutool.core.lang.tree.TreeUtil;
-import cn.hutool.core.util.StrUtil;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 @Service
 public class OrgServiceImpl implements IOrgService {

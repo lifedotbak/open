@@ -1,16 +1,20 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 定时任务调度表
+ * 定时任务调度表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysJobSearch对象", description = "定时任务调度表Search对象")
 public class SysJobSearch {
 

@@ -1,16 +1,26 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.util.Date;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 字典类型表
+ * 字典类型表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysDictTypeSearch对象", description = "字典类型表Search对象")
 public class SysDictTypeSearch {
 
@@ -28,4 +38,13 @@ public class SysDictTypeSearch {
 
     @Schema(description = "状态（0正常 1停用）")
     private String status;
+
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
+    private String updateBy;
+
+    @Schema(description = "备注")
+    private String remark;
 }

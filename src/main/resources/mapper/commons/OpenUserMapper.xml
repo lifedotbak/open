@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spyker.commons.mapper.OpenUserMapper">
+
+
+    <select id="query" resultType="com.spyker.commons.entity.OpenUser"
+            parameterType="com.spyker.commons.search.OpenUserSearch">
+        SELECT
+        a.*
+        FROM
+        open_user a
+        <where>
+                    <if test="null != name ">
+                        and a.name = #{name}
+                    </if>
+                    <if test="null != pinyin ">
+                        and a.pinyin = #{pinyin}
+                    </if>
+                    <if test="null != py ">
+                        and a.py = #{py}
+                    </if>
+                    <if test="null != avatarUrl ">
+                        and a.avatar_url = #{avatarUrl}
+                    </if>
+                    <if test="null != delFlag ">
+                        and a.del_flag = #{delFlag}
+                    </if>
+                    <if test="null != password ">
+                        and a.password = #{password}
+                    </if>
+                    <if test="null != phone ">
+                        and a.phone = #{phone}
+                    </if>
+                    <if test="null != status ">
+                        and a.status = #{status}
+                    </if>
+                    <if test="null != parentId ">
+                        and a.parent_id = #{parentId}
+                    </if>
+                    <if test="null != tenantId ">
+                        and a.tenant_id = #{tenantId}
+                    </if>
+        </where>
+    </select>
+
+    <select id="queryPage" resultType="com.spyker.commons.entity.OpenUser"
+            parameterType="com.spyker.commons.search.OpenUserSearch">
+        SELECT
+        a.*
+        FROM
+        open_user a
+        <where>
+                    <if test="null != search.name ">
+                        and a.name = #{search.name}
+                    </if>
+                    <if test="null != search.pinyin ">
+                        and a.pinyin = #{search.pinyin}
+                    </if>
+                    <if test="null != search.py ">
+                        and a.py = #{search.py}
+                    </if>
+                    <if test="null != search.avatarUrl ">
+                        and a.avatar_url = #{search.avatarUrl}
+                    </if>
+                    <if test="null != search.delFlag ">
+                        and a.del_flag = #{search.delFlag}
+                    </if>
+                    <if test="null != search.password ">
+                        and a.password = #{search.password}
+                    </if>
+                    <if test="null != search.phone ">
+                        and a.phone = #{search.phone}
+                    </if>
+                    <if test="null != search.status ">
+                        and a.status = #{search.status}
+                    </if>
+                    <if test="null != search.parentId ">
+                        and a.parent_id = #{search.parentId}
+                    </if>
+                    <if test="null != search.tenantId ">
+                        and a.tenant_id = #{search.tenantId}
+                    </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,9 +1,11 @@
 package com.flyflow.biz.vo;
 
-import com.flyflow.biz.entity.ProcessInstanceRecord;
 import cn.hutool.core.lang.Dict;
 
+import com.flyflow.biz.entity.ProcessInstanceRecord;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import lombok.Data;
 
 import java.util.List;

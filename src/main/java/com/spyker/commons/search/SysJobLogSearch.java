@@ -1,16 +1,20 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 定时任务调度日志表
+ * 定时任务调度日志表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysJobLogSearch对象", description = "定时任务调度日志表Search对象")
 public class SysJobLogSearch {
 
@@ -34,4 +38,7 @@ public class SysJobLogSearch {
 
     @Schema(description = "执行状态（0正常 1失败）")
     private String status;
+
+    @Schema(description = "异常信息")
+    private String exceptionInfo;
 }

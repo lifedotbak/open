@@ -1,15 +1,17 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 对象存储配置表
+ * 对象存储配置表查询类
  *
  * @author CodeGenerator
- * @since 2023-12-21
+ * @since 2024-07-22
  */
 @Data
 @Accessors(chain = true)
@@ -54,6 +56,9 @@ public class SysOssConfigSearch {
 
     @Schema(description = "状态（0=正常,1=停用）")
     private String status;
+
+    @Schema(description = "扩展字段")
+    private String ext1;
 
     @Schema(description = "创建者")
     private String createBy;

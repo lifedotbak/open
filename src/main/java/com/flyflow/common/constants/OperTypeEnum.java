@@ -14,7 +14,8 @@ public enum OperTypeEnum {
     CANCEL("取消", "cancel"),
     ;
 
-    private String name;
+    private final String name;
+    private final String value;
 
     OperTypeEnum(String name, String value) {
         this.name = name;
@@ -27,6 +28,4 @@ public enum OperTypeEnum {
                 .findAny()
                 .orElse(null);
     }
-
-    private String value;
 }

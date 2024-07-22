@@ -1,8 +1,8 @@
 package com.flyflow.biz.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.flyflow.biz.entity.Message;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.flyflow.biz.entity.Message;
 import com.flyflow.common.dto.R;
 import com.flyflow.common.dto.third.MessageDto;
 

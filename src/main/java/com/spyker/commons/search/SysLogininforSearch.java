@@ -1,18 +1,22 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
 /**
- * 系统访问记录
+ * 系统访问记录查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysLogininforSearch对象", description = "系统访问记录Search对象")
 public class SysLogininforSearch {
 

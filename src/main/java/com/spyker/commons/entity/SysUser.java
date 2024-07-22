@@ -1,24 +1,29 @@
 package com.spyker.commons.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 用户信息表
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_user")
-@Schema(name = "SysUser", description = "用户信息表")
-public class SysUser implements Serializable {
+@Schema(name = "SysUser", description = "用户信息表对象")
+public class SysUser {
 
     @Schema(description = "用户ID")
     @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
@@ -65,18 +70,22 @@ public class SysUser implements Serializable {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")

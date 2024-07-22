@@ -11,22 +11,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 部门表
  *
  * @author CodeGenerator
- * @since 2023-12-25
+ * @since 2024-07-22
  */
 @Data
 @Accessors(chain = true)
 @TableName("sys_company")
-@Schema(name = "SysCompany", description = "公司表对象")
-public class SysCompany implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Schema(name = "SysCompany", description = "部门表对象")
+public class SysCompany {
 
     @Schema(description = "公司id")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
@@ -46,17 +43,21 @@ public class SysCompany implements Serializable {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }

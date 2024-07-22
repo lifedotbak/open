@@ -28,7 +28,7 @@ public class HttpUtil {
     /** 请求超时时间 */
     public static final int TIME_OUT = 60000;
 
-    private static TLogHutoolhttpInterceptor tLogHutoolhttpInterceptor =
+    private static final TLogHutoolhttpInterceptor tLogHutoolhttpInterceptor =
             new TLogHutoolhttpInterceptor();
 
     public static String post(Object object, String url, String baseUrl, String tenantId) {

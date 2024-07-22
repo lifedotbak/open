@@ -1,6 +1,5 @@
 package com.spyker.framework.util.date;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

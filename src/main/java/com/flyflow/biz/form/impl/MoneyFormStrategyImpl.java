@@ -1,11 +1,13 @@
 package com.flyflow.biz.form.impl;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.form.FormStrategy;
 import com.flyflow.common.constants.FormTypeEnum;
 import com.flyflow.common.dto.flow.FormItemVO;
 import com.flyflow.common.utils.JsonUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

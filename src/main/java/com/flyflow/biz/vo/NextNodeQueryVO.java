@@ -1,6 +1,7 @@
 package com.flyflow.biz.vo;
 
 import com.flyflow.biz.entity.ProcessInstanceNodeRecord;
+
 import lombok.Data;
 
 import java.util.List;

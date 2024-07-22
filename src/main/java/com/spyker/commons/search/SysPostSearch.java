@@ -1,21 +1,24 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 岗位信息表
+ * 岗位信息表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysPostSearch对象", description = "岗位信息表Search对象")
 public class SysPostSearch {
 
     private Integer page = 1;
-
     private Integer size = 10;
 
     @Schema(description = "岗位ID")
@@ -26,6 +29,9 @@ public class SysPostSearch {
 
     @Schema(description = "岗位名称")
     private String postName;
+
+    @Schema(description = "显示顺序")
+    private Integer postSort;
 
     @Schema(description = "状态（0正常 1停用）")
     private String status;

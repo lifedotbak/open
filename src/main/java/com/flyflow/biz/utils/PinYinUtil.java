@@ -42,9 +42,9 @@ public class PinYinUtil {
                 if (Character.toString(hanYuArr[i]).matches("[\\u4E00-\\u9FA5]+")) {
                     // 如果是多音字，返回多个拼音，这里只取第一个
                     String[] pys = PinyinHelper.toHanyuPinyinStringArray(hanYuArr[i], format);
-                    pinYin.append(pys[0]).append("");
+                    pinYin.append(pys[0]);
                 } else {
-                    pinYin.append(hanYuArr[i]).append("");
+                    pinYin.append(hanYuArr[i]);
                 }
             }
         } catch (BadHanyuPinyinOutputFormatCombination badHanyuPinyinOutputFormatCombination) {

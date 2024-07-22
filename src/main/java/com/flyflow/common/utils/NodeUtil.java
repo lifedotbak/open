@@ -158,10 +158,7 @@ public class NodeUtil {
     }
 
     public static boolean isNode(Node childNode) {
-        if (childNode != null && StrUtil.isNotBlank(childNode.getId())) {
-            return true;
-        }
-        return false;
+        return childNode != null && StrUtil.isNotBlank(childNode.getId());
     }
 
     /**

@@ -1,7 +1,14 @@
 package com.flyflow.biz.service.impl;
 
-import com.flyflow.biz.entity.Process;
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+
+import com.baomidou.lock.annotation.Lock4j;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.flyflow.biz.entity.*;
+import com.flyflow.biz.entity.Process;
 import com.flyflow.biz.mapper.ProcessMapper;
 import com.flyflow.biz.service.*;
 import com.flyflow.biz.utils.CoreHttpUtil;
@@ -14,23 +21,20 @@ import com.flyflow.common.dto.flow.node.RootNode;
 import com.flyflow.common.utils.JsonUtil;
 import com.flyflow.common.utils.NodeUtil;
 import com.flyflow.common.utils.TenantUtil;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.lock.annotation.Lock4j;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 /**
  * 服务实现类
@@ -298,7 +302,7 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process>
         // 发起人范围
         List<NodeUser> nodeUserList = processVO.getRangeList();
 
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         if (CollUtil.isNotEmpty(nodeUserList)) {
             int index = 0;
 

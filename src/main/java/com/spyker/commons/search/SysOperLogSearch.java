@@ -1,18 +1,24 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.util.Date;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
-
-import java.util.Date;
+import lombok.experimental.Accessors;
 
 /**
- * 操作日志记录
+ * 操作日志记录查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysOperLogSearch对象", description = "操作日志记录Search对象")
 public class SysOperLogSearch {
 

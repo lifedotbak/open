@@ -12,7 +12,8 @@ public enum ApproveResultEnum implements IBaseEnum<Integer> {
     CANCEL("撤销", 3),
     ;
 
-    private String label;
+    private final String label;
+    private final Integer value;
 
     ApproveResultEnum(String label, int value) {
         this.label = label;
@@ -25,6 +26,4 @@ public enum ApproveResultEnum implements IBaseEnum<Integer> {
                 .findAny()
                 .get();
     }
-
-    private Integer value;
 }

@@ -85,8 +85,7 @@ public class LogAopUtil {
         }
 
         proceed = point.proceed(args);
-        if (proceed instanceof R) {
-            R r = (R) proceed;
+        if (proceed instanceof R r) {
             r.setTraceId(TLogContext.getTraceId());
         }
         if (notWriteLogAnno != null && !notWriteLogAnno.printResultLog()) {

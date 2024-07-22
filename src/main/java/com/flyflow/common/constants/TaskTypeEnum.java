@@ -13,7 +13,8 @@ public enum TaskTypeEnum {
     CANCEL("取消", "cancel"),
     ;
 
-    private String name;
+    private final String name;
+    private final String value;
 
     TaskTypeEnum(String name, String value) {
         this.name = name;
@@ -26,6 +27,4 @@ public enum TaskTypeEnum {
                 .findAny()
                 .orElse(null);
     }
-
-    private String value;
 }

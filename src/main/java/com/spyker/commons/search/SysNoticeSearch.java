@@ -1,16 +1,20 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 通知公告表
+ * 通知公告表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysNoticeSearch对象", description = "通知公告表Search对象")
 public class SysNoticeSearch {
 
@@ -26,6 +30,18 @@ public class SysNoticeSearch {
     @Schema(description = "公告类型（1通知 2公告）")
     private String noticeType;
 
+    @Schema(description = "公告内容")
+    private byte[] noticeContent;
+
     @Schema(description = "公告状态（0正常 1关闭）")
     private String status;
+
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
+    private String updateBy;
+
+    @Schema(description = "备注")
+    private String remark;
 }

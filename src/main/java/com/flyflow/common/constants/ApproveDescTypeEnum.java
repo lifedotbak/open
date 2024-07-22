@@ -15,6 +15,9 @@ public enum ApproveDescTypeEnum {
     REFUSE("refuseDesc", "拒绝"),
     ;
 
+    private String type;
+    private String name;
+
     public static List<String> getTypeList() {
         return Arrays.stream(ApproveDescTypeEnum.values())
                 .map(w -> w.getType())
@@ -27,8 +30,4 @@ public enum ApproveDescTypeEnum {
                 .findFirst()
                 .get();
     }
-
-    private String type;
-
-    private String name;
 }

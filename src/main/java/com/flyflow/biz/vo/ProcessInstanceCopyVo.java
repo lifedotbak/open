@@ -1,7 +1,8 @@
 package com.flyflow.biz.vo;
 
-import com.flyflow.biz.entity.ProcessInstanceCopy;
 import cn.hutool.core.lang.Dict;
+
+import com.flyflow.biz.entity.ProcessInstanceCopy;
 
 import lombok.Data;
 

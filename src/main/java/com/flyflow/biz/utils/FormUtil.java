@@ -1,9 +1,10 @@
 package com.flyflow.biz.utils;
 
+import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.form.FormStrategyFactory;
 import com.flyflow.common.constants.ProcessInstanceConstant;
 import com.flyflow.common.dto.flow.FormItemVO;
-import cn.hutool.core.util.StrUtil;
 
 import java.util.Map;
 

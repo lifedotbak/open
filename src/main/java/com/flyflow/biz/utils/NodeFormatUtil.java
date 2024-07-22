@@ -1,5 +1,9 @@
 package com.flyflow.biz.utils;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
+
 import com.flyflow.biz.constants.ProcessInstanceNodeRecordStatusEnum;
 import com.flyflow.biz.entity.ProcessInstanceNodeRecord;
 import com.flyflow.biz.service.IProcessInstanceNodeRecordService;
@@ -13,9 +17,7 @@ import com.flyflow.common.dto.flow.Node;
 import com.flyflow.common.dto.flow.node.GatewayNode;
 import com.flyflow.common.utils.DateUtil;
 import com.flyflow.common.utils.NodeUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

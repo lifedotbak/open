@@ -11,22 +11,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 对象存储配置表
  *
  * @author CodeGenerator
- * @since 2023-12-21
+ * @since 2024-07-22
  */
 @Data
 @Accessors(chain = true)
 @TableName("sys_oss_config")
 @Schema(name = "SysOssConfig", description = "对象存储配置表对象")
-public class SysOssConfig implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class SysOssConfig {
 
     @Schema(description = "主建")
     @TableId(value = "oss_config_id", type = IdType.ASSIGN_UUID)
@@ -70,18 +67,22 @@ public class SysOssConfig implements Serializable {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
+    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")

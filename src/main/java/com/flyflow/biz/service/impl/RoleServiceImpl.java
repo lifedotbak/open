@@ -1,5 +1,11 @@
 package com.flyflow.biz.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.flyflow.biz.entity.Menu;
 import com.flyflow.biz.entity.Role;
 import com.flyflow.biz.entity.RoleMenu;
@@ -11,19 +17,16 @@ import com.flyflow.biz.service.IUserRoleService;
 import com.flyflow.common.dto.R;
 import com.flyflow.common.dto.third.RoleDto;
 import com.flyflow.common.utils.TenantUtil;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.collection.CollectionUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 /**
  * 角色 服务实现类

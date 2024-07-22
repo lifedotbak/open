@@ -1,18 +1,22 @@
 package com.spyker.commons.search;
 
+// @formatter:off
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
- * 用户信息表
+ * 用户信息表查询类
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-22
  */
 @Data
+@Accessors(chain = true)
 @Schema(name = "SysUserSearch对象", description = "用户信息表Search对象")
 public class SysUserSearch {
 
@@ -43,6 +47,12 @@ public class SysUserSearch {
     @Schema(description = "用户性别（0男 1女 2未知）")
     private String sex;
 
+    @Schema(description = "头像地址")
+    private String avatar;
+
+    @Schema(description = "密码")
+    private String password;
+
     @Schema(description = "帐号状态（0正常 1停用）")
     private String status;
 
@@ -53,5 +63,14 @@ public class SysUserSearch {
     private String loginIp;
 
     @Schema(description = "最后登录时间")
-    private Timestamp loginDate;
+    private Date loginDate;
+
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
+    private String updateBy;
+
+    @Schema(description = "备注")
+    private String remark;
 }
