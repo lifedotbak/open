@@ -1,13 +1,5 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -17,7 +9,7 @@ import lombok.experimental.Accessors;
  * 字典数据表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)

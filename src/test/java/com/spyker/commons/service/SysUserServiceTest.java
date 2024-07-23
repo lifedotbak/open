@@ -15,12 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 用户信息表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysUserServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysUserService service;
 
@@ -45,15 +43,19 @@ public class SysUserServiceTest extends BaseTest {
 
         add.setNickName("nickName");
 
+        add.setPinyin("pinyin");
+
+        add.setPy("py");
+
         add.setUserType("userType");
 
         add.setEmail("email");
 
-        add.setPhonenumber("phonenumber");
+        add.setPhoneNumber("phoneNumber");
 
         add.setSex("sex");
 
-        add.setAvatar("avatar");
+        add.setAvatarUrl("avatarUrl");
 
         add.setPassword("password");
 
@@ -69,6 +71,10 @@ public class SysUserServiceTest extends BaseTest {
 
         add.setRemark("remark");
 
+        add.setParentId("parentId");
+
+        add.setTenantId("tenantId");
+
         log.info("add------>{}", add);
 
         service.insert(add);
@@ -78,7 +84,7 @@ public class SysUserServiceTest extends BaseTest {
     public void update() {
         SysUser update = new SysUser();
 
-        update.setUserId("userId");
+        update.setId("id");
 
         update.setDeptId("deptId");
 
@@ -86,15 +92,19 @@ public class SysUserServiceTest extends BaseTest {
 
         update.setNickName("nickName");
 
+        update.setPinyin("pinyin");
+
+        update.setPy("py");
+
         update.setUserType("userType");
 
         update.setEmail("email");
 
-        update.setPhonenumber("phonenumber");
+        update.setPhoneNumber("phoneNumber");
 
         update.setSex("sex");
 
-        update.setAvatar("avatar");
+        update.setAvatarUrl("avatarUrl");
 
         update.setPassword("password");
 
@@ -109,6 +119,10 @@ public class SysUserServiceTest extends BaseTest {
         update.setUpdateBy("updateBy");
 
         update.setRemark("remark");
+
+        update.setParentId("parentId");
+
+        update.setTenantId("tenantId");
 
         log.info("update------>{}", update);
 
@@ -125,15 +139,19 @@ public class SysUserServiceTest extends BaseTest {
 
         search.setNickName("nickName");
 
+        search.setPinyin("pinyin");
+
+        search.setPy("py");
+
         search.setUserType("userType");
 
         search.setEmail("email");
 
-        search.setPhonenumber("phonenumber");
+        search.setPhoneNumber("phoneNumber");
 
         search.setSex("sex");
 
-        search.setAvatar("avatar");
+        search.setAvatarUrl("avatarUrl");
 
         search.setPassword("password");
 
@@ -148,6 +166,10 @@ public class SysUserServiceTest extends BaseTest {
         search.setUpdateBy("updateBy");
 
         search.setRemark("remark");
+
+        search.setParentId("parentId");
+
+        search.setTenantId("tenantId");
 
         service.query(search);
     }
@@ -164,15 +186,19 @@ public class SysUserServiceTest extends BaseTest {
 
         search.setNickName("nickName");
 
+        search.setPinyin("pinyin");
+
+        search.setPy("py");
+
         search.setUserType("userType");
 
         search.setEmail("email");
 
-        search.setPhonenumber("phonenumber");
+        search.setPhoneNumber("phoneNumber");
 
         search.setSex("sex");
 
-        search.setAvatar("avatar");
+        search.setAvatarUrl("avatarUrl");
 
         search.setPassword("password");
 
@@ -187,6 +213,10 @@ public class SysUserServiceTest extends BaseTest {
         search.setUpdateBy("updateBy");
 
         search.setRemark("remark");
+
+        search.setParentId("parentId");
+
+        search.setTenantId("tenantId");
 
         service.queryPage(page, search);
     }

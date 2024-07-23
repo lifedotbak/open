@@ -4,15 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spyker.commons.entity.SysMenu;
 import com.spyker.commons.search.SysMenuSearch;
-import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
 /**
- * 菜单权限表 服务类
+ * 菜单管理 服务接口
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-23
  */
 public interface SysMenuService extends IService<SysMenu> {
 
@@ -22,9 +21,9 @@ public interface SysMenuService extends IService<SysMenu> {
 
     SysMenu get(String id);
 
-    RestResponse<?> insert(SysMenu sysMenu);
+    SysMenu insert(SysMenu sysMenu);
 
-    RestResponse<?> update(SysMenu sysMenu);
+    SysMenu update(SysMenu sysMenu);
 
-    RestResponse<?> delete(String id);
+    boolean delete(String id);
 }

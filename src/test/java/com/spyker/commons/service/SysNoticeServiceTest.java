@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysNoticeService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysNotice;
-import com.spyker.commons.service.SysNoticeService;
-
 import com.spyker.commons.search.SysNoticeSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 通知公告表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysNoticeServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysNoticeService service;
 
@@ -65,7 +58,7 @@ public class SysNoticeServiceTest extends BaseTest {
     public void update() {
         SysNotice update = new SysNotice();
 
-        update.setNoticeId("noticeId");
+        update.setId("id");
 
         update.setNoticeTitle("noticeTitle");
 

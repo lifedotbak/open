@@ -9,15 +9,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 菜单权限表 Mapper 接口测试类
+ * 菜单管理 Mapper 接口测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysMenuMapperTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysMenuMapper sysMenuMapper;
 }

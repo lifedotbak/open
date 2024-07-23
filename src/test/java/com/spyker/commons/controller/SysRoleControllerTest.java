@@ -28,29 +28,27 @@ import com.spyker.commons.entity.SysRole;
 @Slf4j
 public class SysRoleControllerTest extends BaseTest {
 
-    // @formatter:off
-
-    private static final String BASE_URL = "/commons/sys-role";
+    private static String BASE_URL = "/commons/sys-role";
 
     private static final String LOGIN_URL = BASE_URL + "/sys/login/login";
 
     /*分页查询*/
-    private static final String LIST_PAGE_URL = BASE_URL + "/list_page";
+    private static String LIST_PAGE_URL = BASE_URL + "/list_page";
 
     /*查询*/
-    private static final String LIST_URL = BASE_URL + "/list";
+    private static String LIST_URL = BASE_URL + "/list";
 
     /*详情*/
-    private static final String DETAIL_URL = BASE_URL + "/detail";
+    private static String DETAIL_URL = BASE_URL + "/detail";
 
     /*删除*/
-    private static final String DELETE_URL = BASE_URL + "/delete";
+    private static String DELETE_URL = BASE_URL + "/delete";
 
     /*修改*/
-    private static final String UPDATE_URL = BASE_URL + "/update";
+    private static String UPDATE_URL = BASE_URL + "/update";
 
     /*新增*/
-    private static final String ADD_URL = BASE_URL + "/add";
+    private static String ADD_URL = BASE_URL + "/add";
 
     //  @Autowired
     //   private MockMvc mockMvc;
@@ -113,7 +111,7 @@ public class SysRoleControllerTest extends BaseTest {
     public void detail() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("roleId", "1");
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
@@ -133,7 +131,7 @@ public class SysRoleControllerTest extends BaseTest {
     public void delete() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("roleId", "1");
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
@@ -153,23 +151,25 @@ public class SysRoleControllerTest extends BaseTest {
     public void add() {
         SysRole add = new SysRole();
 
-        add.setRoleName("roleName");
-
-        add.setRoleKey("roleKey");
-
-        add.setRoleSort(1);
-
-        add.setDataScope("dataScope");
-
-        add.setStatus("status");
-
-        add.setDelFlag("delFlag");
+        add.setDelFlag(1);
 
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
 
-        add.setRemark("remark");
+        add.setName("name");
+
+        add.setUserId("userId");
+
+        add.setRoleKey("roleKey");
+
+        add.setStatus(1);
+
+        add.setTenantId("tenantId");
+
+        add.setRoleSort(1);
+
+        add.setDataScope(1);
 
         Gson gson = new Gson();
 
@@ -193,25 +193,27 @@ public class SysRoleControllerTest extends BaseTest {
     public void update() {
         SysRole update = new SysRole();
 
-        update.setRoleId("roleId");
+        update.setId("id");
 
-        update.setRoleName("roleName");
-
-        update.setRoleKey("roleKey");
-
-        update.setRoleSort(1);
-
-        update.setDataScope("dataScope");
-
-        update.setStatus("status");
-
-        update.setDelFlag("delFlag");
+        update.setDelFlag(1);
 
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
 
-        update.setRemark("remark");
+        update.setName("name");
+
+        update.setUserId("userId");
+
+        update.setRoleKey("roleKey");
+
+        update.setStatus(1);
+
+        update.setTenantId("tenantId");
+
+        update.setRoleSort(1);
+
+        update.setDataScope(1);
 
         Gson gson = new Gson();
 

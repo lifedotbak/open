@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysRole;
-import com.spyker.commons.service.SysRoleService;
-
 import com.spyker.commons.search.SysRoleSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 角色信息表 服务测试类
+ * 角色 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysRoleServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysRoleService service;
 
@@ -44,23 +37,25 @@ public class SysRoleServiceTest extends BaseTest {
     public void add() {
         SysRole add = new SysRole();
 
-        add.setRoleName("roleName");
-
-        add.setRoleKey("roleKey");
-
-        add.setRoleSort(1);
-
-        add.setDataScope("dataScope");
-
-        add.setStatus("status");
-
-        add.setDelFlag("delFlag");
+        add.setDelFlag(1);
 
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
 
-        add.setRemark("remark");
+        add.setName("name");
+
+        add.setUserId("userId");
+
+        add.setRoleKey("roleKey");
+
+        add.setStatus(1);
+
+        add.setTenantId("tenantId");
+
+        add.setRoleSort(1);
+
+        add.setDataScope(1);
 
         log.info("add------>{}", add);
 
@@ -71,24 +66,24 @@ public class SysRoleServiceTest extends BaseTest {
     public void update() {
         SysRole update = new SysRole();
 
-        update.setRoleId("roleId");
-
-        update.setRoleName("roleName");
-
-        update.setRoleKey("roleKey");
-        update.setRoleSort(1);
-
-        update.setDataScope("dataScope");
-
-        update.setStatus("status");
-
-        update.setDelFlag("delFlag");
+        update.setId("id");
+        update.setDelFlag(1);
 
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
 
-        update.setRemark("remark");
+        update.setName("name");
+
+        update.setUserId("userId");
+
+        update.setRoleKey("roleKey");
+        update.setStatus(1);
+
+        update.setTenantId("tenantId");
+        update.setRoleSort(1);
+
+        update.setDataScope(1);
 
         log.info("update------>{}", update);
 
@@ -99,22 +94,23 @@ public class SysRoleServiceTest extends BaseTest {
     public void query() {
         SysRoleSearch search = new SysRoleSearch();
 
-        search.setRoleName("roleName");
-
-        search.setRoleKey("roleKey");
-        search.setRoleSort(1);
-
-        search.setDataScope("dataScope");
-
-        search.setStatus("status");
-
-        search.setDelFlag("delFlag");
+        search.setDelFlag(1);
 
         search.setCreateBy("createBy");
 
         search.setUpdateBy("updateBy");
 
-        search.setRemark("remark");
+        search.setName("name");
+
+        search.setUserId("userId");
+
+        search.setRoleKey("roleKey");
+        search.setStatus(1);
+
+        search.setTenantId("tenantId");
+        search.setRoleSort(1);
+
+        search.setDataScope(1);
 
         service.query(search);
     }
@@ -125,23 +121,25 @@ public class SysRoleServiceTest extends BaseTest {
 
         SysRoleSearch search = new SysRoleSearch();
 
-        search.setRoleName("roleName");
-
-        search.setRoleKey("roleKey");
-
-        search.setRoleSort(1);
-
-        search.setDataScope("dataScope");
-
-        search.setStatus("status");
-
-        search.setDelFlag("delFlag");
+        search.setDelFlag(1);
 
         search.setCreateBy("createBy");
 
         search.setUpdateBy("updateBy");
 
-        search.setRemark("remark");
+        search.setName("name");
+
+        search.setUserId("userId");
+
+        search.setRoleKey("roleKey");
+
+        search.setStatus(1);
+
+        search.setTenantId("tenantId");
+
+        search.setRoleSort(1);
+
+        search.setDataScope(1);
 
         service.queryPage(page, search);
     }

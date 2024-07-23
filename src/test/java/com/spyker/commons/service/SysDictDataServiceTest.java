@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysDictDataService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysDictData;
-import com.spyker.commons.service.SysDictDataService;
-
 import com.spyker.commons.search.SysDictDataSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 字典数据表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysDictDataServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysDictDataService service;
 
@@ -43,6 +36,8 @@ public class SysDictDataServiceTest extends BaseTest {
     @Test
     public void add() {
         SysDictData add = new SysDictData();
+
+        add.setDictCode("dictCode");
 
         add.setDictSort(1);
 
@@ -74,6 +69,8 @@ public class SysDictDataServiceTest extends BaseTest {
     @Test
     public void update() {
         SysDictData update = new SysDictData();
+
+        update.setId("id");
 
         update.setDictCode("dictCode");
         update.setDictSort(1);
@@ -107,6 +104,7 @@ public class SysDictDataServiceTest extends BaseTest {
     public void query() {
         SysDictDataSearch search = new SysDictDataSearch();
 
+        search.setDictCode("dictCode");
         search.setDictSort(1);
 
         search.setDictLabel("dictLabel");
@@ -137,6 +135,8 @@ public class SysDictDataServiceTest extends BaseTest {
         IPage<SysDictData> page = new Page<>(1, 10);
 
         SysDictDataSearch search = new SysDictDataSearch();
+
+        search.setDictCode("dictCode");
 
         search.setDictSort(1);
 

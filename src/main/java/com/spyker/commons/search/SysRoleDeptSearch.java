@@ -1,7 +1,5 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.experimental.Accessors;
  * 角色和部门关联表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -26,4 +24,10 @@ public class SysRoleDeptSearch {
 
     @Schema(description = "部门ID")
     private String deptId;
+
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
+    private String updateBy;
 }

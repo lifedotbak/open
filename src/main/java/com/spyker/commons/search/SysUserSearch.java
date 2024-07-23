@@ -1,7 +1,5 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -13,7 +11,7 @@ import java.util.Date;
  * 用户信息表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -22,9 +20,6 @@ public class SysUserSearch {
 
     private Integer page = 1;
     private Integer size = 10;
-
-    @Schema(description = "用户ID")
-    private String userId;
 
     @Schema(description = "部门ID")
     private String deptId;
@@ -35,6 +30,12 @@ public class SysUserSearch {
     @Schema(description = "用户昵称")
     private String nickName;
 
+    @Schema(description = "拼音  全拼")
+    private String pinyin;
+
+    @Schema(description = "拼音, 首字母缩写")
+    private String py;
+
     @Schema(description = "用户类型（00系统用户）")
     private String userType;
 
@@ -42,13 +43,13 @@ public class SysUserSearch {
     private String email;
 
     @Schema(description = "手机号码")
-    private String phonenumber;
+    private String phoneNumber;
 
     @Schema(description = "用户性别（0男 1女 2未知）")
     private String sex;
 
     @Schema(description = "头像地址")
-    private String avatar;
+    private String avatarUrl;
 
     @Schema(description = "密码")
     private String password;
@@ -73,4 +74,10 @@ public class SysUserSearch {
 
     @Schema(description = "备注")
     private String remark;
+
+    @Schema(description = "直属领导id")
+    private String parentId;
+
+    @Schema(description = "租户id")
+    private String tenantId;
 }

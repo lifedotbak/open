@@ -17,7 +17,7 @@ import java.util.Date;
  * 字典数据表
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -25,8 +25,11 @@ import java.util.Date;
 @Schema(name = "SysDictData", description = "字典数据表对象")
 public class SysDictData {
 
+    @Schema(description = "参数主键")
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
+
     @Schema(description = "字典编码")
-    @TableId(value = "dict_code", type = IdType.ASSIGN_UUID)
     private String dictCode;
 
     @Schema(description = "字典排序")
@@ -55,22 +58,18 @@ public class SysDictData {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")

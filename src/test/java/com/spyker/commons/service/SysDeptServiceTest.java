@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysDeptService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysDept;
-import com.spyker.commons.service.SysDeptService;
-
 import com.spyker.commons.search.SysDeptSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 部门表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysDeptServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysDeptService service;
 
@@ -44,27 +37,23 @@ public class SysDeptServiceTest extends BaseTest {
     public void add() {
         SysDept add = new SysDept();
 
+        add.setName("name");
+
         add.setParentId("parentId");
 
-        add.setAncestors("ancestors");
-
-        add.setDeptName("deptName");
-
-        add.setOrderNum(1);
-
-        add.setLeader("leader");
-
-        add.setPhone("phone");
-
-        add.setEmail("email");
-
-        add.setStatus("status");
-
-        add.setDelFlag("delFlag");
+        add.setDelFlag(1);
 
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
+
+        add.setStatus(1);
+
+        add.setDeptSort(1);
+
+        add.setTenantId("tenantId");
+
+        add.setAncestors("ancestors");
 
         log.info("add------>{}", add);
 
@@ -75,28 +64,23 @@ public class SysDeptServiceTest extends BaseTest {
     public void update() {
         SysDept update = new SysDept();
 
-        update.setDeptId("deptId");
+        update.setId("id");
+
+        update.setName("name");
 
         update.setParentId("parentId");
-
-        update.setAncestors("ancestors");
-
-        update.setDeptName("deptName");
-        update.setOrderNum(1);
-
-        update.setLeader("leader");
-
-        update.setPhone("phone");
-
-        update.setEmail("email");
-
-        update.setStatus("status");
-
-        update.setDelFlag("delFlag");
+        update.setDelFlag(1);
 
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
+        update.setStatus(1);
+
+        update.setDeptSort(1);
+
+        update.setTenantId("tenantId");
+
+        update.setAncestors("ancestors");
 
         log.info("update------>{}", update);
 
@@ -107,26 +91,21 @@ public class SysDeptServiceTest extends BaseTest {
     public void query() {
         SysDeptSearch search = new SysDeptSearch();
 
+        search.setName("name");
+
         search.setParentId("parentId");
-
-        search.setAncestors("ancestors");
-
-        search.setDeptName("deptName");
-        search.setOrderNum(1);
-
-        search.setLeader("leader");
-
-        search.setPhone("phone");
-
-        search.setEmail("email");
-
-        search.setStatus("status");
-
-        search.setDelFlag("delFlag");
+        search.setDelFlag(1);
 
         search.setCreateBy("createBy");
 
         search.setUpdateBy("updateBy");
+        search.setStatus(1);
+
+        search.setDeptSort(1);
+
+        search.setTenantId("tenantId");
+
+        search.setAncestors("ancestors");
 
         service.query(search);
     }
@@ -137,27 +116,23 @@ public class SysDeptServiceTest extends BaseTest {
 
         SysDeptSearch search = new SysDeptSearch();
 
+        search.setName("name");
+
         search.setParentId("parentId");
 
-        search.setAncestors("ancestors");
-
-        search.setDeptName("deptName");
-
-        search.setOrderNum(1);
-
-        search.setLeader("leader");
-
-        search.setPhone("phone");
-
-        search.setEmail("email");
-
-        search.setStatus("status");
-
-        search.setDelFlag("delFlag");
+        search.setDelFlag(1);
 
         search.setCreateBy("createBy");
 
         search.setUpdateBy("updateBy");
+
+        search.setStatus(1);
+
+        search.setDeptSort(1);
+
+        search.setTenantId("tenantId");
+
+        search.setAncestors("ancestors");
 
         service.queryPage(page, search);
     }

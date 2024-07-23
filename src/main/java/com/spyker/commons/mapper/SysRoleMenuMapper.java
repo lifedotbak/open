@@ -18,8 +18,6 @@ import java.util.List;
 @Mapper
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
 
-    // @formatter:off
-
     List<SysRoleMenu> query(SysRoleMenuSearch search);
 
     IPage<SysRoleMenu> queryPage(IPage<SysRoleMenu> page, SysRoleMenuSearch search);

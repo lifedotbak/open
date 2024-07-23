@@ -30,8 +30,6 @@ import java.util.List;
 public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenu>
         implements SysRoleMenuService {
 
-    // @formatter:off
-
     private final SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override

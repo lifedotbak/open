@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 用户和角色关联表 服务实现类
+ * 用户-角色 服务实现类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Service
 @Transactional
@@ -29,8 +29,6 @@ import java.util.List;
 @CacheConfig(cacheNames = "SysUserRole")
 public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserRole>
         implements SysUserRoleService {
-
-    // @formatter:off
 
     private final SysUserRoleMapper sysUserRoleMapper;
 

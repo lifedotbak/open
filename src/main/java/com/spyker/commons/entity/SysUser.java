@@ -17,7 +17,7 @@ import java.util.Date;
  * 用户信息表
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -25,9 +25,9 @@ import java.util.Date;
 @Schema(name = "SysUser", description = "用户信息表对象")
 public class SysUser {
 
-    @Schema(description = "用户ID")
-    @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
-    private String userId;
+    @Schema(description = "pk")
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
 
     @Schema(description = "部门ID")
     private String deptId;
@@ -38,6 +38,12 @@ public class SysUser {
     @Schema(description = "用户昵称")
     private String nickName;
 
+    @Schema(description = "拼音  全拼")
+    private String pinyin;
+
+    @Schema(description = "拼音, 首字母缩写")
+    private String py;
+
     @Schema(description = "用户类型（00系统用户）")
     private String userType;
 
@@ -45,13 +51,13 @@ public class SysUser {
     private String email;
 
     @Schema(description = "手机号码")
-    private String phonenumber;
+    private String phoneNumber;
 
     @Schema(description = "用户性别（0男 1女 2未知）")
     private String sex;
 
     @Schema(description = "头像地址")
-    private String avatar;
+    private String avatarUrl;
 
     @Schema(description = "密码")
     private String password;
@@ -70,24 +76,26 @@ public class SysUser {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")
     private String remark;
+
+    @Schema(description = "直属领导id")
+    private String parentId;
+
+    @Schema(description = "租户id")
+    private String tenantId;
 }

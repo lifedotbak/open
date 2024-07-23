@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysOperLogService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysOperLog;
-import com.spyker.commons.service.SysOperLogService;
-
 import com.spyker.commons.search.SysOperLogSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 操作日志记录 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysOperLogServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysOperLogService service;
 
@@ -81,7 +74,7 @@ public class SysOperLogServiceTest extends BaseTest {
     public void update() {
         SysOperLog update = new SysOperLog();
 
-        update.setOperId("operId");
+        update.setId("id");
 
         update.setTitle("title");
         update.setBusinessType(1);

@@ -2,6 +2,7 @@ package com.flyflow.biz.constants;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.flyflow.common.constants.IBaseEnum;
+
 import lombok.Getter;
 
 /**

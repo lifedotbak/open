@@ -1,15 +1,18 @@
 package com.flyflow.biz.strategy.assignedtype.impl;
 
-import com.flyflow.biz.strategy.assignedtype.ApprovalNodeAssignedTypeStrategy;
-import com.flyflow.common.dto.flow.node.parent.SuperUserNode;
 import cn.hutool.core.util.StrUtil;
+
+import com.flyflow.biz.strategy.assignedtype.ApprovalNodeAssignedTypeStrategy;
 import com.flyflow.biz.vo.node.NodeFormatUserVo;
 import com.flyflow.biz.vo.node.NodeShowVo;
 import com.flyflow.common.constants.ProcessInstanceConstant;
 import com.flyflow.common.dto.flow.Node;
 import com.flyflow.common.dto.flow.NodeUser;
+import com.flyflow.common.dto.flow.node.parent.SuperUserNode;
 import com.flyflow.common.utils.JsonUtil;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

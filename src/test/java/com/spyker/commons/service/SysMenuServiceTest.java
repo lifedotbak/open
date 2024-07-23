@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysMenu;
-import com.spyker.commons.service.SysMenuService;
-
 import com.spyker.commons.search.SysMenuSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 菜单权限表 服务测试类
+ * 菜单管理 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysMenuServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysMenuService service;
 
@@ -44,39 +37,39 @@ public class SysMenuServiceTest extends BaseTest {
     public void add() {
         SysMenu add = new SysMenu();
 
-        add.setMenuName("menuName");
-
         add.setParentId("parentId");
 
-        add.setAncestors("ancestors");
+        add.setTreePath("treePath");
 
-        add.setOrderNum(1);
+        add.setName("name");
+
+        add.setMenuType(1);
 
         add.setPath("path");
 
         add.setComponent("component");
 
-        add.setQuery("query");
+        add.setPerm("perm");
 
-        add.setIsCache(1);
+        add.setVisible(1);
 
-        add.setIsFrame(1);
-
-        add.setMenuType("menuType");
-
-        add.setVisible("visible");
-
-        add.setStatus("status");
-
-        add.setPerms("perms");
+        add.setMenuSort(1);
 
         add.setIcon("icon");
+
+        add.setRedirect("redirect");
 
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
 
-        add.setRemark("remark");
+        add.setDelFlag(1);
+
+        add.setTenantId("tenantId");
+
+        add.setAncestors("ancestors");
+
+        add.setQueryParams("queryParams");
 
         log.info("add------>{}", add);
 
@@ -87,39 +80,38 @@ public class SysMenuServiceTest extends BaseTest {
     public void update() {
         SysMenu update = new SysMenu();
 
-        update.setMenuId("menuId");
-
-        update.setMenuName("menuName");
+        update.setId("id");
 
         update.setParentId("parentId");
 
-        update.setAncestors("ancestors");
-        update.setOrderNum(1);
+        update.setTreePath("treePath");
+
+        update.setName("name");
+        update.setMenuType(1);
 
         update.setPath("path");
 
         update.setComponent("component");
 
-        update.setQuery("query");
-        update.setIsCache(1);
+        update.setPerm("perm");
+        update.setVisible(1);
 
-        update.setIsFrame(1);
-
-        update.setMenuType("menuType");
-
-        update.setVisible("visible");
-
-        update.setStatus("status");
-
-        update.setPerms("perms");
+        update.setMenuSort(1);
 
         update.setIcon("icon");
+
+        update.setRedirect("redirect");
 
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
+        update.setDelFlag(1);
 
-        update.setRemark("remark");
+        update.setTenantId("tenantId");
+
+        update.setAncestors("ancestors");
+
+        update.setQueryParams("queryParams");
 
         log.info("update------>{}", update);
 
@@ -130,37 +122,36 @@ public class SysMenuServiceTest extends BaseTest {
     public void query() {
         SysMenuSearch search = new SysMenuSearch();
 
-        search.setMenuName("menuName");
-
         search.setParentId("parentId");
 
-        search.setAncestors("ancestors");
-        search.setOrderNum(1);
+        search.setTreePath("treePath");
+
+        search.setName("name");
+        search.setMenuType(1);
 
         search.setPath("path");
 
         search.setComponent("component");
 
-        search.setQuery("query");
-        search.setIsCache(1);
+        search.setPerm("perm");
+        search.setVisible(1);
 
-        search.setIsFrame(1);
-
-        search.setMenuType("menuType");
-
-        search.setVisible("visible");
-
-        search.setStatus("status");
-
-        search.setPerms("perms");
+        search.setMenuSort(1);
 
         search.setIcon("icon");
+
+        search.setRedirect("redirect");
 
         search.setCreateBy("createBy");
 
         search.setUpdateBy("updateBy");
+        search.setDelFlag(1);
 
-        search.setRemark("remark");
+        search.setTenantId("tenantId");
+
+        search.setAncestors("ancestors");
+
+        search.setQueryParams("queryParams");
 
         service.query(search);
     }
@@ -171,39 +162,39 @@ public class SysMenuServiceTest extends BaseTest {
 
         SysMenuSearch search = new SysMenuSearch();
 
-        search.setMenuName("menuName");
-
         search.setParentId("parentId");
 
-        search.setAncestors("ancestors");
+        search.setTreePath("treePath");
 
-        search.setOrderNum(1);
+        search.setName("name");
+
+        search.setMenuType(1);
 
         search.setPath("path");
 
         search.setComponent("component");
 
-        search.setQuery("query");
+        search.setPerm("perm");
 
-        search.setIsCache(1);
+        search.setVisible(1);
 
-        search.setIsFrame(1);
-
-        search.setMenuType("menuType");
-
-        search.setVisible("visible");
-
-        search.setStatus("status");
-
-        search.setPerms("perms");
+        search.setMenuSort(1);
 
         search.setIcon("icon");
+
+        search.setRedirect("redirect");
 
         search.setCreateBy("createBy");
 
         search.setUpdateBy("updateBy");
 
-        search.setRemark("remark");
+        search.setDelFlag(1);
+
+        search.setTenantId("tenantId");
+
+        search.setAncestors("ancestors");
+
+        search.setQueryParams("queryParams");
 
         service.queryPage(page, search);
     }

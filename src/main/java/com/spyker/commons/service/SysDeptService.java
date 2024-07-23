@@ -8,10 +8,10 @@ import com.spyker.commons.search.SysDeptSearch;
 import java.util.List;
 
 /**
- * 部门表 服务类
+ * 部门表 服务接口
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-23
  */
 public interface SysDeptService extends IService<SysDept> {
 
@@ -25,5 +25,5 @@ public interface SysDeptService extends IService<SysDept> {
 
     SysDept update(SysDept sysDept);
 
-    void delete(String id);
+    boolean delete(String id);
 }

@@ -3,18 +3,19 @@ package com.spyker.commons.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
-
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 /**
  * 操作日志记录
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -23,8 +24,8 @@ import lombok.experimental.Accessors;
 public class SysOperLog {
 
     @Schema(description = "日志主键")
-    @TableId(value = "oper_id", type = IdType.ASSIGN_UUID)
-    private String operId;
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
 
     @Schema(description = "模块标题")
     private String title;

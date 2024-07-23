@@ -13,12 +13,10 @@ import java.util.List;
  * 用户与岗位关联表 Mapper 接口
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Mapper
 public interface SysUserPostMapper extends BaseMapper<SysUserPost> {
-
-    // @formatter:off
 
     List<SysUserPost> query(SysUserPostSearch search);
 

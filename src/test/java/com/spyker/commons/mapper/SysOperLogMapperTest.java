@@ -12,12 +12,10 @@ import lombok.extern.slf4j.Slf4j;
  * 操作日志记录 Mapper 接口测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysOperLogMapperTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysOperLogMapper sysOperLogMapper;
 }

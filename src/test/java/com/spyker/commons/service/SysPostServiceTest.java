@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysPostService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysPost;
-import com.spyker.commons.service.SysPostService;
-
 import com.spyker.commons.search.SysPostSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 岗位信息表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysPostServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysPostService service;
 
@@ -67,7 +60,7 @@ public class SysPostServiceTest extends BaseTest {
     public void update() {
         SysPost update = new SysPost();
 
-        update.setPostId("postId");
+        update.setId("id");
 
         update.setPostCode("postCode");
 

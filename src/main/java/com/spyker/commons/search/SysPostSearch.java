@@ -1,7 +1,5 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.experimental.Accessors;
  * 岗位信息表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -20,9 +18,6 @@ public class SysPostSearch {
 
     private Integer page = 1;
     private Integer size = 10;
-
-    @Schema(description = "岗位ID")
-    private String postId;
 
     @Schema(description = "岗位编码")
     private String postCode;

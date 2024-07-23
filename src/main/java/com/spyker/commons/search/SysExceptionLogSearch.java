@@ -1,21 +1,19 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 操作日志记录查询类
+ * 异常日志表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-16
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
-@Schema(name = "SysExceptionLogSearch对象", description = "操作日志记录Search对象")
+@Schema(name = "SysExceptionLogSearch对象", description = "异常日志表Search对象")
 public class SysExceptionLogSearch {
 
     private Integer page = 1;
@@ -30,7 +28,7 @@ public class SysExceptionLogSearch {
     @Schema(description = "异常类型")
     private String expType;
 
-    @Schema(description = "异常控制类")
+    @Schema(description = "异常controller")
     private String expController;
 
     @Schema(description = "异常方法")
@@ -39,9 +37,12 @@ public class SysExceptionLogSearch {
     @Schema(description = "异常详情")
     private String expDetail;
 
-    @Schema(description = "")
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
     private String updateBy;
 
-    @Schema(description = "")
-    private String createBy;
+    @Schema(description = "备注")
+    private String remark;
 }

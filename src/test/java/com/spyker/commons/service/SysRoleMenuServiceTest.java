@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysRoleMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysRoleMenu;
-import com.spyker.commons.service.SysRoleMenuService;
-
 import com.spyker.commons.search.SysRoleMenuSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 角色和菜单关联表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysRoleMenuServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysRoleMenuService service;
 
@@ -44,6 +37,18 @@ public class SysRoleMenuServiceTest extends BaseTest {
     public void add() {
         SysRoleMenu add = new SysRoleMenu();
 
+        add.setRoleId("roleId");
+
+        add.setMenuId("menuId");
+
+        add.setDelFlag(1);
+
+        add.setCreateBy("createBy");
+
+        add.setUpdateBy("updateBy");
+
+        add.setTenantId("tenantId");
+
         log.info("add------>{}", add);
 
         service.insert(add);
@@ -53,9 +58,18 @@ public class SysRoleMenuServiceTest extends BaseTest {
     public void update() {
         SysRoleMenu update = new SysRoleMenu();
 
+        update.setId("id");
+
         update.setRoleId("roleId");
 
         update.setMenuId("menuId");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setTenantId("tenantId");
 
         log.info("update------>{}", update);
 
@@ -66,6 +80,17 @@ public class SysRoleMenuServiceTest extends BaseTest {
     public void query() {
         SysRoleMenuSearch search = new SysRoleMenuSearch();
 
+        search.setRoleId("roleId");
+
+        search.setMenuId("menuId");
+        search.setDelFlag(1);
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
+
+        search.setTenantId("tenantId");
+
         service.query(search);
     }
 
@@ -74,6 +99,18 @@ public class SysRoleMenuServiceTest extends BaseTest {
         IPage<SysRoleMenu> page = new Page<>(1, 10);
 
         SysRoleMenuSearch search = new SysRoleMenuSearch();
+
+        search.setRoleId("roleId");
+
+        search.setMenuId("menuId");
+
+        search.setDelFlag(1);
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
+
+        search.setTenantId("tenantId");
 
         service.queryPage(page, search);
     }

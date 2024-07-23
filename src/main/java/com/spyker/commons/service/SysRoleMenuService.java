@@ -15,8 +15,6 @@ import java.util.List;
  */
 public interface SysRoleMenuService extends IService<SysRoleMenu> {
 
-    // @formatter:off
-
     List<SysRoleMenu> query(SysRoleMenuSearch search);
 
     IPage<SysRoleMenu> queryPage(IPage<SysRoleMenu> page, SysRoleMenuSearch search);

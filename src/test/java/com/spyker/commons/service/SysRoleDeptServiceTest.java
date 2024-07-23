@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysRoleDeptService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysRoleDept;
-import com.spyker.commons.service.SysRoleDeptService;
-
 import com.spyker.commons.search.SysRoleDeptSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 角色和部门关联表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysRoleDeptServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysRoleDeptService service;
 
@@ -48,6 +41,10 @@ public class SysRoleDeptServiceTest extends BaseTest {
 
         add.setDeptId("deptId");
 
+        add.setCreateBy("createBy");
+
+        add.setUpdateBy("updateBy");
+
         log.info("add------>{}", add);
 
         service.insert(add);
@@ -57,9 +54,15 @@ public class SysRoleDeptServiceTest extends BaseTest {
     public void update() {
         SysRoleDept update = new SysRoleDept();
 
+        update.setId("id");
+
         update.setRoleId("roleId");
 
         update.setDeptId("deptId");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
 
         log.info("update------>{}", update);
 
@@ -74,6 +77,10 @@ public class SysRoleDeptServiceTest extends BaseTest {
 
         search.setDeptId("deptId");
 
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
+
         service.query(search);
     }
 
@@ -86,6 +93,10 @@ public class SysRoleDeptServiceTest extends BaseTest {
         search.setRoleId("roleId");
 
         search.setDeptId("deptId");
+
+        search.setCreateBy("createBy");
+
+        search.setUpdateBy("updateBy");
 
         service.queryPage(page, search);
     }

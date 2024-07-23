@@ -30,8 +30,6 @@ import java.util.List;
 public class SysRoleDeptServiceImpl extends ServiceImpl<SysRoleDeptMapper, SysRoleDept>
         implements SysRoleDeptService {
 
-    // @formatter:off
-
     private final SysRoleDeptMapper sysRoleDeptMapper;
 
     @Override

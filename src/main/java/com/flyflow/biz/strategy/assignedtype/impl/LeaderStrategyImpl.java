@@ -1,6 +1,9 @@
 package com.flyflow.biz.strategy.assignedtype.impl;
 
-import com.flyflow.common.service.biz.IRemoteService;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.extra.spring.SpringUtil;
+
 import com.flyflow.biz.strategy.assignedtype.ApprovalNodeAssignedTypeStrategy;
 import com.flyflow.biz.vo.node.NodeFormatUserVo;
 import com.flyflow.biz.vo.node.NodeShowVo;
@@ -9,10 +12,10 @@ import com.flyflow.common.dto.R;
 import com.flyflow.common.dto.flow.Node;
 import com.flyflow.common.dto.flow.node.parent.SuperUserNode;
 import com.flyflow.common.dto.third.DeptDto;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.extra.spring.SpringUtil;
+import com.flyflow.common.service.biz.IRemoteService;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

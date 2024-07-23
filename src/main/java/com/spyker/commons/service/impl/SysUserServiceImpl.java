@@ -90,11 +90,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
 
             if (BCryptUtils.checkpw(password, sysUser.getPassword())) {
 
-                StpUtil.login(sysUser.getUserId());
+                StpUtil.login(sysUser.getId());
 
-                StpUtil.getSession().set(CommonsConstants.LOGIN_USER_KEY, sysUser.getUserId());
+                StpUtil.getSession().set(CommonsConstants.LOGIN_USER_KEY, sysUser.getId());
 
-                httpSession.setAttribute(CommonsConstants.LOGIN_USER_KEY, sysUser.getUserId());
+                httpSession.setAttribute(CommonsConstants.LOGIN_USER_KEY, sysUser.getId());
 
                 return true;
             }

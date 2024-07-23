@@ -10,15 +10,13 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * 用户和角色关联表 Mapper 接口
+ * 用户-角色 Mapper 接口
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Mapper
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
-
-    // @formatter:off
 
     List<SysUserRole> query(SysUserRoleSearch search);
 

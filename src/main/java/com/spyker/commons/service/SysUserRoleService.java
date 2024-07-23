@@ -8,14 +8,12 @@ import com.spyker.commons.search.SysUserRoleSearch;
 import java.util.List;
 
 /**
- * 用户和角色关联表 服务接口
+ * 用户-角色 服务接口
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 public interface SysUserRoleService extends IService<SysUserRole> {
-
-    // @formatter:off
 
     List<SysUserRole> query(SysUserRoleSearch search);
 

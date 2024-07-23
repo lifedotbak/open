@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysOssConfigService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysOssConfig;
-import com.spyker.commons.service.SysOssConfigService;
-
 import com.spyker.commons.search.SysOssConfigSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 对象存储配置表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysOssConfigServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysOssConfigService service;
 
@@ -83,7 +76,7 @@ public class SysOssConfigServiceTest extends BaseTest {
     public void update() {
         SysOssConfig update = new SysOssConfig();
 
-        update.setOssConfigId("ossConfigId");
+        update.setId("id");
 
         update.setConfigKey("configKey");
 

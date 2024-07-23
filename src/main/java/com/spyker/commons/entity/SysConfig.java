@@ -17,7 +17,7 @@ import java.util.Date;
  * 参数配置表
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -26,8 +26,8 @@ import java.util.Date;
 public class SysConfig {
 
     @Schema(description = "参数主键")
-    @TableId(value = "config_id", type = IdType.ASSIGN_UUID)
-    private String configId;
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
 
     @Schema(description = "参数名称")
     private String configName;
@@ -43,22 +43,18 @@ public class SysConfig {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     @Schema(description = "备注")

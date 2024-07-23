@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysConfigService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysConfig;
-import com.spyker.commons.service.SysConfigService;
-
 import com.spyker.commons.search.SysConfigSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 参数配置表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysConfigServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysConfigService service;
 
@@ -67,7 +60,7 @@ public class SysConfigServiceTest extends BaseTest {
     public void update() {
         SysConfig update = new SysConfig();
 
-        update.setConfigId("configId");
+        update.setId("id");
 
         update.setConfigName("configName");
 

@@ -29,6 +29,8 @@ import com.spyker.framework.web.request.PageParamRequest;
 import ${package.Parent}.search.${entity}Search;
 
 import lombok.RequiredArgsConstructor;
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -65,89 +67,97 @@ import org.springframework.web.bind.annotation.*;
     public class ${table.controllerName} {
 </#if>
 
-// @formatter:off
 
-    private final ${table.serviceName} ${table.serviceName?uncap_first};
-    private final HttpServletRequest httpServletRequest;
-    private final HttpServletResponse httpServletResponse;
+private final ${table.serviceName} ${table.serviceName?uncap_first};
+private final HttpServletRequest httpServletRequest;
+private final HttpServletResponse httpServletResponse;
 
-    @Operation(summary = "列表", description = "列表")
-    @GetMapping("/")
-    @ControllerLogAnnotation(title = "${table.comment!}--列表", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<List<${entity}>> list(${entity}Search search) {
+@SaCheckPermission(value = "user:get",orRole = "admin")
+@Operation(summary = "列表", description = "列表")
+@GetMapping("/")
+@ControllerLogAnnotation(title = "${table.comment!}--列表", businessType = BusinessTypeEnum.QUERY)
+public RestResponse
+<List<${entity}>> list(${entity}Search search) {
 
-        List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
+List<${entity}> result = ${table.serviceName?uncap_first}.query(search);
 
-        log.info("result------>{}", result);
+log.info("result------>{}", result);
 
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "列表（分页）", description = "列表（分页）")
-    @GetMapping("/page")
-    @ControllerLogAnnotation(title = "${table.comment!}--列表（分页）", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<IPage<${entity}>> listPage(@ModelAttribute ${entity}Search search) {
-        int current = 1;
-        int size = 10;
-
-        if (null != search) {
-          current = search.getPage();
-          size = search.getSize();
-        }
-
-        IPage<${entity}> page = new Page<>(current, size);
-
-        page = ${table.serviceName?uncap_first}.queryPage(page, search);
-
-        log.info("page------>{}", page);
-
-        return RestResponse.success(page);
-    }
+return RestResponse.success(result);
+}
 
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "${table.comment!}--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<${entity}> detail(@PathVariable("id") String id) {
+@SaCheckPermission(value = "user:get",orRole = "admin")
+@Operation(summary = "列表（分页）", description = "列表（分页）")
+@GetMapping("/page")
+@ControllerLogAnnotation(title = "${table.comment!}--列表（分页）", businessType = BusinessTypeEnum.QUERY)
+public RestResponse
+<IPage<${entity}>> listPage(@ModelAttribute ${entity}Search search) {
+int current = 1;
+int size = 10;
 
-      	${entity} result = ${table.serviceName?uncap_first}.get(id);
+if (null != search) {
+current = search.getPage();
+size = search.getSize();
+}
 
-        return RestResponse.success(result);
-    }
+IPage<${entity}> page = new Page<>(current, size);
+
+page = ${table.serviceName?uncap_first}.queryPage(page, search);
+
+log.info("page------>{}", page);
+
+return RestResponse.success(page);
+}
+
+@SaCheckPermission(value = "user:get",orRole = "admin")
+@Operation(summary = "详情", description = "详情")
+@GetMapping("/{id}")
+@ControllerLogAnnotation(title = "${table.comment!}--详情", businessType = BusinessTypeEnum.QUERY)
+public RestResponse<${entity}> detail(@PathVariable("id") String id) {
+
+${entity} result = ${table.serviceName?uncap_first}.get(id);
+
+return RestResponse.success(result);
+}
+
+@SaCheckRole("admin")
+@SaCheckPermission("admin:add")
+@Operation(summary = "新增", description = "新增")
+@PostMapping("/")
+@ControllerLogAnnotation(title = "${table.comment!}--新增", businessType = BusinessTypeEnum.INSERT)
+public RestResponse<${entity}> add(@RequestBody ${entity} add) {
+
+${table.serviceName?uncap_first}.insert(add);
+
+return RestResponse.success();
+}
+
+@SaCheckRole("admin")
+@SaCheckPermission("admin:update")
+@Operation(summary = "修改", description = "修改")
+@PutMapping("/{id}")
+@ControllerLogAnnotation(title = "${table.comment!}--修改", businessType = BusinessTypeEnum.UPDATE)
+public RestResponse<${entity}> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
+
+update.setId(id);
+
+${table.serviceName?uncap_first}.update(update);
+
+return RestResponse.success();
+}
 
 
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "${table.comment!}--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<${entity}> add(@RequestBody ${entity} add) {
+@SaCheckRole("admin")
+@SaCheckPermission("admin:delete")
+@Operation(summary = "删除", description = "删除")
+@DeleteMapping("/{id}")
+@ControllerLogAnnotation(title = "${table.comment!}--删除", businessType = BusinessTypeEnum.DELETE)
+public RestResponse<${entity}> delete(@PathVariable("id") String id) {
 
-         ${table.serviceName?uncap_first}.insert(add);
+${table.serviceName?uncap_first}.delete(id);
 
-         return RestResponse.success();
-    }
-
-
-    @Operation(summary = "修改", description = "修改")
-    @PutMapping("/{id}")
-    @ControllerLogAnnotation(title = "${table.comment!}--修改", businessType = BusinessTypeEnum.UPDATE)
-    public RestResponse<${entity}> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
-
-        update.setId(id);
-
-        ${table.serviceName?uncap_first}.update(update);
-
-        return RestResponse.success();
-    }
-
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "${table.comment!}--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<${entity}> delete(@PathVariable("id") String id) {
-
-         ${table.serviceName?uncap_first}.delete(id);
-
-         return RestResponse.success();
-    }
+return RestResponse.success();
+}
 
 }

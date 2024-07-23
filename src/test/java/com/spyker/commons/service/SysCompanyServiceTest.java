@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysCompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysCompany;
-import com.spyker.commons.service.SysCompanyService;
-
 import com.spyker.commons.search.SysCompanySearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 部门表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysCompanyServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysCompanyService service;
 
@@ -46,7 +39,7 @@ public class SysCompanyServiceTest extends BaseTest {
 
         add.setCompanyName("companyName");
 
-        add.setOrderNum(1);
+        add.setCompanySort(1);
 
         add.setStatus("status");
 
@@ -68,7 +61,7 @@ public class SysCompanyServiceTest extends BaseTest {
         update.setId("id");
 
         update.setCompanyName("companyName");
-        update.setOrderNum(1);
+        update.setCompanySort(1);
 
         update.setStatus("status");
 
@@ -88,7 +81,7 @@ public class SysCompanyServiceTest extends BaseTest {
         SysCompanySearch search = new SysCompanySearch();
 
         search.setCompanyName("companyName");
-        search.setOrderNum(1);
+        search.setCompanySort(1);
 
         search.setStatus("status");
 
@@ -109,7 +102,7 @@ public class SysCompanyServiceTest extends BaseTest {
 
         search.setCompanyName("companyName");
 
-        search.setOrderNum(1);
+        search.setCompanySort(1);
 
         search.setStatus("status");
 

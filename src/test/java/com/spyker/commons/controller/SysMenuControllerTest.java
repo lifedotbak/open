@@ -28,29 +28,27 @@ import com.spyker.commons.entity.SysMenu;
 @Slf4j
 public class SysMenuControllerTest extends BaseTest {
 
-    // @formatter:off
-
-    private static final String BASE_URL = "/commons/sys-menu";
+    private static String BASE_URL = "/commons/sys-menu";
 
     private static final String LOGIN_URL = BASE_URL + "/sys/login/login";
 
     /*分页查询*/
-    private static final String LIST_PAGE_URL = BASE_URL + "/list_page";
+    private static String LIST_PAGE_URL = BASE_URL + "/list_page";
 
     /*查询*/
-    private static final String LIST_URL = BASE_URL + "/list";
+    private static String LIST_URL = BASE_URL + "/list";
 
     /*详情*/
-    private static final String DETAIL_URL = BASE_URL + "/detail";
+    private static String DETAIL_URL = BASE_URL + "/detail";
 
     /*删除*/
-    private static final String DELETE_URL = BASE_URL + "/delete";
+    private static String DELETE_URL = BASE_URL + "/delete";
 
     /*修改*/
-    private static final String UPDATE_URL = BASE_URL + "/update";
+    private static String UPDATE_URL = BASE_URL + "/update";
 
     /*新增*/
-    private static final String ADD_URL = BASE_URL + "/add";
+    private static String ADD_URL = BASE_URL + "/add";
 
     //  @Autowired
     //   private MockMvc mockMvc;
@@ -113,7 +111,7 @@ public class SysMenuControllerTest extends BaseTest {
     public void detail() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("menuId", "1");
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
@@ -133,7 +131,7 @@ public class SysMenuControllerTest extends BaseTest {
     public void delete() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("menuId", "1");
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
@@ -153,39 +151,39 @@ public class SysMenuControllerTest extends BaseTest {
     public void add() {
         SysMenu add = new SysMenu();
 
-        add.setMenuName("menuName");
-
         add.setParentId("parentId");
 
-        add.setAncestors("ancestors");
+        add.setTreePath("treePath");
 
-        add.setOrderNum(1);
+        add.setName("name");
+
+        add.setMenuType(1);
 
         add.setPath("path");
 
         add.setComponent("component");
 
-        add.setQuery("query");
+        add.setPerm("perm");
 
-        add.setIsCache(1);
+        add.setVisible(1);
 
-        add.setIsFrame(1);
-
-        add.setMenuType("menuType");
-
-        add.setVisible("visible");
-
-        add.setStatus("status");
-
-        add.setPerms("perms");
+        add.setMenuSort(1);
 
         add.setIcon("icon");
+
+        add.setRedirect("redirect");
 
         add.setCreateBy("createBy");
 
         add.setUpdateBy("updateBy");
 
-        add.setRemark("remark");
+        add.setDelFlag(1);
+
+        add.setTenantId("tenantId");
+
+        add.setAncestors("ancestors");
+
+        add.setQueryParams("queryParams");
 
         Gson gson = new Gson();
 
@@ -209,41 +207,41 @@ public class SysMenuControllerTest extends BaseTest {
     public void update() {
         SysMenu update = new SysMenu();
 
-        update.setMenuId("menuId");
-
-        update.setMenuName("menuName");
+        update.setId("id");
 
         update.setParentId("parentId");
 
-        update.setAncestors("ancestors");
+        update.setTreePath("treePath");
 
-        update.setOrderNum(1);
+        update.setName("name");
+
+        update.setMenuType(1);
 
         update.setPath("path");
 
         update.setComponent("component");
 
-        update.setQuery("query");
+        update.setPerm("perm");
 
-        update.setIsCache(1);
+        update.setVisible(1);
 
-        update.setIsFrame(1);
-
-        update.setMenuType("menuType");
-
-        update.setVisible("visible");
-
-        update.setStatus("status");
-
-        update.setPerms("perms");
+        update.setMenuSort(1);
 
         update.setIcon("icon");
+
+        update.setRedirect("redirect");
 
         update.setCreateBy("createBy");
 
         update.setUpdateBy("updateBy");
 
-        update.setRemark("remark");
+        update.setDelFlag(1);
+
+        update.setTenantId("tenantId");
+
+        update.setAncestors("ancestors");
+
+        update.setQueryParams("queryParams");
 
         Gson gson = new Gson();
 

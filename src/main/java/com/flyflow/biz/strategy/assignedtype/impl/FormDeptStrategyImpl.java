@@ -1,7 +1,10 @@
 package com.flyflow.biz.strategy.assignedtype.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
+
 import com.flyflow.biz.api.ApiStrategyFactory;
-import com.flyflow.common.service.biz.IRemoteService;
 import com.flyflow.biz.strategy.assignedtype.ApprovalNodeAssignedTypeStrategy;
 import com.flyflow.biz.vo.node.NodeFormatUserVo;
 import com.flyflow.biz.vo.node.NodeShowVo;
@@ -11,20 +14,21 @@ import com.flyflow.common.dto.flow.NodeUser;
 import com.flyflow.common.dto.flow.node.parent.SuperUserNode;
 import com.flyflow.common.dto.third.DeptDto;
 import com.flyflow.common.dto.third.UserQueryDto;
+import com.flyflow.common.service.biz.IRemoteService;
 import com.flyflow.common.utils.JsonUtil;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 
 /**
  * @author zhj

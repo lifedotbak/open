@@ -20,7 +20,7 @@ import java.util.List;
  * 用户与岗位关联表 服务实现类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Service
 @Transactional
@@ -29,8 +29,6 @@ import java.util.List;
 @CacheConfig(cacheNames = "SysUserPost")
 public class SysUserPostServiceImpl extends ServiceImpl<SysUserPostMapper, SysUserPost>
         implements SysUserPostService {
-
-    // @formatter:off
 
     private final SysUserPostMapper sysUserPostMapper;
 

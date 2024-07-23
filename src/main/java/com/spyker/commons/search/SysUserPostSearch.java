@@ -1,7 +1,5 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.experimental.Accessors;
  * 用户与岗位关联表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -26,4 +24,13 @@ public class SysUserPostSearch {
 
     @Schema(description = "岗位ID")
     private String postId;
+
+    @Schema(description = "租户id")
+    private String tenantId;
+
+    @Schema(description = "创建者")
+    private String createBy;
+
+    @Schema(description = "更新者")
+    private String updateBy;
 }

@@ -3,6 +3,7 @@ package com.flyflow.biz.strategy.assignedtype.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+
 import com.flyflow.biz.entity.ProcessInstanceRecord;
 import com.flyflow.biz.service.IProcessInstanceRecordService;
 import com.flyflow.biz.strategy.assignedtype.ApprovalNodeAssignedTypeStrategy;
@@ -10,8 +11,10 @@ import com.flyflow.biz.vo.node.NodeFormatUserVo;
 import com.flyflow.biz.vo.node.NodeShowVo;
 import com.flyflow.common.constants.ProcessInstanceConstant;
 import com.flyflow.common.dto.flow.Node;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 

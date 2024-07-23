@@ -12,15 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 操作日志记录 服务测试类
+ * 异常日志表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-16
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysExceptionLogServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysExceptionLogService service;
 
@@ -51,9 +49,11 @@ public class SysExceptionLogServiceTest extends BaseTest {
 
         add.setExpDetail("expDetail");
 
+        add.setCreateBy("createBy");
+
         add.setUpdateBy("updateBy");
 
-        add.setCreateBy("createBy");
+        add.setRemark("remark");
 
         log.info("add------>{}", add);
 
@@ -78,9 +78,11 @@ public class SysExceptionLogServiceTest extends BaseTest {
 
         update.setExpDetail("expDetail");
 
+        update.setCreateBy("createBy");
+
         update.setUpdateBy("updateBy");
 
-        update.setCreateBy("createBy");
+        update.setRemark("remark");
 
         log.info("update------>{}", update);
 
@@ -103,9 +105,11 @@ public class SysExceptionLogServiceTest extends BaseTest {
 
         search.setExpDetail("expDetail");
 
+        search.setCreateBy("createBy");
+
         search.setUpdateBy("updateBy");
 
-        search.setCreateBy("createBy");
+        search.setRemark("remark");
 
         service.query(search);
     }
@@ -128,9 +132,11 @@ public class SysExceptionLogServiceTest extends BaseTest {
 
         search.setExpDetail("expDetail");
 
+        search.setCreateBy("createBy");
+
         search.setUpdateBy("updateBy");
 
-        search.setCreateBy("createBy");
+        search.setRemark("remark");
 
         service.queryPage(page, search);
     }

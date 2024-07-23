@@ -2,72 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysDeptMapper">
 
+
     <select id="query" resultType="com.spyker.commons.entity.SysDept"
             parameterType="com.spyker.commons.search.SysDeptSearch">
         SELECT
-            a.*
+        a.*
         FROM
-            sys_dept a
+        sys_dept a
         <where>
-            <if test="null != parentId ">
-                and a.parent_id = #{parentId}
-            </if>
-            <if test="null != ancestors ">
-                and a.ancestors = #{ancestors}
-            </if>
-            <if test="null != deptName ">
-                and a.dept_name = #{deptName}
-            </if>
-            <if test="null != leader ">
-                and a.leader = #{leader}
-            </if>
-            <if test="null != phone ">
-                and a.phone = #{phone}
-            </if>
-            <if test="null != email ">
-                and a.email = #{email}
-            </if>
-            <if test="null != status ">
-                and a.status = #{status}
-            </if>
-            <if test="null != delFlag ">
-                and a.del_flag = #{delFlag}
-            </if>
+                    <if test="null != name ">
+                        and a.name = #{name}
+                    </if>
+                    <if test="null != parentId ">
+                        and a.parent_id = #{parentId}
+                    </if>
+                    <if test="null != delFlag ">
+                        and a.del_flag = #{delFlag}
+                    </if>
+                    <if test="null != createBy ">
+                        and a.create_by = #{createBy}
+                    </if>
+                    <if test="null != updateBy ">
+                        and a.update_by = #{updateBy}
+                    </if>
+                    <if test="null != status ">
+                        and a.status = #{status}
+                    </if>
+                    <if test="null != deptSort ">
+                        and a.dept_sort = #{deptSort}
+                    </if>
+                    <if test="null != tenantId ">
+                        and a.tenant_id = #{tenantId}
+                    </if>
+                    <if test="null != ancestors ">
+                        and a.ancestors = #{ancestors}
+                    </if>
         </where>
     </select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysDept"
             parameterType="com.spyker.commons.search.SysDeptSearch">
         SELECT
-            a.*
+        a.*
         FROM
-            sys_dept a
+        sys_dept a
         <where>
-            <if test="null != search.parentId ">
-                and a.parent_id = #{search.parentId}
-            </if>
-            <if test="null != search.ancestors ">
-                and a.ancestors = #{search.ancestors}
-            </if>
-            <if test="null != search.deptName ">
-                and a.dept_name = #{search.deptName}
-            </if>
-            <if test="null != search.leader ">
-                and a.leader = #{search.leader}
-            </if>
-            <if test="null != search.phone ">
-                and a.phone = #{search.phone}
-            </if>
-            <if test="null != search.email ">
-                and a.email = #{search.email}
-            </if>
-            <if test="null != search.status ">
-                and a.status = #{search.status}
-            </if>
-            <if test="null != search.delFlag ">
-                and a.del_flag = #{search.delFlag}
-            </if>
-
+                    <if test="null != search.name ">
+                        and a.name = #{search.name}
+                    </if>
+                    <if test="null != search.parentId ">
+                        and a.parent_id = #{search.parentId}
+                    </if>
+                    <if test="null != search.delFlag ">
+                        and a.del_flag = #{search.delFlag}
+                    </if>
+                    <if test="null != search.createBy ">
+                        and a.create_by = #{search.createBy}
+                    </if>
+                    <if test="null != search.updateBy ">
+                        and a.update_by = #{search.updateBy}
+                    </if>
+                    <if test="null != search.status ">
+                        and a.status = #{search.status}
+                    </if>
+                    <if test="null != search.deptSort ">
+                        and a.dept_sort = #{search.deptSort}
+                    </if>
+                    <if test="null != search.tenantId ">
+                        and a.tenant_id = #{search.tenantId}
+                    </if>
+                    <if test="null != search.ancestors ">
+                        and a.ancestors = #{search.ancestors}
+                    </if>
         </where>
     </select>
 

@@ -1,7 +1,5 @@
 package com.spyker.commons.search;
 
-// @formatter:off
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.experimental.Accessors;
  * 参数配置表查询类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -20,9 +18,6 @@ public class SysConfigSearch {
 
     private Integer page = 1;
     private Integer size = 10;
-
-    @Schema(description = "参数主键")
-    private String configId;
 
     @Schema(description = "参数名称")
     private String configName;

@@ -10,10 +10,10 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * 菜单权限表 Mapper 接口
+ * 菜单管理 Mapper 接口
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-23
  */
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenu> {

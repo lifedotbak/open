@@ -12,12 +12,10 @@ import lombok.extern.slf4j.Slf4j;
  * 对象存储配置表 Mapper 接口测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysOssConfigMapperTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysOssConfigMapper sysOssConfigMapper;
 }

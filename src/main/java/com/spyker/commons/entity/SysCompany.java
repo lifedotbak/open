@@ -17,7 +17,7 @@ import java.util.Date;
  * 部门表
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
@@ -33,7 +33,7 @@ public class SysCompany {
     private String companyName;
 
     @Schema(description = "显示顺序")
-    private Integer orderNum;
+    private Integer companySort;
 
     @Schema(description = "公司状态（0正常 1停用）")
     private String status;
@@ -43,21 +43,17 @@ public class SysCompany {
 
     @Schema(description = "创建者")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
-    // @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    // @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }

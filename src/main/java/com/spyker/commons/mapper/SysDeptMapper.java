@@ -13,7 +13,7 @@ import java.util.List;
  * 部门表 Mapper 接口
  *
  * @author CodeGenerator
- * @since 2023-09-28
+ * @since 2024-07-23
  */
 @Mapper
 public interface SysDeptMapper extends BaseMapper<SysDept> {

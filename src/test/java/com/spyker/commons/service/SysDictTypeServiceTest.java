@@ -1,31 +1,24 @@
 package com.spyker.commons.service;
 
-import com.spyker.BaseTest;
-import com.spyker.commons.service.SysDictTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.spyker.BaseTest;
 import com.spyker.commons.entity.SysDictType;
-import com.spyker.commons.service.SysDictTypeService;
-
 import com.spyker.commons.search.SysDictTypeSearch;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 字典类型表 服务测试类
  *
  * @author CodeGenerator
- * @since 2024-07-22
+ * @since 2024-07-23
  */
 @Slf4j
 public class SysDictTypeServiceTest extends BaseTest {
-
-    // @formatter:off
 
     @Autowired private SysDictTypeService service;
 
@@ -65,7 +58,7 @@ public class SysDictTypeServiceTest extends BaseTest {
     public void update() {
         SysDictType update = new SysDictType();
 
-        update.setDictId("dictId");
+        update.setId("id");
 
         update.setDictName("dictName");
 

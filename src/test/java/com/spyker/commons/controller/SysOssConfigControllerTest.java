@@ -28,29 +28,27 @@ import com.spyker.commons.entity.SysOssConfig;
 @Slf4j
 public class SysOssConfigControllerTest extends BaseTest {
 
-    // @formatter:off
-
-    private static final String BASE_URL = "/commons/sys-oss-config";
+    private static String BASE_URL = "/commons/sys-oss-config";
 
     private static final String LOGIN_URL = BASE_URL + "/sys/login/login";
 
     /*分页查询*/
-    private static final String LIST_PAGE_URL = BASE_URL + "/list_page";
+    private static String LIST_PAGE_URL = BASE_URL + "/list_page";
 
     /*查询*/
-    private static final String LIST_URL = BASE_URL + "/list";
+    private static String LIST_URL = BASE_URL + "/list";
 
     /*详情*/
-    private static final String DETAIL_URL = BASE_URL + "/detail";
+    private static String DETAIL_URL = BASE_URL + "/detail";
 
     /*删除*/
-    private static final String DELETE_URL = BASE_URL + "/delete";
+    private static String DELETE_URL = BASE_URL + "/delete";
 
     /*修改*/
-    private static final String UPDATE_URL = BASE_URL + "/update";
+    private static String UPDATE_URL = BASE_URL + "/update";
 
     /*新增*/
-    private static final String ADD_URL = BASE_URL + "/add";
+    private static String ADD_URL = BASE_URL + "/add";
 
     //  @Autowired
     //   private MockMvc mockMvc;
@@ -113,7 +111,7 @@ public class SysOssConfigControllerTest extends BaseTest {
     public void detail() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("ossConfigId", "1");
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
@@ -133,7 +131,7 @@ public class SysOssConfigControllerTest extends BaseTest {
     public void delete() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
-        params.add("ossConfigId", "1");
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
@@ -205,7 +203,7 @@ public class SysOssConfigControllerTest extends BaseTest {
     public void update() {
         SysOssConfig update = new SysOssConfig();
 
-        update.setOssConfigId("ossConfigId");
+        update.setId("id");
 
         update.setConfigKey("configKey");
 

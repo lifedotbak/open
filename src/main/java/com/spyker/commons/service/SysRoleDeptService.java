@@ -15,8 +15,6 @@ import java.util.List;
  */
 public interface SysRoleDeptService extends IService<SysRoleDept> {
 
-    // @formatter:off
-
     List<SysRoleDept> query(SysRoleDeptSearch search);
 
     IPage<SysRoleDept> queryPage(IPage<SysRoleDept> page, SysRoleDeptSearch search);

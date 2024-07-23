@@ -14,18 +14,18 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 /**
- * 操作日志记录
+ * 异常日志表
  *
  * @author CodeGenerator
- * @since 2024-07-16
+ * @since 2024-07-23
  */
 @Data
 @Accessors(chain = true)
 @TableName("sys_exception_log")
-@Schema(name = "SysExceptionLog", description = "操作日志记录对象")
+@Schema(name = "SysExceptionLog", description = "异常日志表对象")
 public class SysExceptionLog {
 
-    @Schema(description = "日志主键")
+    @Schema(description = "参数主键")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
@@ -38,7 +38,7 @@ public class SysExceptionLog {
     @Schema(description = "异常类型")
     private String expType;
 
-    @Schema(description = "异常控制类")
+    @Schema(description = "异常controller")
     private String expController;
 
     @Schema(description = "异常方法")
@@ -47,15 +47,22 @@ public class SysExceptionLog {
     @Schema(description = "异常详情")
     private String expDetail;
 
+    @Schema(description = "创建者")
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+
+    @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
+    @Schema(description = "更新者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
+    @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
+    @Schema(description = "备注")
+    private String remark;
 }
