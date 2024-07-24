@@ -1,11 +1,11 @@
-package com.spyker.framework.log.aop;
+package com.spyker.flowable.common.utils;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 
-import com.spyker.framework.log.annotation.NotWriteLogAnnotation;
-import com.spyker.framework.util.IpUtils;
+import com.spyker.flowable.common.config.NotWriteLogAnno;
+import com.spyker.flowable.common.dto.R;
 import com.spyker.framework.util.JsonUtil;
-import com.spyker.framework.web.response.RestResponse;
 import com.yomahub.tlog.context.TLogContext;
 
 import lombok.SneakyThrows;
@@ -13,39 +13,26 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-/** 请求耗时报警时间 */
+/**
+ * @author Huijun Zhao
+ * @description
+ * @date 2023-10-16 09:29
+ */
 @Slf4j
-@Aspect
-@Component
-public class LogAspect {
-
-    /** 排除敏感属性字段 */
-    private static final String[] EXCLUDE_PROPERTIES = {
-        "password", "oldPassword", "newPassword", "confirmPassword"
-    };
-
-    @Around("execution(* com.spyker.*.controller.*.*.*(..))")
-    @SneakyThrows
-    public Object writeLog(ProceedingJoinPoint point) {
-        try {
-            return write(point);
-        } catch (Throwable throwable) {
-            throw new RuntimeException(throwable);
-        }
-    }
-
+public class LogAopUtil {
     /** 请求耗时报警时间 */
+    public static Logger logger = LoggerFactory.getLogger("RECORDLogger");
+
     @SneakyThrows
-    private Object write(ProceedingJoinPoint point) {
+    public static Object write(ProceedingJoinPoint point) {
 
         Object target = point.getTarget();
 
@@ -58,7 +45,7 @@ public class LogAspect {
         MethodSignature methodSignature = (MethodSignature) signature;
 
         Method method = methodSignature.getMethod();
-        NotWriteLogAnnotation notWriteLogAnno = method.getAnnotation(NotWriteLogAnnotation.class);
+        NotWriteLogAnno notWriteLogAnno = method.getAnnotation(NotWriteLogAnno.class);
         if (notWriteLogAnno != null && notWriteLogAnno.exclude()) {
 
             return point.proceed(args);
@@ -68,10 +55,6 @@ public class LogAspect {
             return point.proceed(args);
         }
 
-        String ip = IpUtils.getIpAddr();
-
-        log.info("ip --> {}", ip);
-
         String[] parameterNames = methodSignature.getParameterNames();
         Map<String, Object> paramMap = new HashMap<>();
         int length = parameterNames.length;
@@ -80,22 +63,20 @@ public class LogAspect {
         }
         long l1 = System.currentTimeMillis();
 
+        String s = RandomUtil.randomString(6);
+
         if (notWriteLogAnno != null && notWriteLogAnno.all()) {
 
         } else {
             if (notWriteLogAnno != null) {
-
-                for (String p : EXCLUDE_PROPERTIES) {
-                    paramMap.remove(p);
-                }
-
                 String[] paramsExclude = notWriteLogAnno.paramsExclude();
                 for (String p : paramsExclude) {
                     paramMap.remove(p);
                 }
             }
-            log.info(
-                    " 入参   类:  "
+            logger.info(
+                    s
+                            + " 入参   类:  "
                             + className
                             + " 方法:  "
                             + method.getName()
@@ -104,7 +85,7 @@ public class LogAspect {
         }
 
         proceed = point.proceed(args);
-        if (proceed instanceof RestResponse r) {
+        if (proceed instanceof R r) {
             r.setTraceId(TLogContext.getTraceId());
         }
         if (notWriteLogAnno != null && !notWriteLogAnno.printResultLog()) {
@@ -113,8 +94,8 @@ public class LogAspect {
 
         long l2 = System.currentTimeMillis();
 
-        log.info(
-                "返回日志 类：{} 方法：{} 结果：{} 响应时间:{}",
+        logger.info(
+                s + "返回日志 类：{} 方法：{} 结果：{} 响应时间:{}",
                 className,
                 method.getName(),
                 JsonUtil.toJSONString(proceed),
