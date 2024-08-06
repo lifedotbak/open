@@ -49,8 +49,6 @@ public class FormServiceImpl implements IFormService {
 
     @Resource private IProcessNodeDataService nodeDataService;
 
-    @Resource private IDeptUserService deptUserService;
-
     @Resource private IProcessInstanceRecordService processInstanceRecordService;
     @Resource private IProcessInstanceCopyService processCopyService;
 

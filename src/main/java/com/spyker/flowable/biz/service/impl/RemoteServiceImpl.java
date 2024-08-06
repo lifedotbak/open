@@ -22,8 +22,9 @@ import com.spyker.flowable.common.dto.third.MessageDto;
 import com.spyker.flowable.common.dto.third.UserDto;
 import com.spyker.flowable.common.dto.third.UserQueryDto;
 import com.spyker.flowable.common.service.biz.IRemoteService;
-import com.spyker.framework.util.JsonUtil;
 import com.spyker.flowable.common.utils.NodeUtil;
+import com.spyker.framework.util.JsonUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.redis.core.RedisTemplate;
@@ -50,7 +51,6 @@ public class RemoteServiceImpl implements IRemoteService {
 
     @Resource private RedisTemplate redisTemplate;
     @Resource private IProcessNodeDataService processNodeDataService;
-    @Resource private IMessageService messageService;
 
     @Resource private IProcessInstanceExecutionService processInstanceExecutionService;
 
@@ -119,7 +119,6 @@ public class RemoteServiceImpl implements IRemoteService {
         messageDto.setStartUserName(userDto.getName());
         messageDto.setFlowName(processInstanceRecord.getName());
         messageDto.setGroupName(processInstanceRecord.getGroupName());
-        messageService.saveMessage(messageDto);
 
         ApiStrategyFactory.getStrategy().sendMsg(messageDto);
         return R.success();

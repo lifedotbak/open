@@ -10,7 +10,6 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.yulichang.toolkit.JoinWrappers;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-
 import com.spyker.flowable.biz.api.ApiStrategyFactory;
 import com.spyker.flowable.biz.constants.ProcessInstanceRecordStatusEnum;
 import com.spyker.flowable.biz.entity.*;
@@ -31,8 +30,9 @@ import com.spyker.flowable.common.dto.third.DeptDto;
 import com.spyker.flowable.common.dto.third.UserDto;
 import com.spyker.flowable.common.service.biz.IRemoteService;
 import com.spyker.flowable.common.utils.DateUtil;
-import com.spyker.framework.util.JsonUtil;
 import com.spyker.flowable.common.utils.TenantUtil;
+import com.spyker.framework.util.JsonUtil;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
@@ -50,7 +50,6 @@ public class CombinationGroupServiceImpl implements ICombinationGroupService {
 
     @Resource private IUserService userService;
 
-    @Resource private IDeptUserService deptUserService;
     @Resource private IProcessMainService processMainService;
 
     @Resource private IProcessService processService;
