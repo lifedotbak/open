@@ -92,9 +92,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
 
                 StpUtil.login(sysUser.getId());
 
-                StpUtil.getSession().set(CommonsConstants.LOGIN_USER_KEY, sysUser.getId());
+                StpUtil.getSession().set(CommonsConstants.LOGIN_USER_ID, sysUser.getId());
+                StpUtil.getSession().set(CommonsConstants.LOGIN_USER_INFO, sysUser);
 
-                httpSession.setAttribute(CommonsConstants.LOGIN_USER_KEY, sysUser.getId());
+                httpSession.setAttribute(CommonsConstants.LOGIN_USER_ID, sysUser.getId());
 
                 return true;
             }

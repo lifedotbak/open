@@ -70,7 +70,7 @@ public class MybatisPlusConfig implements MetaObjectHandler {
             SaSession saSession = StpUtil.getSession();
 
             if (null != saSession) {
-                Object userKey = saSession.get(CommonsConstants.LOGIN_USER_KEY);
+                Object userKey = saSession.get(CommonsConstants.LOGIN_USER_ID);
                 if (null != userKey) {
                     loginUserId = (String) userKey;
                 }
@@ -103,7 +103,7 @@ public class MybatisPlusConfig implements MetaObjectHandler {
         String loginUserId = "";
 
         try {
-            loginUserId = (String) StpUtil.getSession().get(CommonsConstants.LOGIN_USER_KEY);
+            loginUserId = (String) StpUtil.getSession().get(CommonsConstants.LOGIN_USER_ID);
         } catch (Exception e) {
             log.error("error-->{}", e);
         }
