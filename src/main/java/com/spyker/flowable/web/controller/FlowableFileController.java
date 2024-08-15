@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 /** 文件控制器 */
 @RestController
 @RequestMapping(value = {"file"})
-public class FileController {
+public class FlowableFileController {
 
     @Resource private IFileService fileService;
 

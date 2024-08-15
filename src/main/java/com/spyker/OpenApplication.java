@@ -1,5 +1,6 @@
 package com.spyker;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -19,7 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * <p>EnableRetry--->springboot 重试机制
  */
 @SpringBootApplication
-// @MapperScan({"com.spyker.*.mapper"})
+@MapperScan({"com.spyker.*.mapper", "com.spyker.flowable.biz.mapper"})
 @EnableScheduling
 @EnableAsync
 @EnableCaching

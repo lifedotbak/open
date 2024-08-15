@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 @Tag(name = "任务实例接口", description = "任务实例接口")
 @RestController
 @RequestMapping(value = "task")
-public class TaskController {
+public class FlowableTaskController {
 
     @Resource private ITaskService taskService;
 

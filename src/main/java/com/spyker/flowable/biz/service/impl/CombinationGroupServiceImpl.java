@@ -48,8 +48,6 @@ import javax.annotation.Resource;
 public class CombinationGroupServiceImpl implements ICombinationGroupService {
     @Resource private IProcessGroupService processGroupService;
 
-    @Resource private IUserService userService;
-
     @Resource private IProcessMainService processMainService;
 
     @Resource private IProcessService processService;
@@ -116,8 +114,8 @@ public class CombinationGroupServiceImpl implements ICombinationGroupService {
             wrapper.innerJoin(UserRole.class, UserRole::getUserId, User::getId)
                     .in(UserRole::getRoleId, roleIdList);
         }
-        List<String> userIdList = userService.selectJoinList(String.class, wrapper);
-        return R.success(userIdList);
+
+        return R.success(null);
     }
 
     /**
