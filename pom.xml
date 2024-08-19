@@ -638,14 +638,6 @@
             <version>15.4</version>
         </dependency>
 		
-		<!--分布式锁-->
-		<!-- https://mvnrepository.com/artifact/com.baomidou/lock4j-redis-template-spring-boot-starter -->
-		<dependency>
-		    <groupId>com.baomidou</groupId>
-		    <artifactId>lock4j-redis-template-spring-boot-starter</artifactId>
-		    <version>2.2.7</version>
-		</dependency>
-		
 		<!--koTime是一个轻量级的springboot项目性能分析工具，通过追踪方法调用链路以及对应的运行时长快速定位性能瓶颈-->
 		<!-- https://mvnrepository.com/artifact/cn.langpy/ko-time -->
 		<dependency>
@@ -673,7 +665,6 @@
 		    <version>6.8.1</version>
 		</dependency>
 		
-		
 		<!-- flowable流程绘制 -->
 		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter-ui-modeler -->
 		<!--		<dependency>-->
@@ -683,14 +674,6 @@
 		<!--		</dependency>-->
 		
 		
-		<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
-		<!-- 反射工具 -->
-		<dependency>
-		    <groupId>org.reflections</groupId>
-		    <artifactId>reflections</artifactId>
-		    <version>0.10.2</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/com.github.yulichang/mybatis-plus-join-boot-starter -->
 		<!-- mybatis-plus做连接查询的插件 -->
 		<dependency>
@@ -699,20 +682,11 @@
             <version>1.4.13</version>
         </dependency>
 		
-		<!--        验证码-->
-		<!-- https://mvnrepository.com/artifact/cloud.tianai.captcha/tianai-captcha -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
-            <groupId>cloud.tianai.captcha</groupId>
-            <artifactId>tianai-captcha</artifactId>
-            <version>1.3.3</version>
-        </dependency>
-		
-		<!--        验证码-->
-		<!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
-		<dependency>
-		    <groupId>com.github.whvcse</groupId>
-		    <artifactId>easy-captcha</artifactId>
-		    <version>1.6.2</version>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.17.2</version>
 		</dependency>
 	
 	</dependencies>

@@ -356,13 +356,3 @@ ko-time:
   log-enable: false
   saver: redis
   data-prefix: kotime
-
-##账号密码登录页面：是否开启验证码
-login:
-  captcha: true
-
-file:
-  ##静态文件在磁盘位置，此处与nginx配置要一直
-  dir: /tmp/flyflow
-  ##静态文件访问路径
-  showUrl: http://127.0.0.1:${server.http.port}/file/show

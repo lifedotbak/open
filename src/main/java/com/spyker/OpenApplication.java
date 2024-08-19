@@ -20,7 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * <p>EnableRetry--->springboot 重试机制
  */
 @SpringBootApplication
-@MapperScan({"com.spyker.*.mapper", "com.spyker.flowable.biz.mapper"})
+@MapperScan({"com.spyker.*.mapper"})
 @EnableScheduling
 @EnableAsync
 @EnableCaching
