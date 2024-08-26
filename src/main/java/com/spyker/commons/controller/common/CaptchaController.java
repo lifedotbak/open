@@ -13,6 +13,7 @@ import com.spyker.framework.web.response.RestMapResponse;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.util.FastByteArrayOutputStream;
@@ -24,7 +25,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 /**
@@ -88,7 +88,7 @@ public class CaptchaController {
         }
 
         ajax.put("uuid", uuid);
-        ajax.put("img", Base64Utils.encode(os.toByteArray()));
+        ajax.put("img", Base64Utils.encodeBase64String(os.toByteArray()));
         return ajax;
     }
 }

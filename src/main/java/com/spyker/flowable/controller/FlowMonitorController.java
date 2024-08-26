@@ -9,6 +9,7 @@ import com.spyker.framework.web.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.flowable.bpmn.model.BpmnModel;
@@ -32,8 +33,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.annotation.Resource;
-
 /** 流程监控 */
 @Tag(name = "流程监控接口", description = "流程监控接口")
 @Controller
@@ -41,7 +40,8 @@ import javax.annotation.Resource;
 public class FlowMonitorController {
 
     private final String prefix = "flowable/monitor";
-    @Resource ManagementService managementService;
+    @Resource
+    ManagementService managementService;
     @Resource RepositoryService repositoryService;
     @Resource ProcessEngineConfiguration configuration;
     @Resource ActRuExecutionMapper actRuExecutionMapper;

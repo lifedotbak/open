@@ -24,6 +24,7 @@ import org.flowable.engine.repository.Model;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.flowable.image.ProcessDiagramGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,8 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
-import javax.annotation.Resource;
-
 /** 流程管理 */
 @Tag(name = "部署管理接口", description = "动态流程接口")
 @Controller
@@ -44,10 +43,10 @@ import javax.annotation.Resource;
 public class FlowController {
 
     private final String prefix = "flowable/manage";
-    @Resource RepositoryService repositoryService;
-    @Resource ProcessEngineConfiguration configuration;
-    @Resource private RuntimeService runtimeService;
-    @Resource private TaskService taskService;
+    @Autowired RepositoryService repositoryService;
+    @Autowired ProcessEngineConfiguration configuration;
+    @Autowired private RuntimeService runtimeService;
+    @Autowired private TaskService taskService;
 
     @GetMapping("")
     public String processList() {

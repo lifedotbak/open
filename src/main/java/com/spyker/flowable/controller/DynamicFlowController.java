@@ -17,6 +17,7 @@ import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.Execution;
 import org.flowable.task.api.Task;
 import org.flowable.validation.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +25,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 @Tag(name = "动态流程接口", description = "动态流程接口")
 @Controller
 @RequestMapping("/dynamic/flow")
 public class DynamicFlowController {
 
-    @Resource RepositoryService repositoryService;
-    @Resource private RuntimeService runtimeService;
-    @Resource private TaskService taskService;
-    @Resource private HistoryService historyService;
+    @Autowired RepositoryService repositoryService;
+    @Autowired private RuntimeService runtimeService;
+    @Autowired private TaskService taskService;
+    @Autowired private HistoryService historyService;
 
     @Operation(summary = "遍历流程信息", description = "遍历流程信息")
     @GetMapping(value = "/info/{processInstanceId}")

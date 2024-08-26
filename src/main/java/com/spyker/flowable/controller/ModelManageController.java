@@ -12,6 +12,7 @@ import com.spyker.framework.web.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.poi.util.IOUtils;
@@ -30,15 +31,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.*;
 
-import javax.annotation.Resource;
-
 @Tag(name = "模型管理接口")
 @Controller
 @RequestMapping("/model/manage")
 public class ModelManageController {
 
     private final String prefix = "flowable/manage";
-    @Resource RepositoryService repositoryService;
+    @Resource
+    RepositoryService repositoryService;
     @Resource private ObjectMapper objectMapper;
 
     @Operation(description = "查询所有模型")

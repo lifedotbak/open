@@ -9,6 +9,7 @@ import com.spyker.framework.web.response.RestResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.annotation.Resource;
 import org.flowable.engine.FormService;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.RuntimeService;
@@ -27,8 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 @Tag(name = "待办任务接口")
 @Controller
 @RequestMapping("/task/manage")
@@ -38,7 +37,8 @@ public class TaskController {
     @Autowired FormService formService;
     @Autowired private RuntimeService runtimeService;
     @Autowired private TaskService taskService;
-    @Resource private HistoryService historyService;
+    @Resource
+    private HistoryService historyService;
 
     @GetMapping("/mytask")
     public String mytasks() {

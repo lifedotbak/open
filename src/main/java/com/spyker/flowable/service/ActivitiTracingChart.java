@@ -11,6 +11,7 @@ import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.image.ProcessDiagramGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,19 +20,18 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 /** 流程追踪图 */
 @Component
 public class ActivitiTracingChart {
 
     private static final Logger logger = LoggerFactory.getLogger(ActivitiTracingChart.class);
 
-    @Resource private HistoryService historyService;
+    @Autowired
+    private HistoryService historyService;
 
-    @Resource private RepositoryService repositoryService;
+    @Autowired private RepositoryService repositoryService;
 
-    @Resource private ProcessEngineConfiguration processEngineConfiguration;
+    @Autowired private ProcessEngineConfiguration processEngineConfiguration;
 
     /**
      * 生成流程追踪图
