@@ -116,7 +116,7 @@
 	        <pattern>${TRACE_LOG_PATTERN}</pattern>
         </layout>
     </appender>
-
+    
     <root level="INFO">
         <!--        <appender-ref ref="FILE-DEBUG" />-->
 	    <appender-ref ref="FILE-ERROR"/>
