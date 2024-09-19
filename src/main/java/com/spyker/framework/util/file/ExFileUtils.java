@@ -129,17 +129,6 @@ public class ExFileUtils extends FileUtils {
         IOUtils.closeQuietly(outputStream);
     }
 
-    public static String getFileType(String fileName) {
-
-        final String[] splits = fileName.split("\\.");
-
-        if (splits.length > 1) {
-            return "." + splits[splits.length - 1];
-        }
-
-        return "";
-    }
-
     public static String getPathFromDate() {
 
         String format = "/" + "yyyy" + "/" + "MM" + "/" + "dd" + "/";
@@ -208,17 +197,6 @@ public class ExFileUtils extends FileUtils {
      * 写数据到文件中
      *
      * @param data 数据
-     * @return 目标文件
-     * @throws IOException IO异常
-     */
-    // public static String writeImportBytes(byte[] data) throws IOException {
-    // return writeBytes(data, PlatformConfig.getImportPath());
-    // }
-
-    /**
-     * 写数据到文件中
-     *
-     * @param data 数据
      * @param uploadDir 目标文件
      * @return 目标文件
      * @throws IOException IO异常
@@ -239,6 +217,17 @@ public class ExFileUtils extends FileUtils {
         }
         return FileUploadUtils.getPathFileName(uploadDir, pathName);
     }
+
+    /**
+     * 写数据到文件中
+     *
+     * @param data 数据
+     * @return 目标文件
+     * @throws IOException IO异常
+     */
+    // public static String writeImportBytes(byte[] data) throws IOException {
+    // return writeBytes(data, PlatformConfig.getImportPath());
+    // }
 
     /**
      * 获取图像后缀
@@ -310,6 +299,17 @@ public class ExFileUtils extends FileUtils {
         return ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, getFileType(resource));
 
         // 不在允许下载的文件规则
+    }
+
+    public static String getFileType(String fileName) {
+
+        final String[] splits = fileName.split("\\.");
+
+        if (splits.length > 1) {
+            return "." + splits[splits.length - 1];
+        }
+
+        return "";
     }
 
     /**

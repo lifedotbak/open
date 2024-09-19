@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysRoleMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysRole"
-            parameterType="com.spyker.commons.search.SysRoleSearch">
-        SELECT a.* FROM sys_role a
+	<select id="query" resultType="com.spyker.commons.entity.SysRole"
+	        parameterType="com.spyker.commons.search.SysRoleSearch">
+		SELECT a.* FROM sys_role a
         <where>
-            <if test="null != roleName ">
-                and a.role_name = #{roleName}
-            </if>
+	        <if test="null != roleName ">
+		        and a.role_name = #{roleName}
+	        </if>
             <if test="null != roleKey ">
-                and a.role_key = #{roleKey}
+	            and a.role_key = #{roleKey}
             </if>
             <if test="null != dataScope ">
-                and a.data_scope = #{dataScope}
+	            and a.data_scope = #{dataScope}
             </if>
             <if test="null != menuCheckStrictly ">
-                and a.menu_check_strictly = #{menuCheckStrictly}
+	            and a.menu_check_strictly = #{menuCheckStrictly}
             </if>
             <if test="null != deptCheckStrictly ">
-                and a.dept_check_strictly = #{deptCheckStrictly}
+	            and a.dept_check_strictly = #{deptCheckStrictly}
             </if>
             <if test="null != status ">
-                and a.status = #{status}
+	            and a.status = #{status}
             </if>
-
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysRole"
             parameterType="com.spyker.commons.search.SysRoleSearch">
-        SELECT a.* FROM sys_role a
+	    SELECT a.* FROM sys_role a
         <where>
-            <if test="null != search.roleName ">
-                and a.role_name = #{search.roleName}
-            </if>
+	        <if test="null != search.roleName ">
+		        and a.role_name = #{search.roleName}
+	        </if>
         </where>
     </select>
-
 </mapper>

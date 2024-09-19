@@ -1,110 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysProcessInstanceOperRecordMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceOperRecord"
-            parameterType="com.spyker.commons.search.SysProcessInstanceOperRecordSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceOperRecord"
+	        parameterType="com.spyker.commons.search.SysProcessInstanceOperRecordSearch">
+		SELECT
         a.*
         FROM
         sys_process_instance_oper_record a
         <where>
-                    <if test="null != userId ">
-                        and a.user_id = #{userId}
-                    </if>
+	        <if test="null != userId ">
+		        and a.user_id = #{userId}
+	        </if>
                     <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
+	                    and a.del_flag = #{delFlag}
                     </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != flowId ">
-                        and a.flow_id = #{flowId}
+	                    and a.flow_id = #{flowId}
                     </if>
                     <if test="null != nodeId ">
-                        and a.node_id = #{nodeId}
+	                    and a.node_id = #{nodeId}
                     </if>
                     <if test="null != nodeName ">
-                        and a.node_name = #{nodeName}
+	                    and a.node_name = #{nodeName}
                     </if>
                     <if test="null != processInstanceId ">
-                        and a.process_instance_id = #{processInstanceId}
+	                    and a.process_instance_id = #{processInstanceId}
                     </if>
                     <if test="null != comment ">
-                        and a.comment = #{comment}
+	                    and a.comment = #{comment}
                     </if>
                     <if test="null != operType ">
-                        and a.oper_type = #{operType}
+	                    and a.oper_type = #{operType}
                     </if>
                     <if test="null != operDesc ">
-                        and a.oper_desc = #{operDesc}
+	                    and a.oper_desc = #{operDesc}
                     </if>
                     <if test="null != imageList ">
-                        and a.image_list = #{imageList}
+	                    and a.image_list = #{imageList}
                     </if>
                     <if test="null != fileList ">
-                        and a.file_list = #{fileList}
+	                    and a.file_list = #{fileList}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysProcessInstanceOperRecord"
             parameterType="com.spyker.commons.search.SysProcessInstanceOperRecordSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_process_instance_oper_record a
         <where>
-                    <if test="null != search.userId ">
-                        and a.user_id = #{search.userId}
-                    </if>
+	        <if test="null != search.userId ">
+		        and a.user_id = #{search.userId}
+	        </if>
                     <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
+	                    and a.del_flag = #{search.delFlag}
                     </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.flowId ">
-                        and a.flow_id = #{search.flowId}
+	                    and a.flow_id = #{search.flowId}
                     </if>
                     <if test="null != search.nodeId ">
-                        and a.node_id = #{search.nodeId}
+	                    and a.node_id = #{search.nodeId}
                     </if>
                     <if test="null != search.nodeName ">
-                        and a.node_name = #{search.nodeName}
+	                    and a.node_name = #{search.nodeName}
                     </if>
                     <if test="null != search.processInstanceId ">
-                        and a.process_instance_id = #{search.processInstanceId}
+	                    and a.process_instance_id = #{search.processInstanceId}
                     </if>
                     <if test="null != search.comment ">
-                        and a.comment = #{search.comment}
+	                    and a.comment = #{search.comment}
                     </if>
                     <if test="null != search.operType ">
-                        and a.oper_type = #{search.operType}
+	                    and a.oper_type = #{search.operType}
                     </if>
                     <if test="null != search.operDesc ">
-                        and a.oper_desc = #{search.operDesc}
+	                    and a.oper_desc = #{search.operDesc}
                     </if>
                     <if test="null != search.imageList ">
-                        and a.image_list = #{search.imageList}
+	                    and a.image_list = #{search.imageList}
                     </if>
                     <if test="null != search.fileList ">
-                        and a.file_list = #{search.fileList}
+	                    and a.file_list = #{search.fileList}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
         </where>
     </select>
-
 </mapper>

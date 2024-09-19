@@ -81,6 +81,21 @@ public class OssClient {
         }
     }
 
+    public void createBucket() {
+        try {
+            String bucketName = properties.getBucketName();
+            if (client.doesBucketExistV2(bucketName)) {
+                return;
+            }
+            CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
+            createBucketRequest.setCannedAcl(CannedAccessControlList.PublicRead);
+            client.createBucket(createBucketRequest);
+            client.setBucketPolicy(bucketName, getPolicy(bucketName, OssPolicyType.READ));
+        } catch (Exception e) {
+            throw new OssException("创建Bucket失败, 请核对配置信息:[" + e.getMessage() + "]");
+        }
+    }
+
     private static String getPolicy(String bucketName, OssPolicyType policyType) {
         StringBuilder builder = new StringBuilder();
         builder.append("{\n\"Statement\": [\n{\n\"Action\": [\n");
@@ -123,41 +138,6 @@ public class OssClient {
         return builder.toString();
     }
 
-    public void createBucket() {
-        try {
-            String bucketName = properties.getBucketName();
-            if (client.doesBucketExistV2(bucketName)) {
-                return;
-            }
-            CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
-            createBucketRequest.setCannedAcl(CannedAccessControlList.PublicRead);
-            client.createBucket(createBucketRequest);
-            client.setBucketPolicy(bucketName, getPolicy(bucketName, OssPolicyType.READ));
-        } catch (Exception e) {
-            throw new OssException("创建Bucket失败, 请核对配置信息:[" + e.getMessage() + "]");
-        }
-    }
-
-    public UploadResult upload(byte[] data, String path, String contentType) {
-        return upload(new ByteArrayInputStream(data), path, contentType);
-    }
-
-    public UploadResult upload(InputStream inputStream, String path, String contentType) {
-        try {
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType(contentType);
-            metadata.setContentLength(inputStream.available());
-            PutObjectRequest putObjectRequest =
-                    new PutObjectRequest(properties.getBucketName(), path, inputStream, metadata);
-            // 设置上传对象的 Acl 为公共读
-            putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
-            client.putObject(putObjectRequest);
-        } catch (Exception e) {
-            throw new OssException("上传文件失败，请检查配置信息:[" + e.getMessage() + "]");
-        }
-        return UploadResult.builder().url(getUrl() + "/" + path).filename(path).build();
-    }
-
     public void delete(String path) {
         path = path.replace(getUrl() + "/", "");
         try {
@@ -165,24 +145,6 @@ public class OssClient {
         } catch (Exception e) {
             throw new OssException("上传文件失败，请检查配置信息:[" + e.getMessage() + "]");
         }
-    }
-
-    public UploadResult uploadSuffix(byte[] data, String suffix, String contentType) {
-        return upload(data, getPath(properties.getPrefix(), suffix), contentType);
-    }
-
-    public UploadResult uploadSuffix(InputStream inputStream, String suffix, String contentType) {
-        return upload(inputStream, getPath(properties.getPrefix(), suffix), contentType);
-    }
-
-    /**
-     * 获取文件元数据
-     *
-     * @param path 完整文件路径
-     */
-    public ObjectMetadata getObjectMetadata(String path) {
-        S3Object object = client.getObject(properties.getBucketName(), path);
-        return object.getObjectMetadata();
     }
 
     public String getUrl() {
@@ -204,6 +166,14 @@ public class OssClient {
         return header + endpoint + "/" + properties.getBucketName();
     }
 
+    public UploadResult uploadSuffix(byte[] data, String suffix, String contentType) {
+        return upload(data, getPath(properties.getPrefix(), suffix), contentType);
+    }
+
+    public UploadResult upload(byte[] data, String path, String contentType) {
+        return upload(new ByteArrayInputStream(data), path, contentType);
+    }
+
     public String getPath(String prefix, String suffix) {
         // 生成uuid
         String uuid = IdUtil.fastSimpleUUID();
@@ -213,6 +183,36 @@ public class OssClient {
             path = prefix + "/" + path;
         }
         return path + suffix;
+    }
+
+    public UploadResult upload(InputStream inputStream, String path, String contentType) {
+        try {
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentType(contentType);
+            metadata.setContentLength(inputStream.available());
+            PutObjectRequest putObjectRequest =
+                    new PutObjectRequest(properties.getBucketName(), path, inputStream, metadata);
+            // 设置上传对象的 Acl 为公共读
+            putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
+            client.putObject(putObjectRequest);
+        } catch (Exception e) {
+            throw new OssException("上传文件失败，请检查配置信息:[" + e.getMessage() + "]");
+        }
+        return UploadResult.builder().url(getUrl() + "/" + path).filename(path).build();
+    }
+
+    public UploadResult uploadSuffix(InputStream inputStream, String suffix, String contentType) {
+        return upload(inputStream, getPath(properties.getPrefix(), suffix), contentType);
+    }
+
+    /**
+     * 获取文件元数据
+     *
+     * @param path 完整文件路径
+     */
+    public ObjectMetadata getObjectMetadata(String path) {
+        S3Object object = client.getObject(properties.getBucketName(), path);
+        return object.getObjectMetadata();
     }
 
     public String getConfigKey() {

@@ -159,12 +159,16 @@ public final class ExDateUtils extends DateUtils {
         }
     }
 
+    public static String dateTimeNow() {
+        return dateTimeNow(Format.YMDHMS.format);
+    }
+
     public static String dateTimeNow(final String format) {
         return format(new Date(), format);
     }
 
-    public static String dateTimeNow() {
-        return dateTimeNow(Format.YMDHMS.format);
+    public static String format(final Date date, final String format) {
+        return DateFormatUtils.format(date, format);
     }
 
     public static Date parse(@NotNull final String value, @NotNull final String format) {
@@ -185,10 +189,6 @@ public final class ExDateUtils extends DateUtils {
     /** 日期路径 即年/月/日 如2018/08/08 */
     public static String datePath() {
         return format(getCurrentDate(), Format.YMD_PATH.format);
-    }
-
-    public static String format(final Date date, final String format) {
-        return DateFormatUtils.format(date, format);
     }
 
     public static Date getCurrentDate() {

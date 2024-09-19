@@ -1,146 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysProcessInstanceRecordMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceRecord"
-            parameterType="com.spyker.commons.search.SysProcessInstanceRecordSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceRecord"
+	        parameterType="com.spyker.commons.search.SysProcessInstanceRecordSearch">
+		SELECT
         a.*
         FROM
         sys_process_instance_record a
         <where>
-                    <if test="null != name ">
-                        and a.name = #{name}
-                    </if>
+	        <if test="null != name ">
+		        and a.name = #{name}
+	        </if>
                     <if test="null != logo ">
-                        and a.logo = #{logo}
+	                    and a.logo = #{logo}
                     </if>
                     <if test="null != userId ">
-                        and a.user_id = #{userId}
+	                    and a.user_id = #{userId}
                     </if>
                     <if test="null != mainDeptId ">
-                        and a.main_dept_id = #{mainDeptId}
+	                    and a.main_dept_id = #{mainDeptId}
                     </if>
                     <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
+	                    and a.del_flag = #{delFlag}
                     </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != flowId ">
-                        and a.flow_id = #{flowId}
+	                    and a.flow_id = #{flowId}
                     </if>
                     <if test="null != processInstanceId ">
-                        and a.process_instance_id = #{processInstanceId}
+	                    and a.process_instance_id = #{processInstanceId}
                     </if>
                     <if test="null != processInstanceBizCode ">
-                        and a.process_instance_biz_code = #{processInstanceBizCode}
+	                    and a.process_instance_biz_code = #{processInstanceBizCode}
                     </if>
                     <if test="null != processInstanceBizKey ">
-                        and a.process_instance_biz_key = #{processInstanceBizKey}
+	                    and a.process_instance_biz_key = #{processInstanceBizKey}
                     </if>
                     <if test="null != formData ">
-                        and a.form_data = #{formData}
+	                    and a.form_data = #{formData}
                     </if>
                     <if test="null != groupId ">
-                        and a.group_id = #{groupId}
+	                    and a.group_id = #{groupId}
                     </if>
                     <if test="null != groupName ">
-                        and a.group_name = #{groupName}
+	                    and a.group_name = #{groupName}
                     </if>
                     <if test="null != status ">
-                        and a.status = #{status}
+	                    and a.status = #{status}
                     </if>
                     <if test="null != parentProcessInstanceId ">
-                        and a.parent_process_instance_id = #{parentProcessInstanceId}
+	                    and a.parent_process_instance_id = #{parentProcessInstanceId}
                     </if>
                     <if test="null != process ">
-                        and a.process = #{process}
+	                    and a.process = #{process}
                     </if>
                     <if test="null != result ">
-                        and a.result = #{result}
+	                    and a.result = #{result}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
                     <if test="null != parentProcessNodeExecutionId ">
-                        and a.parent_process_node_execution_id = #{parentProcessNodeExecutionId}
+	                    and a.parent_process_node_execution_id = #{parentProcessNodeExecutionId}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysProcessInstanceRecord"
             parameterType="com.spyker.commons.search.SysProcessInstanceRecordSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_process_instance_record a
         <where>
-                    <if test="null != search.name ">
-                        and a.name = #{search.name}
-                    </if>
+	        <if test="null != search.name ">
+		        and a.name = #{search.name}
+	        </if>
                     <if test="null != search.logo ">
-                        and a.logo = #{search.logo}
+	                    and a.logo = #{search.logo}
                     </if>
                     <if test="null != search.userId ">
-                        and a.user_id = #{search.userId}
+	                    and a.user_id = #{search.userId}
                     </if>
                     <if test="null != search.mainDeptId ">
-                        and a.main_dept_id = #{search.mainDeptId}
+	                    and a.main_dept_id = #{search.mainDeptId}
                     </if>
                     <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
+	                    and a.del_flag = #{search.delFlag}
                     </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.flowId ">
-                        and a.flow_id = #{search.flowId}
+	                    and a.flow_id = #{search.flowId}
                     </if>
                     <if test="null != search.processInstanceId ">
-                        and a.process_instance_id = #{search.processInstanceId}
+	                    and a.process_instance_id = #{search.processInstanceId}
                     </if>
                     <if test="null != search.processInstanceBizCode ">
-                        and a.process_instance_biz_code = #{search.processInstanceBizCode}
+	                    and a.process_instance_biz_code = #{search.processInstanceBizCode}
                     </if>
                     <if test="null != search.processInstanceBizKey ">
-                        and a.process_instance_biz_key = #{search.processInstanceBizKey}
+	                    and a.process_instance_biz_key = #{search.processInstanceBizKey}
                     </if>
                     <if test="null != search.formData ">
-                        and a.form_data = #{search.formData}
+	                    and a.form_data = #{search.formData}
                     </if>
                     <if test="null != search.groupId ">
-                        and a.group_id = #{search.groupId}
+	                    and a.group_id = #{search.groupId}
                     </if>
                     <if test="null != search.groupName ">
-                        and a.group_name = #{search.groupName}
+	                    and a.group_name = #{search.groupName}
                     </if>
                     <if test="null != search.status ">
-                        and a.status = #{search.status}
+	                    and a.status = #{search.status}
                     </if>
                     <if test="null != search.parentProcessInstanceId ">
-                        and a.parent_process_instance_id = #{search.parentProcessInstanceId}
+	                    and a.parent_process_instance_id = #{search.parentProcessInstanceId}
                     </if>
                     <if test="null != search.process ">
-                        and a.process = #{search.process}
+	                    and a.process = #{search.process}
                     </if>
                     <if test="null != search.result ">
-                        and a.result = #{search.result}
+	                    and a.result = #{search.result}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
                     <if test="null != search.parentProcessNodeExecutionId ">
-                        and a.parent_process_node_execution_id = #{search.parentProcessNodeExecutionId}
+	                    and a.parent_process_node_execution_id = #{search.parentProcessNodeExecutionId}
                     </if>
         </where>
     </select>
-
 </mapper>

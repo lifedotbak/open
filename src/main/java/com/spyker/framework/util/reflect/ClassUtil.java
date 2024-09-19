@@ -57,15 +57,6 @@ public class ClassUtil {
         return classList;
     }
 
-    public static List<Class<?>> getClassList(String... packageName) {
-        List<Class<?>> classList = new LinkedList<>();
-        for (String s : packageName) {
-            List<Class<?>> c = getClassList(s);
-            classList.addAll(c);
-        }
-        return classList;
-    }
-
     public static List<Class<?>> getClassList(String packageName) {
         List<Class<?>> classList = new LinkedList<>();
         try {
@@ -107,5 +98,14 @@ public class ClassUtil {
 
     public static ClassLoader getClassLoader() {
         return Thread.currentThread().getContextClassLoader();
+    }
+
+    public static List<Class<?>> getClassList(String... packageName) {
+        List<Class<?>> classList = new LinkedList<>();
+        for (String s : packageName) {
+            List<Class<?>> c = getClassList(s);
+            classList.addAll(c);
+        }
+        return classList;
     }
 }

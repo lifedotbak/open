@@ -25,8 +25,17 @@ public class JsonUtil {
         return parseArray(jsonString, Object.class);
     }
 
-    public static <T> List<T> toList(Class<T> tClass, Object object) {
-        return parseArray(toJSONString(object), tClass);
+    @SneakyThrows
+    public static String toJSONString(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof String) {
+            return Convert.toStr(obj);
+        }
+        ObjectMapper objectMapper = buildObjectWrapper();
+
+        return objectMapper.writeValueAsString(obj);
     }
 
     @SneakyThrows
@@ -40,6 +49,15 @@ public class JsonUtil {
         return list;
     }
 
+    private static ObjectMapper buildObjectWrapper() {
+        ObjectMapper objectMapper = SpringUtil.getBean(ObjectMapper.class);
+        return objectMapper;
+    }
+
+    public static <T> List<T> toList(Class<T> tClass, Object object) {
+        return parseArray(toJSONString(object), tClass);
+    }
+
     @SneakyThrows
     public static List<Map<Object, Object>> parseArrayOfMap(String json) {
 
@@ -51,25 +69,6 @@ public class JsonUtil {
     }
 
     @SneakyThrows
-    public static List<Object> parseOriArray(String json) {
-        ObjectMapper objectMapper = buildObjectWrapper();
-
-        return objectMapper.readValue(
-                json, new com.fasterxml.jackson.core.type.TypeReference<List<Object>>() {});
-    }
-
-    @SneakyThrows
-    public static Map<Object, Object> parseObject(String json) {
-        if (StrUtil.isBlank(json)) {
-            return null;
-        }
-        ObjectMapper objectMapper = buildObjectWrapper();
-
-        return objectMapper.readValue(
-                json, new com.fasterxml.jackson.core.type.TypeReference<Map<Object, Object>>() {});
-    }
-
-    @SneakyThrows
     public static <T> T parseObject(String json, Class<T> tClass) {
         if (StrUtil.isBlank(json)) {
             return null;
@@ -77,11 +76,6 @@ public class JsonUtil {
         ObjectMapper objectMapper = buildObjectWrapper();
 
         return objectMapper.readValue(json, tClass);
-    }
-
-    private static ObjectMapper buildObjectWrapper() {
-        ObjectMapper objectMapper = SpringUtil.getBean(ObjectMapper.class);
-        return objectMapper;
     }
 
     @SneakyThrows
@@ -116,16 +110,22 @@ public class JsonUtil {
     }
 
     @SneakyThrows
-    public static String toJSONString(Object obj) {
-        if (obj == null) {
+    public static List<Object> parseOriArray(String json) {
+        ObjectMapper objectMapper = buildObjectWrapper();
+
+        return objectMapper.readValue(
+                json, new com.fasterxml.jackson.core.type.TypeReference<List<Object>>() {});
+    }
+
+    @SneakyThrows
+    public static Map<Object, Object> parseObject(String json) {
+        if (StrUtil.isBlank(json)) {
             return null;
-        }
-        if (obj instanceof String) {
-            return Convert.toStr(obj);
         }
         ObjectMapper objectMapper = buildObjectWrapper();
 
-        return objectMapper.writeValueAsString(obj);
+        return objectMapper.readValue(
+                json, new com.fasterxml.jackson.core.type.TypeReference<Map<Object, Object>>() {});
     }
 
     public static class TypeReference<T> extends com.fasterxml.jackson.core.type.TypeReference<T> {}

@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysRoleDeptMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysRoleDept"
-            parameterType="com.spyker.commons.search.SysRoleDeptSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysRoleDept"
+	        parameterType="com.spyker.commons.search.SysRoleDeptSearch">
+		SELECT
             a.*
         FROM
             sys_role_dept a
         <where>
-            <if test="null != roleId ">
-                and a.role_id = #{roleId}
-            </if>
+	        <if test="null != roleId ">
+		        and a.role_id = #{roleId}
+	        </if>
             <if test="null != deptId ">
-                and a.dept_id = #{deptId}
+	            and a.dept_id = #{deptId}
             </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysRoleDept"
             parameterType="com.spyker.commons.search.SysRoleDeptSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_role_dept a
         <where>
-            <if test="null != search.roleId ">
-                and a.role_id = #{search.roleId}
-            </if>
+	        <if test="null != search.roleId ">
+		        and a.role_id = #{search.roleId}
+	        </if>
             <if test="null != search.deptId ">
-                and a.dept_id = #{search.deptId}
+	            and a.dept_id = #{search.deptId}
             </if>
         </where>
     </select>
-
 </mapper>

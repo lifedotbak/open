@@ -21,14 +21,6 @@ public class RedissonService {
 
     private final RedissonClient redissonClient;
 
-    public NameMapper getNameMapper() {
-        Config config = redissonClient.getConfig();
-        if (config.isClusterConfig()) {
-            return config.useClusterServers().getNameMapper();
-        }
-        return config.useSingleServer().getNameMapper();
-    }
-
     /**
      * 限流
      *
@@ -417,6 +409,14 @@ public class RedissonService {
         Stream<String> stream =
                 redissonClient.getKeys().getKeysStreamByPattern(getNameMapper().map(pattern));
         return stream.map(key -> getNameMapper().unmap(key)).collect(Collectors.toList());
+    }
+
+    public NameMapper getNameMapper() {
+        Config config = redissonClient.getConfig();
+        if (config.isClusterConfig()) {
+            return config.useClusterServers().getNameMapper();
+        }
+        return config.useSingleServer().getNameMapper();
     }
 
     /**

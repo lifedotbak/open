@@ -1,62 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysDeptUserMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysDeptUser"
-            parameterType="com.spyker.commons.search.SysDeptUserSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysDeptUser"
+	        parameterType="com.spyker.commons.search.SysDeptUserSearch">
+		SELECT
         a.*
         FROM
         sys_dept_user a
         <where>
-                    <if test="null != deptId ">
-                        and a.dept_id = #{deptId}
-                    </if>
+	        <if test="null != deptId ">
+		        and a.dept_id = #{deptId}
+	        </if>
                     <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
+	                    and a.del_flag = #{delFlag}
                     </if>
                     <if test="null != userId ">
-                        and a.user_id = #{userId}
+	                    and a.user_id = #{userId}
                     </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysDeptUser"
             parameterType="com.spyker.commons.search.SysDeptUserSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_dept_user a
         <where>
-                    <if test="null != search.deptId ">
-                        and a.dept_id = #{search.deptId}
-                    </if>
+	        <if test="null != search.deptId ">
+		        and a.dept_id = #{search.deptId}
+	        </if>
                     <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
+	                    and a.del_flag = #{search.delFlag}
                     </if>
                     <if test="null != search.userId ">
-                        and a.user_id = #{search.userId}
+	                    and a.user_id = #{search.userId}
                     </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
         </where>
     </select>
-
 </mapper>

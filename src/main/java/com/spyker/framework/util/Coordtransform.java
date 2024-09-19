@@ -77,27 +77,14 @@ public class CoordTransform {
     }
 
     /**
-     * GCJ02转WGS84
+     * outOfChina @描述: 判断是否在国内，不在国内则不做偏移
      *
-     * @param gcj_lon
-     * @param gcj_lat
-     * @return Double[lon,lat]
+     * @param lng
+     * @param lat
+     * @return {boolean}
      */
-    public static Double[] GCJ02ToWGS84(Double gcj_lon, Double gcj_lat) {
-        if (outOfChina(gcj_lon, gcj_lat)) {
-            return new Double[] {gcj_lon, gcj_lat};
-        }
-        double dlat = transformlat(gcj_lon - 105.0, gcj_lat - 35.0);
-        double dlng = transformlng(gcj_lon - 105.0, gcj_lat - 35.0);
-        double radlat = gcj_lat / 180.0 * PI;
-        double magic = Math.sin(radlat);
-        magic = 1 - ee * magic * magic;
-        double sqrtmagic = Math.sqrt(magic);
-        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
-        dlng = (dlng * 180.0) / (a / sqrtmagic * Math.cos(radlat) * PI);
-        double mglat = gcj_lat + dlat;
-        double mglng = gcj_lon + dlng;
-        return new Double[] {gcj_lon * 2 - mglng, gcj_lat * 2 - mglat};
+    private static boolean outOfChina(Double lng, Double lat) {
+        return (lng < 72.004 || lng > 137.8347) || ((lat < 0.8293 || lat > 55.8271));
     }
 
     private static Double transformlat(double lng, double lat) {
@@ -129,13 +116,26 @@ public class CoordTransform {
     }
 
     /**
-     * outOfChina @描述: 判断是否在国内，不在国内则不做偏移
+     * GCJ02转WGS84
      *
-     * @param lng
-     * @param lat
-     * @return {boolean}
+     * @param gcj_lon
+     * @param gcj_lat
+     * @return Double[lon,lat]
      */
-    private static boolean outOfChina(Double lng, Double lat) {
-        return (lng < 72.004 || lng > 137.8347) || ((lat < 0.8293 || lat > 55.8271));
+    public static Double[] GCJ02ToWGS84(Double gcj_lon, Double gcj_lat) {
+        if (outOfChina(gcj_lon, gcj_lat)) {
+            return new Double[] {gcj_lon, gcj_lat};
+        }
+        double dlat = transformlat(gcj_lon - 105.0, gcj_lat - 35.0);
+        double dlng = transformlng(gcj_lon - 105.0, gcj_lat - 35.0);
+        double radlat = gcj_lat / 180.0 * PI;
+        double magic = Math.sin(radlat);
+        magic = 1 - ee * magic * magic;
+        double sqrtmagic = Math.sqrt(magic);
+        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
+        dlng = (dlng * 180.0) / (a / sqrtmagic * Math.cos(radlat) * PI);
+        double mglat = gcj_lat + dlat;
+        double mglng = gcj_lon + dlng;
+        return new Double[] {gcj_lon * 2 - mglng, gcj_lat * 2 - mglat};
     }
 }

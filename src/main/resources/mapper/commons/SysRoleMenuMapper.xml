@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysRoleMenuMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysRoleMenu"
-            parameterType="com.spyker.commons.search.SysRoleMenuSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysRoleMenu"
+	        parameterType="com.spyker.commons.search.SysRoleMenuSearch">
+		SELECT
         a.*
         FROM
         sys_role_menu a
         <where>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysRoleMenu"
             parameterType="com.spyker.commons.search.SysRoleMenuSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_role_menu a
         <where>
         </where>
     </select>
-
 </mapper>

@@ -74,6 +74,55 @@ public final class ExUuidUtils implements Serializable, Comparable<ExUuidUtils> 
     }
 
     /**
+     * 返回此{@code UUID} 的字符串表现形式。
+     *
+     * <p>UUID 的字符串表示形式由此 BNF 描述：
+     *
+     * <pre>{@code
+     * UUID                   = <time_low>-<time_mid>-<time_high_and_version>-<variant_and_sequence>-<node>
+     * time_low               = 4*<hexOctet>
+     * time_mid               = 2*<hexOctet>
+     * time_high_and_version  = 2*<hexOctet>
+     * variant_and_sequence   = 2*<hexOctet>
+     * node                   = 6*<hexOctet>
+     * hexOctet               = <hexDigit><hexDigit>
+     * hexDigit               = [0-9a-fA-F]
+     * }</pre>
+     *
+     * </blockquote>
+     *
+     * @param isSimple 是否简单模式，简单模式为不带'-'的UUID字符串
+     * @return 此{@code UUID} 的字符串表现形式
+     */
+    public String toString(boolean isSimple) {
+        final StringBuilder builder = new StringBuilder(isSimple ? 32 : 36);
+        // time_low
+        builder.append(digits(mostSigBits >> 32, 8));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // time_mid
+        builder.append(digits(mostSigBits >> 16, 4));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // time_high_and_version
+        builder.append(digits(mostSigBits, 4));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // variant_and_sequence
+        builder.append(digits(leastSigBits >> 48, 4));
+        if (!isSimple) {
+            builder.append('-');
+        }
+        // node
+        builder.append(digits(leastSigBits, 12));
+
+        return builder.toString();
+    }
+
+    /**
      * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
      *
      * @param isSecure 是否使用{@link SecureRandom}如果是可以获得更安全的随机码，否则可以得到更好的性能
@@ -210,55 +259,6 @@ public final class ExUuidUtils implements Serializable, Comparable<ExUuidUtils> 
         } catch (NoSuchAlgorithmException e) {
             throw new UtilException(e);
         }
-    }
-
-    /**
-     * 返回此{@code UUID} 的字符串表现形式。
-     *
-     * <p>UUID 的字符串表示形式由此 BNF 描述：
-     *
-     * <pre>{@code
-     * UUID                   = <time_low>-<time_mid>-<time_high_and_version>-<variant_and_sequence>-<node>
-     * time_low               = 4*<hexOctet>
-     * time_mid               = 2*<hexOctet>
-     * time_high_and_version  = 2*<hexOctet>
-     * variant_and_sequence   = 2*<hexOctet>
-     * node                   = 6*<hexOctet>
-     * hexOctet               = <hexDigit><hexDigit>
-     * hexDigit               = [0-9a-fA-F]
-     * }</pre>
-     *
-     * </blockquote>
-     *
-     * @param isSimple 是否简单模式，简单模式为不带'-'的UUID字符串
-     * @return 此{@code UUID} 的字符串表现形式
-     */
-    public String toString(boolean isSimple) {
-        final StringBuilder builder = new StringBuilder(isSimple ? 32 : 36);
-        // time_low
-        builder.append(digits(mostSigBits >> 32, 8));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // time_mid
-        builder.append(digits(mostSigBits >> 16, 4));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // time_high_and_version
-        builder.append(digits(mostSigBits, 4));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // variant_and_sequence
-        builder.append(digits(leastSigBits >> 48, 4));
-        if (!isSimple) {
-            builder.append('-');
-        }
-        // node
-        builder.append(digits(leastSigBits, 12));
-
-        return builder.toString();
     }
 
     /**

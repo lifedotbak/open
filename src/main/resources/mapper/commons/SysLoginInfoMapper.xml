@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysLoginInfoMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysLoginInfo"
-            parameterType="com.spyker.commons.search.SysLoginInfoSearch">
-        SELECT a.* FROM sys_login_info a
+	<select id="query" resultType="com.spyker.commons.entity.SysLoginInfo"
+	        parameterType="com.spyker.commons.search.SysLoginInfoSearch">
+		SELECT a.* FROM sys_login_info a
         <where>
-            <if test="null != userName ">
-                and a.user_name = #{userName}
-            </if>
+	        <if test="null != userName ">
+		        and a.user_name = #{userName}
+	        </if>
             <if test="null != browser ">
-                and a.browser = #{browser}
+	            and a.browser = #{browser}
             </if>
             <if test="null != os ">
-                and a.os = #{os}
+	            and a.os = #{os}
             </if>
             <if test="null != status ">
-                and a.status = #{status}
+	            and a.status = #{status}
             </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysLoginInfo"
             parameterType="com.spyker.commons.search.SysLoginInfoSearch">
-        SELECT a.* FROM sys_login_info a
+	    SELECT a.* FROM sys_login_info a
         <where>
-            <if test="null != search.userName ">
-                and a.user_name = #{search.userName}
-            </if>
+	        <if test="null != search.userName ">
+		        and a.user_name = #{search.userName}
+	        </if>
         </where>
     </select>
-
 </mapper>

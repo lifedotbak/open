@@ -53,6 +53,63 @@ public class OnvifPackageXml {
         }
     }
 
+    private static WsseUsernameToken getWsseUsernameToken(String username, String password) {
+        try {
+            // nonce
+            Random r = new Random();
+            String text = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String nonce = "";
+            for (int i = 0; i < 32; i++) {
+                int index = r.nextInt(text.length());
+                nonce = nonce + text.charAt(index);
+            }
+            // time
+            SimpleDateFormat df =
+                    new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
+            String time = df.format(new Date());
+            // password
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            //            byte[] b1 = Base64Util.decodeBase64(nonce.getBytes());
+            byte[] b1 = Base64.decodeBase64(nonce.getBytes());
+            byte[] b2 = time.getBytes();
+            byte[] b3 = password.getBytes();
+            byte[] b4;
+            md.update(b1, 0, b1.length);
+            md.update(b2, 0, b2.length);
+            md.update(b3, 0, b3.length);
+            b4 = md.digest();
+            String passwd = new String(Base64.encodeBase64(b4)).trim();
+            //
+            WsseUsernameToken result = new WsseUsernameToken();
+            result.setUsername(username);
+            result.setPassword(passwd);
+            result.setNonce(nonce);
+            result.setCreated(time);
+            return result;
+        } catch (NoSuchAlgorithmException e) {
+            log.error("error-->{}", e);
+            return new WsseUsernameToken();
+        }
+    }
+
+    /** ----------------------------------- 功能 -------------------------------------* */
+    @NotNull
+    private static StringBuffer getRequestXml(String path) throws IOException {
+        Resource resource = new ClassPathResource(path);
+        InputStream is = resource.getInputStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        StringBuffer sb = new StringBuffer();
+        String data = null;
+        while ((data = br.readLine()) != null) {
+            sb.append(data);
+        }
+        br.close();
+        isr.close();
+        is.close();
+        return sb;
+    }
+
     /***
      * 获取播放流地址
      * @param username
@@ -80,8 +137,6 @@ public class OnvifPackageXml {
             return null;
         }
     }
-
-    /** ----------------------------------- 功能 -------------------------------------* */
 
     /***
      * 云台控制
@@ -211,62 +266,6 @@ public class OnvifPackageXml {
 
             return null;
         }
-    }
-
-    private static WsseUsernameToken getWsseUsernameToken(String username, String password) {
-        try {
-            // nonce
-            Random r = new Random();
-            String text = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            String nonce = "";
-            for (int i = 0; i < 32; i++) {
-                int index = r.nextInt(text.length());
-                nonce = nonce + text.charAt(index);
-            }
-            // time
-            SimpleDateFormat df =
-                    new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
-            String time = df.format(new Date());
-            // password
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            //            byte[] b1 = Base64Util.decodeBase64(nonce.getBytes());
-            byte[] b1 = Base64.decodeBase64(nonce.getBytes());
-            byte[] b2 = time.getBytes();
-            byte[] b3 = password.getBytes();
-            byte[] b4;
-            md.update(b1, 0, b1.length);
-            md.update(b2, 0, b2.length);
-            md.update(b3, 0, b3.length);
-            b4 = md.digest();
-            String passwd = new String(Base64.encodeBase64(b4)).trim();
-            //
-            WsseUsernameToken result = new WsseUsernameToken();
-            result.setUsername(username);
-            result.setPassword(passwd);
-            result.setNonce(nonce);
-            result.setCreated(time);
-            return result;
-        } catch (NoSuchAlgorithmException e) {
-            log.error("error-->{}", e);
-            return new WsseUsernameToken();
-        }
-    }
-
-    @NotNull
-    private static StringBuffer getRequestXml(String path) throws IOException {
-        Resource resource = new ClassPathResource(path);
-        InputStream is = resource.getInputStream();
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(isr);
-        StringBuffer sb = new StringBuffer();
-        String data = null;
-        while ((data = br.readLine()) != null) {
-            sb.append(data);
-        }
-        br.close();
-        isr.close();
-        is.close();
-        return sb;
     }
 
     public static void doGetSnap(String url, String filePath) {

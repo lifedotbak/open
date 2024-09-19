@@ -105,6 +105,10 @@ public class SystemInfoUtils {
         return map;
     }
 
+    public static double formatUnits(long value, long prefix) {
+        return (double) value / (double) prefix;
+    }
+
     /**
      * 获取带宽总值
      *
@@ -117,10 +121,6 @@ public class SystemInfoUtils {
         NetworkIF networkIF = recvNetworkIFs.get(recvNetworkIFs.size() - 1);
 
         return networkIF.getSpeed() / 1048576L / 8L;
-    }
-
-    public static double formatUnits(long value, long prefix) {
-        return (double) value / (double) prefix;
     }
 
     /**

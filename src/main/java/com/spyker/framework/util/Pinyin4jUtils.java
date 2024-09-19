@@ -20,6 +20,13 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Pinyin4jUtils {
 
+    public static void main(String[] args) {
+        String pinYin = getAllPinyin("秋水共长天一色");
+        String firstPinYin = getFirstPinYin("秋水共长天一色");
+        System.out.println("秋水共长天一色全拼：" + pinYin);
+        System.out.println("秋水共长天一色首字母：" + firstPinYin);
+    }
+
     public static String getAllPinyin(String hanzi) {
         // 输出格式设置
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
@@ -85,13 +92,6 @@ public final class Pinyin4jUtils {
             badHanyuPinyinOutputFormatCombination.printStackTrace();
         }
         return firstPinyin.toString();
-    }
-
-    public static void main(String[] args) {
-        String pinYin = getAllPinyin("秋水共长天一色");
-        String firstPinYin = getFirstPinYin("秋水共长天一色");
-        System.out.println("秋水共长天一色全拼：" + pinYin);
-        System.out.println("秋水共长天一色首字母：" + firstPinYin);
     }
 
     public static String convertTolowerCase(String chines) {

@@ -40,8 +40,7 @@ import java.util.*;
 public class FlowMonitorController {
 
     private final String prefix = "flowable/monitor";
-    @Resource
-    ManagementService managementService;
+    @Resource ManagementService managementService;
     @Resource RepositoryService repositoryService;
     @Resource ProcessEngineConfiguration configuration;
     @Resource ActRuExecutionMapper actRuExecutionMapper;

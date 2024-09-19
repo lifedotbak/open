@@ -1,152 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysProcessMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysProcess"
-            parameterType="com.spyker.commons.search.SysProcessSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysProcess"
+	        parameterType="com.spyker.commons.search.SysProcessSearch">
+		SELECT
         a.*
         FROM
         sys_process a
         <where>
-                    <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
-                    </if>
+	        <if test="null != delFlag ">
+		        and a.del_flag = #{delFlag}
+	        </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != flowId ">
-                        and a.flow_id = #{flowId}
+	                    and a.flow_id = #{flowId}
                     </if>
                     <if test="null != name ">
-                        and a.name = #{name}
+	                    and a.name = #{name}
                     </if>
                     <if test="null != logo ">
-                        and a.logo = #{logo}
+	                    and a.logo = #{logo}
                     </if>
                     <if test="null != settings ">
-                        and a.settings = #{settings}
+	                    and a.settings = #{settings}
                     </if>
                     <if test="null != groupId ">
-                        and a.group_id = #{groupId}
+	                    and a.group_id = #{groupId}
                     </if>
                     <if test="null != formItems ">
-                        and a.form_items = #{formItems}
+	                    and a.form_items = #{formItems}
                     </if>
                     <if test="null != process ">
-                        and a.process = #{process}
+	                    and a.process = #{process}
                     </if>
                     <if test="null != remark ">
-                        and a.remark = #{remark}
+	                    and a.remark = #{remark}
                     </if>
                     <if test="null != processSort ">
-                        and a.process_sort = #{processSort}
+	                    and a.process_sort = #{processSort}
                     </if>
                     <if test="null != isHidden ">
-                        and a.is_hidden = #{isHidden}
+	                    and a.is_hidden = #{isHidden}
                     </if>
                     <if test="null != isStop ">
-                        and a.is_stop = #{isStop}
+	                    and a.is_stop = #{isStop}
                     </if>
                     <if test="null != adminId ">
-                        and a.admin_id = #{adminId}
+	                    and a.admin_id = #{adminId}
                     </if>
                     <if test="null != uniqueId ">
-                        and a.unique_id = #{uniqueId}
+	                    and a.unique_id = #{uniqueId}
                     </if>
                     <if test="null != admin ">
-                        and a.admin = #{admin}
+	                    and a.admin = #{admin}
                     </if>
                     <if test="null != rangeShow ">
-                        and a.range_show = #{rangeShow}
+	                    and a.range_show = #{rangeShow}
                     </if>
                     <if test="null != version ">
-                        and a.version = #{version}
+	                    and a.version = #{version}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
                     <if test="null != formItemsPc ">
-                        and a.form_items_pc = #{formItemsPc}
+	                    and a.form_items_pc = #{formItemsPc}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysProcess"
             parameterType="com.spyker.commons.search.SysProcessSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_process a
         <where>
-                    <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
-                    </if>
+	        <if test="null != search.delFlag ">
+		        and a.del_flag = #{search.delFlag}
+	        </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.flowId ">
-                        and a.flow_id = #{search.flowId}
+	                    and a.flow_id = #{search.flowId}
                     </if>
                     <if test="null != search.name ">
-                        and a.name = #{search.name}
+	                    and a.name = #{search.name}
                     </if>
                     <if test="null != search.logo ">
-                        and a.logo = #{search.logo}
+	                    and a.logo = #{search.logo}
                     </if>
                     <if test="null != search.settings ">
-                        and a.settings = #{search.settings}
+	                    and a.settings = #{search.settings}
                     </if>
                     <if test="null != search.groupId ">
-                        and a.group_id = #{search.groupId}
+	                    and a.group_id = #{search.groupId}
                     </if>
                     <if test="null != search.formItems ">
-                        and a.form_items = #{search.formItems}
+	                    and a.form_items = #{search.formItems}
                     </if>
                     <if test="null != search.process ">
-                        and a.process = #{search.process}
+	                    and a.process = #{search.process}
                     </if>
                     <if test="null != search.remark ">
-                        and a.remark = #{search.remark}
+	                    and a.remark = #{search.remark}
                     </if>
                     <if test="null != search.processSort ">
-                        and a.process_sort = #{search.processSort}
+	                    and a.process_sort = #{search.processSort}
                     </if>
                     <if test="null != search.isHidden ">
-                        and a.is_hidden = #{search.isHidden}
+	                    and a.is_hidden = #{search.isHidden}
                     </if>
                     <if test="null != search.isStop ">
-                        and a.is_stop = #{search.isStop}
+	                    and a.is_stop = #{search.isStop}
                     </if>
                     <if test="null != search.adminId ">
-                        and a.admin_id = #{search.adminId}
+	                    and a.admin_id = #{search.adminId}
                     </if>
                     <if test="null != search.uniqueId ">
-                        and a.unique_id = #{search.uniqueId}
+	                    and a.unique_id = #{search.uniqueId}
                     </if>
                     <if test="null != search.admin ">
-                        and a.admin = #{search.admin}
+	                    and a.admin = #{search.admin}
                     </if>
                     <if test="null != search.rangeShow ">
-                        and a.range_show = #{search.rangeShow}
+	                    and a.range_show = #{search.rangeShow}
                     </if>
                     <if test="null != search.version ">
-                        and a.version = #{search.version}
+	                    and a.version = #{search.version}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
                     <if test="null != search.formItemsPc ">
-                        and a.form_items_pc = #{search.formItemsPc}
+	                    and a.form_items_pc = #{search.formItemsPc}
                     </if>
         </where>
     </select>
-
 </mapper>

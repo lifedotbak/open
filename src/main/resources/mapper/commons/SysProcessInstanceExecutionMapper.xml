@@ -1,80 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysProcessInstanceExecutionMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceExecution"
-            parameterType="com.spyker.commons.search.SysProcessInstanceExecutionSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceExecution"
+	        parameterType="com.spyker.commons.search.SysProcessInstanceExecutionSearch">
+		SELECT
         a.*
         FROM
         sys_process_instance_execution a
         <where>
-                    <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
-                    </if>
+	        <if test="null != delFlag ">
+		        and a.del_flag = #{delFlag}
+	        </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
                     <if test="null != processInstanceId ">
-                        and a.process_instance_id = #{processInstanceId}
+	                    and a.process_instance_id = #{processInstanceId}
                     </if>
                     <if test="null != nodeId ">
-                        and a.node_id = #{nodeId}
+	                    and a.node_id = #{nodeId}
                     </if>
                     <if test="null != executionId ">
-                        and a.execution_id = #{executionId}
+	                    and a.execution_id = #{executionId}
                     </if>
                     <if test="null != parentExecutionId ">
-                        and a.parent_execution_id = #{parentExecutionId}
+	                    and a.parent_execution_id = #{parentExecutionId}
                     </if>
                     <if test="null != flowId ">
-                        and a.flow_id = #{flowId}
+	                    and a.flow_id = #{flowId}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysProcessInstanceExecution"
             parameterType="com.spyker.commons.search.SysProcessInstanceExecutionSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_process_instance_execution a
         <where>
-                    <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
-                    </if>
+	        <if test="null != search.delFlag ">
+		        and a.del_flag = #{search.delFlag}
+	        </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
                     <if test="null != search.processInstanceId ">
-                        and a.process_instance_id = #{search.processInstanceId}
+	                    and a.process_instance_id = #{search.processInstanceId}
                     </if>
                     <if test="null != search.nodeId ">
-                        and a.node_id = #{search.nodeId}
+	                    and a.node_id = #{search.nodeId}
                     </if>
                     <if test="null != search.executionId ">
-                        and a.execution_id = #{search.executionId}
+	                    and a.execution_id = #{search.executionId}
                     </if>
                     <if test="null != search.parentExecutionId ">
-                        and a.parent_execution_id = #{search.parentExecutionId}
+	                    and a.parent_execution_id = #{search.parentExecutionId}
                     </if>
                     <if test="null != search.flowId ">
-                        and a.flow_id = #{search.flowId}
+	                    and a.flow_id = #{search.flowId}
                     </if>
         </where>
     </select>
-
 </mapper>

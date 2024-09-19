@@ -26,8 +26,7 @@ public class ActivitiTracingChart {
 
     private static final Logger logger = LoggerFactory.getLogger(ActivitiTracingChart.class);
 
-    @Autowired
-    private HistoryService historyService;
+    @Autowired private HistoryService historyService;
 
     @Autowired private RepositoryService repositoryService;
 

@@ -31,13 +31,6 @@ public class AvatarUtil {
     // 图片高度
     private static final int HEIGHT = 100;
 
-    // 得到该字体字符串的长度
-    public static int getWordWidth(Font font, String content) {
-        FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
-        Rectangle rec = font.getStringBounds(content, frc).getBounds();
-        return (int) rec.getWidth();
-    }
-
     /**
      * @param name 用户名称
      * @return 访问图片的路径 localhost:8082/img/
@@ -140,6 +133,13 @@ public class AvatarUtil {
         String[] color = beautifulColors[random.nextInt(len)].split(",");
         return new Color(
                 Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]));
+    }
+
+    // 得到该字体字符串的长度
+    public static int getWordWidth(Font font, String content) {
+        FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
+        Rectangle rec = font.getStringBounds(content, frc).getBounds();
+        return (int) rec.getWidth();
     }
 
     /**

@@ -37,8 +37,7 @@ import java.util.*;
 public class ModelManageController {
 
     private final String prefix = "flowable/manage";
-    @Resource
-    RepositoryService repositoryService;
+    @Resource RepositoryService repositoryService;
     @Resource private ObjectMapper objectMapper;
 
     @Operation(description = "查询所有模型")

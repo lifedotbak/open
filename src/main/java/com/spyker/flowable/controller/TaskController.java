@@ -37,8 +37,7 @@ public class TaskController {
     @Autowired FormService formService;
     @Autowired private RuntimeService runtimeService;
     @Autowired private TaskService taskService;
-    @Resource
-    private HistoryService historyService;
+    @Resource private HistoryService historyService;
 
     @GetMapping("/mytask")
     public String mytasks() {

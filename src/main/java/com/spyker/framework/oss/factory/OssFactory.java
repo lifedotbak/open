@@ -44,6 +44,19 @@ public class OssFactory {
                 });
     }
 
+    private OssClient getClient(String configKey) {
+        return CLIENT_CACHE.get(configKey);
+    }
+
+    private void refresh(String configKey) {
+        String json = CacheUtils.get(OssConstant.SYS_OSS_CONFIG_KEY, configKey);
+        if (json == null) {
+            throw new OssException("系统异常, '" + configKey + "'配置信息不存在!");
+        }
+        OssProperties properties = ExJsonUtils.parseObject(json, OssProperties.class);
+        CLIENT_CACHE.put(configKey, new OssClient(configKey, properties));
+    }
+
     /** 获取默认实例 */
     public OssClient instance() {
         // 获取redis 默认类型
@@ -62,18 +75,5 @@ public class OssFactory {
             return getClient(configKey);
         }
         return client;
-    }
-
-    private void refresh(String configKey) {
-        String json = CacheUtils.get(OssConstant.SYS_OSS_CONFIG_KEY, configKey);
-        if (json == null) {
-            throw new OssException("系统异常, '" + configKey + "'配置信息不存在!");
-        }
-        OssProperties properties = ExJsonUtils.parseObject(json, OssProperties.class);
-        CLIENT_CACHE.put(configKey, new OssClient(configKey, properties));
-    }
-
-    private OssClient getClient(String configKey) {
-        return CLIENT_CACHE.get(configKey);
     }
 }

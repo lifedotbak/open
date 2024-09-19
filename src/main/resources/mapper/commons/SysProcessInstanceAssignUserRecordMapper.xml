@@ -1,140 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysProcessInstanceAssignUserRecordMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceAssignUserRecord"
-            parameterType="com.spyker.commons.search.SysProcessInstanceAssignUserRecordSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceAssignUserRecord"
+	        parameterType="com.spyker.commons.search.SysProcessInstanceAssignUserRecordSearch">
+		SELECT
         a.*
         FROM
         sys_process_instance_assign_user_record a
         <where>
-                    <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
-                    </if>
+	        <if test="null != delFlag ">
+		        and a.del_flag = #{delFlag}
+	        </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != flowId ">
-                        and a.flow_id = #{flowId}
+	                    and a.flow_id = #{flowId}
                     </if>
                     <if test="null != processInstanceId ">
-                        and a.process_instance_id = #{processInstanceId}
+	                    and a.process_instance_id = #{processInstanceId}
                     </if>
                     <if test="null != data ">
-                        and a.data = #{data}
+	                    and a.data = #{data}
                     </if>
                     <if test="null != nodeId ">
-                        and a.node_id = #{nodeId}
+	                    and a.node_id = #{nodeId}
                     </if>
                     <if test="null != userId ">
-                        and a.user_id = #{userId}
+	                    and a.user_id = #{userId}
                     </if>
                     <if test="null != status ">
-                        and a.status = #{status}
+	                    and a.status = #{status}
                     </if>
                     <if test="null != executionId ">
-                        and a.execution_id = #{executionId}
+	                    and a.execution_id = #{executionId}
                     </if>
                     <if test="null != taskId ">
-                        and a.task_id = #{taskId}
+	                    and a.task_id = #{taskId}
                     </if>
                     <if test="null != approveDesc ">
-                        and a.approve_desc = #{approveDesc}
+	                    and a.approve_desc = #{approveDesc}
                     </if>
                     <if test="null != nodeName ">
-                        and a.node_name = #{nodeName}
+	                    and a.node_name = #{nodeName}
                     </if>
                     <if test="null != taskType ">
-                        and a.task_type = #{taskType}
+	                    and a.task_type = #{taskType}
                     </if>
                     <if test="null != localData ">
-                        and a.local_data = #{localData}
+	                    and a.local_data = #{localData}
                     </if>
                     <if test="null != flowUniqueId ">
-                        and a.flow_unique_id = #{flowUniqueId}
+	                    and a.flow_unique_id = #{flowUniqueId}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
                     <if test="null != auto ">
-                        and a.auto = #{auto}
+	                    and a.auto = #{auto}
                     </if>
                     <if test="null != parentExecutionId ">
-                        and a.parent_execution_id = #{parentExecutionId}
+	                    and a.parent_execution_id = #{parentExecutionId}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysProcessInstanceAssignUserRecord"
             parameterType="com.spyker.commons.search.SysProcessInstanceAssignUserRecordSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_process_instance_assign_user_record a
         <where>
-                    <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
-                    </if>
+	        <if test="null != search.delFlag ">
+		        and a.del_flag = #{search.delFlag}
+	        </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.flowId ">
-                        and a.flow_id = #{search.flowId}
+	                    and a.flow_id = #{search.flowId}
                     </if>
                     <if test="null != search.processInstanceId ">
-                        and a.process_instance_id = #{search.processInstanceId}
+	                    and a.process_instance_id = #{search.processInstanceId}
                     </if>
                     <if test="null != search.data ">
-                        and a.data = #{search.data}
+	                    and a.data = #{search.data}
                     </if>
                     <if test="null != search.nodeId ">
-                        and a.node_id = #{search.nodeId}
+	                    and a.node_id = #{search.nodeId}
                     </if>
                     <if test="null != search.userId ">
-                        and a.user_id = #{search.userId}
+	                    and a.user_id = #{search.userId}
                     </if>
                     <if test="null != search.status ">
-                        and a.status = #{search.status}
+	                    and a.status = #{search.status}
                     </if>
                     <if test="null != search.executionId ">
-                        and a.execution_id = #{search.executionId}
+	                    and a.execution_id = #{search.executionId}
                     </if>
                     <if test="null != search.taskId ">
-                        and a.task_id = #{search.taskId}
+	                    and a.task_id = #{search.taskId}
                     </if>
                     <if test="null != search.approveDesc ">
-                        and a.approve_desc = #{search.approveDesc}
+	                    and a.approve_desc = #{search.approveDesc}
                     </if>
                     <if test="null != search.nodeName ">
-                        and a.node_name = #{search.nodeName}
+	                    and a.node_name = #{search.nodeName}
                     </if>
                     <if test="null != search.taskType ">
-                        and a.task_type = #{search.taskType}
+	                    and a.task_type = #{search.taskType}
                     </if>
                     <if test="null != search.localData ">
-                        and a.local_data = #{search.localData}
+	                    and a.local_data = #{search.localData}
                     </if>
                     <if test="null != search.flowUniqueId ">
-                        and a.flow_unique_id = #{search.flowUniqueId}
+	                    and a.flow_unique_id = #{search.flowUniqueId}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
                     <if test="null != search.auto ">
-                        and a.auto = #{search.auto}
+	                    and a.auto = #{search.auto}
                     </if>
                     <if test="null != search.parentExecutionId ">
-                        and a.parent_execution_id = #{search.parentExecutionId}
+	                    and a.parent_execution_id = #{search.parentExecutionId}
                     </if>
         </where>
     </select>
-
 </mapper>

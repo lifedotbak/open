@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysNoticeMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysNotice"
-            parameterType="com.spyker.commons.search.SysNoticeSearch">
-        SELECT a.* FROM sys_notice a
+	<select id="query" resultType="com.spyker.commons.entity.SysNotice"
+	        parameterType="com.spyker.commons.search.SysNoticeSearch">
+		SELECT a.* FROM sys_notice a
         <where>
-            <if test="null != noticeTitle ">
-                and a.notice_title = #{noticeTitle}
-            </if>
+	        <if test="null != noticeTitle ">
+		        and a.notice_title = #{noticeTitle}
+	        </if>
             <if test="null != noticeType ">
-                and a.notice_type = #{noticeType}
+	            and a.notice_type = #{noticeType}
             </if>
             <if test="null != status ">
-                and a.status = #{status}
+	            and a.status = #{status}
             </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysNotice"
             parameterType="com.spyker.commons.search.SysNoticeSearch">
-        SELECT a.* FROM sys_notice a
+	    SELECT a.* FROM sys_notice a
         <where>
-            <if test="null != search.noticeTitle ">
-                and a.notice_title = #{search.noticeTitle}
-            </if>
+	        <if test="null != search.noticeTitle ">
+		        and a.notice_title = #{search.noticeTitle}
+	        </if>
         </where>
     </select>
-
 </mapper>

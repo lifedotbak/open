@@ -32,6 +32,8 @@ public interface IBaseEnum<T> {
         return matchEnum;
     }
 
+    T getValue();
+
     /**
      * 根据文本标签获取值
      *
@@ -55,6 +57,8 @@ public interface IBaseEnum<T> {
         }
         return label;
     }
+
+    String getLabel();
 
     /**
      * 根据文本标签获取值
@@ -80,8 +84,4 @@ public interface IBaseEnum<T> {
         }
         return value;
     }
-
-    T getValue();
-
-    String getLabel();
 }

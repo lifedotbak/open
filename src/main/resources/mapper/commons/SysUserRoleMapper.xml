@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysUserRoleMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysUserRole"
-            parameterType="com.spyker.commons.search.SysUserRoleSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysUserRole"
+	        parameterType="com.spyker.commons.search.SysUserRoleSearch">
+		SELECT
         a.*
         FROM
         sys_user_role a
         <where>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysUserRole"
             parameterType="com.spyker.commons.search.SysUserRoleSearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_user_role a
         <where>
         </where>
     </select>
-
 </mapper>

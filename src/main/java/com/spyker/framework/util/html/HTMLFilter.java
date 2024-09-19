@@ -154,38 +154,6 @@ public final class HTMLFilter {
                 conf.containsKey("alwaysMakeTags") ? (Boolean) conf.get("alwaysMakeTags") : true;
     }
 
-    public static String htmlSpecialChars(final String s) {
-        String result = s;
-        result = regexReplace(P_AMP, "&amp;", result);
-        result = regexReplace(P_QUOTE, "&quot;", result);
-        result = regexReplace(P_LEFT_ARROW, "&lt;", result);
-        result = regexReplace(P_RIGHT_ARROW, "&gt;", result);
-        return result;
-    }
-
-    private static String regexReplace(
-            final Pattern regex_pattern, final String replacement, final String s) {
-        Matcher m = regex_pattern.matcher(s);
-        return m.replaceAll(replacement);
-    }
-
-    private static boolean inArray(final String s, final String[] array) {
-        for (String item : array) {
-            if (item != null && item.equals(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // ---------------------------------------------------------------
-
-    // ---------------------------------------------------------------
-    // my versions of some PHP library functions
-    public static String chr(final int decimal) {
-        return String.valueOf((char) decimal);
-    }
-
     /**
      * given a user submitted input String, filter out any invalid or restricted html.
      *
@@ -225,6 +193,8 @@ public final class HTMLFilter {
 
         return buf.toString();
     }
+
+    // ---------------------------------------------------------------
 
     private String balanceHTML(String s) {
         if (alwaysMakeTags) {
@@ -293,6 +263,21 @@ public final class HTMLFilter {
         }
 
         return result;
+    }
+
+    public static String htmlSpecialChars(final String s) {
+        String result = s;
+        result = regexReplace(P_AMP, "&amp;", result);
+        result = regexReplace(P_QUOTE, "&quot;", result);
+        result = regexReplace(P_LEFT_ARROW, "&lt;", result);
+        result = regexReplace(P_RIGHT_ARROW, "&gt;", result);
+        return result;
+    }
+
+    private static String regexReplace(
+            final Pattern regex_pattern, final String replacement, final String s) {
+        Matcher m = regex_pattern.matcher(s);
+        return m.replaceAll(replacement);
     }
 
     private String processTag(final String s) {
@@ -392,6 +377,15 @@ public final class HTMLFilter {
         return (vAllowed.isEmpty() || vAllowed.containsKey(name)) && !inArray(name, vDisallowed);
     }
 
+    private static boolean inArray(final String s, final String[] array) {
+        for (String item : array) {
+            if (item != null && item.equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean allowedAttribute(final String name, final String paramName) {
         return allowed(name) && (vAllowed.isEmpty() || vAllowed.get(name).contains(paramName));
     }
@@ -447,6 +441,12 @@ public final class HTMLFilter {
 
         s = validateEntities(s);
         return s;
+    }
+
+    // ---------------------------------------------------------------
+    // my versions of some PHP library functions
+    public static String chr(final int decimal) {
+        return String.valueOf((char) decimal);
     }
 
     private String validateEntities(final String s) {

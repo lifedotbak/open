@@ -58,6 +58,84 @@ public class OnvifDeviceCommand {
     }
 
     /**
+     * 获取token
+     *
+     * @param onvifDevice
+     * @return token
+     */
+    public String token(OnvifDeviceExtend onvifDevice) {
+        try {
+            // 构造http请求头
+            HttpHeaders headers = getHttpHeaders();
+
+            String tokenXml =
+                    OnvifPackageXml.token(onvifDevice.onvifUserName(), onvifDevice.onvifPassword());
+            HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
+
+            // 返回结果
+            String resultStr = getSoapResponse(onvifDevice, formEntity);
+
+            // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转义
+            String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
+
+            log.error("token xmlStr - >{}", xmlStr);
+
+            SAXReader reader = new SAXReader();
+            Document document =
+                    reader.read(new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8)));
+            Element root = document.getRootElement();
+            String token =
+                    root.element("Body")
+                            .element("GetProfilesResponse")
+                            .elements("Profiles")
+                            .get(0)
+                            .attribute("token")
+                            .getText();
+
+            return token;
+        } catch (RestClientException | DocumentException e) {
+
+            log.error("error - >{}", e);
+            return null;
+        }
+    }
+
+    /**
+     * 构造http请求头
+     *
+     * @return HttpHeaders
+     */
+    @NotNull
+    private HttpHeaders getHttpHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
+        headers.setContentType(type);
+        return headers;
+    }
+
+    /**
+     * 请求报文，并获取相应
+     *
+     * @param onvifDevice
+     * @param formEntity
+     * @return
+     */
+    @Nullable
+    private String getSoapResponse(OnvifDeviceExtend onvifDevice, HttpEntity<String> formEntity) {
+
+        String url =
+                "http://"
+                        + onvifDevice.ip()
+                        + ":"
+                        + onvifDevice.onvifPort()
+                        + "/onvif/device_service";
+
+        String resultStr = restTemplate.postForObject(url, formEntity, String.class);
+
+        return resultStr;
+    }
+
+    /**
      * 获取设备回放能力
      *
      * @param onvifDevice
@@ -300,22 +378,6 @@ public class OnvifDeviceCommand {
         return ptz(onvifDevice, 0.5, 0, 0);
     }
 
-    public Boolean ptz_up(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, 0, 0.5, 0);
-    }
-
-    public Boolean ptz_down(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, 0, -0.5, 0);
-    }
-
-    public Boolean ptz_right(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, -0.5, 0, 0);
-    }
-
-    public Boolean ptz_stop(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, 0, 0, 0);
-    }
-
     /**
      * 摄像头操控
      *
@@ -362,81 +424,19 @@ public class OnvifDeviceCommand {
         return true;
     }
 
-    /**
-     * 获取token
-     *
-     * @param onvifDevice
-     * @return token
-     */
-    public String token(OnvifDeviceExtend onvifDevice) {
-        try {
-            // 构造http请求头
-            HttpHeaders headers = getHttpHeaders();
-
-            String tokenXml =
-                    OnvifPackageXml.token(onvifDevice.onvifUserName(), onvifDevice.onvifPassword());
-            HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
-
-            // 返回结果
-            String resultStr = getSoapResponse(onvifDevice, formEntity);
-
-            // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转义
-            String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
-
-            log.error("token xmlStr - >{}", xmlStr);
-
-            SAXReader reader = new SAXReader();
-            Document document =
-                    reader.read(new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8)));
-            Element root = document.getRootElement();
-            String token =
-                    root.element("Body")
-                            .element("GetProfilesResponse")
-                            .elements("Profiles")
-                            .get(0)
-                            .attribute("token")
-                            .getText();
-
-            return token;
-        } catch (RestClientException | DocumentException e) {
-
-            log.error("error - >{}", e);
-            return null;
-        }
+    public Boolean ptz_up(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, 0, 0.5, 0);
     }
 
-    /**
-     * 请求报文，并获取相应
-     *
-     * @param onvifDevice
-     * @param formEntity
-     * @return
-     */
-    @Nullable
-    private String getSoapResponse(OnvifDeviceExtend onvifDevice, HttpEntity<String> formEntity) {
-
-        String url =
-                "http://"
-                        + onvifDevice.ip()
-                        + ":"
-                        + onvifDevice.onvifPort()
-                        + "/onvif/device_service";
-
-        String resultStr = restTemplate.postForObject(url, formEntity, String.class);
-
-        return resultStr;
+    public Boolean ptz_down(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, 0, -0.5, 0);
     }
 
-    /**
-     * 构造http请求头
-     *
-     * @return HttpHeaders
-     */
-    @NotNull
-    private HttpHeaders getHttpHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
-        headers.setContentType(type);
-        return headers;
+    public Boolean ptz_right(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, -0.5, 0, 0);
+    }
+
+    public Boolean ptz_stop(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, 0, 0, 0);
     }
 }

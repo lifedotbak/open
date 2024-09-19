@@ -1,73 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysExceptionLogMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysExceptionLog"
-            parameterType="com.spyker.commons.search.SysExceptionLogSearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysExceptionLog"
+	        parameterType="com.spyker.commons.search.SysExceptionLogSearch">
+		SELECT
             a.*
         FROM
             sys_exception_log a
         <where>
-            <if test="null != expUrl ">
-                and a.exp_url = #{expUrl}
-            </if>
+	        <if test="null != expUrl ">
+		        and a.exp_url = #{expUrl}
+	        </if>
             <if test="null != expParams ">
-                and a.exp_params = #{expParams}
+	            and a.exp_params = #{expParams}
             </if>
             <if test="null != expType ">
-                and a.exp_type = #{expType}
+	            and a.exp_type = #{expType}
             </if>
             <if test="null != expController ">
-                and a.exp_controller = #{expController}
+	            and a.exp_controller = #{expController}
             </if>
             <if test="null != expMethod ">
-                and a.exp_method = #{expMethod}
+	            and a.exp_method = #{expMethod}
             </if>
             <if test="null != expDetail ">
-                and a.exp_detail = #{expDetail}
+	            and a.exp_detail = #{expDetail}
             </if>
             <if test="null != updateBy ">
-                and a.update_by = #{updateBy}
+	            and a.update_by = #{updateBy}
             </if>
             <if test="null != createBy ">
-                and a.create_by = #{createBy}
+	            and a.create_by = #{createBy}
             </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysExceptionLog"
             parameterType="com.spyker.commons.search.SysExceptionLogSearch">
-        SELECT
+	    SELECT
             a.*
         FROM
             sys_exception_log a
         <where>
-            <if test="null != search.expUrl ">
-                and a.exp_url = #{search.expUrl}
-            </if>
+	        <if test="null != search.expUrl ">
+		        and a.exp_url = #{search.expUrl}
+	        </if>
             <if test="null != search.expParams ">
-                and a.exp_params = #{search.expParams}
+	            and a.exp_params = #{search.expParams}
             </if>
             <if test="null != search.expType ">
-                and a.exp_type = #{search.expType}
+	            and a.exp_type = #{search.expType}
             </if>
             <if test="null != search.expController ">
-                and a.exp_controller = #{search.expController}
+	            and a.exp_controller = #{search.expController}
             </if>
             <if test="null != search.expMethod ">
-                and a.exp_method = #{search.expMethod}
+	            and a.exp_method = #{search.expMethod}
             </if>
             <if test="null != search.expDetail ">
-                and a.exp_detail = #{search.expDetail}
+	            and a.exp_detail = #{search.expDetail}
             </if>
             <if test="null != search.updateBy ">
-                and a.update_by = #{search.updateBy}
+	            and a.update_by = #{search.updateBy}
             </if>
             <if test="null != search.createBy ">
-                and a.create_by = #{search.createBy}
+	            and a.create_by = #{search.createBy}
             </if>
         </where>
     </select>
-
 </mapper>

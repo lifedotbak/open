@@ -35,12 +35,12 @@ public enum HttpMethodEnum {
         }
     }
 
+    public boolean matches(String method) {
+        return (this == resolve(method));
+    }
+
     @Nullable
     public static HttpMethodEnum resolve(@Nullable String method) {
         return (method != null ? mappings.get(method) : null);
-    }
-
-    public boolean matches(String method) {
-        return (this == resolve(method));
     }
 }

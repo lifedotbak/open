@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysDictDataMapper">
-
-    <select id="query" resultType="com.spyker.commons.entity.SysDictData"
-            parameterType="com.spyker.commons.search.SysDictDataSearch">
-        SELECT a.* FROM sys_dict_data a
+	<select id="query" resultType="com.spyker.commons.entity.SysDictData"
+	        parameterType="com.spyker.commons.search.SysDictDataSearch">
+		SELECT a.* FROM sys_dict_data a
         <where>
-            <if test="null != dictLabel ">
-                and a.dict_label = #{dictLabel}
-            </if>
+	        <if test="null != dictLabel ">
+		        and a.dict_label = #{dictLabel}
+	        </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysDictData"
             parameterType="com.spyker.commons.search.SysDictDataSearch">
-        SELECT a.* FROM sys_dict_data a
+	    SELECT a.* FROM sys_dict_data a
         <where>
-            <if test="null != search.dictLabel ">
-                and a.dict_label = #{search.dictLabel}
-            </if>
+	        <if test="null != search.dictLabel ">
+		        and a.dict_label = #{search.dictLabel}
+	        </if>
         </where>
     </select>
-
 </mapper>

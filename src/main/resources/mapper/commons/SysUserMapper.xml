@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysUserMapper">
-
-    <select id="getUserByName" resultType="com.spyker.commons.entity.SysUser">
-        SELECT a.* FROM sys_user a where a.user_name = #{userName} limit 1
-    </select>
+	<select id="getUserByName" resultType="com.spyker.commons.entity.SysUser">
+		SELECT a.* FROM sys_user a where a.user_name = #{userName} limit 1
+	</select>
 
     <select id="queryPermsById" resultType="String">
-        SELECT
+	    SELECT
             DISTINCT
             d.perms
         FROM
@@ -24,7 +23,7 @@
     </select>
 
     <select id="queryRolesById" resultType="String">
-        SELECT
+	    SELECT
             DISTINCT
             b.role_key
         FROM
@@ -39,49 +38,48 @@
 
     <select id="query" resultType="com.spyker.commons.entity.SysUser"
             parameterType="com.spyker.commons.search.SysUserSearch">
-        SELECT a.* FROM sys_user a
+	    SELECT a.* FROM sys_user a
         <where>
-            <if test="null != deptId ">
-                and a.dept_id = #{deptId}
-            </if>
+	        <if test="null != deptId ">
+		        and a.dept_id = #{deptId}
+	        </if>
             <if test="null != userName ">
-                and a.user_name = #{userName}
+	            and a.user_name = #{userName}
             </if>
             <if test="null != nickName ">
-                and a.nick_name = #{nickName}
+	            and a.nick_name = #{nickName}
             </if>
             <if test="null != userType ">
-                and a.user_type = #{userType}
+	            and a.user_type = #{userType}
             </if>
             <if test="null != email ">
-                and a.email = #{email}
+	            and a.email = #{email}
             </if>
             <if test="null != phonenumber ">
-                and a.phonenumber = #{phonenumber}
+	            and a.phonenumber = #{phonenumber}
             </if>
             <if test="null != sex ">
-                and a.sex = #{sex}
+	            and a.sex = #{sex}
             </if>
             <if test="null != status ">
-                and a.status = #{status}
+	            and a.status = #{status}
             </if>
             <if test="null != delFlag ">
-                and a.del_flag = #{delFlag}
+	            and a.del_flag = #{delFlag}
             </if>
             <if test="null != loginIp ">
-                and a.login_ip = #{loginIp}
+	            and a.login_ip = #{loginIp}
             </if>
         </where>
     </select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysUser"
             parameterType="com.spyker.commons.search.SysUserSearch">
-        SELECT a.* FROM sys_user a
+	    SELECT a.* FROM sys_user a
         <where>
-            <if test="null != search.deptId ">
-                and a.dept_id = #{dsearch.eptId}
-            </if>
+	        <if test="null != search.deptId ">
+		        and a.dept_id = #{dsearch.eptId}
+	        </if>
         </where>
     </select>
-
 </mapper>

@@ -1,110 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spyker.commons.mapper.SysProcessInstanceCopyMapper">
-
-
-    <select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceCopy"
-            parameterType="com.spyker.commons.search.SysProcessInstanceCopySearch">
-        SELECT
+	<select id="query" resultType="com.spyker.commons.entity.SysProcessInstanceCopy"
+	        parameterType="com.spyker.commons.search.SysProcessInstanceCopySearch">
+		SELECT
         a.*
         FROM
         sys_process_instance_copy a
         <where>
-                    <if test="null != delFlag ">
-                        and a.del_flag = #{delFlag}
-                    </if>
+	        <if test="null != delFlag ">
+		        and a.del_flag = #{delFlag}
+	        </if>
                     <if test="null != createBy ">
-                        and a.create_by = #{createBy}
+	                    and a.create_by = #{createBy}
                     </if>
                     <if test="null != updateBy ">
-                        and a.update_by = #{updateBy}
+	                    and a.update_by = #{updateBy}
                     </if>
                     <if test="null != startUserId ">
-                        and a.start_user_id = #{startUserId}
+	                    and a.start_user_id = #{startUserId}
                     </if>
                     <if test="null != flowId ">
-                        and a.flow_id = #{flowId}
+	                    and a.flow_id = #{flowId}
                     </if>
                     <if test="null != processInstanceId ">
-                        and a.process_instance_id = #{processInstanceId}
+	                    and a.process_instance_id = #{processInstanceId}
                     </if>
                     <if test="null != nodeId ">
-                        and a.node_id = #{nodeId}
+	                    and a.node_id = #{nodeId}
                     </if>
                     <if test="null != groupId ">
-                        and a.group_id = #{groupId}
+	                    and a.group_id = #{groupId}
                     </if>
                     <if test="null != groupName ">
-                        and a.group_name = #{groupName}
+	                    and a.group_name = #{groupName}
                     </if>
                     <if test="null != processName ">
-                        and a.process_name = #{processName}
+	                    and a.process_name = #{processName}
                     </if>
                     <if test="null != nodeName ">
-                        and a.node_name = #{nodeName}
+	                    and a.node_name = #{nodeName}
                     </if>
                     <if test="null != formData ">
-                        and a.form_data = #{formData}
+	                    and a.form_data = #{formData}
                     </if>
                     <if test="null != userId ">
-                        and a.user_id = #{userId}
+	                    and a.user_id = #{userId}
                     </if>
                     <if test="null != tenantId ">
-                        and a.tenant_id = #{tenantId}
+	                    and a.tenant_id = #{tenantId}
                     </if>
         </where>
-    </select>
+	</select>
 
     <select id="queryPage" resultType="com.spyker.commons.entity.SysProcessInstanceCopy"
             parameterType="com.spyker.commons.search.SysProcessInstanceCopySearch">
-        SELECT
+	    SELECT
         a.*
         FROM
         sys_process_instance_copy a
         <where>
-                    <if test="null != search.delFlag ">
-                        and a.del_flag = #{search.delFlag}
-                    </if>
+	        <if test="null != search.delFlag ">
+		        and a.del_flag = #{search.delFlag}
+	        </if>
                     <if test="null != search.createBy ">
-                        and a.create_by = #{search.createBy}
+	                    and a.create_by = #{search.createBy}
                     </if>
                     <if test="null != search.updateBy ">
-                        and a.update_by = #{search.updateBy}
+	                    and a.update_by = #{search.updateBy}
                     </if>
                     <if test="null != search.startUserId ">
-                        and a.start_user_id = #{search.startUserId}
+	                    and a.start_user_id = #{search.startUserId}
                     </if>
                     <if test="null != search.flowId ">
-                        and a.flow_id = #{search.flowId}
+	                    and a.flow_id = #{search.flowId}
                     </if>
                     <if test="null != search.processInstanceId ">
-                        and a.process_instance_id = #{search.processInstanceId}
+	                    and a.process_instance_id = #{search.processInstanceId}
                     </if>
                     <if test="null != search.nodeId ">
-                        and a.node_id = #{search.nodeId}
+	                    and a.node_id = #{search.nodeId}
                     </if>
                     <if test="null != search.groupId ">
-                        and a.group_id = #{search.groupId}
+	                    and a.group_id = #{search.groupId}
                     </if>
                     <if test="null != search.groupName ">
-                        and a.group_name = #{search.groupName}
+	                    and a.group_name = #{search.groupName}
                     </if>
                     <if test="null != search.processName ">
-                        and a.process_name = #{search.processName}
+	                    and a.process_name = #{search.processName}
                     </if>
                     <if test="null != search.nodeName ">
-                        and a.node_name = #{search.nodeName}
+	                    and a.node_name = #{search.nodeName}
                     </if>
                     <if test="null != search.formData ">
-                        and a.form_data = #{search.formData}
+	                    and a.form_data = #{search.formData}
                     </if>
                     <if test="null != search.userId ">
-                        and a.user_id = #{search.userId}
+	                    and a.user_id = #{search.userId}
                     </if>
                     <if test="null != search.tenantId ">
-                        and a.tenant_id = #{search.tenantId}
+	                    and a.tenant_id = #{search.tenantId}
                     </if>
         </where>
     </select>
-
 </mapper>
