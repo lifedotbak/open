@@ -1,4 +1,4 @@
-package com.spyker.framework.filter;
+package com.spyker.framework.log.filter;
 
 import com.alibaba.fastjson2.filter.SimplePropertyPreFilter;
 

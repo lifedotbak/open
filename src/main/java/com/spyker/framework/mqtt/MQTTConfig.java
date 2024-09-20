@@ -33,7 +33,7 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 public class MQTTConfig implements ApplicationListener<ApplicationEvent> {
 
     //	@Value("${mqtt.appid}")
-    private final String appid = MqttAsyncClient.generateClientId(); // 客户端ID
+    private final String appid = "MQTT_APPID_" + MqttAsyncClient.generateClientId(); // 客户端ID
 
     @Value("${mqtt.topic.input}")
     private String[] inputTopic; // 订阅主题，可以是多个主题

@@ -56,7 +56,7 @@ public class MinioUtils {
 
             log.info("url--->{}", result);
         } catch (Exception e) {
-            log.error("------------>{}", e);
+            log.error("--->{}", e);
         }
 
         return result;
