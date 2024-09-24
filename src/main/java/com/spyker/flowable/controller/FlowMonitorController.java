@@ -2,7 +2,7 @@ package com.spyker.flowable.controller;
 
 import com.spyker.flowable.entity.*;
 import com.spyker.flowable.mapper.ActRuExecutionMapper;
-import com.spyker.flowable.service.ActivitiTracingChart;
+import com.spyker.flowable.service.ActivitiTracingChartService;
 import com.spyker.framework.util.text.ExStringUtils;
 import com.spyker.framework.web.response.RestResponse;
 
@@ -40,14 +40,22 @@ import java.util.*;
 public class FlowMonitorController {
 
     private final String prefix = "flowable/monitor";
+
     @Resource ManagementService managementService;
+
     @Resource RepositoryService repositoryService;
+
     @Resource ProcessEngineConfiguration configuration;
+
     @Resource ActRuExecutionMapper actRuExecutionMapper;
+
     @Resource private RuntimeService runtimeService;
+
     @Resource private TaskService taskService;
+
     @Resource private HistoryService historyService;
-    @Resource private ActivitiTracingChart activitiTracingChart;
+
+    @Resource private ActivitiTracingChartService activitiTracingChartService;
 
     @GetMapping("/instance")
     public String processList() {
@@ -310,7 +318,8 @@ public class FlowMonitorController {
             throws IOException {
         response.setContentType("image/jpeg;charset=UTF-8");
         response.setHeader("Content-Disposition", "inline; filename= trace.png");
-        activitiTracingChart.generateFlowChart(processInstanceId, response.getOutputStream());
+        activitiTracingChartService.generateFlowChart(
+                processInstanceId, response.getOutputStream());
     }
 
     @Operation(description = "挂起一个流程实例")

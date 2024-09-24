@@ -22,9 +22,9 @@ import java.util.List;
 
 /** 流程追踪图 */
 @Component
-public class ActivitiTracingChart {
+public class ActivitiTracingChartService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ActivitiTracingChart.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActivitiTracingChartService.class);
 
     @Autowired private HistoryService historyService;
 
