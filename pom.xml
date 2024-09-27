@@ -780,12 +780,25 @@
 				</configuration>
 			</plugin>
 			<plugin>
-			<!-- ======================================= Jib 是一个 Maven 和 Gradle 插件，用来创建Docker镜像======================================= -->
+			<!-- =============Jib 是一个 Maven 和 Gradle 插件，用来创建Docker镜像===================== -->
 				<!-- https://mvnrepository.com/artifact/com.google.cloud.tools/jib-maven-plugin -->
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>${jib-maven-plugin}</version>
 			</plugin>
+			<!-- ============dependency-check-mave依赖漏洞检查======================================= -->
+			<plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+				<version>10.0.4</version>
+				<executions>
+	                <execution>
+	                    <goals>
+	                        <goal>check</goal>
+	                    </goals>
+	                </execution>
+				</executions>
+            </plugin>
 		</plugins>
 	</build>
 
