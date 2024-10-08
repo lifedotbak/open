@@ -1,12 +1,11 @@
 package com.spyker.commons.service;
 
-import com.spyker.commons.entity.SysProcessInstanceCopy;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import java.util.List;
-
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.spyker.commons.entity.SysProcessInstanceCopy;
 import com.spyker.commons.search.SysProcessInstanceCopySearch;
+
+import java.util.List;
 
 /**
  * 流程抄送数据 服务接口

@@ -1,5 +1,14 @@
 package com.spyker.commons.controller;
 
+import com.google.gson.Gson;
+import com.spyker.BaseTest;
+import com.spyker.commons.entity.SysProcessMain;
+
+import jakarta.servlet.http.Cookie;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,42 +22,31 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
-import lombok.RequiredArgsConstructor;
-
-import jakarta.servlet.http.Cookie;
-
-import com.spyker.BaseTest;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import com.google.gson.Gson;
-
-import com.spyker.commons.entity.SysProcessMain;
 
 @Slf4j
 public class SysProcessMainControllerTest extends BaseTest {
 
-    private static String BASE_URL = "/commons/sys-process-main";
+    private static final String BASE_URL = "/commons/sys-process-main";
 
     private static final String LOGIN_URL = BASE_URL + "/sys/login/login";
 
     /*分页查询*/
-    private static String LIST_PAGE_URL = BASE_URL + "/list_page";
+    private static final String LIST_PAGE_URL = BASE_URL + "/list_page";
 
     /*查询*/
-    private static String LIST_URL = BASE_URL + "/list";
+    private static final String LIST_URL = BASE_URL + "/list";
 
     /*详情*/
-    private static String DETAIL_URL = BASE_URL + "/detail";
+    private static final String DETAIL_URL = BASE_URL + "/detail";
 
     /*删除*/
-    private static String DELETE_URL = BASE_URL + "/delete";
+    private static final String DELETE_URL = BASE_URL + "/delete";
 
     /*修改*/
-    private static String UPDATE_URL = BASE_URL + "/update";
+    private static final String UPDATE_URL = BASE_URL + "/update";
 
     /*新增*/
-    private static String ADD_URL = BASE_URL + "/add";
+    private static final String ADD_URL = BASE_URL + "/add";
 
     //  @Autowired
     //   private MockMvc mockMvc;

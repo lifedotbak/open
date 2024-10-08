@@ -1,12 +1,10 @@
 package com.spyker.commons.mapper;
 
-import com.spyker.commons.entity.SysRoleDept;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.spyker.commons.mapper.SysRoleDeptMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.spyker.BaseTest;
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 角色和部门关联表 Mapper 接口测试类
