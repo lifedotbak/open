@@ -7,17 +7,17 @@ package com.spyker.framework.constants;
  */
 public enum BusinessTypeEnum {
 
-    /** 其它 */
-    OTHER,
-
     /** 新增 */
     INSERT,
+
+    /** 删除 */
+    DELETE,
 
     /** 修改 */
     UPDATE,
 
-    /** 删除 */
-    DELETE,
+    /** 查询 */
+    QUERY,
 
     /** 授权 */
     GRANT,
@@ -28,12 +28,9 @@ public enum BusinessTypeEnum {
     /** 导入 */
     IMPORT,
 
-    /** 强退 */
-    FORCE,
-
-    /** 强退 */
-    QUERY,
-
     /** 清空数据 */
-    CLEAN
+    CLEAN,
+
+    /** 其它 */
+    OTHER
 }

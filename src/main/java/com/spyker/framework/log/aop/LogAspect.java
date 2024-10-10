@@ -8,6 +8,8 @@ import com.spyker.framework.util.JsonUtil;
 import com.spyker.framework.web.response.RestResponse;
 import com.yomahub.tlog.context.TLogContext;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +19,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -68,7 +73,9 @@ public class LogAspect {
             return point.proceed(args);
         }
 
-        String ip = IpUtils.getIpAddr();
+        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+        String ip = IpUtils.getIpAddr(request);
 
         log.info("ip --> {}", ip);
 

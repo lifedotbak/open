@@ -34,19 +34,13 @@ public class OperationLog {
     private Integer operatorType;
 
     @Schema(description = "操作人员")
-    private String operName;
-
-    @Schema(description = "部门名称")
-    private String deptName;
+    private String operUserId;
 
     @Schema(description = "请求URL")
     private String operUrl;
 
     @Schema(description = "主机地址")
     private String operIp;
-
-    @Schema(description = "操作地点")
-    private String operLocation;
 
     @Schema(description = "请求参数")
     private String operParam;

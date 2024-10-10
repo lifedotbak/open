@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.spyker.framework.config.PlatformConfigProperties;
 import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.util.http.HttpUtils;
-import com.spyker.framework.util.http.ServletUtils;
 import com.spyker.framework.util.text.ExStringUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -193,15 +192,6 @@ public class IpUtils {
             default:
                 return false;
         }
-    }
-
-    /**
-     * 获取客户端IP
-     *
-     * @return IP地址
-     */
-    public static String getIpAddr() {
-        return getIpAddr(ServletUtils.getRequest());
     }
 
     /**

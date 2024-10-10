@@ -43,7 +43,7 @@ public class SysOperLog {
     private Integer operatorType;
 
     @Schema(description = "操作人员")
-    private String operName;
+    private String operUserId;
 
     @Schema(description = "部门名称")
     private String deptName;
@@ -53,9 +53,6 @@ public class SysOperLog {
 
     @Schema(description = "主机地址")
     private String operIp;
-
-    @Schema(description = "操作地点")
-    private String operLocation;
 
     @Schema(description = "请求参数")
     private String operParam;

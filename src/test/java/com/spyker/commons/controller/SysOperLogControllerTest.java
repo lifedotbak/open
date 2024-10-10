@@ -159,15 +159,11 @@ public class SysOperLogControllerTest extends BaseTest {
 
         add.setOperatorType(1);
 
-        add.setOperName("operName");
-
         add.setDeptName("deptName");
 
         add.setOperUrl("operUrl");
 
         add.setOperIp("operIp");
-
-        add.setOperLocation("operLocation");
 
         add.setOperParam("operParam");
 
@@ -211,15 +207,11 @@ public class SysOperLogControllerTest extends BaseTest {
 
         update.setOperatorType(1);
 
-        update.setOperName("operName");
-
         update.setDeptName("deptName");
 
         update.setOperUrl("operUrl");
 
         update.setOperIp("operIp");
-
-        update.setOperLocation("operLocation");
 
         update.setOperParam("operParam");
 

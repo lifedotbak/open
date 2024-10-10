@@ -24,11 +24,15 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
@@ -81,24 +85,17 @@ public class ControllerLogAnnotationAspect {
         try {
 
             // 获取当前的用户
-            String loginUserId = "";
-
-            SaSession saSession = StpUtil.getSession();
-
-            if (null != saSession) {
-                Object userKey = saSession.get(CommonsConstants.LOGIN_USER_ID);
-                if (null != userKey) {
-                    loginUserId = (String) userKey;
-                }
-            }
-
+            String loginUserId = getLoginUserId();
             // *========数据库日志=========*//
             OperationLog operLog = new OperationLog();
-            operLog.setStatus(0);
-            // 请求的地址
-            String ip = IpUtils.getIpAddr();
 
-            operLog.setOperName(loginUserId);
+            // 请求的地址
+            RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+            HttpServletRequest request =
+                    ((ServletRequestAttributes) requestAttributes).getRequest();
+            String ip = IpUtils.getIpAddr(request);
+
+            operLog.setOperUserId(loginUserId);
             operLog.setOperIp(ip);
             operLog.setOperUrl(
                     ExStringUtils.substring(ServletUtils.getRequest().getRequestURI(), 0, 255));
@@ -106,6 +103,8 @@ public class ControllerLogAnnotationAspect {
             if (e != null) {
                 operLog.setStatus(1);
                 operLog.setErrorMsg(ExStringUtils.substring(e.getMessage(), 0, 2000));
+            } else {
+                operLog.setStatus(0);
             }
             // 设置方法名称
             String className = joinPoint.getTarget().getClass().getName();
@@ -130,6 +129,26 @@ public class ControllerLogAnnotationAspect {
         } finally {
             TIME_THREADLOCAL.remove();
         }
+    }
+
+    @NotNull
+    private static String getLoginUserId() {
+        String loginUserId = "";
+
+        try {
+
+            SaSession saSession = StpUtil.getSession();
+
+            if (null != saSession) {
+                Object userKey = saSession.get(CommonsConstants.LOGIN_USER_ID);
+                if (null != userKey) {
+                    loginUserId = String.valueOf(userKey);
+                }
+            }
+        } catch (Exception e) {
+            log.error("异常信息:{}", e.getMessage());
+        }
+        return loginUserId;
     }
 
     /**
