@@ -16,7 +16,7 @@
 
 SET NAMES utf8mb4;
 SET
-FOREIGN_KEY_CHECKS = 0;
+    FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for flyflow_user_role
@@ -24,16 +24,19 @@ FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `flyflow_user_role`;
 CREATE TABLE `flyflow_user_role`
 (
-    `id`          bigint                                                       NOT NULL COMMENT 'id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-    `user_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
-    `role_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色id',
+    `id`          bigint                                                        NOT NULL COMMENT 'id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    `user_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '用户id',
+    `role_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '角色id',
     `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户-角色' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '用户-角色'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_user_role
@@ -67,22 +70,25 @@ VALUES (67, 0, '2023-08-13 20:54:06', '2023-08-13 20:54:06', '15', 'ts', NULL);
 DROP TABLE IF EXISTS `flyflow_user`;
 CREATE TABLE `flyflow_user`
 (
-    `id`          bigint                                                       NOT NULL COMMENT 'id',
-    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
-    `pinyin`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '拼音  全拼',
-    `py`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '拼音, 首字母缩写',
-    `avatar_url`  varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '头像url',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `password`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '登录密码',
-    `phone`       varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
-    `status`      int                                                          NOT NULL DEFAULT 0,
-    `parent_id`   bigint NULL DEFAULT NULL COMMENT '直属领导id',
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `id`          bigint                                                         NOT NULL COMMENT 'id',
+    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '用户名',
+    `pinyin`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL     DEFAULT NULL COMMENT '拼音  全拼',
+    `py`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL     DEFAULT NULL COMMENT '拼音, 首字母缩写',
+    `avatar_url`  varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '头像url',
+    `del_flag`    tinyint(1)                                                     NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                       NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                       NULL     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `password`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '登录密码',
+    `phone`       varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL     DEFAULT NULL COMMENT '手机号',
+    `status`      int                                                            NOT NULL DEFAULT 0,
+    `parent_id`   bigint                                                         NULL     DEFAULT NULL COMMENT '直属领导id',
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '用户表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_user
@@ -133,15 +139,18 @@ VALUES (15, '张三', 'zhangsan', 'zs', NULL, 0, '2023-06-10 16:35:40', '2024-04
 DROP TABLE IF EXISTS `flyflow_role_menu`;
 CREATE TABLE `flyflow_role_menu`
 (
-    `id`          bigint                                                       NOT NULL COMMENT 'id',
-    `role_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色ID',
-    `menu_id`     bigint                                                       NOT NULL COMMENT '菜单ID',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+    `id`          bigint                                                        NOT NULL COMMENT 'id',
+    `role_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '角色ID',
+    `menu_id`     bigint                                                        NOT NULL COMMENT '菜单ID',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
     `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '角色和菜单关联表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_role_menu
@@ -355,18 +364,21 @@ VALUES (1732311877680803863, 'ts', 99, 0, '2023-12-06 16:11:51', '2023-12-06 16:
 DROP TABLE IF EXISTS `flyflow_role`;
 CREATE TABLE `flyflow_role`
 (
-    `id`          bigint NOT NULL COMMENT 'id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名字',
-    `user_id`     bigint NULL DEFAULT NULL COMMENT '创建人',
-    `key`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-    `status`      int NULL DEFAULT 1,
+    `id`          bigint                                                        NOT NULL COMMENT 'id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '角色名字',
+    `user_id`     bigint                                                        NULL DEFAULT NULL COMMENT '创建人',
+    `key`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL,
+    `status`      int                                                           NULL DEFAULT 1,
     `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '角色'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_role
@@ -387,19 +399,22 @@ DROP TABLE IF EXISTS `flyflow_process_starter`;
 CREATE TABLE `flyflow_process_starter`
 (
     `id`                    bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`              tinyint(1) NOT NULL COMMENT '逻辑删除字段',
+    `del_flag`              tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
     `create_time`           datetime                                                      NOT NULL COMMENT '创建时间',
     `update_time`           datetime                                                      NOT NULL COMMENT '更新时间',
     `type_id`               varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '用户id或者部门id',
-    `contain_children_dept` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否包含下级部门',
+    `contain_children_dept` tinyint(1)                                                    NOT NULL DEFAULT 0 COMMENT '是否包含下级部门',
     `type`                  varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT ' 类型 user dept',
     `process_id`            bigint                                                        NOT NULL COMMENT '流程表id',
-    `data`                  varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据',
-    `tenant_id`             varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `data`                  varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '数据',
+    `tenant_id`             varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     `flow_id`               varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '流程id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                   `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程发起人范围' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程发起人范围'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_starter
@@ -411,17 +426,20 @@ CREATE TABLE `flyflow_process_starter`
 DROP TABLE IF EXISTS `flyflow_process_node_data`;
 CREATE TABLE `flyflow_process_node_data`
 (
-    `id`          bigint                                                       NOT NULL COMMENT 'id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
-    `update_time` datetime                                                     NOT NULL COMMENT '更新时间',
-    `flow_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '流程id',
-    `data`        longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '表单数据',
-    `node_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `id`          bigint                                                        NOT NULL COMMENT 'id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '更新时间',
+    `flow_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程id',
+    `data`        longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '表单数据',
+    `node_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL,
     `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点数据' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程节点数据'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_node_data
@@ -434,19 +452,22 @@ DROP TABLE IF EXISTS `flyflow_process_main`;
 CREATE TABLE `flyflow_process_main`
 (
     `id`          bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
     `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '表单名称',
     `logo`        varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图标配置',
     `group_id`    bigint                                                        NOT NULL COMMENT '分组ID',
     `sort`        int                                                           NOT NULL,
-    `unique_id`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '唯一性id',
+    `unique_id`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '唯一性id',
     `range_show`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '范围描述显示',
     `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程主表' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程主表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_main
@@ -459,7 +480,7 @@ DROP TABLE IF EXISTS `flyflow_process_instance_user_copy`;
 CREATE TABLE `flyflow_process_instance_user_copy`
 (
     `id`                  bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
+    `del_flag`            tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
     `create_time`         datetime                                                      NOT NULL COMMENT '创建时间',
     `update_time`         datetime                                                      NOT NULL COMMENT '更新时间',
     `start_user_id`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '发起人',
@@ -471,8 +492,11 @@ CREATE TABLE `flyflow_process_instance_user_copy`
     `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '抄送人id',
     `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程抄送数据--用户和实例唯一值' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程抄送数据--用户和实例唯一值'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_user_copy
@@ -488,28 +512,31 @@ CREATE TABLE `flyflow_process_instance_record`
     `name`                             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程名字',
     `logo`                             varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '头像',
     `user_id`                          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '发起人的用户id',
-    `main_dept_id`                     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发起人主部门id',
-    `del_flag`                         tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time`                      datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time`                      datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `flow_id`                          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程id',
-    `process_instance_id`              varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程实例id',
-    `process_instance_biz_code`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程实例业务编码',
-    `process_instance_biz_key`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程实例业务key',
-    `form_data`                        longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表单数据',
-    `group_id`                         bigint NULL DEFAULT NULL COMMENT '组id',
+    `main_dept_id`                     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '发起人主部门id',
+    `del_flag`                         tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time`                      datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                      datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `flow_id`                          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '流程id',
+    `process_instance_id`              varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '流程实例id',
+    `process_instance_biz_code`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '流程实例业务编码',
+    `process_instance_biz_key`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '流程实例业务key',
+    `form_data`                        longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '表单数据',
+    `group_id`                         bigint                                                        NULL DEFAULT NULL COMMENT '组id',
     `group_name`                       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组名称',
-    `status`                           int NULL DEFAULT 1 COMMENT '状态',
-    `end_time`                         datetime NULL DEFAULT NULL COMMENT '结束时间',
-    `parent_process_instance_id`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '上级流程实例id',
-    `process`                          json NULL,
-    `result`                           int NULL DEFAULT NULL COMMENT '结果',
+    `status`                           int                                                           NULL DEFAULT 1 COMMENT '状态',
+    `end_time`                         datetime                                                      NULL DEFAULT NULL COMMENT '结束时间',
+    `parent_process_instance_id`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '上级流程实例id',
+    `process`                          json                                                          NULL,
+    `result`                           int                                                           NULL DEFAULT NULL COMMENT '结果',
     `tenant_id`                        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
-    `parent_process_node_execution_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主流程的节点执行id',
+    `parent_process_node_execution_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '主流程的节点执行id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                              `idx_id`(`id` ASC) USING BTREE,
-    INDEX                              `idx_dep_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程记录' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE,
+    INDEX `idx_dep_id` (`user_id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程记录'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_record
@@ -521,25 +548,28 @@ CREATE TABLE `flyflow_process_instance_record`
 DROP TABLE IF EXISTS `flyflow_process_instance_oper_record`;
 CREATE TABLE `flyflow_process_instance_oper_record`
 (
-    `id`                  bigint                                                       NOT NULL COMMENT 'id',
-    `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time`         datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time`         datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程id',
-    `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点id',
-    `node_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点名称',
-    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程实例id',
-    `comment`             varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论',
-    `oper_type`           varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作类型',
-    `oper_desc`           varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作描述',
+    `id`                  bigint                                                         NOT NULL COMMENT 'id',
+    `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '用户id',
+    `del_flag`            tinyint(1)                                                     NOT NULL COMMENT '逻辑删除字段',
+    `create_time`         datetime                                                       NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`         datetime                                                       NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT NULL COMMENT '流程id',
+    `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT NULL COMMENT '节点id',
+    `node_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '节点名称',
+    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT NULL COMMENT '流程实例id',
+    `comment`             varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '评论',
+    `oper_type`           varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT NULL COMMENT '操作类型',
+    `oper_desc`           varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '操作描述',
     `image_list`          varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片列表',
     `file_list`           varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件列表',
-    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE,
-    INDEX                 `idx_dep_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程记录' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE,
+    INDEX `idx_dep_id` (`user_id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程记录'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_oper_record
@@ -551,26 +581,29 @@ CREATE TABLE `flyflow_process_instance_oper_record`
 DROP TABLE IF EXISTS `flyflow_process_instance_node_record`;
 CREATE TABLE `flyflow_process_instance_node_record`
 (
-    `id`                  bigint                                                       NOT NULL COMMENT 'id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time`         datetime                                                     NOT NULL COMMENT '创建时间',
-    `update_time`         datetime                                                     NOT NULL COMMENT '更新时间',
-    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '流程id',
-    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '流程实例id',
-    `data`                longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表单数据',
-    `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-    `node_type`           varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点类型',
-    `node_name`           varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点名字',
-    `status`              int                                                          NOT NULL COMMENT '节点状态',
-    `start_time`          datetime                                                     NOT NULL COMMENT '开始时间',
-    `end_time`            datetime NULL DEFAULT NULL COMMENT '结束时间',
+    `id`                  bigint                                                        NOT NULL COMMENT 'id',
+    `del_flag`            tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time`         datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time`         datetime                                                      NOT NULL COMMENT '更新时间',
+    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程id',
+    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程实例id',
+    `data`                longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NULL COMMENT '表单数据',
+    `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL,
+    `node_type`           varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '节点类型',
+    `node_name`           varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '节点名字',
+    `status`              int                                                           NOT NULL COMMENT '节点状态',
+    `start_time`          datetime                                                      NOT NULL COMMENT '开始时间',
+    `end_time`            datetime                                                      NULL DEFAULT NULL COMMENT '结束时间',
     `execution_id`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '执行id',
     `parent_node_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '上一层级id',
     `flow_unique_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流转唯一标识',
     `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点记录' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程节点记录'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_node_record
@@ -583,18 +616,21 @@ DROP TABLE IF EXISTS `flyflow_process_instance_execution`;
 CREATE TABLE `flyflow_process_instance_execution`
 (
     `id`                  bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
+    `del_flag`            tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
     `create_time`         datetime                                                      NOT NULL COMMENT '创建时间',
     `update_time`         datetime                                                      NOT NULL COMMENT '更新时间',
-    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程实例id',
     `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '节点id',
     `execution_id`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '执行id',
-    `parent_execution_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '上级执行id',
+    `parent_execution_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '上级执行id',
     `flow_id`             varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '流程id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程执行id数据' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程执行id数据'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_execution
@@ -607,7 +643,7 @@ DROP TABLE IF EXISTS `flyflow_process_instance_copy`;
 CREATE TABLE `flyflow_process_instance_copy`
 (
     `id`                  bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
+    `del_flag`            tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
     `create_time`         datetime                                                      NOT NULL COMMENT '创建时间',
     `update_time`         datetime                                                      NOT NULL COMMENT '更新时间',
     `start_time`          datetime                                                      NOT NULL COMMENT ' 流程发起时间',
@@ -620,12 +656,15 @@ CREATE TABLE `flyflow_process_instance_copy`
     `group_name`          varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分组名称',
     `process_name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '流程名称',
     `node_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点 名称',
-    `form_data`           longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '表单数据',
+    `form_data`           longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci     NOT NULL COMMENT '表单数据',
     `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '抄送人id',
     `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程抄送数据' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程抄送数据'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_copy
@@ -637,31 +676,34 @@ CREATE TABLE `flyflow_process_instance_copy`
 DROP TABLE IF EXISTS `flyflow_process_instance_assign_user_record`;
 CREATE TABLE `flyflow_process_instance_assign_user_record`
 (
-    `id`                  bigint                                                       NOT NULL COMMENT 'id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time`         datetime                                                     NOT NULL COMMENT '创建时间',
-    `update_time`         datetime                                                     NOT NULL COMMENT '更新时间',
-    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '流程id',
-    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '流程实例id',
-    `data`                longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表单数据',
-    `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-    `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT ' 用户id',
-    `status`              int                                                          NOT NULL COMMENT '节点状态',
-    `start_time`          datetime                                                     NOT NULL COMMENT '开始时间',
-    `end_time`            datetime NULL DEFAULT NULL COMMENT '结束时间',
-    `execution_id`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '执行id',
-    `task_id`             varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT ' 任务id',
+    `id`                  bigint                                                         NOT NULL COMMENT 'id',
+    `del_flag`            tinyint(1)                                                     NOT NULL COMMENT '逻辑删除字段',
+    `create_time`         datetime                                                       NOT NULL COMMENT '创建时间',
+    `update_time`         datetime                                                       NOT NULL COMMENT '更新时间',
+    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '流程id',
+    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '流程实例id',
+    `data`                longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci      NULL COMMENT '表单数据',
+    `node_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL,
+    `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT ' 用户id',
+    `status`              int                                                            NOT NULL COMMENT '节点状态',
+    `start_time`          datetime                                                       NOT NULL COMMENT '开始时间',
+    `end_time`            datetime                                                       NULL DEFAULT NULL COMMENT '结束时间',
+    `execution_id`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '执行id',
+    `task_id`             varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT ' 任务id',
     `approve_desc`        varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审批意见',
-    `node_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT ' 节点名称',
-    `task_type`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '任务类型',
-    `local_data`          longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表单本地数据',
-    `flow_unique_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流转唯一标识',
-    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
-    `auto`                tinyint(1) NULL DEFAULT 0 COMMENT '是否是自动完成',
-    `parent_execution_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点执行id',
+    `node_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT ' 节点名称',
+    `task_type`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '任务类型',
+    `local_data`          longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci      NULL COMMENT '表单本地数据',
+    `flow_unique_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '流转唯一标识',
+    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '租户id',
+    `auto`                tinyint(1)                                                     NULL DEFAULT 0 COMMENT '是否是自动完成',
+    `parent_execution_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '节点执行id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点记录-执行人' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程节点记录-执行人'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_instance_assign_user_record
@@ -673,16 +715,19 @@ CREATE TABLE `flyflow_process_instance_assign_user_record`
 DROP TABLE IF EXISTS `flyflow_process_group`;
 CREATE TABLE `flyflow_process_group`
 (
-    `id`          bigint                                                       NOT NULL COMMENT 'id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-    `group_name`  varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分组名',
-    `sort`        int                                                          NOT NULL DEFAULT 0 COMMENT '排序',
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `id`          bigint                                                        NOT NULL COMMENT 'id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL     DEFAULT NULL COMMENT '更新时间',
+    `group_name`  varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '分组名',
+    `sort`        int                                                           NOT NULL DEFAULT 0 COMMENT '排序',
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_group
@@ -695,18 +740,21 @@ DROP TABLE IF EXISTS `flyflow_process_form`;
 CREATE TABLE `flyflow_process_form`
 (
     `id`          bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL     DEFAULT NULL COMMENT '更新时间',
     `unique_id`   varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '流程唯一id',
     `form_name`   varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '表单名称',
     `form_id`     varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '表单id',
-    `form_type`   varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表单类型',
+    `form_type`   varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '表单类型',
     `props`       json                                                          NOT NULL COMMENT '表单属性',
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     `flow_id`     varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '流程id',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程表单' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '流程表单'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process_form
@@ -719,31 +767,34 @@ DROP TABLE IF EXISTS `flyflow_process`;
 CREATE TABLE `flyflow_process`
 (
     `id`            bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`      tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time`   datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time`   datetime NULL DEFAULT NULL COMMENT '更新时间',
+    `del_flag`      tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time`   datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                                      NULL     DEFAULT NULL COMMENT '更新时间',
     `flow_id`       varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '表单ID',
     `name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '表单名称',
     `logo`          varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图标配置',
-    `settings`      json NULL COMMENT '设置项',
+    `settings`      json                                                          NULL COMMENT '设置项',
     `group_id`      bigint                                                        NOT NULL COMMENT '分组ID',
     `form_items`    json                                                          NOT NULL COMMENT '表单设置内容',
     `process`       json                                                          NOT NULL COMMENT '流程设置内容',
-    `remark`        varchar(125) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+    `remark`        varchar(125) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '备注',
     `sort`          int                                                           NOT NULL,
-    `is_hidden`     tinyint(1) NOT NULL COMMENT '0 正常 1=隐藏',
-    `is_stop`       tinyint(1) NOT NULL COMMENT '0 正常 1=停用 ',
-    `admin_id`      varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '流程管理员',
-    `unique_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '唯一性id',
-    `admin`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '管理员',
-    `range_show`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '范围描述显示',
-    `version`       int NULL DEFAULT NULL COMMENT '版本',
-    `tenant_id`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `is_hidden`     tinyint(1)                                                    NOT NULL COMMENT '0 正常 1=隐藏',
+    `is_stop`       tinyint(1)                                                    NOT NULL COMMENT '0 正常 1=停用 ',
+    `admin_id`      varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '流程管理员',
+    `unique_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '唯一性id',
+    `admin`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '管理员',
+    `range_show`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '范围描述显示',
+    `version`       int                                                           NULL     DEFAULT NULL COMMENT '版本',
+    `tenant_id`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     `form_items_pc` json                                                          NOT NULL COMMENT '表单设置内容pc',
     PRIMARY KEY (`id`) USING BTREE,
-    UNIQUE INDEX `idx_form_id`(`flow_id` ASC) USING BTREE,
-    INDEX           `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+    UNIQUE INDEX `idx_form_id` (`flow_id` ASC) USING BTREE,
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_process
@@ -755,23 +806,26 @@ CREATE TABLE `flyflow_process`
 DROP TABLE IF EXISTS `flyflow_message`;
 CREATE TABLE `flyflow_message`
 (
-    `id`                  bigint                                                        NOT NULL COMMENT 'id',
-    `del_flag`            tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time`         datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time`         datetime NULL DEFAULT NULL COMMENT '更新时间',
-    `type`                varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '类型',
-    `readed`              tinyint(1) NOT NULL COMMENT '是否已读',
-    `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '用户id',
-    `biz_unique_id`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '业务唯一id',
-    `param`               longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '消息参数',
+    `id`                  bigint                                                         NOT NULL COMMENT 'id',
+    `del_flag`            tinyint(1)                                                     NOT NULL COMMENT '逻辑删除字段',
+    `create_time`         datetime                                                       NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`         datetime                                                       NULL DEFAULT NULL COMMENT '更新时间',
+    `type`                varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '类型',
+    `readed`              tinyint(1)                                                     NOT NULL COMMENT '是否已读',
+    `user_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '用户id',
+    `biz_unique_id`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '业务唯一id',
+    `param`               longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci      NULL COMMENT '消息参数',
     `content`             varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息内容',
-    `title`               varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息头',
-    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程id',
-    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '流程实例id',
-    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `title`               varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT NULL COMMENT '消息头',
+    `flow_id`             varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '流程id',
+    `process_instance_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '流程实例id',
+    `tenant_id`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX                 `idx_id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知消息' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '通知消息'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_message
@@ -783,24 +837,27 @@ CREATE TABLE `flyflow_message`
 DROP TABLE IF EXISTS `flyflow_menu`;
 CREATE TABLE `flyflow_menu`
 (
-    `id`          bigint                                                       NOT NULL,
-    `parent_id`   bigint                                                       NOT NULL COMMENT '父菜单ID',
-    `tree_path`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '父节点ID路径',
-    `name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '菜单名称',
-    `type`        tinyint                                                      NOT NULL COMMENT '菜单类型(1:菜单；2:目录；3:外链；4:按钮)',
-    `path`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '路由路径(浏览器地址栏路径)',
-    `component`   varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径(vue页面完整路径，省略.vue后缀)',
-    `perm`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
-    `visible`     tinyint(1) NOT NULL DEFAULT 1 COMMENT '显示状态(1-显示;0-隐藏)',
-    `sort`        int NULL DEFAULT 0 COMMENT '排序',
-    `icon`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单图标',
-    `redirect`    varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '跳转路径',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `id`          bigint                                                        NOT NULL,
+    `parent_id`   bigint                                                        NOT NULL COMMENT '父菜单ID',
+    `tree_path`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '父节点ID路径',
+    `name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '菜单名称',
+    `type`        tinyint                                                       NOT NULL COMMENT '菜单类型(1:菜单；2:目录；3:外链；4:按钮)',
+    `path`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT '' COMMENT '路由路径(浏览器地址栏路径)',
+    `component`   varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '组件路径(vue页面完整路径，省略.vue后缀)',
+    `perm`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '权限标识',
+    `visible`     tinyint(1)                                                    NOT NULL DEFAULT 1 COMMENT '显示状态(1-显示;0-隐藏)',
+    `sort`        int                                                           NULL     DEFAULT 0 COMMENT '排序',
+    `icon`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT '' COMMENT '菜单图标',
+    `redirect`    varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '跳转路径',
+    `create_time` datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL     DEFAULT NULL COMMENT '更新时间',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '菜单管理'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_menu
@@ -979,17 +1036,20 @@ VALUES (1732310200470892545, 3, '0,1,3', '分配权限', 4, '', NULL, 'sys:role:
 DROP TABLE IF EXISTS `flyflow_dept_user`;
 CREATE TABLE `flyflow_dept_user`
 (
-    `id`          bigint                                                       NOT NULL COMMENT '部门id',
-    `dept_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '部门id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `user_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'user_id',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `id`          bigint                                                        NOT NULL COMMENT '部门id',
+    `dept_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '0' COMMENT '部门id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `user_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT 'user_id',
+    `create_time` datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE,
-    INDEX         `idx_parent_id`(`dept_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门-主管表' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE,
+    INDEX `idx_parent_id` (`dept_id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '部门-主管表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_dept_user
@@ -1027,17 +1087,20 @@ VALUES (15, '2', 0, '15', '2023-06-10 16:35:40', '2024-03-16 12:47:22', NULL);
 DROP TABLE IF EXISTS `flyflow_dept_leader`;
 CREATE TABLE `flyflow_dept_leader`
 (
-    `id`          bigint                                                       NOT NULL COMMENT '部门id',
-    `dept_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '部门id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `user_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主管user_id',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `id`          bigint                                                        NOT NULL COMMENT '部门id',
+    `dept_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '0' COMMENT '部门id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `user_id`     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '主管user_id',
+    `create_time` datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE,
-    INDEX         `idx_parent_id`(`dept_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门-主管表' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE,
+    INDEX `idx_parent_id` (`dept_id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '部门-主管表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_dept_leader
@@ -1059,19 +1122,22 @@ VALUES (8, '8', 0, '3', '2024-01-04 08:16:35', '2024-01-04 08:16:35', NULL);
 DROP TABLE IF EXISTS `flyflow_dept`;
 CREATE TABLE `flyflow_dept`
 (
-    `id`          bigint                                                       NOT NULL COMMENT '部门id',
-    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门名',
-    `parent_id`   bigint                                                       NOT NULL DEFAULT 0 COMMENT '上级部门id',
-    `del_flag`    tinyint(1) NOT NULL COMMENT '逻辑删除字段',
-    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `status`      int                                                          NOT NULL DEFAULT 1,
-    `sort`        int                                                          NOT NULL DEFAULT 1,
-    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户id',
+    `id`          bigint                                                        NOT NULL COMMENT '部门id',
+    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '部门名',
+    `parent_id`   bigint                                                        NOT NULL DEFAULT 0 COMMENT '上级部门id',
+    `del_flag`    tinyint(1)                                                    NOT NULL COMMENT '逻辑删除字段',
+    `create_time` datetime                                                      NULL     DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NULL     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `status`      int                                                           NOT NULL DEFAULT 1,
+    `sort`        int                                                           NOT NULL DEFAULT 1,
+    `tenant_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '租户id',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `idx_id`(`id` ASC) USING BTREE,
-    INDEX         `idx_parent_id`(`parent_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表' ROW_FORMAT = DYNAMIC;
+    INDEX `idx_id` (`id` ASC) USING BTREE,
+    INDEX `idx_parent_id` (`parent_id` ASC) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '部门表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of flyflow_dept
@@ -1094,4 +1160,4 @@ INSERT INTO `flyflow_dept`
 VALUES (8, '发发发', 5, 0, '2023-07-07 00:01:54', '2023-07-07 00:01:54', 1, 3, NULL);
 
 SET
-FOREIGN_KEY_CHECKS = 1;
+    FOREIGN_KEY_CHECKS = 1;
