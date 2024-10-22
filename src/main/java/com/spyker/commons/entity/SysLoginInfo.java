@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import java.util.Date;
 
 /**
@@ -21,6 +23,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("sys_login_info")
 @Schema(name = "SysLoginInfo", description = "系统访问记录对象")
+@RedisHash
 public class SysLoginInfo {
 
     @Schema(description = "PK")

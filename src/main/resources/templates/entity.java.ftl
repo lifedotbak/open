@@ -17,6 +17,7 @@ package ${package.Entity};
         import lombok.experimental.Accessors;
     </#if>
 </#if>
+import org.springframework.data.redis.core.RedisHash;
 
 /**
 * ${table.comment!}
@@ -24,6 +25,7 @@ package ${package.Entity};
 * @author ${author}
 * @since ${date}
 */
+@RedisHash
 <#if entityLombokModel>
     @Data
     <#if chainModel>

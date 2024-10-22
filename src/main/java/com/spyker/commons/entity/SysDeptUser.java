@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import java.util.Date;
 
 /**
@@ -19,6 +21,7 @@ import java.util.Date;
  * @author CodeGenerator
  * @since 2024-07-23
  */
+@RedisHash
 @Data
 @Accessors(chain = true)
 @TableName("sys_dept_user")

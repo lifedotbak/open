@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import java.util.Date;
 
 /**
@@ -23,6 +25,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("sys_notice")
 @Schema(name = "SysNotice", description = "通知公告表对象")
+@RedisHash
 public class SysNotice {
 
     @Schema(description = "公告ID")

@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import java.util.Date;
 
 /**
@@ -23,6 +25,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("sys_oss_config")
 @Schema(name = "SysOssConfig", description = "对象存储配置表对象")
+@RedisHash
 public class SysOssConfig {
 
     @Schema(description = "主建")

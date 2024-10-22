@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import java.util.Date;
 
 /**
@@ -23,6 +25,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("sys_exception_log")
 @Schema(name = "SysExceptionLog", description = "异常日志表对象")
+@RedisHash
 public class SysExceptionLog {
 
     @Schema(description = "参数主键")
