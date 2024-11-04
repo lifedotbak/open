@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -113,7 +114,7 @@ public class ControllerLogAnnotationAspect {
             // 设置请求方式
             operLog.setRequestMethod(ServletUtils.getRequest().getMethod());
             // 处理设置注解上的参数
-            getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult);
+            getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult, request);
             // 设置消耗时间
             operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
 
@@ -162,12 +163,23 @@ public class ControllerLogAnnotationAspect {
             JoinPoint joinPoint,
             ControllerLogAnnotation log,
             OperationLog operLog,
-            Object jsonResult)
+            Object jsonResult,
+            HttpServletRequest request)
             throws Exception {
         // 设置action动作
         operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
-        operLog.setTitle(log.title());
+        String title = log.title();
+
+        if (StringUtils.isNotBlank(log.titleParam())) {
+            String titleParamValue = request.getParameter(log.titleParam());
+
+            if (StringUtils.isNotBlank(titleParamValue)) {
+                title = title + "(" + titleParamValue + ")";
+            }
+        }
+
+        operLog.setTitle(title);
         // 设置操作人类别
         operLog.setOperatorType(log.operatorType().ordinal());
         // 是否需要保存request，参数和值

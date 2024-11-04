@@ -18,6 +18,13 @@ public @interface ControllerLogAnnotation {
     /** 模块 */
     String title() default "";
 
+    /**
+     * 标题参数
+     *
+     * @return
+     */
+    String titleParam() default "";
+
     /** 功能 */
     BusinessTypeEnum businessType() default BusinessTypeEnum.OTHER;
 
