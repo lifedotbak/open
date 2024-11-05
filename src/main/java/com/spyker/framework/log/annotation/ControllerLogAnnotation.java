@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface ControllerLogAnnotation {
 
-    /** 模块 */
+    /** 模块，支持%s等sting.format的占位符 */
     String title() default "";
 
     /**

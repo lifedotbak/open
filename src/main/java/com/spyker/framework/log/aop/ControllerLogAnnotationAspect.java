@@ -114,7 +114,7 @@ public class ControllerLogAnnotationAspect {
             // 设置请求方式
             operLog.setRequestMethod(ServletUtils.getRequest().getMethod());
             // 处理设置注解上的参数
-            getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult, request);
+            getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult);
             // 设置消耗时间
             operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
 
@@ -155,42 +155,41 @@ public class ControllerLogAnnotationAspect {
     /**
      * 获取注解中对方法的描述信息 用于Controller层注解
      *
-     * @param log 日志
+     * @param logAnnotation 日志
      * @param operLog 操作日志
      * @throws Exception
      */
     public void getControllerMethodDescription(
             JoinPoint joinPoint,
-            ControllerLogAnnotation log,
+            ControllerLogAnnotation logAnnotation,
             OperationLog operLog,
-            Object jsonResult,
-            HttpServletRequest request)
+            Object jsonResult)
             throws Exception {
         // 设置action动作
-        operLog.setBusinessType(log.businessType().ordinal());
+        operLog.setBusinessType(logAnnotation.businessType().ordinal());
+
+        // 设置操作人类别
+        operLog.setOperatorType(logAnnotation.operatorType().ordinal());
+        // 是否需要保存request，参数和值
+        if (logAnnotation.isSaveRequestData()) {
+            // 获取参数的信息，传入到数据库中。
+            setRequestValue(joinPoint, operLog, logAnnotation.excludeParamNames());
+        }
+        // 是否需要保存response，参数和值
+        if (logAnnotation.isSaveResponseData() && ExStringUtils.isNotNull(jsonResult)) {
+            operLog.setJsonResult(ExStringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
+        }
+
         // 设置标题
-        String title = log.title();
+        String title = logAnnotation.title();
 
-        if (StringUtils.isNotBlank(log.titleParam())) {
-            String titleParamValue = request.getParameter(log.titleParam());
+        if (StringUtils.isNotBlank(logAnnotation.titleParam())) {
+            //            title = title + ":" + titleParamValue;
 
-            if (StringUtils.isNotBlank(titleParamValue)) {
-                title = title + "(" + titleParamValue + ")";
-            }
+            title = String.format(title, logAnnotation.titleParam());
         }
 
         operLog.setTitle(title);
-        // 设置操作人类别
-        operLog.setOperatorType(log.operatorType().ordinal());
-        // 是否需要保存request，参数和值
-        if (log.isSaveRequestData()) {
-            // 获取参数的信息，传入到数据库中。
-            setRequestValue(joinPoint, operLog, log.excludeParamNames());
-        }
-        // 是否需要保存response，参数和值
-        if (log.isSaveResponseData() && ExStringUtils.isNotNull(jsonResult)) {
-            operLog.setJsonResult(ExStringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
-        }
     }
 
     /**
