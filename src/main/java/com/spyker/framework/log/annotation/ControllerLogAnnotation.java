@@ -23,7 +23,7 @@ public @interface ControllerLogAnnotation {
      *
      * @return
      */
-    String titleParam() default "";
+    String[] titleParamNames() default {};
 
     /** 功能 */
     BusinessTypeEnum businessType() default BusinessTypeEnum.OTHER;

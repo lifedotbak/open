@@ -1,5 +1,6 @@
 package com.spyker.commons.controller.test;
 
+import com.spyker.framework.log.annotation.ControllerLogAnnotation;
 import com.spyker.framework.ratelimiter.RateLimiting;
 import com.spyker.framework.web.response.RestResponse;
 
@@ -22,6 +23,14 @@ public class IndexController {
     @GetMapping("/limit1")
     @RateLimiting(limitNum = 1, name = "limiting1")
     public RestResponse<String> limit1() {
+        return RestResponse.success("limiting1");
+    }
+
+    @ControllerLogAnnotation(
+            title = "测试%s接口%s",
+            titleParamNames = {"id", "name"})
+    @GetMapping("/controllerLogAnnotation")
+    public RestResponse<String> controllerLogAnnotation(String id, String name) {
         return RestResponse.success("limiting1");
     }
 

@@ -10,8 +10,8 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 
-import com.spyker.framework.util.date.ExDateUtils;
-import com.spyker.framework.util.uuid.ExUuidUtils;
+import com.luna.common.date.DateUtils;
+import com.spyker.framework.config.PlatformConfigProperties;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -197,6 +197,17 @@ public class ExFileUtils extends FileUtils {
      * 写数据到文件中
      *
      * @param data 数据
+     * @return 目标文件
+     * @throws IOException IO异常
+     */
+    public static String writeImportBytes(byte[] data) throws IOException {
+        return writeBytes(data, PlatformConfigProperties.getImportPath());
+    }
+
+    /**
+     * 写数据到文件中
+     *
+     * @param data 数据
      * @param uploadDir 目标文件
      * @return 目标文件
      * @throws IOException IO异常
@@ -205,10 +216,10 @@ public class ExFileUtils extends FileUtils {
         FileOutputStream fos = null;
         String pathName = "";
         try {
+
+            Date now = new Date();
             String extension = getFileExtendName(data);
-            // pathName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
-            pathName =
-                    ExDateUtils.datePath() + "/" + ExUuidUtils.fastStringUUID() + "." + extension;
+            pathName = DateUtils.datePath() + "/" + now.getTime() + "." + extension;
             File file = FileUploadUtils.getAbsoluteFile(uploadDir, pathName);
             fos = new FileOutputStream(file);
             fos.write(data);
@@ -217,17 +228,6 @@ public class ExFileUtils extends FileUtils {
         }
         return FileUploadUtils.getPathFileName(uploadDir, pathName);
     }
-
-    /**
-     * 写数据到文件中
-     *
-     * @param data 数据
-     * @return 目标文件
-     * @throws IOException IO异常
-     */
-    // public static String writeImportBytes(byte[] data) throws IOException {
-    // return writeBytes(data, PlatformConfig.getImportPath());
-    // }
 
     /**
      * 获取图像后缀
@@ -375,6 +375,17 @@ public class ExFileUtils extends FileUtils {
         String encode = URLEncoder.encode(s, StandardCharsets.UTF_8);
         return encode.replaceAll("\\+", "%20");
     }
+
+    //    /**
+    //     * 写数据到文件中
+    //     *
+    //     * @param data 数据
+    //     * @return 目标文件
+    //     * @throws IOException IO异常
+    //     */
+    //    public static String writeImportBytes(byte[] data) throws IOException {
+    //        return writeBytes(data, GridSystemConfig.getImportPath());
+    //    }
 
     /**
      * 获取文件名称 /profile/upload/2022/04/16/platform.png -- platform.png

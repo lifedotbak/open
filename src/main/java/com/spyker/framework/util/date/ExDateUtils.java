@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -68,6 +70,23 @@ public final class ExDateUtils extends DateUtils {
     public static final DateTimeFormatter formatterMillisecondISO8601 =
             DateTimeFormatter.ofPattern(ISO8601_MILLISECOND_PATTERN, Locale.getDefault())
                     .withZone(ZoneId.of(zoneStr));
+
+    public static String parseDateToStr(final String format, final Date date) {
+        return new SimpleDateFormat(format).format(date);
+    }
+
+    /** 增加 LocalDate ==> Date */
+    public static Date toDate(LocalDate temporalAccessor) {
+        LocalDateTime localDateTime = LocalDateTime.of(temporalAccessor, LocalTime.of(0, 0, 0));
+        ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
+        return Date.from(zdt.toInstant());
+    }
+
+    /** 增加 LocalDateTime ==> Date */
+    public static Date toDate(LocalDateTime temporalAccessor) {
+        ZonedDateTime zdt = temporalAccessor.atZone(ZoneId.systemDefault());
+        return Date.from(zdt.toInstant());
+    }
 
     /**
      * 日期显示
@@ -132,6 +151,28 @@ public final class ExDateUtils extends DateUtils {
             return true;
         } catch (DateTimeParseException exception) {
             return false;
+        }
+    }
+
+    /** 日期型字符串转化为日期 格式 */
+    public static Date parseDate(Object str) {
+        if (str == null) {
+            return null;
+        }
+        try {
+
+            List<String> parsePatternsList = new ArrayList<>();
+
+            for (Format format : Format.values()) {
+                parsePatternsList.add(format.getFormat());
+            }
+
+            String[] parsePatterns =
+                    parsePatternsList.toArray(new String[parsePatternsList.size()]);
+
+            return parseDate(str.toString(), parsePatterns);
+        } catch (ParseException e) {
+            return null;
         }
     }
 

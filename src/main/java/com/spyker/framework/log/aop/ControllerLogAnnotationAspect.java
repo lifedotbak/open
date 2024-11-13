@@ -4,6 +4,7 @@ import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.spyker.framework.constants.CommonsConstants;
 import com.spyker.framework.log.annotation.ControllerLogAnnotation;
 import com.spyker.framework.log.entity.OperationLog;
@@ -19,7 +20,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -36,9 +36,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 操作日志记录处理
@@ -183,11 +181,18 @@ public class ControllerLogAnnotationAspect {
         // 设置标题
         String title = logAnnotation.title();
 
-        if (StringUtils.isNotBlank(logAnnotation.titleParam())) {
-            //            title = title + ":" + titleParamValue;
+        String opParam = operLog.getOperParam();
 
-            title = String.format(title, logAnnotation.titleParam());
+        JSONObject jsonObject = JSON.parseObject(opParam);
+
+        List<String> titleParamValus = new ArrayList<>();
+
+        for (String titleParamName : logAnnotation.titleParamNames()) {
+
+            titleParamValus.add(jsonObject.getString(titleParamName));
         }
+
+        title = String.format(title, titleParamValus.toArray());
 
         operLog.setTitle(title);
     }
