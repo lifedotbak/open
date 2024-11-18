@@ -98,7 +98,7 @@
 		<lombok>1.18.34</lombok>
 		<xpp3>1.1.6</xpp3>
 		<pinyin4j>2.5.1</pinyin4j>
-		<xstream>1.4.20</xstream>
+		<camel-xstream>3.22.2</camel-xstream>
 		<jakarta.annotation-api>3.0.0</jakarta.annotation-api>
 		<crayfish-common-crc>1.0.1</crayfish-common-crc>
 		<easyexcel>4.0.2</easyexcel>
@@ -500,11 +500,12 @@
 			<version>${pinyin4j}</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+		<!-- xstream最新升级版本 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.camel/camel-xstream -->
 		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>${xstream}</version>
+		    <groupId>org.apache.camel</groupId>
+		    <artifactId>camel-xstream</artifactId>
+		    <version>${camel-xstream}</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.ogce/xpp3 -->
@@ -600,6 +601,13 @@
 		    <groupId>io.github.lunasaw</groupId>
 		    <artifactId>zlm-spring-boot-starter</artifactId>
 		    <version>${io.github.lunasaw.zlm-spring-boot-starter}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/cn.afterturn/easypoi-spring-boot-starter -->
+		<dependency>
+		    <groupId>cn.afterturn</groupId>
+		    <artifactId>easypoi-spring-boot-starter</artifactId>
+		    <version>4.5.0</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.camunda.bpm.springboot/camunda-bpm-spring-boot-starter -->
