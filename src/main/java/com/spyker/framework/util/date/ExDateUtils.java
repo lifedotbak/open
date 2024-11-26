@@ -35,7 +35,7 @@ public final class ExDateUtils extends DateUtils {
             DateTimeFormatter.ofPattern(YMD_LINE_HMS, Locale.getDefault())
                     .withZone(ZoneId.of(zoneStr));
 
-    public static final DateTimeFormatter YMD_LINE_Formatter =
+    public static final DateTimeFormatter YMD_LINE_FORMATTER =
             DateTimeFormatter.ofPattern(YMD_LINE, Locale.getDefault()).withZone(ZoneId.of(zoneStr));
 
     public static final DateTimeFormatter YMDHMS_FORMATTER =
