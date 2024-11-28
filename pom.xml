@@ -92,7 +92,7 @@
 		<!-- 其他相关依赖版本 -->
 		<java-jwt>4.4.0</java-jwt>
 		<aws-java-sdk-s3>1.12.769</aws-java-sdk-s3>
-		<commons-io>2.16.1</commons-io>
+		<commons-io>2.18.0</commons-io>
 		<jna>5.14.0</jna>
 		<json>20240303</json>
 		<lombok>1.18.34</lombok>
