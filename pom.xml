@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-parent</artifactId>
-	    <version>3.3.2</version>
+	    <version>3.4.1</version>
 	</parent>
 
 	<groupId>com.spyker</groupId>
@@ -88,7 +88,7 @@
 		<!-- therapi相关依赖版本 -->
 		<therapi-runtime-javadoc>0.15.0</therapi-runtime-javadoc>
 		<!-- minio相关依赖版本 -->
-		<minio>8.5.9</minio>
+		<minio>8.5.14</minio>
 		<!-- 其他相关依赖版本 -->
 		<java-jwt>4.4.0</java-jwt>
 		<aws-java-sdk-s3>1.12.769</aws-java-sdk-s3>
@@ -98,7 +98,7 @@
 		<lombok>1.18.34</lombok>
 		<xpp3>1.1.6</xpp3>
 		<pinyin4j>2.5.1</pinyin4j>
-		<camel-xstream>3.22.2</camel-xstream>
+		<camel-xstream>3.22.3</camel-xstream>
 		<jakarta.annotation-api>3.0.0</jakarta.annotation-api>
 		<crayfish-common-crc>1.0.1</crayfish-common-crc>
 		<easyexcel>4.0.2</easyexcel>
@@ -118,6 +118,12 @@
 		<flowable-json-converter>6.8.1</flowable-json-converter>
 		<mybatis-plus-join-boot-starter>1.4.13</mybatis-plus-join-boot-starter>
 		<jib-maven-plugin>3.4.3</jib-maven-plugin>
+		<xstream.version>1.4.21</xstream.version>
+		<easypoi-spring-boot-starter.version>4.5.0</easypoi-spring-boot-starter.version>
+		<logback-core.version>1.5.15</logback-core.version>
+		<dependency-check-maven.version>11.1.1</dependency-check-maven.version>
+	
+	
 	</properties>
 
 	<profiles>
@@ -508,6 +514,13 @@
 		    <version>${camel-xstream}</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>${xstream.version}</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.ogce/xpp3 -->
 		<dependency>
 			<groupId>org.ogce</groupId>
@@ -607,7 +620,7 @@
 		<dependency>
 		    <groupId>cn.afterturn</groupId>
 		    <artifactId>easypoi-spring-boot-starter</artifactId>
-		    <version>4.5.0</version>
+		    <version>${easypoi-spring-boot-starter.version}</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.camunda.bpm.springboot/camunda-bpm-spring-boot-starter -->
@@ -654,6 +667,14 @@
 				</exclusion>
 			</exclusions>
         </dependency>
+		
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-core</artifactId>
+		    <version>${logback-core.version}</version>
+		</dependency>
+		
 		
 		<!--从 JDK 1.8 开始，Nashorn取代Rhino(JDK 1.6, JDK1.7) 成为 Java 的嵌入式 JavaScript 引擎。
 		Nashorn 完全支持 ECMAScript 5.1 规范以及一些扩展。它使用基于 JSR 292 的新语言特性
@@ -798,7 +819,7 @@
 			<plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-				<version>10.0.4</version>
+				<version>${dependency-check-maven.version}</version>
 				<executions>
 	                <execution>
 	                    <goals>

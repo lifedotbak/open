@@ -64,9 +64,8 @@ public class MinioUtils {
 
     public boolean put(String fileKey, File file) {
 
-        try {
-
-            InputStream inputStream = new FileInputStream(file);
+        /** try with resources */
+        try (InputStream inputStream = new FileInputStream(file)) {
 
             ObjectWriteResponse objectWriteResponse =
                     minioClient.putObject(
@@ -89,9 +88,8 @@ public class MinioUtils {
 
     public boolean put(String fileKey, File file, @NotNull ContentTypeEnum contentTypeEnum) {
 
-        try {
-
-            InputStream inputStream = new FileInputStream(file);
+        /** try with resources */
+        try (InputStream inputStream = new FileInputStream(file)) {
 
             ObjectWriteResponse objectWriteResponse =
                     minioClient.putObject(
@@ -112,9 +110,17 @@ public class MinioUtils {
         }
     }
 
+    /**
+     * 上传文件
+     *
+     * @param fileKey
+     * @param inputStream
+     * @param contentType
+     * @return
+     */
     public boolean put(String fileKey, InputStream inputStream, String contentType) {
-
-        try {
+        /** try with resources */
+        try (inputStream) {
 
             ObjectWriteResponse objectWriteResponse =
                     minioClient.putObject(
@@ -140,7 +146,7 @@ public class MinioUtils {
     public boolean put(
             String fileKey, InputStream inputStream, @NotNull ContentTypeEnum contentTypeEnum) {
 
-        try {
+        try (inputStream) {
 
             ObjectWriteResponse objectWriteResponse =
                     minioClient.putObject(
