@@ -1,3 +1,0 @@
-com.application.system.api.factory.RemoteUserFallbackFactory
-com.application.system.api.factory.RemoteLogFallbackFactory
-com.application.system.api.factory.RemoteFileFallbackFactory
