@@ -15,6 +15,21 @@ import java.lang.annotation.*;
 @Documented
 public @interface ControllerLogAnnotation {
 
+    /** 功能 */
+    BusinessTypeEnum businessType() default BusinessTypeEnum.OTHER;
+
+    /** 排除指定的请求参数 */
+    String[] excludeParamNames() default {};
+
+    /** 是否保存请求的参数 */
+    boolean isSaveRequestData() default true;
+
+    /** 是否保存响应的参数 */
+    boolean isSaveResponseData() default true;
+
+    /** 操作人类别 */
+    OperatorTypeEnum operatorType() default OperatorTypeEnum.MANAGE;
+
     /** 模块，支持%s等sting.format的占位符 */
     String title() default "";
 
@@ -24,19 +39,4 @@ public @interface ControllerLogAnnotation {
      * @return
      */
     String[] titleParamNames() default {};
-
-    /** 功能 */
-    BusinessTypeEnum businessType() default BusinessTypeEnum.OTHER;
-
-    /** 操作人类别 */
-    OperatorTypeEnum operatorType() default OperatorTypeEnum.MANAGE;
-
-    /** 是否保存请求的参数 */
-    boolean isSaveRequestData() default true;
-
-    /** 是否保存响应的参数 */
-    boolean isSaveResponseData() default true;
-
-    /** 排除指定的请求参数 */
-    String[] excludeParamNames() default {};
 }

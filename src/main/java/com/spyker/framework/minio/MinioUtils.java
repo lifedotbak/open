@@ -33,7 +33,7 @@ public class MinioUtils {
     }
 
     /**
-     * minio需要配置Access Rules--->(*,readonlu),负责获取文件会有过期以及无权限问题
+     * minio需要配置Access Rules--->(*,readonly),负责获取文件会有过期以及无权限问题
      *
      * <p>https://blog.csdn.net/hanjun0612/article/details/118100616
      *

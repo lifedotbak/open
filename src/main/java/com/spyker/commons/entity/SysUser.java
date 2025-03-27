@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 
 import org.springframework.data.redis.core.RedisHash;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -26,7 +27,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("sys_user")
 @Schema(name = "SysUser", description = "用户信息表对象")
-public class SysUser {
+public class SysUser implements Serializable {
 
     @Schema(description = "pk")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)

@@ -34,6 +34,10 @@ spring:
   #      client :
   #        name : ${server.name}
   #        url : http://127.0.0.1:8080/open
+
+  # flowable ui关闭liquibase
+  liquibase:
+    enabled: false
   jackson:
     time-zone: Asia/Shanghai
     #字段为null时不返回该字段
@@ -143,15 +147,6 @@ spring:
       thread-name-prefix: "scheduling-"
       pool:
         size: 5
-
-############################### springboot admin config ###############################
-management:
-  endpoints:
-    shutdown:
-      enabled: true
-  jmx:
-    exposure:
-      include: health,info
 
 #=======================打开mybatis-plus,SQL执行日志输出==========================
 mybatis-plus:
@@ -320,25 +315,14 @@ sa-token:
 #    register:
 #      group-name: dev
 
-################ camunda登录信息配置 ################
-################ camunda.bpm.generic-properties.properties.historyTimeToLive:P1D如果不添加，解析bpmn会出错 ################
-camunda.bpm:
-  admin-user:
-    id: admin  #用户名
-    password: 123456  #密码
-    firstName: open
-  filter:
-    create: All tasks
-  generic-properties:
-    properties:
-      historyTimeToLive: P1D
-
 ################ flowable配置 ################
 # flowable 配置
 flowable:
   # 关闭异步，不关闭历史数据的插入就是异步的，会在同一个事物里面，无法回滚
   # 开发可开启会提高些效率，上线需要关闭
   async-executor-activate: false
+  check-process-definitions: true
+  history-level: full
   common:
     app:
       idm-url: /a.html

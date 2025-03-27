@@ -71,7 +71,9 @@ public class FlowController {
                         .name(filename)
                         .addZipInputStream(new ZipInputStream(is))
                         .deploy();
-            } else if (filename.endsWith("bpmn") || filename.endsWith("xml")) {
+            } else if (filename.endsWith("bpmn")
+                    || filename.endsWith("processes")
+                    || filename.endsWith("xml")) {
                 repositoryService
                         .createDeployment()
                         .name(filename)
