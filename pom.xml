@@ -122,7 +122,7 @@
 		<logback-core.version>1.5.16</logback-core.version>
 		<dependency-check-maven.version>11.1.1</dependency-check-maven.version>
 		<commons-io.version>2.18.0</commons-io.version><httpmime.version>4.5.14</httpmime.version>
-		<spring-security-crypto.version>6.4.3</spring-security-crypto.version>
+		<spring-security-crypto.version>6.4.4</spring-security-crypto.version>
 		<google-java-format.version>1.25.2</google-java-format.version>
 	</properties>
 
