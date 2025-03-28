@@ -92,7 +92,6 @@
 		<java-jwt>4.4.0</java-jwt>
 		<aws-java-sdk-s3>1.12.769</aws-java-sdk-s3>
 		
-		
 		<json>20240303</json>
 		<lombok>1.18.34</lombok>
 		<xpp3>1.1.6</xpp3>
@@ -124,6 +123,9 @@
 		<commons-io.version>2.18.0</commons-io.version><httpmime.version>4.5.14</httpmime.version>
 		<spring-security-crypto.version>6.4.3</spring-security-crypto.version>
 		<google-java-format.version>1.25.2</google-java-format.version>
+		
+		<!-- spring-boot-maven-plugin 跳过测试打包 -->
+		<skipTests>true</skipTests>
 	</properties>
 
 	<profiles>
@@ -467,7 +469,6 @@
 			<version>${aws-java-sdk-s3}</version>
 		</dependency>
 		
-		
 		<!-- ======================================= 其他相关依赖 ======================================= -->
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
 		<dependency>
@@ -534,7 +535,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
 		
 		<!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
 		<dependency>
@@ -678,25 +678,6 @@
 		    <version>${ko-time}</version>
 		</dependency>
 		
-		<!-- 流程 -->
-		<dependency>
-            <groupId>org.flowable</groupId>
-            <artifactId>flowable-spring-boot-starter</artifactId>
-            <version>${flowable-spring-boot-starter}</version>
-        </dependency>
-		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-bpmn-layout -->
-		<dependency>
-		    <groupId>org.flowable</groupId>
-		    <artifactId>flowable-bpmn-layout</artifactId>
-		    <version>${flowable-spring-boot-starter}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.flowable/flowable-json-converter -->
-		<dependency>
-		    <groupId>org.flowable</groupId>
-		    <artifactId>flowable-json-converter</artifactId>
-		    <version>${flowable-json-converter}</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/com.github.yulichang/mybatis-plus-join-boot-starter -->
 		<!-- mybatis-plus做连接查询的插件 -->
 		<dependency>
@@ -731,10 +712,8 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>${commons-io.version}</version>
 		</dependency>
-
 	
 	</dependencies>
-	
 	
 	<build>
 		<finalName>open</finalName>

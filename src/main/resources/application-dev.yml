@@ -315,26 +315,6 @@ sa-token:
 #    register:
 #      group-name: dev
 
-################ flowable配置 ################
-# flowable 配置
-flowable:
-  # 关闭异步，不关闭历史数据的插入就是异步的，会在同一个事物里面，无法回滚
-  # 开发可开启会提高些效率，上线需要关闭
-  async-executor-activate: false
-  check-process-definitions: true
-  history-level: full
-  common:
-    app:
-      idm-url: /a.html
-      idm-admin:
-        user: open
-        password: open
-  form:
-    enabled: false
-  # Flowable-IDM功能：提供用户管理功能：提供用户分组功能：提供权限管理功能；提供单点登录管理：
-  idm:
-    enabled: false
-
 ko-time:
   pointcut: execution(public * com.spyker.*.controller.*.*(..))
   log-enable: false

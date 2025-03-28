@@ -40,11 +40,11 @@ public class HttpClientAuthScopeUtils {
 
     public static String doDelete(
             String host, short port, String userName, String password, String url, String input) {
-        String putUrl = "http://" + host + ":" + port + url;
+        String deleteUrl = "http://" + host + ":" + port + url;
 
-        log.info("doDelete --> {}", putUrl);
+        log.info("doDelete --> {}", deleteUrl);
 
-        HttpDelete httpDelete = new HttpDelete(putUrl);
+        HttpDelete httpDelete = new HttpDelete(deleteUrl);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(
                 new AuthScope(host, port), new UsernamePasswordCredentials(userName, password));
@@ -136,9 +136,11 @@ public class HttpClientAuthScopeUtils {
 
     public static String doPost(
             String host, short port, String userName, String password, String url, String input) {
-        String PostUrl = "http://" + host + ":" + port + url;
+        String postUrl = "http://" + host + ":" + port + url;
 
-        HttpPost httpPost = new HttpPost(PostUrl);
+        log.info("doPost --> {}", postUrl);
+
+        HttpPost httpPost = new HttpPost(postUrl);
         httpPost.setEntity(new StringEntity(input, "UTF-8"));
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(
@@ -160,7 +162,7 @@ public class HttpClientAuthScopeUtils {
             }
 
         } catch (IOException e) {
-            log.error("doPut error:{}", e);
+            log.error("doPost error:{}", e);
         } finally {
             try {
                 // 释放资源
@@ -171,7 +173,7 @@ public class HttpClientAuthScopeUtils {
                     responseBody.close();
                 }
             } catch (IOException e) {
-                log.error("doPut error:{}", e);
+                log.error("doPost error:{}", e);
             }
         }
         return response;
@@ -180,6 +182,8 @@ public class HttpClientAuthScopeUtils {
     public static String doDelete(
             String host, short port, String userName, String password, String url) {
         String deleteUrl = "http://" + host + ":" + port + url;
+
+        log.info("deleteUrl --> {}", deleteUrl);
 
         HttpDelete httpDelete = new HttpDelete(deleteUrl);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -201,7 +205,7 @@ public class HttpClientAuthScopeUtils {
             }
 
         } catch (IOException e) {
-            log.error("doPut error:{}", e);
+            log.error("deleteUrl error:{}", e);
         } finally {
             try {
                 // 释放资源
@@ -212,7 +216,7 @@ public class HttpClientAuthScopeUtils {
                     responseBody.close();
                 }
             } catch (IOException e) {
-                log.error("doPut error:{}", e);
+                log.error("deleteUrl error:{}", e);
             }
         }
         return response;
@@ -222,7 +226,7 @@ public class HttpClientAuthScopeUtils {
             String host, short port, String userName, String password, String url) {
         String getUrl = "http://" + host + ":" + port + url;
 
-        log.info("getUrl --> {}", getUrl);
+        log.info("doGet --> {}", getUrl);
 
         HttpGet httpget = new HttpGet(getUrl);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -244,7 +248,7 @@ public class HttpClientAuthScopeUtils {
             }
 
         } catch (IOException e) {
-            log.error("doPut error:{}", e);
+            log.error("doGet error:{}", e);
         } finally {
             try {
                 // 释放资源
@@ -255,7 +259,7 @@ public class HttpClientAuthScopeUtils {
                     responseBody.close();
                 }
             } catch (IOException e) {
-                log.error("doPut error:{}", e);
+                log.error("doGet error:{}", e);
             }
         }
         return response;
@@ -264,9 +268,11 @@ public class HttpClientAuthScopeUtils {
     public static String doPostUploadPhoto(
             String host, short port, String username, String password, String url, String input)
             throws UnsupportedEncodingException {
-        String PostUrl = "http://" + host + ":" + port + url;
+        String postUrl = "http://" + host + ":" + port + url;
 
-        HttpPost httpPost = new HttpPost(PostUrl);
+        log.info("doPostUploadPhoto --> {}", postUrl);
+
+        HttpPost httpPost = new HttpPost(postUrl);
 
         // 创建 MultipartEntityBuilder 实例
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
@@ -298,7 +304,7 @@ public class HttpClientAuthScopeUtils {
             }
 
         } catch (IOException e) {
-            log.error("doPut error:{}", e);
+            log.error("doPostUploadPhoto error:{}", e);
         } finally {
             try {
                 // 释放资源
@@ -309,7 +315,7 @@ public class HttpClientAuthScopeUtils {
                     responseBody.close();
                 }
             } catch (IOException e) {
-                log.error("doPut error:{}", e);
+                log.error("doPostUploadPhoto error:{}", e);
             }
         }
         return response;

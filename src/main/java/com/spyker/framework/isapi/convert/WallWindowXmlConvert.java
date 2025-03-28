@@ -1,20 +1,24 @@
 package com.spyker.framework.isapi.convert;
 
+import lombok.Data;
+
 /** 给墙分配视频流 */
+@Data
 public class WallWindowXmlConvert {
 
-    private final int x;
-    private final int y;
+    private String windowId;
+    private int x;
+    private int y;
 
     /** width height 为整个窗口的宽高，x,y为窗口左上角的坐标，width,height为窗口的宽高，subWindowId为子窗口的ID，windowMode为窗口模式， */
-    private final int width;
+    private int width;
 
-    private final int height;
-    private final String streamingChannelID;
-    private final String subWindowId;
+    private int height;
+    private String streamingChannelID;
+    private String subWindowId;
 
     /** subType:int, [1#1,4#4,6#6,8#8,9#9,16#16,25#25]-->1 */
-    private final int windowMode;
+    private int windowMode;
 
     public WallWindowXmlConvert(
             int x,
@@ -32,6 +36,33 @@ public class WallWindowXmlConvert {
         this.streamingChannelID = streamingChannelID;
         this.subWindowId = subWindowId;
         this.windowMode = windowMode;
+    }
+
+    public String getPutXMl() {
+        String input =
+                "<WallWindow version: '2.0' xmlns='http://www.isapi"
+                        + ".org/ver20/XMLSchema'><id>"
+                        + windowId
+                        + "</id><wndOperateMode>uniformCoordinate</wndOperateMode><Rect"
+                        + "><Coordinate><x>"
+                        + x
+                        + "</x><y>"
+                        + y
+                        + "</y></Coordinate><width>"
+                        + width
+                        + "</width><height>"
+                        + height
+                        + "</height></Rect"
+                        + "><layerIdx></layerIdx><windowMode>"
+                        + windowMode
+                        + "</windowMode><SubWindowList><SubWindow><id>"
+                        + subWindowId
+                        + "</id"
+                        + "><SubWindowParam><signalMode>stream id</signalMode><streamingChannelID>"
+                        + streamingChannelID
+                        + "</streamingChannelID></SubWindowParam></SubWindow></SubWindowList></WallWindow>";
+
+        return input;
     }
 
     public String getSubWindowListXml() {
