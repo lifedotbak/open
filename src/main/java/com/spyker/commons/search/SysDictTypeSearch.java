@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 /**
  * 字典类型表查询类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Data

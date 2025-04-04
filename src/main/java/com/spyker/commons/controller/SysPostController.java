@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * 岗位信息表 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Tag(name = "岗位信息表", description = "岗位信息表")

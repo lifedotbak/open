@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 用户与岗位关联表 服务实现类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Service

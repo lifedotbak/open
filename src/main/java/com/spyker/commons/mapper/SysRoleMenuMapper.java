@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 角色和菜单关联表 Mapper 接口
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-22
  */
 @Mapper

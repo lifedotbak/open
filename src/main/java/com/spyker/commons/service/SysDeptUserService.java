@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 部门-主管表 服务接口
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 public interface SysDeptUserService extends IService<SysDeptUser> {

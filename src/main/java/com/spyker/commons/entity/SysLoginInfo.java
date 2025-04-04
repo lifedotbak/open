@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * 系统访问记录
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Data

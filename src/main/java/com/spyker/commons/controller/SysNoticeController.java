@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * 通知公告表 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Tag(name = "通知公告表", description = "通知公告表")

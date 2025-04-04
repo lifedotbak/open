@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * 菜单管理 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Tag(name = "菜单管理", description = "菜单管理")

@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 流程抄送数据查询类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-22
  */
 @Data

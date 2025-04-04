@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * 通知公告表
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Data

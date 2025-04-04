@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * 字典类型表 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Tag(name = "字典类型表", description = "字典类型表")

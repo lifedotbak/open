@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * 流程发起人范围
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @RedisHash

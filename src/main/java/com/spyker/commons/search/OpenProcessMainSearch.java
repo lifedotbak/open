@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 /**
  * 流程主表查询类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-22
  */
 @Data

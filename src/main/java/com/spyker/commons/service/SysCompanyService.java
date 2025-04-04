@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 公司表 服务类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-12-25
  */
 public interface SysCompanyService extends IService<SysCompany> {

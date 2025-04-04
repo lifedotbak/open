@@ -16,7 +16,7 @@ import org.springframework.data.redis.core.RedisHash;
 import java.util.Date;
 
 /**
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @RedisHash

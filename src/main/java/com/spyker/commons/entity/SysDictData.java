@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * 字典数据表
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Data

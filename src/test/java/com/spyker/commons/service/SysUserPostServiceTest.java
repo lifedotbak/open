@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 用户与岗位关联表 服务测试类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Slf4j

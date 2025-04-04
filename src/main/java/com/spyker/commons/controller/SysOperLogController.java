@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * 操作日志记录 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Tag(name = "操作日志记录", description = "操作日志记录")

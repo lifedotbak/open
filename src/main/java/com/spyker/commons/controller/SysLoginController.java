@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 系统访问记录 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-09-28
  */
 @RestController

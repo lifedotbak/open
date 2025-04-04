@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 系统访问记录 服务类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-09-28
  */
 public interface SysLoginInfoService extends IService<SysLoginInfo> {

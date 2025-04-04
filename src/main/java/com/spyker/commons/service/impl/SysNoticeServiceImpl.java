@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 通知公告表 服务实现类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-09-28
  */
 @Service

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 参数配置表 服务类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-09-28
  */
 public interface SysConfigService extends IService<SysConfig> {

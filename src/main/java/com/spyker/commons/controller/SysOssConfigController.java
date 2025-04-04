@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * 对象存储配置表 前端控制器
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 @Tag(name = "对象存储配置表", description = "对象存储配置表")

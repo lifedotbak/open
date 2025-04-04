@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 字典数据表 Mapper 接口
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-09-28
  */
 @Mapper

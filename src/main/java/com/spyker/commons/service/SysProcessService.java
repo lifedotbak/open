@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 服务接口
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-23
  */
 public interface SysProcessService extends IService<SysProcess> {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 岗位信息表 服务类
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2023-09-28
  */
 public interface SysPostService extends IService<SysPost> {

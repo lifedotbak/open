@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 角色和菜单关联表 服务接口
  *
- * @author CodeGenerator
+ * @author 121232224@qq.com
  * @since 2024-07-22
  */
 public interface SysRoleMenuService extends IService<SysRoleMenu> {
