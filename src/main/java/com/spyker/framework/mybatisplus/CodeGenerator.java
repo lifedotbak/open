@@ -34,7 +34,7 @@ import java.util.Scanner;
 
 public class CodeGenerator {
 
-    private static final String CODE_AUTHOR = "CodeGenerator";
+    private static final String CODE_AUTHOR = "121232224@qq.com";
 
     private static final String BASE_PACKAGE = "com.spyker";
 
