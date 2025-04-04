@@ -90,7 +90,6 @@
 		<minio>8.5.14</minio>
 		<!-- 其他相关依赖版本 -->
 		<java-jwt>4.4.0</java-jwt>
-		<aws-java-sdk-s3>1.12.769</aws-java-sdk-s3>
 		
 		<json>20240303</json>
 		<lombok>1.18.34</lombok>
@@ -121,7 +120,7 @@
 		<logback-core.version>1.5.16</logback-core.version>
 		<dependency-check-maven.version>11.1.1</dependency-check-maven.version>
 		<commons-io.version>2.18.0</commons-io.version><httpmime.version>4.5.14</httpmime.version>
-		<spring-security-crypto.version>6.4.3</spring-security-crypto.version>
+		<spring-security-crypto.version>6.4.4</spring-security-crypto.version>
 		<google-java-format.version>1.25.2</google-java-format.version>
 		
 		<!-- spring-boot-maven-plugin 跳过测试打包 -->
@@ -459,14 +458,6 @@
 		    <groupId>cn.hutool</groupId>
 		    <artifactId>hutool-all</artifactId>
 		    <version>${hutool}</version>
-		</dependency>
-		
-		<!-- ======================================= amazonaws依赖 ======================================= -->
-		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
-		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk-s3</artifactId>
-			<version>${aws-java-sdk-s3}</version>
 		</dependency>
 		
 		<!-- ======================================= 其他相关依赖 ======================================= -->
