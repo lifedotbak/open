@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /** <a href="">https://springdoc.cn/spring-retry-guide/</a> */
 @Slf4j
 @Service
+@Transactional
 public class RetryService {
 
     private int retryCount = 0;
