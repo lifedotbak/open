@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysUserRoleSearch;
 
 import java.util.List;
 
-/**
- * 用户-角色 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户-角色 服务接口 */
 public interface SysUserRoleService extends IService<SysUserRole> {
 
-    List<SysUserRole> query(SysUserRoleSearch search);
-
-    IPage<SysUserRole> queryPage(IPage<SysUserRole> page, SysUserRoleSearch search);
+    boolean delete(String id);
 
     SysUserRole get(String id);
 
     SysUserRole insert(SysUserRole sysUserRole);
 
-    SysUserRole update(SysUserRole sysUserRole);
+    List<SysUserRole> query(SysUserRoleSearch search);
 
-    boolean delete(String id);
+    IPage<SysUserRole> queryPage(IPage<SysUserRole> page, SysUserRoleSearch search);
+
+    SysUserRole update(SysUserRole sysUserRole);
 }

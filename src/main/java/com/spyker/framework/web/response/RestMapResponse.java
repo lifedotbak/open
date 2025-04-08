@@ -6,11 +6,7 @@ import com.spyker.framework.util.text.ExStringUtils;
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
- * 操作消息提醒
- *
- * @author spyker
- */
+/** 操作消息提醒 */
 public class RestMapResponse extends HashMap<String, Object> {
 
     /** 状态码 */
@@ -49,6 +45,46 @@ public class RestMapResponse extends HashMap<String, Object> {
         if (ExStringUtils.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }
+    }
+
+    /**
+     * 是否为错误消息
+     *
+     * @return 结果
+     */
+    public boolean isError() {
+        return Objects.equals(HttpStatus.ERROR, this.get(CODE_TAG));
+    }
+
+    /**
+     * 是否为成功消息
+     *
+     * @return 结果
+     */
+    public boolean isSuccess() {
+        return Objects.equals(HttpStatus.SUCCESS, this.get(CODE_TAG));
+    }
+
+    /**
+     * 是否为警告消息
+     *
+     * @return 结果
+     */
+    public boolean isWarn() {
+        return Objects.equals(HttpStatus.WARN, this.get(CODE_TAG));
+    }
+
+    /**
+     * 方便链式调用
+     *
+     * @param key 键
+     * @param value 值
+     * @return 数据对象
+     */
+    @Override
+    public RestMapResponse put(String key, Object value) {
+        super.put(key, value);
+        return this;
     }
 
     /**
@@ -150,45 +186,5 @@ public class RestMapResponse extends HashMap<String, Object> {
      */
     public static RestMapResponse error(int code, String msg) {
         return new RestMapResponse(code, msg, null);
-    }
-
-    /**
-     * 是否为成功消息
-     *
-     * @return 结果
-     */
-    public boolean isSuccess() {
-        return Objects.equals(HttpStatus.SUCCESS, this.get(CODE_TAG));
-    }
-
-    /**
-     * 是否为警告消息
-     *
-     * @return 结果
-     */
-    public boolean isWarn() {
-        return Objects.equals(HttpStatus.WARN, this.get(CODE_TAG));
-    }
-
-    /**
-     * 是否为错误消息
-     *
-     * @return 结果
-     */
-    public boolean isError() {
-        return Objects.equals(HttpStatus.ERROR, this.get(CODE_TAG));
-    }
-
-    /**
-     * 方便链式调用
-     *
-     * @param key 键
-     * @param value 值
-     * @return 数据对象
-     */
-    @Override
-    public RestMapResponse put(String key, Object value) {
-        super.put(key, value);
-        return this;
     }
 }

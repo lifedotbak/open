@@ -20,11 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-/**
- * 退款返回结果解析
- *
- * @author spyker
- */
+/** 退款返回结果解析 */
 @AutoConfiguration
 @ConditionalOnClass(PayConfig.class)
 @Slf4j

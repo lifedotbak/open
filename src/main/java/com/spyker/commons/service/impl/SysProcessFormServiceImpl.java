@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 流程表单 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程表单 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,23 +27,14 @@ public class SysProcessFormServiceImpl extends ServiceImpl<SysProcessFormMapper,
 
     private final SysProcessFormMapper sysProcessFormMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysProcessForm> query(SysProcessFormSearch search) {
-
-        List<SysProcessForm> result = sysProcessFormMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysProcessForm> queryPage(
-            IPage<SysProcessForm> page, SysProcessFormSearch search) {
-
-        page = sysProcessFormMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -77,6 +63,25 @@ public class SysProcessFormServiceImpl extends ServiceImpl<SysProcessFormMapper,
         return sysProcessForm;
     }
 
+    @Override
+    public List<SysProcessForm> query(SysProcessFormSearch search) {
+
+        List<SysProcessForm> result = sysProcessFormMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysProcessForm> queryPage(
+            IPage<SysProcessForm> page, SysProcessFormSearch search) {
+
+        page = sysProcessFormMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysProcessForm
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -86,15 +91,5 @@ public class SysProcessFormServiceImpl extends ServiceImpl<SysProcessFormMapper,
     public SysProcessForm update(SysProcessForm sysProcessForm) {
         updateById(sysProcessForm);
         return sysProcessForm;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

@@ -22,12 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 用户信息表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 用户信息表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -40,17 +35,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     private final HttpSession httpSession;
 
     @Override
-    public List<SysUser> query(SysUserSearch search) {
-        List<SysUser> SysUserList = sysUserMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return SysUserList;
+        return RestResponse.success();
     }
 
     @Override
-    public IPage<SysUser> queryPage(IPage<SysUser> page, SysUserSearch search) {
-        page = sysUserMapper.queryPage(page, search);
+    public void deleteUserThrowException(String id) {
+        removeById(id);
+        removeById("333");
+        removeById("444");
 
-        return page;
+        throw new RuntimeException("deleteBy is not support");
     }
 
     @Override
@@ -65,20 +62,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         save(sysUser);
 
         return RestResponse.success(sysUser);
-    }
-
-    @Override
-    public RestResponse<?> update(SysUser SysUser) {
-        updateById(SysUser);
-
-        return RestResponse.success();
-    }
-
-    @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
-
-        return RestResponse.success();
     }
 
     @Override
@@ -102,5 +85,26 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         }
 
         return false;
+    }
+
+    @Override
+    public List<SysUser> query(SysUserSearch search) {
+        List<SysUser> SysUserList = sysUserMapper.query(search);
+
+        return SysUserList;
+    }
+
+    @Override
+    public IPage<SysUser> queryPage(IPage<SysUser> page, SysUserSearch search) {
+        page = sysUserMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysUser SysUser) {
+        updateById(SysUser);
+
+        return RestResponse.success();
     }
 }

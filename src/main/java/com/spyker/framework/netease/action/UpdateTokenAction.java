@@ -21,8 +21,6 @@ import java.util.List;
  * <p>
  *
  * <p>更新网易云信IM token。通过该接口，可以对accid更新到指定的IM token，更新后请开发者务必做好本地的维护。更新后，需要确保客户端SDK再次登录时携带的token保持最新。
- *
- * @author spyker
  */
 public class UpdateTokenAction {
 

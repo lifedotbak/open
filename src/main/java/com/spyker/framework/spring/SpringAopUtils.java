@@ -13,6 +13,20 @@ import org.springframework.aop.support.AopUtils;
  */
 public class SpringAopUtils {
 
+    private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
+        Object dynamicAdvisedInterceptor = BeanUtil.getFieldValue(proxy, "CGLIB$CALLBACK_0");
+        AdvisedSupport advisedSupport =
+                (AdvisedSupport) BeanUtil.getFieldValue(dynamicAdvisedInterceptor, "advised");
+        return advisedSupport.getTargetSource().getTarget();
+    }
+
+    private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
+        AopProxy aopProxy = (AopProxy) BeanUtil.getFieldValue(proxy, "h");
+        AdvisedSupport advisedSupport =
+                (AdvisedSupport) BeanUtil.getFieldValue(aopProxy, "advised");
+        return advisedSupport.getTargetSource().getTarget();
+    }
+
     /**
      * 获取代理的目标对象
      *
@@ -30,19 +44,5 @@ public class SpringAopUtils {
         }
         // Cglib 代理
         return getCglibProxyTargetObject(proxy);
-    }
-
-    private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
-        AopProxy aopProxy = (AopProxy) BeanUtil.getFieldValue(proxy, "h");
-        AdvisedSupport advisedSupport =
-                (AdvisedSupport) BeanUtil.getFieldValue(aopProxy, "advised");
-        return advisedSupport.getTargetSource().getTarget();
-    }
-
-    private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
-        Object dynamicAdvisedInterceptor = BeanUtil.getFieldValue(proxy, "CGLIB$CALLBACK_0");
-        AdvisedSupport advisedSupport =
-                (AdvisedSupport) BeanUtil.getFieldValue(dynamicAdvisedInterceptor, "advised");
-        return advisedSupport.getTargetSource().getTarget();
     }
 }

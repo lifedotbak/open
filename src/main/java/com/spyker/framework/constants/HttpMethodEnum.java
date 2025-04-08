@@ -5,11 +5,7 @@ import org.springframework.lang.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 请求方式
- *
- * @author spyker
- */
+/** 请求方式 */
 public enum HttpMethodEnum {
     GET,
 

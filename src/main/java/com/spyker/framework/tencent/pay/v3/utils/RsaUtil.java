@@ -19,8 +19,6 @@ import javax.security.cert.X509Certificate;
  * 敏感信息加解密
  *
  * <p>https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi
- *
- * @author zhangzhaofeng
  */
 public class RsaUtil {
 

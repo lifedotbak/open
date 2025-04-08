@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity;
 
 import lombok.Data;
 
-/**
- * APP调起支付API,生成sign对象
- *
- * @author zhangzhaofeng
- */
+/** APP调起支付API,生成sign对象 */
 @Data
 public class CallBackAuth {
 

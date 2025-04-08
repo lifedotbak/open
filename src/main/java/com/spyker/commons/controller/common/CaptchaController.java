@@ -28,11 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
-/**
- * 验证码操作处理
- *
- * @author spyker
- */
+/** 验证码操作处理 */
 @Tag(name = "验证码生成", description = "验证码生成")
 @RestController
 @RequestMapping("/common/captcha")

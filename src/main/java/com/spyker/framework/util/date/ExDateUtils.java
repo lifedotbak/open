@@ -71,6 +71,57 @@ public final class ExDateUtils extends DateUtils {
             DateTimeFormatter.ofPattern(ISO8601_MILLISECOND_PATTERN, Locale.getDefault())
                     .withZone(ZoneId.of(zoneStr));
 
+    public enum Format {
+
+        /** 大写的SSS是毫秒 */
+        YM("yyyyMM"),
+
+        YM_CN("yyyy年MM月"),
+
+        YM_POINT("yyyy.MM"),
+
+        YM_LINE("yyyy-MM"),
+
+        YMD("yyyyMMdd"),
+
+        YMD_CN("yyyy年MM月dd日"),
+
+        YMD_P("yyyy.MM.dd"),
+
+        YMD_LINE("yyyy-MM-dd"),
+
+        YMD_LINE_HMS("yyyy-MM-dd HH:mm:ss"),
+
+        YMD_LINE_HMSS("yyyy-MM-dd HH:mm:ss.SSS"),
+
+        YMD_PATH("yyyy/MM/dd"),
+
+        YMDHMS("yyyyMMddHHmmss"),
+
+        HMS("HH:mm:ss"),
+
+        YMDHMSS("yyyyMMddHHmmssSSS"),
+
+        ISO8601_COMPATIBLE_PATTERN("yyyy-M-d'T'H:m:s"),
+
+        ISO8601_PATTERN("yyyy-MM-dd'T'HH:mm:ss"),
+
+        ISO8601_ZONE_PATTERN("yyyy-MM-dd'T'HH:mm:ssXXX"),
+
+        ISO8601_MILLISECOND_PATTERN("yyyy-MM-dd'T'HH:mm:ss.SSS"),
+        ;
+
+        private final String format;
+
+        Format(String format) {
+            this.format = format;
+        }
+
+        public String getFormat() {
+            return format;
+        }
+    }
+
     public static String parseDateToStr(final String format, final Date date) {
         return new SimpleDateFormat(format).format(date);
     }
@@ -526,57 +577,6 @@ public final class ExDateUtils extends DateUtils {
             log.error("format2Date error", e.getMessage());
 
             return null;
-        }
-    }
-
-    public enum Format {
-
-        /** 大写的SSS是毫秒 */
-        YM("yyyyMM"),
-
-        YM_CN("yyyy年MM月"),
-
-        YM_POINT("yyyy.MM"),
-
-        YM_LINE("yyyy-MM"),
-
-        YMD("yyyyMMdd"),
-
-        YMD_CN("yyyy年MM月dd日"),
-
-        YMD_P("yyyy.MM.dd"),
-
-        YMD_LINE("yyyy-MM-dd"),
-
-        YMD_LINE_HMS("yyyy-MM-dd HH:mm:ss"),
-
-        YMD_LINE_HMSS("yyyy-MM-dd HH:mm:ss.SSS"),
-
-        YMD_PATH("yyyy/MM/dd"),
-
-        YMDHMS("yyyyMMddHHmmss"),
-
-        HMS("HH:mm:ss"),
-
-        YMDHMSS("yyyyMMddHHmmssSSS"),
-
-        ISO8601_COMPATIBLE_PATTERN("yyyy-M-d'T'H:m:s"),
-
-        ISO8601_PATTERN("yyyy-MM-dd'T'HH:mm:ss"),
-
-        ISO8601_ZONE_PATTERN("yyyy-MM-dd'T'HH:mm:ssXXX"),
-
-        ISO8601_MILLISECOND_PATTERN("yyyy-MM-dd'T'HH:mm:ss.SSS"),
-        ;
-
-        private final String format;
-
-        Format(String format) {
-            this.format = format;
-        }
-
-        public String getFormat() {
-            return format;
         }
     }
 }

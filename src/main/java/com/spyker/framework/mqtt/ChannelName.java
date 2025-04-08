@@ -1,10 +1,6 @@
 package com.spyker.framework.mqtt;
 
-/**
- * 管道名称常量类
- *
- * @author spyker
- */
+/** 管道名称常量类 */
 public class ChannelName {
 
     public static final String INPUT_DATA = "input_data"; // 入站管道

@@ -17,11 +17,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-/**
- * 文件上传工具类
- *
- * @author spyker
- */
+/** 文件上传工具类 */
 public class FileUploadUtils {
     /** 默认大小 50M */
     public static final long DEFAULT_MAX_SIZE = 50 * 1024 * 1024;

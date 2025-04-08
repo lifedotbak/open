@@ -23,8 +23,6 @@ import org.springframework.cache.annotation.Cacheable;
 /**
 *
 * ${table.comment!} 服务实现类
-* @author ${author}
-* @since ${date}
 */
 @Service
 @Transactional

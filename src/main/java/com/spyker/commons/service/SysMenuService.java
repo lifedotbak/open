@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysMenuSearch;
 
 import java.util.List;
 
-/**
- * 菜单管理 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 菜单管理 服务接口 */
 public interface SysMenuService extends IService<SysMenu> {
 
-    List<SysMenu> query(SysMenuSearch search);
-
-    IPage<SysMenu> queryPage(IPage<SysMenu> page, SysMenuSearch search);
+    boolean delete(String id);
 
     SysMenu get(String id);
 
     SysMenu insert(SysMenu sysMenu);
 
-    SysMenu update(SysMenu sysMenu);
+    List<SysMenu> query(SysMenuSearch search);
 
-    boolean delete(String id);
+    IPage<SysMenu> queryPage(IPage<SysMenu> page, SysMenuSearch search);
+
+    SysMenu update(SysMenu sysMenu);
 }

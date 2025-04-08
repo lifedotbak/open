@@ -15,11 +15,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 
-/**
- * 图片处理工具类
- *
- * @author ruoyi
- */
+/** 图片处理工具类 */
 public class ImageUtils {
     private static final Logger log = LoggerFactory.getLogger(ImageUtils.class);
 

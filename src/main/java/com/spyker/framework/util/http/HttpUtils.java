@@ -16,13 +16,29 @@ import java.security.cert.X509Certificate;
 
 import javax.net.ssl.*;
 
-/**
- * 通用http发送方法
- *
- * @author spyker
- */
+/** 通用http发送方法 */
 @Slf4j
 public class HttpUtils {
+
+    private static class TrustAnyTrustManager implements X509TrustManager {
+        @Override
+        public void checkClientTrusted(X509Certificate[] chain, String authType) {}
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] chain, String authType) {}
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return new X509Certificate[] {};
+        }
+    }
+
+    private static class TrustAnyHostnameVerifier implements HostnameVerifier {
+        @Override
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
+    }
 
     /**
      * 向指定 URL 发送GET方法的请求
@@ -209,25 +225,5 @@ public class HttpUtils {
             log.error("调用HttpsUtil.sendSSLPost Exception, url=" + url + ",param=" + param, e);
         }
         return result.toString();
-    }
-
-    private static class TrustAnyTrustManager implements X509TrustManager {
-        @Override
-        public void checkClientTrusted(X509Certificate[] chain, String authType) {}
-
-        @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType) {}
-
-        @Override
-        public X509Certificate[] getAcceptedIssuers() {
-            return new X509Certificate[] {};
-        }
-    }
-
-    private static class TrustAnyHostnameVerifier implements HostnameVerifier {
-        @Override
-        public boolean verify(String hostname, SSLSession session) {
-            return true;
-        }
     }
 }

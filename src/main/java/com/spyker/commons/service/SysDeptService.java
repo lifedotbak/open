@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysDeptSearch;
 
 import java.util.List;
 
-/**
- * 部门表 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 部门表 服务接口 */
 public interface SysDeptService extends IService<SysDept> {
 
-    List<SysDept> query(SysDeptSearch search);
-
-    IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search);
+    boolean delete(String id);
 
     SysDept get(String id);
 
     SysDept insert(SysDept sysDept);
 
-    SysDept update(SysDept sysDept);
+    List<SysDept> query(SysDeptSearch search);
 
-    boolean delete(String id);
+    IPage<SysDept> queryPage(IPage<SysDept> page, SysDeptSearch search);
+
+    SysDept update(SysDept sysDept);
 }

@@ -3,14 +3,19 @@ package com.spyker.framework.word.impl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created with IntelliJ IDEA. User: Administrator Date: 18-6-5 Time: 下午3:44 To change this template
- * use File | Settings | File Templates.
- */
 public class WeChatWord {
 
     private static final String replaceChart = "*";
     private static final String regex_web = "[-A-Za-z0-9_.]{6,20}";
+
+    private static boolean checkSourceWeb(String word) {
+        if (word == null || "".equals(word)) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile(regex_web);
+        Matcher m = pattern.matcher(word);
+        return m.matches();
+    }
 
     public static String getValue(String word) {
         boolean checked = checkSourceWeb(word);
@@ -31,15 +36,6 @@ public class WeChatWord {
         }
 
         return buffer.toString();
-    }
-
-    private static boolean checkSourceWeb(String word) {
-        if (word == null || "".equals(word)) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile(regex_web);
-        Matcher m = pattern.matcher(word);
-        return m.matches();
     }
 
     public static void main(String[] args) {

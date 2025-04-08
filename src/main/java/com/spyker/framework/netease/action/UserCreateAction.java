@@ -33,8 +33,6 @@ import java.util.List;
  * <p>
  *
  * <p>客户端通过网易云信SDK连接登录云信服务器时，需要保证网易云信IM账号已经注册， 且确保客户端从自己的服务器已经取得了有效token；
- *
- * @author spyker
  */
 @Slf4j
 public class UserCreateAction {

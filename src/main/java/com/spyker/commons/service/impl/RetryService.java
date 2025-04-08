@@ -5,15 +5,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /** <a href="">https://springdoc.cn/spring-retry-guide/</a> */
 @Slf4j
 @Service
-@Transactional
 public class RetryService {
 
     private int retryCount = 0;
+
+    /**
+     * Retryable 方法对应的recover方法
+     *
+     * @param e
+     * @param sql
+     */
+    @Recover
+    public void recover(RuntimeException e, String sql) {
+        log.info("e-->{}", e.getMessage());
+        log.info("recover");
+    }
 
     /**
      * 由于没有指定任何异常，因此将尝试重试所有异常。此外，一旦达到最大尝试次数， 但仍有异常，就会抛出 ExhaustedRetryException。
@@ -39,17 +49,5 @@ public class RetryService {
     public void retryServiceWithRecovery() {
         log.info("retryCount-->{}", retryCount++);
         throw new RuntimeException("retryServiceWithRecovery");
-    }
-
-    /**
-     * Retryable 方法对应的recover方法
-     *
-     * @param e
-     * @param sql
-     */
-    @Recover
-    public void recover(RuntimeException e, String sql) {
-        log.info("e-->{}", e.getMessage());
-        log.info("recover");
     }
 }

@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 部门-主管表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 部门-主管表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,22 +27,14 @@ public class SysDeptLeaderServiceImpl extends ServiceImpl<SysDeptLeaderMapper, S
 
     private final SysDeptLeaderMapper sysDeptLeaderMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysDeptLeader> query(SysDeptLeaderSearch search) {
-
-        List<SysDeptLeader> result = sysDeptLeaderMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysDeptLeader> queryPage(IPage<SysDeptLeader> page, SysDeptLeaderSearch search) {
-
-        page = sysDeptLeaderMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -76,6 +63,24 @@ public class SysDeptLeaderServiceImpl extends ServiceImpl<SysDeptLeaderMapper, S
         return sysDeptLeader;
     }
 
+    @Override
+    public List<SysDeptLeader> query(SysDeptLeaderSearch search) {
+
+        List<SysDeptLeader> result = sysDeptLeaderMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysDeptLeader> queryPage(IPage<SysDeptLeader> page, SysDeptLeaderSearch search) {
+
+        page = sysDeptLeaderMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysDeptLeader
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -85,15 +90,5 @@ public class SysDeptLeaderServiceImpl extends ServiceImpl<SysDeptLeaderMapper, S
     public SysDeptLeader update(SysDeptLeader sysDeptLeader) {
         updateById(sysDeptLeader);
         return sysDeptLeader;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

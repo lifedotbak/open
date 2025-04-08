@@ -5,7 +5,7 @@ import lombok.Data;
 /***
  * 微信接口请求时候,创建sign数据对象.比如预支付
  *
- * @author zhangzhaofeng
+ *
  *
  */
 @Data

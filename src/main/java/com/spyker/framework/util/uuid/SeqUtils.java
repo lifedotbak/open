@@ -5,9 +5,7 @@ import com.spyker.framework.util.text.ExStringUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author spyker 序列生成类
- */
+/** */
 public class SeqUtils {
     // 通用序列类型
     public static final String commSeqType = "COMMON";
@@ -23,6 +21,24 @@ public class SeqUtils {
 
     // 机器标识
     private static final String machineCode = "A";
+
+    /**
+     * 序列循环递增字符串[1, 10 的 (length)幂次方), 用0左补齐length位数
+     *
+     * @return 序列值
+     */
+    private static synchronized String getSeq(AtomicInteger atomicInt, int length) {
+        // 先取值再+1
+        int value = atomicInt.getAndIncrement();
+
+        // 如果更新后值>=10 的 (length)幂次方则重置为1
+        int maxSeq = (int) Math.pow(10, length);
+        if (atomicInt.get() >= maxSeq) {
+            atomicInt.set(1);
+        }
+        // 转字符串，用0左补齐
+        return ExStringUtils.padl(value, length);
+    }
 
     /**
      * 获取通用序列号
@@ -58,23 +74,5 @@ public class SeqUtils {
         result += machineCode;
         result += getSeq(atomicInt, length);
         return result;
-    }
-
-    /**
-     * 序列循环递增字符串[1, 10 的 (length)幂次方), 用0左补齐length位数
-     *
-     * @return 序列值
-     */
-    private static synchronized String getSeq(AtomicInteger atomicInt, int length) {
-        // 先取值再+1
-        int value = atomicInt.getAndIncrement();
-
-        // 如果更新后值>=10 的 (length)幂次方则重置为1
-        int maxSeq = (int) Math.pow(10, length);
-        if (atomicInt.get() >= maxSeq) {
-            atomicInt.set(1);
-        }
-        // 转字符串，用0左补齐
-        return ExStringUtils.padl(value, length);
     }
 }

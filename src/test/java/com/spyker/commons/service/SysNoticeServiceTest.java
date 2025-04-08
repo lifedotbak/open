@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 通知公告表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 通知公告表 服务测试类 */
 @Slf4j
 public class SysNoticeServiceTest extends BaseTest {
 
     @Autowired private SysNoticeService service;
-
-    @Test
-    public void get() {
-        SysNotice result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -55,26 +39,14 @@ public class SysNoticeServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysNotice update = new SysNotice();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setNoticeTitle("noticeTitle");
-
-        update.setNoticeType("noticeType");
-
-        update.setStatus("status");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setRemark("remark");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysNotice result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -115,5 +87,28 @@ public class SysNoticeServiceTest extends BaseTest {
         search.setRemark("remark");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysNotice update = new SysNotice();
+
+        update.setId("id");
+
+        update.setNoticeTitle("noticeTitle");
+
+        update.setNoticeType("noticeType");
+
+        update.setStatus("status");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setRemark("remark");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

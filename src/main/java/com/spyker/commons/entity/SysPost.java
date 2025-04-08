@@ -15,12 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Date;
 
-/**
- * 岗位信息表
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 岗位信息表 */
 @Data
 @Accessors(chain = true)
 @TableName("sys_post")

@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysDictDataSearch;
 
 import java.util.List;
 
-/**
- * 字典数据表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 字典数据表 服务类 */
 public interface SysDictDataService extends IService<SysDictData> {
 
-    List<SysDictData> query(SysDictDataSearch search);
-
-    IPage<SysDictData> queryPage(IPage<SysDictData> page, SysDictDataSearch search);
+    void delete(String id);
 
     SysDictData get(String id);
 
     SysDictData insert(SysDictData sysDictData);
 
-    SysDictData update(SysDictData sysDictData);
+    List<SysDictData> query(SysDictDataSearch search);
 
-    void delete(String id);
+    IPage<SysDictData> queryPage(IPage<SysDictData> page, SysDictDataSearch search);
+
+    SysDictData update(SysDictData sysDictData);
 }

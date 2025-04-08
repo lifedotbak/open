@@ -11,11 +11,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-/**
- * 汉字转化为拼音
- *
- * @author SPYKER
- */
+/** 汉字转化为拼音 */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Pinyin4jUtils {

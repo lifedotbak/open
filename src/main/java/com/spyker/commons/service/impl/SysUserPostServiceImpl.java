@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 用户与岗位关联表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户与岗位关联表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,22 +27,14 @@ public class SysUserPostServiceImpl extends ServiceImpl<SysUserPostMapper, SysUs
 
     private final SysUserPostMapper sysUserPostMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysUserPost> query(SysUserPostSearch search) {
-
-        List<SysUserPost> result = sysUserPostMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysUserPost> queryPage(IPage<SysUserPost> page, SysUserPostSearch search) {
-
-        page = sysUserPostMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -76,6 +63,24 @@ public class SysUserPostServiceImpl extends ServiceImpl<SysUserPostMapper, SysUs
         return sysUserPost;
     }
 
+    @Override
+    public List<SysUserPost> query(SysUserPostSearch search) {
+
+        List<SysUserPost> result = sysUserPostMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysUserPost> queryPage(IPage<SysUserPost> page, SysUserPostSearch search) {
+
+        page = sysUserPostMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysUserPost
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -85,15 +90,5 @@ public class SysUserPostServiceImpl extends ServiceImpl<SysUserPostMapper, SysUs
     public SysUserPost update(SysUserPost sysUserPost) {
         updateById(sysUserPost);
         return sysUserPost;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

@@ -2,11 +2,7 @@ package com.spyker.framework.util.file.exception;
 
 import java.util.Arrays;
 
-/**
- * 文件上传 误异常类
- *
- * @author spyker
- */
+/** 文件上传 误异常类 */
 public class InvalidExtensionException extends Exception {
 
     private static final long serialVersionUID = 1L;

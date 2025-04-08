@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 角色和菜单关联表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 角色和菜单关联表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,22 +27,14 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
 
     private final SysRoleMenuMapper sysRoleMenuMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysRoleMenu> query(SysRoleMenuSearch search) {
-
-        List<SysRoleMenu> result = sysRoleMenuMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysRoleMenu> queryPage(IPage<SysRoleMenu> page, SysRoleMenuSearch search) {
-
-        page = sysRoleMenuMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -76,6 +63,24 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         return sysRoleMenu;
     }
 
+    @Override
+    public List<SysRoleMenu> query(SysRoleMenuSearch search) {
+
+        List<SysRoleMenu> result = sysRoleMenuMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysRoleMenu> queryPage(IPage<SysRoleMenu> page, SysRoleMenuSearch search) {
+
+        page = sysRoleMenuMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysRoleMenu
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -85,15 +90,5 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
     public SysRoleMenu update(SysRoleMenu sysRoleMenu) {
         updateById(sysRoleMenu);
         return sysRoleMenu;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

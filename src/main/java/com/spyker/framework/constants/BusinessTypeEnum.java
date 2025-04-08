@@ -1,10 +1,6 @@
 package com.spyker.framework.constants;
 
-/**
- * 业务操作类型
- *
- * @author spyker
- */
+/** 业务操作类型 */
 public enum BusinessTypeEnum {
 
     /** 新增 */

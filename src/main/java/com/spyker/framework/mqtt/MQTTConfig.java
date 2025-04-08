@@ -21,11 +21,7 @@ import org.springframework.integration.mqtt.outbound.AbstractMqttMessageHandler;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 
-/**
- * * MQTT 数据转发服务 mqtt.services MQTT服务地址不配置时，不会启用该服务 检测mqtt.services这个参数是否配置，以确定是否启用MQTT服务
- *
- * @author spyker
- */
+/** * MQTT 数据转发服务 mqtt.services MQTT服务地址不配置时，不会启用该服务 检测mqtt.services这个参数是否配置，以确定是否启用MQTT服务 */
 @EnableIntegration
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "mqtt", name = "enabled", havingValue = "true")
@@ -63,6 +59,30 @@ public class MQTTConfig implements ApplicationListener<ApplicationEvent> {
     private Integer Qos; // 通信质量，详见MQTT协议
 
     public MQTTConfig() {}
+
+    /**
+     * 向服务器发送数据管道绑定
+     *
+     * @param connectionFactory tcp连接工厂类
+     * @return 消息管道对象
+     */
+    @Bean
+    @ServiceActivator(inputChannel = ChannelName.OUTPUT_DATA_MQTT)
+    public AbstractMqttMessageHandler MQTTOutAdapter(MqttPahoClientFactory connectionFactory) {
+
+        log.info("appid -->{}", appid);
+
+        // 创建一个新的出站管道，由于MQTT的发布与订阅是两个独立的连接，因此客户端的ID(即APPID）不能与订阅时所使用的ID一样，否则在服务端会认为是同一个客户端，而造成连接失败
+        MqttPahoMessageHandler outGate =
+                new MqttPahoMessageHandler(appid + "_put", connectionFactory);
+        DefaultPahoMessageConverter converter = new DefaultPahoMessageConverter();
+        converter.setPayloadAsBytes(true); // bytes类型接收
+        outGate.setAsync(true);
+        outGate.setCompletionTimeout(CompletionTimeout); // 设置连接超时时时
+        outGate.setDefaultQos(Qos); // 设置通信质量
+        outGate.setConverter(converter);
+        return outGate;
+    }
 
     /**
      * MQTT连接配置
@@ -117,30 +137,6 @@ public class MQTTConfig implements ApplicationListener<ApplicationEvent> {
         adapter.setQos(Qos); // 消息质量
         adapter.setOutputChannelName(ChannelName.INPUT_DATA); // 输入管道名称
         return adapter;
-    }
-
-    /**
-     * 向服务器发送数据管道绑定
-     *
-     * @param connectionFactory tcp连接工厂类
-     * @return 消息管道对象
-     */
-    @Bean
-    @ServiceActivator(inputChannel = ChannelName.OUTPUT_DATA_MQTT)
-    public AbstractMqttMessageHandler MQTTOutAdapter(MqttPahoClientFactory connectionFactory) {
-
-        log.info("appid -->{}", appid);
-
-        // 创建一个新的出站管道，由于MQTT的发布与订阅是两个独立的连接，因此客户端的ID(即APPID）不能与订阅时所使用的ID一样，否则在服务端会认为是同一个客户端，而造成连接失败
-        MqttPahoMessageHandler outGate =
-                new MqttPahoMessageHandler(appid + "_put", connectionFactory);
-        DefaultPahoMessageConverter converter = new DefaultPahoMessageConverter();
-        converter.setPayloadAsBytes(true); // bytes类型接收
-        outGate.setAsync(true);
-        outGate.setCompletionTimeout(CompletionTimeout); // 设置连接超时时时
-        outGate.setDefaultQos(Qos); // 设置通信质量
-        outGate.setConverter(converter);
-        return outGate;
     }
 
     /**

@@ -5,11 +5,7 @@ import cn.hutool.core.util.NumberUtil;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-/**
- * 金额工具类
- *
- * @author spyker
- */
+/** 金额工具类 */
 public class MoneyUtils {
 
     /**

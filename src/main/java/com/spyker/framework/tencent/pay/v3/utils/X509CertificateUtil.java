@@ -10,8 +10,6 @@ import java.security.cert.*;
  * 获取证书。
  *
  * <p>https://wechatpay-api.gitbook.io/wechatpay-api-v3/chang-jian-wen-ti/zheng-shu-xiang-guan
- *
- * @author zhangzhaofeng
  */
 public final class X509CertificateUtil {
 

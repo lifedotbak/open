@@ -1,10 +1,6 @@
 package com.spyker.framework.constants;
 
-/**
- * 用户状态
- *
- * @author spyker
- */
+/** 用户状态 */
 public enum UserStatusEnum {
     OK("0", "正常"),
 

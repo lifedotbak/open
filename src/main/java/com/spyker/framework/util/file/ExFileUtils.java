@@ -38,11 +38,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * 文件处理工具类
- *
- * @author spyker
- */
+/** 文件处理工具类 */
 public class ExFileUtils extends FileUtils {
 
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";

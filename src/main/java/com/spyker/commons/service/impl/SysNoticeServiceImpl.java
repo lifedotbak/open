@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 通知公告表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 通知公告表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,17 +27,10 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
     private final SysNoticeMapper sysNoticeMapper;
 
     @Override
-    public List<SysNotice> query(SysNoticeSearch search) {
-        List<SysNotice> SysNoticeList = sysNoticeMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return SysNoticeList;
-    }
-
-    @Override
-    public IPage<SysNotice> queryPage(IPage<SysNotice> page, SysNoticeSearch search) {
-        page = sysNoticeMapper.queryPage(page, search);
-
-        return page;
+        return RestResponse.success();
     }
 
     @Override
@@ -60,15 +48,22 @@ public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice
     }
 
     @Override
-    public RestResponse<?> update(SysNotice sysNotice) {
-        updateById(sysNotice);
+    public List<SysNotice> query(SysNoticeSearch search) {
+        List<SysNotice> SysNoticeList = sysNoticeMapper.query(search);
 
-        return RestResponse.success();
+        return SysNoticeList;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+    public IPage<SysNotice> queryPage(IPage<SysNotice> page, SysNoticeSearch search) {
+        page = sysNoticeMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysNotice sysNotice) {
+        updateById(sysNotice);
 
         return RestResponse.success();
     }

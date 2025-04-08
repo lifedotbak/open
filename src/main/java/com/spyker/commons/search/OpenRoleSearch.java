@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 角色查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 角色查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "OpenRoleSearch对象", description = "角色Search对象")

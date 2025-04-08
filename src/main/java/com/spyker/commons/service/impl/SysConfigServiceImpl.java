@@ -15,12 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 参数配置表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 参数配置表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -31,17 +26,22 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
     private final SysConfigMapper sysConfigMapper;
 
     @Override
-    public boolean selectCaptchaEnabled() {
+    public boolean delete(String id) {
+        return removeById(id);
+    }
 
-        SysConfig sysConfig = sysConfigMapper.getByConfigKey("sys.account.captchaEnabled");
+    @Override
+    public SysConfig get(String id) {
+        SysConfig sysConfig = getById(id);
 
-        if (null != sysConfig) {
-            return "true".equalsIgnoreCase(sysConfig.getConfigValue())
-                    || "yes".equalsIgnoreCase(sysConfig.getConfigValue())
-                    || "1".equalsIgnoreCase(sysConfig.getConfigValue());
-        }
+        log.info("result-->{}", sysConfig);
 
-        return false;
+        return sysConfig;
+    }
+
+    @Override
+    public boolean insert(SysConfig sysConfig) {
+        return save(sysConfig);
     }
 
     @Override
@@ -61,26 +61,21 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
     }
 
     @Override
-    public SysConfig get(String id) {
-        SysConfig sysConfig = getById(id);
+    public boolean selectCaptchaEnabled() {
 
-        log.info("result-->{}", sysConfig);
+        SysConfig sysConfig = sysConfigMapper.getByConfigKey("sys.account.captchaEnabled");
 
-        return sysConfig;
-    }
+        if (null != sysConfig) {
+            return "true".equalsIgnoreCase(sysConfig.getConfigValue())
+                    || "yes".equalsIgnoreCase(sysConfig.getConfigValue())
+                    || "1".equalsIgnoreCase(sysConfig.getConfigValue());
+        }
 
-    @Override
-    public boolean insert(SysConfig sysConfig) {
-        return save(sysConfig);
+        return false;
     }
 
     @Override
     public boolean update(SysConfig sysConfig) {
         return updateById(sysConfig);
-    }
-
-    @Override
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

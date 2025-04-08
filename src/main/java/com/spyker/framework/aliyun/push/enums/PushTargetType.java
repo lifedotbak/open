@@ -19,11 +19,11 @@ public enum PushTargetType {
         this.desc = desc;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public String getDesc() {
         return desc;
+    }
+
+    public String getType() {
+        return type;
     }
 }

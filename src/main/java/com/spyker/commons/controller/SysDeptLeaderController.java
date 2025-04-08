@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 部门-主管表 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 部门-主管表 前端控制器 */
 @Tag(name = "部门-主管表", description = "部门-主管表")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,36 @@ public class SysDeptLeaderController extends BaseController {
     private final SysDeptLeaderService sysDeptLeaderService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "部门-主管表--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysDeptLeader> add(@RequestBody SysDeptLeader add) {
+
+        sysDeptLeaderService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "部门-主管表--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysDeptLeader> delete(@PathVariable("id") String id) {
+
+        sysDeptLeaderService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "部门-主管表--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysDeptLeader> detail(@PathVariable("id") String id) {
+
+        SysDeptLeader result = sysDeptLeaderService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -83,26 +108,6 @@ public class SysDeptLeaderController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "部门-主管表--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysDeptLeader> detail(@PathVariable("id") String id) {
-
-        SysDeptLeader result = sysDeptLeaderService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "部门-主管表--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysDeptLeader> add(@RequestBody SysDeptLeader add) {
-
-        sysDeptLeaderService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "部门-主管表--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -112,16 +117,6 @@ public class SysDeptLeaderController extends BaseController {
         update.setId(id);
 
         sysDeptLeaderService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "部门-主管表--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysDeptLeader> delete(@PathVariable("id") String id) {
-
-        sysDeptLeaderService.delete(id);
 
         return RestResponse.success();
     }

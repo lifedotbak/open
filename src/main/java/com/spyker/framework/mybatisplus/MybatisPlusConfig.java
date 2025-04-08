@@ -25,31 +25,6 @@ import java.util.Date;
 public class MybatisPlusConfig implements MetaObjectHandler {
 
     /**
-     * 设置分页组件
-     *
-     * @return
-     */
-    @Bean
-    public MybatisPlusInterceptor paginationInterceptor() {
-
-        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-
-        /** 分页插件 PaginationInnerInterceptor */
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
-
-        /** 非法SQL拦截插件 IllegalSQLInnerIntercepto */
-        //		interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
-
-        /** 防全表更新与删除插件 BlockAttackInnerInterceptor */
-        interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
-
-        /** 数据变动记录插件 #DataChangeRecorderInnerInterceptor */
-        interceptor.addInnerInterceptor(new DataChangeRecorderInnerInterceptor());
-
-        return interceptor;
-    }
-
-    /**
      * insert 默认操作
      *
      * @param metaObject 元对象
@@ -112,5 +87,30 @@ public class MybatisPlusConfig implements MetaObjectHandler {
 
         this.setFieldValByName("modifyTime", new Date(), metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
+    }
+
+    /**
+     * 设置分页组件
+     *
+     * @return
+     */
+    @Bean
+    public MybatisPlusInterceptor paginationInterceptor() {
+
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+
+        /** 分页插件 PaginationInnerInterceptor */
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+
+        /** 非法SQL拦截插件 IllegalSQLInnerIntercepto */
+        //		interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
+
+        /** 防全表更新与删除插件 BlockAttackInnerInterceptor */
+        interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
+
+        /** 数据变动记录插件 #DataChangeRecorderInnerInterceptor */
+        interceptor.addInnerInterceptor(new DataChangeRecorderInnerInterceptor());
+
+        return interceptor;
     }
 }

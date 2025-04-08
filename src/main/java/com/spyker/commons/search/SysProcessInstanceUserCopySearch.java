@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 流程抄送数据--用户和实例唯一值查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程抄送数据--用户和实例唯一值查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysProcessInstanceUserCopySearch对象", description = "流程抄送数据--用户和实例唯一值Search对象")

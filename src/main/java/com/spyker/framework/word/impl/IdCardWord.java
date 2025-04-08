@@ -11,15 +11,6 @@ public class IdCardWord {
     private static final String IdCardReg = "(\\d{6})\\d{8}(\\w{4})";
     private static final String IdCardReplaceRule = "$1********$2";
 
-    public static String getValue(String word) {
-        boolean flag = is18IdCard(word);
-        if (flag) {
-            return word.replaceAll(IdCardReg, IdCardReplaceRule);
-        } else {
-            return word;
-        }
-    }
-
     /**
      * 18位身份证号码的基本数字和位数验校
      *
@@ -28,5 +19,14 @@ public class IdCardWord {
      */
     private static boolean is18IdCard(String idcard) {
         return Pattern.matches(IdCardReg18, idcard);
+    }
+
+    public static String getValue(String word) {
+        boolean flag = is18IdCard(word);
+        if (flag) {
+            return word.replaceAll(IdCardReg, IdCardReplaceRule);
+        } else {
+            return word;
+        }
     }
 }

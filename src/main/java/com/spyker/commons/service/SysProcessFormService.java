@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysProcessFormSearch;
 
 import java.util.List;
 
-/**
- * 流程表单 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程表单 服务接口 */
 public interface SysProcessFormService extends IService<SysProcessForm> {
 
-    List<SysProcessForm> query(SysProcessFormSearch search);
-
-    IPage<SysProcessForm> queryPage(IPage<SysProcessForm> page, SysProcessFormSearch search);
+    boolean delete(String id);
 
     SysProcessForm get(String id);
 
     SysProcessForm insert(SysProcessForm sysProcessForm);
 
-    SysProcessForm update(SysProcessForm sysProcessForm);
+    List<SysProcessForm> query(SysProcessFormSearch search);
 
-    boolean delete(String id);
+    IPage<SysProcessForm> queryPage(IPage<SysProcessForm> page, SysProcessFormSearch search);
+
+    SysProcessForm update(SysProcessForm sysProcessForm);
 }

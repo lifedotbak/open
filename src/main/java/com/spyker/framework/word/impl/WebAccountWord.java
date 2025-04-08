@@ -9,6 +9,15 @@ public class WebAccountWord {
     private static final String replaceChart = "*";
     private static final String regex_web = "[-A-Za-z0-9_.]{5,30}";
 
+    private static boolean checkSourceWeb(String word) {
+        if (word == null || "".equals(word)) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile(regex_web);
+        Matcher m = pattern.matcher(word);
+        return m.matches();
+    }
+
     public static String getValue(String word) {
         boolean checked = checkSourceWeb(word);
         if (!checked) {
@@ -28,15 +37,6 @@ public class WebAccountWord {
         }
 
         return buffer.toString();
-    }
-
-    private static boolean checkSourceWeb(String word) {
-        if (word == null || "".equals(word)) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile(regex_web);
-        Matcher m = pattern.matcher(word);
-        return m.matches();
     }
 
     public static void main(String[] args) {

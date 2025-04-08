@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 菜单管理 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 菜单管理 服务测试类 */
 @Slf4j
 public class SysMenuServiceTest extends BaseTest {
 
     @Autowired private SysMenuService service;
-
-    @Test
-    public void get() {
-        SysMenu result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -77,45 +61,14 @@ public class SysMenuServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysMenu update = new SysMenu();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setParentId("parentId");
-
-        update.setTreePath("treePath");
-
-        update.setName("name");
-        update.setMenuType(1);
-
-        update.setPath("path");
-
-        update.setComponent("component");
-
-        update.setPerm("perm");
-        update.setVisible(1);
-
-        update.setMenuSort(1);
-
-        update.setIcon("icon");
-
-        update.setRedirect("redirect");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-        update.setDelFlag(1);
-
-        update.setTenantId("tenantId");
-
-        update.setAncestors("ancestors");
-
-        update.setQueryParams("queryParams");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysMenu result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -197,5 +150,47 @@ public class SysMenuServiceTest extends BaseTest {
         search.setQueryParams("queryParams");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysMenu update = new SysMenu();
+
+        update.setId("id");
+
+        update.setParentId("parentId");
+
+        update.setTreePath("treePath");
+
+        update.setName("name");
+        update.setMenuType(1);
+
+        update.setPath("path");
+
+        update.setComponent("component");
+
+        update.setPerm("perm");
+        update.setVisible(1);
+
+        update.setMenuSort(1);
+
+        update.setIcon("icon");
+
+        update.setRedirect("redirect");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+        update.setDelFlag(1);
+
+        update.setTenantId("tenantId");
+
+        update.setAncestors("ancestors");
+
+        update.setQueryParams("queryParams");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

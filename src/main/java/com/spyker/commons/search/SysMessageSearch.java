@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 通知消息查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 通知消息查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysMessageSearch对象", description = "通知消息Search对象")

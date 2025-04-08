@@ -8,23 +8,18 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 角色信息表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 角色信息表 服务类 */
 public interface SysRoleService extends IService<SysRole> {
 
-    List<SysRole> query(SysRoleSearch search);
-
-    IPage<SysRole> queryPage(IPage<SysRole> page, SysRoleSearch search);
+    RestResponse<?> delete(String id);
 
     SysRole get(String id);
 
     RestResponse<?> insert(SysRole sysRole);
 
-    RestResponse<?> update(SysRole sysRole);
+    List<SysRole> query(SysRoleSearch search);
 
-    RestResponse<?> delete(String id);
+    IPage<SysRole> queryPage(IPage<SysRole> page, SysRoleSearch search);
+
+    RestResponse<?> update(SysRole sysRole);
 }

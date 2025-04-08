@@ -15,11 +15,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-/**
- * Excel 工具类 @NoArgsConstructor(access = AccessLevel.PRIVATE) 定义一个私有构造函数
- *
- * @author spyker
- */
+/** Excel 工具类 @NoArgsConstructor(access = AccessLevel.PRIVATE) 定义一个私有构造函数 */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExcelUtils {
 

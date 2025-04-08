@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,23 +27,14 @@ public class SysProcessGroupServiceImpl extends ServiceImpl<SysProcessGroupMappe
 
     private final SysProcessGroupMapper sysProcessGroupMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysProcessGroup> query(SysProcessGroupSearch search) {
-
-        List<SysProcessGroup> result = sysProcessGroupMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysProcessGroup> queryPage(
-            IPage<SysProcessGroup> page, SysProcessGroupSearch search) {
-
-        page = sysProcessGroupMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -77,6 +63,25 @@ public class SysProcessGroupServiceImpl extends ServiceImpl<SysProcessGroupMappe
         return sysProcessGroup;
     }
 
+    @Override
+    public List<SysProcessGroup> query(SysProcessGroupSearch search) {
+
+        List<SysProcessGroup> result = sysProcessGroupMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysProcessGroup> queryPage(
+            IPage<SysProcessGroup> page, SysProcessGroupSearch search) {
+
+        page = sysProcessGroupMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysProcessGroup
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -86,15 +91,5 @@ public class SysProcessGroupServiceImpl extends ServiceImpl<SysProcessGroupMappe
     public SysProcessGroup update(SysProcessGroup sysProcessGroup) {
         updateById(sysProcessGroup);
         return sysProcessGroup;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

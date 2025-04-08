@@ -9,12 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * 通知公告表 Mapper 接口
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 通知公告表 Mapper 接口 */
 @Mapper
 public interface SysNoticeMapper extends BaseMapper<SysNotice> {
 

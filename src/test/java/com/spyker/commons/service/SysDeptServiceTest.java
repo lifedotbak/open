@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 部门表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 部门表 服务测试类 */
 @Slf4j
 public class SysDeptServiceTest extends BaseTest {
 
     @Autowired private SysDeptService service;
-
-    @Test
-    public void get() {
-        SysDept result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -61,30 +45,14 @@ public class SysDeptServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysDept update = new SysDept();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setName("name");
-
-        update.setParentId("parentId");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-        update.setStatus(1);
-
-        update.setDeptSort(1);
-
-        update.setTenantId("tenantId");
-
-        update.setAncestors("ancestors");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysDept result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -135,5 +103,32 @@ public class SysDeptServiceTest extends BaseTest {
         search.setAncestors("ancestors");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysDept update = new SysDept();
+
+        update.setId("id");
+
+        update.setName("name");
+
+        update.setParentId("parentId");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+        update.setStatus(1);
+
+        update.setDeptSort(1);
+
+        update.setTenantId("tenantId");
+
+        update.setAncestors("ancestors");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

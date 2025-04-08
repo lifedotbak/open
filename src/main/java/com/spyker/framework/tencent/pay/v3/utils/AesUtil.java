@@ -17,8 +17,6 @@ import javax.crypto.spec.SecretKeySpec;
  * 证书和回调报文解密
  *
  * <p>https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/zheng-shu-he-hui-tiao-bao-wen-jie-mi
- *
- * @author zhangzhaofeng
  */
 public class AesUtil {
 

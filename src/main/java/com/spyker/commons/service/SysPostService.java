@@ -8,23 +8,18 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 岗位信息表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 岗位信息表 服务类 */
 public interface SysPostService extends IService<SysPost> {
 
-    List<SysPost> query(SysPostSearch search);
-
-    IPage<SysPost> queryPage(IPage<SysPost> page, SysPostSearch search);
+    RestResponse<?> delete(String id);
 
     SysPost get(String id);
 
     RestResponse<?> insert(SysPost sysPost);
 
-    RestResponse<?> update(SysPost sysPost);
+    List<SysPost> query(SysPostSearch search);
 
-    RestResponse<?> delete(String id);
+    IPage<SysPost> queryPage(IPage<SysPost> page, SysPostSearch search);
+
+    RestResponse<?> update(SysPost sysPost);
 }

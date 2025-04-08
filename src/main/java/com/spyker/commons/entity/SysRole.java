@@ -15,12 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Date;
 
-/**
- * 角色
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 角色 */
 @RedisHash
 @Data
 @Accessors(chain = true)

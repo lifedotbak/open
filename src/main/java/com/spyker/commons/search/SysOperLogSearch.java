@@ -7,12 +7,7 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * 操作日志记录查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 操作日志记录查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysOperLogSearch对象", description = "操作日志记录Search对象")

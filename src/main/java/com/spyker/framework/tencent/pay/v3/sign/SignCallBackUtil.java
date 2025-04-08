@@ -12,11 +12,7 @@ import java.security.PrivateKey;
 import java.security.Signature;
 import java.util.Base64;
 
-/**
- * 生成回调的sign
- *
- * @author zhangzhaofeng
- */
+/** 生成回调的sign */
 @Slf4j
 public class SignCallBackUtil {
 
@@ -36,6 +32,20 @@ public class SignCallBackUtil {
         String signature = sign(message.getBytes(StandardCharsets.UTF_8));
 
         log.info("signApp signature============>{}", signature);
+
+        return signature;
+    }
+
+    @SneakyThrows
+    public String jsapi(CallBackAuth callBackAuth) {
+
+        String message = buildJsapiMessage(callBackAuth);
+
+        log.info("signJsapi message============>{}", message);
+
+        String signature = sign(message.getBytes(StandardCharsets.UTF_8));
+
+        log.info("signJsapi signature============>{}", signature);
 
         return signature;
     }
@@ -63,39 +73,6 @@ public class SignCallBackUtil {
     }
 
     /**
-     * 计算签名值
-     *
-     * @param message
-     * @return
-     * @throws Exception
-     */
-    @SneakyThrows
-    private String sign(byte[] message) {
-
-        PrivateKey privateKey = PrivateKeyUtil.getPrivateKey(payConfig.getApiclientKeyPath());
-
-        Signature sign = Signature.getInstance("SHA256withRSA");
-        sign.initSign(privateKey);
-        sign.update(message);
-
-        return Base64.getEncoder().encodeToString(sign.sign());
-    }
-
-    @SneakyThrows
-    public String jsapi(CallBackAuth callBackAuth) {
-
-        String message = buildJsapiMessage(callBackAuth);
-
-        log.info("signJsapi message============>{}", message);
-
-        String signature = sign(message.getBytes(StandardCharsets.UTF_8));
-
-        log.info("signJsapi signature============>{}", signature);
-
-        return signature;
-    }
-
-    /**
      * 构造的请求签名串
      *
      * @param method
@@ -115,5 +92,24 @@ public class SignCallBackUtil {
                 + "\n"
                 + callBackAuth.getPackageValue()
                 + "\n";
+    }
+
+    /**
+     * 计算签名值
+     *
+     * @param message
+     * @return
+     * @throws Exception
+     */
+    @SneakyThrows
+    private String sign(byte[] message) {
+
+        PrivateKey privateKey = PrivateKeyUtil.getPrivateKey(payConfig.getApiclientKeyPath());
+
+        Signature sign = Signature.getInstance("SHA256withRSA");
+        sign.initSign(privateKey);
+        sign.update(message);
+
+        return Base64.getEncoder().encodeToString(sign.sign());
     }
 }

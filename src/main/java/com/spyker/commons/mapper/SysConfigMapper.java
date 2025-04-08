@@ -10,19 +10,14 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * 参数配置表 Mapper 接口
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 参数配置表 Mapper 接口 */
 @Mapper
 public interface SysConfigMapper extends BaseMapper<SysConfig> {
+
+    @Select("select * from sys_config where config_key = #{confiKey} limit 1")
+    SysConfig getByConfigKey(String confiKey);
 
     List<SysConfig> query(SysConfigSearch search);
 
     IPage<SysConfig> queryPage(IPage<SysConfig> page, SysConfigSearch search);
-
-    @Select("select * from sys_config where config_key = #{confiKey} limit 1")
-    SysConfig getByConfigKey(String confiKey);
 }

@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 异常日志表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 异常日志表 服务测试类 */
 @Slf4j
 public class SysExceptionLogServiceTest extends BaseTest {
 
     @Autowired private SysExceptionLogService service;
-
-    @Test
-    public void get() {
-        SysExceptionLog result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -61,32 +45,14 @@ public class SysExceptionLogServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysExceptionLog update = new SysExceptionLog();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setExpUrl("expUrl");
-
-        update.setExpParams("expParams");
-
-        update.setExpType("expType");
-
-        update.setExpController("expController");
-
-        update.setExpMethod("expMethod");
-
-        update.setExpDetail("expDetail");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setRemark("remark");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysExceptionLog result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -139,5 +105,34 @@ public class SysExceptionLogServiceTest extends BaseTest {
         search.setRemark("remark");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysExceptionLog update = new SysExceptionLog();
+
+        update.setId("id");
+
+        update.setExpUrl("expUrl");
+
+        update.setExpParams("expParams");
+
+        update.setExpType("expType");
+
+        update.setExpController("expController");
+
+        update.setExpMethod("expMethod");
+
+        update.setExpDetail("expDetail");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setRemark("remark");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

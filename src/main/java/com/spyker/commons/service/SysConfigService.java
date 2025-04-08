@@ -9,13 +9,18 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * 参数配置表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 参数配置表 服务类 */
 public interface SysConfigService extends IService<SysConfig> {
+
+    boolean delete(String id);
+
+    SysConfig get(String id);
+
+    boolean insert(SysConfig SysConfig);
+
+    List<SysConfig> query(SysConfigSearch search);
+
+    IPage<SysConfig> queryPage(IPage<SysConfig> page, @Param("search") SysConfigSearch search);
 
     /**
      * 获取验证码开关
@@ -24,15 +29,5 @@ public interface SysConfigService extends IService<SysConfig> {
      */
     boolean selectCaptchaEnabled();
 
-    List<SysConfig> query(SysConfigSearch search);
-
-    IPage<SysConfig> queryPage(IPage<SysConfig> page, @Param("search") SysConfigSearch search);
-
-    SysConfig get(String id);
-
-    boolean insert(SysConfig SysConfig);
-
     boolean update(SysConfig SysConfig);
-
-    boolean delete(String id);
 }

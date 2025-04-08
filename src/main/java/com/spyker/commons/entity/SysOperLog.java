@@ -13,12 +13,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Date;
 
-/**
- * 操作日志记录
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 操作日志记录 */
 @Data
 @Accessors(chain = true)
 @TableName("sys_oper_log")

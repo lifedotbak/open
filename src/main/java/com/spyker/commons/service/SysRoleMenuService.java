@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysRoleMenuSearch;
 
 import java.util.List;
 
-/**
- * 角色和菜单关联表 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 角色和菜单关联表 服务接口 */
 public interface SysRoleMenuService extends IService<SysRoleMenu> {
 
-    List<SysRoleMenu> query(SysRoleMenuSearch search);
-
-    IPage<SysRoleMenu> queryPage(IPage<SysRoleMenu> page, SysRoleMenuSearch search);
+    boolean delete(String id);
 
     SysRoleMenu get(String id);
 
     SysRoleMenu insert(SysRoleMenu sysRoleMenu);
 
-    SysRoleMenu update(SysRoleMenu sysRoleMenu);
+    List<SysRoleMenu> query(SysRoleMenuSearch search);
 
-    boolean delete(String id);
+    IPage<SysRoleMenu> queryPage(IPage<SysRoleMenu> page, SysRoleMenuSearch search);
+
+    SysRoleMenu update(SysRoleMenu sysRoleMenu);
 }

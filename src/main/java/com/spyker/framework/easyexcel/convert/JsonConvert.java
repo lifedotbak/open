@@ -7,11 +7,7 @@ import com.alibaba.excel.metadata.data.WriteCellData;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
 import com.spyker.framework.util.ExJsonUtils;
 
-/**
- * Excel Json 转换器
- *
- * @author spyker
- */
+/** Excel Json 转换器 */
 public class JsonConvert implements Converter<Object> {
 
     @Override

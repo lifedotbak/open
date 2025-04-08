@@ -13,13 +13,17 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * springboot项目需要开启此配置，springcloud项目无需此类，springcloud默认开启
- *
- * @author spyker
- */
+/** springboot项目需要开启此配置，springcloud项目无需此类，springcloud默认开启 */
 @Configuration
 public class RestTemplateConfig {
+
+    @Bean
+    public ClientHttpRequestFactory httpRequestFactory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setReadTimeout(10000); // ms
+        factory.setConnectTimeout(15000); // ms
+        return factory;
+    }
 
     // 使用RestTemplateBuilder来实例化RestTemplate对象，spring默认已经注入了RestTemplateBuilder实例
     @Bean
@@ -29,14 +33,6 @@ public class RestTemplateConfig {
         Duration connectTime = Duration.ofMinutes(1);
 
         return builder.setReadTimeout(readTime).setConnectTimeout(connectTime).build();
-    }
-
-    @Bean
-    public ClientHttpRequestFactory httpRequestFactory() {
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setReadTimeout(10000); // ms
-        factory.setConnectTimeout(15000); // ms
-        return factory;
     }
 
     // 解决微信返回json Content-Type 值却是 text/plain 的问题

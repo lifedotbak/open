@@ -8,23 +8,18 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 操作日志记录 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 操作日志记录 服务类 */
 public interface SysOperLogService extends IService<SysOperLog> {
 
-    List<SysOperLog> query(SysOperLogSearch search);
-
-    IPage<SysOperLog> queryPage(IPage<SysOperLog> page, SysOperLogSearch search);
+    RestResponse<?> delete(String id);
 
     SysOperLog get(String id);
 
     RestResponse<?> insert(SysOperLog sysOperLog);
 
-    RestResponse<?> update(SysOperLog sysOperLog);
+    List<SysOperLog> query(SysOperLogSearch search);
 
-    RestResponse<?> delete(String id);
+    IPage<SysOperLog> queryPage(IPage<SysOperLog> page, SysOperLogSearch search);
+
+    RestResponse<?> update(SysOperLog sysOperLog);
 }

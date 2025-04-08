@@ -1,10 +1,6 @@
 package com.spyker.framework.constants;
 
-/**
- * 通用常量信息
- *
- * @author spyker
- */
+/** 通用常量信息 */
 public interface CommonsConstants {
 
     // 默认分页

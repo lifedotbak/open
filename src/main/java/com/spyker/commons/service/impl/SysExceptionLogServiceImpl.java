@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 操作日志记录 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-16
- */
+/** 操作日志记录 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,23 +27,14 @@ public class SysExceptionLogServiceImpl extends ServiceImpl<SysExceptionLogMappe
 
     private final SysExceptionLogMapper sysExceptionLogMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysExceptionLog> query(SysExceptionLogSearch search) {
-
-        List<SysExceptionLog> result = sysExceptionLogMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysExceptionLog> queryPage(
-            IPage<SysExceptionLog> page, SysExceptionLogSearch search) {
-
-        page = sysExceptionLogMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -77,6 +63,25 @@ public class SysExceptionLogServiceImpl extends ServiceImpl<SysExceptionLogMappe
         return sysExceptionLog;
     }
 
+    @Override
+    public List<SysExceptionLog> query(SysExceptionLogSearch search) {
+
+        List<SysExceptionLog> result = sysExceptionLogMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysExceptionLog> queryPage(
+            IPage<SysExceptionLog> page, SysExceptionLogSearch search) {
+
+        page = sysExceptionLogMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysExceptionLog
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -86,15 +91,5 @@ public class SysExceptionLogServiceImpl extends ServiceImpl<SysExceptionLogMappe
     public SysExceptionLog update(SysExceptionLog sysExceptionLog) {
         updateById(sysExceptionLog);
         return sysExceptionLog;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

@@ -7,12 +7,7 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * 流程节点记录查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 流程节点记录查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "OpenProcessInstanceNodeRecordSearch对象", description = "流程节点记录Search对象")

@@ -29,11 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 通用请求处理
- *
- * @author spyker
- */
+/** 通用请求处理 */
 @Tag(name = "文件上传下载处理", description = "文件上传下载处理")
 @RestController
 @RequestMapping("/common/file")
@@ -74,6 +70,34 @@ public class FileController {
             if (delete) {
                 ExFileUtils.deleteFile(filePath);
             }
+        } catch (Exception e) {
+            log.error("下载文件失败", e);
+        }
+    }
+
+    /** 本地资源通用下载 */
+    @GetMapping("/download/resource")
+    public void resourceDownload(
+            String resource, HttpServletRequest request, HttpServletResponse response) {
+
+        if (!ExFileUtils.checkAllowDownload(resource)) {
+            throw new IllegalArgumentException(
+                    ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
+        }
+
+        try {
+            // 本地资源路径
+            String localPath = PlatformConfigProperties.getProfile();
+            // 数据库资源地址
+            String downloadPath =
+                    localPath
+                            + StringUtils.substringAfter(
+                                    resource, CommonsConstants.RESOURCE_PREFIX);
+            // 下载名称
+            String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            ExFileUtils.setAttachmentResponseHeader(response, downloadName);
+            ExFileUtils.writeBytes(downloadPath, response.getOutputStream());
         } catch (Exception e) {
             log.error("下载文件失败", e);
         }
@@ -129,34 +153,6 @@ public class FileController {
 
             log.error("error--->{}", e.getMessage());
             return RestMapResponse.error(e.getMessage());
-        }
-    }
-
-    /** 本地资源通用下载 */
-    @GetMapping("/download/resource")
-    public void resourceDownload(
-            String resource, HttpServletRequest request, HttpServletResponse response) {
-
-        if (!ExFileUtils.checkAllowDownload(resource)) {
-            throw new IllegalArgumentException(
-                    ExStringUtils.format("资源文件({})非法，不允许下载。 ", resource));
-        }
-
-        try {
-            // 本地资源路径
-            String localPath = PlatformConfigProperties.getProfile();
-            // 数据库资源地址
-            String downloadPath =
-                    localPath
-                            + StringUtils.substringAfter(
-                                    resource, CommonsConstants.RESOURCE_PREFIX);
-            // 下载名称
-            String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
-            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-            ExFileUtils.setAttachmentResponseHeader(response, downloadName);
-            ExFileUtils.writeBytes(downloadPath, response.getOutputStream());
-        } catch (Exception e) {
-            log.error("下载文件失败", e);
         }
     }
 }

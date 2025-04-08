@@ -7,24 +7,19 @@ import com.spyker.commons.search.SysProcessInstanceUserCopySearch;
 
 import java.util.List;
 
-/**
- * 流程抄送数据--用户和实例唯一值 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程抄送数据--用户和实例唯一值 服务接口 */
 public interface SysProcessInstanceUserCopyService extends IService<SysProcessInstanceUserCopy> {
+
+    boolean delete(String id);
+
+    SysProcessInstanceUserCopy get(String id);
+
+    SysProcessInstanceUserCopy insert(SysProcessInstanceUserCopy sysProcessInstanceUserCopy);
 
     List<SysProcessInstanceUserCopy> query(SysProcessInstanceUserCopySearch search);
 
     IPage<SysProcessInstanceUserCopy> queryPage(
             IPage<SysProcessInstanceUserCopy> page, SysProcessInstanceUserCopySearch search);
 
-    SysProcessInstanceUserCopy get(String id);
-
-    SysProcessInstanceUserCopy insert(SysProcessInstanceUserCopy sysProcessInstanceUserCopy);
-
     SysProcessInstanceUserCopy update(SysProcessInstanceUserCopy sysProcessInstanceUserCopy);
-
-    boolean delete(String id);
 }

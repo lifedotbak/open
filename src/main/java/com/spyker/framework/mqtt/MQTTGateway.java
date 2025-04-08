@@ -6,11 +6,7 @@ import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 
-/**
- * 发送消息网关,其它需要发向服务器发送消息时，调用该接口
- *
- * @author spyker
- */
+/** 发送消息网关,其它需要发向服务器发送消息时，调用该接口 */
 @MessagingGateway(defaultRequestChannel = ChannelName.OUTPUT_DATA_MQTT)
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "mqtt", name = "enabled", havingValue = "true")

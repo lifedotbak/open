@@ -16,6 +16,13 @@ import java.util.Map;
 @Slf4j
 public class JsonUtil {
 
+    private static ObjectMapper buildObjectWrapper() {
+        ObjectMapper objectMapper = SpringUtil.getBean(ObjectMapper.class);
+        return objectMapper;
+    }
+
+    public static class TypeReference<T> extends com.fasterxml.jackson.core.type.TypeReference<T> {}
+
     public static List<?> toList(Object object) {
         String jsonString = toJSONString(object);
         if (StrUtil.isBlank(jsonString)) {
@@ -47,11 +54,6 @@ public class JsonUtil {
 
         List list = objectMapper.readValue(json, javaType);
         return list;
-    }
-
-    private static ObjectMapper buildObjectWrapper() {
-        ObjectMapper objectMapper = SpringUtil.getBean(ObjectMapper.class);
-        return objectMapper;
     }
 
     public static <T> List<T> toList(Class<T> tClass, Object object) {
@@ -127,6 +129,4 @@ public class JsonUtil {
         return objectMapper.readValue(
                 json, new com.fasterxml.jackson.core.type.TypeReference<Map<Object, Object>>() {});
     }
-
-    public static class TypeReference<T> extends com.fasterxml.jackson.core.type.TypeReference<T> {}
 }

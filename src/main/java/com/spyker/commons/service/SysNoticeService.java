@@ -8,23 +8,18 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 通知公告表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 通知公告表 服务类 */
 public interface SysNoticeService extends IService<SysNotice> {
 
-    List<SysNotice> query(SysNoticeSearch search);
-
-    IPage<SysNotice> queryPage(IPage<SysNotice> page, SysNoticeSearch search);
+    RestResponse<?> delete(String id);
 
     SysNotice get(String id);
 
     RestResponse<?> insert(SysNotice sysNotice);
 
-    RestResponse<?> update(SysNotice sysNotice);
+    List<SysNotice> query(SysNoticeSearch search);
 
-    RestResponse<?> delete(String id);
+    IPage<SysNotice> queryPage(IPage<SysNotice> page, SysNoticeSearch search);
+
+    RestResponse<?> update(SysNotice sysNotice);
 }

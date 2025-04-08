@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity.refunds;
 
 import lombok.Data;
 
-/**
- * 回调resource对象进行解密后，得到的资源对象
- *
- * @author spyker
- */
+/** 回调resource对象进行解密后，得到的资源对象 */
 @Data
 public class RefundsCiphertextParse {
 

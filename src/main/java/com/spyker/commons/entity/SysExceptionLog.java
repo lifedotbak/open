@@ -15,12 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Date;
 
-/**
- * 异常日志表
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 异常日志表 */
 @Data
 @Accessors(chain = true)
 @TableName("sys_exception_log")

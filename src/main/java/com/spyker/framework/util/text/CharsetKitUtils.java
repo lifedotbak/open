@@ -3,11 +3,7 @@ package com.spyker.framework.util.text;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-/**
- * 字符集工具类
- *
- * @author spyker
- */
+/** 字符集工具类 */
 public class CharsetKitUtils {
     /** ISO-8859-1 */
     public static final String ISO_8859_1 = "ISO-8859-1";

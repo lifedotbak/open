@@ -5,13 +5,12 @@ import cn.hutool.core.util.ObjectUtil;
 import java.util.EnumSet;
 import java.util.Objects;
 
-/**
- * 枚举通用接口
- *
- * @author haoxr
- * @since 2022/3/27 12:06
- */
+/** 枚举通用接口 */
 public interface IBaseEnum<T> {
+
+    String getLabel();
+
+    T getValue();
 
     /**
      * 根据值获取枚举
@@ -31,8 +30,6 @@ public interface IBaseEnum<T> {
                         .orElse(null);
         return matchEnum;
     }
-
-    T getValue();
 
     /**
      * 根据文本标签获取值
@@ -57,8 +54,6 @@ public interface IBaseEnum<T> {
         }
         return label;
     }
-
-    String getLabel();
 
     /**
      * 根据文本标签获取值

@@ -7,25 +7,20 @@ import com.spyker.commons.search.SysProcessInstanceOperRecordSearch;
 
 import java.util.List;
 
-/**
- * 流程记录 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程记录 服务接口 */
 public interface SysProcessInstanceOperRecordService
         extends IService<SysProcessInstanceOperRecord> {
+
+    boolean delete(String id);
+
+    SysProcessInstanceOperRecord get(String id);
+
+    SysProcessInstanceOperRecord insert(SysProcessInstanceOperRecord sysProcessInstanceOperRecord);
 
     List<SysProcessInstanceOperRecord> query(SysProcessInstanceOperRecordSearch search);
 
     IPage<SysProcessInstanceOperRecord> queryPage(
             IPage<SysProcessInstanceOperRecord> page, SysProcessInstanceOperRecordSearch search);
 
-    SysProcessInstanceOperRecord get(String id);
-
-    SysProcessInstanceOperRecord insert(SysProcessInstanceOperRecord sysProcessInstanceOperRecord);
-
     SysProcessInstanceOperRecord update(SysProcessInstanceOperRecord sysProcessInstanceOperRecord);
-
-    boolean delete(String id);
 }

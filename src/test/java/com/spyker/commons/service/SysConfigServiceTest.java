@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 参数配置表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 参数配置表 服务测试类 */
 @Slf4j
 public class SysConfigServiceTest extends BaseTest {
 
     @Autowired private SysConfigService service;
-
-    @Test
-    public void get() {
-        SysConfig result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -57,28 +41,14 @@ public class SysConfigServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysConfig update = new SysConfig();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setConfigName("configName");
-
-        update.setConfigKey("configKey");
-
-        update.setConfigValue("configValue");
-
-        update.setConfigType("configType");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setRemark("remark");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysConfig result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -123,5 +93,30 @@ public class SysConfigServiceTest extends BaseTest {
         search.setRemark("remark");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysConfig update = new SysConfig();
+
+        update.setId("id");
+
+        update.setConfigName("configName");
+
+        update.setConfigKey("configKey");
+
+        update.setConfigValue("configValue");
+
+        update.setConfigType("configType");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setRemark("remark");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

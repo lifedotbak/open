@@ -12,8 +12,6 @@ import ${package.Parent}.search.${entity}Search;
 /**
 *
 * ${table.comment!} Mapper 接口
-* @author ${author}
-* @since ${date}
 */
 @Mapper
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {

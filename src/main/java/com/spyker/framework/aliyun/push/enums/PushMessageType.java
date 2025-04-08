@@ -13,11 +13,11 @@ public enum PushMessageType {
         this.desc = desc;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public String getDesc() {
         return desc;
+    }
+
+    public String getType() {
+        return type;
     }
 }

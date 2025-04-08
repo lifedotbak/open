@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 系统访问记录 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 系统访问记录 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,17 +27,10 @@ public class SysLoginInfoServiceImpl extends ServiceImpl<SysLoginInfoMapper, Sys
     private final SysLoginInfoMapper sysLoginInfoMapper;
 
     @Override
-    public List<SysLoginInfo> query(SysLoginInfoSearch search) {
-        List<SysLoginInfo> sysLogininforList = sysLoginInfoMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return sysLogininforList;
-    }
-
-    @Override
-    public IPage<SysLoginInfo> queryPage(IPage<SysLoginInfo> page, SysLoginInfoSearch search) {
-        page = sysLoginInfoMapper.queryPage(page, search);
-
-        return page;
+        return RestResponse.success();
     }
 
     @Override
@@ -60,15 +48,22 @@ public class SysLoginInfoServiceImpl extends ServiceImpl<SysLoginInfoMapper, Sys
     }
 
     @Override
-    public RestResponse<?> update(SysLoginInfo sysLogininfor) {
-        updateById(sysLogininfor);
+    public List<SysLoginInfo> query(SysLoginInfoSearch search) {
+        List<SysLoginInfo> sysLogininforList = sysLoginInfoMapper.query(search);
 
-        return RestResponse.success();
+        return sysLogininforList;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+    public IPage<SysLoginInfo> queryPage(IPage<SysLoginInfo> page, SysLoginInfoSearch search) {
+        page = sysLoginInfoMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysLoginInfo sysLogininfor) {
+        updateById(sysLogininfor);
 
         return RestResponse.success();
     }

@@ -57,125 +57,6 @@ public class OnvifDeviceCommand {
         String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
     }
 
-    /**
-     * 获取token
-     *
-     * @param onvifDevice
-     * @return token
-     */
-    public String token(OnvifDeviceExtend onvifDevice) {
-        try {
-            // 构造http请求头
-            HttpHeaders headers = getHttpHeaders();
-
-            String tokenXml =
-                    OnvifPackageXml.token(onvifDevice.onvifUserName(), onvifDevice.onvifPassword());
-            HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
-
-            // 返回结果
-            String resultStr = getSoapResponse(onvifDevice, formEntity);
-
-            // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转义
-            String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
-
-            log.error("token xmlStr - >{}", xmlStr);
-
-            SAXReader reader = new SAXReader();
-            Document document =
-                    reader.read(new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8)));
-            Element root = document.getRootElement();
-            String token =
-                    root.element("Body")
-                            .element("GetProfilesResponse")
-                            .elements("Profiles")
-                            .get(0)
-                            .attribute("token")
-                            .getText();
-
-            return token;
-        } catch (RestClientException | DocumentException e) {
-
-            log.error("error - >{}", e);
-            return null;
-        }
-    }
-
-    /**
-     * 构造http请求头
-     *
-     * @return HttpHeaders
-     */
-    @NotNull
-    private HttpHeaders getHttpHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
-        headers.setContentType(type);
-        return headers;
-    }
-
-    /**
-     * 请求报文，并获取相应
-     *
-     * @param onvifDevice
-     * @param formEntity
-     * @return
-     */
-    @Nullable
-    private String getSoapResponse(OnvifDeviceExtend onvifDevice, HttpEntity<String> formEntity) {
-
-        String url =
-                "http://"
-                        + onvifDevice.ip()
-                        + ":"
-                        + onvifDevice.onvifPort()
-                        + "/onvif/device_service";
-
-        String resultStr = restTemplate.postForObject(url, formEntity, String.class);
-
-        return resultStr;
-    }
-
-    /**
-     * 获取设备回放能力
-     *
-     * @param onvifDevice
-     * @return
-     * @throws DocumentException
-     */
-    public boolean replay_get_service_capabilities(OnvifDeviceExtend onvifDevice)
-            throws DocumentException {
-        // 判断是否已获取token
-        String token = token(onvifDevice);
-
-        // 构造http请求头
-        HttpHeaders headers = getHttpHeaders();
-
-        HttpEntity<String> formEntity =
-                new HttpEntity<String>(
-                        OnvifPackageXml.replay_get_service_capabilities(
-                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword()),
-                        headers);
-        // 返回结果
-        String resultStr = getSoapResponse(onvifDevice, formEntity);
-
-        // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
-        String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
-
-        SAXReader reader = new SAXReader();
-        Document document =
-                reader.read(new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8)));
-        Element root = document.getRootElement();
-        String xxx =
-                root.element("Body")
-                        .element("GetServiceCapabilitiesResponse")
-                        .elements("Capabilities")
-                        .get(0)
-                        .attribute("ReversePlayback")
-                        .getText();
-
-        return !"false".equalsIgnoreCase(xxx);
-    }
-
     public void getSnap(OnvifDeviceExtend onvifDevice, String path) {
 
         String url = mdeia_get_snap_shot_uri(onvifDevice);
@@ -234,54 +115,8 @@ public class OnvifDeviceCommand {
         }
     }
 
-    /**
-     * 获取视频流
-     *
-     * @param onvifDevice
-     * @return
-     *     rtsp://admin:grid123456@192.168.15.88:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_101
-     */
-    public String stream(OnvifDeviceExtend onvifDevice) {
-
-        // 判断是否已获取token
-        String token = token(onvifDevice);
-
-        // 构造http请求头
-        HttpHeaders headers = getHttpHeaders();
-        HttpEntity<String> formEntity =
-                new HttpEntity<String>(
-                        OnvifPackageXml.stream(
-                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword(), token),
-                        headers);
-        // 返回结果
-        String resultStr = getSoapResponse(onvifDevice, formEntity);
-
-        // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
-        String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
-
-        // JSONObject obj = XML.toJSONObject(tmpStr);
-        String reg = "<tt:Uri>(.*?)\\</tt:Uri>";
-        Pattern pattern = Pattern.compile(reg);
-        // 内容 与 匹配规则 的测试
-        Matcher matcher = pattern.matcher(xmlStr);
-        if (matcher.find()) {
-            // 包含前后的两个字符
-            // System.out.println(matcher.group());
-            // 不包含前后的两个字符
-            String rtspUrl =
-                    matcher.group(1)
-                            .replace(
-                                    "rtsp://",
-                                    "rtsp://"
-                                            + onvifDevice.onvifUserName()
-                                            + ":"
-                                            + onvifDevice.onvifPassword()
-                                            + "@");
-            return rtspUrl;
-        } else {
-            // System.out.println(" 没有匹配到内容....");
-            return null;
-        }
+    public Boolean ptz_down(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, 0, -0.5, 0);
     }
 
     /**
@@ -378,6 +213,187 @@ public class OnvifDeviceCommand {
         return ptz(onvifDevice, 0.5, 0, 0);
     }
 
+    public Boolean ptz_right(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, -0.5, 0, 0);
+    }
+
+    public Boolean ptz_stop(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, 0, 0, 0);
+    }
+
+    public Boolean ptz_up(OnvifDeviceExtend onvifDevice) {
+        return ptz(onvifDevice, 0, 0.5, 0);
+    }
+
+    /**
+     * 获取设备回放能力
+     *
+     * @param onvifDevice
+     * @return
+     * @throws DocumentException
+     */
+    public boolean replay_get_service_capabilities(OnvifDeviceExtend onvifDevice)
+            throws DocumentException {
+        // 判断是否已获取token
+        String token = token(onvifDevice);
+
+        // 构造http请求头
+        HttpHeaders headers = getHttpHeaders();
+
+        HttpEntity<String> formEntity =
+                new HttpEntity<String>(
+                        OnvifPackageXml.replay_get_service_capabilities(
+                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword()),
+                        headers);
+        // 返回结果
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
+
+        // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
+        String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
+
+        SAXReader reader = new SAXReader();
+        Document document =
+                reader.read(new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8)));
+        Element root = document.getRootElement();
+        String xxx =
+                root.element("Body")
+                        .element("GetServiceCapabilitiesResponse")
+                        .elements("Capabilities")
+                        .get(0)
+                        .attribute("ReversePlayback")
+                        .getText();
+
+        return !"false".equalsIgnoreCase(xxx);
+    }
+
+    /**
+     * 获取视频流
+     *
+     * @param onvifDevice
+     * @return
+     *     rtsp://admin:grid123456@192.168.15.88:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_101
+     */
+    public String stream(OnvifDeviceExtend onvifDevice) {
+
+        // 判断是否已获取token
+        String token = token(onvifDevice);
+
+        // 构造http请求头
+        HttpHeaders headers = getHttpHeaders();
+        HttpEntity<String> formEntity =
+                new HttpEntity<String>(
+                        OnvifPackageXml.stream(
+                                onvifDevice.onvifUserName(), onvifDevice.onvifPassword(), token),
+                        headers);
+        // 返回结果
+        String resultStr = getSoapResponse(onvifDevice, formEntity);
+
+        // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转移
+        String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
+
+        // JSONObject obj = XML.toJSONObject(tmpStr);
+        String reg = "<tt:Uri>(.*?)\\</tt:Uri>";
+        Pattern pattern = Pattern.compile(reg);
+        // 内容 与 匹配规则 的测试
+        Matcher matcher = pattern.matcher(xmlStr);
+        if (matcher.find()) {
+            // 包含前后的两个字符
+            // System.out.println(matcher.group());
+            // 不包含前后的两个字符
+            String rtspUrl =
+                    matcher.group(1)
+                            .replace(
+                                    "rtsp://",
+                                    "rtsp://"
+                                            + onvifDevice.onvifUserName()
+                                            + ":"
+                                            + onvifDevice.onvifPassword()
+                                            + "@");
+            return rtspUrl;
+        } else {
+            // System.out.println(" 没有匹配到内容....");
+            return null;
+        }
+    }
+
+    /**
+     * 获取token
+     *
+     * @param onvifDevice
+     * @return token
+     */
+    public String token(OnvifDeviceExtend onvifDevice) {
+        try {
+            // 构造http请求头
+            HttpHeaders headers = getHttpHeaders();
+
+            String tokenXml =
+                    OnvifPackageXml.token(onvifDevice.onvifUserName(), onvifDevice.onvifPassword());
+            HttpEntity<String> formEntity = new HttpEntity<String>(tokenXml, headers);
+
+            // 返回结果
+            String resultStr = getSoapResponse(onvifDevice, formEntity);
+
+            // 转换返回结果中的特殊字符，返回的结果中会将xml转义，此处需要反转义
+            String xmlStr = StringEscapeUtils.unescapeXml(resultStr);
+
+            log.error("token xmlStr - >{}", xmlStr);
+
+            SAXReader reader = new SAXReader();
+            Document document =
+                    reader.read(new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8)));
+            Element root = document.getRootElement();
+            String token =
+                    root.element("Body")
+                            .element("GetProfilesResponse")
+                            .elements("Profiles")
+                            .get(0)
+                            .attribute("token")
+                            .getText();
+
+            return token;
+        } catch (RestClientException | DocumentException e) {
+
+            log.error("error - >{}", e);
+            return null;
+        }
+    }
+
+    /**
+     * 构造http请求头
+     *
+     * @return HttpHeaders
+     */
+    @NotNull
+    private HttpHeaders getHttpHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("text/xml;charset=UTF-8");
+        headers.setContentType(type);
+        return headers;
+    }
+
+    /**
+     * 请求报文，并获取相应
+     *
+     * @param onvifDevice
+     * @param formEntity
+     * @return
+     */
+    @Nullable
+    private String getSoapResponse(OnvifDeviceExtend onvifDevice, HttpEntity<String> formEntity) {
+
+        String url =
+                "http://"
+                        + onvifDevice.ip()
+                        + ":"
+                        + onvifDevice.onvifPort()
+                        + "/onvif/device_service";
+
+        String resultStr = restTemplate.postForObject(url, formEntity, String.class);
+
+        return resultStr;
+    }
+
     /**
      * 摄像头操控
      *
@@ -422,21 +438,5 @@ public class OnvifDeviceCommand {
 
         // JSONObject obj = XML.toJSONObject(tmpStr);
         return true;
-    }
-
-    public Boolean ptz_up(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, 0, 0.5, 0);
-    }
-
-    public Boolean ptz_down(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, 0, -0.5, 0);
-    }
-
-    public Boolean ptz_right(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, -0.5, 0, 0);
-    }
-
-    public Boolean ptz_stop(OnvifDeviceExtend onvifDevice) {
-        return ptz(onvifDevice, 0, 0, 0);
     }
 }

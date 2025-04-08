@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程发起人范围 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程发起人范围 服务测试类 */
 @Slf4j
 public class SysProcessStarterServiceTest extends BaseTest {
 
     @Autowired private SysProcessStarterService service;
-
-    @Test
-    public void get() {
-        SysProcessStarter result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -63,32 +47,14 @@ public class SysProcessStarterServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessStarter update = new SysProcessStarter();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setTypeId("typeId");
-        update.setContainChildrenDept(1);
-
-        update.setTypeName("typeName");
-
-        update.setProcessId("processId");
-
-        update.setData("data");
-
-        update.setTenantId("tenantId");
-
-        update.setFlowId("flowId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessStarter result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -144,5 +110,34 @@ public class SysProcessStarterServiceTest extends BaseTest {
         search.setFlowId("flowId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessStarter update = new SysProcessStarter();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setTypeId("typeId");
+        update.setContainChildrenDept(1);
+
+        update.setTypeName("typeName");
+
+        update.setProcessId("processId");
+
+        update.setData("data");
+
+        update.setTenantId("tenantId");
+
+        update.setFlowId("flowId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

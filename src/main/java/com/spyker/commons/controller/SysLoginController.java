@@ -18,12 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 系统访问记录 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 系统访问记录 前端控制器 */
 @RestController
 @Tag(name = "系统登录", description = "系统登录")
 @RequestMapping("/commons/login")

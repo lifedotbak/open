@@ -25,6 +25,28 @@ public class SingleCallByTtsUtils {
     @Value("${aliyun.accessKeySecret}")
     private String accessKeySecret;
 
+    public void singleCallByTts(String calledNumber, String ttsParam, String ttsCode) {
+
+        DefaultProfile profile = DefaultProfile.getProfile("default", accessKeyId, accessKeySecret);
+        IAcsClient client = new DefaultAcsClient(profile);
+
+        CommonRequest request = new CommonRequest();
+        request.setMethod(MethodType.POST);
+        request.setDomain("dyvmsapi.aliyuncs.com");
+        request.setVersion("2017-05-25");
+        request.setAction("SingleCallByTts");
+        // request.putQueryParameter("CalledShowNumber", "02985796072");
+        request.putQueryParameter("CalledNumber", calledNumber);
+        request.putQueryParameter("TtsCode", ttsCode);
+        request.putQueryParameter("TtsParam", ttsParam);
+        try {
+            CommonResponse response = client.getCommonResponse(request);
+            log.info(response.getData());
+        } catch (Exception e) {
+            log.error(ttsCode + " exception:", e);
+        }
+    }
+
     /**
      * ${washItem}订单离支付失效还有5分钟，请尽快支付预付款
      *
@@ -94,28 +116,6 @@ public class SingleCallByTtsUtils {
             log.info("TTS_197465247 response:{}", response.getData());
         } catch (Exception e) {
             log.error("TTS_197465247 exception:", e);
-        }
-    }
-
-    public void singleCallByTts(String calledNumber, String ttsParam, String ttsCode) {
-
-        DefaultProfile profile = DefaultProfile.getProfile("default", accessKeyId, accessKeySecret);
-        IAcsClient client = new DefaultAcsClient(profile);
-
-        CommonRequest request = new CommonRequest();
-        request.setMethod(MethodType.POST);
-        request.setDomain("dyvmsapi.aliyuncs.com");
-        request.setVersion("2017-05-25");
-        request.setAction("SingleCallByTts");
-        // request.putQueryParameter("CalledShowNumber", "02985796072");
-        request.putQueryParameter("CalledNumber", calledNumber);
-        request.putQueryParameter("TtsCode", ttsCode);
-        request.putQueryParameter("TtsParam", ttsParam);
-        try {
-            CommonResponse response = client.getCommonResponse(request);
-            log.info(response.getData());
-        } catch (Exception e) {
-            log.error(ttsCode + " exception:", e);
         }
     }
 }

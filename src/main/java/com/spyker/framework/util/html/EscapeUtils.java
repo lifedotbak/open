@@ -4,11 +4,7 @@ import com.spyker.framework.util.text.ExStringUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * 转义和反转义工具类
- *
- * @author spyker
- */
+/** 转义和反转义工具类 */
 public class EscapeUtils {
     public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";
 
@@ -25,6 +21,39 @@ public class EscapeUtils {
         TEXT['&'] = "&#38;".toCharArray(); // &符
         TEXT['<'] = "&#60;".toCharArray(); // 小于号
         TEXT['>'] = "&#62;".toCharArray(); // 大于号
+    }
+
+    /**
+     * Escape编码
+     *
+     * @param text 被编码的文本
+     * @return 编码后的字符
+     */
+    private static String encode(String text) {
+        if (ExStringUtils.isEmpty(text)) {
+            return StringUtils.EMPTY;
+        }
+
+        final StringBuilder tmp = new StringBuilder(text.length() * 6);
+        char c;
+        for (int i = 0; i < text.length(); i++) {
+            c = text.charAt(i);
+            if (c < 256) {
+                tmp.append("%");
+                if (c < 16) {
+                    tmp.append("0");
+                }
+                tmp.append(Integer.toString(c, 16));
+            } else {
+                tmp.append("%u");
+                if (c <= 0xfff) {
+                    // issue#I49JU8@Gitee
+                    tmp.append("0");
+                }
+                tmp.append(Integer.toString(c, 16));
+            }
+        }
+        return tmp.toString();
     }
 
     public static void main(String[] args) {
@@ -66,39 +95,6 @@ public class EscapeUtils {
      */
     public static String unescape(String content) {
         return decode(content);
-    }
-
-    /**
-     * Escape编码
-     *
-     * @param text 被编码的文本
-     * @return 编码后的字符
-     */
-    private static String encode(String text) {
-        if (ExStringUtils.isEmpty(text)) {
-            return StringUtils.EMPTY;
-        }
-
-        final StringBuilder tmp = new StringBuilder(text.length() * 6);
-        char c;
-        for (int i = 0; i < text.length(); i++) {
-            c = text.charAt(i);
-            if (c < 256) {
-                tmp.append("%");
-                if (c < 16) {
-                    tmp.append("0");
-                }
-                tmp.append(Integer.toString(c, 16));
-            } else {
-                tmp.append("%u");
-                if (c <= 0xfff) {
-                    // issue#I49JU8@Gitee
-                    tmp.append("0");
-                }
-                tmp.append(Integer.toString(c, 16));
-            }
-        }
-        return tmp.toString();
     }
 
     /**

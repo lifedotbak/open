@@ -10,8 +10,6 @@ import org.springframework.web.filter.CorsFilter;
  * 处理ajax跨域请求（开发时使用）
  *
  * <p>GlobalCorsConfig
- *
- * @author spyker
  */
 // 如果使用网关服务调用微服务，则注释掉Configuration注解；如果不使用网关服务，则需将Configuration注解的注释放开
 @Configuration

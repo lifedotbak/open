@@ -12,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
 * ${table.comment!} Mapper 接口测试类
 *
-* @author ${author}
-* @since ${date}
 */
 @Slf4j
 public class ${table.mapperName}Test extends BaseTest {

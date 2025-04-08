@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 流程记录 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程记录 前端控制器 */
 @Tag(name = "流程记录", description = "流程记录")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,37 @@ public class SysProcessInstanceOperRecordController extends BaseController {
     private final SysProcessInstanceOperRecordService sysProcessInstanceOperRecordService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "流程记录--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysProcessInstanceOperRecord> add(
+            @RequestBody SysProcessInstanceOperRecord add) {
+
+        sysProcessInstanceOperRecordService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程记录--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysProcessInstanceOperRecord> delete(@PathVariable("id") String id) {
+
+        sysProcessInstanceOperRecordService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程记录--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysProcessInstanceOperRecord> detail(@PathVariable("id") String id) {
+
+        SysProcessInstanceOperRecord result = sysProcessInstanceOperRecordService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -86,27 +112,6 @@ public class SysProcessInstanceOperRecordController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程记录--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysProcessInstanceOperRecord> detail(@PathVariable("id") String id) {
-
-        SysProcessInstanceOperRecord result = sysProcessInstanceOperRecordService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "流程记录--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysProcessInstanceOperRecord> add(
-            @RequestBody SysProcessInstanceOperRecord add) {
-
-        sysProcessInstanceOperRecordService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "流程记录--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -116,16 +121,6 @@ public class SysProcessInstanceOperRecordController extends BaseController {
         update.setId(id);
 
         sysProcessInstanceOperRecordService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程记录--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysProcessInstanceOperRecord> delete(@PathVariable("id") String id) {
-
-        sysProcessInstanceOperRecordService.delete(id);
 
         return RestResponse.success();
     }

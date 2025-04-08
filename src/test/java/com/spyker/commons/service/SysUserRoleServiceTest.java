@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 用户-角色 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户-角色 服务测试类 */
 @Slf4j
 public class SysUserRoleServiceTest extends BaseTest {
 
     @Autowired private SysUserRoleService service;
-
-    @Test
-    public void get() {
-        SysUserRole result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -55,25 +39,14 @@ public class SysUserRoleServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysUserRole update = new SysUserRole();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setUserId("userId");
-
-        update.setRoleId("roleId");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysUserRole result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -114,5 +87,27 @@ public class SysUserRoleServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysUserRole update = new SysUserRole();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setUserId("userId");
+
+        update.setRoleId("roleId");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

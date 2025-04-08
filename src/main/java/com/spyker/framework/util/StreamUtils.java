@@ -13,11 +13,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/**
- * stream 流工具类
- *
- * @author Lion Li
- */
+/** stream 流工具类 */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StreamUtils {
 

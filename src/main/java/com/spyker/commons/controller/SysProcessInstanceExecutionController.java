@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 流程执行id数据 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程执行id数据 前端控制器 */
 @Tag(name = "流程执行id数据", description = "流程执行id数据")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,37 @@ public class SysProcessInstanceExecutionController extends BaseController {
     private final SysProcessInstanceExecutionService sysProcessInstanceExecutionService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "流程执行id数据--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysProcessInstanceExecution> add(
+            @RequestBody SysProcessInstanceExecution add) {
+
+        sysProcessInstanceExecutionService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程执行id数据--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysProcessInstanceExecution> delete(@PathVariable("id") String id) {
+
+        sysProcessInstanceExecutionService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程执行id数据--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysProcessInstanceExecution> detail(@PathVariable("id") String id) {
+
+        SysProcessInstanceExecution result = sysProcessInstanceExecutionService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -85,27 +111,6 @@ public class SysProcessInstanceExecutionController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程执行id数据--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysProcessInstanceExecution> detail(@PathVariable("id") String id) {
-
-        SysProcessInstanceExecution result = sysProcessInstanceExecutionService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "流程执行id数据--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysProcessInstanceExecution> add(
-            @RequestBody SysProcessInstanceExecution add) {
-
-        sysProcessInstanceExecutionService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "流程执行id数据--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -115,16 +120,6 @@ public class SysProcessInstanceExecutionController extends BaseController {
         update.setId(id);
 
         sysProcessInstanceExecutionService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程执行id数据--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysProcessInstanceExecution> delete(@PathVariable("id") String id) {
-
-        sysProcessInstanceExecutionService.delete(id);
 
         return RestResponse.success();
     }

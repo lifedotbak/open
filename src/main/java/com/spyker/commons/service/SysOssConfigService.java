@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysOssConfigSearch;
 
 import java.util.List;
 
-/**
- * 对象存储配置表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-12-21
- */
+/** 对象存储配置表 服务类 */
 public interface SysOssConfigService extends IService<SysOssConfig> {
 
-    List<SysOssConfig> query(SysOssConfigSearch search);
-
-    IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search);
+    boolean delete(String id);
 
     SysOssConfig get(String id);
 
     boolean insert(SysOssConfig sysOssConfig);
 
-    boolean update(SysOssConfig sysOssConfig);
+    List<SysOssConfig> query(SysOssConfigSearch search);
 
-    boolean delete(String id);
+    IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search);
+
+    boolean update(SysOssConfig sysOssConfig);
 }

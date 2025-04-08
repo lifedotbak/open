@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysProcessSearch;
 
 import java.util.List;
 
-/**
- * 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 服务接口 */
 public interface SysProcessService extends IService<SysProcess> {
 
-    List<SysProcess> query(SysProcessSearch search);
-
-    IPage<SysProcess> queryPage(IPage<SysProcess> page, SysProcessSearch search);
+    boolean delete(String id);
 
     SysProcess get(String id);
 
     SysProcess insert(SysProcess sysProcess);
 
-    SysProcess update(SysProcess sysProcess);
+    List<SysProcess> query(SysProcessSearch search);
 
-    boolean delete(String id);
+    IPage<SysProcess> queryPage(IPage<SysProcess> page, SysProcessSearch search);
+
+    SysProcess update(SysProcess sysProcess);
 }

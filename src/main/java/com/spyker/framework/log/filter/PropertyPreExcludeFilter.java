@@ -2,11 +2,7 @@ package com.spyker.framework.log.filter;
 
 import com.alibaba.fastjson2.filter.SimplePropertyPreFilter;
 
-/**
- * 排除JSON敏感属性
- *
- * @author platform
- */
+/** 排除JSON敏感属性 */
 public class PropertyPreExcludeFilter extends SimplePropertyPreFilter {
     public PropertyPreExcludeFilter() {}
 

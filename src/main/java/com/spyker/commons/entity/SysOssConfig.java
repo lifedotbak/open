@@ -15,12 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Date;
 
-/**
- * 对象存储配置表
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 对象存储配置表 */
 @Data
 @Accessors(chain = true)
 @TableName("sys_oss_config")

@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysRoleDeptSearch;
 
 import java.util.List;
 
-/**
- * 角色和部门关联表 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 角色和部门关联表 服务接口 */
 public interface SysRoleDeptService extends IService<SysRoleDept> {
 
-    List<SysRoleDept> query(SysRoleDeptSearch search);
-
-    IPage<SysRoleDept> queryPage(IPage<SysRoleDept> page, SysRoleDeptSearch search);
+    boolean delete(String id);
 
     SysRoleDept get(String id);
 
     SysRoleDept insert(SysRoleDept sysRoleDept);
 
-    SysRoleDept update(SysRoleDept sysRoleDept);
+    List<SysRoleDept> query(SysRoleDeptSearch search);
 
-    boolean delete(String id);
+    IPage<SysRoleDept> queryPage(IPage<SysRoleDept> page, SysRoleDeptSearch search);
+
+    SysRoleDept update(SysRoleDept sysRoleDept);
 }

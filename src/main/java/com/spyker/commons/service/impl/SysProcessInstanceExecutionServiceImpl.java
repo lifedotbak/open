@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 流程执行id数据 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程执行id数据 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -33,23 +28,14 @@ public class SysProcessInstanceExecutionServiceImpl
 
     private final SysProcessInstanceExecutionMapper sysProcessInstanceExecutionMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysProcessInstanceExecution> query(SysProcessInstanceExecutionSearch search) {
-
-        List<SysProcessInstanceExecution> result = sysProcessInstanceExecutionMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysProcessInstanceExecution> queryPage(
-            IPage<SysProcessInstanceExecution> page, SysProcessInstanceExecutionSearch search) {
-
-        page = sysProcessInstanceExecutionMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -79,6 +65,25 @@ public class SysProcessInstanceExecutionServiceImpl
         return sysProcessInstanceExecution;
     }
 
+    @Override
+    public List<SysProcessInstanceExecution> query(SysProcessInstanceExecutionSearch search) {
+
+        List<SysProcessInstanceExecution> result = sysProcessInstanceExecutionMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysProcessInstanceExecution> queryPage(
+            IPage<SysProcessInstanceExecution> page, SysProcessInstanceExecutionSearch search) {
+
+        page = sysProcessInstanceExecutionMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysProcessInstanceExecution
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -89,15 +94,5 @@ public class SysProcessInstanceExecutionServiceImpl
             SysProcessInstanceExecution sysProcessInstanceExecution) {
         updateById(sysProcessInstanceExecution);
         return sysProcessInstanceExecution;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

@@ -3,10 +3,6 @@ package com.spyker.framework.word;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created with IntelliJ IDEA. User: Administrator Date: 18-6-4 Time: 上午9:47 To change this template
- * use File | Settings | File Templates.
- */
 public class SensitiveWordUtils {
 
     // 判断是不是数字

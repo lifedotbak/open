@@ -15,12 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 对象存储配置表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-12-21
- */
+/** 对象存储配置表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -31,17 +26,8 @@ public class SysOssConfigServiceImpl extends ServiceImpl<SysOssConfigMapper, Sys
     private final SysOssConfigMapper sysOssConfigMapper;
 
     @Override
-    public List<SysOssConfig> query(SysOssConfigSearch search) {
-        List<SysOssConfig> result = sysOssConfigMapper.query(search);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search) {
-        page = sysOssConfigMapper.queryPage(page, search);
-
-        return page;
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     @Override
@@ -59,12 +45,21 @@ public class SysOssConfigServiceImpl extends ServiceImpl<SysOssConfigMapper, Sys
     }
 
     @Override
-    public boolean update(SysOssConfig sysOssConfig) {
-        return updateById(sysOssConfig);
+    public List<SysOssConfig> query(SysOssConfigSearch search) {
+        List<SysOssConfig> result = sysOssConfigMapper.query(search);
+
+        return result;
     }
 
     @Override
-    public boolean delete(String id) {
-        return removeById(id);
+    public IPage<SysOssConfig> queryPage(IPage<SysOssConfig> page, SysOssConfigSearch search) {
+        page = sysOssConfigMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public boolean update(SysOssConfig sysOssConfig) {
+        return updateById(sysOssConfig);
     }
 }

@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 对象存储配置表查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 对象存储配置表查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysOssConfigSearch对象", description = "对象存储配置表Search对象")

@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity.refunds;
 
 import lombok.Data;
 
-/**
- * 退款通知资源数据
- *
- * @author spyker
- */
+/** 退款通知资源数据 */
 @Data
 public class RefundsNotifyResource {
 

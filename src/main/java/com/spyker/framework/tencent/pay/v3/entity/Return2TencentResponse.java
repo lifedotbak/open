@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity;
 
 import lombok.Data;
 
-/**
- * 微信支付回调之后,业务处理结果,返回给微信
- *
- * @author zhangzhaofeng
- */
+/** 微信支付回调之后,业务处理结果,返回给微信 */
 @Data
 public class Return2TencentResponse {
 

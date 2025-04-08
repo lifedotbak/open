@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 流程节点数据 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点数据 前端控制器 */
 @Tag(name = "流程节点数据", description = "流程节点数据")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,36 @@ public class SysProcessNodeDataController extends BaseController {
     private final SysProcessNodeDataService sysProcessNodeDataService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "流程节点数据--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysProcessNodeData> add(@RequestBody SysProcessNodeData add) {
+
+        sysProcessNodeDataService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程节点数据--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysProcessNodeData> delete(@PathVariable("id") String id) {
+
+        sysProcessNodeDataService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程节点数据--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysProcessNodeData> detail(@PathVariable("id") String id) {
+
+        SysProcessNodeData result = sysProcessNodeDataService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -84,26 +109,6 @@ public class SysProcessNodeDataController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程节点数据--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysProcessNodeData> detail(@PathVariable("id") String id) {
-
-        SysProcessNodeData result = sysProcessNodeDataService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "流程节点数据--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysProcessNodeData> add(@RequestBody SysProcessNodeData add) {
-
-        sysProcessNodeDataService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "流程节点数据--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -113,16 +118,6 @@ public class SysProcessNodeDataController extends BaseController {
         update.setId(id);
 
         sysProcessNodeDataService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程节点数据--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysProcessNodeData> delete(@PathVariable("id") String id) {
-
-        sysProcessNodeDataService.delete(id);
 
         return RestResponse.success();
     }

@@ -320,3 +320,34 @@ ko-time:
   log-enable: false
   saver: redis
   data-prefix: kotime
+
+################ 全局事务配置 ##############
+transactional:
+  pointcut: execution(public * com.spyker.*.service.*.*(..))
+  requiredMethods:
+    - save*
+    - remove*
+    - update*
+    - batch*
+    - clear*
+    - add*
+    - append*
+    - modify*
+    - edit*
+    - insert*
+    - delete*
+    - do*
+    - create*
+    - import*
+    - upload*
+  readOnlyMethods:
+    - get*
+    - find*
+    - list*
+    - query*
+    - select*
+    - load*
+    - count*
+    - page*
+    - search*
+    - valid*

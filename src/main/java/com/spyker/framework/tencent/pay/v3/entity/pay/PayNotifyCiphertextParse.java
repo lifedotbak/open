@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity.pay;
 
 import lombok.Data;
 
-/**
- * 微信通知数据解密后对象
- *
- * @author zhangzhaofeng
- */
+/** 微信通知数据解密后对象 */
 @Data
 public class PayNotifyCiphertextParse {
 

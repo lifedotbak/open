@@ -46,36 +46,6 @@ public class CodeGenerator {
 
     private static final String YML_SOURE = "/src/main/resources/application-dev.yml";
 
-    public static void main(String[] args) {
-
-        String projectPath = System.getProperty("user.dir");
-
-        String applicationName = scanner("applicationName(应用名称)!");
-
-        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
-
-        generatorCode(tableNames, projectPath, applicationName);
-    }
-
-    /** 读取控制台内容 */
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("请输入" + tip + ":");
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "!");
-    }
-
-    // 处理 all 情况
-    private static List<String> getTables(String tables) {
-        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
-    }
-
     private static void generatorCode(
             List<String> tableNames, String projectPath, String applicationName) {
 
@@ -225,6 +195,11 @@ public class CodeGenerator {
         return result;
     }
 
+    // 处理 all 情况
+    private static List<String> getTables(String tables) {
+        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
+    }
+
     @SneakyThrows
     private static ApplicationConfig readYaml() {
 
@@ -273,5 +248,30 @@ public class CodeGenerator {
         private String username;
         private String password;
         private String url;
+    }
+
+    public static void main(String[] args) {
+
+        String projectPath = System.getProperty("user.dir");
+
+        String applicationName = scanner("applicationName(应用名称)!");
+
+        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
+
+        generatorCode(tableNames, projectPath, applicationName);
+    }
+
+    /** 读取控制台内容 */
+    public static String scanner(String tip) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("请输入" + tip + ":");
+        if (scanner.hasNext()) {
+            String ipt = scanner.next();
+            if (StringUtils.isNotEmpty(ipt)) {
+                return ipt;
+            }
+        }
+        throw new MybatisPlusException("请输入正确的" + tip + "!");
     }
 }

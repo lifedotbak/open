@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 流程记录 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程记录 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -33,24 +28,14 @@ public class SysProcessInstanceOperRecordServiceImpl
 
     private final SysProcessInstanceOperRecordMapper sysProcessInstanceOperRecordMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysProcessInstanceOperRecord> query(SysProcessInstanceOperRecordSearch search) {
-
-        List<SysProcessInstanceOperRecord> result =
-                sysProcessInstanceOperRecordMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysProcessInstanceOperRecord> queryPage(
-            IPage<SysProcessInstanceOperRecord> page, SysProcessInstanceOperRecordSearch search) {
-
-        page = sysProcessInstanceOperRecordMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -80,6 +65,26 @@ public class SysProcessInstanceOperRecordServiceImpl
         return sysProcessInstanceOperRecord;
     }
 
+    @Override
+    public List<SysProcessInstanceOperRecord> query(SysProcessInstanceOperRecordSearch search) {
+
+        List<SysProcessInstanceOperRecord> result =
+                sysProcessInstanceOperRecordMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysProcessInstanceOperRecord> queryPage(
+            IPage<SysProcessInstanceOperRecord> page, SysProcessInstanceOperRecordSearch search) {
+
+        page = sysProcessInstanceOperRecordMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysProcessInstanceOperRecord
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -90,15 +95,5 @@ public class SysProcessInstanceOperRecordServiceImpl
             SysProcessInstanceOperRecord sysProcessInstanceOperRecord) {
         updateById(sysProcessInstanceOperRecord);
         return sysProcessInstanceOperRecord;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

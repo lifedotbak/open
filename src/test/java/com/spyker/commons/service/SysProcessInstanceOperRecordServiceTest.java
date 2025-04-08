@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程记录 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程记录 服务测试类 */
 @Slf4j
 public class SysProcessInstanceOperRecordServiceTest extends BaseTest {
 
     @Autowired private SysProcessInstanceOperRecordService service;
-
-    @Test
-    public void get() {
-        SysProcessInstanceOperRecord result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -71,41 +55,14 @@ public class SysProcessInstanceOperRecordServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessInstanceOperRecord update = new SysProcessInstanceOperRecord();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setUserId("userId");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setFlowId("flowId");
-
-        update.setNodeId("nodeId");
-
-        update.setNodeName("nodeName");
-
-        update.setProcessInstanceId("processInstanceId");
-
-        update.setComment("comment");
-
-        update.setOperType("operType");
-
-        update.setOperDesc("operDesc");
-
-        update.setImageList("imageList");
-
-        update.setFileList("fileList");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessInstanceOperRecord result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -177,5 +134,43 @@ public class SysProcessInstanceOperRecordServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessInstanceOperRecord update = new SysProcessInstanceOperRecord();
+
+        update.setId("id");
+
+        update.setUserId("userId");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setFlowId("flowId");
+
+        update.setNodeId("nodeId");
+
+        update.setNodeName("nodeName");
+
+        update.setProcessInstanceId("processInstanceId");
+
+        update.setComment("comment");
+
+        update.setOperType("operType");
+
+        update.setOperDesc("operDesc");
+
+        update.setImageList("imageList");
+
+        update.setFileList("fileList");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

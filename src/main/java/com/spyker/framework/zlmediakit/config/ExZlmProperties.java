@@ -31,16 +31,6 @@ public class ExZlmProperties {
 
     private final LoadBalancerEnums balance = LoadBalancerEnums.ROUND_ROBIN;
 
-    public static void addNode(ZlmNode zlmNode) {
-
-        log.info("add node:{}", zlmNode);
-
-        if (zlmNode != null) {
-            nodes.add(zlmNode);
-            nodeMap.put(zlmNode.getServerId(), zlmNode);
-        }
-    }
-
     public Map<String, ZlmNode> getNodeMap() {
 
         nodeMap =
@@ -53,5 +43,15 @@ public class ExZlmProperties {
 
     public List<ZlmNode> getNodes() {
         return nodes;
+    }
+
+    public static void addNode(ZlmNode zlmNode) {
+
+        log.info("add node:{}", zlmNode);
+
+        if (zlmNode != null) {
+            nodes.add(zlmNode);
+            nodeMap.put(zlmNode.getServerId(), zlmNode);
+        }
     }
 }

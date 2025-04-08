@@ -31,42 +31,6 @@ public class PlusSpringCacheManager implements CacheManager {
         this.redissonClient = redissonClient;
     }
 
-    /**
-     * Defines possibility of storing {@code null} values.
-     *
-     * <p>Default is <code>true</code>
-     *
-     * @param allowNullValues stores if <code>true</code>
-     */
-    public void setAllowNullValues(boolean allowNullValues) {
-        this.allowNullValues = allowNullValues;
-    }
-
-    /**
-     * Defines if cache aware of Spring-managed transactions. If {@code true} put/evict operations
-     * are executed only for successful transaction in after-commit phase.
-     *
-     * <p>Default is <code>false</code>
-     *
-     * @param transactionAware cache is transaction aware if <code>true</code>
-     */
-    public void setTransactionAware(boolean transactionAware) {
-        this.transactionAware = transactionAware;
-    }
-
-    /**
-     * Set cache config mapped by cache name
-     *
-     * @param config object
-     */
-    public void setConfig(Map<String, ? extends CacheConfig> config) {
-        this.configMap = (Map<String, CacheConfig>) config;
-    }
-
-    protected CacheConfig createDefaultConfig() {
-        return new CacheConfig();
-    }
-
     @Override
     public Cache getCache(String name) {
         Cache cache = instanceMap.get(name);
@@ -103,6 +67,62 @@ public class PlusSpringCacheManager implements CacheManager {
         return createMapCache(name, config);
     }
 
+    @Override
+    public Collection<String> getCacheNames() {
+        return Collections.unmodifiableSet(configMap.keySet());
+    }
+
+    /**
+     * Defines 'fixed' cache names. A new cache instance will not be created in dynamic for
+     * non-defined names.
+     *
+     * <p>`null` parameter setups dynamic mode
+     *
+     * @param names of caches
+     */
+    public void setCacheNames(Collection<String> names) {
+        if (names != null) {
+            for (String name : names) {
+                getCache(name);
+            }
+            dynamic = false;
+        } else {
+            dynamic = true;
+        }
+    }
+
+    /**
+     * Defines possibility of storing {@code null} values.
+     *
+     * <p>Default is <code>true</code>
+     *
+     * @param allowNullValues stores if <code>true</code>
+     */
+    public void setAllowNullValues(boolean allowNullValues) {
+        this.allowNullValues = allowNullValues;
+    }
+
+    /**
+     * Set cache config mapped by cache name
+     *
+     * @param config object
+     */
+    public void setConfig(Map<String, ? extends CacheConfig> config) {
+        this.configMap = (Map<String, CacheConfig>) config;
+    }
+
+    /**
+     * Defines if cache aware of Spring-managed transactions. If {@code true} put/evict operations
+     * are executed only for successful transaction in after-commit phase.
+     *
+     * <p>Default is <code>false</code>
+     *
+     * @param transactionAware cache is transaction aware if <code>true</code>
+     */
+    public void setTransactionAware(boolean transactionAware) {
+        this.transactionAware = transactionAware;
+    }
+
     private Cache createMap(String name, CacheConfig config) {
         RMap<Object, Object> map = redissonClient.getMap(name);
 
@@ -133,27 +153,7 @@ public class PlusSpringCacheManager implements CacheManager {
         return cache;
     }
 
-    @Override
-    public Collection<String> getCacheNames() {
-        return Collections.unmodifiableSet(configMap.keySet());
-    }
-
-    /**
-     * Defines 'fixed' cache names. A new cache instance will not be created in dynamic for
-     * non-defined names.
-     *
-     * <p>`null` parameter setups dynamic mode
-     *
-     * @param names of caches
-     */
-    public void setCacheNames(Collection<String> names) {
-        if (names != null) {
-            for (String name : names) {
-                getCache(name);
-            }
-            dynamic = false;
-        } else {
-            dynamic = true;
-        }
+    protected CacheConfig createDefaultConfig() {
+        return new CacheConfig();
     }
 }

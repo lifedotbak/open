@@ -23,8 +23,6 @@ import java.util.List;
  * <p>1.封禁网易云信IM账号后，此ID将不能再次登录。若封禁时，该id处于登录状态，则当前登录不受影响，仍然可以收发消息。封禁效果会在下次登录时生效。因此建议，将needkick设置为true，让该账号同时被踢出登录。
  *
  * <p>2.出于安全目的，账号创建后只能封禁，不能删除；封禁后账号仍计入应用内账号总数。
- *
- * @author spyker
  */
 public class UserBlockAction {
 

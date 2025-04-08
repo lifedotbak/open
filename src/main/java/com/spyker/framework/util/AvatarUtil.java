@@ -19,7 +19,6 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 /**
- * @author zhj
  * @version 1.0
  * @description: 头像工具类
  * @date 2024/3/16 15:22
@@ -30,6 +29,30 @@ public class AvatarUtil {
     private static final int WIDTH = 100;
     // 图片高度
     private static final int HEIGHT = 100;
+
+    /**
+     * @author: zhengzhonghua
+     * @date: 2023/3/16 13:32
+     * @description: 生成随机颜色
+     */
+    private static Color getRandomColor() {
+        String[] beautifulColors =
+                new String[] {
+                    "2,168,250",
+                    "51,153,204",
+                    "51,102,255",
+                    "102,0,204",
+                    "102,102,51",
+                    "99," + "00,99",
+                    "204,51,204",
+                    "255,153,102"
+                };
+        int len = beautifulColors.length;
+        Random random = new Random();
+        String[] color = beautifulColors[random.nextInt(len)].split(",");
+        return new Color(
+                Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]));
+    }
 
     /**
      * @param name 用户名称
@@ -109,30 +132,6 @@ public class AvatarUtil {
         fb.close();
         inputStream.close();
         return file;
-    }
-
-    /**
-     * @author: zhengzhonghua
-     * @date: 2023/3/16 13:32
-     * @description: 生成随机颜色
-     */
-    private static Color getRandomColor() {
-        String[] beautifulColors =
-                new String[] {
-                    "2,168,250",
-                    "51,153,204",
-                    "51,102,255",
-                    "102,0,204",
-                    "102,102,51",
-                    "99," + "00,99",
-                    "204,51,204",
-                    "255,153,102"
-                };
-        int len = beautifulColors.length;
-        Random random = new Random();
-        String[] color = beautifulColors[random.nextInt(len)].split(",");
-        return new Color(
-                Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]));
     }
 
     // 得到该字体字符串的长度

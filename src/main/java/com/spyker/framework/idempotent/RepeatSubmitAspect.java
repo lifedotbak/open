@@ -29,11 +29,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * 防止重复提交(参考美团GTIS防重系统)
- *
- * @author Lion Li
- */
+/** 防止重复提交(参考美团GTIS防重系统) */
 @Aspect
 @Component
 public class RepeatSubmitAspect {
@@ -43,6 +39,40 @@ public class RepeatSubmitAspect {
     private static final String REPEAT_SUBMIT_KEY = "repeat_submit:";
 
     @Autowired private RedisService redisService;
+
+    /**
+     * 处理完请求后执行
+     *
+     * @param joinPoint 切点
+     */
+    @AfterReturning(pointcut = "@annotation(repeatSubmit)", returning = "jsonResult")
+    public void doAfterReturning(
+            JoinPoint joinPoint, RepeatSubmit repeatSubmit, Object jsonResult) {
+        if (jsonResult instanceof RestResponse) {
+            try {
+                RestResponse<?> r = (RestResponse<?>) jsonResult;
+                // 成功则不删除redis数据 保证在有效时间内无法重复提交
+                if (r.getCode() == 200) {
+                    return;
+                }
+                redisService.deleteObject(KEY_CACHE.get());
+            } finally {
+                KEY_CACHE.remove();
+            }
+        }
+    }
+
+    /**
+     * 拦截异常操作
+     *
+     * @param joinPoint 切点
+     * @param e 异常
+     */
+    @AfterThrowing(value = "@annotation(repeatSubmit)", throwing = "e")
+    public void doAfterThrowing(JoinPoint joinPoint, RepeatSubmit repeatSubmit, Exception e) {
+        redisService.deleteObject(KEY_CACHE.get());
+        KEY_CACHE.remove();
+    }
 
     @Before("@annotation(repeatSubmit)")
     public void doBefore(JoinPoint point, RepeatSubmit repeatSubmit) throws Throwable {
@@ -81,23 +111,6 @@ public class RepeatSubmitAspect {
         }
     }
 
-    /** 参数拼装 */
-    private String argsArrayToString(Object[] paramsArray) {
-        StringBuilder params = new StringBuilder();
-        if (paramsArray != null) {
-            for (Object o : paramsArray) {
-                if (ObjectUtil.isNotNull(o) && !isFilterObject(o)) {
-                    try {
-                        params.append(ExJsonUtils.toJsonString(o)).append(" ");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return params.toString().trim();
-    }
-
     /**
      * 判断是否需要过滤的对象。
      *
@@ -127,37 +140,20 @@ public class RepeatSubmitAspect {
                 || o instanceof BindingResult;
     }
 
-    /**
-     * 处理完请求后执行
-     *
-     * @param joinPoint 切点
-     */
-    @AfterReturning(pointcut = "@annotation(repeatSubmit)", returning = "jsonResult")
-    public void doAfterReturning(
-            JoinPoint joinPoint, RepeatSubmit repeatSubmit, Object jsonResult) {
-        if (jsonResult instanceof RestResponse) {
-            try {
-                RestResponse<?> r = (RestResponse<?>) jsonResult;
-                // 成功则不删除redis数据 保证在有效时间内无法重复提交
-                if (r.getCode() == 200) {
-                    return;
+    /** 参数拼装 */
+    private String argsArrayToString(Object[] paramsArray) {
+        StringBuilder params = new StringBuilder();
+        if (paramsArray != null) {
+            for (Object o : paramsArray) {
+                if (ObjectUtil.isNotNull(o) && !isFilterObject(o)) {
+                    try {
+                        params.append(ExJsonUtils.toJsonString(o)).append(" ");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                redisService.deleteObject(KEY_CACHE.get());
-            } finally {
-                KEY_CACHE.remove();
             }
         }
-    }
-
-    /**
-     * 拦截异常操作
-     *
-     * @param joinPoint 切点
-     * @param e 异常
-     */
-    @AfterThrowing(value = "@annotation(repeatSubmit)", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, RepeatSubmit repeatSubmit, Exception e) {
-        redisService.deleteObject(KEY_CACHE.get());
-        KEY_CACHE.remove();
+        return params.toString().trim();
     }
 }

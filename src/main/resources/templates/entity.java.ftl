@@ -21,9 +21,6 @@ import org.springframework.data.redis.core.RedisHash;
 
 /**
 * ${table.comment!}
-*
-* @author ${author}
-* @since ${date}
 */
 @RedisHash
 <#if entityLombokModel>

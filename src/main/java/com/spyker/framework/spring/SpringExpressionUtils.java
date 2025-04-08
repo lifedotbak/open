@@ -19,11 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Spring EL 表达式的工具类
- *
- * @author mashu
- */
+/** Spring EL 表达式的工具类 */
 public class SpringExpressionUtils {
 
     /** spel表达式解析器 */
@@ -95,8 +91,6 @@ public class SpringExpressionUtils {
      * @param info 返回值
      * @param expressionStrings EL 表达式数组
      * @return Map<String, Object> 结果
-     * @author 陈賝
-     * @since 2023/6/18 11:20
      */
     public static Map<String, Object> parseExpression(
             JoinPoint joinPoint, Object info, List<String> expressionStrings) {

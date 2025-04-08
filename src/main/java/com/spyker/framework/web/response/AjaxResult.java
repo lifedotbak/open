@@ -6,11 +6,7 @@ import com.spyker.framework.util.text.ExStringUtils;
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
- * 操作消息提醒
- *
- * @author ruoyi
- */
+/** 操作消息提醒 */
 public class AjaxResult extends HashMap<String, Object> {
     /** 状态码 */
     public static final String CODE_TAG = "code";
@@ -50,6 +46,46 @@ public class AjaxResult extends HashMap<String, Object> {
         if (ExStringUtils.isNotNull(data)) {
             super.put(DATA_TAG, data);
         }
+    }
+
+    /**
+     * 是否为错误消息
+     *
+     * @return 结果
+     */
+    public boolean isError() {
+        return Objects.equals(HttpStatus.ERROR, this.get(CODE_TAG));
+    }
+
+    /**
+     * 是否为成功消息
+     *
+     * @return 结果
+     */
+    public boolean isSuccess() {
+        return Objects.equals(HttpStatus.SUCCESS, this.get(CODE_TAG));
+    }
+
+    /**
+     * 是否为警告消息
+     *
+     * @return 结果
+     */
+    public boolean isWarn() {
+        return Objects.equals(HttpStatus.WARN, this.get(CODE_TAG));
+    }
+
+    /**
+     * 方便链式调用
+     *
+     * @param key 键
+     * @param value 值
+     * @return 数据对象
+     */
+    @Override
+    public AjaxResult put(String key, Object value) {
+        super.put(key, value);
+        return this;
     }
 
     /**
@@ -151,45 +187,5 @@ public class AjaxResult extends HashMap<String, Object> {
      */
     public static AjaxResult error(int code, String msg) {
         return new AjaxResult(code, msg, null);
-    }
-
-    /**
-     * 是否为成功消息
-     *
-     * @return 结果
-     */
-    public boolean isSuccess() {
-        return Objects.equals(HttpStatus.SUCCESS, this.get(CODE_TAG));
-    }
-
-    /**
-     * 是否为警告消息
-     *
-     * @return 结果
-     */
-    public boolean isWarn() {
-        return Objects.equals(HttpStatus.WARN, this.get(CODE_TAG));
-    }
-
-    /**
-     * 是否为错误消息
-     *
-     * @return 结果
-     */
-    public boolean isError() {
-        return Objects.equals(HttpStatus.ERROR, this.get(CODE_TAG));
-    }
-
-    /**
-     * 方便链式调用
-     *
-     * @param key 键
-     * @param value 值
-     * @return 数据对象
-     */
-    @Override
-    public AjaxResult put(String key, Object value) {
-        super.put(key, value);
-        return this;
     }
 }

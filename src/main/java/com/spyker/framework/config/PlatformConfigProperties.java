@@ -3,11 +3,7 @@ package com.spyker.framework.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-/**
- * 读取项目相关配置
- *
- * @author spyker
- */
+/** 读取项目相关配置 */
 @Component
 @ConfigurationProperties(prefix = "platform", ignoreUnknownFields = true)
 public class PlatformConfigProperties {

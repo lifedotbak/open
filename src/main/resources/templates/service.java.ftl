@@ -11,8 +11,6 @@ import ${package.Parent}.search.${entity}Search;
 /**
 * ${table.comment!} 服务接口
 *
-* @author ${author}
-* @since ${date}
 */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 

@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 流程抄送数据--用户和实例唯一值 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程抄送数据--用户和实例唯一值 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -33,23 +28,14 @@ public class SysProcessInstanceUserCopyServiceImpl
 
     private final SysProcessInstanceUserCopyMapper sysProcessInstanceUserCopyMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysProcessInstanceUserCopy> query(SysProcessInstanceUserCopySearch search) {
-
-        List<SysProcessInstanceUserCopy> result = sysProcessInstanceUserCopyMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysProcessInstanceUserCopy> queryPage(
-            IPage<SysProcessInstanceUserCopy> page, SysProcessInstanceUserCopySearch search) {
-
-        page = sysProcessInstanceUserCopyMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -79,6 +65,25 @@ public class SysProcessInstanceUserCopyServiceImpl
         return sysProcessInstanceUserCopy;
     }
 
+    @Override
+    public List<SysProcessInstanceUserCopy> query(SysProcessInstanceUserCopySearch search) {
+
+        List<SysProcessInstanceUserCopy> result = sysProcessInstanceUserCopyMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysProcessInstanceUserCopy> queryPage(
+            IPage<SysProcessInstanceUserCopy> page, SysProcessInstanceUserCopySearch search) {
+
+        page = sysProcessInstanceUserCopyMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysProcessInstanceUserCopy
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -89,15 +94,5 @@ public class SysProcessInstanceUserCopyServiceImpl
             SysProcessInstanceUserCopy sysProcessInstanceUserCopy) {
         updateById(sysProcessInstanceUserCopy);
         return sysProcessInstanceUserCopy;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

@@ -4,11 +4,7 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * 退款请求对象
- *
- * @author spyker
- */
+/** 退款请求对象 */
 @Data
 public class Refunds {
 

@@ -4,7 +4,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 
 /**
- * @ClassName ResultCodeEnum @Description 公共模块响应码枚举 @Author HZW @Date 2023/2/21 16:10 @Version 1.0
+ * @ClassName ResultCodeEnum @Description 公共模块响应码枚举
  */
 public enum ResponseCodeEnum implements IResponseCode {
 

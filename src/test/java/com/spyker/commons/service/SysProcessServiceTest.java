@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 服务测试类 */
 @Slf4j
 public class SysProcessServiceTest extends BaseTest {
 
     @Autowired private SysProcessService service;
-
-    @Test
-    public void get() {
-        SysProcess result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -85,53 +69,14 @@ public class SysProcessServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcess update = new SysProcess();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setFlowId("flowId");
-
-        update.setName("name");
-
-        update.setLogo("logo");
-
-        update.setSettings("settings");
-
-        update.setGroupId("groupId");
-
-        update.setFormItems("formItems");
-
-        update.setProcess("process");
-
-        update.setRemark("remark");
-        update.setProcessSort(1);
-
-        update.setIsHidden(1);
-
-        update.setIsStop(1);
-
-        update.setAdminId("adminId");
-
-        update.setUniqueId("uniqueId");
-
-        update.setAdmin("admin");
-
-        update.setRangeShow("rangeShow");
-        update.setVersion(1);
-
-        update.setTenantId("tenantId");
-
-        update.setFormItemsPc("formItemsPc");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcess result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -230,5 +175,55 @@ public class SysProcessServiceTest extends BaseTest {
         search.setFormItemsPc("formItemsPc");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcess update = new SysProcess();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setFlowId("flowId");
+
+        update.setName("name");
+
+        update.setLogo("logo");
+
+        update.setSettings("settings");
+
+        update.setGroupId("groupId");
+
+        update.setFormItems("formItems");
+
+        update.setProcess("process");
+
+        update.setRemark("remark");
+        update.setProcessSort(1);
+
+        update.setIsHidden(1);
+
+        update.setIsStop(1);
+
+        update.setAdminId("adminId");
+
+        update.setUniqueId("uniqueId");
+
+        update.setAdmin("admin");
+
+        update.setRangeShow("rangeShow");
+        update.setVersion(1);
+
+        update.setTenantId("tenantId");
+
+        update.setFormItemsPc("formItemsPc");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

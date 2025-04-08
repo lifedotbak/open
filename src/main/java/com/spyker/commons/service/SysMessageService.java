@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysMessageSearch;
 
 import java.util.List;
 
-/**
- * 通知消息 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 通知消息 服务接口 */
 public interface SysMessageService extends IService<SysMessage> {
 
-    List<SysMessage> query(SysMessageSearch search);
-
-    IPage<SysMessage> queryPage(IPage<SysMessage> page, SysMessageSearch search);
+    boolean delete(String id);
 
     SysMessage get(String id);
 
     SysMessage insert(SysMessage sysMessage);
 
-    SysMessage update(SysMessage sysMessage);
+    List<SysMessage> query(SysMessageSearch search);
 
-    boolean delete(String id);
+    IPage<SysMessage> queryPage(IPage<SysMessage> page, SysMessageSearch search);
+
+    SysMessage update(SysMessage sysMessage);
 }

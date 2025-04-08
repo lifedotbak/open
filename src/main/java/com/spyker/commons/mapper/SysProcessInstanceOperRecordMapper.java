@@ -9,12 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * 流程记录 Mapper 接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程记录 Mapper 接口 */
 @Mapper
 public interface SysProcessInstanceOperRecordMapper
         extends BaseMapper<SysProcessInstanceOperRecord> {

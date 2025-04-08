@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 角色和菜单关联表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 角色和菜单关联表 服务测试类 */
 @Slf4j
 public class SysRoleMenuServiceTest extends BaseTest {
 
     @Autowired private SysRoleMenuService service;
-
-    @Test
-    public void get() {
-        SysRoleMenu result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -55,25 +39,14 @@ public class SysRoleMenuServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysRoleMenu update = new SysRoleMenu();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setRoleId("roleId");
-
-        update.setMenuId("menuId");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysRoleMenu result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -113,5 +86,27 @@ public class SysRoleMenuServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysRoleMenu update = new SysRoleMenu();
+
+        update.setId("id");
+
+        update.setRoleId("roleId");
+
+        update.setMenuId("menuId");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @ClassName ContentCachingRequestWrapper @Description 用于重复读取requestBody @Author HZW @Date
- * 2023/2/22 18:01 @Version 1.0
+ * @ClassName ContentCachingRequestWrapper @Description 用于重复读取requestBody 2023/2/22 18:01 @Version
+ * 1.0
  */
 public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
@@ -33,11 +33,6 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
     public ContentCachingRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
         loadBody(request);
-    }
-
-    private void loadBody(HttpServletRequest request) throws IOException {
-        body = IOUtils.toByteArray(request.getInputStream());
-        inputStream = new RequestCachingInputStream(body);
     }
 
     public byte[] getBody() {
@@ -60,17 +55,17 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
         return reader;
     }
 
+    private void loadBody(HttpServletRequest request) throws IOException {
+        body = IOUtils.toByteArray(request.getInputStream());
+        inputStream = new RequestCachingInputStream(body);
+    }
+
     private static class RequestCachingInputStream extends ServletInputStream {
 
         private final ByteArrayInputStream inputStream;
 
         public RequestCachingInputStream(byte[] bytes) {
             inputStream = new ByteArrayInputStream(bytes);
-        }
-
-        @Override
-        public int read() throws IOException {
-            return inputStream.read();
         }
 
         @Override
@@ -85,5 +80,10 @@ public class ContentCachingRequestWrapper extends HttpServletRequestWrapper {
 
         @Override
         public void setReadListener(ReadListener readlistener) {}
+
+        @Override
+        public int read() throws IOException {
+            return inputStream.read();
+        }
     }
 }

@@ -1,10 +1,6 @@
 package com.spyker.framework.util.file;
 
-/**
- * 媒体类型工具类
- *
- * @author spyker
- */
+/** 媒体类型工具类 */
 public class MimeTypeUtils {
     public static final String IMAGE_PNG = "image/png";
 

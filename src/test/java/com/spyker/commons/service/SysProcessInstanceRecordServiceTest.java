@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程记录 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程记录 服务测试类 */
 @Slf4j
 public class SysProcessInstanceRecordServiceTest extends BaseTest {
 
     @Autowired private SysProcessInstanceRecordService service;
-
-    @Test
-    public void get() {
-        SysProcessInstanceRecord result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -83,51 +67,14 @@ public class SysProcessInstanceRecordServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessInstanceRecord update = new SysProcessInstanceRecord();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setName("name");
-
-        update.setLogo("logo");
-
-        update.setUserId("userId");
-
-        update.setMainDeptId("mainDeptId");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setFlowId("flowId");
-
-        update.setProcessInstanceId("processInstanceId");
-
-        update.setProcessInstanceBizCode("processInstanceBizCode");
-
-        update.setProcessInstanceBizKey("processInstanceBizKey");
-
-        update.setFormData("formData");
-
-        update.setGroupId("groupId");
-
-        update.setGroupName("groupName");
-        update.setStatus(1);
-
-        update.setParentProcessInstanceId("parentProcessInstanceId");
-
-        update.setProcess("process");
-        update.setResult(1);
-
-        update.setTenantId("tenantId");
-
-        update.setParentProcessNodeExecutionId("parentProcessNodeExecutionId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessInstanceRecord result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -221,5 +168,53 @@ public class SysProcessInstanceRecordServiceTest extends BaseTest {
         search.setParentProcessNodeExecutionId("parentProcessNodeExecutionId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessInstanceRecord update = new SysProcessInstanceRecord();
+
+        update.setId("id");
+
+        update.setName("name");
+
+        update.setLogo("logo");
+
+        update.setUserId("userId");
+
+        update.setMainDeptId("mainDeptId");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setFlowId("flowId");
+
+        update.setProcessInstanceId("processInstanceId");
+
+        update.setProcessInstanceBizCode("processInstanceBizCode");
+
+        update.setProcessInstanceBizKey("processInstanceBizKey");
+
+        update.setFormData("formData");
+
+        update.setGroupId("groupId");
+
+        update.setGroupName("groupName");
+        update.setStatus(1);
+
+        update.setParentProcessInstanceId("parentProcessInstanceId");
+
+        update.setProcess("process");
+        update.setResult(1);
+
+        update.setTenantId("tenantId");
+
+        update.setParentProcessNodeExecutionId("parentProcessNodeExecutionId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

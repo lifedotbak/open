@@ -7,14 +7,16 @@ import com.spyker.commons.search.SysProcessInstanceAssignUserRecordSearch;
 
 import java.util.List;
 
-/**
- * 流程节点记录-执行人 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点记录-执行人 服务接口 */
 public interface SysProcessInstanceAssignUserRecordService
         extends IService<SysProcessInstanceAssignUserRecord> {
+
+    boolean delete(String id);
+
+    SysProcessInstanceAssignUserRecord get(String id);
+
+    SysProcessInstanceAssignUserRecord insert(
+            SysProcessInstanceAssignUserRecord sysProcessInstanceAssignUserRecord);
 
     List<SysProcessInstanceAssignUserRecord> query(SysProcessInstanceAssignUserRecordSearch search);
 
@@ -22,13 +24,6 @@ public interface SysProcessInstanceAssignUserRecordService
             IPage<SysProcessInstanceAssignUserRecord> page,
             SysProcessInstanceAssignUserRecordSearch search);
 
-    SysProcessInstanceAssignUserRecord get(String id);
-
-    SysProcessInstanceAssignUserRecord insert(
-            SysProcessInstanceAssignUserRecord sysProcessInstanceAssignUserRecord);
-
     SysProcessInstanceAssignUserRecord update(
             SysProcessInstanceAssignUserRecord sysProcessInstanceAssignUserRecord);
-
-    boolean delete(String id);
 }

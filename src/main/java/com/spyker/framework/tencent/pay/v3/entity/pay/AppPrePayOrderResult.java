@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity.pay;
 
 import lombok.Data;
 
-/**
- * APP调起支付对象
- *
- * @author zhangzhaofeng
- */
+/** APP调起支付对象 */
 @Data
 public class AppPrePayOrderResult {
 

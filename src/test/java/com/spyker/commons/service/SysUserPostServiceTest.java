@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 用户与岗位关联表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户与岗位关联表 服务测试类 */
 @Slf4j
 public class SysUserPostServiceTest extends BaseTest {
 
     @Autowired private SysUserPostService service;
-
-    @Test
-    public void get() {
-        SysUserPost result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -53,24 +37,14 @@ public class SysUserPostServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysUserPost update = new SysUserPost();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setUserId("userId");
-
-        update.setPostId("postId");
-
-        update.setTenantId("tenantId");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysUserPost result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -107,5 +81,26 @@ public class SysUserPostServiceTest extends BaseTest {
         search.setUpdateBy("updateBy");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysUserPost update = new SysUserPost();
+
+        update.setId("id");
+
+        update.setUserId("userId");
+
+        update.setPostId("postId");
+
+        update.setTenantId("tenantId");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

@@ -11,6 +11,13 @@ public class GpsUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(GpsUtil.class);
 
+    @Data
+    public static class BaiduPoint {
+        String bdLng;
+
+        String bdLat;
+    }
+
     public static BaiduPoint Wgs84ToBd09(String xx, String yy) {
 
         double lng = Double.parseDouble(xx);
@@ -34,12 +41,5 @@ public class GpsUtil {
         final Base64.Decoder decoder = Base64.getDecoder();
         bt = decoder.decode(str); // .decodeBuffer(str);
         return bt;
-    }
-
-    @Data
-    public static class BaiduPoint {
-        String bdLng;
-
-        String bdLat;
     }
 }

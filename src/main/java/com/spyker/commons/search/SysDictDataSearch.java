@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 字典数据表查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 字典数据表查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysDictDataSearch对象", description = "字典数据表Search对象")

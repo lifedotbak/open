@@ -7,12 +7,7 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * 用户信息表查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户信息表查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysUserSearch对象", description = "用户信息表Search对象")

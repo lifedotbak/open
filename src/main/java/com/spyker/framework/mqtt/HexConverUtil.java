@@ -8,6 +8,17 @@ public final class HexConverUtil {
 
     private HexConverUtil() {}
 
+    private static String hexLeftPad(long value, int lenght) {
+
+        String result = Long.toHexString(value);
+
+        if (result.length() < lenght) {
+            result = StringUtils.leftPad(result, lenght, "0");
+        }
+
+        return result;
+    }
+
     /**
      * 接收的队列消息，转hex的string的串
      *
@@ -33,17 +44,6 @@ public final class HexConverUtil {
 
     public static String hex2(long value) {
         return hexLeftPad(value, 2);
-    }
-
-    private static String hexLeftPad(long value, int lenght) {
-
-        String result = Long.toHexString(value);
-
-        if (result.length() < lenght) {
-            result = StringUtils.leftPad(result, lenght, "0");
-        }
-
-        return result;
     }
 
     public static int converHex210(String value) {

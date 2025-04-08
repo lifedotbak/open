@@ -7,12 +7,7 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * 流程节点记录-执行人查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点记录-执行人查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysProcessInstanceAssignUserRecordSearch对象", description = "流程节点记录-执行人Search对象")

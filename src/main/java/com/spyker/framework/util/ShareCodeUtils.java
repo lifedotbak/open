@@ -12,8 +12,6 @@ import java.util.Random;
  * 3) 转为字符串，并在后面加'o'字符：gpm6o <br>
  * 4）在后面随机产生若干个随机数字字符：gpm6o7 <br>
  * 转为自定义进制后就不会出现o这个字符，然后在后面加个'o'，这样就能确定唯一性。最后在后面产生一些随机字符进行补全。<br>
- *
- * @author open-open
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShareCodeUtils {

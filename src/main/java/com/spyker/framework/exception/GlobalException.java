@@ -3,11 +3,7 @@ package com.spyker.framework.exception;
 import com.spyker.framework.util.MessageUtils;
 import com.spyker.framework.util.text.ExStringUtils;
 
-/**
- * 全局异常
- *
- * @author spyker
- */
+/** 全局异常 */
 public class GlobalException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;

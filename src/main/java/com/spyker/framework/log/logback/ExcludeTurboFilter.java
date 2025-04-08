@@ -12,10 +12,6 @@ public class ExcludeTurboFilter extends TurboFilter {
 
     String excludePackageNames;
 
-    public void setExcludePackageNames(String excludePackageNames) {
-        this.excludePackageNames = excludePackageNames;
-    }
-
     @Override
     public FilterReply decide(
             Marker marker,
@@ -38,5 +34,9 @@ public class ExcludeTurboFilter extends TurboFilter {
         }
 
         return FilterReply.NEUTRAL;
+    }
+
+    public void setExcludePackageNames(String excludePackageNames) {
+        this.excludePackageNames = excludePackageNames;
     }
 }

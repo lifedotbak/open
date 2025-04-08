@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysDeptLeaderSearch;
 
 import java.util.List;
 
-/**
- * 部门-主管表 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 部门-主管表 服务接口 */
 public interface SysDeptLeaderService extends IService<SysDeptLeader> {
 
-    List<SysDeptLeader> query(SysDeptLeaderSearch search);
-
-    IPage<SysDeptLeader> queryPage(IPage<SysDeptLeader> page, SysDeptLeaderSearch search);
+    boolean delete(String id);
 
     SysDeptLeader get(String id);
 
     SysDeptLeader insert(SysDeptLeader sysDeptLeader);
 
-    SysDeptLeader update(SysDeptLeader sysDeptLeader);
+    List<SysDeptLeader> query(SysDeptLeaderSearch search);
 
-    boolean delete(String id);
+    IPage<SysDeptLeader> queryPage(IPage<SysDeptLeader> page, SysDeptLeaderSearch search);
+
+    SysDeptLeader update(SysDeptLeader sysDeptLeader);
 }

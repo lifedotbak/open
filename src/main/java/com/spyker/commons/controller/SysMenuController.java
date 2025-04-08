@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 菜单管理 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 菜单管理 前端控制器 */
 @Tag(name = "菜单管理", description = "菜单管理")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,36 @@ public class SysMenuController extends BaseController {
     private final SysMenuService sysMenuService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "菜单管理--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysMenu> add(@RequestBody SysMenu add) {
+
+        sysMenuService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "菜单管理--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysMenu> delete(@PathVariable("id") String id) {
+
+        sysMenuService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "菜单管理--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysMenu> detail(@PathVariable("id") String id) {
+
+        SysMenu result = sysMenuService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -83,26 +108,6 @@ public class SysMenuController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "菜单管理--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysMenu> detail(@PathVariable("id") String id) {
-
-        SysMenu result = sysMenuService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "菜单管理--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysMenu> add(@RequestBody SysMenu add) {
-
-        sysMenuService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "菜单管理--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -112,16 +117,6 @@ public class SysMenuController extends BaseController {
         update.setId(id);
 
         sysMenuService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "菜单管理--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysMenu> delete(@PathVariable("id") String id) {
-
-        sysMenuService.delete(id);
 
         return RestResponse.success();
     }

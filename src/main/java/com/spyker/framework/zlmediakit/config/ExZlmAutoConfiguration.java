@@ -27,15 +27,6 @@ public class ExZlmAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ZlmHookService zlmHookService() {
-
-        log.info("zlmHookService init");
-
-        return new DefaultZlmHookServiceImpl();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
     public LoadBalancer loadBalancer() {
 
         log.info("loadBalancer init");
@@ -54,5 +45,14 @@ public class ExZlmAutoConfiguration {
             default:
                 throw new RuntimeException("未找到负载均衡器");
         }
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ZlmHookService zlmHookService() {
+
+        log.info("zlmHookService init");
+
+        return new DefaultZlmHookServiceImpl();
     }
 }

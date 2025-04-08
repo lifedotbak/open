@@ -14,6 +14,11 @@ public class ClassUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ClassUtil.class);
 
+    private static void doAddClass(List<Class<?>> classList, String className) {
+        Class<?> cls = loadClass(className, false);
+        classList.add(cls);
+    }
+
     public static Object getBean(Class<?> clazz) {
         if (clazz != null) {
             try {
@@ -79,11 +84,6 @@ public class ClassUtil {
             throw new RuntimeException(e);
         }
         return classList;
-    }
-
-    private static void doAddClass(List<Class<?>> classList, String className) {
-        Class<?> cls = loadClass(className, false);
-        classList.add(cls);
     }
 
     public static Class<?> loadClass(String className, boolean isInitialized) {

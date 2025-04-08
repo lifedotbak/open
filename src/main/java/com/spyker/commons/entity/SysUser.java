@@ -16,12 +16,7 @@ import org.springframework.data.redis.core.RedisHash;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 用户信息表
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户信息表 */
 @RedisHash
 @Data
 @Accessors(chain = true)

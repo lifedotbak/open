@@ -1,10 +1,6 @@
 package com.spyker.framework.constants;
 
-/**
- * 任务调度通用常量
- *
- * @author spyker
- */
+/** 任务调度通用常量 */
 public class ScheduleConstants {
 
     public static final String TASK_CLASS_NAME = "TASK_CLASS_NAME";

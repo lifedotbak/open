@@ -7,11 +7,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.regex.Pattern;
 
-/**
- * 校验工具类
- *
- * @author spyker
- */
+/** 校验工具类 */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ValidationUtils {
 

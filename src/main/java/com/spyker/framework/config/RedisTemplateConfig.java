@@ -18,6 +18,20 @@ import org.springframework.data.redis.support.collections.RedisList;
 public class RedisTemplateConfig {
 
     /**
+     * RedisList 在 Redis 之上实现了 List、Queue 和 Deque 合约（以及它们的等效阻塞同类），以最小的配置将存储暴露为
+     * FIFO（先入先出）、LIFO（后入先出）或上限集合。
+     *
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public RedisList<Object> redisListTemplate(RedisTemplate<String, Object> redisTemplate) {
+
+        /** 在代码中，@Autowired Deque<Object> deque; 这样使用 */
+        return new DefaultRedisList<>("app-queue", redisTemplate);
+    }
+
+    /**
      * RedisTemplate 线程安全
      *
      * @param factory
@@ -53,19 +67,5 @@ public class RedisTemplateConfig {
         redisTemplate.setEnableTransactionSupport(false);
 
         return redisTemplate;
-    }
-
-    /**
-     * RedisList 在 Redis 之上实现了 List、Queue 和 Deque 合约（以及它们的等效阻塞同类），以最小的配置将存储暴露为
-     * FIFO（先入先出）、LIFO（后入先出）或上限集合。
-     *
-     * @param redisTemplate
-     * @return
-     */
-    @Bean
-    public RedisList<Object> redisListTemplate(RedisTemplate<String, Object> redisTemplate) {
-
-        /** 在代码中，@Autowired Deque<Object> deque; 这样使用 */
-        return new DefaultRedisList<>("app-queue", redisTemplate);
     }
 }

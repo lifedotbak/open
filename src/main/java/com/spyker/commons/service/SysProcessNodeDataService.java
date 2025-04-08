@@ -7,24 +7,19 @@ import com.spyker.commons.search.SysProcessNodeDataSearch;
 
 import java.util.List;
 
-/**
- * 流程节点数据 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点数据 服务接口 */
 public interface SysProcessNodeDataService extends IService<SysProcessNodeData> {
+
+    boolean delete(String id);
+
+    SysProcessNodeData get(String id);
+
+    SysProcessNodeData insert(SysProcessNodeData sysProcessNodeData);
 
     List<SysProcessNodeData> query(SysProcessNodeDataSearch search);
 
     IPage<SysProcessNodeData> queryPage(
             IPage<SysProcessNodeData> page, SysProcessNodeDataSearch search);
 
-    SysProcessNodeData get(String id);
-
-    SysProcessNodeData insert(SysProcessNodeData sysProcessNodeData);
-
     SysProcessNodeData update(SysProcessNodeData sysProcessNodeData);
-
-    boolean delete(String id);
 }

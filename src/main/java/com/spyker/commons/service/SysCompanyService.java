@@ -7,23 +7,18 @@ import com.spyker.commons.search.SysCompanySearch;
 
 import java.util.List;
 
-/**
- * 公司表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-12-25
- */
+/** 公司表 服务类 */
 public interface SysCompanyService extends IService<SysCompany> {
 
-    List<SysCompany> query(SysCompanySearch search);
-
-    IPage<SysCompany> queryPage(IPage<SysCompany> page, SysCompanySearch search);
+    boolean delete(String id);
 
     SysCompany get(String id);
 
     boolean insert(SysCompany sysCompany);
 
-    boolean update(SysCompany sysCompany);
+    List<SysCompany> query(SysCompanySearch search);
 
-    boolean delete(String id);
+    IPage<SysCompany> queryPage(IPage<SysCompany> page, SysCompanySearch search);
+
+    boolean update(SysCompany sysCompany);
 }

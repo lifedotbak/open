@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity.pay;
 
 import lombok.Data;
 
-/**
- * 接收微信支付通知
- *
- * @author zhangzhaofeng
- */
+/** 接收微信支付通知 */
 @Data
 public class PayNotify {
 

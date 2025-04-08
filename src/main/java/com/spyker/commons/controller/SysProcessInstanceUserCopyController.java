@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 流程抄送数据--用户和实例唯一值 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程抄送数据--用户和实例唯一值 前端控制器 */
 @Tag(name = "流程抄送数据--用户和实例唯一值", description = "流程抄送数据--用户和实例唯一值")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,37 @@ public class SysProcessInstanceUserCopyController extends BaseController {
     private final SysProcessInstanceUserCopyService sysProcessInstanceUserCopyService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysProcessInstanceUserCopy> add(
+            @RequestBody SysProcessInstanceUserCopy add) {
+
+        sysProcessInstanceUserCopyService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysProcessInstanceUserCopy> delete(@PathVariable("id") String id) {
+
+        sysProcessInstanceUserCopyService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysProcessInstanceUserCopy> detail(@PathVariable("id") String id) {
+
+        SysProcessInstanceUserCopy result = sysProcessInstanceUserCopyService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -87,27 +113,6 @@ public class SysProcessInstanceUserCopyController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysProcessInstanceUserCopy> detail(@PathVariable("id") String id) {
-
-        SysProcessInstanceUserCopy result = sysProcessInstanceUserCopyService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysProcessInstanceUserCopy> add(
-            @RequestBody SysProcessInstanceUserCopy add) {
-
-        sysProcessInstanceUserCopyService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -117,16 +122,6 @@ public class SysProcessInstanceUserCopyController extends BaseController {
         update.setId(id);
 
         sysProcessInstanceUserCopyService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "流程抄送数据--用户和实例唯一值--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysProcessInstanceUserCopy> delete(@PathVariable("id") String id) {
-
-        sysProcessInstanceUserCopyService.delete(id);
 
         return RestResponse.success();
     }

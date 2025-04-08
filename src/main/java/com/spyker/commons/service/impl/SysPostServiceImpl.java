@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 岗位信息表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 岗位信息表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,17 +27,10 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost>
     private final SysPostMapper sysPostMapper;
 
     @Override
-    public List<SysPost> query(SysPostSearch search) {
-        List<SysPost> SysPostList = sysPostMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return SysPostList;
-    }
-
-    @Override
-    public IPage<SysPost> queryPage(IPage<SysPost> page, SysPostSearch search) {
-        page = sysPostMapper.queryPage(page, search);
-
-        return page;
+        return RestResponse.success();
     }
 
     @Override
@@ -60,15 +48,22 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost>
     }
 
     @Override
-    public RestResponse<?> update(SysPost sysPost) {
-        updateById(sysPost);
+    public List<SysPost> query(SysPostSearch search) {
+        List<SysPost> SysPostList = sysPostMapper.query(search);
 
-        return RestResponse.success();
+        return SysPostList;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+    public IPage<SysPost> queryPage(IPage<SysPost> page, SysPostSearch search) {
+        page = sysPostMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysPost sysPost) {
+        updateById(sysPost);
 
         return RestResponse.success();
     }

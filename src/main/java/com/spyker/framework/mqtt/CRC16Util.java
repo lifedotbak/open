@@ -10,23 +10,24 @@ public final class CRC16Util {
 
     private CRC16Util() {}
 
-    // {"msg":"C0C0C0FF48444C4D495241434C45AAAA0FFDFEFFFE00312802010000007A83"}
-    public static void main(String[] args) {
-
-        System.out.println(crc16ModbusLowHigh("01 03 00 01 00 02"));
-    }
-
     /**
-     * CRC16_MODBUS 低位在前
+     * 转换为低位在前
      *
-     * @param validationData
+     * @param crcValue
      * @return
      */
-    public static String crc16ModbusLowHigh(String validationData) {
+    private static String convertLowHigh(@NonNull String crcValue) {
 
-        String result = crc(CrcModel.CRC16_MODBUS, validationData);
+        if (null == crcValue || crcValue.length() > 4) {
+            return "";
+        }
 
-        return convertLowHigh(result);
+        crcValue = StringUtils.leftPad(crcValue, 4, "0");
+
+        String high = crcValue.substring(0, 2);
+        String low = crcValue.substring(2, 4);
+
+        return low + high;
     }
 
     /**
@@ -55,26 +56,6 @@ public final class CRC16Util {
         return result;
     }
 
-    /**
-     * 转换为低位在前
-     *
-     * @param crcValue
-     * @return
-     */
-    private static String convertLowHigh(@NonNull String crcValue) {
-
-        if (null == crcValue || crcValue.length() > 4) {
-            return "";
-        }
-
-        crcValue = StringUtils.leftPad(crcValue, 4, "0");
-
-        String high = crcValue.substring(0, 2);
-        String low = crcValue.substring(2, 4);
-
-        return low + high;
-    }
-
     private static byte[] hexStr2Bytes(String src) {
         src = src.replaceAll(" ", "");
         int m = 0, n = 0;
@@ -93,6 +74,25 @@ public final class CRC16Util {
             }
         }
         return ret;
+    }
+
+    // {"msg":"C0C0C0FF48444C4D495241434C45AAAA0FFDFEFFFE00312802010000007A83"}
+    public static void main(String[] args) {
+
+        System.out.println(crc16ModbusLowHigh("01 03 00 01 00 02"));
+    }
+
+    /**
+     * CRC16_MODBUS 低位在前
+     *
+     * @param validationData
+     * @return
+     */
+    public static String crc16ModbusLowHigh(String validationData) {
+
+        String result = crc(CrcModel.CRC16_MODBUS, validationData);
+
+        return convertLowHigh(result);
     }
 
     public static String crc16Xmodem(String validationData) {

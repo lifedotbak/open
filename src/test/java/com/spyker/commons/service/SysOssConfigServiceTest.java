@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 对象存储配置表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 对象存储配置表 服务测试类 */
 @Slf4j
 public class SysOssConfigServiceTest extends BaseTest {
 
     @Autowired private SysOssConfigService service;
-
-    @Test
-    public void get() {
-        SysOssConfig result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -73,44 +57,14 @@ public class SysOssConfigServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysOssConfig update = new SysOssConfig();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setConfigKey("configKey");
-
-        update.setAccessKey("accessKey");
-
-        update.setSecretKey("secretKey");
-
-        update.setBucketName("bucketName");
-
-        update.setPrefix("prefix");
-
-        update.setEndpoint("endpoint");
-
-        update.setDomain("domain");
-
-        update.setIsHttps("isHttps");
-
-        update.setRegion("region");
-
-        update.setAccessPolicy("accessPolicy");
-
-        update.setStatus("status");
-
-        update.setExt1("ext1");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setRemark("remark");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysOssConfig result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -187,5 +141,46 @@ public class SysOssConfigServiceTest extends BaseTest {
         search.setRemark("remark");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysOssConfig update = new SysOssConfig();
+
+        update.setId("id");
+
+        update.setConfigKey("configKey");
+
+        update.setAccessKey("accessKey");
+
+        update.setSecretKey("secretKey");
+
+        update.setBucketName("bucketName");
+
+        update.setPrefix("prefix");
+
+        update.setEndpoint("endpoint");
+
+        update.setDomain("domain");
+
+        update.setIsHttps("isHttps");
+
+        update.setRegion("region");
+
+        update.setAccessPolicy("accessPolicy");
+
+        update.setStatus("status");
+
+        update.setExt1("ext1");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setRemark("remark");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

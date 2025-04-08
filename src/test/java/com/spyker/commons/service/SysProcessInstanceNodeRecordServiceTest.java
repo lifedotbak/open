@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程节点记录 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点记录 服务测试类 */
 @Slf4j
 public class SysProcessInstanceNodeRecordServiceTest extends BaseTest {
 
     @Autowired private SysProcessInstanceNodeRecordService service;
-
-    @Test
-    public void get() {
-        SysProcessInstanceNodeRecord result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -71,40 +55,14 @@ public class SysProcessInstanceNodeRecordServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessInstanceNodeRecord update = new SysProcessInstanceNodeRecord();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setFlowId("flowId");
-
-        update.setProcessInstanceId("processInstanceId");
-
-        update.setData("data");
-
-        update.setNodeId("nodeId");
-
-        update.setNodeType("nodeType");
-
-        update.setNodeName("nodeName");
-        update.setStatus(1);
-
-        update.setExecutionId("executionId");
-
-        update.setParentNodeId("parentNodeId");
-
-        update.setFlowUniqueId("flowUniqueId");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessInstanceNodeRecord result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -176,5 +134,42 @@ public class SysProcessInstanceNodeRecordServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessInstanceNodeRecord update = new SysProcessInstanceNodeRecord();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setFlowId("flowId");
+
+        update.setProcessInstanceId("processInstanceId");
+
+        update.setData("data");
+
+        update.setNodeId("nodeId");
+
+        update.setNodeType("nodeType");
+
+        update.setNodeName("nodeName");
+        update.setStatus(1);
+
+        update.setExecutionId("executionId");
+
+        update.setParentNodeId("parentNodeId");
+
+        update.setFlowUniqueId("flowUniqueId");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

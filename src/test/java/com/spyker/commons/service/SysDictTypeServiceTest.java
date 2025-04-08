@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 字典类型表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 字典类型表 服务测试类 */
 @Slf4j
 public class SysDictTypeServiceTest extends BaseTest {
 
     @Autowired private SysDictTypeService service;
-
-    @Test
-    public void get() {
-        SysDictType result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -55,26 +39,14 @@ public class SysDictTypeServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysDictType update = new SysDictType();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setDictName("dictName");
-
-        update.setDictType("dictType");
-
-        update.setStatus("status");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setRemark("remark");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysDictType result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -115,5 +87,28 @@ public class SysDictTypeServiceTest extends BaseTest {
         search.setRemark("remark");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysDictType update = new SysDictType();
+
+        update.setId("id");
+
+        update.setDictName("dictName");
+
+        update.setDictType("dictType");
+
+        update.setStatus("status");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setRemark("remark");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

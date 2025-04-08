@@ -8,23 +8,18 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 系统访问记录 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 系统访问记录 服务类 */
 public interface SysLoginInfoService extends IService<SysLoginInfo> {
 
-    List<SysLoginInfo> query(SysLoginInfoSearch search);
-
-    IPage<SysLoginInfo> queryPage(IPage<SysLoginInfo> page, SysLoginInfoSearch search);
+    RestResponse<?> delete(String id);
 
     SysLoginInfo get(String id);
 
     RestResponse<?> insert(SysLoginInfo sysLogininfor);
 
-    RestResponse<?> update(SysLoginInfo sysLogininfor);
+    List<SysLoginInfo> query(SysLoginInfoSearch search);
 
-    RestResponse<?> delete(String id);
+    IPage<SysLoginInfo> queryPage(IPage<SysLoginInfo> page, SysLoginInfoSearch search);
+
+    RestResponse<?> update(SysLoginInfo sysLogininfor);
 }

@@ -8,11 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-/**
- * 获取i18n资源文件
- *
- * @author spyker
- */
+/** 获取i18n资源文件 */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageUtils {
 

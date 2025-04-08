@@ -1,10 +1,6 @@
 package com.spyker.framework.exception;
 
-/**
- * 业务异常
- *
- * @author spyker
- */
+/** 业务异常 */
 public final class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +30,10 @@ public final class BusinessException extends RuntimeException {
         this.code = code;
     }
 
+    public Integer getCode() {
+        return code;
+    }
+
     public String getDetailMessage() {
         return detailMessage;
     }
@@ -51,9 +51,5 @@ public final class BusinessException extends RuntimeException {
     public BusinessException setMessage(String message) {
         this.message = message;
         return this;
-    }
-
-    public Integer getCode() {
-        return code;
     }
 }

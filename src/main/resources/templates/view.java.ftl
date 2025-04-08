@@ -12,9 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
 * ${table.comment!}视图对象
-*
-* @author ${author}
-* @since ${date}
 */
 <#if entityLombokModel>
     @Data

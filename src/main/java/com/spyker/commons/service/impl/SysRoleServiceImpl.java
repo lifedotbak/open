@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 角色信息表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 角色信息表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,17 +27,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
     private final SysRoleMapper sysRoleMapper;
 
     @Override
-    public List<SysRole> query(SysRoleSearch search) {
-        List<SysRole> SysRoleList = sysRoleMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return SysRoleList;
-    }
-
-    @Override
-    public IPage<SysRole> queryPage(IPage<SysRole> page, SysRoleSearch search) {
-        page = sysRoleMapper.queryPage(page, search);
-
-        return page;
+        return RestResponse.success();
     }
 
     @Override
@@ -60,15 +48,22 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
     }
 
     @Override
-    public RestResponse<?> update(SysRole sysRole) {
-        updateById(sysRole);
+    public List<SysRole> query(SysRoleSearch search) {
+        List<SysRole> SysRoleList = sysRoleMapper.query(search);
 
-        return RestResponse.success();
+        return SysRoleList;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+    public IPage<SysRole> queryPage(IPage<SysRole> page, SysRoleSearch search) {
+        page = sysRoleMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysRole sysRole) {
+        updateById(sysRole);
 
         return RestResponse.success();
     }

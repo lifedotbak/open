@@ -2,11 +2,7 @@ package com.spyker.framework.tencent.pay.v3.entity.pay;
 
 import lombok.Data;
 
-/**
- * 通知报文解析amount信息
- *
- * @author spyker
- */
+/** 通知报文解析amount信息 */
 @Data
 public class PayNotifyCiphertextParseAmount {
 

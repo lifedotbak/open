@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程执行id数据 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程执行id数据 服务测试类 */
 @Slf4j
 public class SysProcessInstanceExecutionServiceTest extends BaseTest {
 
     @Autowired private SysProcessInstanceExecutionService service;
-
-    @Test
-    public void get() {
-        SysProcessInstanceExecution result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -61,31 +45,14 @@ public class SysProcessInstanceExecutionServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessInstanceExecution update = new SysProcessInstanceExecution();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setTenantId("tenantId");
-
-        update.setProcessInstanceId("processInstanceId");
-
-        update.setNodeId("nodeId");
-
-        update.setExecutionId("executionId");
-
-        update.setParentExecutionId("parentExecutionId");
-
-        update.setFlowId("flowId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessInstanceExecution result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -138,5 +105,33 @@ public class SysProcessInstanceExecutionServiceTest extends BaseTest {
         search.setFlowId("flowId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessInstanceExecution update = new SysProcessInstanceExecution();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setTenantId("tenantId");
+
+        update.setProcessInstanceId("processInstanceId");
+
+        update.setNodeId("nodeId");
+
+        update.setExecutionId("executionId");
+
+        update.setParentExecutionId("parentExecutionId");
+
+        update.setFlowId("flowId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

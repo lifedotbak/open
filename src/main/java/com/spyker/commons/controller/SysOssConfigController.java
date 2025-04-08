@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 对象存储配置表 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 对象存储配置表 前端控制器 */
 @Tag(name = "对象存储配置表", description = "对象存储配置表")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,36 @@ public class SysOssConfigController extends BaseController {
     private final SysOssConfigService sysOssConfigService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "对象存储配置表--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysOssConfig> add(@RequestBody SysOssConfig add) {
+
+        sysOssConfigService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "对象存储配置表--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysOssConfig> delete(@PathVariable("id") String id) {
+
+        sysOssConfigService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "对象存储配置表--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysOssConfig> detail(@PathVariable("id") String id) {
+
+        SysOssConfig result = sysOssConfigService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -83,26 +108,6 @@ public class SysOssConfigController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "对象存储配置表--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysOssConfig> detail(@PathVariable("id") String id) {
-
-        SysOssConfig result = sysOssConfigService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "对象存储配置表--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysOssConfig> add(@RequestBody SysOssConfig add) {
-
-        sysOssConfigService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "对象存储配置表--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -112,16 +117,6 @@ public class SysOssConfigController extends BaseController {
         update.setId(id);
 
         sysOssConfigService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "对象存储配置表--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysOssConfig> delete(@PathVariable("id") String id) {
-
-        sysOssConfigService.delete(id);
 
         return RestResponse.success();
     }

@@ -28,8 +28,6 @@ import java.util.Base64;
  * signature="uOVRnA4qG/MNnYzdQxJanN+zU+lTgIcnU9BxGw5dKjK+VdEUz2FeIoC+D5sB/LN
  * +nGzX3hfZg6r5wT1pl2ZobmIc6p0ldN7J6yDgUzbX8Uk3sD4a4eZVPTBvqNDoUqcYMlZ9uuDdCvNv4TM3c1WzsXUrExwVkI1XO5jCNbgDJ25nkT
  * /c1gIFvqoogl7MdSFGc4W4xZsqCItnqbypR3RuGIlR9h9vlRsy7zJR9PBI83X8alLDIfR1ukt1P7tMnmogZ0cuDY8cZsd8ZlCgLadmvej58SLsIkVxFJ8XyUgx9FmutKSYTmYtWBZ0+tNvfGmbXU7cob8H/4nLBiCwIUFluw==",timestamp="1554208460",serial_no="1DDE55AD98ED71D6EDD4A4A16996DE7B47773A8C"
- *
- * @author zhangzhaofeng
  */
 public class SignRequestAuthUtil {
 
@@ -53,6 +51,37 @@ public class SignRequestAuthUtil {
     @SneakyThrows
     public String generateHttpHeader(RequestAuth prePayAuth) {
         return schema + " " + generateToken(prePayAuth);
+    }
+
+    /**
+     * 构造的请求签名串
+     *
+     * @param method
+     * @param url
+     * @param timestamp
+     * @param nonceStr
+     * @param body
+     * @return
+     */
+    private String buildMessage(RequestAuth prePayAuth) {
+
+        HttpUrl httpurl = HttpUrl.parse(prePayAuth.getUrl());
+
+        StringBuilder canonicalUrl = new StringBuilder(httpurl.encodedPath());
+        if (httpurl.encodedQuery() != null) {
+            canonicalUrl.append("?").append(httpurl.encodedQuery());
+        }
+
+        return prePayAuth.getMethod()
+                + "\n"
+                + canonicalUrl
+                        .append("\n")
+                        .append(prePayAuth.getTimestamp())
+                        .append("\n")
+                        .append(prePayAuth.getNonce_str())
+                        .append("\n")
+                        .append(prePayAuth.getBody())
+                        .append("\n");
     }
 
     /**
@@ -86,37 +115,6 @@ public class SignRequestAuthUtil {
                 + "signature=\""
                 + signature
                 + "\"";
-    }
-
-    /**
-     * 构造的请求签名串
-     *
-     * @param method
-     * @param url
-     * @param timestamp
-     * @param nonceStr
-     * @param body
-     * @return
-     */
-    private String buildMessage(RequestAuth prePayAuth) {
-
-        HttpUrl httpurl = HttpUrl.parse(prePayAuth.getUrl());
-
-        StringBuilder canonicalUrl = new StringBuilder(httpurl.encodedPath());
-        if (httpurl.encodedQuery() != null) {
-            canonicalUrl.append("?").append(httpurl.encodedQuery());
-        }
-
-        return prePayAuth.getMethod()
-                + "\n"
-                + canonicalUrl
-                        .append("\n")
-                        .append(prePayAuth.getTimestamp())
-                        .append("\n")
-                        .append(prePayAuth.getNonce_str())
-                        .append("\n")
-                        .append(prePayAuth.getBody())
-                        .append("\n");
     }
 
     /**

@@ -9,22 +9,17 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * 用户信息表 Mapper 接口
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 用户信息表 Mapper 接口 */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
+
+    SysUser getUserByName(String userName);
 
     List<SysUser> query(SysUserSearch search);
 
     IPage<SysUser> queryPage(IPage<SysUser> page, SysUserSearch search);
 
-    SysUser getUserByName(String userName);
+    List<String> queryPermsById(String userId);
 
     List<String> queryRolesById(String userId);
-
-    List<String> queryPermsById(String userId);
 }

@@ -8,25 +8,22 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 用户信息表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 用户信息表 服务类 */
 public interface SysUserService extends IService<SysUser> {
 
-    List<SysUser> query(SysUserSearch search);
+    RestResponse<?> delete(String id);
 
-    IPage<SysUser> queryPage(IPage<SysUser> page, SysUserSearch search);
+    void deleteUserThrowException(String id);
 
     SysUser get(String id);
 
     RestResponse<?> insert(SysUser sysUser);
 
-    RestResponse<?> update(SysUser sysUser);
-
-    RestResponse<?> delete(String id);
-
     boolean login(String userName, String password);
+
+    List<SysUser> query(SysUserSearch search);
+
+    IPage<SysUser> queryPage(IPage<SysUser> page, SysUserSearch search);
+
+    RestResponse<?> update(SysUser sysUser);
 }

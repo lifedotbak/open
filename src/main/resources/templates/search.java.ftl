@@ -22,8 +22,6 @@ import lombok.experimental.Accessors;
 /**
 * ${table.comment!}查询类
 *
-* @author ${author}
-* @since ${date}
 */
 <#if entityLombokModel>
 @Data

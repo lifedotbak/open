@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 异常日志表查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 异常日志表查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysExceptionLogSearch对象", description = "异常日志表Search对象")

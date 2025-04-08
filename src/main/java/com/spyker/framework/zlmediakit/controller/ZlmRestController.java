@@ -23,13 +23,6 @@ public class ZlmRestController {
 
     private final ExZlmProperties exZlmProperties;
 
-    @GetMapping("/getProperties")
-    public ServerResponse<ExZlmProperties> getProperties() {
-        ServerResponse<ExZlmProperties> result = new ServerResponse<>();
-        result.setData(exZlmProperties);
-        return result;
-    }
-
     @GetMapping("/getApiList")
     public ServerResponse<List<String>> getApiList() {
 
@@ -37,6 +30,13 @@ public class ZlmRestController {
                 ZlmRestService.getApiList(
                         "http://192.168.200.81:8080", "035c73f7-bb6b-4889-a715-d9eb2d1925cc");
 
+        return result;
+    }
+
+    @GetMapping("/getProperties")
+    public ServerResponse<ExZlmProperties> getProperties() {
+        ServerResponse<ExZlmProperties> result = new ServerResponse<>();
+        result.setData(exZlmProperties);
         return result;
     }
 

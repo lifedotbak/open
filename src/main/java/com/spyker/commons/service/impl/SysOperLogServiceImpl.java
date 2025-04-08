@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 操作日志记录 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 操作日志记录 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,17 +27,10 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
     private final SysOperLogMapper sysOperLogMapper;
 
     @Override
-    public List<SysOperLog> query(SysOperLogSearch search) {
-        List<SysOperLog> SysOperLogList = sysOperLogMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return SysOperLogList;
-    }
-
-    @Override
-    public IPage<SysOperLog> queryPage(IPage<SysOperLog> page, SysOperLogSearch search) {
-        page = sysOperLogMapper.queryPage(page, search);
-
-        return page;
+        return RestResponse.success();
     }
 
     @Override
@@ -60,15 +48,22 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
     }
 
     @Override
-    public RestResponse<?> update(SysOperLog sysOperLog) {
-        updateById(sysOperLog);
+    public List<SysOperLog> query(SysOperLogSearch search) {
+        List<SysOperLog> SysOperLogList = sysOperLogMapper.query(search);
 
-        return RestResponse.success();
+        return SysOperLogList;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+    public IPage<SysOperLog> queryPage(IPage<SysOperLog> page, SysOperLogSearch search) {
+        page = sysOperLogMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysOperLog sysOperLog) {
+        updateById(sysOperLog);
 
         return RestResponse.success();
     }

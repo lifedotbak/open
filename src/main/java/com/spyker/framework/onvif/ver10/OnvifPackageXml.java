@@ -29,28 +29,22 @@ import javax.imageio.ImageIO;
 @Slf4j
 public class OnvifPackageXml {
 
-    public static String mdeia_get_snap_shot_uri(String username, String password, String token) {
-        try {
-
-            WsseUsernameToken account = getWsseUsernameToken(username, password);
-
-            StringBuffer sb = getRequestXml("wsdl/mdeia_get_snap_shot_uri.wsdl");
-
-            String streamXml =
-                    sb.toString()
-                            .replace("{username}", account.getUsername())
-                            .replace("{password}", account.getPassword())
-                            .replace("{nonce}", account.getNonce())
-                            .replace("{created}", account.getCreated())
-                            .replace("{token}", token);
-
-            return streamXml;
-        } catch (IOException e) {
-
-            log.error("error-->{}", e);
-
-            return null;
+    /** ----------------------------------- 功能 -------------------------------------* */
+    @NotNull
+    private static StringBuffer getRequestXml(String path) throws IOException {
+        Resource resource = new ClassPathResource(path);
+        InputStream is = resource.getInputStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        StringBuffer sb = new StringBuffer();
+        String data = null;
+        while ((data = br.readLine()) != null) {
+            sb.append(data);
         }
+        br.close();
+        isr.close();
+        is.close();
+        return sb;
     }
 
     private static WsseUsernameToken getWsseUsernameToken(String username, String password) {
@@ -92,22 +86,28 @@ public class OnvifPackageXml {
         }
     }
 
-    /** ----------------------------------- 功能 -------------------------------------* */
-    @NotNull
-    private static StringBuffer getRequestXml(String path) throws IOException {
-        Resource resource = new ClassPathResource(path);
-        InputStream is = resource.getInputStream();
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(isr);
-        StringBuffer sb = new StringBuffer();
-        String data = null;
-        while ((data = br.readLine()) != null) {
-            sb.append(data);
+    public static String mdeia_get_snap_shot_uri(String username, String password, String token) {
+        try {
+
+            WsseUsernameToken account = getWsseUsernameToken(username, password);
+
+            StringBuffer sb = getRequestXml("wsdl/mdeia_get_snap_shot_uri.wsdl");
+
+            String streamXml =
+                    sb.toString()
+                            .replace("{username}", account.getUsername())
+                            .replace("{password}", account.getPassword())
+                            .replace("{nonce}", account.getNonce())
+                            .replace("{created}", account.getCreated())
+                            .replace("{token}", token);
+
+            return streamXml;
+        } catch (IOException e) {
+
+            log.error("error-->{}", e);
+
+            return null;
         }
-        br.close();
-        isr.close();
-        is.close();
-        return sb;
     }
 
     /***

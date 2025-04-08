@@ -9,11 +9,7 @@ import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Set;
 
-/**
- * 类型转换器
- *
- * @author spyker
- */
+/** 类型转换器 */
 public class ConvertUtils {
     /**
      * 转换为字符串<br>

@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 角色 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 角色 服务测试类 */
 @Slf4j
 public class SysRoleServiceTest extends BaseTest {
 
     @Autowired private SysRoleService service;
-
-    @Test
-    public void get() {
-        SysRole result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -63,31 +47,14 @@ public class SysRoleServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysRole update = new SysRole();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setName("name");
-
-        update.setUserId("userId");
-
-        update.setRoleKey("roleKey");
-        update.setStatus(1);
-
-        update.setTenantId("tenantId");
-        update.setRoleSort(1);
-
-        update.setDataScope(1);
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysRole result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -142,5 +109,33 @@ public class SysRoleServiceTest extends BaseTest {
         search.setDataScope(1);
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysRole update = new SysRole();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setName("name");
+
+        update.setUserId("userId");
+
+        update.setRoleKey("roleKey");
+        update.setStatus(1);
+
+        update.setTenantId("tenantId");
+        update.setRoleSort(1);
+
+        update.setDataScope(1);
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

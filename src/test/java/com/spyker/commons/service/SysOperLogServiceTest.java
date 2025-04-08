@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 操作日志记录 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 操作日志记录 服务测试类 */
 @Slf4j
 public class SysOperLogServiceTest extends BaseTest {
 
     @Autowired private SysOperLogService service;
-
-    @Test
-    public void get() {
-        SysOperLog result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -67,35 +51,14 @@ public class SysOperLogServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysOperLog update = new SysOperLog();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setTitle("title");
-        update.setBusinessType(1);
-
-        update.setMethod("method");
-
-        update.setRequestMethod("requestMethod");
-        update.setOperatorType(1);
-
-        update.setDeptName("deptName");
-
-        update.setOperUrl("operUrl");
-
-        update.setOperIp("operIp");
-
-        update.setOperParam("operParam");
-
-        update.setJsonResult("jsonResult");
-        update.setStatus(1);
-
-        update.setErrorMsg("errorMsg");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysOperLog result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -165,5 +128,37 @@ public class SysOperLogServiceTest extends BaseTest {
         search.setErrorMsg("errorMsg");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysOperLog update = new SysOperLog();
+
+        update.setId("id");
+
+        update.setTitle("title");
+        update.setBusinessType(1);
+
+        update.setMethod("method");
+
+        update.setRequestMethod("requestMethod");
+        update.setOperatorType(1);
+
+        update.setDeptName("deptName");
+
+        update.setOperUrl("operUrl");
+
+        update.setOperIp("operIp");
+
+        update.setOperParam("operParam");
+
+        update.setJsonResult("jsonResult");
+        update.setStatus(1);
+
+        update.setErrorMsg("errorMsg");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

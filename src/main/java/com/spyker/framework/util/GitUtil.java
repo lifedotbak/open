@@ -32,31 +32,31 @@ public class GitUtil {
     @Value("${git.commit.time:}")
     private String commitTime;
 
-    public String getGitCommitId() {
-        return gitCommitId;
-    }
-
     public String getBranch() {
         return branch;
-    }
-
-    public String getGitUrl() {
-        return gitUrl;
     }
 
     public String getBuildDate() {
         return buildDate;
     }
 
-    public String getCommitIdShort() {
-        return commitIdShort;
-    }
-
     public String getBuildVersion() {
         return buildVersion;
     }
 
+    public String getCommitIdShort() {
+        return commitIdShort;
+    }
+
     public String getCommitTime() {
         return commitTime;
+    }
+
+    public String getGitCommitId() {
+        return gitCommitId;
+    }
+
+    public String getGitUrl() {
+        return gitUrl;
     }
 }

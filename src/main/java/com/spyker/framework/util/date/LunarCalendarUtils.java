@@ -40,6 +40,97 @@ public final class LunarCalendarUtils {
             new String[] {"鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"};
 
     /**
+     * 传出农历.year0 .month1 .day2 .yearCyl3 .monCyl4 .dayCyl5 .isLeap6
+     *
+     * @param y
+     * @param m
+     * @return
+     */
+    private long[] Lunar(int y, int m) {
+        long[] nongDate = new long[7];
+        int i = 0, temp = 0, leap = 0;
+        // Date baseDate = new Date(1900, 1, 31);
+        Date baseDate = new GregorianCalendar(1900 + 1900, 1, 31).getTime();
+        // Date objDate = new Date(y, m, 1);
+        Date objDate = new GregorianCalendar(y + 1900, m, 1).getTime();
+        long offset = (objDate.getTime() - baseDate.getTime()) / 86400000L;
+        if (y < 2000) {
+            offset += year19[m - 1];
+        }
+        if (y > 2000) {
+            offset += year20[m - 1];
+        }
+        if (y == 2000) {
+            offset += year2000[m - 1];
+        }
+        nongDate[5] = offset + 40;
+        nongDate[4] = 14;
+
+        for (i = 1900; i < 2050 && offset > 0; i++) {
+            temp = lYearDays(i);
+            offset -= temp;
+            nongDate[4] += 12;
+        }
+        if (offset < 0) {
+            offset += temp;
+            i--;
+            nongDate[4] -= 12;
+        }
+        nongDate[0] = i;
+        nongDate[3] = i - 1864;
+        leap = leapMonth(i); // 闰哪个月
+        nongDate[6] = 0;
+
+        for (i = 1; i < 13 && offset > 0; i++) {
+            // 闰月
+            if (leap > 0 && i == (leap + 1) && nongDate[6] == 0) {
+                --i;
+                nongDate[6] = 1;
+                temp = leapDays((int) nongDate[0]);
+            } else {
+                temp = monthDays((int) nongDate[0], i);
+            }
+
+            // 解除闰月
+            if (nongDate[6] == 1 && i == (leap + 1)) {
+                nongDate[6] = 0;
+            }
+            offset -= temp;
+            if (nongDate[6] == 0) {
+                nongDate[4]++;
+            }
+        }
+
+        if (offset == 0 && leap > 0 && i == leap + 1) {
+            if (nongDate[6] == 1) {
+                nongDate[6] = 0;
+            } else {
+                nongDate[6] = 1;
+                --i;
+                --nongDate[4];
+            }
+        }
+        if (offset < 0) {
+            offset += temp;
+            --i;
+            --nongDate[4];
+        }
+        nongDate[1] = i;
+        nongDate[2] = offset + 1;
+        return nongDate;
+    }
+
+    /**
+     * 传入 月日的offset 传回干支,0=甲子
+     *
+     * @param num
+     * @return
+     */
+    private static String cyclicalm(int num) {
+        return (Gan[num % 10] + Zhi[num % 12]);
+    }
+
+    /**
      * 传回农历 y年的总天数
      *
      * @param y
@@ -71,6 +162,16 @@ public final class LunarCalendarUtils {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * 传回农历 y年闰哪个月 1-12 , 没闰传回 0
+     *
+     * @param y
+     * @return
+     */
+    private static int leapMonth(int y) {
+        return (int) (lunarInfo[y - 1900] & 0xf);
     }
 
     /**
@@ -107,16 +208,6 @@ public final class LunarCalendarUtils {
     public static String cyclical(int y) {
         int num = y - 1900 + 36;
         return (cyclicalm(num));
-    }
-
-    /**
-     * 传入 月日的offset 传回干支,0=甲子
-     *
-     * @param num
-     * @return
-     */
-    private static String cyclicalm(int num) {
-        return (Gan[num % 10] + Zhi[num % 12]);
     }
 
     /**
@@ -359,96 +450,5 @@ public final class LunarCalendarUtils {
         int year = Integer.parseInt(dateStringArray[i++]);
 
         return 0 != leapMonth(year);
-    }
-
-    /**
-     * 传回农历 y年闰哪个月 1-12 , 没闰传回 0
-     *
-     * @param y
-     * @return
-     */
-    private static int leapMonth(int y) {
-        return (int) (lunarInfo[y - 1900] & 0xf);
-    }
-
-    /**
-     * 传出农历.year0 .month1 .day2 .yearCyl3 .monCyl4 .dayCyl5 .isLeap6
-     *
-     * @param y
-     * @param m
-     * @return
-     */
-    private long[] Lunar(int y, int m) {
-        long[] nongDate = new long[7];
-        int i = 0, temp = 0, leap = 0;
-        // Date baseDate = new Date(1900, 1, 31);
-        Date baseDate = new GregorianCalendar(1900 + 1900, 1, 31).getTime();
-        // Date objDate = new Date(y, m, 1);
-        Date objDate = new GregorianCalendar(y + 1900, m, 1).getTime();
-        long offset = (objDate.getTime() - baseDate.getTime()) / 86400000L;
-        if (y < 2000) {
-            offset += year19[m - 1];
-        }
-        if (y > 2000) {
-            offset += year20[m - 1];
-        }
-        if (y == 2000) {
-            offset += year2000[m - 1];
-        }
-        nongDate[5] = offset + 40;
-        nongDate[4] = 14;
-
-        for (i = 1900; i < 2050 && offset > 0; i++) {
-            temp = lYearDays(i);
-            offset -= temp;
-            nongDate[4] += 12;
-        }
-        if (offset < 0) {
-            offset += temp;
-            i--;
-            nongDate[4] -= 12;
-        }
-        nongDate[0] = i;
-        nongDate[3] = i - 1864;
-        leap = leapMonth(i); // 闰哪个月
-        nongDate[6] = 0;
-
-        for (i = 1; i < 13 && offset > 0; i++) {
-            // 闰月
-            if (leap > 0 && i == (leap + 1) && nongDate[6] == 0) {
-                --i;
-                nongDate[6] = 1;
-                temp = leapDays((int) nongDate[0]);
-            } else {
-                temp = monthDays((int) nongDate[0], i);
-            }
-
-            // 解除闰月
-            if (nongDate[6] == 1 && i == (leap + 1)) {
-                nongDate[6] = 0;
-            }
-            offset -= temp;
-            if (nongDate[6] == 0) {
-                nongDate[4]++;
-            }
-        }
-
-        if (offset == 0 && leap > 0 && i == leap + 1) {
-            if (nongDate[6] == 1) {
-                nongDate[6] = 0;
-            } else {
-                nongDate[6] = 1;
-                --i;
-                --nongDate[4];
-            }
-        }
-        if (offset < 0) {
-            offset += temp;
-            --i;
-            --nongDate[4];
-        }
-        nongDate[1] = i;
-        nongDate[2] = offset + 1;
-        return nongDate;
     }
 }

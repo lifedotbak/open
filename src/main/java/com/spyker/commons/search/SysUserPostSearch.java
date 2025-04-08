@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 用户与岗位关联表查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户与岗位关联表查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "SysUserPostSearch对象", description = "用户与岗位关联表Search对象")

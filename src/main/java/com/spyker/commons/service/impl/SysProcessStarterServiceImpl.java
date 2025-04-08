@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 流程发起人范围 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程发起人范围 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -33,23 +28,14 @@ public class SysProcessStarterServiceImpl
 
     private final SysProcessStarterMapper sysProcessStarterMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysProcessStarter> query(SysProcessStarterSearch search) {
-
-        List<SysProcessStarter> result = sysProcessStarterMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysProcessStarter> queryPage(
-            IPage<SysProcessStarter> page, SysProcessStarterSearch search) {
-
-        page = sysProcessStarterMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -78,6 +64,25 @@ public class SysProcessStarterServiceImpl
         return sysProcessStarter;
     }
 
+    @Override
+    public List<SysProcessStarter> query(SysProcessStarterSearch search) {
+
+        List<SysProcessStarter> result = sysProcessStarterMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysProcessStarter> queryPage(
+            IPage<SysProcessStarter> page, SysProcessStarterSearch search) {
+
+        page = sysProcessStarterMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysProcessStarter
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -87,15 +92,5 @@ public class SysProcessStarterServiceImpl
     public SysProcessStarter update(SysProcessStarter sysProcessStarter) {
         updateById(sysProcessStarter);
         return sysProcessStarter;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

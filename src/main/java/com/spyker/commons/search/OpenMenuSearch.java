@@ -5,12 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-/**
- * 菜单管理查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 菜单管理查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "OpenMenuSearch对象", description = "菜单管理Search对象")

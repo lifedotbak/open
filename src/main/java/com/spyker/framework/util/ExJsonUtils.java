@@ -20,11 +20,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * JSON 工具类
- *
- * @author spyker
- */
+/** JSON 工具类 */
 @UtilityClass
 @Slf4j
 public class ExJsonUtils {

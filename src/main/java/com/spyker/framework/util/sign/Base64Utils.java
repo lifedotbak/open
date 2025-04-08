@@ -2,11 +2,7 @@ package com.spyker.framework.util.sign;
 
 import org.apache.commons.codec.binary.Base64;
 
-/**
- * Base64工具类
- *
- * @author spyker
- */
+/** Base64工具类 */
 public final class Base64Utils {
 
     /**

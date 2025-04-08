@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 用户信息表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 用户信息表 服务测试类 */
 @Slf4j
 public class SysUserServiceTest extends BaseTest {
 
     @Autowired private SysUserService service;
-
-    @Test
-    public void get() {
-        SysUser result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -81,52 +65,14 @@ public class SysUserServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysUser update = new SysUser();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-
-        update.setDeptId("deptId");
-
-        update.setUserName("userName");
-
-        update.setNickName("nickName");
-
-        update.setPinyin("pinyin");
-
-        update.setPy("py");
-
-        update.setUserType("userType");
-
-        update.setEmail("email");
-
-        update.setPhoneNumber("phoneNumber");
-
-        update.setSex("sex");
-
-        update.setAvatarUrl("avatarUrl");
-
-        update.setPassword("password");
-
-        update.setStatus("status");
-
-        update.setDelFlag("delFlag");
-
-        update.setLoginIp("loginIp");
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setRemark("remark");
-
-        update.setParentId("parentId");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysUser result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -219,5 +165,54 @@ public class SysUserServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysUser update = new SysUser();
+
+        update.setId("id");
+
+        update.setDeptId("deptId");
+
+        update.setUserName("userName");
+
+        update.setNickName("nickName");
+
+        update.setPinyin("pinyin");
+
+        update.setPy("py");
+
+        update.setUserType("userType");
+
+        update.setEmail("email");
+
+        update.setPhoneNumber("phoneNumber");
+
+        update.setSex("sex");
+
+        update.setAvatarUrl("avatarUrl");
+
+        update.setPassword("password");
+
+        update.setStatus("status");
+
+        update.setDelFlag("delFlag");
+
+        update.setLoginIp("loginIp");
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setRemark("remark");
+
+        update.setParentId("parentId");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

@@ -1,10 +1,6 @@
 package com.spyker.framework.constants;
 
-/**
- * 返回状态码
- *
- * @author spyker
- */
+/** 返回状态码 */
 public interface HttpStatus {
 
     /** 操作成功 */

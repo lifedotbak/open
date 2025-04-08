@@ -4,6 +4,26 @@ import java.text.DecimalFormat;
 
 public final class DecimalFormatUtils {
 
+    public enum Format {
+
+        /** 十分位 */
+        tenth("###.#")
+
+        /** 百分位 */
+        ,
+        percentile("###.##");
+
+        private final String format;
+
+        Format(String format) {
+            this.format = format;
+        }
+
+        public String getFormat() {
+            return format;
+        }
+    }
+
     public static float format(double value, Format format) {
         DecimalFormat df = new DecimalFormat(format.getFormat());
 
@@ -30,25 +50,5 @@ public final class DecimalFormatUtils {
      */
     public static String formatFloat(float f, String format) {
         return String.format(format, f);
-    }
-
-    public enum Format {
-
-        /** 十分位 */
-        tenth("###.#")
-
-        /** 百分位 */
-        ,
-        percentile("###.##");
-
-        private final String format;
-
-        Format(String format) {
-            this.format = format;
-        }
-
-        public String getFormat() {
-            return format;
-        }
     }
 }

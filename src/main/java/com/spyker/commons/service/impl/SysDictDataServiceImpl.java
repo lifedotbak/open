@@ -15,12 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 字典数据表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 字典数据表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -31,19 +26,8 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
     private final SysDictDataMapper sysDictDataMapper;
 
     @Override
-    public List<SysDictData> query(SysDictDataSearch search) {
-        List<SysDictData> result = sysDictDataMapper.query(search);
-
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysDictData> queryPage(IPage<SysDictData> page, SysDictDataSearch search) {
-        page = sysDictDataMapper.queryPage(page, search);
-
-        return page;
+    public void delete(String id) {
+        removeById(id);
     }
 
     @Override
@@ -64,15 +48,26 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
     }
 
     @Override
+    public List<SysDictData> query(SysDictDataSearch search) {
+        List<SysDictData> result = sysDictDataMapper.query(search);
+
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysDictData> queryPage(IPage<SysDictData> page, SysDictDataSearch search) {
+        page = sysDictDataMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
     public SysDictData update(SysDictData sysDictData) {
 
         updateById(sysDictData);
 
         return sysDictData;
-    }
-
-    @Override
-    public void delete(String id) {
-        removeById(id);
     }
 }

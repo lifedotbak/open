@@ -6,12 +6,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * 操作日志记录
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 操作日志记录 */
 @Data
 public class OperationLog {
 

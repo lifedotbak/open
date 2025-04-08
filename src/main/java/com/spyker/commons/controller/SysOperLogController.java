@@ -32,12 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 操作日志记录 前端控制器
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 操作日志记录 前端控制器 */
 @Tag(name = "操作日志记录", description = "操作日志记录")
 @SaCheckLogin
 @RequiredArgsConstructor
@@ -49,6 +44,36 @@ public class SysOperLogController extends BaseController {
     private final SysOperLogService sysOperLogService;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
+
+    @Operation(summary = "新增", description = "新增")
+    @PostMapping("/")
+    @ControllerLogAnnotation(title = "操作日志记录--新增", businessType = BusinessTypeEnum.INSERT)
+    public RestResponse<SysOperLog> add(@RequestBody SysOperLog add) {
+
+        sysOperLogService.insert(add);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "删除", description = "删除")
+    @DeleteMapping("/{id}")
+    @ControllerLogAnnotation(title = "操作日志记录--删除", businessType = BusinessTypeEnum.DELETE)
+    public RestResponse<SysOperLog> delete(@PathVariable("id") String id) {
+
+        sysOperLogService.delete(id);
+
+        return RestResponse.success();
+    }
+
+    @Operation(summary = "详情", description = "详情")
+    @GetMapping("/{id}")
+    @ControllerLogAnnotation(title = "操作日志记录--详情", businessType = BusinessTypeEnum.QUERY)
+    public RestResponse<SysOperLog> detail(@PathVariable("id") String id) {
+
+        SysOperLog result = sysOperLogService.get(id);
+
+        return RestResponse.success(result);
+    }
 
     @Operation(summary = "列表", description = "列表")
     @GetMapping("/")
@@ -83,26 +108,6 @@ public class SysOperLogController extends BaseController {
         return RestResponse.success(page);
     }
 
-    @Operation(summary = "详情", description = "详情")
-    @GetMapping("/{id}")
-    @ControllerLogAnnotation(title = "操作日志记录--详情", businessType = BusinessTypeEnum.QUERY)
-    public RestResponse<SysOperLog> detail(@PathVariable("id") String id) {
-
-        SysOperLog result = sysOperLogService.get(id);
-
-        return RestResponse.success(result);
-    }
-
-    @Operation(summary = "新增", description = "新增")
-    @PostMapping("/")
-    @ControllerLogAnnotation(title = "操作日志记录--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysOperLog> add(@RequestBody SysOperLog add) {
-
-        sysOperLogService.insert(add);
-
-        return RestResponse.success();
-    }
-
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "操作日志记录--修改", businessType = BusinessTypeEnum.UPDATE)
@@ -112,16 +117,6 @@ public class SysOperLogController extends BaseController {
         update.setId(id);
 
         sysOperLogService.update(update);
-
-        return RestResponse.success();
-    }
-
-    @Operation(summary = "删除", description = "删除")
-    @DeleteMapping("/{id}")
-    @ControllerLogAnnotation(title = "操作日志记录--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysOperLog> delete(@PathVariable("id") String id) {
-
-        sysOperLogService.delete(id);
 
         return RestResponse.success();
     }

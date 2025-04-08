@@ -8,23 +8,18 @@ import com.spyker.framework.web.response.RestResponse;
 
 import java.util.List;
 
-/**
- * 字典类型表 服务类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 字典类型表 服务类 */
 public interface SysDictTypeService extends IService<SysDictType> {
 
-    List<SysDictType> query(SysDictTypeSearch search);
-
-    IPage<SysDictType> queryPage(IPage<SysDictType> page, SysDictTypeSearch search);
+    RestResponse<?> delete(String id);
 
     SysDictType get(String id);
 
     RestResponse<?> insert(SysDictType sysDictType);
 
-    RestResponse<?> update(SysDictType sysDictType);
+    List<SysDictType> query(SysDictTypeSearch search);
 
-    RestResponse<?> delete(String id);
+    IPage<SysDictType> queryPage(IPage<SysDictType> page, SysDictTypeSearch search);
+
+    RestResponse<?> update(SysDictType sysDictType);
 }

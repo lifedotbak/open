@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程节点数据 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点数据 服务测试类 */
 @Slf4j
 public class SysProcessNodeDataServiceTest extends BaseTest {
 
     @Autowired private SysProcessNodeDataService service;
-
-    @Test
-    public void get() {
-        SysProcessNodeData result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -57,27 +41,14 @@ public class SysProcessNodeDataServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessNodeData update = new SysProcessNodeData();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setFlowId("flowId");
-
-        update.setData("data");
-
-        update.setNodeId("nodeId");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessNodeData result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -122,5 +93,29 @@ public class SysProcessNodeDataServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessNodeData update = new SysProcessNodeData();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setFlowId("flowId");
+
+        update.setData("data");
+
+        update.setNodeId("nodeId");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

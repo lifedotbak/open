@@ -2,11 +2,7 @@ package com.spyker.framework.log.annotation;
 
 import java.lang.annotation.*;
 
-/**
- * 日志打印注解 添加到controller方法上
- *
- * @author 121232224@qq.com
- */
+/** 日志打印注解 添加到controller方法上 */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

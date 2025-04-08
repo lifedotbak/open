@@ -30,8 +30,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
  * 微信统一下单(个人到公司)
  *
  * <p>商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再在APP里面调起支付。
- *
- * @author zhangzhaofeng
  */
 @Slf4j
 @AutoConfiguration

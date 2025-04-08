@@ -60,25 +60,37 @@ public class SysProcessFormControllerTest extends BaseTest {
 
     //  private WebTestClient client;
 
-    @BeforeEach
-    void setUp() {
-        //    client =
-        // MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
-        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        cookies = getLoginCookies(LOGIN_URL, mockMvc);
-    }
-
     @Test
     @SneakyThrows
-    public void list_page() {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+    public void add() {
+        SysProcessForm add = new SysProcessForm();
+
+        add.setDelFlag(1);
+
+        add.setUniqueId("uniqueId");
+
+        add.setFormName("formName");
+
+        add.setFormId("formId");
+
+        add.setFormType("formType");
+
+        add.setProps("props");
+
+        add.setTenantId("tenantId");
+
+        add.setFlowId("flowId");
+
+        Gson gson = new Gson();
+
+        String jsonString = gson.toJson(add);
 
         MvcResult mvcResult =
                 mockMvc.perform(
-                                MockMvcRequestBuilders.get(LIST_PAGE_URL)
+                                MockMvcRequestBuilders.post(ADD_URL)
                                         .cookie(cookies)
-                                        .accept(MediaType.APPLICATION_JSON)
-                                        .params(params))
+                                        .content(jsonString)
+                                        .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(MockMvcResultMatchers.status().isOk())
                         .andDo(MockMvcResultHandlers.print())
                         .andReturn();
@@ -88,12 +100,14 @@ public class SysProcessFormControllerTest extends BaseTest {
 
     @Test
     @SneakyThrows
-    public void list() {
+    public void delete() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+
+        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
-                                MockMvcRequestBuilders.get(LIST_URL)
+                                MockMvcRequestBuilders.delete(DELETE_URL)
                                         .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
@@ -126,14 +140,12 @@ public class SysProcessFormControllerTest extends BaseTest {
 
     @Test
     @SneakyThrows
-    public void delete() {
+    public void list() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-
-        params.add("id", "1");
 
         MvcResult mvcResult =
                 mockMvc.perform(
-                                MockMvcRequestBuilders.delete(DELETE_URL)
+                                MockMvcRequestBuilders.get(LIST_URL)
                                         .cookie(cookies)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .params(params))
@@ -146,35 +158,15 @@ public class SysProcessFormControllerTest extends BaseTest {
 
     @Test
     @SneakyThrows
-    public void add() {
-        SysProcessForm add = new SysProcessForm();
-
-        add.setDelFlag(1);
-
-        add.setUniqueId("uniqueId");
-
-        add.setFormName("formName");
-
-        add.setFormId("formId");
-
-        add.setFormType("formType");
-
-        add.setProps("props");
-
-        add.setTenantId("tenantId");
-
-        add.setFlowId("flowId");
-
-        Gson gson = new Gson();
-
-        String jsonString = gson.toJson(add);
+    public void list_page() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
         MvcResult mvcResult =
                 mockMvc.perform(
-                                MockMvcRequestBuilders.post(ADD_URL)
+                                MockMvcRequestBuilders.get(LIST_PAGE_URL)
                                         .cookie(cookies)
-                                        .content(jsonString)
-                                        .contentType(MediaType.APPLICATION_JSON))
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .params(params))
                         .andExpect(MockMvcResultMatchers.status().isOk())
                         .andDo(MockMvcResultHandlers.print())
                         .andReturn();
@@ -220,5 +212,13 @@ public class SysProcessFormControllerTest extends BaseTest {
                         .andReturn();
 
         log.info(mvcResult.getResponse().getContentAsString());
+    }
+
+    @BeforeEach
+    void setUp() {
+        //    client =
+        // MockMvcWebTestClient.bindToApplicationContext(this.webApplicationContext).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+        cookies = getLoginCookies(LOGIN_URL, mockMvc);
     }
 }

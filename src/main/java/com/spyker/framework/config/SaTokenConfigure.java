@@ -12,12 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SaTokenConfigure implements WebMvcConfigurer {
 
-    // Sa-Token 整合 jwt (Simple 简单模式)
-    @Bean
-    public StpLogic getStpLogicJwt() {
-        return new StpLogicJwtForSimple();
-    }
-
     // 注册 Sa-Token 拦截器，打开注解式鉴权功能
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -45,5 +39,11 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         // SaRouter.match("/comment/**", r -> StpUtil.checkPermission("comment"));
         //
         // })).addPathPatterns("/**");
+    }
+
+    // Sa-Token 整合 jwt (Simple 简单模式)
+    @Bean
+    public StpLogic getStpLogicJwt() {
+        return new StpLogicJwtForSimple();
     }
 }

@@ -7,25 +7,20 @@ import com.spyker.commons.search.SysProcessInstanceNodeRecordSearch;
 
 import java.util.List;
 
-/**
- * 流程节点记录 服务接口
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程节点记录 服务接口 */
 public interface SysProcessInstanceNodeRecordService
         extends IService<SysProcessInstanceNodeRecord> {
+
+    boolean delete(String id);
+
+    SysProcessInstanceNodeRecord get(String id);
+
+    SysProcessInstanceNodeRecord insert(SysProcessInstanceNodeRecord sysProcessInstanceNodeRecord);
 
     List<SysProcessInstanceNodeRecord> query(SysProcessInstanceNodeRecordSearch search);
 
     IPage<SysProcessInstanceNodeRecord> queryPage(
             IPage<SysProcessInstanceNodeRecord> page, SysProcessInstanceNodeRecordSearch search);
 
-    SysProcessInstanceNodeRecord get(String id);
-
-    SysProcessInstanceNodeRecord insert(SysProcessInstanceNodeRecord sysProcessInstanceNodeRecord);
-
     SysProcessInstanceNodeRecord update(SysProcessInstanceNodeRecord sysProcessInstanceNodeRecord);
-
-    boolean delete(String id);
 }

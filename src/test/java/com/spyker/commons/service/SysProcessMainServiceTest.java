@@ -11,27 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * 流程主表 服务测试类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 流程主表 服务测试类 */
 @Slf4j
 public class SysProcessMainServiceTest extends BaseTest {
 
     @Autowired private SysProcessMainService service;
-
-    @Test
-    public void get() {
-        SysProcessMain result = service.getById("1");
-        log.info("result------>{}", result);
-    }
-
-    @Test
-    public void delete() {
-        service.delete("1");
-    }
 
     @Test
     public void add() {
@@ -63,32 +47,14 @@ public class SysProcessMainServiceTest extends BaseTest {
     }
 
     @Test
-    public void update() {
-        SysProcessMain update = new SysProcessMain();
+    public void delete() {
+        service.delete("1");
+    }
 
-        update.setId("id");
-        update.setDelFlag(1);
-
-        update.setCreateBy("createBy");
-
-        update.setUpdateBy("updateBy");
-
-        update.setName("name");
-
-        update.setLogo("logo");
-
-        update.setGroupId("groupId");
-        update.setProcessMainSort(1);
-
-        update.setUniqueId("uniqueId");
-
-        update.setRangeShow("rangeShow");
-
-        update.setTenantId("tenantId");
-
-        log.info("update------>{}", update);
-
-        service.update(update);
+    @Test
+    public void get() {
+        SysProcessMain result = service.getById("1");
+        log.info("result------>{}", result);
     }
 
     @Test
@@ -144,5 +110,34 @@ public class SysProcessMainServiceTest extends BaseTest {
         search.setTenantId("tenantId");
 
         service.queryPage(page, search);
+    }
+
+    @Test
+    public void update() {
+        SysProcessMain update = new SysProcessMain();
+
+        update.setId("id");
+        update.setDelFlag(1);
+
+        update.setCreateBy("createBy");
+
+        update.setUpdateBy("updateBy");
+
+        update.setName("name");
+
+        update.setLogo("logo");
+
+        update.setGroupId("groupId");
+        update.setProcessMainSort(1);
+
+        update.setUniqueId("uniqueId");
+
+        update.setRangeShow("rangeShow");
+
+        update.setTenantId("tenantId");
+
+        log.info("update------>{}", update);
+
+        service.update(update);
     }
 }

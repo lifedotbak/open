@@ -15,12 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 公司表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-12-25
- */
+/** 公司表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -29,6 +24,25 @@ public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysComp
         implements SysCompanyService {
 
     private final SysCompanyMapper sysCompanyMapper;
+
+    @Override
+    public boolean delete(String id) {
+        return removeById(id);
+    }
+
+    @Override
+    public SysCompany get(String id) {
+        SysCompany result = getById(id);
+
+        log.info("result-->{}", result);
+
+        return result;
+    }
+
+    @Override
+    public boolean insert(SysCompany sysCompany) {
+        return save(sysCompany);
+    }
 
     @Override
     public List<SysCompany> query(SysCompanySearch search) {
@@ -49,26 +63,7 @@ public class SysCompanyServiceImpl extends ServiceImpl<SysCompanyMapper, SysComp
     }
 
     @Override
-    public SysCompany get(String id) {
-        SysCompany result = getById(id);
-
-        log.info("result-->{}", result);
-
-        return result;
-    }
-
-    @Override
-    public boolean insert(SysCompany sysCompany) {
-        return save(sysCompany);
-    }
-
-    @Override
     public boolean update(SysCompany sysCompany) {
         return updateById(sysCompany);
-    }
-
-    @Override
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

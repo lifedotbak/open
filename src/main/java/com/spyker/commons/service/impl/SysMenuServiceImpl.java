@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 菜单管理 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 菜单管理 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,22 +27,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
 
     private final SysMenuMapper sysMenuMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysMenu> query(SysMenuSearch search) {
-
-        List<SysMenu> result = sysMenuMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysMenu> queryPage(IPage<SysMenu> page, SysMenuSearch search) {
-
-        page = sysMenuMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -76,6 +63,24 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
         return sysMenu;
     }
 
+    @Override
+    public List<SysMenu> query(SysMenuSearch search) {
+
+        List<SysMenu> result = sysMenuMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysMenu> queryPage(IPage<SysMenu> page, SysMenuSearch search) {
+
+        page = sysMenuMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysMenu
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -85,15 +90,5 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu>
     public SysMenu update(SysMenu sysMenu) {
         updateById(sysMenu);
         return sysMenu;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

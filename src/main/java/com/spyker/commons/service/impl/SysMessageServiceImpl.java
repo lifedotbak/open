@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 通知消息 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2024-07-23
- */
+/** 通知消息 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,22 +27,14 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
 
     private final SysMessageMapper sysMessageMapper;
 
+    /**
+     * @param id
+     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
+     */
     @Override
-    public List<SysMessage> query(SysMessageSearch search) {
-
-        List<SysMessage> result = sysMessageMapper.query(search);
-        log.info("result------>{}", result);
-
-        return result;
-    }
-
-    @Override
-    public IPage<SysMessage> queryPage(IPage<SysMessage> page, SysMessageSearch search) {
-
-        page = sysMessageMapper.queryPage(page, search);
-        log.info("page------>{}", page);
-
-        return page;
+    // @CacheEvict(key = "#id")
+    public boolean delete(String id) {
+        return removeById(id);
     }
 
     /**
@@ -76,6 +63,24 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
         return sysMessage;
     }
 
+    @Override
+    public List<SysMessage> query(SysMessageSearch search) {
+
+        List<SysMessage> result = sysMessageMapper.query(search);
+        log.info("result------>{}", result);
+
+        return result;
+    }
+
+    @Override
+    public IPage<SysMessage> queryPage(IPage<SysMessage> page, SysMessageSearch search) {
+
+        page = sysMessageMapper.queryPage(page, search);
+        log.info("page------>{}", page);
+
+        return page;
+    }
+
     /**
      * @param sysMessage
      * @return @CachePut 加了@CachePut注解的方法，会把方法的返回值put到缓存里面缓存起来， 供其它地方使用。它通常用在新增方法上。
@@ -85,15 +90,5 @@ public class SysMessageServiceImpl extends ServiceImpl<SysMessageMapper, SysMess
     public SysMessage update(SysMessage sysMessage) {
         updateById(sysMessage);
         return sysMessage;
-    }
-
-    /**
-     * @param id
-     * @return @CacheEvict 使用了CacheEvict注解的方法，会清空指定缓存。 一般用在更新或者删除的方法上。
-     */
-    @Override
-    // @CacheEvict(key = "#id")
-    public boolean delete(String id) {
-        return removeById(id);
     }
 }

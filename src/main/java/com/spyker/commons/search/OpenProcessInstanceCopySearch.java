@@ -7,12 +7,7 @@ import lombok.experimental.Accessors;
 
 import java.util.Date;
 
-/**
- * 流程抄送数据查询类
- *
- * @author 121232224@qq.com
- * @since 2024-07-22
- */
+/** 流程抄送数据查询类 */
 @Data
 @Accessors(chain = true)
 @Schema(name = "OpenProcessInstanceCopySearch对象", description = "流程抄送数据Search对象")

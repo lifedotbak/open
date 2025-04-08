@@ -16,12 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * 字典类型表 服务实现类
- *
- * @author 121232224@qq.com
- * @since 2023-09-28
- */
+/** 字典类型表 服务实现类 */
 @Service
 @Transactional
 @Slf4j
@@ -32,17 +27,10 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     private final SysDictTypeMapper sysDictTypeMapper;
 
     @Override
-    public List<SysDictType> query(SysDictTypeSearch search) {
-        List<SysDictType> result = sysDictTypeMapper.query(search);
+    public RestResponse<?> delete(String id) {
+        removeById(id);
 
-        return result;
-    }
-
-    @Override
-    public IPage<SysDictType> queryPage(IPage<SysDictType> page, SysDictTypeSearch search) {
-        page = sysDictTypeMapper.queryPage(page, search);
-
-        return page;
+        return RestResponse.success();
     }
 
     @Override
@@ -60,15 +48,22 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     }
 
     @Override
-    public RestResponse<?> update(SysDictType sysDictType) {
-        updateById(sysDictType);
+    public List<SysDictType> query(SysDictTypeSearch search) {
+        List<SysDictType> result = sysDictTypeMapper.query(search);
 
-        return RestResponse.success();
+        return result;
     }
 
     @Override
-    public RestResponse<?> delete(String id) {
-        removeById(id);
+    public IPage<SysDictType> queryPage(IPage<SysDictType> page, SysDictTypeSearch search) {
+        page = sysDictTypeMapper.queryPage(page, search);
+
+        return page;
+    }
+
+    @Override
+    public RestResponse<?> update(SysDictType sysDictType) {
+        updateById(sysDictType);
 
         return RestResponse.success();
     }

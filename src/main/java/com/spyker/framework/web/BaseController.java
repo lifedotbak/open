@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.InitBinder;
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
 
-/**
- * controller基础类,web层通用数据处理
- *
- * @author spyker
- */
+/** controller基础类,web层通用数据处理 */
 public class BaseController {
+
+    /** 返回失败消息 */
+    public RestMapResponse error(String message) {
+        return RestMapResponse.error(message);
+    }
+
+    /** 返回失败消息 */
+    public RestMapResponse error() {
+        return RestMapResponse.error();
+    }
 
     /** 将前台传递过来的日期格式的字符串，自动转化为Date类型 */
     @InitBinder
@@ -31,24 +37,9 @@ public class BaseController {
                 });
     }
 
-    /** 返回成功消息 */
-    public RestMapResponse success(String message) {
-        return RestMapResponse.success(message);
-    }
-
-    /** 返回成功消息 */
-    public RestMapResponse success(Object data) {
-        return RestMapResponse.success(data);
-    }
-
-    /** 返回失败消息 */
-    public RestMapResponse error(String message) {
-        return RestMapResponse.error(message);
-    }
-
-    /** 返回警告消息 */
-    public RestMapResponse warn(String message) {
-        return RestMapResponse.warn(message);
+    /** 页面跳转 */
+    public String redirect(String url) {
+        return ExStringUtils.format("redirect:{}", url);
     }
 
     /** 返回成功 */
@@ -56,13 +47,18 @@ public class BaseController {
         return RestMapResponse.success();
     }
 
-    /** 返回失败消息 */
-    public RestMapResponse error() {
-        return RestMapResponse.error();
+    /** 返回成功消息 */
+    public RestMapResponse success(Object data) {
+        return RestMapResponse.success(data);
     }
 
-    /** 页面跳转 */
-    public String redirect(String url) {
-        return ExStringUtils.format("redirect:{}", url);
+    /** 返回成功消息 */
+    public RestMapResponse success(String message) {
+        return RestMapResponse.success(message);
+    }
+
+    /** 返回警告消息 */
+    public RestMapResponse warn(String message) {
+        return RestMapResponse.warn(message);
     }
 }

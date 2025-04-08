@@ -19,9 +19,6 @@ import org.junit.jupiter.api.Test;
 /**
 *
 * ${table.comment!} 服务测试类
-*
-* @author ${author}
-* @since ${date}
 */
 @Slf4j
 public class ${table.serviceName}Test extends BaseTest {
