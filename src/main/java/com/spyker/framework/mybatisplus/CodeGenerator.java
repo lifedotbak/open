@@ -103,8 +103,11 @@ public class CodeGenerator {
                         .superClass(BaseController.class)
                         .serviceBuilder()
                         .formatServiceFileName("%sService")
+                        .enableFileOverride()
                         .mapperBuilder()
+                        .enableFileOverride()
                         .entityBuilder()
+                        .enableFileOverride()
                         .enableLombok()
                         .enableChainModel()
                         .enableFileOverride()
@@ -163,6 +166,14 @@ public class CodeGenerator {
                         .packageName("repository.redis")
                         .build();
 
+        CustomFile excelEntity =
+                new CustomFile.Builder()
+                        .fileName("Excel.java")
+                        .enableFileOverride()
+                        .templatePath("/templates/excel" + ".java.ftl")
+                        .packageName("excel")
+                        .build();
+
         List<CustomFile> customFiles = new ArrayList<>();
 
         customFiles.add(controllerTestFile);
@@ -170,6 +181,7 @@ public class CodeGenerator {
         customFiles.add(mapperTestFile);
         customFiles.add(searchCustomFile);
         customFiles.add(redisRepository);
+        customFiles.add(excelEntity);
 
         InjectionConfig ic = new InjectionConfig.Builder().customFile(customFiles).build();
 

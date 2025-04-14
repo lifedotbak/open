@@ -2,6 +2,7 @@ package ${package.ServiceImpl};
 
 
 import ${package.Entity}.${entity};
+import ${package.Parent}.excel.${entity}Excel;
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
@@ -109,4 +110,14 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 		return removeById(id);
 	}
 
+
+     @Override
+      public  void importExcel(List<${entity}Excel> excelList){
+
+        for(${entity}Excel excel:excelList){
+            ${entity} insert =  new ${entity}();
+            BeanUtils.copyProperties(excel, insert);
+            save(insert);
+        }
+      }
 }

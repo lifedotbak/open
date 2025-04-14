@@ -16,6 +16,8 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
 // @formatter:off
 
+    void importExcel(List<${entity}Excel> excelList);
+
 	List<${entity}> query(${entity}Search search);
 
 	IPage<${entity}> queryPage(IPage<${entity}> page, ${entity}Search search);
