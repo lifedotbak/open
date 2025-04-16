@@ -17,27 +17,10 @@ public class AliyunConfigProperties {
     private Sms sms;
     private Oss oss;
     private Ram ram;
+    private Tts tts;
 
     @Data
-    private static class Push {
-
-        private String accessKeyId;
-        private String accessKeySecret;
-        private String signName;
-        private String androidKey;
-        private String iosKey;
-    }
-
-    @Data
-    private static class Sms {
-
-        private String accessKeyId;
-        private String accessKeySecret;
-        private String signName;
-    }
-
-    @Data
-    private static class Oss {
+    public static class Oss {
 
         private String accessKeyId;
         private String accessKeySecret;
@@ -52,12 +35,37 @@ public class AliyunConfigProperties {
     }
 
     @Data
-    private static class Ram {
+    public static class Push {
+
+        private String accessKeyId;
+        private String accessKeySecret;
+        private String signName;
+        private String androidKey;
+        private String iosKey;
+    }
+
+    @Data
+    public static class Sms {
+
+        private String accessKeyId;
+        private String accessKeySecret;
+        private String signName;
+    }
+
+    @Data
+    public static class Ram {
 
         private String accessKeyId;
         private String accessKeySecret;
         private String roleArn;
         private String roleSessionName;
         private int durationSeconds;
+    }
+
+    @Data
+    public static class Tts {
+
+        private String accessKeyId;
+        private String accessKeySecret;
     }
 }

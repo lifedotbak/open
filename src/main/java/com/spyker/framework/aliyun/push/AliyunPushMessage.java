@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.util.Map;
 
 @Data
-public class PushMessage {
+public class AliyunPushMessage {
 
     private String accessKeyId;
     private String accessKeySecret;

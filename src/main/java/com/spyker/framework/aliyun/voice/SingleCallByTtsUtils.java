@@ -6,28 +6,38 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.spyker.framework.aliyun.AliyunConfigProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-// @Component
+@AutoConfiguration
+@ConditionalOnClass(AliyunConfigProperties.class)
 public class SingleCallByTtsUtils {
 
-    @Value("${aliyun.accessKeyId}")
-    private String accessKeyId;
+    @Autowired AliyunConfigProperties aliyunConfigProperties;
 
-    @Value("${aliyun.accessKeySecret}")
-    private String accessKeySecret;
+    /**
+     * 您已接单，请尽快到达${address}
+     *
+     * @param calledNumber
+     * @param address
+     */
+    public void TTS_197465247(String calledNumber, String address) {
 
-    public void singleCallByTts(String calledNumber, String ttsParam, String ttsCode) {
+        AliyunConfigProperties.Tts tts = aliyunConfigProperties.getTts();
 
-        DefaultProfile profile = DefaultProfile.getProfile("default", accessKeyId, accessKeySecret);
+        DefaultProfile profile =
+                DefaultProfile.getProfile(
+                        "default", tts.getAccessKeyId(), tts.getAccessKeySecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -37,13 +47,21 @@ public class SingleCallByTtsUtils {
         request.setAction("SingleCallByTts");
         // request.putQueryParameter("CalledShowNumber", "02985796072");
         request.putQueryParameter("CalledNumber", calledNumber);
-        request.putQueryParameter("TtsCode", ttsCode);
-        request.putQueryParameter("TtsParam", ttsParam);
+        request.putQueryParameter("TtsCode", "TTS_197465247");
+
+        Map<String, String> ttsParam = new HashMap<>();
+        ttsParam.put("address", address);
+
+        JSONObject jsonObject = new JSONObject(ttsParam);
+        //		JSONObject jsonObject = JSONObject.fromObject(ttsParam);
+
+        request.putQueryParameter("TtsParam", jsonObject.toString());
         try {
             CommonResponse response = client.getCommonResponse(request);
-            log.info(response.getData());
+            System.out.println(response.getData());
+            log.info("TTS_197465247 response:{}", response.getData());
         } catch (Exception e) {
-            log.error(ttsCode + " exception:", e);
+            log.error("TTS_197465247 exception:", e);
         }
     }
 
@@ -53,9 +71,13 @@ public class SingleCallByTtsUtils {
      * @param calledNumber
      * @param washItem
      */
-    public static void TTS_197595183(String calledNumber, String washItem) {
+    public void TTS_197595183(String calledNumber, String washItem) {
 
-        DefaultProfile profile = DefaultProfile.getProfile("default", "", "");
+        AliyunConfigProperties.Tts tts = aliyunConfigProperties.getTts();
+
+        DefaultProfile profile =
+                DefaultProfile.getProfile(
+                        "default", tts.getAccessKeyId(), tts.getAccessKeySecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -83,15 +105,14 @@ public class SingleCallByTtsUtils {
         }
     }
 
-    /**
-     * 您已接单，请尽快到达${address}
-     *
-     * @param calledNumber
-     * @param address
-     */
-    public static void TTS_197465247(String calledNumber, String address) {
+    public void singleCallByTts(String calledNumber, String ttsParam, String ttsCode) {
 
-        DefaultProfile profile = DefaultProfile.getProfile("default", "", "");
+        AliyunConfigProperties.Tts tts = aliyunConfigProperties.getTts();
+
+        DefaultProfile profile =
+                DefaultProfile.getProfile(
+                        "default", tts.getAccessKeyId(), tts.getAccessKeySecret());
+
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -101,21 +122,13 @@ public class SingleCallByTtsUtils {
         request.setAction("SingleCallByTts");
         // request.putQueryParameter("CalledShowNumber", "02985796072");
         request.putQueryParameter("CalledNumber", calledNumber);
-        request.putQueryParameter("TtsCode", "TTS_197465247");
-
-        Map<String, String> ttsParam = new HashMap<>();
-        ttsParam.put("address", address);
-
-        JSONObject jsonObject = new JSONObject(ttsParam);
-        //		JSONObject jsonObject = JSONObject.fromObject(ttsParam);
-
-        request.putQueryParameter("TtsParam", jsonObject.toString());
+        request.putQueryParameter("TtsCode", ttsCode);
+        request.putQueryParameter("TtsParam", ttsParam);
         try {
             CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
-            log.info("TTS_197465247 response:{}", response.getData());
+            log.info(response.getData());
         } catch (Exception e) {
-            log.error("TTS_197465247 exception:", e);
+            log.error(ttsCode + " exception:", e);
         }
     }
 }

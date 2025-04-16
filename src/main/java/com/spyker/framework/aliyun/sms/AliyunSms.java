@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
-public class Sms {
+public class AliyunSms {
 
     private String phonenumber;
 
@@ -16,12 +16,6 @@ public class Sms {
     /** json 格式 "{\"code\":\"888888\"}" */
     // private String templateParam;
     private String outId;
-
-    private String accessKeyId;
-
-    private String accessSecret;
-
-    private String signName;
 
     private Map<String, Object> paramMap;
 
