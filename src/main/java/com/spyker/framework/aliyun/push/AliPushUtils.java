@@ -8,27 +8,32 @@ import com.aliyuncs.push.model.v20160801.PushResponse;
 import com.aliyuncs.utils.ParameterHelper;
 import com.spyker.framework.aliyun.push.enums.PushMessageType;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AutoConfiguration
+@ConditionalOnClass(AliyunPushProperties.class)
 public class AliPushUtils {
+
+    @Autowired private AliyunPushProperties aliyunPushProperties;
 
     public static void main(String[] args) {
 
         AliyunPushMessage aliyunPushMessage = new AliyunPushMessage();
 
-        aliyunPushMessage.setAccessKeyId("xxx");
-        aliyunPushMessage.setAccessKeySecret("xxx");
-        aliyunPushMessage.setSignName("初集健康");
-        aliyunPushMessage.setAndroidKey(333383909);
-        aliyunPushMessage.setIosKey(333383919);
+        //        aliyunPushMessage.setAccessKeyId("xxx");
+        //        aliyunPushMessage.setAccessKeySecret("xxx");
+        //        aliyunPushMessage.setSignName("初集健康");
+        //        aliyunPushMessage.setAndroidKey(333383909);
+        //        aliyunPushMessage.setIosKey(333383919);
 
         aliyunPushMessage.setPushMessageType(PushMessageType.NOTICE);
         aliyunPushMessage.setTitle("这是一个title");
@@ -41,25 +46,26 @@ public class AliPushUtils {
         ext.put("2", "4444");
         aliyunPushMessage.setExtParametersMap(ext);
 
-        AliPushUtils.push(aliyunPushMessage);
+        //        AliPushUtils.push(aliyunPushMessage);
     }
 
-    public static void push(AliyunPushMessage aliyunPushMessage) {
+    public void push(AliyunPushMessage aliyunPushMessage) {
         pushIos(aliyunPushMessage);
         pushAndroid(aliyunPushMessage);
     }
 
-    private static void pushIos(AliyunPushMessage aliyunPushMessage) {
+    private void pushIos(AliyunPushMessage aliyunPushMessage) {
 
         IClientProfile profile =
                 DefaultProfile.getProfile(
                         "cn-hangzhou",
-                        aliyunPushMessage.getAccessKeyId(),
-                        aliyunPushMessage.getAccessKeySecret());
+                        aliyunPushProperties.getAccessKeyId(),
+                        aliyunPushProperties.getAccessKeySecret());
         DefaultAcsClient client = new DefaultAcsClient(profile);
         PushRequest pushRequest = new PushRequest();
         // 推送目标
-        pushRequest.setAppKey(aliyunPushMessage.getIosKey());
+        pushRequest.setAppKey(aliyunPushProperties.getIosKey());
+        //        pushRequest.setSmsSignName(aliyunPushProperties.getSignName());  TODO
         // 推送目标:DEVICE:按设备推送ALIAS: 按别名推送:ACCOUNT:按帐号推送 TAG:按标签推送; ALL: 广播推送
         pushRequest.setTarget(aliyunPushMessage.getPushTargetType().getType());
         pushRequest.setTargetValue(aliyunPushMessage.getTargetValue());
@@ -150,17 +156,17 @@ public class AliPushUtils {
         }
     }
 
-    private static void pushAndroid(AliyunPushMessage pushMessage) {
+    private void pushAndroid(AliyunPushMessage pushMessage) {
 
         IClientProfile profile =
                 DefaultProfile.getProfile(
                         "cn-hangzhou",
-                        pushMessage.getAccessKeyId(),
-                        pushMessage.getAccessKeySecret());
+                        aliyunPushProperties.getAccessKeyId(),
+                        aliyunPushProperties.getAccessKeySecret());
         DefaultAcsClient client = new DefaultAcsClient(profile);
         PushRequest pushRequest = new PushRequest();
         // 推送目标
-        pushRequest.setAppKey(pushMessage.getAndroidKey());
+        pushRequest.setAppKey(aliyunPushProperties.getAndroidKey());
         // 推送目标:DEVICE:按设备推送ALIAS: 按别名推送:ACCOUNT:按帐号推送 TAG:按标签推送; ALL: 广播推送
         pushRequest.setTarget(pushMessage.getPushTargetType().getType());
         pushRequest.setTargetValue(pushMessage.getTargetValue());

@@ -1,5 +1,6 @@
 package com.spyker.framework.aliyun.oss;
 
+import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.GetObjectRequest;
@@ -7,30 +8,35 @@ import com.aliyun.oss.model.PutObjectResult;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+
 import java.io.File;
 
 @Slf4j
+@AutoConfiguration
+@ConditionalOnClass(AliyunOssProperties.class)
 public class OssFileOperateUtils {
 
-    private OssFileOperateUtils() {}
+    @Autowired private AliyunOssProperties aliyunOssProperties;
 
     /**
      * 下载文件
      *
      * @param ossFileOperateParameters
      */
-    public static void download(OssFileOperateParameters ossFileOperateParameters) {
+    public void download(OssFileOperateParameters ossFileOperateParameters) {
 
         if (null != ossFileOperateParameters) {
 
             // 创建OSSClient实例。
-
             OSS ossClient =
                     new OSSClientBuilder()
                             .build(
-                                    ossFileOperateParameters.getEndpoint(),
-                                    ossFileOperateParameters.getAccessKeyId(),
-                                    ossFileOperateParameters.getAccessKeySecret());
+                                    aliyunOssProperties.getEndPoint(),
+                                    aliyunOssProperties.getAccessKeyId(),
+                                    aliyunOssProperties.getAccessKeySecret());
 
             // 下载文件。
             ossClient.getObject(
@@ -48,7 +54,7 @@ public class OssFileOperateUtils {
      *
      * @param ossFileOperateParameters
      */
-    public static boolean upload(OssFileOperateParameters ossFileOperateParameters) {
+    public boolean upload(OssFileOperateParameters ossFileOperateParameters) {
 
         boolean isSuccessful = false;
 
@@ -58,9 +64,9 @@ public class OssFileOperateUtils {
             OSS ossClient =
                     new OSSClientBuilder()
                             .build(
-                                    ossFileOperateParameters.getEndpoint(),
-                                    ossFileOperateParameters.getAccessKeyId(),
-                                    ossFileOperateParameters.getAccessKeySecret());
+                                    aliyunOssProperties.getEndPoint(),
+                                    aliyunOssProperties.getAccessKeyId(),
+                                    aliyunOssProperties.getAccessKeySecret());
 
             // 上传文件。
             PutObjectResult putObjectResult =
@@ -91,7 +97,7 @@ public class OssFileOperateUtils {
      *
      * @param ossFileOperateParameters
      */
-    public static void delete(OssFileOperateParameters ossFileOperateParameters) {
+    public void delete(OssFileOperateParameters ossFileOperateParameters) {
 
         if (null != ossFileOperateParameters) {
 
@@ -99,19 +105,26 @@ public class OssFileOperateUtils {
             OSS ossClient =
                     new OSSClientBuilder()
                             .build(
-                                    ossFileOperateParameters.getEndpoint(),
-                                    ossFileOperateParameters.getAccessKeyId(),
-                                    ossFileOperateParameters.getAccessKeySecret());
+                                    aliyunOssProperties.getEndPoint(),
+                                    aliyunOssProperties.getAccessKeyId(),
+                                    aliyunOssProperties.getAccessKeySecret());
 
             try {
                 // 上传文件。
                 ossClient.deleteObject(
                         ossFileOperateParameters.getBucketName(),
                         ossFileOperateParameters.getObjectName());
+
+            } catch (ClientException e) {
+                log.error("Failed：");
+                log.error("Error code: " + e.getErrorMessage());
+                log.error("Error message: " + e.getErrorCode());
+                log.error("RequestId: " + e.getRequestId());
+
+                log.error("error -->{}", e);
+            } finally {
                 // 关闭Client。
                 ossClient.shutdown();
-            } catch (Exception e) {
-                log.error("error  ==>{}", e);
             }
         }
     }

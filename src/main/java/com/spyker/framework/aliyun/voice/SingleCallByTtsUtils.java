@@ -6,7 +6,6 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import com.spyker.framework.aliyun.AliyunConfigProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,10 +19,10 @@ import java.util.Map;
 
 @Slf4j
 @AutoConfiguration
-@ConditionalOnClass(AliyunConfigProperties.class)
+@ConditionalOnClass(AliyunTtsProperties.class)
 public class SingleCallByTtsUtils {
 
-    @Autowired AliyunConfigProperties aliyunConfigProperties;
+    @Autowired AliyunTtsProperties aliyunTtsProperties;
 
     /**
      * 您已接单，请尽快到达${address}
@@ -33,11 +32,11 @@ public class SingleCallByTtsUtils {
      */
     public void TTS_197465247(String calledNumber, String address) {
 
-        AliyunConfigProperties.Tts tts = aliyunConfigProperties.getTts();
-
         DefaultProfile profile =
                 DefaultProfile.getProfile(
-                        "default", tts.getAccessKeyId(), tts.getAccessKeySecret());
+                        "default",
+                        aliyunTtsProperties.getAccessKeyId(),
+                        aliyunTtsProperties.getAccessKeySecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -73,11 +72,11 @@ public class SingleCallByTtsUtils {
      */
     public void TTS_197595183(String calledNumber, String washItem) {
 
-        AliyunConfigProperties.Tts tts = aliyunConfigProperties.getTts();
-
         DefaultProfile profile =
                 DefaultProfile.getProfile(
-                        "default", tts.getAccessKeyId(), tts.getAccessKeySecret());
+                        "default",
+                        aliyunTtsProperties.getAccessKeyId(),
+                        aliyunTtsProperties.getAccessKeySecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -107,11 +106,11 @@ public class SingleCallByTtsUtils {
 
     public void singleCallByTts(String calledNumber, String ttsParam, String ttsCode) {
 
-        AliyunConfigProperties.Tts tts = aliyunConfigProperties.getTts();
-
         DefaultProfile profile =
                 DefaultProfile.getProfile(
-                        "default", tts.getAccessKeyId(), tts.getAccessKeySecret());
+                        "default",
+                        aliyunTtsProperties.getAccessKeyId(),
+                        aliyunTtsProperties.getAccessKeySecret());
 
         IAcsClient client = new DefaultAcsClient(profile);
 

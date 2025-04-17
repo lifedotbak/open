@@ -2,41 +2,37 @@ package com.spyker.framework.aliyun.oss.vod;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleRequest;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleResponse;
 import com.aliyuncs.vod.model.v20170321.*;
+import com.spyker.framework.aliyun.oss.AliyunRamProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+
 @Slf4j
+@AutoConfiguration
+@ConditionalOnClass(AliyunRamProperties.class)
 public class AcsClientUtils {
 
     private static final String END_POINT = "sts.aliyuncs.com";
     private static final String REGION_ID = "cn-shanghai";
 
-    private AcsClientUtils() {}
-
-    public static DefaultAcsClient getAcsClient(String accessKeyId, String accessKeySecret) {
-        DefaultAcsClient acsClient =
-                new DefaultAcsClient(
-                        DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret));
-        return acsClient;
-    }
+    @Autowired private AliyunRamProperties aliyunRamProperties;
 
     /**
      * 获取播放凭证
      *
-     * @param accessKeyId
-     * @param accessKeySecret
      * @param videoid
      * @return
      */
-    public static GetVideoPlayAuthResponse getVideoPlayAuth(
-            String accessKeyId, String accessKeySecret, String videoid) {
+    public GetVideoPlayAuthResponse getVideoPlayAuth(String videoid) {
         GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
         request.setVideoId(videoid);
         GetVideoPlayAuthResponse response = null;
@@ -44,13 +40,21 @@ public class AcsClientUtils {
 
             DefaultAcsClient aliyunClient =
                     new DefaultAcsClient(
-                            DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret));
+                            DefaultProfile.getProfile(
+                                    REGION_ID,
+                                    aliyunRamProperties.getAccessKeyId(),
+                                    aliyunRamProperties.getAccessKeySecret()));
 
             response = aliyunClient.getAcsResponse(request);
 
             log.info(response.getPlayAuth());
 
         } catch (ClientException e) {
+            log.error("Failed：");
+            log.error("Error code: " + e.getErrCode());
+            log.error("Error message: " + e.getErrMsg());
+            log.error("RequestId: " + e.getRequestId());
+
             log.error("error -->{}", e);
         }
 
@@ -60,13 +64,10 @@ public class AcsClientUtils {
     /**
      * 获取视频播放地址
      *
-     * @param accessKeyId
-     * @param accessKeySecret
      * @param videoid
      * @return
      */
-    public static GetPlayInfoResponse getVideoPlayInfo(
-            String accessKeyId, String accessKeySecret, String videoid) {
+    public GetPlayInfoResponse getVideoPlayInfo(String videoid) {
         GetPlayInfoRequest request = new GetPlayInfoRequest();
         request.setVideoId(videoid);
         GetPlayInfoResponse response = null;
@@ -74,13 +75,19 @@ public class AcsClientUtils {
 
             DefaultAcsClient aliyunClient =
                     new DefaultAcsClient(
-                            DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret));
+                            DefaultProfile.getProfile(
+                                    REGION_ID,
+                                    aliyunRamProperties.getAccessKeyId(),
+                                    aliyunRamProperties.getAccessKeySecret()));
 
             response = aliyunClient.getAcsResponse(request);
 
-        } catch (ServerException e) {
-            log.error("error -->{}", e);
         } catch (ClientException e) {
+            log.error("Failed：");
+            log.error("Error code: " + e.getErrCode());
+            log.error("Error message: " + e.getErrMsg());
+            log.error("RequestId: " + e.getRequestId());
+
             log.error("error -->{}", e);
         }
 
@@ -90,13 +97,10 @@ public class AcsClientUtils {
     /**
      * 获取源视频播放地址
      *
-     * @param accessKeyId
-     * @param accessKeySecret
      * @param videoid
      * @return
      */
-    public static GetMezzanineInfoResponse getSourceVideoPlayInfo(
-            String accessKeyId, String accessKeySecret, String videoid) {
+    public GetMezzanineInfoResponse getSourceVideoPlayInfo(String videoid) {
         GetMezzanineInfoRequest request = new GetMezzanineInfoRequest();
         request.setVideoId(videoid);
         GetMezzanineInfoResponse response = null;
@@ -104,13 +108,19 @@ public class AcsClientUtils {
 
             DefaultAcsClient aliyunClient =
                     new DefaultAcsClient(
-                            DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret));
+                            DefaultProfile.getProfile(
+                                    REGION_ID,
+                                    aliyunRamProperties.getAccessKeyId(),
+                                    aliyunRamProperties.getAccessKeySecret()));
 
             response = aliyunClient.getAcsResponse(request);
 
-        } catch (ServerException e) {
-            log.error("error -->{}", e);
         } catch (ClientException e) {
+            log.error("Failed：");
+            log.error("Error code: " + e.getErrCode());
+            log.error("Error message: " + e.getErrMsg());
+            log.error("RequestId: " + e.getRequestId());
+
             log.error("error -->{}", e);
         }
 
@@ -120,27 +130,24 @@ public class AcsClientUtils {
     /**
      * STS临时授权访问
      *
-     * @param accessKeyId
-     * @param accessKeySecret
-     * @param roleArn
-     * @param roleSessionName
      * @return
-     * @throws ClientException
      */
-    public static AssumeRoleResponse assumeRole(
-            String accessKeyId, String accessKeySecret, String roleArn, String roleSessionName)
-            throws ClientException {
+    public AssumeRoleResponse assumeRole() {
 
         AssumeRoleResponse response = null;
         try {
             // Init ACS Client
             DefaultProfile.addEndpoint("", "", "Sts", END_POINT);
-            IClientProfile profile = DefaultProfile.getProfile("", accessKeyId, accessKeySecret);
+            IClientProfile profile =
+                    DefaultProfile.getProfile(
+                            "",
+                            aliyunRamProperties.getAccessKeyId(),
+                            aliyunRamProperties.getAccessKeySecret());
             DefaultAcsClient client = new DefaultAcsClient(profile);
             final AssumeRoleRequest request = new AssumeRoleRequest();
             request.setMethod(MethodType.POST);
-            request.setRoleArn(roleArn);
-            request.setRoleSessionName(roleSessionName);
+            request.setRoleArn(aliyunRamProperties.getRoleArn());
+            request.setRoleSessionName(aliyunRamProperties.getRoleSessionName());
             // request.setPolicy(policy); // Optional
             response = client.getAcsResponse(request);
 
@@ -160,16 +167,16 @@ public class AcsClientUtils {
     /**
      * 获取视频上传路径
      *
-     * @param accessKeyId
-     * @param accessKeySecret
      * @param uploadVideoInfo
      * @return
      */
-    public static CreateUploadVideoResponse getAcsResponse(
-            String accessKeyId, String accessKeySecret, UploadVideoInfo uploadVideoInfo) {
+    public CreateUploadVideoResponse getAcsResponse(UploadVideoInfo uploadVideoInfo) {
         DefaultAcsClient aliyunClient =
                 new DefaultAcsClient(
-                        DefaultProfile.getProfile(REGION_ID, accessKeyId, accessKeySecret));
+                        DefaultProfile.getProfile(
+                                REGION_ID,
+                                aliyunRamProperties.getAccessKeyId(),
+                                aliyunRamProperties.getAccessKeySecret()));
 
         CreateUploadVideoRequest request = new CreateUploadVideoRequest();
         CreateUploadVideoResponse response = null;
@@ -198,11 +205,13 @@ public class AcsClientUtils {
 
             response = aliyunClient.getAcsResponse(request);
 
-        } catch (ServerException e) {
-            log.error("CreateUploadVideoRequest Server Exception:");
-            log.error("error -->{}", e);
         } catch (ClientException e) {
-            log.error("CreateUploadVideoRequest Client Exception:");
+
+            log.error("Failed：");
+            log.error("Error code: " + e.getErrCode());
+            log.error("Error message: " + e.getErrMsg());
+            log.error("RequestId: " + e.getRequestId());
+
             log.error("error -->{}", e);
         }
 

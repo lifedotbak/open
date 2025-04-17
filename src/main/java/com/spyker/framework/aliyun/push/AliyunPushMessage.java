@@ -13,13 +13,6 @@ import java.util.Map;
 @Data
 public class AliyunPushMessage {
 
-    private String accessKeyId;
-    private String accessKeySecret;
-    private String signName;
-
-    private long androidKey;
-    private long iosKey;
-
     private PushTargetType pushTargetType = PushTargetType.ACCOUNT;
     private PushMessageType pushMessageType = PushMessageType.NOTICE;
 

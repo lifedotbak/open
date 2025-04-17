@@ -4,9 +4,9 @@ import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import com.spyker.framework.aliyun.AliyunConfigProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,20 +16,18 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 @Slf4j
 @AutoConfiguration
-@ConditionalOnClass(AliyunConfigProperties.class)
+@ConditionalOnClass(AliyunSmsProperties.class)
 public final class AliyunSendSmsUtils {
 
-    @Autowired AliyunConfigProperties aliyunConfigProperties;
+    @Autowired AliyunSmsProperties aliyunSmsProperties;
 
     public void sendSms(AliyunSms sms) {
-
-        AliyunConfigProperties.Sms smsProperties = aliyunConfigProperties.getSms();
 
         DefaultProfile profile =
                 DefaultProfile.getProfile(
                         "cn-hangzhou",
-                        smsProperties.getAccessKeyId(),
-                        smsProperties.getAccessKeySecret());
+                        aliyunSmsProperties.getAccessKeyId(),
+                        aliyunSmsProperties.getAccessKeySecret());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
@@ -38,7 +36,7 @@ public final class AliyunSendSmsUtils {
         request.setSysVersion("2017-05-25");
         request.setSysAction("SendSms");
 
-        request.putQueryParameter("SignName", smsProperties.getSignName());
+        request.putQueryParameter("SignName", aliyunSmsProperties.getSignName());
         request.putQueryParameter("RegionId", "cn-hangzhou");
 
         request.putQueryParameter("PhoneNumbers", sms.getPhonenumber());
@@ -48,7 +46,11 @@ public final class AliyunSendSmsUtils {
         try {
             CommonResponse response = client.getCommonResponse(request);
             log.info(response.getData());
-        } catch (Exception e) {
+        } catch (ClientException e) {
+            log.error("Failed：");
+            log.error("Error code: " + e.getErrMsg());
+            log.error("Error message: " + e.getErrCode());
+            log.error("RequestId: " + e.getRequestId());
             log.error(e.getMessage());
         }
     }

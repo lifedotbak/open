@@ -155,31 +155,34 @@ mybatis-plus:
 
 #======================阿里云配置================================
 aliyun:
-  enabled: true
   push:
+    enabled: true
     accessKeyId: push-accessKeyId
     accessKeySecret: push-accessKeySecret
     signName: push-accessKeySecret
     androidKey: push-accessKeySecret
     iosKey: push-accessKeySecret
   sms:
+    enabled: true
     accessKeyId: sms-accessKeySecret
     accessKeySecret: sms-accessKeySecret
     signName: sms-accessKeySecret
   oss:
+    enabled: true
     accessKeyId: oss-accessKeySecret
     accessKeySecret: oss-accessKeySecret
     bucketName: oss-bucketName
     endPoint: oss-endPoint
-    out:
-      imgUrl: uuuu
+    outImgUrl: uuuu
   ram:
+    enabled: true
     accessKeyId: ram-accessKeySecret
     accessKeySecret: ram-accessKeySecret
     roleArn: ram-accessKeySecret
     roleSessionName: ram-accessKeySecret
     durationSeconds: 3600
   tts:
+    enabled: true
     accessKeyId: tts-accessKeySecret
     accessKeySecret: tts-accessKeySecret
 
