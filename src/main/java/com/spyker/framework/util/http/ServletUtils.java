@@ -132,7 +132,8 @@ public class ServletUtils {
             response.setStatus(200);
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
-            response.getWriter().print(string);
+            //            response.getWriter().print(string);
+            response.getOutputStream().print(string);
         } catch (IOException e) {
             e.printStackTrace();
         }

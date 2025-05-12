@@ -48,7 +48,7 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
     @ControllerLogAnnotation(title = "部门表--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<SysCompany> add(@RequestBody SysCompany add) {
+    public RestResponse<?> add(@RequestBody SysCompany add) {
 
         sysCompanyService.insert(add);
 
@@ -58,7 +58,7 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
     @ControllerLogAnnotation(title = "部门表--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<SysCompany> delete(@PathVariable("id") String id) {
+    public RestResponse<?> delete(@PathVariable("id") String id) {
 
         sysCompanyService.delete(id);
 
@@ -111,8 +111,7 @@ public class SysCompanyController extends BaseController {
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "部门表--修改", businessType = BusinessTypeEnum.UPDATE)
-    public RestResponse<SysCompany> update(
-            @PathVariable("id") String id, @RequestBody SysCompany update) {
+    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody SysCompany update) {
 
         update.setId(id);
 

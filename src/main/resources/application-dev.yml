@@ -45,6 +45,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     deserialization:
       fail-on-unknown-properties: false
+    serialization:
+      fail-on-empty-beans: false
+  #  jackson:
   #    date-format: yyyy-MM-dd HH:mm:ss
   #  profiles:
   #    active: druid
@@ -111,7 +114,7 @@ spring:
 
   web:
     resources:
-      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.location}
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${upload.location},file:${platform.profile}
 
   flyway:
     # 启用或禁用 flyway

@@ -85,12 +85,14 @@ public class ${table.controllerName} {
     @SneakyThrows
     @Operation(summary = "数据导入", description = "数据导入")
     @PostMapping("/importExcel")
-    public void importExcel(MultipartFile file) {
+    public RestResponse<?> importExcel(MultipartFile file) {
 
        ExcelUtil<${entity}Excel> util = new ExcelUtil<>(${entity}Excel.class);
        List<${entity}Excel> importExcels = util.importExcel(file.getInputStream(), 0);
 
        ${table.serviceName?uncap_first}.importExcel(importExcels);
+
+       return RestResponse.success();
     }
 
     @Operation(summary = "数据导出", description = "数据导出")
@@ -166,7 +168,7 @@ public class ${table.controllerName} {
     @Operation(summary = "新增", description = "新增")
     @PostMapping("/")
     @ControllerLogAnnotation(title = "${table.comment!}--新增", businessType = BusinessTypeEnum.INSERT)
-    public RestResponse<${entity}> add(@RequestBody ${entity} add) {
+    public RestResponse<?> add(@RequestBody ${entity} add) {
 
         ${table.serviceName?uncap_first}.insert(add);
 
@@ -178,7 +180,7 @@ public class ${table.controllerName} {
     @Operation(summary = "修改", description = "修改")
     @PutMapping("/{id}")
     @ControllerLogAnnotation(title = "${table.comment!}--修改", businessType = BusinessTypeEnum.UPDATE)
-    public RestResponse<${entity}> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
+    public RestResponse<?> update(@PathVariable("id") String id, @RequestBody ${entity} update) {
 
         update.setId(id);
 
@@ -193,7 +195,7 @@ public class ${table.controllerName} {
     @Operation(summary = "删除", description = "删除")
     @DeleteMapping("/{id}")
     @ControllerLogAnnotation(title = "${table.comment!}--删除", businessType = BusinessTypeEnum.DELETE)
-    public RestResponse<${entity}> delete(@PathVariable("id") String id) {
+    public RestResponse<?> delete(@PathVariable("id") String id) {
 
         ${table.serviceName?uncap_first}.delete(id);
 

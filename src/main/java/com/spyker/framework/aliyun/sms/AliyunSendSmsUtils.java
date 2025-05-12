@@ -39,8 +39,8 @@ public final class AliyunSendSmsUtils {
         request.putQueryParameter("SignName", aliyunSmsProperties.getSignName());
         request.putQueryParameter("RegionId", "cn-hangzhou");
 
-        request.putQueryParameter("PhoneNumbers", sms.getPhonenumber());
-        request.putQueryParameter("TemplateCode", sms.getTempleteCode());
+        request.putQueryParameter("PhoneNumbers", sms.getPhoneNumber());
+        request.putQueryParameter("TemplateCode", sms.getTemplateCode());
         request.putQueryParameter("TemplateParam", sms.getTemplateParam());
 
         try {

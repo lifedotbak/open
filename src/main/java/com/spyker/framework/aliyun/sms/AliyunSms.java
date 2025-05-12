@@ -6,12 +6,15 @@ import lombok.Data;
 
 import java.util.Map;
 
+/**
+ * @author 121232224@qq.com
+ */
 @Data
 public class AliyunSms {
 
-    private String phonenumber;
+    private String phoneNumber;
 
-    private String templeteCode;
+    private String templateCode;
 
     /** json 格式 "{\"code\":\"888888\"}" */
     // private String templateParam;

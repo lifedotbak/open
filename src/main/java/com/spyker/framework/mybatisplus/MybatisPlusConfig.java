@@ -34,9 +34,14 @@ public class MybatisPlusConfig implements MetaObjectHandler {
 
         Date date = new Date();
 
-        this.strictInsertFill(metaObject, "createTime", Date.class, date); // 起始版本 3.3.0(推荐使用)
-        this.strictInsertFill(metaObject, "updateTime", Date.class, date); // 起始版本 3.3.0(推荐使用)
-        this.strictInsertFill(metaObject, "delFlag", Boolean.class, false); // 起始版本 3.3.0(推荐使用)
+        //        // 起始版本 3.3.0(推荐使用)
+        //        this.strictInsertFill(metaObject, "createTime", Date.class, date);
+        //        // 起始版本 3.3.0(推荐使用)
+        //        this.strictInsertFill(metaObject, "updateTime", Date.class, date);
+        //        // 起始版本 3.3.0(推荐使用)
+        //        this.strictInsertFill(metaObject, "modifyTime", Date.class, date);
+        //        // 起始版本 3.3.0(推荐使用)
+        //        this.strictInsertFill(metaObject, "delFlag", Boolean.class, false);
 
         String loginUserId = "";
 
@@ -52,7 +57,7 @@ public class MybatisPlusConfig implements MetaObjectHandler {
             }
 
         } catch (Exception e) {
-            log.error("error-->{}", e);
+            log.error("saSession is null");
         }
 
         this.setFieldValByName("createBy", loginUserId, metaObject);
@@ -60,7 +65,6 @@ public class MybatisPlusConfig implements MetaObjectHandler {
 
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("modifyTime", new Date(), metaObject);
-
         this.setFieldValByName("updateTime", new Date(), metaObject);
     }
 
@@ -80,11 +84,10 @@ public class MybatisPlusConfig implements MetaObjectHandler {
         try {
             loginUserId = (String) StpUtil.getSession().get(CommonsConstants.LOGIN_USER_ID);
         } catch (Exception e) {
-            log.error("error-->{}", e);
+            log.error("saSession is null");
         }
 
         this.setFieldValByName("updateBy", loginUserId, metaObject);
-
         this.setFieldValByName("modifyTime", new Date(), metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
     }

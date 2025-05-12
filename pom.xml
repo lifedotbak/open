@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-parent</artifactId>
-	    <version>3.3.2</version>
+	    <version>3.4.5</version>
 	</parent>
 
 	<groupId>com.spyker</groupId>
@@ -55,8 +55,7 @@
 		
 		<!-- spring相关依赖版本 -->
 		<!-- https://spring.io/projects/spring-cloud/ -->
-		<springdoc-openapi-starter-webmvc-ui>2.6.0</springdoc-openapi-starter-webmvc-ui>
-		<knife4j-openapi3-spring-boot-starter>4.5.0</knife4j-openapi3-spring-boot-starter>
+		<springdoc-openapi-starter-webmvc-ui>2.8.6</springdoc-openapi-starter-webmvc-ui>
 		<spring-integration-redis>6.3.2</spring-integration-redis>
 		
 		<!-- 数据库相关依赖相关依赖版本 -->
@@ -111,8 +110,6 @@
 		<io.github.lunasaw.zlm-spring-boot-starter>1.0.3</io.github.lunasaw.zlm-spring-boot-starter>
 		<com.yomahub.tlog-web-spring-boot-starter>1.5.2</com.yomahub.tlog-web-spring-boot-starter>
 		<ko-time>2.4.4</ko-time>
-		<flowable-spring-boot-starter>7.1.0</flowable-spring-boot-starter>
-		<flowable-json-converter>6.8.1</flowable-json-converter>
 		<mybatis-plus-join-boot-starter>1.4.13</mybatis-plus-join-boot-starter>
 		<jib-maven-plugin>3.4.3</jib-maven-plugin>
 		<xstream.version>1.4.21</xstream.version>
@@ -122,7 +119,7 @@
 		<commons-io.version>2.18.0</commons-io.version><httpmime.version>4.5.14</httpmime.version>
 		<spring-security-crypto.version>6.4.4</spring-security-crypto.version>
 		<google-java-format.version>1.25.2</google-java-format.version>
-		
+		<knife4j-openapi3-jakarta-spring-boot-starter>4.5.0</knife4j-openapi3-jakarta-spring-boot-starter>
 		<!-- spring-boot-maven-plugin 跳过测试打包 -->
 		<skipTests>true</skipTests>
 	</properties>
@@ -252,11 +249,11 @@
 			<version>${springdoc-openapi-starter-webmvc-ui}</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-openapi3-spring-boot-starter -->
+		<!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-openapi3-jakarta-spring-boot-starter -->
 		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
-			<version>${knife4j-openapi3-spring-boot-starter}</version>
+		    <groupId>com.github.xiaoymin</groupId>
+		    <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+		    <version>${knife4j-openapi3-jakarta-spring-boot-starter}</version>
 		</dependency>
 		
 		<!-- ======================================= mybatis-plus 相关依赖 ======================================= -->
@@ -333,18 +330,18 @@
 		
 		<!-- ======================================= 数据库脚本同步工具 ======================================= -->
 		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-			<version>${flywaydb}</version>
-		</dependency>
-		<!-- 必须同时引入flyway-mysql，否则会报不支持mysql8.1版本数据库 -->
-		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql -->
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-mysql</artifactId>
-			<version>${flywaydb}</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.flywaydb</groupId>-->
+		<!--			<artifactId>flyway-core</artifactId>-->
+		<!--			<version>${flywaydb}</version>-->
+		<!--		</dependency>-->
+		<!--		&lt;!&ndash; 必须同时引入flyway-mysql，否则会报不支持mysql8.1版本数据库 &ndash;&gt;-->
+		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql &ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.flywaydb</groupId>-->
+		<!--			<artifactId>flyway-mysql</artifactId>-->
+		<!--			<version>${flywaydb}</version>-->
+		<!--		</dependency>-->
 		
 		<!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
 		<dependency>
@@ -616,21 +613,21 @@
 		
 		<!--TLog 是一款国产的轻量级分布式日志标记追踪组件。集成方便，通过对日志打标签的方式实现了微服务的链路追踪。
 		支持 log4j、log4j2、logback 三大日志框架。支持 dubbo、dubbox、springcluod 三大RPC框架。-->
-		<dependency>
-            <groupId>com.yomahub</groupId>
-            <artifactId>tlog-web-spring-boot-starter</artifactId>
-            <version>${com.yomahub.tlog-web-spring-boot-starter}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-beanutils</artifactId>
-					<groupId>commons-beanutils</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>hutool-core</artifactId>
-					<groupId>cn.hutool</groupId>
-				</exclusion>
-			</exclusions>
-        </dependency>
+		<!--		<dependency>-->
+		<!--            <groupId>com.yomahub</groupId>-->
+		<!--            <artifactId>tlog-web-spring-boot-starter</artifactId>-->
+		<!--            <version>${com.yomahub.tlog-web-spring-boot-starter}</version>-->
+		<!--			<exclusions>-->
+		<!--				<exclusion>-->
+		<!--					<artifactId>commons-beanutils</artifactId>-->
+		<!--					<groupId>commons-beanutils</groupId>-->
+		<!--				</exclusion>-->
+		<!--				<exclusion>-->
+		<!--					<artifactId>hutool-core</artifactId>-->
+		<!--					<groupId>cn.hutool</groupId>-->
+		<!--				</exclusion>-->
+		<!--			</exclusions>-->
+		<!--        </dependency>-->
 		
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
 		<dependency>
@@ -671,11 +668,11 @@
 		
 		<!-- https://mvnrepository.com/artifact/com.github.yulichang/mybatis-plus-join-boot-starter -->
 		<!-- mybatis-plus做连接查询的插件 -->
-		<dependency>
-            <groupId>com.github.yulichang</groupId>
-            <artifactId>mybatis-plus-join-boot-starter</artifactId>
-            <version>${mybatis-plus-join-boot-starter}</version>
-        </dependency>
+		<!--		<dependency>-->
+		<!--            <groupId>com.github.yulichang</groupId>-->
+		<!--            <artifactId>mybatis-plus-join-boot-starter</artifactId>-->
+		<!--            <version>${mybatis-plus-join-boot-starter}</version>-->
+		<!--        </dependency>-->
 		
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
@@ -727,6 +724,7 @@
                         <nonFilteredFileExtension>woff</nonFilteredFileExtension>
                         <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
                         <nonFilteredFileExtension>otf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                 </configuration>
             </plugin>

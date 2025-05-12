@@ -18,6 +18,7 @@
                 </#if>
             </#list>
         </where>
+        order by a.update_time desc
     </select>
 
     <select id="queryPage" resultType="${package.Entity}.${entity}"
@@ -35,6 +36,7 @@
                 </#if>
             </#list>
         </where>
+        order by a.update_time desc
     </select>
 
 </mapper>

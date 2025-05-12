@@ -6,7 +6,7 @@ import com.spyker.framework.log.annotation.NotWriteLogAnnotation;
 import com.spyker.framework.util.IpUtils;
 import com.spyker.framework.util.JsonUtil;
 import com.spyker.framework.web.response.RestResponse;
-import com.yomahub.tlog.context.TLogContext;
+// import com.yomahub.tlog.context.TLogContext;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -112,7 +112,7 @@ public class LogAspect {
 
         proceed = point.proceed(args);
         if (proceed instanceof RestResponse r) {
-            r.setTraceId(TLogContext.getTraceId());
+            //            r.setTraceId(TLogContext.getTraceId());
         }
         if (notWriteLogAnno != null && !notWriteLogAnno.printResultLog()) {
             return proceed;

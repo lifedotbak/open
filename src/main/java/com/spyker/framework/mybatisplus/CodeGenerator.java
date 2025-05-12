@@ -24,6 +24,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * @author zhang.zhaofeng
+ */
 public class CodeGenerator {
 
     private static final String CODE_AUTHOR = "121232224@qq.com";
@@ -45,6 +49,36 @@ public class CodeGenerator {
     private static final String TEST_SOURCE = "/src/test/java";
 
     private static final String YML_SOURE = "/src/main/resources/application-dev.yml";
+
+    public static void main(String[] args) {
+
+        String projectPath = System.getProperty("user.dir");
+
+        String applicationName = scanner("applicationName(应用名称)!");
+
+        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
+
+        generatorCode(tableNames, projectPath, applicationName);
+    }
+
+    /** 读取控制台内容 */
+    public static String scanner(String tip) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("请输入" + tip + ":");
+        if (scanner.hasNext()) {
+            String ipt = scanner.next();
+            if (StringUtils.isNotEmpty(ipt)) {
+                return ipt;
+            }
+        }
+        throw new MybatisPlusException("请输入正确的" + tip + "!");
+    }
+
+    // 处理 all 情况
+    private static List<String> getTables(String tables) {
+        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
+    }
 
     private static void generatorCode(
             List<String> tableNames, String projectPath, String applicationName) {
@@ -73,12 +107,16 @@ public class CodeGenerator {
         // 2 全局配置
         GlobalConfig globalConfig =
                 new GlobalConfig.Builder()
-                        .disableOpenDir() // 禁止打开输出目录 默认值:true
-                        .outputDir(outputDir) // 指定输出目录 /opt/baomidou/ 默认值:
+                        // 禁止打开输出目录 默认值:true
+                        .disableOpenDir()
+                        // 指定输出目录 /opt/baomidou/ 默认值:
+                        .outputDir(outputDir)
                         // windows:D:// linux or mac : /tmp
-                        .dateType(DateType.ONLY_DATE) // 设置时间类型为java.util.date
-                        .enableSpringdoc() // 支持spring doc
-                        .author(CODE_AUTHOR) //
+                        // 设置时间类型为java.util.date
+                        .dateType(DateType.ONLY_DATE)
+                        // 支持spring doc
+                        .enableSpringdoc()
+                        .author(CODE_AUTHOR)
                         .enableSpringdoc()
                         .build();
 
@@ -88,8 +126,10 @@ public class CodeGenerator {
         // 3.1 自定义包名
         PackageConfig.Builder packageConfig =
                 new PackageConfig.Builder()
-                        .parent(BASE_PACKAGE) // 父包名 默认值:com.baomidou
-                        .moduleName(applicationName) // 父包模块名 默认值:无
+                        // 父包名 默认值:com.baomidou
+                        .parent(BASE_PACKAGE)
+                        // 父包模块名 默认值:无
+                        .moduleName(applicationName)
                         .pathInfo((Collections.singletonMap(OutputFile.xml, xmlPath)));
 
         // 4. 配置策略
@@ -207,11 +247,6 @@ public class CodeGenerator {
         return result;
     }
 
-    // 处理 all 情况
-    private static List<String> getTables(String tables) {
-        return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
-    }
-
     @SneakyThrows
     private static ApplicationConfig readYaml() {
 
@@ -223,20 +258,7 @@ public class CodeGenerator {
 
         if (yamlFile.exists()) {
 
-            Yaml yaml = new Yaml();
-
-            InputStream is = new FileInputStream(yamlFile);
-
-            Map<String, Object> obj = yaml.load(is);
-
-            @SuppressWarnings("unchecked")
-            Map<String, Object> spring = (Map<String, Object>) obj.get("spring");
-
-            @SuppressWarnings("unchecked")
-            Map<String, Object> datasource = (Map<String, Object>) spring.get("datasource");
-
-            @SuppressWarnings("unchecked")
-            Map<String, Object> druid = (Map<String, Object>) datasource.get("druid");
+            Map<String, Object> druid = getDruid(yamlFile);
 
             String userName = (String) druid.get("username");
             String password = (String) druid.get("password");
@@ -254,36 +276,29 @@ public class CodeGenerator {
         return null;
     }
 
+    private static Map<String, Object> getDruid(File yamlFile) throws FileNotFoundException {
+        Yaml yaml = new Yaml();
+
+        InputStream is = new FileInputStream(yamlFile);
+
+        Map<String, Object> obj = yaml.load(is);
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> spring = (Map<String, Object>) obj.get("spring");
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> datasource = (Map<String, Object>) spring.get("datasource");
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> druid = (Map<String, Object>) datasource.get("druid");
+        return druid;
+    }
+
     @Data
     public static class ApplicationConfig {
 
         private String username;
         private String password;
         private String url;
-    }
-
-    public static void main(String[] args) {
-
-        String projectPath = System.getProperty("user.dir");
-
-        String applicationName = scanner("applicationName(应用名称)!");
-
-        List<String> tableNames = getTables(scanner("表名，多个英文逗号分割!所有表请输入all!"));
-
-        generatorCode(tableNames, projectPath, applicationName);
-    }
-
-    /** 读取控制台内容 */
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("请输入" + tip + ":");
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "!");
     }
 }
